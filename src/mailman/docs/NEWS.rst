@@ -638,7 +638,7 @@ REST
 * Subscription requests API now allows filtering requests with ``token_owner``
   parameter. (Closes #714)
 * Add ``subscription_mode`` to ``Member`` resource so API clients can
-  differentiate between subscription via address and via primary address of an
+  differentiate between subscription via address and via primary address of a
   user. (Closes #707)
 * Add ``/list/<listid>/held/count`` to get a count of total held
   messages. (Closes #713)

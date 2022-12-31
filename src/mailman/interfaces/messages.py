@@ -58,7 +58,7 @@ class IMessageStore(Interface):
         """Add the message to the store.
 
         :param message: An email.message.Message instance containing at least
-            a unique Message-ID header.  The message will be given an
+            a unique Message-ID header.  The message will be given a
             Message-ID-Hash header, overriding any existing such header.  If
             the message already exists in the store, it is not added again.
         :returns: The calculated Message-ID-Hash header or None if the message
