@@ -66,8 +66,29 @@ PRESERVE_ENVS = {
     'LOCALE_ARCHIVE',
     'MAILMAN_EXTRA_TESTING_CFG',
     'MAILMAN_VAR_DIR',
-    'PYTHONPATH',
+
+    # These variables tweak the behavior of the Python interpreter.
+    # If the user specifies them for the master process, they should
+    # also be applied to the started runners.
+    'PYTHONASYNCIODEBUG',
+    'PYTHONBREAKPOINT',
+    'PYTHONDEBUG',
+    'PYTHONDONTWRITEBYTECODE',
     'PYTHONHOME',
+    'PYTHONIOENCODING',
+    'PYTHONMALLOC',
+    'PYTHONMALLOCSTATS',
+    'PYTHONNOUSERSITE',
+    'PYTHONOPTIMIZE',
+    'PYTHONPATH',
+    'PYTHONPLATLIBDIR',
+    'PYTHONPROFILEIMPORTTIME',
+    'PYTHONSAFEPATH',
+    'PYTHONTRACEMALLOC',
+    'PYTHONUNBUFFERED',
+    'PYTHONUSERBASE',
+    'PYTHONVERBOSE',
+    'PYTHONWARNINGS',
     }
 
 
