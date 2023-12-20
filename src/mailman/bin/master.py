@@ -65,6 +65,7 @@ PRESERVE_ENVS = {
     'LC_TIME',
     'LOCALE_ARCHIVE',
     'MAILMAN_EXTRA_TESTING_CFG',
+    'MAILMAN_VAR_DIR',
     'PYTHONPATH',
     'PYTHONHOME',
     }
@@ -375,11 +376,6 @@ class Loop:
                 '-C', config_file, rswitch]
         log = logging.getLogger('mailman.runner')
         log.debug('starting: %s', args)
-        # We must pass this environment variable through if it's set,
-        # otherwise runner processes will not have the correct VAR_DIR.
-        var_dir = os.environ.get('MAILMAN_VAR_DIR')
-        if var_dir is not None:
-            env['MAILMAN_VAR_DIR'] = var_dir
         args.append(env)
         os.execle(*args)
         # We should never get here.
