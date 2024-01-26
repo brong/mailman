@@ -20,6 +20,9 @@ Bugs fixed
   record display_name if the address record has none.  (Closes #1107)
 * The user_name_or_email substitution in regular header/footer templates now
   works (Closes #1108)
+* The output from the ``mailman lists`` command no longer has trailing blanks
+  and the command with the ``-d`` option doesn't fail with very long list ids.
+  (Closes #1117 and #1118)
 
 New Features
 ------------
