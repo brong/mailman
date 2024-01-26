@@ -47,3 +47,58 @@ class TestLists(unittest.TestCase):
         self.assertEqual(
             result.output,
             '1 matching mailing lists found:\ntest3@example.net\n')
+
+    def test_lists_with_description(self):
+        getUtility(IDomainManager).add(
+            'example.net', 'An example domain.')
+        mlist1 = create_list('test1@example.com')
+        mlist1.description = ('Test list number 1 plus a whole lot more stuff '
+                              'and even longer')
+        create_list('test2@example.com')
+        mlist3 = create_list('test3@example.net')
+        mlist3.description = 'Test list number 3'
+        create_list('test4@example.com')
+        result = self._command.invoke(lists, ('-d'))
+        self.assertEqual(result.exit_code, 0)
+        self.assertEqual(
+            result.output,
+            '4 matching mailing lists found:\n'
+            'test1@example.com - Test list number 1 plus a whole lot more '
+            'stuff and even longer\n'
+            'test2@example.com -\n'
+            'test3@example.net - Test list number 3\n'
+            'test4@example.com -\n')
+
+    def test_lists_without_description(self):
+        getUtility(IDomainManager).add(
+            'example.net', 'An example domain.')
+        mlist1 = create_list('test1@example.com')
+        mlist1.description = ('Test list number 1 plus a whole lot more stuff '
+                              'and even longer')
+        create_list('test2@example.com')
+        mlist3 = create_list('test3@example.net')
+        mlist3.description = 'Test list number 3'
+        create_list('test4@example.com')
+        result = self._command.invoke(lists)
+        self.assertEqual(result.exit_code, 0)
+        self.assertEqual(
+            result.output,
+            '4 matching mailing lists found:\n'
+            'test1@example.com\n'
+            'test2@example.com\n'
+            'test3@example.net\n'
+            'test4@example.com\n')
+
+    def test_lists_with_description_and_long_name(self):
+        mlist = create_list('a_very_long_list_name_with_more_than_seventy'
+                            '_characters_xxxxxxx@example.com')
+        mlist.description = ('Test list number 1 plus a whole lot more stuff '
+                             'and even longer')
+        result = self._command.invoke(lists, '-d')
+        self.assertEqual(result.exit_code, 0)
+        self.assertEqual(
+            result.output,
+            '1 matching mailing lists found:\n'
+            'a_very_long_list_name_with_more_than_seventy'
+            '_characters_xxxxxxx@example.com - Test list number 1 '
+            'plus a whole lot more stuff and even longer\n')

@@ -105,13 +105,14 @@ def lists(ctx, advertised, names, descriptions, quiet, domains):
         longest = max(len(identifier), longest)
         output.append((identifier, mlist.description))
     # Print it out.
-    if descriptions:
-        format_string = '{0:{2}} - {1:{3}}'
-    else:
-        format_string = '{0:{2}}'
     for identifier, description in output:
-        print(format_string.format(
-            identifier, description, longest, 70 - longest))
+        if descriptions and description:
+            print('{0:{1}}'.format(identifier, longest) + ' - ' + description)
+            # to truncate use description[:70-longest]
+        elif descriptions:
+            print('{0:{1}}'.format(identifier, longest) + ' -')
+        else:
+            print(identifier)
 
 
 @public
