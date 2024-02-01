@@ -43,7 +43,10 @@ SECONDS_IN_A_DAY = 86400
 SUBPROC_START_WAIT = timedelta(seconds=20)
 
 # Environment variables to forward into subprocesses.
-PRESERVE_ENVS = (
+#
+# This is used by the test framework, but also to make sure spawned
+# Python interpreters behave the same way as ours.
+PRESERVE_ENVS = {
     'COVERAGE_PROCESS_START',
     'LANG',
     'LANGUAGE',
@@ -62,9 +65,31 @@ PRESERVE_ENVS = (
     'LC_TIME',
     'LOCALE_ARCHIVE',
     'MAILMAN_EXTRA_TESTING_CFG',
-    'PYTHONPATH',
+    'MAILMAN_VAR_DIR',
+
+    # These variables tweak the behavior of the Python interpreter.
+    # If the user specifies them for the master process, they should
+    # also be applied to the started runners.
+    'PYTHONASYNCIODEBUG',
+    'PYTHONBREAKPOINT',
+    'PYTHONDEBUG',
+    'PYTHONDONTWRITEBYTECODE',
     'PYTHONHOME',
-    )
+    'PYTHONIOENCODING',
+    'PYTHONMALLOC',
+    'PYTHONMALLOCSTATS',
+    'PYTHONNOUSERSITE',
+    'PYTHONOPTIMIZE',
+    'PYTHONPATH',
+    'PYTHONPLATLIBDIR',
+    'PYTHONPROFILEIMPORTTIME',
+    'PYTHONSAFEPATH',
+    'PYTHONTRACEMALLOC',
+    'PYTHONUNBUFFERED',
+    'PYTHONUSERBASE',
+    'PYTHONVERBOSE',
+    'PYTHONWARNINGS',
+    }
 
 
 @public
@@ -349,10 +374,15 @@ class Loop:
             return pid
         # Child.
         #
+        # Preserve some environment variables.
+        env = {k: v for k, v in os.environ.items()     # pragma: nocover
+               if k in PRESERVE_ENVS}
+
         # Set the environment variable which tells the runner that it's
         # running under bin/master control.  This subtly changes the error
         # behavior of bin/runner.
-        env = {'MAILMAN_UNDER_MASTER_CONTROL': '1'}
+        env['MAILMAN_UNDER_MASTER_CONTROL'] = '1'      # pragma: nocover
+
         # Craft the command line arguments for the exec() call.
         rswitch = '--runner=' + spec
         # Always pass the explicit path to the configuration file to the
@@ -367,16 +397,6 @@ class Loop:
                 '-C', config_file, rswitch]
         log = logging.getLogger('mailman.runner')
         log.debug('starting: %s', args)
-        # We must pass this environment variable through if it's set,
-        # otherwise runner processes will not have the correct VAR_DIR.
-        var_dir = os.environ.get('MAILMAN_VAR_DIR')
-        if var_dir is not None:
-            env['MAILMAN_VAR_DIR'] = var_dir
-        # For the testing framework, if these environment variables are set,
-        # pass them on to the subprocess.
-        for envvar in PRESERVE_ENVS:
-            if envvar in os.environ:
-                env[envvar] = os.environ[envvar]
         args.append(env)
         os.execle(*args)
         # We should never get here.

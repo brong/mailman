@@ -30,6 +30,12 @@ New Features
   ``accept_these_nonmembers`` attribute of a list to accept nonmember posts
   from members of another list.  (Closes #794)
 
+Other
+-----
+* The Mailman master process that starts the runners will now pass a
+  number of environment variables to the runner processes that alter
+  the behavior of the Python interpreter.  See section ENVIRONMENT
+  VARIABLES in `python(1)`.
 
 Packaging
 ---------
