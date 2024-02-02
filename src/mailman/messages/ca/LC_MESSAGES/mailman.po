@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-12 11:40-0800\n"
+"POT-Creation-Date: 2024-02-02 14:08-0800\n"
 "PO-Revision-Date: 2022-03-23 03:38+0000\n"
 "Last-Translator: Jaume Ortolà i Font <jaumeortola@gmail.com>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/gnu-mailman/mailman/ca/>\n"
@@ -147,7 +147,7 @@ msgstr "Cal la vostra confirmació per a abandonar la llista de correu ${event.m
 msgid "Your confirmation is needed to join the ${event.mlist.fqdn_listname} mailing list."
 msgstr "Cal la vostra confirmació per a unir-vos a la llista de correu ${event.mlist.fqdn_listname}."
 
-#: src/mailman/bin/mailman.py:102 src/mailman/bin/master.py:565
+#: src/mailman/bin/mailman.py:102 src/mailman/bin/master.py:585
 #: src/mailman/bin/runner.py:96
 msgid ""
 "    Configuration file to use.  If not given, the environment variable\n"
@@ -170,7 +170,7 @@ msgstr ""
 msgid "    If you are sure you want to run as root, specify --run-as-root."
 msgstr "    Si esteu segur que voleu executar-ho com a administrador, especifiqueu --run-as-root."
 
-#: src/mailman/bin/master.py:157
+#: src/mailman/bin/master.py:182
 msgid ""
 "The master lock could not be acquired because it appears as though another\n"
 "master is already running."
@@ -178,7 +178,7 @@ msgstr ""
 "El blocatge principal no s'ha pogut adquirir perquè sembla que un altre\n"
 "principal ja s'està executant."
 
-#: src/mailman/bin/master.py:163
+#: src/mailman/bin/master.py:188
 #, python-brace-format
 msgid ""
 "The master lock could not be acquired.  It appears as though there is a stale\n"
@@ -187,7 +187,7 @@ msgstr ""
 "No s'ha pogut adquirir el blocatge principal. Sembla com si hi hagués un\n"
 "blocatge principal obsolet. Proveu de tornar a executar ${program} amb l'opció --force."
 
-#: src/mailman/bin/master.py:169
+#: src/mailman/bin/master.py:194
 #, python-brace-format
 msgid ""
 "The master lock could not be acquired, because it appears as if some process\n"
@@ -208,7 +208,7 @@ msgstr ""
 "\n"
 "Se surt."
 
-#: src/mailman/bin/master.py:182
+#: src/mailman/bin/master.py:207
 #, python-brace-format
 msgid ""
 "For unknown reasons, the master lock could not be acquired.\n"
@@ -225,7 +225,7 @@ msgstr ""
 "\n"
 "Se surt."
 
-#: src/mailman/bin/master.py:541
+#: src/mailman/bin/master.py:561
 msgid ""
 "    Master subprocess watcher.\n"
 "\n"
@@ -267,7 +267,7 @@ msgstr ""
 "    el seu propi identificador de procés al fitxer indicat en el fitxer de configuració, però\n"
 "    normalment no cal fer servir aquest PID directament."
 
-#: src/mailman/bin/master.py:572
+#: src/mailman/bin/master.py:592
 msgid ""
 "    Don't restart the runners when they exit because of an error or a SIGUSR1.\n"
 "    Use this only for debugging."
@@ -275,7 +275,7 @@ msgstr ""
 "    No reiniciïs els corredors quan surtin a causa d'un error o un SIGUSR1.\n"
 "    Utilitzeu-ho només per a depuració."
 
-#: src/mailman/bin/master.py:578
+#: src/mailman/bin/master.py:598
 msgid ""
 "    If the master watcher finds an existing master lock, it will normally exit\n"
 "    with an error message.  With this option,the master will perform an extra\n"
@@ -293,7 +293,7 @@ msgstr ""
 "    Però si no es troba cap procés que encaixi, el principal eliminarà el blocatge\n"
 "    aparentment obsolet i farà un altre intent de reclamar el blocatge principal."
 
-#: src/mailman/bin/master.py:591
+#: src/mailman/bin/master.py:611
 msgid ""
 "    Override the default set of runners that the master will invoke, which is\n"
 "    typically defined in the configuration file.  Multiple -r options may be\n"
@@ -303,7 +303,7 @@ msgstr ""
 "    que està normalment definit al fitxer de configuració. Es podrien donar \n"
 "    múltiples opcions -r. Els valors de -r es passen directament a bin/runner."
 
-#: src/mailman/bin/master.py:598 src/mailman/bin/runner.py:133
+#: src/mailman/bin/master.py:618 src/mailman/bin/runner.py:133
 msgid "Display more debugging information to the log file."
 msgstr "Mostra més informació de depuració al fitxer de registre."
 
@@ -1010,7 +1010,7 @@ msgstr "No s'ha trobat cap llista de correu que encaixi"
 msgid "${count} matching mailing lists found:"
 msgstr "Llistes de correu que encaixin amb amb ${count} trobades:"
 
-#: src/mailman/commands/cli_lists.py:126
+#: src/mailman/commands/cli_lists.py:127
 msgid ""
 "    Create a mailing list.\n"
 "\n"
@@ -1024,7 +1024,7 @@ msgstr ""
 "    és necessari. Ha de ser una adreça de correu electrònic vàlida i el domini ha d'estar\n"
 "    registrat a Mailman. Els noms de llista han de ser en minúscules."
 
-#: src/mailman/commands/cli_lists.py:134
+#: src/mailman/commands/cli_lists.py:135
 msgid ""
 "    Set the list's preferred language to CODE, which must be a registered two\n"
 "    letter language code."
@@ -1032,7 +1032,7 @@ msgstr ""
 "    Establir l'idioma preferit de la llista a CODE, que ha de ser un\n"
 "    codi d'idioma de dues lletres."
 
-#: src/mailman/commands/cli_lists.py:140
+#: src/mailman/commands/cli_lists.py:141
 msgid ""
 "    Specify a list owner email address.  If the address is not currently\n"
 "    registered with Mailman, the address is registered and linked to a user.\n"
@@ -1046,7 +1046,7 @@ msgstr ""
 "    enviarà un avís de creació de llista a l'adreça. Es pot especificar més d'un\n"
 "    propietari."
 
-#: src/mailman/commands/cli_lists.py:149
+#: src/mailman/commands/cli_lists.py:150
 msgid ""
 "    Notify the list owner by email that their mailing list has been\n"
 "    created."
@@ -1054,11 +1054,11 @@ msgstr ""
 "    Notificar al propietari de la llista per correu que la llista s'ha\n"
 "    creat."
 
-#: src/mailman/commands/cli_lists.py:155
+#: src/mailman/commands/cli_lists.py:156
 msgid "Print less output."
 msgstr "Mostrar menys sortida."
 
-#: src/mailman/commands/cli_lists.py:159
+#: src/mailman/commands/cli_lists.py:160
 msgid ""
 "    Register the mailing list's domain if not yet registered.  This is\n"
 "    the default behavior, but these options are provided for backward\n"
@@ -1068,55 +1068,55 @@ msgstr ""
 "    el comportament predeterminat, però aquestes opcions es proporcionen per\n"
 "    compatibilitat amb el passat. Amb -D no registrar el domini de la llista de correu."
 
-#: src/mailman/commands/cli_lists.py:170
+#: src/mailman/commands/cli_lists.py:171
 #, python-brace-format
 msgid "Invalid language code: ${language_code}"
 msgstr "Codi d'idioma no vàlid: ${language_code}"
 
-#: src/mailman/commands/cli_lists.py:186
+#: src/mailman/commands/cli_lists.py:187
 #, python-brace-format
 msgid "Illegal owner addresses: ${invalid}"
 msgstr "Direccions incorrectes del propietari: ${invalid}"
 
-#: src/mailman/commands/cli_lists.py:190
+#: src/mailman/commands/cli_lists.py:191
 #, python-brace-format
 msgid "Illegal list name: ${fqdn_listname}"
 msgstr "Nom de llista incorrecte: ${fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:192
+#: src/mailman/commands/cli_lists.py:193
 #, python-brace-format
 msgid "List already exists: ${fqdn_listname}"
 msgstr "La llista ja existeix: ${fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:194
+#: src/mailman/commands/cli_lists.py:195
 #, python-brace-format
 msgid "Undefined domain: ${domain}"
 msgstr "Domini indefinit: ${domain}"
 
-#: src/mailman/commands/cli_lists.py:202
+#: src/mailman/commands/cli_lists.py:203
 #, python-brace-format
 msgid "Created mailing list: ${mlist.fqdn_listname}"
 msgstr "Llista de correu creada: ${mlist.fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:217
+#: src/mailman/commands/cli_lists.py:218
 #, python-brace-format
 msgid "Your new mailing list: ${fqdn_listname}"
 msgstr "La seva nova llista de correu: ${fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:231
+#: src/mailman/commands/cli_lists.py:232
 msgid "Remove a mailing list."
 msgstr "Suprimir una llista de correu."
 
-#: src/mailman/commands/cli_lists.py:235
+#: src/mailman/commands/cli_lists.py:236
 msgid "Suppress status messages"
 msgstr "Suprimir missatges d'estat"
 
-#: src/mailman/commands/cli_lists.py:241
+#: src/mailman/commands/cli_lists.py:242
 #, python-brace-format
 msgid "No such list matching spec: ${listspec}"
 msgstr "No s'ha trobat cap llista que encaixi amb l'espec: ${listspec}"
 
-#: src/mailman/commands/cli_lists.py:246
+#: src/mailman/commands/cli_lists.py:247
 #, python-brace-format
 msgid "Removed list: ${listspec}"
 msgstr "Llista eliminada: ${listspec}"
@@ -1969,6 +1969,26 @@ msgstr "Moure el missatge a la cua de notícies sortint."
 #: src/mailman/handlers/validate_authenticity.py:120
 msgid "Perform auth checks and attach Authentication-Results header."
 msgstr "Realitzar les comprovacions d'autenticació i adjuntar la capçalera Authentication-Results."
+
+#: src/mailman/interfaces/member.py:122
+#, python-brace-format
+msgid "${self.email} is already a member of mailing list ${self.fqdn_listname}"
+msgstr ""
+
+#: src/mailman/interfaces/member.py:125
+#, python-brace-format
+msgid "${self.email} is already an owner of mailing list ${self.fqdn_listname}"
+msgstr ""
+
+#: src/mailman/interfaces/member.py:128
+#, python-brace-format
+msgid "${self.email} is already a moderator of mailing list ${self.fqdn_listname}"
+msgstr ""
+
+#: src/mailman/interfaces/member.py:131
+#, python-brace-format
+msgid "${self.email} is already a non-member of mailing list ${self.fqdn_listname}"
+msgstr ""
 
 #: src/mailman/interfaces/pipeline.py:53
 msgid "[No details are available]"

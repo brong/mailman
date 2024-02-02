@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-12 11:40-0800\n"
+"POT-Creation-Date: 2024-02-02 14:08-0800\n"
 "PO-Revision-Date: 2023-06-30 10:53+0000\n"
 "Last-Translator: Serhii Horichenko <m@sgg.im>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/gnu-mailman/mailman/uk/>\n"
@@ -147,7 +147,7 @@ msgstr "Щоб залишити список розсилки ${event.mlist.fqdn
 msgid "Your confirmation is needed to join the ${event.mlist.fqdn_listname} mailing list."
 msgstr "Щоб приєднатися до списку розсилки ${event.mlist.fqdn_listname}, необхідне Ваше погодження."
 
-#: src/mailman/bin/mailman.py:102 src/mailman/bin/master.py:565
+#: src/mailman/bin/mailman.py:102 src/mailman/bin/master.py:585
 #: src/mailman/bin/runner.py:96
 msgid ""
 "    Configuration file to use.  If not given, the environment variable\n"
@@ -170,7 +170,7 @@ msgstr ""
 msgid "    If you are sure you want to run as root, specify --run-as-root."
 msgstr "    Якщо Ви впевнені, що хочете запускати від імені root, вкажіть --run-as-root."
 
-#: src/mailman/bin/master.py:157
+#: src/mailman/bin/master.py:182
 msgid ""
 "The master lock could not be acquired because it appears as though another\n"
 "master is already running."
@@ -178,7 +178,7 @@ msgstr ""
 "Одноосібне використання в якості майстра не можна отримати, оскільки\n"
 "схоже, що інший майстер вже активний."
 
-#: src/mailman/bin/master.py:163
+#: src/mailman/bin/master.py:188
 #, python-brace-format
 msgid ""
 "The master lock could not be acquired.  It appears as though there is a stale\n"
@@ -187,7 +187,7 @@ msgstr ""
 "Одноосібне використання в якості майстра не можна отримати. Схоже існує застаріле блокування.\n"
 "Спробуйте перезапустити ${program} з параметром --force."
 
-#: src/mailman/bin/master.py:169
+#: src/mailman/bin/master.py:194
 #, python-brace-format
 msgid ""
 "The master lock could not be acquired, because it appears as if some process\n"
@@ -208,7 +208,7 @@ msgstr ""
 "\n"
 "Виходимо."
 
-#: src/mailman/bin/master.py:182
+#: src/mailman/bin/master.py:207
 #, python-brace-format
 msgid ""
 "For unknown reasons, the master lock could not be acquired.\n"
@@ -225,7 +225,7 @@ msgstr ""
 "\n"
 "Виходимо."
 
-#: src/mailman/bin/master.py:541
+#: src/mailman/bin/master.py:561
 msgid ""
 "    Master subprocess watcher.\n"
 "\n"
@@ -267,7 +267,7 @@ msgstr ""
 "    залишає власний ID процесу у файлі, вказаному у файлі конфігурації, але Вам\n"
 "    зазвичай не потрібно використовувати цей PID безпосередньо."
 
-#: src/mailman/bin/master.py:572
+#: src/mailman/bin/master.py:592
 msgid ""
 "    Don't restart the runners when they exit because of an error or a SIGUSR1.\n"
 "    Use this only for debugging."
@@ -275,7 +275,7 @@ msgstr ""
 "    Не перезапускайте потоки, коли вони виходять через помилку або SIGUSR1.\n"
 "    Використовуйте це лише для налагодження."
 
-#: src/mailman/bin/master.py:578
+#: src/mailman/bin/master.py:598
 msgid ""
 "    If the master watcher finds an existing master lock, it will normally exit\n"
 "    with an error message.  With this option,the master will perform an extra\n"
@@ -293,7 +293,7 @@ msgstr ""
 "    вилучить застаріле блокування і зробить ще одну спробу отримати\n"
 "    ексклюзивне блокування."
 
-#: src/mailman/bin/master.py:591
+#: src/mailman/bin/master.py:611
 msgid ""
 "    Override the default set of runners that the master will invoke, which is\n"
 "    typically defined in the configuration file.  Multiple -r options may be\n"
@@ -303,7 +303,7 @@ msgstr ""
 "    зазвичай визначається у файлі конфігурації. Може бути кілька параметрів -r.\n"
 "    Значення для -r передаються прямо до bin/потоку."
 
-#: src/mailman/bin/master.py:598 src/mailman/bin/runner.py:133
+#: src/mailman/bin/master.py:618 src/mailman/bin/runner.py:133
 msgid "Display more debugging information to the log file."
 msgstr "Відображати більше налагоджувальної інформації у файлі журналу."
 
@@ -1075,7 +1075,7 @@ msgstr "Відповідні списки розсилки не знайдені
 msgid "${count} matching mailing lists found:"
 msgstr "Знайдено ${count} відповідних списків розсилки:"
 
-#: src/mailman/commands/cli_lists.py:126
+#: src/mailman/commands/cli_lists.py:127
 msgid ""
 "    Create a mailing list.\n"
 "\n"
@@ -1089,7 +1089,7 @@ msgstr ""
 "    розсилки.  Це має бути дійсна адреса ел.пошти та домен повинен бути\n"
 "    зареєстрованим у Mailman.  Назви списків примусово вводяться в нижньому регістрі."
 
-#: src/mailman/commands/cli_lists.py:134
+#: src/mailman/commands/cli_lists.py:135
 msgid ""
 "    Set the list's preferred language to CODE, which must be a registered two\n"
 "    letter language code."
@@ -1097,7 +1097,7 @@ msgstr ""
 "    Встановіть бажану мову списку на CODE, який повинен бути зареєстрованим\n"
 "    дволітерним кодом мови."
 
-#: src/mailman/commands/cli_lists.py:140
+#: src/mailman/commands/cli_lists.py:141
 msgid ""
 "    Specify a list owner email address.  If the address is not currently\n"
 "    registered with Mailman, the address is registered and linked to a user.\n"
@@ -1111,7 +1111,7 @@ msgstr ""
 "    надішле сповіщення про створення списку на цю адресу.  Можна вказати більше\n"
 "    одного власника."
 
-#: src/mailman/commands/cli_lists.py:149
+#: src/mailman/commands/cli_lists.py:150
 msgid ""
 "    Notify the list owner by email that their mailing list has been\n"
 "    created."
@@ -1119,11 +1119,11 @@ msgstr ""
 "    Повідомити власника списку ел.поштою про те, що його список розсилки\n"
 "    створений."
 
-#: src/mailman/commands/cli_lists.py:155
+#: src/mailman/commands/cli_lists.py:156
 msgid "Print less output."
 msgstr "Показувати менше виводу."
 
-#: src/mailman/commands/cli_lists.py:159
+#: src/mailman/commands/cli_lists.py:160
 msgid ""
 "    Register the mailing list's domain if not yet registered.  This is\n"
 "    the default behavior, but these options are provided for backward\n"
@@ -1133,55 +1133,55 @@ msgstr ""
 "    поведінка, але ці опції надані для зворотної\n"
 "    сумісності.  За допомогою -D не реєструвати домен списку розсилки."
 
-#: src/mailman/commands/cli_lists.py:170
+#: src/mailman/commands/cli_lists.py:171
 #, python-brace-format
 msgid "Invalid language code: ${language_code}"
 msgstr "Хибний мовний код: ${language_code}"
 
-#: src/mailman/commands/cli_lists.py:186
+#: src/mailman/commands/cli_lists.py:187
 #, python-brace-format
 msgid "Illegal owner addresses: ${invalid}"
 msgstr "Хибна адреса власника: ${invalid}"
 
-#: src/mailman/commands/cli_lists.py:190
+#: src/mailman/commands/cli_lists.py:191
 #, python-brace-format
 msgid "Illegal list name: ${fqdn_listname}"
 msgstr "Хибна назва списку: ${fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:192
+#: src/mailman/commands/cli_lists.py:193
 #, python-brace-format
 msgid "List already exists: ${fqdn_listname}"
 msgstr "Список вже існує: ${fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:194
+#: src/mailman/commands/cli_lists.py:195
 #, python-brace-format
 msgid "Undefined domain: ${domain}"
 msgstr "Невизначений домен: ${domain}"
 
-#: src/mailman/commands/cli_lists.py:202
+#: src/mailman/commands/cli_lists.py:203
 #, python-brace-format
 msgid "Created mailing list: ${mlist.fqdn_listname}"
 msgstr "Створений список розсилки: ${mlist.fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:217
+#: src/mailman/commands/cli_lists.py:218
 #, python-brace-format
 msgid "Your new mailing list: ${fqdn_listname}"
 msgstr "Ваш новий список розсилки: ${fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:231
+#: src/mailman/commands/cli_lists.py:232
 msgid "Remove a mailing list."
 msgstr "Вилучити список розсилки."
 
-#: src/mailman/commands/cli_lists.py:235
+#: src/mailman/commands/cli_lists.py:236
 msgid "Suppress status messages"
 msgstr "Заборонити повідомлення про стан"
 
-#: src/mailman/commands/cli_lists.py:241
+#: src/mailman/commands/cli_lists.py:242
 #, python-brace-format
 msgid "No such list matching spec: ${listspec}"
 msgstr "Немає списку який би відповідав специфікації: ${listspec}"
 
-#: src/mailman/commands/cli_lists.py:246
+#: src/mailman/commands/cli_lists.py:247
 #, python-brace-format
 msgid "Removed list: ${listspec}"
 msgstr "Вилучений список: ${listspec}"
@@ -2103,6 +2103,26 @@ msgstr "Перемістити повідомлення до черги нови
 #: src/mailman/handlers/validate_authenticity.py:120
 msgid "Perform auth checks and attach Authentication-Results header."
 msgstr "Виконайте перевірку аутентифікації та додайте заголовки Authentication-Results."
+
+#: src/mailman/interfaces/member.py:122
+#, python-brace-format
+msgid "${self.email} is already a member of mailing list ${self.fqdn_listname}"
+msgstr ""
+
+#: src/mailman/interfaces/member.py:125
+#, python-brace-format
+msgid "${self.email} is already an owner of mailing list ${self.fqdn_listname}"
+msgstr ""
+
+#: src/mailman/interfaces/member.py:128
+#, python-brace-format
+msgid "${self.email} is already a moderator of mailing list ${self.fqdn_listname}"
+msgstr ""
+
+#: src/mailman/interfaces/member.py:131
+#, python-brace-format
+msgid "${self.email} is already a non-member of mailing list ${self.fqdn_listname}"
+msgstr ""
 
 #: src/mailman/interfaces/pipeline.py:53
 msgid "[No details are available]"

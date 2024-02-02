@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-12 11:40-0800\n"
+"POT-Creation-Date: 2024-02-02 14:08-0800\n"
 "PO-Revision-Date: 2022-03-23 03:39+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/gnu-mailman/mailman/tr/>\n"
@@ -147,7 +147,7 @@ msgstr "${event.mlist.fqdn_listname} posta listesinden ayrılmak için doğrulam
 msgid "Your confirmation is needed to join the ${event.mlist.fqdn_listname} mailing list."
 msgstr "${event.mlist.fqdn_listname} posta listesine katılmak için doğrulamanız gerekiyor."
 
-#: src/mailman/bin/mailman.py:102 src/mailman/bin/master.py:565
+#: src/mailman/bin/mailman.py:102 src/mailman/bin/master.py:585
 #: src/mailman/bin/runner.py:96
 msgid ""
 "    Configuration file to use.  If not given, the environment variable\n"
@@ -170,7 +170,7 @@ msgstr ""
 msgid "    If you are sure you want to run as root, specify --run-as-root."
 msgstr "    Root olarak çalıştırmak istediğinizden eminseniz --run-as-root seçeneğini belirtin."
 
-#: src/mailman/bin/master.py:157
+#: src/mailman/bin/master.py:182
 msgid ""
 "The master lock could not be acquired because it appears as though another\n"
 "master is already running."
@@ -178,7 +178,7 @@ msgstr ""
 "Başka bir ana işlem zaten çalışıyor gibi göründüğü için ana kilit elde\n"
 "edilemedi."
 
-#: src/mailman/bin/master.py:163
+#: src/mailman/bin/master.py:188
 #, python-brace-format
 msgid ""
 "The master lock could not be acquired.  It appears as though there is a stale\n"
@@ -187,7 +187,7 @@ msgstr ""
 "Ana kilit elde edilemedi.  Eski bir ana kilit varmış gibi görünüyor.  ${program}'ı\n"
 "--force seçeneğiyle yeniden çalıştırmayı deneyin."
 
-#: src/mailman/bin/master.py:169
+#: src/mailman/bin/master.py:194
 #, python-brace-format
 msgid ""
 "The master lock could not be acquired, because it appears as if some process\n"
@@ -208,7 +208,7 @@ msgstr ""
 "\n"
 "Çıkılıyor."
 
-#: src/mailman/bin/master.py:182
+#: src/mailman/bin/master.py:207
 #, python-brace-format
 msgid ""
 "For unknown reasons, the master lock could not be acquired.\n"
@@ -225,7 +225,7 @@ msgstr ""
 "\n"
 "Çıkılıyor."
 
-#: src/mailman/bin/master.py:541
+#: src/mailman/bin/master.py:561
 msgid ""
 "    Master subprocess watcher.\n"
 "\n"
@@ -267,7 +267,7 @@ msgstr ""
 "    yapılandırma dosyasında belirtilen dosyaya kendi işlem kimliğini kaydeder, ancak\n"
 "    normalde bu işlem kimliğini (PID) doğrudan kullanmanız gerekmez."
 
-#: src/mailman/bin/master.py:572
+#: src/mailman/bin/master.py:592
 msgid ""
 "    Don't restart the runners when they exit because of an error or a SIGUSR1.\n"
 "    Use this only for debugging."
@@ -275,7 +275,7 @@ msgstr ""
 "    Çalıştırıcılar bir hata veya SIGUSR1 nedeniyle çıktığında yeniden başlatma.\n"
 "    Bunu yalnızca hata ayıklama için kullanın."
 
-#: src/mailman/bin/master.py:578
+#: src/mailman/bin/master.py:598
 msgid ""
 "    If the master watcher finds an existing master lock, it will normally exit\n"
 "    with an error message.  With this option,the master will perform an extra\n"
@@ -293,7 +293,7 @@ msgstr ""
 "    görünen kilidi kaldıracak ve ana kilidi elde etmek için başka bir girişimde\n"
 "    bulunacaktır."
 
-#: src/mailman/bin/master.py:591
+#: src/mailman/bin/master.py:611
 msgid ""
 "    Override the default set of runners that the master will invoke, which is\n"
 "    typically defined in the configuration file.  Multiple -r options may be\n"
@@ -303,7 +303,7 @@ msgstr ""
 "    öntanımlı çalıştırıcı kümesini geçersiz kıl.  Birden çok -r seçeneği belirtilebilir.\n"
 "    -r için belirtilen değerler doğrudan bin/runner işlemine iletilir."
 
-#: src/mailman/bin/master.py:598 src/mailman/bin/runner.py:133
+#: src/mailman/bin/master.py:618 src/mailman/bin/runner.py:133
 msgid "Display more debugging information to the log file."
 msgstr "Günlük dosyasında daha fazla hata ayıklama bilgisi görüntüle."
 
@@ -1073,7 +1073,7 @@ msgstr "Eşleşen posta listesi bulunamadı"
 msgid "${count} matching mailing lists found:"
 msgstr "${count} eşleşen posta listesi bulundu:"
 
-#: src/mailman/commands/cli_lists.py:126
+#: src/mailman/commands/cli_lists.py:127
 msgid ""
 "    Create a mailing list.\n"
 "\n"
@@ -1087,7 +1087,7 @@ msgstr ""
 "    gereklidir.  Geçerli bir e-posta adresi olmalıdır ve etki alanı Mailman'e\n"
 "    kaydedilmelidir.  Liste adları küçük harfe zorlanır."
 
-#: src/mailman/commands/cli_lists.py:134
+#: src/mailman/commands/cli_lists.py:135
 msgid ""
 "    Set the list's preferred language to CODE, which must be a registered two\n"
 "    letter language code."
@@ -1095,7 +1095,7 @@ msgstr ""
 "    Listenin tercih edilen dilini CODE olarak ayarla, kayıtlı bir iki harfli dil kodu\n"
 "    olması gereklidir."
 
-#: src/mailman/commands/cli_lists.py:140
+#: src/mailman/commands/cli_lists.py:141
 msgid ""
 "    Specify a list owner email address.  If the address is not currently\n"
 "    registered with Mailman, the address is registered and linked to a user.\n"
@@ -1108,7 +1108,7 @@ msgstr ""
 "    mesajı ile birlikte, aynı zamanda bir liste oluşturma bildirimi de\n"
 "    gönderecektir. Birden fazla sahip belirtilebilir."
 
-#: src/mailman/commands/cli_lists.py:149
+#: src/mailman/commands/cli_lists.py:150
 msgid ""
 "    Notify the list owner by email that their mailing list has been\n"
 "    created."
@@ -1116,11 +1116,11 @@ msgstr ""
 "    Posta listesinin oluşturulduğunu liste sahibine e-posta ile\n"
 "    bildir."
 
-#: src/mailman/commands/cli_lists.py:155
+#: src/mailman/commands/cli_lists.py:156
 msgid "Print less output."
 msgstr "Daha az çıktı yazdır."
 
-#: src/mailman/commands/cli_lists.py:159
+#: src/mailman/commands/cli_lists.py:160
 msgid ""
 "    Register the mailing list's domain if not yet registered.  This is\n"
 "    the default behavior, but these options are provided for backward\n"
@@ -1130,55 +1130,55 @@ msgstr ""
 "    öntanımlı davranıştır ancak bu seçenekler geriye dönük uyumluluk için\n"
 "    sağlanmıştır.  -D seçeneği ile, posta listesinin etki alanını kaydetme."
 
-#: src/mailman/commands/cli_lists.py:170
+#: src/mailman/commands/cli_lists.py:171
 #, python-brace-format
 msgid "Invalid language code: ${language_code}"
 msgstr "Geçersiz dil kodu: ${language_code}"
 
-#: src/mailman/commands/cli_lists.py:186
+#: src/mailman/commands/cli_lists.py:187
 #, python-brace-format
 msgid "Illegal owner addresses: ${invalid}"
 msgstr "Geçersiz sahip adresleri: ${invalid}"
 
-#: src/mailman/commands/cli_lists.py:190
+#: src/mailman/commands/cli_lists.py:191
 #, python-brace-format
 msgid "Illegal list name: ${fqdn_listname}"
 msgstr "Geçersiz liste adı: ${fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:192
+#: src/mailman/commands/cli_lists.py:193
 #, python-brace-format
 msgid "List already exists: ${fqdn_listname}"
 msgstr "Liste zaten var: ${fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:194
+#: src/mailman/commands/cli_lists.py:195
 #, python-brace-format
 msgid "Undefined domain: ${domain}"
 msgstr "Tanımsız etki alanı: ${domain}"
 
-#: src/mailman/commands/cli_lists.py:202
+#: src/mailman/commands/cli_lists.py:203
 #, python-brace-format
 msgid "Created mailing list: ${mlist.fqdn_listname}"
 msgstr "Posta listesi oluşturuldu: ${mlist.fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:217
+#: src/mailman/commands/cli_lists.py:218
 #, python-brace-format
 msgid "Your new mailing list: ${fqdn_listname}"
 msgstr "Yeni posta listeniz: ${fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:231
+#: src/mailman/commands/cli_lists.py:232
 msgid "Remove a mailing list."
 msgstr "Bir posta listesini kaldır."
 
-#: src/mailman/commands/cli_lists.py:235
+#: src/mailman/commands/cli_lists.py:236
 msgid "Suppress status messages"
 msgstr "Durum mesajlarını gösterme"
 
-#: src/mailman/commands/cli_lists.py:241
+#: src/mailman/commands/cli_lists.py:242
 #, python-brace-format
 msgid "No such list matching spec: ${listspec}"
 msgstr "${listspec} ile eşleşen liste yok"
 
-#: src/mailman/commands/cli_lists.py:246
+#: src/mailman/commands/cli_lists.py:247
 #, python-brace-format
 msgid "Removed list: ${listspec}"
 msgstr "Liste kaldırıldı: ${listspec}"
@@ -2098,6 +2098,26 @@ msgstr "Mesajı giden haber kuyruğuna taşı."
 #: src/mailman/handlers/validate_authenticity.py:120
 msgid "Perform auth checks and attach Authentication-Results header."
 msgstr "Kimlik doğrulama denetimleri gerçekleştir ve Authentication-Results başlığı ekle."
+
+#: src/mailman/interfaces/member.py:122
+#, python-brace-format
+msgid "${self.email} is already a member of mailing list ${self.fqdn_listname}"
+msgstr ""
+
+#: src/mailman/interfaces/member.py:125
+#, python-brace-format
+msgid "${self.email} is already an owner of mailing list ${self.fqdn_listname}"
+msgstr ""
+
+#: src/mailman/interfaces/member.py:128
+#, python-brace-format
+msgid "${self.email} is already a moderator of mailing list ${self.fqdn_listname}"
+msgstr ""
+
+#: src/mailman/interfaces/member.py:131
+#, python-brace-format
+msgid "${self.email} is already a non-member of mailing list ${self.fqdn_listname}"
+msgstr ""
 
 #: src/mailman/interfaces/pipeline.py:53
 msgid "[No details are available]"
