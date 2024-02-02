@@ -114,7 +114,7 @@ class TestConfirmJoin(unittest.TestCase):
             self._mlist, Message(), {}, (self._token,), result)
         self.assertEqual(status, ContinueProcessing.no)
         # The result will contain an error message.
-        self.assertIn('anne@example.com is already a MemberRole.member of '
+        self.assertIn('anne@example.com is already a member of '
                       'mailing list test@example.com', str(result))
 
 

@@ -217,7 +217,7 @@ class TestJoin(unittest.TestCase):
         self._command.process(self._mlist, msg, {}, (), results)
         self.assertEqual(
             str(results).splitlines()[-1],
-            'anne@example.com is already a MemberRole.member of '
+            'anne@example.com is already a member of '
             'mailing list ant@example.com')
 
     def test_join_banned(self):

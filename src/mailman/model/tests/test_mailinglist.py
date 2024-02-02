@@ -70,6 +70,36 @@ class TestMailingList(unittest.TestCase):
         self.assertEqual(cm.exception.email, 'anne@example.com')
         self.assertEqual(cm.exception.role, MemberRole.member)
 
+    def test_add_same_owner_twice(self):
+        anne = getUtility(IUserManager).create_user('anne@example.com')
+        # Give the user a preferred address.
+        set_preferred(anne)
+        self._mlist.subscribe(anne, role=MemberRole.owner)
+        with self.assertRaises(AlreadySubscribedError) as e:
+            self._mlist.subscribe(anne, role=MemberRole.owner)
+        self.assertEqual(str(e.exception), 'anne@example.com is already'
+                         ' an owner of mailing list ant@example.com')
+
+    def test_add_same_moderator_twice(self):
+        anne = getUtility(IUserManager).create_user('anne@example.com')
+        # Give the user a preferred address.
+        set_preferred(anne)
+        self._mlist.subscribe(anne, role=MemberRole.moderator)
+        with self.assertRaises(AlreadySubscribedError) as e:
+            self._mlist.subscribe(anne, role=MemberRole.moderator)
+        self.assertEqual(str(e.exception), 'anne@example.com is already'
+                         ' a moderator of mailing list ant@example.com')
+
+    def test_add_same_nonmember_twice(self):
+        anne = getUtility(IUserManager).create_user('anne@example.com')
+        # Give the user a preferred address.
+        set_preferred(anne)
+        self._mlist.subscribe(anne, role=MemberRole.nonmember)
+        with self.assertRaises(AlreadySubscribedError) as e:
+            self._mlist.subscribe(anne, role=MemberRole.nonmember)
+        self.assertEqual(str(e.exception), 'anne@example.com is already'
+                         ' a non-member of mailing list ant@example.com')
+
     def test_subscribing_user_must_have_preferred_address(self):
         # A user object cannot be subscribed to a mailing list without a
         # preferred address.

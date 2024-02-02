@@ -18,6 +18,7 @@
 """Interface describing the basics of a member."""
 
 from enum import Enum
+from mailman.core.i18n import _
 from mailman.interfaces.errors import MailmanError
 from public import public
 from zope.interface import Attribute, Interface
@@ -117,8 +118,18 @@ class AlreadySubscribedError(MembershipError):
         self.role = role
 
     def __str__(self):
-        return '{0} is already a {1} of mailing list {2}'.format(
-            self.email, self.role, self.fqdn_listname)
+        if self.role == MemberRole.member:
+            return _('${self.email} is already a member of mailing list '
+                     '${self.fqdn_listname}')
+        if self.role == MemberRole.owner:
+            return _('${self.email} is already an owner of mailing list '
+                     '${self.fqdn_listname}')
+        if self.role == MemberRole.moderator:
+            return _('${self.email} is already a moderator of mailing list '
+                     '${self.fqdn_listname}')
+        if self.role == MemberRole.nonmember:
+            return _('${self.email} is already a non-member of mailing list '
+                     '${self.fqdn_listname}')
 
 
 @public

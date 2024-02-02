@@ -23,6 +23,7 @@ Bugs fixed
 * The output from the ``mailman lists`` command no longer has trailing blanks
   and the command with the ``-d`` option doesn't fail with very long list ids.
   (Closes #1117 and #1118)
+* The text of the AlreadySubscribedError is now translatable.  (Closes #1121)
 
 New Features
 ------------
