@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-02 14:08-0800\n"
-"PO-Revision-Date: 2023-10-10 05:58+0000\n"
-"Last-Translator: Matsubara <matsubara.cc@mie-u.ac.jp>\n"
-"Language-Team: Japanese <https://hosted.weblate.org/projects/gnu-mailman/mailman/ja/>\n"
+"PO-Revision-Date: 2024-03-18 20:40+0000\n"
+"Last-Translator: SATOH Fumiyasu <fumiyas@osstech.co.jp>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/gnu-mailman/"
+"mailman/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:85
 #: src/mailman/chains/hold.py:163 src/mailman/handlers/acknowledge.py:56
@@ -41,7 +42,7 @@ msgstr "キャッチされないバウンス通知"
 #: src/mailman/app/membership.py:147
 #, python-brace-format
 msgid "${mlist.display_name} unsubscription notification"
-msgstr "${mlist.display_name} 購読解除通知"
+msgstr "${mlist.display_name} 退会通知"
 
 #: src/mailman/app/moderator.py:97
 msgid ""
@@ -68,11 +69,11 @@ msgstr "承認待ちのメッセージの転送"
 #: src/mailman/app/moderator.py:244
 #, python-brace-format
 msgid "New unsubscription request from ${mlist.display_name} by ${email}"
-msgstr "${email}で ${mlist.display_name}からの新しい購読解除のリクエスト"
+msgstr "${mlist.display_name} から ${email} の新しい退会申請"
 
 #: src/mailman/app/moderator.py:277
 msgid "Unsubscription request"
-msgstr "購読解除リクエスト"
+msgstr "退会申請"
 
 #: src/mailman/app/moderator.py:318
 msgid "Original Message"
@@ -81,7 +82,7 @@ msgstr "元のメッセージ"
 #: src/mailman/app/moderator.py:321
 #, python-brace-format
 msgid "Request to mailing list \"${display_name}\" rejected"
-msgstr "メーリングリスト\"${display_name}\" のリクエストが拒否されました"
+msgstr "メーリングリスト「${display_name}」への申請が拒否されました"
 
 #: src/mailman/app/notifications.py:93
 msgid " (Digest mode)"
@@ -95,17 +96,17 @@ msgstr "メーリングリスト \"${mlist.display_name}\" へようこそ${digm
 #: src/mailman/app/notifications.py:130
 #, python-brace-format
 msgid "You have been unsubscribed from the ${mlist.display_name} mailing list"
-msgstr "メーリングリスト ${mlist.display_name} の購読を解除しました"
+msgstr "メーリングリスト ${mlist.display_name} から退会しました"
 
 #: src/mailman/app/notifications.py:148
 #, python-brace-format
 msgid "${mlist.display_name} subscription notification"
-msgstr "${mlist.display_name} 購読通知"
+msgstr "${mlist.display_name} 退会通知"
 
 #: src/mailman/app/notifications.py:173
 #, python-brace-format
 msgid "${member}'s subscription disabled on ${mlist.display_name}"
-msgstr "${member}の ${mlist.display_name} の購読が無効になっています"
+msgstr "${member} の ${mlist.display_name} の配信は無効化されています"
 
 #: src/mailman/app/notifications.py:201
 #, python-brace-format
@@ -115,22 +116,23 @@ msgstr "${mlist.display_name}で${member}のバウンススコアが増加しま
 #: src/mailman/app/notifications.py:227
 #, python-brace-format
 msgid "${member} unsubscribed from ${mlist.display_name} mailing list due to bounces"
-msgstr "バウンスが原因で${member}がメーリングリスト ${mlist.display_name}から購読を解除されました"
+msgstr "${member} はバウンスが原因でメーリングリスト ${mlist.display_name} "
+"から退会されました"
 
 #: src/mailman/app/notifications.py:254
 #, python-brace-format
 msgid "Your subscription for ${mlist.display_name} mailing list has been disabled"
-msgstr "メーリングリスト${mlist.display_name}に対して購読が無効になりました"
+msgstr "メーリングリスト ${mlist.display_name} の配信が無効化されました"
 
 #: src/mailman/app/subscriptions.py:328
 #, python-brace-format
 msgid "New subscription request to ${self.mlist.display_name} from ${self.address.email}"
-msgstr "${self.address.email}から${self.mlist.display_name}への新しい購読リクエスト"
+msgstr "${self.mlist.display_name} への ${self.address.email} の新しい入会申請"
 
 #: src/mailman/app/subscriptions.py:497
 #, python-brace-format
 msgid "New unsubscription request to ${self.mlist.display_name} from ${self.address.email}"
-msgstr "${self.address.email}から${self.mlist.display_name}への新しい購読解除リクエスト"
+msgstr "${self.mlist.display_name} からの ${self.address.email} の新しい退会申請"
 
 #: src/mailman/app/subscriptions.py:629
 #, python-brace-format
@@ -487,7 +489,7 @@ msgstr "有効なメールアドレスとして解析できません(スキッ�
 #: src/mailman/commands/cli_addmembers.py:104
 #, python-brace-format
 msgid "Already subscribed (skipping): ${email}"
-msgstr "既に購読済みです(スキップ): ${email}"
+msgstr "既に入会済みです (スキップ): ${email}"
 
 #: src/mailman/commands/cli_addmembers.py:107
 #: src/mailman/commands/cli_syncmembers.py:87
@@ -499,7 +501,7 @@ msgstr "メンバー登録がブロックされています(スキップ): ${ema
 #: src/mailman/commands/cli_syncmembers.py:90
 #, python-brace-format
 msgid "Subscription already pending (skipping): ${email}"
-msgstr "購読は既に保留中です。(skipping): ${email}"
+msgstr "入会は既に申請中です (スキップ): ${email}"
 
 #: src/mailman/commands/cli_addmembers.py:116
 msgid ""
@@ -747,7 +749,7 @@ msgstr "Mailman runnerの再起動"
 #: src/mailman/commands/cli_delmembers.py:48
 #, python-brace-format
 msgid "Member not subscribed (skipping): ${email}"
-msgstr "メンバーが購読していません(スキップ): ${email}"
+msgstr "メンバーとして入会されていません (スキップ): ${email}"
 
 #: src/mailman/commands/cli_delmembers.py:54
 msgid "    Delete members from a mailing list."
@@ -1291,7 +1293,7 @@ msgstr ""
 
 #: src/mailman/commands/cli_notify.py:40
 msgid "Notify list owners/moderators of pending requests."
-msgstr "保留中のリクエストについて、リストのオーナー／モデレータに通知します。"
+msgstr "保留中の申請をリストのオーナーとモデレータに通知します。"
 
 #: src/mailman/commands/cli_notify.py:43
 msgid ""
@@ -1299,13 +1301,14 @@ msgid ""
 "    argument can either be a List-ID or a fully qualified list name.  Without\n"
 "    this option, operate on the requests for all mailing lists."
 msgstr ""
-"    このメーリングリストに対して操作を行います。複数の--listオプションを指定できます。\n"
-"    引数はList-IDまたは完全修飾リスト名のいずれかです。\n"
-"    このオプションがない場合、すべてのメーリングリストのリクエストに対して操作します。"
+"    このメーリングリストに対して操作を行います。複数の --list オプションを\n"
+"    指定できます。引数は List-ID または完全修飾リスト名のいずれかです。\n"
+"    "
+"このオプションがない場合、すべてのメーリングリストの申請に対して操作します。"
 
 #: src/mailman/commands/cli_notify.py:80 src/mailman/commands/cli_notify.py:141
 msgid "The {} list has {} moderation requests waiting."
-msgstr "{} リストには {} 件のモデレーションリクエストが保留中です。"
+msgstr "{} メーリングリストで {} 件の投稿申請が保留中です。"
 
 #: src/mailman/commands/cli_notify.py:111
 msgid ""
@@ -1313,7 +1316,7 @@ msgid ""
 "Held Subscriptions:\n"
 msgstr ""
 "\n"
-"保留中の購読:\n"
+"保留中の入会申請:\n"
 
 #: src/mailman/commands/cli_notify.py:113 src/mailman/commands/cli_notify.py:117
 msgid "User: {}\n"
@@ -1325,7 +1328,7 @@ msgid ""
 "Held Unsubscriptions:\n"
 msgstr ""
 "\n"
-"保留中の購読解除\n"
+"保留中の退会申請\n"
 
 #: src/mailman/commands/cli_notify.py:119
 msgid ""
@@ -1734,7 +1737,7 @@ msgstr "変数 'm' は ${listspec} メーリングリストです"
 
 #: src/mailman/commands/eml_confirm.py:43
 msgid "Confirm a subscription or held message request."
-msgstr "購読または保留中のメッセージリクエストを確認します。"
+msgstr "入会または保留中の投稿の申請を確認してください。"
 
 #: src/mailman/commands/eml_confirm.py:50
 msgid "No confirmation token found"
@@ -1797,13 +1800,12 @@ msgid ""
 "used.  You can use the 'address' option to request subscription of an address\n"
 "other than the sender of the command.\n"
 msgstr ""
-"購読リクエストの確認が求められ、\n"
-"仮のパスワードが発行されることがあります。\n"
+"入会の確認が求められ、仮のパスワードが発行されることがあります。\n"
 "\n"
-"'digest' オプションを使用することで、ダイジェスト配信を希望するかどうかを\n"
-"指定できます。\t指定しない場合、メーリングリストのデフォルトの\n"
-"配信モードが使用されます。\t'address' オプションを使用して、\n"
-"コマンドの送信者以外のアドレスの購読をリクエストできます。\n"
+"「digest」 オプションを使用してダイジェスト配信を希望するかどうかを\n"
+"指定できます。指定しない場合はメーリングリストのデフォルトの配信モードが\n"
+"使用されます。「address」オプションを使用してコマンドの送信者以外の\n"
+"アドレスで入会申請ができます。\n"
 
 #: src/mailman/commands/eml_membership.py:79
 msgid "Join this mailing list."
@@ -1817,7 +1819,7 @@ msgstr "${self.name}: 有効なメールアドレスが見つかりませんで�
 #: src/mailman/commands/eml_membership.py:131
 #, python-brace-format
 msgid "${person} has a pending subscription for ${listname}"
-msgstr "\"${person}\" さんは \"${listname}\" への保留中の購読があります"
+msgstr "${person} さんは ${listname} への保留中の入会申請があります"
 
 #: src/mailman/commands/eml_membership.py:135
 #, python-brace-format
@@ -1842,7 +1844,7 @@ msgid ""
 msgstr ""
 "このメーリングリストを退会します。\n"
 "\n"
-"退会リクエストの確認が求められることがあります。"
+"退会申請の確認が求められることがあります。"
 
 #: src/mailman/commands/eml_membership.py:189
 msgid "Leave this mailing list."
@@ -1851,7 +1853,7 @@ msgstr "このメーリングリストを退会します。"
 #: src/mailman/commands/eml_membership.py:196
 #, python-brace-format
 msgid "${self.name}: No valid email address found to unsubscribe"
-msgstr "${self.name}: 有効なメールアドレスが見つからないため、購読解除できません"
+msgstr "${self.name}: 有効なメールアドレスが見つからないため退会できません"
 
 #: src/mailman/commands/eml_membership.py:202
 #, python-brace-format
@@ -2108,22 +2110,23 @@ msgstr "認証チェックを実行し、Authentication-Resultsヘッダーを�
 #: src/mailman/interfaces/member.py:122
 #, python-brace-format
 msgid "${self.email} is already a member of mailing list ${self.fqdn_listname}"
-msgstr ""
+msgstr "{self.email} は既にメーリングリスト {self.fqdn_listname} のメンバーです"
 
 #: src/mailman/interfaces/member.py:125
 #, python-brace-format
 msgid "${self.email} is already an owner of mailing list ${self.fqdn_listname}"
-msgstr ""
+msgstr "{self.email} は既にメーリングリスト {self.fqdn_listname} のオーナーです"
 
 #: src/mailman/interfaces/member.py:128
 #, python-brace-format
 msgid "${self.email} is already a moderator of mailing list ${self.fqdn_listname}"
-msgstr ""
+msgstr "{self.email} は既にメーリングリスト {self.fqdn_listname} のモデレーターです"
 
 #: src/mailman/interfaces/member.py:131
 #, python-brace-format
 msgid "${self.email} is already a non-member of mailing list ${self.fqdn_listname}"
-msgstr ""
+msgstr "{self.email} は既にメーリングリスト {self.fqdn_listname} "
+"のメンバーではありません"
 
 #: src/mailman/interfaces/pipeline.py:53
 msgid "[No details are available]"
@@ -2147,7 +2150,7 @@ msgstr "新規のキューパイプライン。"
 
 #: src/mailman/rest/sub_moderation.py:121
 msgid "Subscription request"
-msgstr "購読リクエスト"
+msgstr "入会申請"
 
 #: src/mailman/rules/administrivia.py:53
 msgid "Catch mis-addressed email commands."
@@ -2497,19 +2500,17 @@ msgstr ""
 
 msgid "list:admin:action:post.txt"
 msgstr ""
-"リスト管理者として、\n"
-"以下のメーリングリスト投稿に対する承認が要求されています:\n"
+"リスト管理者として以下のメーリングリスト投稿に対する承認が要求されています:\n"
 "\n"
-"    List:    $listname\n"
-"    From:    $sender_email\n"
-"    Subject: $subject\n"
+"    メーリングリスト: $listname\n"
+"    送信者アドレス:   $sender_email\n"
+"    件名:             $subject\n"
 "\n"
-"このメッセージは次の理由で保留中です:\n"
+"このメッセージは下記の理由で保留中です:\n"
 "\n"
 "$reasons\n"
 "\n"
-"ご都合の良いときに、\n"
-"ダッシュボードを訪れてリクエストを承認または拒否してください。"
+"ご都合のよいときにダッシュボードで申請を承認または拒否してください。"
 
 msgid "list:admin:action:subscribe.txt"
 msgstr ""
@@ -2521,18 +2522,17 @@ msgstr ""
 
 msgid "list:admin:action:unsubscribe.txt"
 msgstr ""
-"メーリングリスト登録解除の承認には\n"
-"あなたの認証が必要です。\n"
+"メーリングリスト退会の承認にはあなたの認証が必要です。\n"
 "\n"
-"    For:  $member\n"
-"    List: $listname"
+"    メンバー:         $member\n"
+"    メーリングリスト: $listname"
 
 msgid "list:admin:notice:disable.txt"
 msgstr ""
-"$memberの購読は、\n"
-"バウンススコアがメーリングリストのbounce_score_thresholdを超えたため、$listnameで無効にされました。\n"
+"$member への配信はバウンススコアがメーリングリスト $listname の\n"
+"bounce_score_threshold 設定値を超えたために無効化されました。\n"
 "\n"
-"トリガーとなるDSNが利用可能な場合、添付されています。"
+"無効化の契機となった配送エラー通知メールを添付します。(利用可能な場合)"
 
 msgid "list:admin:notice:increment.txt"
 msgstr ""
@@ -2542,16 +2542,16 @@ msgstr ""
 
 msgid "list:admin:notice:pending.txt"
 msgstr ""
-"$listname リストには $count 件の承認リクエストが保留中です。\n"
+"$listname メーリングリストに $count 件の投稿申請が保留中です。\n"
 "\n"
 "$data\n"
 "できるだけ早く対応してください。"
 
 msgid "list:admin:notice:removal.txt"
-msgstr "$member は過度なバウンスのため、$listname から購読が解除されました。"
+msgstr "$member は過度なバウンスのため、$listname から退会されました。"
 
 msgid "list:admin:notice:subscribe.txt"
-msgstr "$memberは$display_nameの購読に成功しました。"
+msgstr "$member の $display_name への入会が成功しました。"
 
 msgid "list:admin:notice:unrecognized.txt"
 msgstr ""
@@ -2568,18 +2568,18 @@ msgstr "list:member:digest:header.txt"
 
 msgid "list:member:digest:masthead.txt"
 msgstr ""
-"$display_nameメーリングリストの送信先\n"
+"$display_name メーリングリストの投稿先メールアドレス:\n"
 "\t$listname\n"
 "\n"
-"Eメールでの購読・購読解除は、件名または本文に\n"
-"ヘルプ\n"
+"メールでの入会・退会は件名または本文に「help」と記載して\n"
+"下記のメールアドレスにメッセージを送信:\n"
 "\t$request_email\n"
 "\n"
-"リストを管理している人物への連絡先は以下の通りです。\n"
+"メーリングリストを管理者への連絡先:\n"
 "\t$owner_email\n"
 "\n"
-"返信の際は、件名を \"Re: $display_nameのダイジェストの内容... \"\n"
-"より具体的に編集してください"
+"返信の際は、件名を「Re:  $display_name のダイジェストの内容... 」\n"
+"よりも具体的な内容に変更してください。"
 
 msgid "list:member:generic:footer.txt"
 msgstr ""
@@ -2612,24 +2612,26 @@ msgid "list:user:action:subscribe.txt"
 msgstr ""
 "メールアドレス登録確認\n"
 "\n"
-"こんにちは、こちらは$domain のGNU Mailmanサーバーです。\n"
+"こんにちは、こちらは $domain の GNU Mailman サーバーです。\n"
 "\n"
-"メールアドレスの登録リクエストを受け取りました。\n"
+"メールアドレスの登録申請を受け取りました。\n"
 "\n"
 "    $user_email\n"
 "\n"
-"このサイトでGNU Mailmanを使い始める前に、これがあなたのメールアドレスであることを\n"
+"このサイトで GNU Mailman を使い始める前に、"
+"これがあなたのメールアドレスであることを\n"
 "確認する必要があります。 このメッセージに返信することで確認できます。\n"
 "\n"
-"以下の内容を本文に記載し、 $request_email: 宛てに\n"
+"以下の内容を本文に記載して $request_email  宛てに\n"
 "メールを送信する方法でも参加手続きを完了することができます。\n"
 "\n"
 "    confirm $token\n"
 "\n"
-"ほとんどのメールソフトでは、\n"
-"このメッセージに返信するだけでうまくいくはずです。\n"
+"ほとんどのメールソフトではこのメッセージに返信するだけでうまくいくはずです。"
 "\n"
-"このメールアドレスを登録したくない場合は、このメッセージを無視してください。  \n"
+"\n"
+"このメールアドレスを登録したくない場合は、このメッセージを無視してください。"
+"\n"
 "あなたが悪意を持ってリストに登録されていると思われる場合、\n"
 "またはその他の質問がある場合は、下記までご連絡ください。\n"
 "\n"
@@ -2637,28 +2639,31 @@ msgstr ""
 
 msgid "list:user:action:unsubscribe.txt"
 msgstr ""
-"メールアドレス配信停止確認\n"
+"メールアドレス退会確認\n"
 "\n"
-"こんにちは、こちらは $domain のGNU Mailmanサーバーです。\n"
+"こんにちは、こちらは $domain の GNU Mailman サーバーです。\n"
 "\n"
-"メールアドレスの登録解除リクエストを受け取りました。\n"
+"メールアドレスの退会申請を受け取りました。\n"
 "\n"
 "    $user_email\n"
 "\n"
-"GNU Mailmanがあなたの配信を停止する前に、まずあなたのリクエストを確認する必要があります。\n"
+"GNU Mailmanが "
+"あなたの配信を停止する前に、まずあなたの申請を確認する必要があります。\n"
 "このメッセージに返信するだけで、これを行うことができます。\n"
 "\n"
-"以下の内容を本文に記載し、 $request_email: あてにメールを\n"
+"以下の内容を本文に記載して $request_email 宛にメールを\n"
 "送信する方法でも退会手続きを完了することができます\n"
 "\n"
 "    confirm $token\n"
 "\n"
-"ほとんどのメールソフトでは、\n"
-"このメッセージに返信するだけでうまくいくはずです。\n"
+"ほとんどのメールソフトでは、このメッセージに返信するだけでうまくいくはずです"
+"。\n"
 "\n"
-"このメールアドレスの配信停止を希望されない場合は、\n"
-"このメッセージを無視してください。  悪意を持って配信停止されていると思われる場合、\n"
-"またはその他のご質問がある場合は、下記までご連絡ください。\n"
+"このメールアドレスの配信停止を希望されない場合はこのメッセージを無視してくだ"
+"さい。\n"
+"悪意を持って配信停止されていると思われる場合、またはその他のご質問がある場合"
+"は、\n"
+"下記までご連絡ください。\n"
 "\n"
 "    $owner_email"
 
@@ -2719,17 +2724,16 @@ msgstr ""
 
 msgid "list:user:notice:refuse.txt"
 msgstr ""
-"メーリングリストへのリクエスト\n"
+"メーリングリストへの申請\n"
 "\n"
 "    $request\n"
 "\n"
-"はリスト管理者によって拒否されました。  モデレーターは、あなたのリクエストを却下した理由を\n"
-"次のように述べています：\n"
+"はリスト管理者によって拒否されました。 モデレーターは、あなたのリクエストを\n"
+"却下した理由を次のように述べています：\n"
 "\n"
 "\"$reason\"\n"
 "\n"
-"ご質問やご意見は、\n"
-"リスト管理者までお寄せください：\n"
+"ご質問やご意見は、リスト管理者までお寄せください：\n"
 "\n"
 "    $owner_email"
 
@@ -2744,30 +2748,31 @@ msgstr ""
 
 msgid "list:user:notice:warning.txt"
 msgstr ""
-"$listname メーリングリストは、$sender_emailへのメッセージ配信に\n"
-"問題があることを示すバウンスを多数受信したため、\n"
-"あなたの購読は無効になりました。\n"
-"メール管理者に問い合わせてみてください。\n"
+"あなたへの $listname メーリングリストからの配信は無効化されました。\n"
+"$sender_email へのメッセージ配信に問題があることを示すバウンスを\n"
+"多数受信したためにです。詳細はご利用のメールシステムの管理者に\n"
+"お問い合わせください。\n"
 "\n"
-"質問や問題がある場合は、メーリングリストのオーナーに連絡してください。\n"
+"質問や問題がある場合はメーリングリストのオーナーにご連絡ください。\n"
 "\n"
-"    $owner_email"
+"      $owner_email"
 
 msgid "list:user:notice:welcome.txt"
 msgstr ""
-"\"$display_name\" メーリングリストへようこそ！\n"
+"$display_name メーリングリストへようこそ!\n"
 "\n"
-"このリストに投稿するには、メッセージを次のアドレスに送信してください:\n"
+"メーリングリストへの投稿には下記メールアドレスにメッセージを送信してください:"
+"\n"
 "\n"
 "\t$listname\n"
 "\n"
-"購読を解除したりオプションを調整するには、\n"
-"メールで次のアドレスにメッセージを送信してください:\n"
+"退会やオプションの調整には下記メールアドレスにメッセージを送信してください:\n"
 "\n"
 "\t$request_email\n"
 "\n"
-"メッセージの件名または本文に 'help' と入力して（引用符は含めないでください）\n"
-"その後の手順を含むメッセージが届きます。\n"
-"オプションを変更するにはパスワードが必要ですが、\n"
-"セキュリティのため、このパスワードはここに含まれていません。\n"
-"パスワードを忘れた場合は、ウェブUIを使用してリセットする必要があります。"
+"このアドレス宛のメッセージの件名または本文に「help」(引用符は含めないでくださ"
+"い)\n"
+"と入力して送信すると、その後の手順を含むメッセージが届きます。\n"
+"オプションを変更するにはパスワードが必要ですが、安全のためパスワードは\n"
+"ここに記しません。パスワードを忘れた場合はウェブ UI を使用してリセット\n"
+"する必要があります。"
