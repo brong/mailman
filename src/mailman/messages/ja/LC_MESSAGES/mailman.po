@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-02 14:08-0800\n"
-"PO-Revision-Date: 2024-03-18 20:40+0000\n"
+"PO-Revision-Date: 2024-03-19 08:59+0000\n"
 "Last-Translator: SATOH Fumiyasu <fumiyas@osstech.co.jp>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/gnu-mailman/"
 "mailman/ja/>\n"
@@ -438,7 +438,7 @@ msgstr "N/A"
 
 #: src/mailman/chains/hold.py:118
 msgid "Last autoresponse notification for today"
-msgstr "本日最後の自動返信通知"
+msgstr "本日最後の自動応答通知"
 
 #: src/mailman/chains/hold.py:133
 msgid "Hold a message and stop processing."
