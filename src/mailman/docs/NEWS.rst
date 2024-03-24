@@ -30,6 +30,8 @@ New Features
 * One can now add entries like ``@list@example.com`` to the
   ``accept_these_nonmembers`` attribute of a list to accept nonmember posts
   from members of another list.  (Closes #794)
+* REST API now allows forwarding the held message to a new address when handling
+  the message. (Fixes #174)
 
 Other
 -----

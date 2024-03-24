@@ -15,9 +15,9 @@ with no held messages.
     >>> from mailman.app.lifecycle import create_list
     >>> ant = create_list('ant@example.com')
     >>> from mailman.config import config
-    >>> transaction = config.db    
+    >>> transaction = config.db
     >>> transaction.commit()
-    >>> from mailman.testing.documentation import dump_json    
+    >>> from mailman.testing.documentation import dump_json
     >>> dump_json('http://localhost:9001/3.0/lists/ant@example.com/held')
     http_etag: "..."
     start: 0
@@ -166,7 +166,7 @@ moderation.
     >>> request_id = hold_message(ant, msg)
     >>> transaction.commit()
 
-    >>> from mailman.testing.documentation import call_http    
+    >>> from mailman.testing.documentation import call_http
     >>> results = call_http(url(request_id))
     >>> print(results['message_id'])
     <bravo>
@@ -236,3 +236,41 @@ under ``original_subject``.
     >>> print(results['original_subject'])
     =?iso-8859-1?q?p=F6stal?=
 
+
+Forwarding of Held message
+==========================
+
+When disposing held message, the message can be forwarded to a different
+address.
+::
+
+    >>> msg = message_from_string("""\
+    ... From: anne@example.com
+    ... To: ant@example.com
+    ... Subject: =?iso-8859-1?q?p=F6stal?=
+    ... Message-ID: <beta>
+    ...
+    ... Something else.
+    ... """)
+
+    >>> from mailman.app.moderator import hold_message
+    >>> request_id = hold_message(ant, msg, {'extra': 7}, 'Because')
+    >>> transaction.commit()
+
+Now, when handling the request, we can forward the message to bee@example.com
+
+    >>> dump_json(url(request_id), {
+    ...     'action': 'discard',
+    ...     'forward': ['bee@example.com']
+    ...     })
+    date: ...
+    server: ...
+    status: 204
+
+    >>> messages = get_queue_messages('virgin')
+    >>> len(messages)
+    1
+    >>> print(messages[0].msg['subject'])
+    Forward of moderated message
+    >>> print(messages[0].msg['To'])
+    bee@example.com

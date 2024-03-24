@@ -252,6 +252,72 @@ Something else.
             dict(action='reject', comment='Because I want to.'))
         self.assertEqual(response.status_code, 204)
 
+    def test_forward_held_message(self):
+        self._msg = mfs("""\
+From: aperson@example.com
+To: ant@example.com
+Subject: Hold my post
+Message-ID: <AwesomeID>
+
+Hello
+""")
+        with transaction():
+            held_id = hold_message(self._mlist, self._msg)
+        json, response = call_api(
+            'http://localhost:9001/3.0/lists/ant@example.com'
+            '/held/{}'.format(held_id),)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(json['request_id'], held_id)
+        # Now, let's reject the post and forward it to another
+        # address.
+        json, response = call_api(
+            'http://localhost:9001/3.0/lists/ant@example.com'
+            '/held/{}'.format(held_id),
+            dict(action='reject', comment='Wrong list for you',
+                 forward=['bee@example.com', 'me@example.com']))
+        self.assertEqual(response.status_code, 204)
+        items = get_queue_messages('virgin')
+        self.assertEqual(len(items), 2)
+        message = items[0].msg
+        # First message is reject message to the sender.
+        self.assertEqual(message['From'], 'ant-bounces@example.com')
+        self.assertEqual(message['To'], 'aperson@example.com')
+        self.assertEqual(str(message['Subject']),
+                         'Request to mailing list "Ant" rejected')
+        fwd_msg = items[1].msg
+        # Second message is the forwarded message to multiple recipients.
+        self.assertEqual(fwd_msg['From'], 'ant-bounces@example.com')
+        self.assertEqual(fwd_msg['To'], 'bee@example.com, me@example.com')
+        self.assertEqual(str(fwd_msg['Subject']),
+                         'Forward of moderated message')
+
+    def test_forward_held_message_single_address(self):
+        self._msg = mfs("""\
+From: aperson@example.com
+To: ant@example.com
+Subject: Hold my post
+Message-ID: <AwesomeID>
+
+Hello
+""")
+        with transaction():
+            held_id = hold_message(self._mlist, self._msg)
+        # Now, let's discard the post and forward it to another
+        # address.
+        json, response = call_api(
+            'http://localhost:9001/3.0/lists/ant@example.com'
+            '/held/{}'.format(held_id),
+            dict(action='discard', forward='bee@example.com',))
+        self.assertEqual(response.status_code, 204)
+        items = get_queue_messages('virgin')
+        self.assertEqual(len(items), 1)
+        fwd_msg = items[0].msg
+        # Second message is the forwarded message.
+        self.assertEqual(fwd_msg['From'], 'ant-bounces@example.com')
+        self.assertEqual(fwd_msg['To'], 'bee@example.com')
+        self.assertEqual(str(fwd_msg['Subject']),
+                         'Forward of moderated message')
+
 
 class TestSubscriptionModeration(unittest.TestCase):
     layer = RESTLayer
