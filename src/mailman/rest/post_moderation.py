@@ -33,7 +33,11 @@ from mailman.rest.helpers import (
     not_found,
     okay,
 )
-from mailman.rest.validator import enum_validator, Validator
+from mailman.rest.validator import (
+    enum_validator,
+    list_of_emails_validator,
+    Validator,
+)
 from public import public
 from zope.component import getUtility
 
@@ -137,7 +141,8 @@ class HeldMessage(_HeldMessageBase):
             validator = Validator(
                 action=enum_validator(Action),
                 comment=str,
-                _optional=('comment',))
+                forward=list_of_emails_validator,
+                _optional=('comment', 'forward'))
             arguments = validator(request)
         except ValueError as error:
             bad_request(response, str(error))
