@@ -65,6 +65,23 @@ class TestCreate(unittest.TestCase):
             'Try \'create --help\' for help.\n\n'
             'Error: Illegal owner addresses: invalid\n')
 
+    def test_create_with_style_name(self):
+        # Cannot create a list with a unknown style name.
+        result = self._command.invoke(
+            create, ('--style-name', 'private-default', 'ant@example.com'))
+        self.assertEqual(result.exit_code, 0)
+
+    def test_create_with_unknown_style_name(self):
+        # Cannot create a list with a unknown style name.
+        result = self._command.invoke(
+            create, ('--style-name', 'invalid', 'ant@example.com'))
+        self.assertEqual(result.exit_code, 2)
+        self.assertEqual(
+            result.output,
+            'Usage: create [OPTIONS] LISTNAME\n'
+            'Try \'create --help\' for help.\n\n'
+            'Error: Unknown list style name: invalid\n')
+
     def test_create_without_domain_option(self):
         # The domain will be created if no domain options are specified.  Use
         # the example.org domain since example.com is created by the test
