@@ -106,6 +106,17 @@ class TestBasicImport(unittest.TestCase):
         self.assertTrue(self._mlist.allow_list_posts)
         self.assertTrue(self._mlist.include_rfc2369_headers)
 
+    def test_subject_prefix_spaces(self):
+        self._pckdict['subject_prefix'] = '  '
+        self._import()
+        self.assertEqual(self._mlist.subject_prefix, '')
+        self._pckdict['subject_prefix'] = '[prefix]'
+        self._import()
+        self.assertEqual(self._mlist.subject_prefix, '[prefix] ')
+        self._pckdict['subject_prefix'] = '  [prefix]  '
+        self._import()
+        self.assertEqual(self._mlist.subject_prefix, '[prefix] ')
+
     def test_no_overwrite_rosters(self):
         # The mlist.members and mlist.digest_members rosters must not be
         # overwritten.

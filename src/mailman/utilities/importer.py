@@ -201,6 +201,17 @@ enabled: yes
     return code
 
 
+def subject_prefix_adjust(value):
+    """Mailman 2.1 strips subject_prefix and prefixes Subject: header
+    value with subject_prefix and a space if subject_prefix has a text,
+    but Mailman 3 prefixes Subject: with subject_prefix only.
+    """
+    value = value.strip()
+    if len(value):
+        value += ' '
+    return value
+
+
 def maybe_truncate_mysql(value):
     # For MySQL, column type SAUnicode is VARCHAR(255).  In many MySQL
     # configurations, attempts to store longer values are fatal.
@@ -237,6 +248,7 @@ TYPES = dict(
     personalize=Personalization,
     preferred_language=check_language_code,
     reply_goes_to_list=ReplyToMunging,
+    subject_prefix=subject_prefix_adjust,
     subscription_policy=SubscriptionPolicy,
     )
 
