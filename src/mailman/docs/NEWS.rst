@@ -24,6 +24,8 @@ Bugs fixed
   and the command with the ``-d`` option doesn't fail with very long list ids.
   (Closes #1117 and #1118)
 * The text of the AlreadySubscribedError is now translatable.  (Closes #1121)
+* The ``mailman create`` command now has a ``--style-name NAME`` option.
+  (Closes #1136)
 * The ``mailman import21`` command adjust spaces in ``subject_prefix`` for
   Mailman 2.1 compatibility.  (Closes #1135)
 

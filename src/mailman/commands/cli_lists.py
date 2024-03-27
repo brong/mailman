@@ -36,6 +36,7 @@ from mailman.interfaces.domain import (
 )
 from mailman.interfaces.languages import ILanguageManager
 from mailman.interfaces.listmanager import IListManager, ListAlreadyExistsError
+from mailman.interfaces.styles import IStyleManager
 from mailman.interfaces.template import ITemplateLoader
 from mailman.utilities.options import I18nCommand
 from mailman.utilities.string import expand, wrap
@@ -145,6 +146,10 @@ class Lists:
     send a list creation notice to the address.  More than one owner can be
     specified."""))
 @click.option(
+    '--style-name', metavar='NAME',
+    help=_("""\
+    Specify a list style name."""))
+@click.option(
     '--notify/-no-notify', '-n/-N',
     default=False,
     help=_("""\
@@ -163,7 +168,8 @@ class Lists:
     compatibility.  With -D do not register the mailing list's domain."""))
 @click.argument('fqdn_listname', metavar='LISTNAME')
 @click.pass_context
-def create(ctx, language, owners, notify, quiet, create_domain, fqdn_listname):
+def create(ctx, language, owners, style_name, notify, quiet, create_domain,
+           fqdn_listname):
     language_code = (language if language is not None
                      else system_preferences.preferred_language.code)
     # Make sure that the selected language code is known.
@@ -185,8 +191,11 @@ def create(ctx, language, owners, notify, quiet, create_domain, fqdn_listname):
         if invalid_owners:
             invalid = COMMASPACE.join(sorted(invalid_owners))  # noqa: F841
             ctx.fail(_('Illegal owner addresses: ${invalid}'))
+    if style_name is not None:
+        if getUtility(IStyleManager).get(style_name) is None:
+            ctx.fail(_('Unknown list style name: ${style_name}'))
     try:
-        mlist = create_list(fqdn_listname, owners)
+        mlist = create_list(fqdn_listname, owners, style_name)
     except InvalidEmailAddressError:
         ctx.fail(_('Illegal list name: ${fqdn_listname}'))
     except ListAlreadyExistsError:
