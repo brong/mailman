@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-02 14:08-0800\n"
-"PO-Revision-Date: 2024-03-27 07:43+0000\n"
+"PO-Revision-Date: 2024-03-28 19:20+0000\n"
 "Last-Translator: SATOH Fumiyasu <fumiyas@osstech.co.jp>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/gnu-mailman/"
 "mailman/ja/>\n"
@@ -140,17 +140,17 @@ msgstr "${self.mlist.display_name} メーリングリスト: ${self.address.emai
 #: src/mailman/app/subscriptions.py:629
 #, python-brace-format
 msgid "You have been invited to join the ${event.mlist.fqdn_listname} mailing list."
-msgstr "メーリングリスト ${event.mlist.fqdn_listname} への参加を招待されました。"
+msgstr "${event.mlist.fqdn_listname} メーリングリストへの入会を招待されました。"
 
 #: src/mailman/app/subscriptions.py:632
 #, python-brace-format
 msgid "Your confirmation is needed to leave the ${event.mlist.fqdn_listname} mailing list."
-msgstr "メーリングリスト ${event.mlist.fqdn_listname} から脱退するには確認が必要です。"
+msgstr "${event.mlist.fqdn_listname} メーリングリストから退会するには確認が必要です。"
 
 #: src/mailman/app/subscriptions.py:636
 #, python-brace-format
 msgid "Your confirmation is needed to join the ${event.mlist.fqdn_listname} mailing list."
-msgstr "メーリングリスト ${event.mlist.fqdn_listname} に参加するには確認が必要です。"
+msgstr "${event.mlist.fqdn_listname} メーリングリストに入会するには確認が必要です。"
 
 #: src/mailman/bin/mailman.py:102 src/mailman/bin/master.py:585
 #: src/mailman/bin/runner.py:96
@@ -450,12 +450,14 @@ msgstr "メッセージを保留し、プロセスを止めてください。"
 #: src/mailman/chains/hold.py:202
 #, python-brace-format
 msgid "Your message to ${mlist.fqdn_listname} awaits moderator approval"
-msgstr "あなたの${mlist.fqdn_listname}へのメッセージはモデレーターの承認を待っています"
+msgstr "${mlist.fqdn_listname} "
+"メーリングリストへのあなたの投稿はモデレーターの承認待ちです"
 
 #: src/mailman/chains/hold.py:231
 #, python-brace-format
 msgid "${mlist.fqdn_listname} post from ${msg.sender} requires approval"
-msgstr "${msg.sender}からの${mlist.fqdn_listname}のポストは承認を待っています"
+msgstr "${mlist.fqdn_listname} メーリングリストへの ${msg.sender} "
+"からの投稿が承認待ちです。"
 
 #: src/mailman/chains/hold.py:246
 msgid ""
@@ -1820,7 +1822,7 @@ msgstr ""
 
 #: src/mailman/commands/eml_membership.py:79
 msgid "Join this mailing list."
-msgstr "このメーリングリストに参加します。"
+msgstr "このメーリングリストに入会します。"
 
 #: src/mailman/commands/eml_membership.py:102
 #, python-brace-format
@@ -1889,7 +1891,8 @@ msgstr "${person} が ${mlist.fqdn_listname} を退会しました"
 #: src/mailman/commands/eml_membership.py:243
 #, python-brace-format
 msgid "Confirmation email sent to ${person} to leave ${mlist.fqdn_listname}"
-msgstr "${mlist.fqdn_listname} を退会するための確認メールが ${person} さんに送信されました"
+msgstr "${mlist.fqdn_listname} から退会するための確認メールが ${person} "
+"さんに送信されました"
 
 #: src/mailman/commands/eml_membership.py:253
 msgid "An alias for 'leave'."
@@ -2119,22 +2122,22 @@ msgstr "認証チェックを実行し、Authentication-Resultsヘッダーを�
 #: src/mailman/interfaces/member.py:122
 #, python-brace-format
 msgid "${self.email} is already a member of mailing list ${self.fqdn_listname}"
-msgstr "{self.email} は既にメーリングリスト {self.fqdn_listname} のメンバーです"
+msgstr "${self.email} は既にメーリングリスト ${self.fqdn_listname} のメンバーです"
 
 #: src/mailman/interfaces/member.py:125
 #, python-brace-format
 msgid "${self.email} is already an owner of mailing list ${self.fqdn_listname}"
-msgstr "{self.email} は既にメーリングリスト {self.fqdn_listname} のオーナーです"
+msgstr "${self.email} は既にメーリングリスト ${self.fqdn_listname} のオーナーです"
 
 #: src/mailman/interfaces/member.py:128
 #, python-brace-format
 msgid "${self.email} is already a moderator of mailing list ${self.fqdn_listname}"
-msgstr "{self.email} は既にメーリングリスト {self.fqdn_listname} のモデレーターです"
+msgstr "${self.email} は既にメーリングリスト ${self.fqdn_listname} のモデレーターです"
 
 #: src/mailman/interfaces/member.py:131
 #, python-brace-format
 msgid "${self.email} is already a non-member of mailing list ${self.fqdn_listname}"
-msgstr "{self.email} は既にメーリングリスト {self.fqdn_listname} "
+msgstr "${self.email} は既にメーリングリスト ${self.fqdn_listname} "
 "のメンバーではありません"
 
 #: src/mailman/interfaces/pipeline.py:53
@@ -2614,7 +2617,7 @@ msgstr ""
 "下記の内容だけを本文に記載して $request_email 宛に\n"
 "メールを送信する方法でも招待を受けることができます:\n"
 "\n"
-"    confirm $token \n"
+"    confirm $token\n"
 "\n"
 "ほとんどのメールソフトでは、このメッセージに返信するだけでうまく\n"
 "いくはずです。\n"
@@ -2647,7 +2650,7 @@ msgstr ""
 "いくはずです。\n"
 "\n"
 "このメールアドレスを入会したくない場合は、このメッセージを無視してください。"
-"  \n"
+"\n"
 "誰かが悪意を持ってリストに入会申請していると思われる場合や、\n"
 "そのほか質問がある場合は、下記メールアドレスまでご連絡ください:\n"
 "\n"
@@ -2675,7 +2678,7 @@ msgstr ""
 "いくはずです。\n"
 "\n"
 "このメールアドレスを退会したくない場合は、このメッセージを無視してください。"
-"  \n"
+"\n"
 "誰かが悪意を持ってリストに退会申請していると思われる場合や、\n"
 "そのほか質問がある場合は、下記メールアドレスまでご連絡ください:\n"
 "\n"
@@ -2687,7 +2690,7 @@ msgstr "list:user:notice:goodbye.txt"
 msgid "list:user:notice:hold.txt"
 msgstr ""
 "「$listname」への下記の件名の投稿メッセージは、\n"
-"メーリングリストのモデレーターによる審査・承認まで保留されます。\n"
+"メーリングリストのモデレーターが承認するまで保留されます。\n"
 "\n"
 "     $subject\n"
 "\n"
