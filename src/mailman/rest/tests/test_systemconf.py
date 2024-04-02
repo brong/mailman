@@ -213,6 +213,7 @@ class TestSystemConfiguration(unittest.TestCase):
             'runner.virgin',
             'shell',
             'styles',
+            'urlpatterns',
             'webservice',
             ])
 

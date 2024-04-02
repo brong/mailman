@@ -36,6 +36,7 @@ from mailman.rest.validator import (
     list_of_emails_validator,
     list_of_strings_validator,
     subscriber_validator,
+    url_validator,
     Validator,
 )
 from mailman.testing.layers import RESTLayer
@@ -213,6 +214,24 @@ class TestValidators(unittest.TestCase):
         validator = Validator(key=as_boolean)
         self.assertTrue(validator(RequestTrue)['key'])
         self.assertFalse(validator(RequestFalse)['key'])
+
+    def test_url_validator(self):
+        self.assertEqual(
+            url_validator('http://example.com/mailma3'),
+            'http://example.com/mailma3')
+        self.assertEqual(
+            url_validator('https://example.com/postorius'),
+            'https://example.com/postorius')
+        # Missing /postorius or /mailman3 in the end.
+        self.assertRaises(
+            ValueError,
+            url_validator,
+            'https://example.com')
+        # missing scheme.
+        self.assertRaises(
+            ValueError,
+            url_validator,
+            'example.com/mailman3')
 
 
 class TestGetterSetter(unittest.TestCase):

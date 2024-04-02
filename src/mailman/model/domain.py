@@ -55,11 +55,13 @@ class Domain(Model):
                           secondary='domain_owner',
                           backref='domains')
     alias_domain = Column(SAUnicode)
+    base_url = Column(SAUnicode)
 
     def __init__(self, mail_host,
                  description=None,
                  owners=None,
-                 alias_domain=None):
+                 alias_domain=None,
+                 base_url=None):
         """Create and register a domain.
 
         :param mail_host: The host name for the email interface.
@@ -76,6 +78,7 @@ class Domain(Model):
         if owners is not None:
             self.add_owners(owners)
         self.alias_domain = alias_domain
+        self.base_url = base_url
 
     @property
     @dbconnection
@@ -134,7 +137,8 @@ class DomainManager:
             mail_host,
             description=None,
             owners=None,
-            alias_domain=None):
+            alias_domain=None,
+            base_url=None):
         """See `IDomainManager`."""
         # Be sure the mail_host is not already registered.  This is probably
         # a constraint that should (also) be maintained in the database.
@@ -142,7 +146,7 @@ class DomainManager:
             raise BadDomainSpecificationError(
                 'Duplicate email host: {}'.format(mail_host))
         notify(DomainCreatingEvent(mail_host))
-        domain = Domain(mail_host, description, owners, alias_domain)
+        domain = Domain(mail_host, description, owners, alias_domain, base_url)
         store.add(domain)
         notify(DomainCreatedEvent(domain))
         return domain

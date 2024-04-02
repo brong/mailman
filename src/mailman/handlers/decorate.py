@@ -29,6 +29,7 @@ from mailman.interfaces.handler import IHandler
 from mailman.interfaces.mailinglist import IListArchiverSet
 from mailman.interfaces.template import ITemplateLoader
 from mailman.utilities.string import expand
+from mailman.utilities.urls import web_urls
 from public import public
 from zope.component import getUtility
 from zope.interface import implementer
@@ -69,6 +70,9 @@ def process(mlist, msg, msgdata):
         # For backward compatibility.
         d['user_name_or_address'] = member.display_name or recipient
         d['user_address'] = recipient
+    if mlist.domain.base_url is not None:
+        d['base_url'] = mlist.domain.base_url
+        web_urls(d, mlist)
     # Calculate the archiver permalink substitution variables.  This provides
     # the $<archive-name>_url placeholder for every enabled archiver.
     for archiver in IListArchiverSet(mlist).archivers:
