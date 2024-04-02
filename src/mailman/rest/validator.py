@@ -25,6 +25,7 @@ from mailman.interfaces.errors import MailmanError
 from mailman.interfaces.languages import ILanguageManager
 from mailman.rest.helpers import get_request_params
 from public import public
+from urllib.parse import urlparse
 from zope.component import getUtility
 
 
@@ -244,6 +245,15 @@ def email_validator(value):
         raise ValueError(
             'Expected a valid email address, got {}'.format(value))
     return value
+
+
+@public
+def url_validator(value):
+    """Validate the value is a valid web url."""
+    parsed = urlparse(value)
+    if parsed.scheme and parsed.netloc and parsed.path:
+        return value
+    raise ValueError("Invalid URL: {value}.".format(value=value))
 
 
 @public

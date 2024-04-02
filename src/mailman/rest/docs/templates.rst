@@ -444,6 +444,17 @@ Mailman.  There are a common set of placeholders most templates support:
 * ``language`` - the two letter language code for the list's preferred
   language (e.g. ``en``, ``it``, ``fr``)
 
+Along with these, Mailman supports placeholder as URLs for web interface
+when ``base_url`` property is set at the ``Domain`` level. These include:
+
+* ``domain_url`` - URL to homepage for a domain.
+* ``mailinglist_url`` - URL to homepage for a mailinglist.
+* ``held_message_url`` - URL to page for handling all held messages.
+* ``pending_subscriptions_url`` - URL to page for handling
+  pending subscription requests.
+* ``pending_unsubscriptions_url`` - URL to page for handling pending
+  unsubscriptions.
+
 Other template substitutions are described below the template name listed
 below.  Here are all the supported template names:
 

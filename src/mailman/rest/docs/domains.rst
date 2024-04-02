@@ -14,7 +14,7 @@ Domains
     >>> domain_manager.remove('example.com')
     <Domain example.com...>
     >>> from mailman.config import config
-    >>> transaction = config.db    
+    >>> transaction = config.db
     >>> transaction.commit()
 
 The REST API can be queried for the set of known domains, of which there are
@@ -36,6 +36,7 @@ Once a domain is added, it is accessible through the API.
     >>> dump_json('http://localhost:9001/3.0/domains')
     entry 0:
         alias_domain: None
+        base_url: None
         description: An example domain
         http_etag: "..."
         mail_host: example.com
@@ -64,24 +65,28 @@ At the top level, all domains are returned as separate entries.
     >>> dump_json('http://localhost:9001/3.0/domains')
     entry 0:
         alias_domain: None
+        base_url: None
         description: An example domain
         http_etag: "..."
         mail_host: example.com
         self_link: http://localhost:9001/3.0/domains/example.com
     entry 1:
         alias_domain: None
+        base_url: None
         description: None
         http_etag: "..."
         mail_host: example.org
         self_link: http://localhost:9001/3.0/domains/example.org
     entry 2:
         alias_domain: None
+        base_url: None
         description: Porkmasters
         http_etag: "..."
         mail_host: lists.example.net
         self_link: http://localhost:9001/3.0/domains/lists.example.net
     entry 3:
         alias_domain: mmx.example.net
+        base_url: None
         description: Porkmasters2
         http_etag: "..."
         mail_host: mm.example.net
@@ -99,6 +104,7 @@ The information for a single domain is available by following one of the
 
     >>> dump_json('http://localhost:9001/3.0/domains/lists.example.net')
     alias_domain: None
+    base_url: None
     description: Porkmasters
     http_etag: "..."
     mail_host: lists.example.net
@@ -163,6 +169,7 @@ Now the web service knows about our new domain.
 
     >>> dump_json('http://localhost:9001/3.0/domains/lists.example.com')
     alias_domain: None
+    base_url: None
     description: None
     http_etag: "..."
     mail_host: lists.example.com
@@ -192,6 +199,7 @@ You can also create a new domain with a description and a contact address.
 
     >>> dump_json('http://localhost:9001/3.0/domains/my.example.com')
     alias_domain: None
+    base_url: None
     description: My new domain
     http_etag: "..."
     mail_host: my.example.com
@@ -203,6 +211,40 @@ You can also create a new domain with a description and a contact address.
     # Unlock the database.
     >>> transaction.abort()
 
+Domain URLs
+===========
+Domain have a ``base_url`` property which allows Mailman to generate URLs
+for Mailman's Web Inteface. URL patterns are configured under ``[urlpatterns]``
+configuration.
+
+Initially, the domain doesn't have ``base_url``::
+
+    >>> dump_json('http://localhost:9001/3.0/domains/my.example.com')
+    alias_domain: None
+    base_url: None
+    description: My new domain
+    http_etag: "..."
+    mail_host: my.example.com
+    self_link: http://localhost:9001/3.0/domains/my.example.com
+
+Set the URL to the ``base_url`` of the web interface. If you are using
+Postorius it will look something like ``https://lists.example.com/mailman3``
+or ``https://lists.example.com/postorius``::
+
+    >>> dump_json('http://localhost:9001/3.0/domains/my.example.com', {
+    ...           'base_url': 'https://lists.example.com/mailman3',
+    ...           }, method='PATCH')
+    date: ...
+    server: gunicorn
+    status: 204
+
+    >>> dump_json('http://localhost:9001/3.0/domains/my.example.com')
+    alias_domain: None
+    base_url: https://lists.example.com/mailman3
+    description: My new domain
+    http_etag: "..."
+    mail_host: my.example.com
+    self_link: http://localhost:9001/3.0/domains/my.example.com
 
 Deleting domains
 ================

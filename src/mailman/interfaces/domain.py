@@ -87,6 +87,13 @@ class IDomain(Interface):
         The mailing lists are returned in order sorted by list-id.
         """)
 
+    base_url = Attribute(
+        """
+        Web host with URL prefix where the web UI is available. When there are
+        no web frontends installed, this value should be null.
+        """
+    )
+
 
 @public
 class IDomainManager(Interface):

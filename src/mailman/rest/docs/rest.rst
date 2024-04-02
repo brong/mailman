@@ -33,16 +33,16 @@ You can write your own HTTP clients to speak this API, or you can use the
 Root URL
 ========
 
-In this documentation, we mainly use ``http://localhost:9001/3.0/``   
-as the REST root url. Port ``9001`` is used for unit tests, but 
-for a running system, the port is ``8001`` unless changed in config. 
+In this documentation, we mainly use ``http://localhost:9001/3.0/``
+as the REST root url. Port ``9001`` is used for unit tests, but
+for a running system, the port is ``8001`` unless changed in config.
 
-In the documentation we use ``3.0`` as the primary API version, but 
-the latest version of the API might be different. You may check the 
+In the documentation we use ``3.0`` as the primary API version, but
+the latest version of the API might be different. You may check the
 difference of versions in `Basic Operation`_.
 
-The ``hostname`` and ``port`` where Mailman's REST API will be 
-listening can be found by running `mailman info`_ command. 
+The ``hostname`` and ``port`` where Mailman's REST API will be
+listening can be found by running `mailman info`_ command.
 You can configure that in ``mailman.cfg`` configuration file.::
 
 
@@ -77,10 +77,11 @@ instead.
 
 For example, call like::
 
-    >>> from mailman.testing.documentation import dump_json  
+    >>> from mailman.testing.documentation import dump_json
     >>> dump_json('http://localhost:9001/3.1/domains')
     entry 0:
         alias_domain: None
+        base_url: None
         description: An example domain.
         http_etag: "..."
         mail_host: example.com
@@ -97,6 +98,7 @@ is a ``GET`` request to the URL specified as the first parameter. An equivalent
    "entries": [
         {
             "alias_domain": null,
+            "base_url": null,
             "description": null,
             "http_etag": "\"75a9858de80b96f525d71157558fff523cb940c3\"",
             "mail_host": "example.com",
@@ -107,7 +109,7 @@ is a ``GET`` request to the URL specified as the first parameter. An equivalent
     "start": 0,
     "total_size": 1
     }
-  
+
 
 .. warning:: Note that the port used in the above two commands are intentionally
              different. Documentation uses 9001 to make sure that the doctests
@@ -140,6 +142,7 @@ This is equivalent to::
     "entries": [
         {
             "alias_domain": null,
+            "base_url": null,
             "description": null,
             "http_etag": "\"75a9858de80b96f525d71157558fff523cb940c3\"",
             "mail_host": "example.com",
@@ -147,6 +150,7 @@ This is equivalent to::
         },
         {
             "alias_domain": null,
+            "base_url": null,
             "description": null,
             "http_etag": "\"a13efb90674956b3ed26363705bf966a954f1121\"",
             "mail_host": "lists.example.com",
@@ -171,7 +175,7 @@ call you have to use ``POST``. However, when updating an existing resource,
 you'd want to use ``PATCH`` request. Mailman also support ``PUT`` requests for
 updating a resource, but you need to specify **all** the attributes when
 updating via a ``PUT`` request.
-   
+
 
 REST API Documentation
 ======================

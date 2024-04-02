@@ -43,6 +43,7 @@ class TestDomains(unittest.TestCase):
             mail_host='example.org',
             description='Example domain',
             owner=['someone@example.com', 'secondowner@example.com'],
+            base_url="https://lists.example.org/mailman3",
             )
         content, response = call_api(
             'http://localhost:9001/3.0/domains', data, method="POST")
@@ -125,6 +126,23 @@ class TestDomains(unittest.TestCase):
                 data,
                 method='PATCH')
         self.assertEqual(cm.exception.code, 400)
+
+    def test_patch_domain_base_url(self):
+        domain = getUtility(IDomainManager).get('example.com')
+        self.assertEqual(domain.base_url, None)
+
+        data = {'base_url': 'https://lists.example.com/postorius'}
+        content, response = call_api(
+            'http://localhost:9001/3.1/domains/example.com',
+            data,
+            method='PATCH',
+        )
+        self.assertEqual(response.status_code, 204)
+        content, response = call_api(
+            'http://localhost:9001/3.1/domains/example.com'
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['base_url'], data['base_url'])
 
     def test_domain_create_with_single_owner(self):
         # Creating domain with single owner should not raise InvalidEmailError.

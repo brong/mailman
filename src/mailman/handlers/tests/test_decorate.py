@@ -143,6 +143,23 @@ This is a test message.
         self.assertIn('http://example.com/link_to_message',
                       self._msg.as_string())
 
+    def test_decorate_footer_with_weburl(self):
+        site_dir = os.path.join(config.TEMPLATE_DIR, 'site', 'en')
+        os.makedirs(site_dir)
+        footer_path = os.path.join(site_dir, 'footer_with_weburls.txt')
+        with open(footer_path, 'w', encoding='utf-8') as fp:
+            print('${held_message_url}', file=fp)
+        getUtility(ITemplateManager).set(
+            'list:member:regular:footer',
+            None,
+            'mailman:///footer_with_weburls.txt')
+        self._mlist.preferred_language = 'en'
+        self._mlist.domain.base_url = 'https://lists.example.com/mailman3'
+        decorate.process(self._mlist, self._msg, {})
+        self.assertIn(
+            'https://lists.example.com/mailman3/lists/ant.example.com/held_messages',  # noqa: E501
+            self._msg.as_string())
+
     def test_trailing_space_not_removed(self):
         site_dir = os.path.join(config.TEMPLATE_DIR, 'site', 'en')
         os.makedirs(site_dir)

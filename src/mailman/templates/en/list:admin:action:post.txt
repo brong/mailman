@@ -11,3 +11,5 @@ $reasons
 
 At your convenience, visit your dashboard to approve or deny the
 request.
+
+    $held_message_url

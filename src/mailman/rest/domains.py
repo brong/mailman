@@ -37,7 +37,11 @@ from mailman.rest.helpers import (
 from mailman.rest.lists import ListsForDomain
 from mailman.rest.uris import ADomainURI, AllDomainURIs
 from mailman.rest.users import ListOfDomainOwners, OwnersForDomain
-from mailman.rest.validator import list_of_strings_validator, Validator
+from mailman.rest.validator import (
+    list_of_strings_validator,
+    url_validator,
+    Validator,
+)
 from public import public
 from zope.component import getUtility
 
@@ -51,6 +55,7 @@ class _DomainBase(CollectionMixin):
             alias_domain=domain.alias_domain,
             description=domain.description,
             mail_host=domain.mail_host,
+            base_url=domain.base_url,
             self_link=self.api.path_to('domains/{}'.format(domain.mail_host)),
             )
 
@@ -91,6 +96,7 @@ class ADomain(_DomainBase):
         kws = dict(
             alias_domain=GetterSetter(str),
             description=GetterSetter(str),
+            base_url=GetterSetter(url_validator),
             owner=ListOfDomainOwners(list_of_strings_validator),
             )
         if is_optional:
@@ -163,10 +169,12 @@ class AllDomains(_DomainBase):
             validator = Validator(mail_host=str,
                                   description=str,
                                   alias_domain=str,
+                                  base_url=url_validator,
                                   owner=list_of_strings_validator,
                                   _optional=('description',
                                              'owner',
-                                             'alias_domain')
+                                             'alias_domain',
+                                             'base_url')
                                   )
             values = validator(request)
             # For consistency, owners are passed in as multiple `owner` keys,

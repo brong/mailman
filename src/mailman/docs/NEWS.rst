@@ -36,6 +36,9 @@ New Features
   from members of another list.  (Closes #794)
 * REST API now allows forwarding the held message to a new address when handling
   the message. (Fixes #174)
+* Add the ability to set web URLs by setting domain's ``base_url`` parameter
+  which allows using parameters like ``$held_message_url`` in
+  the templates. (See #981)
 
 Other
 -----
