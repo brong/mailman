@@ -28,6 +28,8 @@ Bugs fixed
   Mailman 2.1 compatibility.  (Closes #1135)
 * An exception in the lmtp runner is caught and a retryable status returned.
   (Closes #1148)
+* Catch more generic requests exceptions on downloading suffix list
+  to avoid shunting messages.  (Closes #1140)
 
 New Features
 ------------

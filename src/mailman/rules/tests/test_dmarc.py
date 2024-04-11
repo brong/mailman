@@ -555,6 +555,8 @@ class TestableHandler(BaseHTTPRequestHandler):
             self.send_header('Content-Type', 'UTF-8')
             self.end_headers()
             self.wfile.write(b'abc')
+        elif self.path == '/internal-server-error':
+            self.send_error(HTTPStatus.INTERNAL_SERVER_ERROR)
         else:
             self.send_error(HTTPStatus.NOT_FOUND)
 
@@ -633,9 +635,9 @@ class TestSuffixList(TestCase):
 
     @configuration(
         'dmarc',
-        org_domain_data_url='http://localhost:8180/public_suffix_list.err')
-    def test_cached_copy_is_missing_download_404s(self):
-        # There's no cached file and we'll get a 404 with the .err file so
+        org_domain_data_url='http://localhost:8180/not-found')
+    def test_cached_copy_is_missing_download_not_found(self):
+        # There's no cached file and we'll get a 404 (Not Found) so
         # we'll have to fall back to our internal copy.
         cache_path = os.path.join(config.VAR_DIR, dmarc.LOCAL_FILE_NAME)
         self.assertFalse(os.path.exists(cache_path))
@@ -653,8 +655,8 @@ class TestSuffixList(TestCase):
 
     @configuration(
         'dmarc',
-        org_domain_data_url='http://localhost:8180/public_suffix_list.err')
-    def test_cached_copy_is_expired_download_404s(self):
+        org_domain_data_url='http://localhost:8180/not-found')
+    def test_cached_copy_is_expired_download_not_found(self):
         # Because the cached copy is out of date, we try to download the new
         # version.  But that 404s so we end up continuing to use the cached
         # copy.
@@ -673,3 +675,13 @@ class TestSuffixList(TestCase):
         self.assertEqual(contents, 'xyz')
         # The cached file timestamp doesn't change.
         self.assertEqual(os.stat(new_path).st_mtime, expires)
+
+    @configuration(
+        'dmarc',
+        org_domain_data_url='http://localhost:8180/internal-server-error')
+    def test_download_internal_server_error(self):
+        # https://gitlab.com/mailman/mailman/-/issues/1140
+        cache_path = os.path.join(config.VAR_DIR, dmarc.LOCAL_FILE_NAME)
+        self.assertFalse(os.path.exists(cache_path))
+        new_path = dmarc.ensure_current_suffix_list()
+        self.assertEqual(cache_path, new_path)

@@ -34,7 +34,7 @@ from mailman.utilities.datetime import now
 from mailman.utilities.protocols import get
 from mailman.utilities.string import wrap
 from public import public
-from requests.exceptions import HTTPError
+from requests.exceptions import RequestException
 from urllib.error import URLError
 from zope.interface import implementer
 
@@ -75,7 +75,7 @@ def ensure_current_suffix_list():
     if download:
         try:
             content = get(config.dmarc.org_domain_data_url)
-        except (URLError, HTTPError) as error:
+        except (URLError, RequestException) as error:
             elog.error('Unable to retrieve public suffix list from %s: %s',
                        config.dmarc.org_domain_data_url,
                        getattr(error, 'reason', str(error)))
