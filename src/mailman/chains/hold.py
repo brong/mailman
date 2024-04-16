@@ -265,5 +265,6 @@ also appear in the first line of the body of the reply.""")),
                 msgdata.get('moderation_reasons', ['N/A']))
             log.info('HOLD: %s post from %s held, message-id=%s: %s',
                      mlist.fqdn_listname, msg.sender,
-                     msg.get('message-id', 'n/a'), SEMISPACE.join(reasons))
+                     msg.get('message-id', 'n/a').strip(),
+                     SEMISPACE.join(reasons))
         notify(HoldEvent(mlist, msg, msgdata, self))

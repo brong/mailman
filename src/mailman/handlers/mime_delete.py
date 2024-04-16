@@ -82,7 +82,7 @@ message.
             # inspect the message.
             filebase = config.switchboards['bad'].enqueue(msg, msgdata)
             log.info('{} preserved in file base {}'.format(
-                msg.get('message-id', 'n/a'), filebase))
+                msg.get('message-id', 'n/a').strip(), filebase))
     elif mlist.filter_action is FilterAction.discard:
         pass
     elif msgdata.get('fwd_preserve', True):

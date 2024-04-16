@@ -50,5 +50,5 @@ class AcceptChain(TerminalChainBase):
         if rule_misses:
             msg['X-Mailman-Rule-Misses'] = SEMISPACE.join(rule_misses)
         config.switchboards['pipeline'].enqueue(msg, msgdata)
-        log.info('ACCEPT: %s', msg.get('message-id', 'n/a'))
+        log.info('ACCEPT: %s', msg.get('message-id', 'n/a').strip())
         notify(AcceptEvent(mlist, msg, msgdata, self))
