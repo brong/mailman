@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-02 14:08-0800\n"
-"PO-Revision-Date: 2024-04-01 21:27+0000\n"
+"PO-Revision-Date: 2024-04-23 06:07+0000\n"
 "Last-Translator: SATOH Fumiyasu <fumiyas@osstech.co.jp>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/gnu-mailman/"
 "mailman/ja/>\n"
@@ -2233,7 +2233,7 @@ msgstr "暗黙の宛先を持つメッセージを取得します。"
 
 #: src/mailman/rules/implicit_dest.py:95
 msgid "Message has implicit destination"
-msgstr "メッセージには暗黙の宛先が含まれています"
+msgstr "メッセージの宛先にメーリングリストが明示されていません"
 
 #: src/mailman/rules/loop.py:32
 msgid "Look for a posting loop."
