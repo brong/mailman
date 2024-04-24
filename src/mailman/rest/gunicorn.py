@@ -65,6 +65,7 @@ def make_gunicorn_server():
     port = int(config.webservice.port)
     log_path = os.path.join(config.LOG_DIR, config.logging.gunicorn['path'])
     options = {
+        'proc_name': 'mailman: runner [rest]',
         'bind': '{}:{}'.format(host, port),
         'accesslog': log_path,
         'errorlog': log_path,
@@ -73,7 +74,7 @@ def make_gunicorn_server():
         'disable_redirect_access_to_syslog': True,
         'workers': int(config.webservice.workers),
         'post_worker_init': _post_worker_init,
-        }
+    }
     # Read the ini configuration and pass those values to the
     # GunicornApplication.
     gunicorn_config = external_configuration(config.webservice.configuration)

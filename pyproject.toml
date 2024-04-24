@@ -49,6 +49,9 @@ dependencies = [
 license = {text = "GPLv3"}
 requires-python = ">=3.9"
 
+[project.optional-dependencies]
+setproctitle = ["setproctitle"]
+
 [project.urls]
 Homepage = "https://www.list.org"
 Documentation = "https://docs.mailman3.org/projects/mailman/en/latest/README.html"
