@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-02 14:08-0800\n"
-"PO-Revision-Date: 2024-04-23 06:07+0000\n"
+"PO-Revision-Date: 2024-04-26 10:07+0000\n"
 "Last-Translator: SATOH Fumiyasu <fumiyas@osstech.co.jp>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/gnu-mailman/"
 "mailman/ja/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.5.1\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:85
 #: src/mailman/chains/hold.py:163 src/mailman/handlers/acknowledge.py:56
@@ -2093,7 +2093,7 @@ msgstr "RFC 2369 List-* ヘッダーを追加します。"
 
 #: src/mailman/handlers/subject_prefix.py:158
 msgid "Add a list-specific prefix to the Subject header value."
-msgstr "Subjectヘッダー値にリスト固有のプレフィックスを追加します。"
+msgstr "Subject: ヘッダー値にリスト固有のプレフィックスを追加します。"
 
 #: src/mailman/handlers/tagger.py:173
 msgid "Tag messages with topic matches."
@@ -2166,7 +2166,7 @@ msgstr "入会申請"
 
 #: src/mailman/rules/administrivia.py:53
 msgid "Catch mis-addressed email commands."
-msgstr "誤って投稿アドレスに送信されたメールコマンドを処理します。"
+msgstr "誤って投稿アドレスに送信されたメールコマンドを捕捉します。"
 
 #: src/mailman/rules/administrivia.py:99
 msgid "Message contains administrivia"
@@ -2190,7 +2190,7 @@ msgstr "メッセージの送信者 {} はこのリストからブロックさ�
 
 #: src/mailman/rules/digests.py:43
 msgid "Catch messages with digest Subject or boilerplate quote."
-msgstr "ダイジェストの題名や定型文の引用を含むメッセージを取得します。"
+msgstr "ダイジェストの件名や定型文の引用を含むメッセージを捕捉します。"
 
 #: src/mailman/rules/digests.py:58
 msgid "Message has a digest subject"
@@ -2229,7 +2229,7 @@ msgstr "このリストでは緊急モデレーションが有効です"
 
 #: src/mailman/rules/implicit_dest.py:37
 msgid "Catch messages with implicit destination."
-msgstr "暗黙の宛先を持つメッセージを取得します。"
+msgstr "暗黙の宛先を持つメッセージを捕捉します。"
 
 #: src/mailman/rules/implicit_dest.py:95
 msgid "Message has implicit destination"
@@ -2245,7 +2245,7 @@ msgstr "このリストにはすでにメッセージが投稿されています
 
 #: src/mailman/rules/max_recipients.py:33
 msgid "Catch messages with too many explicit recipients."
-msgstr "明示的な受信者が多すぎるメッセージをキャッチします。"
+msgstr "明示的な宛先が多すぎるメッセージを捕捉します。"
 
 #: src/mailman/rules/max_recipients.py:49
 msgid "Message has more than {} recipients"
@@ -2253,7 +2253,7 @@ msgstr "このメッセージには {} 人以上の受信者がいます"
 
 #: src/mailman/rules/max_size.py:37
 msgid "Catch messages that are bigger than a specified maximum."
-msgstr "指定された最大サイズを超えるメッセージを取得します。"
+msgstr "指定された最大サイズを超えるメッセージを捕捉します。"
 
 #: src/mailman/rules/max_size.py:68
 msgid "The message is larger than the {} KB maximum size"
@@ -2307,7 +2307,7 @@ msgstr "このメッセージには適切な送信者がいません"
 
 #: src/mailman/rules/no_subject.py:32
 msgid "Catch messages with no, or empty, Subject headers."
-msgstr "Subjectヘッダーがないか、空のメッセージを取得します。"
+msgstr "Subject: ヘッダーがないか空のメッセージを捕捉します。"
 
 #: src/mailman/rules/no_subject.py:45
 msgid "Message has no subject"
@@ -2315,7 +2315,7 @@ msgstr "メッセージに件名がありません"
 
 #: src/mailman/rules/suspicious.py:38
 msgid "Catch messages with suspicious headers."
-msgstr "疑わしいヘッダーを持つメッセージを取得します。"
+msgstr "疑わしいヘッダーを持つメッセージを捕捉します。"
 
 #: src/mailman/rules/suspicious.py:97
 msgid "Header \"{}\" matched a bounce_matching_header line"
@@ -2519,7 +2519,7 @@ msgstr ""
 
 msgid "list:admin:action:post.txt"
 msgstr ""
-"メーリングリスト管理者として下記の投稿に対する承認が要求されています:\n"
+"メーリングリスト管理者に下記の投稿の審査が求められています:\n"
 "\n"
 "    リスト名: $listname\n"
 "    投稿者:   $sender_email\n"
@@ -2699,7 +2699,7 @@ msgstr ""
 "$reasons\n"
 "\n"
 "モデレーターによる確認後、メッセージはメーリングリストに配信、\n"
-"またはモデレーターから通知が届きます。"
+"もしくはモデレーターから審査結果が届きます。"
 
 msgid "list:user:notice:no-more-today.txt"
 msgstr ""
