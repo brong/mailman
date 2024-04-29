@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: mm 3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-02 14:08-0800\n"
-"PO-Revision-Date: 2023-02-11 23:42+0000\n"
-"Last-Translator: Lars Vogdt <lars.vogdt@suse.com>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/gnu-mailman/mailman/de/>\n"
+"PO-Revision-Date: 2024-04-29 11:43+0000\n"
+"Last-Translator: Gian Klug <gian.klug@ict-scouts.ch>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/gnu-mailman/"
+"mailman/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.16-dev\n"
+"X-Generator: Weblate 5.5.2\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:85
 #: src/mailman/chains/hold.py:163 src/mailman/handlers/acknowledge.py:56
@@ -1755,7 +1756,7 @@ msgstr "Bestätigt"
 
 #: src/mailman/commands/eml_confirm.py:112
 msgid "Invalid Approved: password"
-msgstr ""
+msgstr "Falsch angenommen: Passwort"
 
 #: src/mailman/commands/eml_confirm.py:115
 #, python-brace-format
@@ -2113,21 +2114,29 @@ msgstr "Authentisierungsprüfungen durchführen und Authentication-Results Heade
 #, python-brace-format
 msgid "${self.email} is already a member of mailing list ${self.fqdn_listname}"
 msgstr ""
+"${self.email} ist bereits ein Mitglied der Mailing-Liste ${self."
+"fqdn_listname}"
 
 #: src/mailman/interfaces/member.py:125
 #, python-brace-format
 msgid "${self.email} is already an owner of mailing list ${self.fqdn_listname}"
 msgstr ""
+"${self.email} ist bereits ein Besitzer der Mailing-Liste ${self."
+"fqdn_listname}"
 
 #: src/mailman/interfaces/member.py:128
 #, python-brace-format
 msgid "${self.email} is already a moderator of mailing list ${self.fqdn_listname}"
 msgstr ""
+"${self.email} ist bereits ein Moderator der Mailing-Liste ${self."
+"fqdn_listname}"
 
 #: src/mailman/interfaces/member.py:131
 #, python-brace-format
 msgid "${self.email} is already a non-member of mailing list ${self.fqdn_listname}"
 msgstr ""
+"${self.email} ist bereits kein Mitglied der Mailing-Liste ${self."
+"fqdn_listname}"
 
 #: src/mailman/interfaces/pipeline.py:53
 msgid "[No details are available]"
