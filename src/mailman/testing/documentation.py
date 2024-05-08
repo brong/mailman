@@ -124,7 +124,8 @@ def _print_dict(data, depth=0):
         print('    ' * depth + '{}: {}'.format(item, value))
 
 
-def dump_json(url, data=None, method=None, username=None, password=None):
+def dump_json(url, data=None, method=None, username=None, password=None,
+              sort_entries=None):
     """Print the JSON dictionary read from a URL.
 
     :param url: The url to open, read, and print.
@@ -138,7 +139,9 @@ def dump_json(url, data=None, method=None, username=None, password=None):
     :type username: str
     :param password: The HTTP Basic Auth password.  None means use the value
         from the configuration.
-    :type username: str
+    :type password: str
+    :param sort_entries: The key to sort entiries.
+    :type sort_entries: str
     """
     results = call_http(url, data, method, username, password)
     if results is None:
@@ -146,7 +149,10 @@ def dump_json(url, data=None, method=None, username=None, password=None):
     for key in sorted(results):
         value = results[key]
         if key == 'entries':
-            for i, entry in enumerate(value):
+            entries = value
+            if sort_entries:
+                entries = sorted(entries, key=lambda x: x[sort_entries])
+            for i, entry in enumerate(entries):
                 # entry is a dictionary.
                 print('entry %d:' % i)
                 for entry_key in sorted(entry):
