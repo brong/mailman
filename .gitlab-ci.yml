@@ -56,8 +56,6 @@ pgsql-310:
   - postgres:latest
   script:
   - MAILMAN_EXTRA_TESTING_CFG=/home/runner/configs/postgres.cfg tox -e py310-nocov-pg
-  tags:
-  - postgres
 
 pgsql-311:
   <<: *only-default
@@ -65,8 +63,6 @@ pgsql-311:
   - postgres:latest
   script:
   - MAILMAN_EXTRA_TESTING_CFG=/home/runner/configs/postgres.cfg tox -e py311-nocov-pg
-  tags:
-  - postgres
 
 pgsql-39:
   <<: *only-default
@@ -74,8 +70,6 @@ pgsql-39:
   - postgres:latest
   script:
   - MAILMAN_EXTRA_TESTING_CFG=/home/runner/configs/postgres.cfg tox -e py39-nocov-pg
-  tags:
-  - postgres
 
 mysql-311:
   <<: *only-default
@@ -83,8 +77,6 @@ mysql-311:
   - mysql:5.6
   script:
   - MAILMAN_EXTRA_TESTING_CFG=/home/runner/configs/mysql.cfg tox -e py311-nocov-mysql
-  tags:
-  - mysql
 
 mysql-310:
   <<: *only-default
@@ -92,8 +84,6 @@ mysql-310:
   - mysql:5.6
   script:
   - MAILMAN_EXTRA_TESTING_CFG=/home/runner/configs/mysql.cfg tox -e py310-nocov-mysql
-  tags:
-  - mysql
 
 mysql-39:
   <<: *only-default
@@ -101,8 +91,6 @@ mysql-39:
   - mysql:5.6
   script:
   - MAILMAN_EXTRA_TESTING_CFG=/home/runner/configs/mysql.cfg tox -e py39-nocov-mysql
-  tags:
-  - mysql
 
 diffcov:
   script:
