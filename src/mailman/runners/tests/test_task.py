@@ -17,6 +17,7 @@
 
 """Tests for the Task runner."""
 
+import os
 import unittest
 
 from datetime import timedelta
@@ -32,6 +33,7 @@ from mailman.interfaces.pending import IPendable, IPendings
 from mailman.interfaces.requests import IListRequests
 from mailman.interfaces.workflow import IWorkflowStateManager
 from mailman.model.bounce import BounceEvent
+from mailman.model.message import Message
 from mailman.runners.task import TaskRunner
 from mailman.testing.helpers import (
     LogFileMark,
@@ -142,6 +144,35 @@ second message
         # Now there's only msg2.
         self.assertEqual(len(list(self._messages.messages)), 1)
         self.assertIsNotNone(self._messages.get_message_by_id('<msg2>'))
+        log = mark.read()
+        self.assertIn('Task runner deleted 1 orphaned messages', log)
+
+    @dbconnection
+    def test_task_runner_message_files(self, store):
+        # Test that task runner deletes message files with no entry in the
+        # message store.
+        def count_files():
+            """ A helper to count the number of saved message files."""
+            count = 0
+            base_dir = config.MESSAGES_DIR
+            for root, dirs, files in os.walk(base_dir):
+                if files:
+                    count += len(files)
+            return count
+        # Initally there are two entries in the message store and two files.
+        self.assertEqual(len(list(self._messages.messages)), 2)
+        self.assertEqual(count_files(), 2)
+        # Delete one of the message store entries leaving one but still two
+        # files.
+        row = store.query(Message).filter_by(message_id='<msg1>').first()
+        store.delete(row)
+        self.assertEqual(len(list(self._messages.messages)), 1)
+        self.assertEqual(count_files(), 2)
+        mark = LogFileMark('mailman.task')
+        self._runner.run()
+        # Now there's only one file.
+        self.assertEqual(len(list(self._messages.messages)), 1)
+        self.assertEqual(count_files(), 1)
         log = mark.read()
         self.assertIn('Task runner deleted 1 orphaned messages', log)
 

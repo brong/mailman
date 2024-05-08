@@ -17,6 +17,7 @@
 
 """Task runner."""
 
+import os
 import logging
 
 from datetime import datetime
@@ -105,13 +106,26 @@ class TaskRunner(Runner):
                 mids[mid] = True
         count = 0
         messages = getUtility(IMessageStore)
+        # Need this below.
+        hashes = dict()
         for msg in messages.messages:
             # msg can be None if file is already removed.
             if msg is not None:
+                hashes[msg['message-id-hash']] = True
                 mid = msg.get('message-id')
                 if mid not in mids:
                     messages.delete_message(mid)
                     count += 1
+        # We also need to delete files which aren't in the message store.
+        # MAS This is clunky, but I don't know a better way.
+        # Find all the saved message files and remove orphans.
+        base_dir = config.MESSAGES_DIR
+        for root, dirs, files in os.walk(base_dir):
+            if files:
+                for f in files:
+                    if f not in hashes:
+                        os.remove(os.path.join(root, f))
+                        count += 1
         tlog.info('Task runner deleted %d orphaned messages', count)
 
     @dbconnection
