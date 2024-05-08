@@ -187,7 +187,8 @@ class FindLists(_ListBase):
             memberships = service.find_members(**data)
             # Get all the lists from from the membership records.
             lists = [getUtility(IListManager).get_by_list_id(member.list_id)
-                     for member in memberships]
+                     for member in memberships
+                     if 'role' in data or member.role != MemberRole.nonmember]
             # If there are no matching lists, return a 404.
             if not len(lists):
                 return not_found(response)
