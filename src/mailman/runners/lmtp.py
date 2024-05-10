@@ -134,7 +134,11 @@ class LMTPHandler:
 
     @transactional
     def _handle_RCPT(self, server, session, envelope, to, rcpt_options):
-        listnames = set(getUtility(IListManager).names)
+        try:
+            listnames = set(getUtility(IListManager).names)
+        except Exception as e:
+            slog.exception(f"Can't get list names: {e}")
+            return ERR_451
         try:
             to = parseaddr(to)[1].lower()
             local, subaddress, domain = split_recipient(to)

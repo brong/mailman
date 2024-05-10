@@ -26,6 +26,8 @@ Bugs fixed
 * The text of the AlreadySubscribedError is now translatable.  (Closes #1121)
 * The ``mailman import21`` command adjust spaces in ``subject_prefix`` for
   Mailman 2.1 compatibility.  (Closes #1135)
+* An exception in the lmtp runner is caught and a retryable status returned.
+  (Closes #1148)
 
 New Features
 ------------
