@@ -22,7 +22,7 @@ import datetime
 
 from email.utils import make_msgid
 from lazr.config import as_boolean, as_timedelta
-from mailman.app.bounces import _ProbePendable, PENDABLE_LIFETIME, send_probe
+from mailman.app.bounces import _ProbePendable, send_probe
 from mailman.app.membership import delete_member
 from mailman.app.notifications import (
     send_admin_disable_notice,
@@ -104,7 +104,7 @@ class BounceProcessor:
         pendable = _ProbePendable(
             _mod_message_id=msg.get('message-id'))
         getUtility(IPendings).add(
-            pendable, lifetime=as_timedelta(PENDABLE_LIFETIME))
+            pendable, lifetime=as_timedelta(config.mailman.dsn_lifetime))
         event = BounceEvent(mlist.list_id, email, msg, where)
         store.add(event)
         return event

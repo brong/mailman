@@ -48,6 +48,8 @@ New Features
 * Set process title if setproctitle module is available.  (Closes #1134)
 * Strip whitespaces from Message-ID header value in log not to separate
   into multiple lines (Closes #1139)
+* The lifetime of saved DSNs in the message store is now configurable with a
+  default of 1 day.  (Closes #1145)
 
 Other
 -----
