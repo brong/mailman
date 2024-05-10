@@ -63,5 +63,5 @@ class RejectChain(TerminalChainBase):
             error = RejectMessage(
                 template, reasons, dict(listname=mlist.display_name))
         bounce_message(mlist, msg, error)
-        log.info('REJECT: %s', msg.get('message-id', 'n/a'))
+        log.info('REJECT: %s', msg.get('message-id', 'n/a').strip())
         notify(RejectEvent(mlist, msg, msgdata, self))

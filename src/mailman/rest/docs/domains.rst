@@ -279,7 +279,8 @@ Anne and Bart volunteer to be a domain owners.
     server: ...
     status: 204
 
-    >>> dump_json('http://localhost:9001/3.0/domains/my.example.com/owners')
+    >>> dump_json('http://localhost:9001/3.0/domains/my.example.com/owners',
+    ...     sort_entries='user_id')
     entry 0:
         created_on: 2005-08-01T07:49:23
         http_etag: ...
@@ -327,7 +328,8 @@ New domains can be created with owners.
 
 The new domain has the expected owners.
 
-    >>> dump_json('http://localhost:9001/3.0/domains/your.example.com/owners')
+    >>> dump_json('http://localhost:9001/3.0/domains/your.example.com/owners',
+    ...     sort_entries='user_id')
     entry 0:
         created_on: 2005-08-01T07:49:23
         http_etag: ...

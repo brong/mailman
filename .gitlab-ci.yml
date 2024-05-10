@@ -4,6 +4,7 @@
     - master
     - merge_requests
     - tags
+    - web
 
 image: ghcr.io/maxking/mailman-ci-runner:latest
 

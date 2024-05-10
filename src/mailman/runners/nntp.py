@@ -104,7 +104,7 @@ class NNTPRunner(Runner):
                 log_message_id = msgdata.get('original_message-id',
                                              msg.get('message-id', 'n/a'))
                 log.exception('{} NNTP error for {}'.format(
-                    log_message_id, mlist.fqdn_listname))
+                    log_message_id.strip(), mlist.fqdn_listname))
             else:
                 # This might be a duplicate Message-ID.  Munge it and requeue
                 # the message, but save the original Message-ID for logging.
@@ -115,12 +115,12 @@ class NNTPRunner(Runner):
                 return True
         except socket.error:
             log.exception('{} NNTP socket error for {}'.format(
-                msg.get('message-id', 'n/a'), mlist.fqdn_listname))
+                msg.get('message-id', 'n/a').strip(), mlist.fqdn_listname))
         except Exception:
             # Some other exception occurred, which we definitely did not
             # expect, so set this message up for requeuing.
             log.exception('{} NNTP unexpected exception for {}'.format(
-                msg.get('message-id', 'n/a'), mlist.fqdn_listname))
+                msg.get('message-id', 'n/a').strip(), mlist.fqdn_listname))
             return True
         finally:
             if conn:

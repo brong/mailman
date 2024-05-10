@@ -154,7 +154,7 @@ def handle_message(mlist, id, action, comment=None, forward=None):
         msg['X-Mailman-Approved-At'] = formatdate(
             time.mktime(now(tz=tzlocal()).timetuple()), localtime=True)
         vlog.info('held message approved, message-id: %s',
-                  msg.get('message-id', 'n/a'))
+                  msg.get('message-id', 'n/a').strip())
         # Stick the message back in the incoming queue for further
         # processing.
         config.switchboards['pipeline'].enqueue(msg, _metadata=msgdata)

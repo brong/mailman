@@ -130,6 +130,29 @@ class TestFindLists(unittest.TestCase):
         mlist = json['entries'][0]
         self.assertEqual(mlist['list_id'], 'test2.example.com')
 
+    def test_find_lists_with_subscriber_as_nonmember(self):
+        # Test GET /lists/find with a valid subscriber, but nonmember
+        with transaction():
+            list2 = create_list('test2@example.com')
+            create_list('test3@example.com')
+            anne_addr = self._user_manager.create_address('anne@example.com')
+            self._mlist.subscribe(anne_addr, role=MemberRole.nonmember)
+            list2.subscribe(anne_addr, role=MemberRole.moderator)
+        # With role=nonmember, only one list will be returned.
+        json, response = call_api(
+            'http://localhost:9001/3.1/lists/find',
+            {'subscriber': 'anne@example.com', 'role': 'nonmember'})
+        self.assertEqual(json['total_size'], 1)
+        mlist = json['entries'][0]
+        self.assertEqual(mlist['list_id'], 'test.example.com')
+        # Without role, we should get 2nd list.
+        json, response = call_api(
+            'http://localhost:9001/3.1/lists/find',
+            {'subscriber': 'anne@example.com'})
+        self.assertEqual(json['total_size'], 1)
+        mlist = json['entries'][0]
+        self.assertEqual(mlist['list_id'], 'test2.example.com')
+
     def test_find_lists_with_bad_role(self):
         with transaction():
             self._mlist.subscribe(self.address)

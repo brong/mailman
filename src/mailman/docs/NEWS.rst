@@ -26,6 +26,10 @@ Bugs fixed
 * The text of the AlreadySubscribedError is now translatable.  (Closes #1121)
 * The ``mailman import21`` command adjust spaces in ``subject_prefix`` for
   Mailman 2.1 compatibility.  (Closes #1135)
+* An exception in the lmtp runner is caught and a retryable status returned.
+  (Closes #1148)
+* Catch more generic requests exceptions on downloading suffix list
+  to avoid shunting messages.  (Closes #1140)
 
 New Features
 ------------
@@ -42,6 +46,8 @@ New Features
 * The task runner will now delete message files that have no entry in the
   message store.  (Closes #1145)
 * Set process title if setproctitle module is available.  (Closes #1134)
+* Strip whitespaces from Message-ID header value in log not to separate
+  into multiple lines (Closes #1139)
 
 Other
 -----
