@@ -640,6 +640,12 @@ def main(config_file, restartable, force, runners, verbose):
     master also leaves its own process id in the file `data/master.pid`
     but you normally don't need to use this pid directly.
     """
+    try:
+        import setproctitle
+        setproctitle.setproctitle('mailman: master')  # pragma: nocover
+    except ImportError:  # pragma: nocover
+        pass
+
     initialize(config_file, verbose)
     # Acquire the master lock, exiting if we can't.  We'll let the caller
     # handle any clean up or lock breaking.  No `with` statement here because

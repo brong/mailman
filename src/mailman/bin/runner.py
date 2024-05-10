@@ -156,6 +156,14 @@ def main(ctx, config_file, verbose, list_runners, once, runner_spec):
     if runner_spec is None and not list_runners:
         ctx.fail(_('No runner name given.'))
 
+    try:
+        import setproctitle
+        setproctitle.setproctitle(
+            f'mailman: runner [{runner_spec[0]}]'
+        )  # pragma: nocover
+    except ImportError:  # pragma: nocover
+        pass
+
     # Initialize the system.  Honor the -C flag if given.
     initialize(config_file, verbose)
     log = logging.getLogger('mailman.runner')

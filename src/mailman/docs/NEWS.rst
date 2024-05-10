@@ -45,6 +45,7 @@ New Features
   (Closes #1136)
 * The task runner will now delete message files that have no entry in the
   message store.  (Closes #1145)
+* Set process title if setproctitle module is available.  (Closes #1134)
 * Strip whitespaces from Message-ID header value in log not to separate
   into multiple lines (Closes #1139)
 
