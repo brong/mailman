@@ -63,7 +63,7 @@ class BounceRunner(Runner):
                 return False
             if len(permanent) == 0:
                 log.info('VERPed bounce message but not a recognized DSN: %s',
-                         msg.get('message-id', 'n/a'))
+                         msg.get('message-id', 'n/a').strip())
                 maybe_forward(mlist, msg)
                 return False
         else:
@@ -97,7 +97,7 @@ class BounceRunner(Runner):
                 self._processor.register(mlist, address, msg, context)
         else:
             log.info('Bounce message w/no discernable addresses: %s',
-                     msg.get('message-id', 'n/a'))
+                     msg.get('message-id', 'n/a').strip())
             maybe_forward(mlist, msg)
         # Dequeue this message.
         return False

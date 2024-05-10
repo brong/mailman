@@ -40,5 +40,5 @@ class BuiltInOwnerChain(TerminalChainBase):
     def _process(self, mlist, msg, msgdata):
         # At least for now, everything posted to -owners goes through.
         config.switchboards['pipeline'].enqueue(msg, msgdata)
-        log.info('OWNER: %s', msg.get('message-id', 'n/a'))
+        log.info('OWNER: %s', msg.get('message-id', 'n/a').strip())
         notify(AcceptOwnerEvent(mlist, msg, msgdata, self))

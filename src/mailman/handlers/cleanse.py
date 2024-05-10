@@ -75,7 +75,7 @@ class Cleanse:
         # We remove other headers from anonymous lists.
         if mlist.anonymous_list:
             log.info('post to %s from %s anonymized',
-                     mlist.fqdn_listname, msg.get('from'))
+                     mlist.fqdn_listname, msg.get('from').strip())
             del msg['from']
             del msg['reply-to']
             del msg['sender']
