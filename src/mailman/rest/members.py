@@ -68,7 +68,7 @@ from uuid import UUID
 from zope.component import getUtility
 
 
-log = logging.getLogger('mailman.rest')
+log = logging.getLogger('mailman.http')
 
 
 class _MemberBase(CollectionMixin):
