@@ -39,13 +39,15 @@ New Features
   the templates. (See #981)
 * The ``mailman create`` command now has a ``--style-name NAME`` option.
   (Closes #1136)
+* The task runner will now delete message files that have no entry in the
+  message store.  (Closes #1145)
 
 Other
 -----
 * The Mailman master process that starts the runners will now pass a
   number of environment variables to the runner processes that alter
   the behavior of the Python interpreter.  See section ENVIRONMENT
-  VARIABLES in `python(1)`.
+  VARIABLES in `man python`.
 
 Packaging
 ---------
