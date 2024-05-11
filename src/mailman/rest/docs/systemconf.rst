@@ -20,6 +20,7 @@ You can also get all the values for a particular section, such as the
     cache_life: 7d
     check_max_size_on_filtered_message: no
     default_language: en
+    dsn_lifetime: 1d
     email_commands_max_lines: 10
     filter_report: no
     filtered_messages_are_preservable: no
