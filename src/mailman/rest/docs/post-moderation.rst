@@ -53,6 +53,7 @@ When a message gets held for moderator approval, it shows up in this list.
     Message-ID: <alpha>
     Message-ID-Hash: XZ3DGG4V37BZTTLXNUX4NABB4DNQHTCP
     X-Message-ID-Hash: XZ3DGG4V37BZTTLXNUX4NABB4DNQHTCP
+    X-Mailman-TimeStamp: ...
     <BLANKLINE>
     Something else.
     <BLANKLINE>
@@ -93,6 +94,7 @@ message.  This will include the text of the message.
     Message-ID: <alpha>
     Message-ID-Hash: XZ3DGG4V37BZTTLXNUX4NABB4DNQHTCP
     X-Message-ID-Hash: XZ3DGG4V37BZTTLXNUX4NABB4DNQHTCP
+    X-Mailman-TimeStamp: ...
     <BLANKLINE>
     Something else.
     <BLANKLINE>
@@ -138,6 +140,7 @@ The message is still in the moderation queue.
     Message-ID: <alpha>
     Message-ID-Hash: XZ3DGG4V37BZTTLXNUX4NABB4DNQHTCP
     X-Message-ID-Hash: XZ3DGG4V37BZTTLXNUX4NABB4DNQHTCP
+    X-Mailman-TimeStamp: ...
     <BLANKLINE>
     Something else.
     <BLANKLINE>
