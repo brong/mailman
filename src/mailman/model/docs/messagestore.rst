@@ -30,7 +30,6 @@ A message with a ``Message-ID`` header can be stored.
     Message-ID: <87myycy5eh.fsf@uwakimon.sk.tsukuba.ac.jp>
     Message-ID-Hash: JJIGKPKB6CVDX6B2CUG4IHAJRIQIOUTP
     X-Message-ID-Hash: JJIGKPKB6CVDX6B2CUG4IHAJRIQIOUTP
-    X-Mailman-TimeStamp: ...
     <BLANKLINE>
     This message is very important.
     <BLANKLINE>
@@ -56,7 +55,6 @@ Given an existing ``Message-ID``, the message can be found.
     Message-ID: <87myycy5eh.fsf@uwakimon.sk.tsukuba.ac.jp>
     Message-ID-Hash: JJIGKPKB6CVDX6B2CUG4IHAJRIQIOUTP
     X-Message-ID-Hash: JJIGKPKB6CVDX6B2CUG4IHAJRIQIOUTP
-    X-Mailman-TimeStamp: ...
     <BLANKLINE>
     This message is very important.
     <BLANKLINE>
@@ -69,7 +67,6 @@ Similarly, we can find messages by the ``X-Message-ID-Hash``:
     Message-ID: <87myycy5eh.fsf@uwakimon.sk.tsukuba.ac.jp>
     Message-ID-Hash: JJIGKPKB6CVDX6B2CUG4IHAJRIQIOUTP
     X-Message-ID-Hash: JJIGKPKB6CVDX6B2CUG4IHAJRIQIOUTP
-    X-Mailman-TimeStamp: ...
     <BLANKLINE>
     This message is very important.
     <BLANKLINE>
@@ -89,7 +86,6 @@ contains.
     Message-ID: <87myycy5eh.fsf@uwakimon.sk.tsukuba.ac.jp>
     Message-ID-Hash: JJIGKPKB6CVDX6B2CUG4IHAJRIQIOUTP
     X-Message-ID-Hash: JJIGKPKB6CVDX6B2CUG4IHAJRIQIOUTP
-    X-Mailman-TimeStamp: ...
     <BLANKLINE>
     This message is very important.
     <BLANKLINE>

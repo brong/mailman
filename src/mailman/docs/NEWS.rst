@@ -30,8 +30,8 @@ Bugs fixed
   (Closes #1148)
 * Catch more generic requests exceptions on downloading suffix list
   to avoid shunting messages.  (Closes #1140)
-* Added a new ``X-Mailman-TimeStamp`` header to saved messages to detect a
-  potential race condition in the Task runner.  (Closes #1151)
+* Reordered retrievals in the Task runner to avoid premature deletions due to
+  a race condition.  (Closes #1151)
 
 New Features
 ------------

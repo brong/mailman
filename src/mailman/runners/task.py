@@ -18,7 +18,6 @@
 """Task runner."""
 
 import os
-import time
 import logging
 
 from datetime import datetime
@@ -97,42 +96,44 @@ class TaskRunner(Runner):
                 self._delete_request(id)
                 count += 1
         tlog.info('Task runner deleted %d orphaned requests', count)
-        # Also, delete any orphaned messages from the message store.
-        # Need the time to check for a message added after getting pendings.
-        now = str(time.time())
-        mids = dict()
+        # Also, delete any orphaned messages and message files from the
+        # message store. The order of the next 3 steps is important to
+        # avoid premature deletion due to race conditions.
+        # First get a list of message files.
+        message_files = []
+        for root, dirs, files in os.walk(config.MESSAGES_DIR):
+            if files:
+                for f in files:
+                    message_files.append(os.path.join(root, f))
+        # Then a list of message-ids in the store and a dict of their hashes.
+        messages = getUtility(IMessageStore)
+        msgs = []
+        hashes = dict()
+        for msg in messages.messages:
+            if msg is not None:
+                msgs.append(msg.get('message-id'))
+                hashes[msg['message-id-hash']] = True
+        # Finally, a list of pending message-ids.
+        pmids = dict()
         for token, pendable in pendings:
             if not pendable:
                 continue                                # pragma: nocover
             mid = pendable.get('_mod_message_id')
             if mid:
-                mids[mid] = True
+                pmids[mid] = True
+        # Now delete the orphaned message store messages.
         count = 0
-        messages = getUtility(IMessageStore)
-        # Need this below.
-        hashes = dict()
-        for msg in messages.messages:
-            # msg can be None if file is already removed.
-            if msg is not None:
-                # Remember it's hash.
-                hashes[msg['message-id-hash']] = True
-                mid = msg.get('message-id')
-                # If it's an orphan and not too new.
-                if (mid not in mids and
-                        msg.get('x-mailman-timestamp', '0') < now):
-                    messages.delete_message(mid)
-                    count += 1
+        for mmid in msgs:
+            if mmid not in pmids:
+                messages.delete_message(mmid)
+                count += 1
         tlog.info('Task runner deleted %d orphaned messages', count)
-        # We also need to delete files which aren't in the message store.
-        # MAS This is clunky, but I don't know a better way.
-        # Find all the saved message files and remove orphans.
+        # And finally the orphaned message files
         count = 0
-        for root, dirs, files in os.walk(config.MESSAGES_DIR):
-            if files:
-                for f in files:
-                    if f not in hashes:
-                        os.remove(os.path.join(root, f))
-                        count += 1
+        for message_file in message_files:
+            if os.path.basename(message_file) not in hashes:
+                os.remove(message_file)
+                count += 1
         tlog.info('Task runner deleted %d orphaned message files', count)
 
     @dbconnection

@@ -91,14 +91,13 @@ Something else.
         self.assertEqual(response.status_code, 200)
         self.assertEqual(json['total_size'], 1)
         self.assertEqual(json['entries'][0]['request_id'], held_id)
-        self.assertRegex(json['entries'][0]['msg'], """\
+        self.assertEqual(json['entries'][0]['msg'], """\
 From: anne@example.com
 To: ant@example.com
 Subject: Something
 Message-ID: <alpha>
 Message-ID-Hash: XZ3DGG4V37BZTTLXNUX4NABB4DNQHTCP
 X-Message-ID-Hash: XZ3DGG4V37BZTTLXNUX4NABB4DNQHTCP
-X-Mailman-TimeStamp: [^ ]*
 
 Something else.
 """)
