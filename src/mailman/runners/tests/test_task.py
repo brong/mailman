@@ -174,7 +174,7 @@ second message
         self.assertEqual(len(list(self._messages.messages)), 1)
         self.assertEqual(count_files(), 1)
         log = mark.read()
-        self.assertIn('Task runner deleted 1 orphaned messages', log)
+        self.assertIn('Task runner deleted 1 orphaned message files', log)
 
     @dbconnection
     def test_task_runner_bounce_events_old_unprocessed(self, store):
