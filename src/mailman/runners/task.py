@@ -18,7 +18,6 @@
 """Task runner."""
 
 import os
-import time
 import logging
 
 from datetime import datetime
@@ -98,8 +97,6 @@ class TaskRunner(Runner):
                 count += 1
         tlog.info('Task runner deleted %d orphaned requests', count)
         # Also, delete any orphaned messages from the message store.
-        # Need the time to check for a message added after getting pendings.
-        now = str(time.time())
         mids = dict()
         for token, pendable in pendings:
             if not pendable:
@@ -114,26 +111,22 @@ class TaskRunner(Runner):
         for msg in messages.messages:
             # msg can be None if file is already removed.
             if msg is not None:
-                # Remember it's hash.
                 hashes[msg['message-id-hash']] = True
                 mid = msg.get('message-id')
-                # If it's an orphan and not too new.
-                if (mid not in mids and
-                        msg.get('x-mailman-timestamp', '0') < now):
+                if mid not in mids:
                     messages.delete_message(mid)
                     count += 1
-        tlog.info('Task runner deleted %d orphaned messages', count)
         # We also need to delete files which aren't in the message store.
         # MAS This is clunky, but I don't know a better way.
         # Find all the saved message files and remove orphans.
-        count = 0
-        for root, dirs, files in os.walk(config.MESSAGES_DIR):
+        base_dir = config.MESSAGES_DIR
+        for root, dirs, files in os.walk(base_dir):
             if files:
                 for f in files:
                     if f not in hashes:
                         os.remove(os.path.join(root, f))
                         count += 1
-        tlog.info('Task runner deleted %d orphaned message files', count)
+        tlog.info('Task runner deleted %d orphaned messages', count)
 
     @dbconnection
     def _evict_expired_bounce_events(self, store):

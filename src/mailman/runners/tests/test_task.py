@@ -18,7 +18,6 @@
 """Tests for the Task runner."""
 
 import os
-import pickle
 import unittest
 
 from datetime import timedelta
@@ -174,62 +173,6 @@ second message
         # Now there's only one file.
         self.assertEqual(len(list(self._messages.messages)), 1)
         self.assertEqual(count_files(), 1)
-        log = mark.read()
-        self.assertIn('Task runner deleted 1 orphaned message files', log)
-
-    @dbconnection
-    def test_task_runner_message_files_race(self, store):
-        # Test that the task runner doesn't delete 'orphaned' messages from the
-        # message store if they are too new.
-        # Initially, there are 2 messages in the store and 4 pendings.
-        self.assertEqual(len(list(self._messages.messages)), 2)
-        self.assertEqual(self._pendings.count(), 4)
-        # Deleting the first request removes the pending but not the message.
-        self._listrequests.delete_request(self._requestid1)
-        self.assertEqual(self._pendings.count(), 3)
-        self.assertEqual(len(list(self._messages.messages)), 2)
-        # Now message 1's pending is gone, but set its timestamp so it isn't
-        # deleted.
-        msg = self._messages.get_message_by_id('<msg1>')
-        # Add the file back with a future timestamp.
-        msg.replace_header('X-Mailman-TimeStamp', '999999')
-        hash = msg.get('message-id-hash')
-        relpath = f'{hash[:2]}/{hash[2:4]}/{hash}'
-        with open(os.path.join(config.MESSAGES_DIR, relpath), 'wb') as fp:
-            pickle.dump(msg, fp)
-        mark = LogFileMark('mailman.task')
-        self._runner.run()
-        # Now there's still two messages.
-        self.assertEqual(len(list(self._messages.messages)), 2)
-        self.assertIsNotNone(self._messages.get_message_by_id('<msg1>'))
-        self.assertIsNotNone(self._messages.get_message_by_id('<msg2>'))
-        log = mark.read()
-        self.assertIn('Task runner deleted 0 orphaned messages', log)
-
-    @dbconnection
-    def test_task_runner_message_files_no_timestamp(self, store):
-        # Test that the task runner deletes orphaned messages from the
-        # message store if they have no timestamp.
-        # Initially, there are 2 messages in the store and 4 pendings.
-        self.assertEqual(len(list(self._messages.messages)), 2)
-        self.assertEqual(self._pendings.count(), 4)
-        # Deleting the first request removes the pending but not the message.
-        self._listrequests.delete_request(self._requestid1)
-        self.assertEqual(self._pendings.count(), 3)
-        self.assertEqual(len(list(self._messages.messages)), 2)
-        # Now message 1's pending is gone, delete its timestamp.
-        msg = self._messages.get_message_by_id('<msg1>')
-        # Add the file back with no timestamp.
-        del msg['x-mailman-timestamp']
-        hash = msg.get('message-id-hash')
-        relpath = f'{hash[:2]}/{hash[2:4]}/{hash}'
-        with open(os.path.join(config.MESSAGES_DIR, relpath), 'wb') as fp:
-            pickle.dump(msg, fp)
-        mark = LogFileMark('mailman.task')
-        self._runner.run()
-        # Now there's just one message.
-        self.assertEqual(len(list(self._messages.messages)), 1)
-        self.assertIsNotNone(self._messages.get_message_by_id('<msg2>'))
         log = mark.read()
         self.assertIn('Task runner deleted 1 orphaned messages', log)
 

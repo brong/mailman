@@ -18,7 +18,6 @@
 """Model for message stores."""
 
 import os
-import time
 import errno
 import pickle
 
@@ -60,10 +59,6 @@ class MessageStore:
         if existing is not None:
             return None
         hash32 = add_message_hash(message)
-        # Add a timestamp header used in task runner to check for a race.
-        # Ensure only one.
-        del message['x-mailman-timestamp']
-        message['X-Mailman-TimeStamp'] = str(time.time())
         # Calculate the path on disk where we're going to store this message
         # object, in pickled format.
         parts = []

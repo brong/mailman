@@ -153,7 +153,6 @@ This one is addressed to the list moderators.
     Message-ID: <first>
     Message-ID-Hash: 4CMWUN6BHVCMHMDAOSJZ2Q72G5M32MWB
     X-Message-ID-Hash: 4CMWUN6BHVCMHMDAOSJZ2Q72G5M32MWB
-    X-Mailman-TimeStamp: ...
     <BLANKLINE>
     An important message.
     <BLANKLINE>
@@ -227,7 +226,6 @@ processed and sent on to the list membership.
     Message-ID: <first>
     Message-ID-Hash: 4CMWUN6BHVCMHMDAOSJZ2Q72G5M32MWB
     X-Message-ID-Hash: 4CMWUN6BHVCMHMDAOSJZ2Q72G5M32MWB
-    X-Mailman-TimeStamp: ...
     <BLANKLINE>
     An important message.
     <BLANKLINE>
@@ -274,7 +272,6 @@ This message will end up in the `pipeline` queue.
     Message-ID: <first>
     Message-ID-Hash: 4CMWUN6BHVCMHMDAOSJZ2Q72G5M32MWB
     X-Message-ID-Hash: 4CMWUN6BHVCMHMDAOSJZ2Q72G5M32MWB
-    X-Mailman-TimeStamp: ...
     X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency;
         loop; banned-address; member-moderation; nonmember-moderation;
         administrivia; implicit-dest; max-recipients; max-size;

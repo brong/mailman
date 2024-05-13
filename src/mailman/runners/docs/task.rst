@@ -11,18 +11,14 @@ Configuration
 By default, the Task runner executes tasks once per hour to evict expired
 pending requests, bounce events and cache entries and to delete any saved
 workflow states and saved message store messages orphaned by deleting the
-associated pending request.  It also deletes saved message files which
-have no associated message store entry.  This timing is configurable in the
-``[mailman]`` section of the configuration.::
+associated pending request.  This timing is configurable in the ``[mailman]``
+section of the configuration.::
 
     # mailman.cfg
     [mailman]
     run_tasks_every: 1d
 
-This will run the tasks once per day instead of once per hour.  If you have
-a large installation with thousands of messages in the message store and you
-find the Task runner consuming a lot of resources when finding orphaned
-messages for deletion, running it daily rather that hourly is fine.
+This will run the tasks once per day instead of once per hour.
 
 
 Logging
