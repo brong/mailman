@@ -22,7 +22,6 @@ import logging
 
 from datetime import datetime
 from lazr.config import as_timedelta
-from mailman.app.bounces import PENDABLE_LIFETIME
 from mailman.config import config
 from mailman.core.runner import Runner
 from mailman.database.transaction import dbconnection, transactional
@@ -142,7 +141,8 @@ class TaskRunner(Runner):
         for entry in store.query(BounceEvent).all():
             if not entry.processed:
                 continue
-            if entry.timestamp > now() - as_timedelta(PENDABLE_LIFETIME):
+            if entry.timestamp > now() - as_timedelta(
+                    config.mailman.dsn_lifetime):
                 continue
             store.delete(entry)
             count += 1
