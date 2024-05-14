@@ -22,7 +22,6 @@ import unittest
 
 from datetime import timedelta
 from lazr.config import as_timedelta
-from mailman.app.bounces import PENDABLE_LIFETIME
 from mailman.app.lifecycle import create_list
 from mailman.app.moderator import hold_message
 from mailman.config import config
@@ -179,13 +178,14 @@ second message
     @dbconnection
     def test_task_runner_bounce_events_old_unprocessed(self, store):
         # Test that the task runner deletes processed bounce events older than
-        # PENDABLE_LIFETIME, but not newer ones or unprocessed ones.
+        # dsn_lifetime, but not newer ones or unprocessed ones.
         # Set one old but unprocessed.
         event = self._events(self._mlist.list_id,
                              'anne@example.com',
                              self._msg1,
                              )
-        event.timestamp -= as_timedelta(PENDABLE_LIFETIME) + as_timedelta('1d')
+        event.timestamp -= (as_timedelta(config.mailman.dsn_lifetime) +
+                            as_timedelta('1d'))
         store.add(event)
         mark = LogFileMark('mailman.task')
         self._runner.run()
@@ -195,13 +195,14 @@ second message
     @dbconnection
     def test_task_runner_bounce_events_old_processed(self, store):
         # Test that the task runner deletes processed bounce events older than
-        # PENDABLE_LIFETIME, but not newer ones or unprocessed ones.
+        # dsn_lifetime, but not newer ones or unprocessed ones.
         # Set one old and processed.
         event = self._events(self._mlist.list_id,
                              'anne@example.com',
                              self._msg1,
                              )
-        event.timestamp -= as_timedelta(PENDABLE_LIFETIME) + as_timedelta('1d')
+        event.timestamp -= (as_timedelta(config.mailman.dsn_lifetime) +
+                            as_timedelta('1d'))
         event.processed = True
         store.add(event)
         mark = LogFileMark('mailman.task')
@@ -212,7 +213,7 @@ second message
     @dbconnection
     def test_task_runner_bounce_events_processed(self, store):
         # Test that the task runner deletes processed bounce events older than
-        # PENDABLE_LIFETIME, but not newer ones or unprocessed ones.
+        # dsn_lifetime, but not newer ones or unprocessed ones.
         # Set one processed.
         event = self._events(self._mlist.list_id,
                              'anne@example.com',
