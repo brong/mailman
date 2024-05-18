@@ -32,6 +32,8 @@ Bugs fixed
   to avoid shunting messages.  (Closes #1140)
 * Reordered retrievals in the Task runner to avoid premature deletions due to
   a race condition.  (Closes #1151)
+* The ``nttplib`` slated to be removed in Python 3.13. Getting from PyPI.
+  (Closes #1144)
 
 New Features
 ------------
