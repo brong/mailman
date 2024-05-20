@@ -34,6 +34,7 @@ Bugs fixed
   a race condition.  (Closes #1151)
 * The ``nttplib`` slated to be removed in Python 3.13. Getting from PyPI.
   (Closes #1144)
+* The web URL replacements now work in all templates.  (Closes #1142)
 
 New Features
 ------------
