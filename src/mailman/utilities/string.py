@@ -66,6 +66,11 @@ def expand(template, mlist=None, extras=None, template_class=Template):
             owner_email=mlist.owner_address,
             language=mlist.preferred_language.code,
             ))
+        if mlist.domain.base_url is not None:
+            substitutions['base_url'] = mlist.domain.base_url
+            for key in config.urlpatterns:
+                substitutions[f'{key}_url'] = expand(
+                        config.urlpatterns[key], extras=substitutions)
     if extras is not None:
         substitutions.update(extras)
     return template_class(template).safe_substitute(substitutions)
