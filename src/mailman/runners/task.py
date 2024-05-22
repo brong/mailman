@@ -49,7 +49,11 @@ class TaskRunner(Runner):
     def __init__(self, name, slice=None):
         super().__init__(name, slice)
         self.lastrun = datetime.min
+        self.lastmsg = datetime.min
         self.delay = as_timedelta(config.mailman.run_tasks_every)
+        # Only look for orphaned message files this often.  Normally there
+        # shouldn't be any anyway.
+        self.msgdelay = as_timedelta('1w')
 
     @transactional
     def _do_periodic(self):
@@ -98,12 +102,14 @@ class TaskRunner(Runner):
         # Also, delete any orphaned messages and message files from the
         # message store. The order of the next 3 steps is important to
         # avoid premature deletion due to race conditions.
-        # First get a list of message files.
+        # First get a list of message files, but only do this infrequently.
         message_files = []
-        for root, dirs, files in os.walk(config.MESSAGES_DIR):
-            if files:
-                for f in files:
-                    message_files.append(os.path.join(root, f))
+        if self.lastmsg + self.msgdelay <= datetime.now():
+            self.lastmsg = datetime.now()
+            for root, dirs, files in os.walk(config.MESSAGES_DIR):
+                if files:
+                    for f in files:
+                        message_files.append(os.path.join(root, f))
         # Then a list of message-ids in the store and a dict of their hashes.
         messages = getUtility(IMessageStore)
         msgs = []
