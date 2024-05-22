@@ -57,7 +57,7 @@ class Member(Model):
     __tablename__ = 'member'
 
     id = Column(Integer, primary_key=True)
-    _member_id = Column(UUID)
+    _member_id = Column(UUID, index=True)
     role = Column(Enum(MemberRole), index=True)
     list_id = Column(SAUnicode, index=True)
 
