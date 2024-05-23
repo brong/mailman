@@ -12,6 +12,7 @@ headers generally start with the `List-` prefix.
     >>> mlist.archive_policy = ArchivePolicy.never
 
     This is a helper function for the following section.
+
     >>> def list_headers(msg, only=None):
     ...     if isinstance(only, str):
     ...         only = (only.lower(),)
