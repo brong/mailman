@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-02 14:08-0800\n"
-"PO-Revision-Date: 2024-04-26 10:07+0000\n"
+"PO-Revision-Date: 2024-05-28 16:09+0000\n"
 "Last-Translator: SATOH Fumiyasu <fumiyas@osstech.co.jp>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/gnu-mailman/"
 "mailman/ja/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.5.1\n"
+"X-Generator: Weblate 5.6-dev\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:85
 #: src/mailman/chains/hold.py:163 src/mailman/handlers/acknowledge.py:56
@@ -102,7 +102,7 @@ msgstr "${mlist.display_name} メーリングリスト: "
 #: src/mailman/app/notifications.py:148
 #, python-brace-format
 msgid "${mlist.display_name} subscription notification"
-msgstr "${mlist.display_name} メーリングリスト: 退会通知"
+msgstr "${mlist.display_name} メーリングリスト: 入会通知"
 
 #: src/mailman/app/notifications.py:173
 #, python-brace-format
