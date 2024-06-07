@@ -14,6 +14,13 @@ Here is a history of user visible changes to Mailman.
 
 (xxxx-xx-xx)
 
+Configuration
+-------------
+
+* **BREAKING CHANGE**: The nntp runner is no longer started by default. If you
+  have lists gating to/from usnet you need to add ``start: yes`` in the
+  ``[runner.nntp]`` section in mailman.cfg.
+
 Bugs fixed
 ----------
 * The ``mailman members`` command will now fall back to the member's user
