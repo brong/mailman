@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-02 14:08-0800\n"
-"PO-Revision-Date: 2022-03-23 03:38+0000\n"
-"Last-Translator: Jaume Ortolà i Font <jaumeortola@gmail.com>\n"
-"Language-Team: Catalan <https://hosted.weblate.org/projects/gnu-mailman/mailman/ca/>\n"
+"PO-Revision-Date: 2024-06-21 08:41+0000\n"
+"Last-Translator: SATOH Fumiyasu <fumiyas@osstech.co.jp>\n"
+"Language-Team: Catalan <https://hosted.weblate.org/projects/gnu-mailman/"
+"mailman/ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.12-dev\n"
+"X-Generator: Weblate 5.6-rc\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:85
 #: src/mailman/chains/hold.py:163 src/mailman/handlers/acknowledge.py:56
@@ -935,13 +936,13 @@ msgid "Inject a message from a file into a mailing list's queue."
 msgstr "Injectar un missatge d'un arxiu a la cua d'una llista de correu."
 
 #: src/mailman/commands/cli_inject.py:48
-#, fuzzy
 msgid ""
 "    The name of the queue to inject the message to.  QUEUE must be one of the\n"
 "    directories inside the queue directory.  If omitted, the incoming queue is\n"
 "    used."
 msgstr ""
-"    El nom de la cua a la qual s'injectarà el missatge. QUEUE ha de ser un dels\n"
+"    El nom de la cua a la qual s'injectarà el missatge. QUEUE ha de ser un "
+"dels\n"
 "    directoris dins del directori qfiles. Si s'omet, s 'utilitza\n"
 "    la cua entrant."
 
@@ -2339,7 +2340,6 @@ msgstr "La vostra autorització és necessària per a una sol·licitud de subscr
 msgid "list:admin:action:unsubscribe.txt"
 msgstr "La vostra autorització és necessària per a l'aprovació d'una sol·licitud de baixa de llista de correu: Per: ${member} Llista: $listname"
 
-#, fuzzy
 msgid "list:admin:notice:disable.txt"
 msgstr "${member} s'ha subscrit amb èxit a ${display_name}."
 
@@ -2349,7 +2349,6 @@ msgstr ""
 msgid "list:admin:notice:pending.txt"
 msgstr ""
 
-#, fuzzy
 msgid "list:admin:notice:removal.txt"
 msgstr "${member} s'ha subscrit amb èxit a ${display_name}."
 
@@ -2404,9 +2403,17 @@ msgstr "La seva sol·licitud a la llista de correu ${listname}      ${request} h
 msgid "list:user:notice:rejected.txt"
 msgstr "El seu missatge a la llista de correu ${listname} s'ha rebutjat per les següents raons: ${reasons} S'adjunta el missatge original rebut per Mailman."
 
-#, fuzzy
 msgid "list:user:notice:warning.txt"
-msgstr "Aquest és un missatge de sonda.  Podeu ignorar aquest missatge. La llista de correu ${listname} ha rebut diversos rebots de la vostra part, indicant que pot haver-hi un problema al enviar missatges a ${sender_email}. Una mostra s'adjunta a continuació.  Consulteu aquest missatge per assegurar-vos que no hi hagi problemes amb la seva adreça de correu.  Potser voldreu consultar amb el vostre administrador de correu per obtenir més ajuda. No heu de fer res per seguir sent un membre actiu de la llista de correu. Si teniu cap pregunta o problema, podeu fer-ho contactant amb el propietari de la llista de distribució a    ${owner_email}"
+msgstr ""
+"Aquest és un missatge de sonda.  Podeu ignorar aquest missatge. La llista de "
+"correu ${listname} ha rebut diversos rebots de la vostra part, indicant que "
+"pot haver-hi un problema al enviar missatges a ${sender_email}. Una mostra "
+"s'adjunta a continuació.  Consulteu aquest missatge per assegurar-vos que no "
+"hi hagi problemes amb la seva adreça de correu.  Potser voldreu consultar "
+"amb el vostre administrador de correu per obtenir més ajuda. No heu de fer "
+"res per seguir sent un membre actiu de la llista de correu. Si teniu cap "
+"pregunta o problema, podeu fer-ho contactant amb el propietari de la llista "
+"de distribució a    ${owner_email}"
 
 msgid "list:user:notice:welcome.txt"
 msgstr "Benvingut a la llista de correu \"${display_name} \"! Per a publicar en aquesta llista, envieu el vostre correu electrònic a:  ${listname}. Podeu donar-vos de baixa o fer ajustos a les vostres opcions per correu electrònic enviant un missatge a: ${request_email} amb la paraula 'help' en l'assumpte o el cos (no inclogueu les cometes) i rebreu un missatge amb instruccions. Necessitareu la vostra contrasenya per a canviar les opcions, però, a efectes de seguretat, aquesta contrasenya no s’hi inclourà. Si heu oblidat la contrasenya, haureu de restablir-la mitjançant la interfície d'usuari web."

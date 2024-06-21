@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-02 14:08-0800\n"
-"PO-Revision-Date: 2024-02-18 22:01+0000\n"
+"PO-Revision-Date: 2024-06-21 08:51+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/gnu-mailman/"
 "mailman/he/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Weblate 5.4\n"
+"X-Generator: Weblate 5.6-rc\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:85
 #: src/mailman/chains/hold.py:163 src/mailman/handlers/acknowledge.py:56
@@ -2556,7 +2556,7 @@ msgid "list:admin:notice:unsubscribe.txt"
 msgstr "ההסרה של ${member} מרשימת הדיוור ${display_name} הושלמה."
 
 msgid "list:member:digest:header.txt"
-msgstr " "
+msgstr ""
 
 msgid "list:member:digest:masthead.txt"
 msgstr ""
@@ -2580,7 +2580,7 @@ msgstr ""
 "כדי לבטל את המינוי עליך לשלוח הודעת דוא״ל אל ‎${short_listname}-leave@${domain}‎"
 
 msgid "list:member:regular:header.txt"
-msgstr " "
+msgstr ""
 
 msgid "list:user:action:invite.txt"
 msgstr ""
