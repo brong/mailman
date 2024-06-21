@@ -50,7 +50,7 @@ def write_template(lang, name, content):
     "Get the template text with the name if it exists."
     template_path = Path(TEMPLATE_PATH_TEMPLATE.format(lang=lang, name=name))
     template_path.parent.mkdir(exist_ok=True, parents=True)
-    if not content.endswith('\n'):
+    if content and not content.endswith('\n'):
         content += '\n'
     template_path.write_text(content)
 
@@ -69,8 +69,7 @@ def main():
 
         for each in catalog:
             if each.id.endswith('.txt'):
-                if each.string.strip() != '':
-                    write_template(lang, each.id, each.string)
+                write_template(lang, each.id, each.string)
 
         print(f'Finished writing templates for {lang}')
 
