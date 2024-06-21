@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-02 14:08-0800\n"
-"PO-Revision-Date: 2024-02-14 11:15+0000\n"
-"Last-Translator: Сергій <sergiy.goncharuk.1@gmail.com>\n"
+"PO-Revision-Date: 2024-06-21 08:51+0000\n"
+"Last-Translator: SATOH Fumiyasu <fumiyas@osstech.co.jp>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/gnu-mailman/"
 "mailman/uk/>\n"
 "Language: uk\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.6-rc\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:85
 #: src/mailman/chains/hold.py:163 src/mailman/handlers/acknowledge.py:56
@@ -2565,7 +2565,7 @@ msgid "list:admin:notice:unsubscribe.txt"
 msgstr "$member видалено з $display_name."
 
 msgid "list:member:digest:header.txt"
-msgstr "  "
+msgstr ""
 
 msgid "list:member:digest:masthead.txt"
 msgstr ""
@@ -2589,7 +2589,7 @@ msgstr ""
 "Щоб відписатися, надішліть листа на адресу ${short_listname}-leave@${domain}"
 
 msgid "list:member:regular:header.txt"
-msgstr " "
+msgstr ""
 
 msgid "list:user:action:invite.txt"
 msgstr ""
@@ -2664,7 +2664,7 @@ msgstr ""
 "    $owner_email"
 
 msgid "list:user:notice:goodbye.txt"
-msgstr " "
+msgstr ""
 
 msgid "list:user:notice:hold.txt"
 msgstr ""
