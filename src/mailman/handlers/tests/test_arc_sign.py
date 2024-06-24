@@ -81,7 +81,7 @@ uEzxBDAr518Z8VFbR41in3W4Y3yCDgQlLlcETrS+zYcL
 
         msg = """Authentication-Results: lists.example.org; arc=none;
         spf=pass smtp.mfrom=jqd@d1.example;
-        dkim=pass (1024-bit key) header.i=@d1.example; dmarc=pass
+        dkim=pass header.i=@d1.example; dmarc=pass
 MIME-Version: 1.0
 Return-Path: <jqd@d1.example.org>
 Received: by 10.157.14.6 with HTTP; Tue, 3 Jan 2017 12:22:54 -0800 (PST)
@@ -100,7 +100,7 @@ This is a test message.
         ARCSign().process(lst, msg, msgdata)
 
         res = ["i=1;lists.example.org;arc=none;spf=passsmtp.mfrom=jqd@d1"
-               ".example;dkim=pass(1024-bitkey)header.i=@d1.example;dmar"
+               ".example;dkim=passheader.i=@d1.example;dmar"
                "c=pass"]
         self.assertEqual("".join(msg["ARC-Authentication-Results"].split()),
                          "".join(res))
@@ -117,10 +117,11 @@ i=1; s=dummy; t=12345"""
         expected = set(expected)
         self.assertEqual(sig, expected)
 
-        seal = "".join(["a=rsa-sha256;b=Pg8Yyk1AgYy2l+kb6iy+mY106AXm5EdgDwJ"
-                        "hLP7+XyT6yaS38ZUho+bmgSDorV+LyARH4A967A/oWMX3coyC7"
-                        "pAGyI+hA3+JifL7P3/aIVP4ooRJ/WUgT79snPuulxE15jg6FgQ"
-                        "E68ObA1/hy77BxdbD9EQxFGNcr/wCKQoeKJ8=; cv=none; d="
+        seal = "".join(["a=rsa-sha256;b=OI+GmgigM5/fJ8u+yoYCoT70X"
+                        "a433kSYLvhZWtx4HdLnLB2wvKy9zX7KHFVOhfhZ6"
+                        "gWtsfMAufWx0rw+xgZNseDnejbz++2pPfj+jKUg+"
+                        "JF7VC15IbpPUloISLKjfiK1cxC+u7s9NLu1wI4QV"
+                        "sAT/M6RQ42MauUR/dBSdQdSMho=; cv=none; d="
                         "example.org; i=1; s=dummy; t=12345"])
         seal = set("".join(seal.split()).split(";"))
         expected = set("".join(msg["ARC-Seal"].split()).split(";"))
