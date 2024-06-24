@@ -172,6 +172,19 @@ This is a test message.
         decorate.process(self._mlist, self._msg, {})
         self.assertTrue(self._msg.as_string().endswith('-- \nMy sig\n'))
 
+    def test_whitespace_header_not_added(self):
+        site_dir = os.path.join(config.TEMPLATE_DIR, 'site', 'en')
+        os.makedirs(site_dir)
+        header_path = os.path.join(site_dir, 'myheader.txt')
+        with open(header_path, 'w', encoding='utf-8') as fp:
+            print(' \r\n', file=fp)
+        getUtility(ITemplateManager).set(
+            'list:member:regular:header', None, 'mailman:///myheader.txt')
+        self._mlist.preferred_language = 'en'
+        decorate.process(self._mlist, self._mpm, {})
+        self.assertEqual(self._mpm.get_payload(0).get_payload(),
+                         'This is a test message.')
+
     def test_decorate_member_as_address(self):
         site_dir = os.path.join(config.TEMPLATE_DIR, 'site', 'en')
         os.makedirs(site_dir)

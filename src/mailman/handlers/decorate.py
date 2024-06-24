@@ -234,6 +234,9 @@ def decorate_template(mlist, template, extradict=None):
     if extradict is not None:
         substitutions.update(extradict)
     text = expand(template, mlist, substitutions)
+    # Don't return non-empty, whitespace only templates.
+    if not text.strip():
+        return ''
     # Turn any \r\n line endings into just \n
     return re.sub(r'\r\n', r'\n', text)
 
