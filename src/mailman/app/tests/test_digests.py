@@ -213,11 +213,40 @@ Subject: message {}
         self.assertLess(os.path.getsize(self._mailbox_path), 100 * 1024.0)
         get_queue_messages('virgin', expected_count=0)
 
+    def test_dont_send_digest_threshold_zero(self):
+        # Put a few messages in the digest.
+        self._to_digest(3)
+        # Set the size threshold to zero which should not trigger a send.
+        self._mlist.digest_size_threshold = 0
+        maybe_send_digest_now(self._mlist)
+        self._runner.run()
+        # A digest is still being collected, but none have been sent.
+        get_queue_messages('digest', expected_count=0)
+        self.assertGreater(os.path.getsize(self._mailbox_path), 0)
+        get_queue_messages('virgin', expected_count=0)
+
     def test_force_send_digest_under_threshold(self):
         # Put a few messages in the digest.
         self._to_digest(3)
         # Set the size threshold high enough to not trigger a send.
         self._mlist.digest_size_threshold = 100
+        # Force sending a digest anyway.
+        maybe_send_digest_now(self._mlist, force=True)
+        self._runner.run()
+        # There are no digests in flight now, and a single digest message has
+        # been sent.
+        get_queue_messages('digest', expected_count=0)
+        self.assertFalse(os.path.exists(self._mailbox_path))
+        items = get_queue_messages('virgin', expected_count=1)
+        digest_contents = str(items[0].msg)
+        self.assertIn('Subject: message 1', digest_contents)
+        self.assertIn('Subject: message 2', digest_contents)
+
+    def test_force_and_threshold_zero(self):
+        # Put a few messages in the digest.
+        self._to_digest(3)
+        # Set the size threshold to zero (unlimited).
+        self._mlist.digest_size_threshold = 0
         # Force sending a digest anyway.
         maybe_send_digest_now(self._mlist, force=True)
         self._runner.run()

@@ -382,7 +382,8 @@ class TestI18nDigest(unittest.TestCase):
         self._mlist = create_list('test@example.com')
         self._mlist.send_welcome_message = False
         self._mlist.preferred_language = 'fr'
-        self._mlist.digest_size_threshold = 0
+        # Can't use 0 because of !1230.
+        self._mlist.digest_size_threshold = 0.01
         self._process = config.handlers['to-digest'].process
         self._runner = make_testable_runner(DigestRunner)
         # Add a French version of the digest masthead.
