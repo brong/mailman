@@ -63,6 +63,8 @@ New Features
 * The lifetime of saved DSNs in the message store is now configurable with a
   default of 1 day.  (Closes #1145)
 * Task runner now uses the configured dsn_lifetime when deleting bounce events.
+* Setting ``digest_size_threshold`` to zero now means ``unlimited``, i.e., a
+  digest will never be sent based on size.  (Closes #1158)
 
 Other
 -----

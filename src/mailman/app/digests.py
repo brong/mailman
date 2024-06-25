@@ -91,7 +91,9 @@ def maybe_send_digest_now(mlist, *, force=False):
         size = os.path.getsize(mailbox_path)
     except FileNotFoundError:
         size = 0
-    if (size >= mlist.digest_size_threshold * 1024.0 or (force and size > 0)):
+    if ((mlist.digest_size_threshold > 0 and
+            size >= mlist.digest_size_threshold * 1024.0) or
+            (force and size > 0)):
         # Send the digest.  Because we don't want to hold up this process
         # with crafting the digest, we're going to move the digest file to
         # a safe place, then craft a fake message for the DigestRunner as
