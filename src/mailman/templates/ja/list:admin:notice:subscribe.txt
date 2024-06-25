@@ -1,1 +1,1 @@
-$memberは$display_nameの購読に成功しました。
+$member が $display_name へ入会されました。

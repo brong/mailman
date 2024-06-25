@@ -1,1 +1,1 @@
-$member は $display_name から削除されました。
+$member が $display_name から退会されました。

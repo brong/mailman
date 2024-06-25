@@ -1,1 +1,1 @@
-$member は過度なバウンスのため、$listname から購読が解除されました。
+$member が過度なバウンスのため $listname から退会されました。
