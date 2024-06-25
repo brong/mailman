@@ -16,4 +16,4 @@ build:
     python: "3.11"
   jobs:
       post_build:
-        - ln -s $READTHEDOCS_OUTPUT/html/README.html $READTHEDOCS_OUTPUT/html/index.html
+        - cp $READTHEDOCS_OUTPUT/html/README.html $READTHEDOCS_OUTPUT/html/index.html
