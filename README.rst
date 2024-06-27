@@ -2,7 +2,7 @@
 Mailman - The GNU Mailing List Management System
 ================================================
 
-.. image:: https://gitlab.com/mailman/mailman/badges/master/build.svg
+.. image:: https://gitlab.com/mailman/mailman/badges/master/pipeline.svg
     :target: https://gitlab.com/mailman/mailman/commits/master
 
 .. image:: https://readthedocs.org/projects/mailman/badge
