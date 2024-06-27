@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-02 14:08-0800\n"
-"PO-Revision-Date: 2024-06-21 02:32+0000\n"
+"PO-Revision-Date: 2024-06-27 15:09+0000\n"
 "Last-Translator: SATOH Fumiyasu <fumiyas@osstech.co.jp>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/gnu-mailman/"
 "mailman/ja/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.6-rc\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:85
 #: src/mailman/chains/hold.py:163 src/mailman/handlers/acknowledge.py:56
@@ -1984,7 +1984,7 @@ msgstr "メッセージにヘッダーとフッターを付与します。"
 #: src/mailman/handlers/dmarc.py:128
 #, python-brace-format
 msgid "${realname} via ${mlist.display_name}"
-msgstr "${mlist.display_name} 経由の ${realname}"
+msgstr "${realname} - ${mlist.display_name} 経由"
 
 #: src/mailman/handlers/dmarc.py:229
 msgid "Apply DMARC mitigations."
