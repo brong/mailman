@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-02 14:08-0800\n"
-"PO-Revision-Date: 2024-06-21 08:51+0000\n"
-"Last-Translator: SATOH Fumiyasu <fumiyas@osstech.co.jp>\n"
+"PO-Revision-Date: 2024-06-30 23:25+0000\n"
+"Last-Translator: LS-Shandong <LS-Shandong@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "gnu-mailman/mailman/zh_Hans/>\n"
 "Language: zh_Hans\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.6-rc\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:85
 #: src/mailman/chains/hold.py:163 src/mailman/handlers/acknowledge.py:56
@@ -2010,22 +2010,22 @@ msgstr "执行认证检查然后附到认证结果首部。"
 #: src/mailman/interfaces/member.py:122
 #, python-brace-format
 msgid "${self.email} is already a member of mailing list ${self.fqdn_listname}"
-msgstr ""
+msgstr "${self.email} 已经是邮件列表 ${self.fqdn_listname} 的成员"
 
 #: src/mailman/interfaces/member.py:125
 #, python-brace-format
 msgid "${self.email} is already an owner of mailing list ${self.fqdn_listname}"
-msgstr ""
+msgstr "${self.email} 已经是邮件列表 ${self.fqdn_listname} 的所有者"
 
 #: src/mailman/interfaces/member.py:128
 #, python-brace-format
 msgid "${self.email} is already a moderator of mailing list ${self.fqdn_listname}"
-msgstr ""
+msgstr "${self.email} 已是邮件列表 ${self.fqdn_listname} 的版主"
 
 #: src/mailman/interfaces/member.py:131
 #, python-brace-format
 msgid "${self.email} is already a non-member of mailing list ${self.fqdn_listname}"
-msgstr ""
+msgstr "${self.email} 已是邮件列表 ${self.fqdn_listname} 的非成员"
 
 #: src/mailman/interfaces/pipeline.py:53
 msgid "[No details are available]"
@@ -2453,7 +2453,7 @@ msgid "list:admin:notice:unsubscribe.txt"
 msgstr "${member} 已从 ${display_name} 中移除。"
 
 msgid "list:member:digest:header.txt"
-msgstr ""
+msgstr " "
 
 msgid "list:member:digest:masthead.txt"
 msgstr ""
