@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-02 14:08-0800\n"
-"PO-Revision-Date: 2024-06-27 15:09+0000\n"
+"PO-Revision-Date: 2024-07-02 19:19+0000\n"
 "Last-Translator: SATOH Fumiyasu <fumiyas@osstech.co.jp>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/gnu-mailman/"
 "mailman/ja/>\n"
@@ -517,8 +517,8 @@ msgid ""
 "    "
 msgstr ""
 "    -d/--deliveryで指定された配送モードで、FILENAMEの全メンバーアドレスを\n"
-"    追加します。FILENAMEには標準入力を示す'-'を指定できます。\n"
-"    空白行や'#'で始まる行は無視されます。\n"
+"    追加します。FILENAMEには標準入力を示す「-」を指定できます。\n"
+"    空白行や「#」で始まる行は無視されます。\n"
 "    "
 
 #: src/mailman/commands/cli_addmembers.py:124
@@ -587,7 +587,7 @@ msgstr "メールアドレスは変わっていません。  何も変更する�
 
 #: src/mailman/commands/cli_changeaddress.py:53
 msgid "Address {} already exists; can't change."
-msgstr "メールアドレス{}は既に存在しています;変更できません。"
+msgstr "メールアドレス {} は既に存在しています。変更できません。"
 
 #: src/mailman/commands/cli_changeaddress.py:58
 msgid "Address changed from {} to {}."
@@ -602,7 +602,7 @@ msgid ""
 "    File to send the output to.  If not given, or if '-' is given, standard\n"
 "    output is used."
 msgstr ""
-"    出力を送るファイル。  指定されない場合、または'-'が指定された場合、\n"
+"    出力先のファイル。  指定されない場合、または「-」が指定された場合、\n"
 "    標準出力が使われます。"
 
 #: src/mailman/commands/cli_conf.py:62
@@ -710,7 +710,7 @@ msgstr "GNU Mailmanの以前の実行がきれいに終了しませんでした(
 
 #: src/mailman/commands/cli_control.py:105
 msgid "Starting Mailman's master runner"
-msgstr "Mailmanのマスターrunnerを起動します"
+msgstr "Mailman のマスター runner を起動します"
 
 #: src/mailman/commands/cli_control.py:108
 msgid "Generating MTA alias maps"
@@ -740,7 +740,7 @@ msgstr "Mailman masterとrunnerプロセスを停止する。"
 
 #: src/mailman/commands/cli_control.py:175
 msgid "Shutting down Mailman's master runner"
-msgstr "Mailmanのマスターrunnerをシャットダウンする"
+msgstr "Mailman のマスター runner を停止します"
 
 #: src/mailman/commands/cli_control.py:188
 msgid "Signal the Mailman processes to re-open their log files."
@@ -783,8 +783,9 @@ msgid ""
 "    "
 msgstr ""
 "    -m/--memberで指定されたメンバーに加えて、\n"
-"    FILENAMEにアドレスを持つリストメンバーを削除します。  FILENAMEには標準入力を示す\n"
-"    '-'を指定できます。  空白行と'#'で始まる行は無視されます。\n"
+"    FILENAME にアドレスを持つリストメンバーを削除します。  FILENAME "
+"には標準入力を示す\n"
+"    「-」を指定できます。  空白行と「#」で始まる行は無視されます。\n"
 "    "
 
 #: src/mailman/commands/cli_delmembers.py:71
@@ -859,7 +860,7 @@ msgid ""
 "    Send any collected digests right now, even if the size threshold has not\n"
 "    yet been met."
 msgstr ""
-"    収集したダイジェストは、まだサイズのしきい値に達していなくても、\n"
+"    収集したダイジェストは、まだサイズの基準値に達していなくても、\n"
 "    今すぐ送信します。"
 
 #: src/mailman/commands/cli_digests.py:54
@@ -980,9 +981,11 @@ msgid ""
 "    thereof. This will normally be the Mailman 2.1 charset of the list's\n"
 "    preferred_language."
 msgstr ""
-"    PICKLE_FILE内の文字列のエンコーディングがutf-8またはそのサブセットでない場合は、\n"
+"    PICKLE_FILE 内の文字エンコーディングが UTF-8 "
+"またはそのサブセットでない場合は、\n"
 "    文字列のエンコーディングを指定してください。\n"
-"    通常、これはリストのpreferred_languageに基づいたMailman 2.1の文字セットになります。"
+"    通常、これはリストの preferred_language に基づいた Mailman 2.1 "
+"の文字エンコーディングになります。"
 
 #: src/mailman/commands/cli_import.py:82
 #, python-brace-format
@@ -1258,7 +1261,7 @@ msgid ""
 "    can be '-' to indicate standard output."
 msgstr ""
 "    標準出力ではなく、出力をFILENAMEに表示します。\n"
-"    FILENAMEには標準出力を示すために'-'を使用できます。"
+"    FILENAMEには標準出力を示すために「-」を使用できます。"
 
 #: src/mailman/commands/cli_members.py:151
 msgid ""
@@ -1268,9 +1271,9 @@ msgid ""
 "    If not given, then 'member' role is assumed."
 msgstr ""
 "    指定されたROLEを持つメンバーのみを表示します。\n"
-"    ROLEには 'any', 'member', 'nonmember', 'owner', 'moderator',\n"
-"    または 'administrator'（つまりオーナーとモデレーター）が指定できます。\n"
-"    指定しない場合、'member' の役割が仮定されます。"
+"    ROLEには 「any」,「member」,「nonmember」,「owner」,「moderator」,\n"
+"    または 「administrator」(つまりオーナーとモデレーター) が指定できます。\n"
+"    指定しない場合、「member」の役割が仮定されます。"
 
 #: src/mailman/commands/cli_members.py:159
 msgid "    Display only regular delivery members."
@@ -1286,9 +1289,11 @@ msgid ""
 "    'any' means any digest type, 'plaintext' means only plain text (rfc 1153)\n"
 "    type digests, 'mime' means MIME type digests."
 msgstr ""
-"    特定の種類（kind）のダイジェストメンバーのみを表示します。\n"
-"    'any' は任意のダイジェストタイプを意味し、'plaintext' はプレーンテキスト（RFC 1153）\n"
-"    タイプのダイジェストのみを意味し、'mime' はMIMEタイプのダイジェストを意味します。"
+"    特定の種類のダイジェストメンバーのみを表示します。\n"
+"    「any」は任意のダイジェストタイプを意味し、「plaintext」"
+"はプレーンテキスト (RFC 1153)\n"
+"    タイプのダイジェストのみを意味し、「mime」は MIME "
+"タイプのダイジェストを意味します。"
 
 #: src/mailman/commands/cli_members.py:190
 msgid ""
@@ -1392,10 +1397,11 @@ msgid ""
 "    representation.  Useful with 'mailman qfile -i <file>'.  In that case, the\n"
 "    list of unpickled objects will be left in a variable called 'm'."
 msgstr ""
-"    オブジェクトの整形表示を行いません。    これはオブジェクトに何らかの問題があり、\n"
+"    オブジェクトの整形表示を行いません。    "
+"これはオブジェクトに何らかの問題があり、\n"
 "    pickle 形式の解読表示だけを行いたい場合に有効です。\n"
-"    'mailman qfile -i <file>' と一緒に使用すると便利です。  その場合、\n"
-"    pickle形式ではないオブジェクトのリストは'm'という変数に残されます。"
+"    @mailman qfile -i <file>」と一緒に使用すると便利です。  その場合、\n"
+"    pickle形式ではないオブジェクトのリストは「m」という変数に残されます。"
 
 #: src/mailman/commands/cli_qfile.py:50
 msgid ""
@@ -1403,7 +1409,7 @@ msgid ""
 "    containing the list of unpickled objects."
 msgstr ""
 "    Pythonの対話型セッションを開始し、\n"
-"    'm'という変数にpickle 形式ではないオブジェクトのリストを入れます。"
+"    「m」という変数にpickle 形式ではないオブジェクトのリストを入れます。"
 
 #: src/mailman/commands/cli_qfile.py:67
 msgid "[----- start pickle -----]"
@@ -1421,7 +1427,7 @@ msgstr "[----- pickle 終了 -----]"
 #: src/mailman/commands/cli_qfile.py:77
 #, python-brace-format
 msgid "Number of objects found (see the variable 'm'): ${count}"
-msgstr "見つかったオブジェクトの数（変数 'm' を参照）: ${count}"
+msgstr "見つかったオブジェクトの数（変数「m」を参照）: ${count}"
 
 #: src/mailman/commands/cli_status.py:34
 msgid "Show the current running status of the Mailman system."
@@ -1473,11 +1479,14 @@ msgid ""
 msgstr ""
 "    必要に応じて、入力ファイルを使用してリストのメンバーシップを\n"
 "    同期させるためにメンバーを追加および削除します。\n"
-"    FILENAMEは新しいメンバーシップを含むファイルで、1つのメンバーが1行に記載されています。\n"
-"    空行や'#'で始まる行は無視されます。\n"
-"    FILENAME内のアドレスで、現在のリストメンバーでないものは、-d/--deliveryで指定された配信モードでリストに追加されます。\n"
-"    FILENAME内に含まれていないアドレスを持つリストメンバーは、リストから削除されます。\n"
-"    FILENAMEは標準入力を示すために'-'を使用できます。\n"
+"    FILENAMEは新しいメンバーシップを含むファイルで、1つのメンバーが1行に記載"
+"されています。\n"
+"    空行や「#」で始まる行は無視されます。\n"
+"    FILENAME内のアドレスで、現在のリストメンバーでないものは、-d/"
+"--deliveryで指定された配信モードでリストに追加されます。\n"
+"    FILENAME内に含まれていないアドレスを持つリストメンバーは、リストから削除"
+"されます。\n"
+"    FILENAMEは標準入力を示すために「-」を使用できます。\n"
 "    "
 
 #: src/mailman/commands/cli_syncmembers.py:172
@@ -1486,13 +1495,16 @@ msgid ""
 "    'summary' or 'disabled'.  I.e., one of regular, three modes of digest\n"
 "    or no delivery.  If not given, the default is regular."
 msgstr ""
-"    追加されるメンバーの配信モードを 'regular'、'mime'、'plain'、'summary'、または 'disabled' のいずれかに設定します。\n"
-"    つまり、通常の配信、3つのダイジェストモード、または配信なしのいずれかです。\n"
-"    指定しない場合、デフォルトは 'regular' です。"
+"    追加されるメンバーの配信モードを「regular」、「mime」、「plain」、「summa"
+"ry」、または「disabled」のいずれかに設定します。\n"
+"    つまり、通常の配信、3 "
+"つのダイジェストモード、または配信なしのいずれかです。\n"
+"    指定しない場合、デフォルトは「regular」です。"
 
 #: src/mailman/commands/cli_syncmembers.py:178
 msgid "    Override the list's setting for send_welcome_message to added members."
-msgstr "    メンバーに追加するために、メーリングリストのsend_welcome_message設定を上書きします。"
+msgstr "    メンバーに追加するために、メーリングリストの send_welcome_message "
+"設定を上書きします。"
 
 #: src/mailman/commands/cli_syncmembers.py:192
 msgid ""
@@ -1525,7 +1537,7 @@ msgstr ""
 
 #: src/mailman/commands/cli_version.py:32
 msgid "Display Mailman's version."
-msgstr "Mailmanのバージョンを表示します。"
+msgstr "Mailman のバージョンを表示します。"
 
 #: src/mailman/commands/cli_withlist.py:74
 msgid "ipython is not available, set use_ipython to no"
@@ -1555,10 +1567,12 @@ msgid ""
 "variable 'm' will be available in the global namespace.  It will reference the\n"
 "mailing list object."
 msgstr ""
-"このスクリプトの使用方法は、対話的またはプログラムによるものの2つがあります。\n"
-"対話的に使用する場合、Pythonの対話型インタープリタからメーリングリストを\n"
+"このスクリプトの使用方法は、対話的またはプログラムによるものの2つがあります。"
+"\n"
+"対話的に使用する場合、Python の対話型インタープリタからメーリングリストを\n"
 "操作、検査、変更することができます。\t対話的に実行する際、\n"
-"変数 'm' はグローバルな名前空間で使用できます。\tこれはメーリングリストオブジェクトを\n"
+"変数「m」はグローバルな名前空間で使用できます。"
+"\tこれはメーリングリストオブジェクトを\n"
 "参照します。"
 
 #: src/mailman/commands/cli_withlist.py:159
@@ -1599,7 +1613,8 @@ msgid ""
 "\n"
 "If -l is not given then you can run a function that takes no arguments.\n"
 msgstr ""
-"--runオプションの使用例を示します。\tMailmanインストールディレクトリに 'listaddr.py'\n"
+"--runオプションの使用例を示します。\tMailmanインストールディレクトリに"
+"「listaddr.py」\n"
 "というファイルがあり、次の2つの関数が含まれていると\n"
 "仮定します：\n"
 "\n"
@@ -1642,7 +1657,8 @@ msgid ""
 "Running listaddr.requestaddr() ...\n"
 "ant-request@example.com"
 msgstr ""
-"また、メーリングリストのリクエストアドレスを表示するには、次のコマンドを実行できます：\n"
+"また、メーリングリストのリクエストアドレスを表示するには、次のコマンドを実行"
+"できます:\n"
 "\n"
 "% mailman withlist -r listaddr.requestaddr -l ant@example.com\n"
 "Importing listaddr ...\n"
@@ -1714,14 +1730,16 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"    スクリプトを実行します。\t引数は呼び出し可能なモジュールのパスを指定します。\n"
-"    このモジュールはインポートされ、さらに、--listspec/-lも指定された場合、\n"
+"    "
+"スクリプトを実行します。引数は呼び出し可能なモジュールのパスを指定します。\n"
+"    このモジュールはインポートされ、さらに、--listspec/-l も指定された場合、"
+"\n"
 "    メーリングリストが最初の引数として渡されて呼び出されます。\n"
 "    コマンドラインの最後に追加の引数が指定された場合、\n"
 "    それらはモジュールに対して後続の位置引数として渡されます。\n"
-"    詳細なヘルプについては、--detailsオプションを参照してください。\n"
+"    詳細なヘルプについては、--details オプションを参照してください。\n"
 "\n"
-"    --listspec/-lの引数が指定されていない場合、\n"
+"    --listspec/-l の引数が指定されていない場合、\n"
 "    呼び出されるスクリプト関数は引数なしで呼び出されます。\n"
 "    "
 
@@ -1752,7 +1770,7 @@ msgstr "正規表現を使用するには、--runが必要です"
 #: src/mailman/commands/cli_withlist.py:299
 #, python-brace-format
 msgid "The variable 'm' is the ${listspec} mailing list"
-msgstr "変数 'm' は ${listspec} メーリングリストです"
+msgstr "変数「m」は ${listspec} メーリングリストです"
 
 #: src/mailman/commands/eml_confirm.py:43
 msgid "Confirm a subscription or held message request."
@@ -1789,11 +1807,11 @@ msgstr "コマンドの処理を停止します."
 
 #: src/mailman/commands/eml_end.py:47
 msgid "An alias for 'end'."
-msgstr "'end' のエイリアスです。"
+msgstr "「end」のエイリアスです。"
 
 #: src/mailman/commands/eml_help.py:38
 msgid "Get help about available email commands."
-msgstr "利用可能なメールコマンドに関するヘルプを取得します."
+msgstr "利用可能なメールコマンドに関するヘルプを取得します。"
 
 #: src/mailman/commands/eml_help.py:51
 msgid "n/a"
@@ -1853,7 +1871,7 @@ msgstr "不正な引数: ${argument}"
 
 #: src/mailman/commands/eml_membership.py:175
 msgid "An alias for 'join'."
-msgstr "'join' のエイリアス。"
+msgstr "「join」のエイリアス。"
 
 #: src/mailman/commands/eml_membership.py:186
 msgid ""
@@ -1902,7 +1920,7 @@ msgstr "${mlist.fqdn_listname} から退会するための確認メールが ${p
 
 #: src/mailman/commands/eml_membership.py:253
 msgid "An alias for 'leave'."
-msgstr "'leave' のエイリアス."
+msgstr "「leave」のエイリアス。"
 
 #: src/mailman/commands/eml_who.py:42
 msgid ""
@@ -2420,7 +2438,7 @@ msgstr "ダイジェストヘッダー"
 #: src/mailman/runners/digest.py:173
 #, python-brace-format
 msgid "Today's Topics (${count} messages)"
-msgstr "今日のトピック（${count} 件のメッセージ）"
+msgstr "今日のトピック (${count} 件のメッセージ)"
 
 #: src/mailman/runners/digest.py:195 src/mailman/runners/digest.py:270
 msgid "Digest Footer"
