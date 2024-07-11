@@ -2,9 +2,10 @@
 Poll the NNTP Server For New Messages
 =====================================
 
-The ``mailman gatenews`` command is normally run periodically, usually a few
-times per hour, by cron to poll the configured NNTP server for new messages to
+The ``mailman gatenews`` command is normally run as a periodic task by the
+NNTP runner to poll the configured NNTP server for new messages to
 be posted to lists that are configured to gateway messages from a usenet group.
+It is normally not run manually.
 
 There are no options other than ``--help``.
 ::
