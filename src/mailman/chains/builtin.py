@@ -45,14 +45,14 @@ class BuiltInChain:
         # Discard emails with no valid senders.
         ('no-senders', LinkAction.jump, 'discard'),
         ('approved', LinkAction.jump, 'accept'),
-        ('emergency', LinkAction.jump, 'hold'),
         ('loop', LinkAction.jump, 'discard'),
         # Discard emails from banned addresses.
         ('banned-address', LinkAction.jump, 'discard'),
-        # Determine whether the member or nonmember has an action shortcut.
-        ('member-moderation', LinkAction.jump, 'moderation'),
         # Take a detour through the header matching chain.
         ('truth', LinkAction.detour, 'header-match'),
+        ('emergency', LinkAction.jump, 'hold'),
+        # Determine whether the member or nonmember has an action shortcut.
+        ('member-moderation', LinkAction.jump, 'moderation'),
         # Check for nonmember moderation.
         ('nonmember-moderation', LinkAction.jump, 'moderation'),
         # Do all of the following before deciding whether to hold the message.

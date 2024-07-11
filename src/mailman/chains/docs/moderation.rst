@@ -93,9 +93,9 @@ built-in chain.  No rules hit and so the message is accepted.
         dmarc-mitigation
         no-senders
         approved
-        emergency
         loop
         banned-address
+        emergency
         member-moderation
         nonmember-moderation
         administrivia
@@ -133,9 +133,9 @@ moderator approval.
         dmarc-mitigation
         no-senders
         approved
-        emergency
         loop
         banned-address
+        emergency
 
 Anne's moderation action can also be set to `discard`...
 ::
@@ -161,9 +161,9 @@ Anne's moderation action can also be set to `discard`...
         dmarc-mitigation
         no-senders
         approved
-        emergency
         loop
         banned-address
+        emergency
 
 ... or `reject`.
 
@@ -188,9 +188,9 @@ Anne's moderation action can also be set to `discard`...
         dmarc-mitigation
         no-senders
         approved
-        emergency
         loop
         banned-address
+        emergency
 
 
 Nonmembers
@@ -230,9 +230,9 @@ moderator approval.
         dmarc-mitigation
         no-senders
         approved
-        emergency
         loop
         banned-address
+        emergency
         member-moderation
 
     >>> nonmember = mlist.nonmembers.get_member('bart@example.com')

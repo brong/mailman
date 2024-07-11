@@ -42,6 +42,9 @@ Bugs fixed
 * The ``nttplib`` slated to be removed in Python 3.13. Getting from PyPI.
   (Closes #1144)
 * The web URL replacements now work in all templates.  (Closes #1142)
+* Emergency moderation is now applied following mail loop detection, banned
+  address detection and header matching so those actions are applied before
+  an emergency hold.  (Closes #173)
 
 New Features
 ------------
