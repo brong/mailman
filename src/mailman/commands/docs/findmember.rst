@@ -18,6 +18,8 @@ Here is the complete usage for the command.
     Usage: findmember [OPTIONS] PATTERN
     <BLANKLINE>
       Display all memberships for a user or users with address matching a pattern.
+      Because part of the process involves converting the pattern to a SQL query
+      with wildcards, the pattern should be simple. A simple string works best.
     <BLANKLINE>
     Options:
       -r, --role [all|owner|moderator|nonmember|member|administrator]

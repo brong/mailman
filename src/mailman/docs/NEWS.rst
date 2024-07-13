@@ -45,6 +45,7 @@ Bugs fixed
 * Emergency moderation is now applied following mail loop detection, banned
   address detection and header matching so those actions are applied before
   an emergency hold.  (Closes #173)
+* The performance of ``mailman findmember`` has been improved.  (Closes #1095)
 
 New Features
 ------------

@@ -61,11 +61,28 @@ def _sort_key(member):
     return (email, list_id, role)
 
 
+def _sql_pattern(pattern):
+    pattern = re.sub(r'\.\*', '%', pattern)
+    pattern = re.sub(r'(^|[^\\])\.', r'\1_', pattern)
+    pattern = re.sub(r'\\\.', '.', pattern)
+    if pattern.endswith('$'):
+        pattern = pattern[:-1]
+    else:
+        pattern = pattern + '%'
+    if pattern.startswith('^'):
+        pattern = pattern[1:]
+    elif not pattern.startswith('%'):
+        pattern = '%' + pattern
+    return pattern
+
+
 @click.command(
     cls=I18nCommand,
     help=_("""\
     Display all memberships for a user or users with address matching a
-    pattern.
+    pattern. Because part of the process involves converting the pattern
+    to a SQL query with wildcards, the pattern should be simple. A simple
+    string works best.
     """))
 @click.option(
     '--role', '-r',
@@ -79,7 +96,7 @@ def _sort_key(member):
 def findmember(ctx, role, pattern):
     result = list()
     user_manager = getUtility(IUserManager)
-    for user in user_manager.users:
+    for user in user_manager.find_users(_sql_pattern(pattern)):
         emails = [address.email for address in user.addresses]
         for email in emails:
             if re.search(pattern, email, re.I):
