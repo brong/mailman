@@ -46,6 +46,17 @@ Email: aperson@example.com
         MemberRole.member
 """)
 
+    def test_basic_find_with_more_complex_pattern(self):
+        # Test a find of one membership with a more complex pattern.
+        subscribe(self._mlist, 'Anne')
+        result = self._command.invoke(findmember, ('^.*$',))
+        self.assertEqual(result.exit_code, 0)
+        self.assertEqual(result.output, """\
+Email: aperson@example.com
+    List: ant.example.com
+        MemberRole.member
+""")
+
     def test_no_role(self):
         # Test for no matching roles.
         subscribe(self._mlist, 'Anne')
