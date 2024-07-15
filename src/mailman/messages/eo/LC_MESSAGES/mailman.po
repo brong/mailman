@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-02 14:08-0800\n"
-"PO-Revision-Date: 2022-03-23 03:39+0000\n"
+"PO-Revision-Date: 2024-07-15 14:09+0000\n"
 "Last-Translator: phlostically <phlostically@mailinator.com>\n"
-"Language-Team: Esperanto <https://hosted.weblate.org/projects/gnu-mailman/mailman/eo/>\n"
+"Language-Team: Esperanto <https://hosted.weblate.org/projects/gnu-mailman/"
+"mailman/eo/>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.12-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:85
 #: src/mailman/chains/hold.py:163 src/mailman/handlers/acknowledge.py:56
@@ -747,15 +748,15 @@ msgstr ""
 
 #: src/mailman/commands/cli_findmember.py:98
 msgid "Email: {}"
-msgstr ""
+msgstr "Retpoŝto: {}"
 
 #: src/mailman/commands/cli_findmember.py:102
 msgid "List: {}"
-msgstr ""
+msgstr "Listo: {}"
 
 #: src/mailman/commands/cli_findmember.py:105
 msgid "{}"
-msgstr ""
+msgstr "{}"
 
 #: src/mailman/commands/cli_gatenews.py:170
 msgid "Poll the NNTP server for messages to be gatewayed to mailing lists."
@@ -1069,7 +1070,7 @@ msgstr ""
 
 #: src/mailman/commands/cli_notify.py:113 src/mailman/commands/cli_notify.py:117
 msgid "User: {}\n"
-msgstr ""
+msgstr "Uzanto: {}\n"
 
 #: src/mailman/commands/cli_notify.py:115
 msgid ""
@@ -1085,17 +1086,19 @@ msgstr ""
 
 #: src/mailman/commands/cli_notify.py:126
 msgid "Sender: {}\n"
-msgstr ""
+msgstr "Sendinto: {}\n"
 
 #: src/mailman/commands/cli_notify.py:128 src/mailman/commands/cli_notify.py:131
 msgid "Subject: {}\n"
-msgstr ""
+msgstr "Temo: {}\n"
 
 #: src/mailman/commands/cli_notify.py:132
 msgid ""
 "Reason: {}\n"
 "\n"
 msgstr ""
+"Kialo: {}\n"
+"\n"
 
 #: src/mailman/commands/cli_notify.py:135
 msgid ""
@@ -1128,7 +1131,7 @@ msgstr ""
 #: src/mailman/commands/cli_qfile.py:70
 #, python-brace-format
 msgid "<----- start object ${count} ----->"
-msgstr ""
+msgstr "<----- komenco de objekto ${count} ----->"
 
 #: src/mailman/commands/cli_qfile.py:75
 msgid "[----- end pickle -----]"
@@ -1397,7 +1400,7 @@ msgstr ""
 #: src/mailman/commands/eml_confirm.py:115
 #, python-brace-format
 msgid "Message ${message}"
-msgstr ""
+msgstr "Mesaĝo ${message}"
 
 #: src/mailman/commands/eml_echo.py:36
 msgid "Echo back your arguments."
@@ -1409,7 +1412,7 @@ msgstr ""
 
 #: src/mailman/commands/eml_end.py:47
 msgid "An alias for 'end'."
-msgstr ""
+msgstr "Sinonimo de «end»."
 
 #: src/mailman/commands/eml_help.py:38
 msgid "Get help about available email commands."
@@ -1467,7 +1470,7 @@ msgstr ""
 
 #: src/mailman/commands/eml_membership.py:175
 msgid "An alias for 'join'."
-msgstr ""
+msgstr "Sinonimo de «join»."
 
 #: src/mailman/commands/eml_membership.py:186
 msgid ""
@@ -1512,7 +1515,7 @@ msgstr ""
 
 #: src/mailman/commands/eml_membership.py:253
 msgid "An alias for 'leave'."
-msgstr ""
+msgstr "Sinonimo de «leave»."
 
 #: src/mailman/commands/eml_who.py:42
 msgid ""
@@ -1658,7 +1661,7 @@ msgstr ""
 #: src/mailman/handlers/mime_delete.py:281 src/mailman/handlers/mime_delete.py:287
 #, python-brace-format
 msgid "Name: ${fname}\n"
-msgstr ""
+msgstr "Nomo: ${fname}\n"
 
 #: src/mailman/handlers/mime_delete.py:400
 msgid "Filter the MIME content of messages."
@@ -1755,7 +1758,7 @@ msgstr ""
 
 #: src/mailman/rest/sub_moderation.py:121
 msgid "Subscription request"
-msgstr ""
+msgstr "Peto pri abono"
 
 #: src/mailman/rules/administrivia.py:53
 msgid "Catch mis-addressed email commands."
@@ -1927,17 +1930,17 @@ msgstr "- Detaloj pri originala mesaĝo:"
 #: src/mailman/runners/command.py:194
 #, python-brace-format
 msgid "    From: ${from_}"
-msgstr ""
+msgstr "    De: ${from_}"
 
 #: src/mailman/runners/command.py:195
 #, python-brace-format
 msgid "    Subject: ${subject}"
-msgstr ""
+msgstr "    Temo: ${subject}"
 
 #: src/mailman/runners/command.py:196
 #, python-brace-format
 msgid "    Date: ${date}"
-msgstr ""
+msgstr "    Dato: ${date}"
 
 #: src/mailman/runners/command.py:197
 #, python-brace-format
@@ -1949,6 +1952,8 @@ msgid ""
 "\n"
 "- Results:"
 msgstr ""
+"\n"
+"- Rezultoj:"
 
 #: src/mailman/runners/command.py:212
 #, python-brace-format
@@ -1972,6 +1977,8 @@ msgid ""
 "\n"
 "- Done."
 msgstr ""
+"\n"
+"- Farite."
 
 #: src/mailman/runners/command.py:240
 msgid "The results of your email commands"
@@ -1984,7 +1991,7 @@ msgstr ""
 
 #: src/mailman/runners/digest.py:84
 msgid "Today's Topics:\n"
-msgstr ""
+msgstr "Hodiaŭaj Temoj:\n"
 
 #: src/mailman/runners/digest.py:153
 msgid "Digest Header"
@@ -2001,7 +2008,7 @@ msgstr ""
 
 #: src/mailman/runners/digest.py:202 src/mailman/runners/digest.py:277
 msgid "End of "
-msgstr ""
+msgstr "Fino de "
 
 #: src/mailman/styles/base.py:59
 #, python-brace-format
