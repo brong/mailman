@@ -25,7 +25,9 @@ from mailman.app.lifecycle import create_list
 from mailman.chains.builtin import BuiltInChain
 from mailman.chains.hold import autorespond_to_sender, HoldChain
 from mailman.core.chains import process as process_chain
+from mailman.core.i18n import _
 from mailman.interfaces.autorespond import IAutoResponseSet, Response
+from mailman.interfaces.languages import ILanguageManager
 from mailman.interfaces.member import MemberRole
 from mailman.interfaces.messages import IMessageStore
 from mailman.interfaces.requests import IListRequests, RequestType
@@ -36,6 +38,7 @@ from mailman.testing.helpers import (
     LogFileMark,
     set_preferred,
     specialized_message_from_string as mfs,
+    subscribe,
 )
 from mailman.testing.layers import ConfigLayer
 from zope.component import getUtility
@@ -151,6 +154,44 @@ A message body.
         self.assertEqual(
             data.get('_mod_reason'),
             'TEST-REASON-1; TEST-REASON-2; TEST-FORMAT-REASON-3')
+
+    def test_hold_chain_reason_language(self):
+        msg = mfs("""\
+From: anne@example.com
+To: test@example.com
+Subject: A message
+Message-ID: <ant>
+MIME-Version: 1.0
+
+A message body.
+""")
+        # Subscribe Anne to the list.
+        anne = subscribe(self._mlist, 'Anne', email='anne@example.com')
+        # Clear the welcome message.
+        get_queue_messages('virgin', expected_count=1)
+        # Set Anne's preferred language.
+        french = getUtility(ILanguageManager).get('fr')
+        anne.preferences.preferred_language = french
+        _.push('fr')
+        # Reason could be anything that will be translated. There are only a
+        # few in the testing french catalog.
+        msgdata = dict(moderation_reasons=[
+                '[Message discarded by content filter]'])
+        process_chain(self._mlist, msg, msgdata, start_chain='hold')
+        # Check the reason passed to hold_message().
+        requests = IListRequests(self._mlist)
+        self.assertEqual(requests.count_of(RequestType.held_message), 1)
+        request = requests.of_type(RequestType.held_message)[0]
+        key, data = requests.get_request(request.id)
+        self.assertEqual(
+            data.get('_mod_reason'),
+            '[Message discarded by content filter]')
+        # Get the notices to user and admin.
+        messages = get_queue_messages('virgin', expected_count=2)
+        # Only interested in the admin message.
+        msg = messages[1].msg
+        self.assertIn('[Message discarded by content filter]',
+                      msg.get_payload(0).get_payload())
 
     def test_hold_chain_no_reasons_given(self):
         msg = mfs("""\
