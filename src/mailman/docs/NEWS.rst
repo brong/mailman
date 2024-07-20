@@ -46,6 +46,8 @@ Bugs fixed
   address detection and header matching so those actions are applied before
   an emergency hold.  (Closes #173)
 * The performance of ``mailman findmember`` has been improved.  (Closes #1095)
+* Moderation reasons in admin notices of held messages are now always in the
+  list's preferred language.  (Closes #1159)
 
 New Features
 ------------
