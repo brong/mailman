@@ -361,6 +361,26 @@ class TestBasicImport(unittest.TestCase):
         for _pattern, addr in banned:
             self.assertTrue(IBanManager(self._mlist).is_banned(addr))
 
+    def test_ban_list_invalid_regex(self):
+        expected = """\
+Dropping invalid regexp b'^**@example.edu' in ban_list
+nothing to repeat at position 1"""
+        banned = [
+            ('^**@example.edu', 'bob@example.edu'),
+            ('anne@example.net', 'anne@example.net'),
+            ('^.*@example.net', 'bob@example.net'),
+            ]
+        self._pckdict['ban_list'] = [b[0].encode('iso-8859-1') for b in banned]
+        serr = StringIO()
+        with redirect_stderr(serr):
+            self._import()
+        self.assertIn(expected, serr.getvalue())
+        serr.close()
+        for _pattern, addr in banned[1:]:
+            self.assertTrue(IBanManager(self._mlist).is_banned(addr))
+        self.assertEqual([x.email for x in IBanManager(self._mlist).bans],
+                         ['^.*@example.net', 'anne@example.net'])
+
     def test_acceptable_aliases(self):
         # This used to be a plain-text field (values are newline-separated)
         # but values were interpreted as regexps even without '^' so we need

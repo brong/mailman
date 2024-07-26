@@ -48,6 +48,8 @@ Bugs fixed
 * The performance of ``mailman findmember`` has been improved.  (Closes #1095)
 * Moderation reasons in admin notices of held messages are now always in the
   list's preferred language.  (Closes #1159)
+* The ``mailman import21`` command drops invalid regexps from the imported
+  ``ban_list``.  (Closes #1166)
 
 New Features
 ------------

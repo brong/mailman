@@ -403,6 +403,13 @@ def import_config_pck(mlist, config_dict):
     # Handle ban list.
     ban_manager = IBanManager(mlist)
     for address in config_dict.get('ban_list', []):
+        if address.startswith(b'^'):
+            try:
+                re.compile(address)
+            except re.error as e:
+                print(f'Dropping invalid regexp {address} in ban_list\n{e}',
+                      file=sys.stderr)
+                continue
         ban_manager.ban(bytes_to_str(address))
     # Handle acceptable aliases.
     acceptable_aliases = config_dict.get('acceptable_aliases', '')
