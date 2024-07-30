@@ -61,9 +61,9 @@ in ``incoming`` is specific to the Postfix MTA.  See the section for your MTA
 below for details on these parameters.
 
 ``lmtp_host`` and ``lmtp_port`` are parameters which are used by Mailman, but
-also will be passed to the MTA to identify the Mailman host.  The "same host"
-case is special; some MTAs (including Postfix) do not recognize "localhost",
-and need the numerical IP address.  If they are on different hosts,
+also need to be configured in the MTA to identify the Mailman host.  The "same
+host" case is special; some MTAs (including Postfix) do not recognize
+"localhost", and need the numerical IP address.  If they are on different hosts,
 ``lmtp_host`` should be set to the domain name or IP address of the Mailman
 host.  ``lmtp_port`` is fairly arbitrary (there is no standard port for LMTP).
 Use any port convenient for your site.  "8024" is as good as any, unless
