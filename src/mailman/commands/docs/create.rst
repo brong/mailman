@@ -79,6 +79,8 @@ You can even specify more than one address for the owners.
     <Address: bart@example.com [not verified] at ...>
     <Address: cate@example.com [not verified] at ...>
 
+You can also set owners and moderators on an existing list with the
+`mailman admins`_ command.
 
 Setting the language
 ====================
@@ -146,3 +148,6 @@ The notification message is in the virgin queue.
     <BLANKLINE>
     Please address all questions to noreply@example.com.
     <BLANKLINE>
+
+
+.. _`mailman admins`: https://docs.mailman3.org/projects/mailman/en/latest/src/mailman/commands/docs/admins.html
