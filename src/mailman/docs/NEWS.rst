@@ -73,6 +73,8 @@ New Features
 * Task runner now uses the configured dsn_lifetime when deleting bounce events.
 * Setting ``digest_size_threshold`` to zero now means ``unlimited``, i.e., a
   digest will never be sent based on size.  (Closes #1158)
+* There is a new ``mailman admins`` command to add/delete owners or moderators
+  of a list.  (Closes #1160)
 
 Other
 -----
