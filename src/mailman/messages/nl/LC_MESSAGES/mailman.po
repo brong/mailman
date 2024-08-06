@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-02 14:08-0800\n"
+"POT-Creation-Date: 2024-08-06 08:48-0700\n"
 "PO-Revision-Date: 2024-06-21 08:51+0000\n"
 "Last-Translator: SATOH Fumiyasu <fumiyas@osstech.co.jp>\n"
-"Language-Team: Dutch <https://hosted.weblate.org/projects/gnu-mailman/"
-"mailman/nl/>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/gnu-mailman/mailman/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +19,7 @@ msgstr ""
 "X-Generator: Weblate 5.6-rc\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:85
-#: src/mailman/chains/hold.py:163 src/mailman/handlers/acknowledge.py:56
+#: src/mailman/chains/hold.py:166 src/mailman/handlers/acknowledge.py:56
 #: src/mailman/handlers/subject_prefix.py:46
 #: src/mailman/handlers/subject_prefix.py:91 src/mailman/runners/digest.py:88
 msgid "(no subject)"
@@ -402,7 +401,7 @@ msgstr ""
 msgid "No runner name given."
 msgstr "Geen runner naam opgegeven."
 
-#: src/mailman/bin/runner.py:181
+#: src/mailman/bin/runner.py:189
 #, python-brace-format
 msgid "${name} runs ${classname}"
 msgstr "${name} draait ${classname}"
@@ -443,17 +442,17 @@ msgstr "Laatste melding van automatisch antwoord voor vandaag"
 msgid "Hold a message and stop processing."
 msgstr "Bericht vasthouden en stoppen met verwerking."
 
-#: src/mailman/chains/hold.py:202
+#: src/mailman/chains/hold.py:205
 #, python-brace-format
 msgid "Your message to ${mlist.fqdn_listname} awaits moderator approval"
 msgstr "Uw bericht aan ${mlist.fqdn_listname} wacht op goedkeuring van een moderator"
 
-#: src/mailman/chains/hold.py:231
+#: src/mailman/chains/hold.py:234
 #, python-brace-format
 msgid "${mlist.fqdn_listname} post from ${msg.sender} requires approval"
 msgstr "Bericht aan ${mlist.fqdn_listname} van ${msg.sender} vereist goedkeuring"
 
-#: src/mailman/chains/hold.py:246
+#: src/mailman/chains/hold.py:249
 msgid ""
 "If you reply to this message, keeping the Subject: header intact, Mailman will\n"
 "discard the held message.  Do this if the message is spam.  If you reply to\n"
@@ -538,13 +537,57 @@ msgstr ""
 msgid "    Override the list's setting for send_welcome_message."
 msgstr "    Overschrijf de lijstinstelling voor send_welcome_message."
 
-#: src/mailman/commands/cli_addmembers.py:146 src/mailman/commands/cli_import.py:68
-#: src/mailman/commands/cli_inject.py:75 src/mailman/commands/cli_members.py:206
+#: src/mailman/commands/cli_addmembers.py:146 src/mailman/commands/cli_admins.py:89
+#: src/mailman/commands/cli_import.py:68 src/mailman/commands/cli_inject.py:75
+#: src/mailman/commands/cli_members.py:206
 #: src/mailman/commands/cli_syncmembers.py:204
 #: src/mailman/commands/cli_withlist.py:291 src/mailman/commands/cli_withlist.py:298
 #, python-brace-format
 msgid "No such list: ${listspec}"
 msgstr "Lijst niet gevonden: ${listspec}"
+
+#: src/mailman/commands/cli_admins.py:45
+msgid "{} is already an {} of {}"
+msgstr ""
+
+#: src/mailman/commands/cli_admins.py:53
+msgid "{} is not an {} of {}"
+msgstr ""
+
+#: src/mailman/commands/cli_admins.py:61
+msgid ""
+"    Add and/or delete owners and moderators of a list.\n"
+"    "
+msgstr ""
+
+#: src/mailman/commands/cli_admins.py:66
+msgid ""
+"    Email address of the user to add with the given role.\n"
+"    May be repeated to add multiple users.\n"
+"    "
+msgstr ""
+
+#: src/mailman/commands/cli_admins.py:72
+msgid ""
+"    Email address of the user to be removed from the given role.\n"
+"    May be repeated to delete multiple users.\n"
+"    "
+msgstr ""
+
+#: src/mailman/commands/cli_admins.py:79
+msgid ""
+"    The role to add/delete. This may be 'owner' or 'moderator'.\n"
+"    If not given, then 'owner' role is assumed.\n"
+"    "
+msgstr ""
+
+#: src/mailman/commands/cli_admins.py:91
+msgid "Nothing to add or delete."
+msgstr ""
+
+#: src/mailman/commands/cli_admins.py:94 src/mailman/commands/cli_admins.py:97
+msgid "Invalid email address: {}"
+msgstr ""
 
 #: src/mailman/commands/cli_aliases.py:33
 msgid "Regenerate the aliases appropriate for your MTA."
@@ -903,17 +946,16 @@ msgstr "${mlist.list_id} is opgeschoven naar volume ${mlist.volume}, nummer ${ml
 msgid "${mlist.list_id} sent volume ${mlist.volume}, number ${mlist.next_digest_number}"
 msgstr "${mlist.list_id} heeft volume ${mlist.volume}, nummer ${mlist.next_digest_number} verstuurd"
 
-#: src/mailman/commands/cli_findmember.py:66
+#: src/mailman/commands/cli_findmember.py:81
 msgid ""
 "    Display all memberships for a user or users with address matching a\n"
-"    pattern.\n"
+"    pattern. Because part of the process involves converting the pattern\n"
+"    to a SQL query with wildcards, the pattern should be simple. A simple\n"
+"    string works best.\n"
 "    "
 msgstr ""
-"    Toon alle lidmaatschappen voor een gebruiker of gebruikers wiens e-mailadres\n"
-"    overeenkomt met een bepaald patroon.\n"
-"    "
 
-#: src/mailman/commands/cli_findmember.py:74
+#: src/mailman/commands/cli_findmember.py:91
 msgid ""
 "    Display only memberships with the given role.  If not given, 'all' role,\n"
 "    i.e. all roles, is the default."
@@ -921,15 +963,15 @@ msgstr ""
 "    Toon enkel leden met de opgegeven rol.  Indien niet opgegeven, worden leden met de 'all' rol,\n"
 "    d.w.z. alle rollen, getoond."
 
-#: src/mailman/commands/cli_findmember.py:98
+#: src/mailman/commands/cli_findmember.py:115
 msgid "Email: {}"
 msgstr "E-mail: {}"
 
-#: src/mailman/commands/cli_findmember.py:102
+#: src/mailman/commands/cli_findmember.py:119
 msgid "List: {}"
 msgstr "Lijst: {}"
 
-#: src/mailman/commands/cli_findmember.py:105
+#: src/mailman/commands/cli_findmember.py:122
 msgid "{}"
 msgstr "{}"
 
@@ -1037,27 +1079,27 @@ msgstr ""
 msgid "No such queue: ${queue}"
 msgstr "Wachtrij bestaat niet: ${queue}"
 
-#: src/mailman/commands/cli_lists.py:53
+#: src/mailman/commands/cli_lists.py:54
 msgid "List all mailing lists."
 msgstr "Toon alle maillijsten."
 
-#: src/mailman/commands/cli_lists.py:57
+#: src/mailman/commands/cli_lists.py:58
 msgid "List only those mailing lists that are publicly advertised"
 msgstr "Toon enkel maillijsten die publiek toegankelijk zijn"
 
-#: src/mailman/commands/cli_lists.py:61
+#: src/mailman/commands/cli_lists.py:62
 msgid "Show also the list names"
 msgstr "Toon ook de lijstnamen"
 
-#: src/mailman/commands/cli_lists.py:65
+#: src/mailman/commands/cli_lists.py:66
 msgid "Show also the list descriptions"
 msgstr "Toon ook de lijstbeschrijvingen"
 
-#: src/mailman/commands/cli_lists.py:69
+#: src/mailman/commands/cli_lists.py:70
 msgid "Less verbosity"
 msgstr "Minder uitgebreid"
 
-#: src/mailman/commands/cli_lists.py:73
+#: src/mailman/commands/cli_lists.py:74
 msgid ""
 "    List only those mailing lists hosted on the given domain, which\n"
 "    must be the email host name.  Multiple -d options may be given.\n"
@@ -1067,16 +1109,16 @@ msgstr ""
 "    Meerdere -d opties zijn toegelaten.\n"
 "    "
 
-#: src/mailman/commands/cli_lists.py:91
+#: src/mailman/commands/cli_lists.py:92
 msgid "No matching mailing lists found"
 msgstr "Geen overeenkomstige maillijsten gevonden"
 
-#: src/mailman/commands/cli_lists.py:95
+#: src/mailman/commands/cli_lists.py:96
 #, python-brace-format
 msgid "${count} matching mailing lists found:"
 msgstr "${count} overeenkomende maillijsten gevonden:"
 
-#: src/mailman/commands/cli_lists.py:127
+#: src/mailman/commands/cli_lists.py:128
 msgid ""
 "    Create a mailing list.\n"
 "\n"
@@ -1090,7 +1132,7 @@ msgstr ""
 "    maillijst is verplicht.  Het moet een geldig e-mailadres zijn en het domein moet\n"
 "    in Mailman geregistreerd zijn.  Lijstnamen worden automatisch in kleine letters omgezet."
 
-#: src/mailman/commands/cli_lists.py:135
+#: src/mailman/commands/cli_lists.py:136
 msgid ""
 "    Set the list's preferred language to CODE, which must be a registered two\n"
 "    letter language code."
@@ -1098,7 +1140,7 @@ msgstr ""
 "    Stel de voorkeurstaal van de lijst in op CODE. Dit moet een geregistreerde\n"
 "    tweeletterige taalcode zijn."
 
-#: src/mailman/commands/cli_lists.py:141
+#: src/mailman/commands/cli_lists.py:142
 msgid ""
 "    Specify a list owner email address.  If the address is not currently\n"
 "    registered with Mailman, the address is registered and linked to a user.\n"
@@ -1113,6 +1155,10 @@ msgstr ""
 "    opgegeven."
 
 #: src/mailman/commands/cli_lists.py:150
+msgid "    Specify a list style name."
+msgstr ""
+
+#: src/mailman/commands/cli_lists.py:155
 msgid ""
 "    Notify the list owner by email that their mailing list has been\n"
 "    created."
@@ -1120,11 +1166,11 @@ msgstr ""
 "    Breng de lijstbeheerder op de hoogte van het aanmaken van hun\n"
 "    maillijst."
 
-#: src/mailman/commands/cli_lists.py:156
+#: src/mailman/commands/cli_lists.py:161
 msgid "Print less output."
 msgstr "Toon minder uitvoer."
 
-#: src/mailman/commands/cli_lists.py:160
+#: src/mailman/commands/cli_lists.py:165
 msgid ""
 "    Register the mailing list's domain if not yet registered.  This is\n"
 "    the default behavior, but these options are provided for backward\n"
@@ -1134,55 +1180,60 @@ msgstr ""
 "    standaardprocedure, maar deze opties zijn beschikbaar voor compatibiliteit\n"
 "    met oudere systemen.  Met -D wordt de domeinnaam van de maillijst niet in het systeem geregistreerd."
 
-#: src/mailman/commands/cli_lists.py:171
+#: src/mailman/commands/cli_lists.py:177
 #, python-brace-format
 msgid "Invalid language code: ${language_code}"
 msgstr "Ongeldige taalcode: ${language_code}"
 
-#: src/mailman/commands/cli_lists.py:187
+#: src/mailman/commands/cli_lists.py:193
 #, python-brace-format
 msgid "Illegal owner addresses: ${invalid}"
 msgstr "Ongeldig lijstbeheerdersadres: ${invalid}"
 
-#: src/mailman/commands/cli_lists.py:191
+#: src/mailman/commands/cli_lists.py:196
+#, python-brace-format
+msgid "Unknown list style name: ${style_name}"
+msgstr ""
+
+#: src/mailman/commands/cli_lists.py:200
 #, python-brace-format
 msgid "Illegal list name: ${fqdn_listname}"
 msgstr "Ongeldige maillijstnaam: ${fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:193
+#: src/mailman/commands/cli_lists.py:202
 #, python-brace-format
 msgid "List already exists: ${fqdn_listname}"
 msgstr "Lijst bestaat al: ${fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:195
+#: src/mailman/commands/cli_lists.py:204
 #, python-brace-format
 msgid "Undefined domain: ${domain}"
 msgstr "Ongedefinieerd domein: ${domain}"
 
-#: src/mailman/commands/cli_lists.py:203
+#: src/mailman/commands/cli_lists.py:212
 #, python-brace-format
 msgid "Created mailing list: ${mlist.fqdn_listname}"
 msgstr "Maillijst aangemaakt: ${mlist.fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:218
+#: src/mailman/commands/cli_lists.py:227
 #, python-brace-format
 msgid "Your new mailing list: ${fqdn_listname}"
 msgstr "Uw nieuwe maillijst: ${fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:232
+#: src/mailman/commands/cli_lists.py:241
 msgid "Remove a mailing list."
 msgstr "Verwijder een maillijst."
 
-#: src/mailman/commands/cli_lists.py:236
+#: src/mailman/commands/cli_lists.py:245
 msgid "Suppress status messages"
 msgstr "Onderdruk statusberichten"
 
-#: src/mailman/commands/cli_lists.py:242
+#: src/mailman/commands/cli_lists.py:251
 #, python-brace-format
 msgid "No such list matching spec: ${listspec}"
 msgstr "Geen lijst gevonden die overeenkomt met specificatie: ${listspec}"
 
-#: src/mailman/commands/cli_lists.py:247
+#: src/mailman/commands/cli_lists.py:256
 #, python-brace-format
 msgid "Removed list: ${listspec}"
 msgstr "Lijst verwijderd: ${listspec}"
@@ -1956,7 +2007,7 @@ msgstr "Verwijder bepaalde headers van alle berichten."
 msgid "Modify message headers."
 msgstr "Wijzig berichtheaders."
 
-#: src/mailman/handlers/decorate.py:247
+#: src/mailman/handlers/decorate.py:250
 msgid "Decorate a message with headers and footers."
 msgstr "Voeg kop- en voetteksten toe aan een bericht."
 
@@ -2772,3 +2823,12 @@ msgstr ""
 "een wachtwoord nodig hebben, maar om veiligheidsredenen wordt dit wachtwoord niet\n"
 "meegestuurd in deze e-mail.  Als u uw wachtwoord vergeten bent, dan zal u het moeten resetten\n"
 "via de web gebruikersinterface."
+
+#~ msgid ""
+#~ "    Display all memberships for a user or users with address matching a\n"
+#~ "    pattern.\n"
+#~ "    "
+#~ msgstr ""
+#~ "    Toon alle lidmaatschappen voor een gebruiker of gebruikers wiens e-mailadres\n"
+#~ "    overeenkomt met een bepaald patroon.\n"
+#~ "    "

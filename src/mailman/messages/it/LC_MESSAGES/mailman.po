@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-02 14:08-0800\n"
+"POT-Creation-Date: 2024-08-06 08:48-0700\n"
 "PO-Revision-Date: 2022-03-23 03:38+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/gnu-mailman/mailman/it/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Generator: Weblate 4.12-dev\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:85
-#: src/mailman/chains/hold.py:163 src/mailman/handlers/acknowledge.py:56
+#: src/mailman/chains/hold.py:166 src/mailman/handlers/acknowledge.py:56
 #: src/mailman/handlers/subject_prefix.py:46
 #: src/mailman/handlers/subject_prefix.py:91 src/mailman/runners/digest.py:88
 msgid "(no subject)"
@@ -382,7 +382,7 @@ msgstr ""
 msgid "No runner name given."
 msgstr "Nessun nome di sottoprocesso ricevuto."
 
-#: src/mailman/bin/runner.py:181
+#: src/mailman/bin/runner.py:189
 #, python-brace-format
 msgid "${name} runs ${classname}"
 msgstr "${name} fa andare ${classname}"
@@ -423,17 +423,17 @@ msgstr "Ultima notifica delle risposte automatiche per oggi"
 msgid "Hold a message and stop processing."
 msgstr "Trattieni il messaggio e ferma il processamento."
 
-#: src/mailman/chains/hold.py:202
+#: src/mailman/chains/hold.py:205
 #, python-brace-format
 msgid "Your message to ${mlist.fqdn_listname} awaits moderator approval"
 msgstr "Il tuo messaggio a ${mlist.fqdn_listname} attende l'approvazione del moderatore"
 
-#: src/mailman/chains/hold.py:231
+#: src/mailman/chains/hold.py:234
 #, python-brace-format
 msgid "${mlist.fqdn_listname} post from ${msg.sender} requires approval"
 msgstr "${mlist.fqdn_listname} messaggio da ${msg.sender} richiede approvazione"
 
-#: src/mailman/chains/hold.py:246
+#: src/mailman/chains/hold.py:249
 msgid ""
 "If you reply to this message, keeping the Subject: header intact, Mailman will\n"
 "discard the held message.  Do this if the message is spam.  If you reply to\n"
@@ -518,13 +518,57 @@ msgstr ""
 msgid "    Override the list's setting for send_welcome_message."
 msgstr "    Sostituisci l'impostazione della lista per send_welcome_message."
 
-#: src/mailman/commands/cli_addmembers.py:146 src/mailman/commands/cli_import.py:68
-#: src/mailman/commands/cli_inject.py:75 src/mailman/commands/cli_members.py:206
+#: src/mailman/commands/cli_addmembers.py:146 src/mailman/commands/cli_admins.py:89
+#: src/mailman/commands/cli_import.py:68 src/mailman/commands/cli_inject.py:75
+#: src/mailman/commands/cli_members.py:206
 #: src/mailman/commands/cli_syncmembers.py:204
 #: src/mailman/commands/cli_withlist.py:291 src/mailman/commands/cli_withlist.py:298
 #, python-brace-format
 msgid "No such list: ${listspec}"
 msgstr "Lista non presente: ${listspec}"
+
+#: src/mailman/commands/cli_admins.py:45
+msgid "{} is already an {} of {}"
+msgstr ""
+
+#: src/mailman/commands/cli_admins.py:53
+msgid "{} is not an {} of {}"
+msgstr ""
+
+#: src/mailman/commands/cli_admins.py:61
+msgid ""
+"    Add and/or delete owners and moderators of a list.\n"
+"    "
+msgstr ""
+
+#: src/mailman/commands/cli_admins.py:66
+msgid ""
+"    Email address of the user to add with the given role.\n"
+"    May be repeated to add multiple users.\n"
+"    "
+msgstr ""
+
+#: src/mailman/commands/cli_admins.py:72
+msgid ""
+"    Email address of the user to be removed from the given role.\n"
+"    May be repeated to delete multiple users.\n"
+"    "
+msgstr ""
+
+#: src/mailman/commands/cli_admins.py:79
+msgid ""
+"    The role to add/delete. This may be 'owner' or 'moderator'.\n"
+"    If not given, then 'owner' role is assumed.\n"
+"    "
+msgstr ""
+
+#: src/mailman/commands/cli_admins.py:91
+msgid "Nothing to add or delete."
+msgstr ""
+
+#: src/mailman/commands/cli_admins.py:94 src/mailman/commands/cli_admins.py:97
+msgid "Invalid email address: {}"
+msgstr ""
 
 #: src/mailman/commands/cli_aliases.py:33
 msgid "Regenerate the aliases appropriate for your MTA."
@@ -880,28 +924,30 @@ msgstr "${mlist.list_id} aggiornato al volume volume ${mlist.volume}, numero ${m
 msgid "${mlist.list_id} sent volume ${mlist.volume}, number ${mlist.next_digest_number}"
 msgstr "${mlist.list_id} inviato volume ${mlist.volume}, numero ${mlist.next_digest_number}"
 
-#: src/mailman/commands/cli_findmember.py:66
+#: src/mailman/commands/cli_findmember.py:81
 msgid ""
 "    Display all memberships for a user or users with address matching a\n"
-"    pattern.\n"
+"    pattern. Because part of the process involves converting the pattern\n"
+"    to a SQL query with wildcards, the pattern should be simple. A simple\n"
+"    string works best.\n"
 "    "
 msgstr ""
 
-#: src/mailman/commands/cli_findmember.py:74
+#: src/mailman/commands/cli_findmember.py:91
 msgid ""
 "    Display only memberships with the given role.  If not given, 'all' role,\n"
 "    i.e. all roles, is the default."
 msgstr ""
 
-#: src/mailman/commands/cli_findmember.py:98
+#: src/mailman/commands/cli_findmember.py:115
 msgid "Email: {}"
 msgstr ""
 
-#: src/mailman/commands/cli_findmember.py:102
+#: src/mailman/commands/cli_findmember.py:119
 msgid "List: {}"
 msgstr ""
 
-#: src/mailman/commands/cli_findmember.py:105
+#: src/mailman/commands/cli_findmember.py:122
 msgid "{}"
 msgstr ""
 
@@ -1005,27 +1051,27 @@ msgstr ""
 msgid "No such queue: ${queue}"
 msgstr "Coda non esistente: ${queue}"
 
-#: src/mailman/commands/cli_lists.py:53
+#: src/mailman/commands/cli_lists.py:54
 msgid "List all mailing lists."
 msgstr "Elenca tutte le liste."
 
-#: src/mailman/commands/cli_lists.py:57
+#: src/mailman/commands/cli_lists.py:58
 msgid "List only those mailing lists that are publicly advertised"
 msgstr "Elenca solo le liste che sono state pubblicizzate"
 
-#: src/mailman/commands/cli_lists.py:61
+#: src/mailman/commands/cli_lists.py:62
 msgid "Show also the list names"
 msgstr "Mostra anche i nomi delle lista"
 
-#: src/mailman/commands/cli_lists.py:65
+#: src/mailman/commands/cli_lists.py:66
 msgid "Show also the list descriptions"
 msgstr "Mostra anche le descrizioni delle lista"
 
-#: src/mailman/commands/cli_lists.py:69
+#: src/mailman/commands/cli_lists.py:70
 msgid "Less verbosity"
 msgstr "Meno dettagli"
 
-#: src/mailman/commands/cli_lists.py:73
+#: src/mailman/commands/cli_lists.py:74
 msgid ""
 "    List only those mailing lists hosted on the given domain, which\n"
 "    must be the email host name.  Multiple -d options may be given.\n"
@@ -1035,16 +1081,16 @@ msgstr ""
 "    il nome dell'host.  Sono supportate multiple opzioni -d.\n"
 "    "
 
-#: src/mailman/commands/cli_lists.py:91
+#: src/mailman/commands/cli_lists.py:92
 msgid "No matching mailing lists found"
 msgstr "Nessuna lista corrispondente trovata"
 
-#: src/mailman/commands/cli_lists.py:95
+#: src/mailman/commands/cli_lists.py:96
 #, python-brace-format
 msgid "${count} matching mailing lists found:"
 msgstr "${count} liste corrispondenti trovate:"
 
-#: src/mailman/commands/cli_lists.py:127
+#: src/mailman/commands/cli_lists.py:128
 msgid ""
 "    Create a mailing list.\n"
 "\n"
@@ -1058,7 +1104,7 @@ msgstr ""
 "    indirizzo valido e il dominio deve essere registrato in Mailman. Il nome\n"
 "    della lista è forzato in minuscolo."
 
-#: src/mailman/commands/cli_lists.py:135
+#: src/mailman/commands/cli_lists.py:136
 msgid ""
 "    Set the list's preferred language to CODE, which must be a registered two\n"
 "    letter language code."
@@ -1066,7 +1112,7 @@ msgstr ""
 "    Imposta la lingua preferita per la lista a CODE, che deve essere\n"
 "    un codice lingua registrato di due lettere."
 
-#: src/mailman/commands/cli_lists.py:141
+#: src/mailman/commands/cli_lists.py:142
 msgid ""
 "    Specify a list owner email address.  If the address is not currently\n"
 "    registered with Mailman, the address is registered and linked to a user.\n"
@@ -1081,6 +1127,10 @@ msgstr ""
 "    possibile specificare più di un proprietario."
 
 #: src/mailman/commands/cli_lists.py:150
+msgid "    Specify a list style name."
+msgstr ""
+
+#: src/mailman/commands/cli_lists.py:155
 msgid ""
 "    Notify the list owner by email that their mailing list has been\n"
 "    created."
@@ -1088,11 +1138,11 @@ msgstr ""
 "    Notifica il proprietari della lista per e-mail che la loro lista è\n"
 "    stata creata."
 
-#: src/mailman/commands/cli_lists.py:156
+#: src/mailman/commands/cli_lists.py:161
 msgid "Print less output."
 msgstr "Mostra meno output."
 
-#: src/mailman/commands/cli_lists.py:160
+#: src/mailman/commands/cli_lists.py:165
 msgid ""
 "    Register the mailing list's domain if not yet registered.  This is\n"
 "    the default behavior, but these options are provided for backward\n"
@@ -1102,55 +1152,60 @@ msgstr ""
 "    il comportamento predefinito, Ma queste opzioni sono per la retro\n"
 "    compatibilità. Con -D non registra il dominio della lista."
 
-#: src/mailman/commands/cli_lists.py:171
+#: src/mailman/commands/cli_lists.py:177
 #, python-brace-format
 msgid "Invalid language code: ${language_code}"
 msgstr "Codice di lingua invalido: ${language_code}"
 
-#: src/mailman/commands/cli_lists.py:187
+#: src/mailman/commands/cli_lists.py:193
 #, python-brace-format
 msgid "Illegal owner addresses: ${invalid}"
 msgstr "Indirizzo del proprietario non valido: ${invalid}"
 
-#: src/mailman/commands/cli_lists.py:191
+#: src/mailman/commands/cli_lists.py:196
+#, python-brace-format
+msgid "Unknown list style name: ${style_name}"
+msgstr ""
+
+#: src/mailman/commands/cli_lists.py:200
 #, python-brace-format
 msgid "Illegal list name: ${fqdn_listname}"
 msgstr "Nome lista non valido: ${fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:193
+#: src/mailman/commands/cli_lists.py:202
 #, python-brace-format
 msgid "List already exists: ${fqdn_listname}"
 msgstr "La lista esiste già: ${fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:195
+#: src/mailman/commands/cli_lists.py:204
 #, python-brace-format
 msgid "Undefined domain: ${domain}"
 msgstr "Dominio non definito: ${domain}"
 
-#: src/mailman/commands/cli_lists.py:203
+#: src/mailman/commands/cli_lists.py:212
 #, python-brace-format
 msgid "Created mailing list: ${mlist.fqdn_listname}"
 msgstr "Lista create: ${mlist.fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:218
+#: src/mailman/commands/cli_lists.py:227
 #, python-brace-format
 msgid "Your new mailing list: ${fqdn_listname}"
 msgstr "Nuova lista: ${fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:232
+#: src/mailman/commands/cli_lists.py:241
 msgid "Remove a mailing list."
 msgstr "Elimina una lista."
 
-#: src/mailman/commands/cli_lists.py:236
+#: src/mailman/commands/cli_lists.py:245
 msgid "Suppress status messages"
 msgstr "Sopprimi il messaggio di stato"
 
-#: src/mailman/commands/cli_lists.py:242
+#: src/mailman/commands/cli_lists.py:251
 #, python-brace-format
 msgid "No such list matching spec: ${listspec}"
 msgstr "Nessuna lista corrispondente alle specifiche: ${listspec}"
 
-#: src/mailman/commands/cli_lists.py:247
+#: src/mailman/commands/cli_lists.py:256
 #, python-brace-format
 msgid "Removed list: ${listspec}"
 msgstr "Eliminata lista: ${listspec}"
@@ -1893,7 +1948,7 @@ msgstr "Pulisci alcune intestazioni da tutti i messaggi."
 msgid "Modify message headers."
 msgstr "Modifica le intestazioni del messaggio."
 
-#: src/mailman/handlers/decorate.py:247
+#: src/mailman/handlers/decorate.py:250
 msgid "Decorate a message with headers and footers."
 msgstr "Decora il messaggio con preambolo e note a piè di pagina."
 
