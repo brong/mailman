@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-08-06 08:48-0700\n"
-"PO-Revision-Date: 2024-02-04 15:01+0000\n"
+"PO-Revision-Date: 2024-08-07 17:09+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/gnu-mailman/mailman/tr/>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/gnu-mailman/"
+"mailman/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:85
 #: src/mailman/chains/hold.py:166 src/mailman/handlers/acknowledge.py:56
@@ -548,17 +549,19 @@ msgstr "Böyle bir liste yok: ${listspec}"
 
 #: src/mailman/commands/cli_admins.py:45
 msgid "{} is already an {} of {}"
-msgstr ""
+msgstr "{} zaten bir {} ({} için)"
 
 #: src/mailman/commands/cli_admins.py:53
 msgid "{} is not an {} of {}"
-msgstr ""
+msgstr "{} bir {} değil ({} için)"
 
 #: src/mailman/commands/cli_admins.py:61
 msgid ""
 "    Add and/or delete owners and moderators of a list.\n"
 "    "
 msgstr ""
+"    Bir listenin sahiplerini ve moderatörlerini ekle ve/veya sil.\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:66
 msgid ""
@@ -566,6 +569,9 @@ msgid ""
 "    May be repeated to add multiple users.\n"
 "    "
 msgstr ""
+"    Belirtilen rol ile eklenecek kullanıcının e-posta adresi.\n"
+"    Birden fazla kullanıcı eklemek için tekrarlanabilir.\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:72
 msgid ""
@@ -573,6 +579,9 @@ msgid ""
 "    May be repeated to delete multiple users.\n"
 "    "
 msgstr ""
+"    Belirtilen rolden kaldırılacak kullanıcının e-posta adresi.\n"
+"    Birden fazla kullanıcı silmek için tekrarlanabilir.\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:79
 msgid ""
@@ -580,14 +589,17 @@ msgid ""
 "    If not given, then 'owner' role is assumed.\n"
 "    "
 msgstr ""
+"    Eklenecek/silinecek rol. Bu 'owner' veya 'moderator' olabilir.\n"
+"    Belirtilmezse, 'owner' rolü kabul edilir.\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:91
 msgid "Nothing to add or delete."
-msgstr ""
+msgstr "Eklenecek veya silinecek bir şey yok."
 
 #: src/mailman/commands/cli_admins.py:94 src/mailman/commands/cli_admins.py:97
 msgid "Invalid email address: {}"
-msgstr ""
+msgstr "Geçersiz e-posta adresi: {}"
 
 #: src/mailman/commands/cli_aliases.py:33
 msgid "Regenerate the aliases appropriate for your MTA."
@@ -953,6 +965,11 @@ msgid ""
 "    string works best.\n"
 "    "
 msgstr ""
+"    Bir kullanıcı veya adresi bir kalıpla eşleşen kullanıcılar için tüm\n"
+"    üyelikleri görüntüle. İşlemin bir kısmı kalıbı joker karakterler içeren\n"
+"    bir SQL sorgusuna dönüştürmeyi içerdiğinden, kalıp basit olmalıdır.\n"
+"    Basit bir dizge en iyi sonucu verir.\n"
+"    "
 
 #: src/mailman/commands/cli_findmember.py:91
 msgid ""
@@ -1153,7 +1170,7 @@ msgstr ""
 
 #: src/mailman/commands/cli_lists.py:150
 msgid "    Specify a list style name."
-msgstr ""
+msgstr "    Bir liste tarzı adı belirt."
 
 #: src/mailman/commands/cli_lists.py:155
 msgid ""
@@ -1190,7 +1207,7 @@ msgstr "Geçersiz sahip adresleri: ${invalid}"
 #: src/mailman/commands/cli_lists.py:196
 #, python-brace-format
 msgid "Unknown list style name: ${style_name}"
-msgstr ""
+msgstr "Bilinmeyen liste tarzı adı: ${style_name}"
 
 #: src/mailman/commands/cli_lists.py:200
 #, python-brace-format
