@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-06 08:48-0700\n"
+"POT-Creation-Date: 2024-08-08 22:30-0700\n"
 "PO-Revision-Date: 2022-03-23 03:39+0000\n"
 "Last-Translator: HelaBasa <R45XvezA@protonmail.ch>\n"
 "Language-Team: Sinhala <https://hosted.weblate.org/projects/gnu-mailman/mailman/si/>\n"
@@ -434,7 +434,7 @@ msgstr ""
 msgid "    Override the list's setting for send_welcome_message."
 msgstr ""
 
-#: src/mailman/commands/cli_addmembers.py:146 src/mailman/commands/cli_admins.py:89
+#: src/mailman/commands/cli_addmembers.py:146 src/mailman/commands/cli_admins.py:97
 #: src/mailman/commands/cli_import.py:68 src/mailman/commands/cli_inject.py:75
 #: src/mailman/commands/cli_members.py:206
 #: src/mailman/commands/cli_syncmembers.py:204
@@ -443,47 +443,52 @@ msgstr ""
 msgid "No such list: ${listspec}"
 msgstr ""
 
-#: src/mailman/commands/cli_admins.py:45
-msgid "{} is already an {} of {}"
+#: src/mailman/commands/cli_admins.py:51
+#, python-brace-format
+msgid "${email} is already a ${role.name} of ${mlist.fqdn_listname}"
 msgstr ""
 
-#: src/mailman/commands/cli_admins.py:53
-msgid "{} is not an {} of {}"
+#: src/mailman/commands/cli_admins.py:59
+#, python-brace-format
+msgid "${email} is not a ${role.name} of ${mlist.fqdn_listname}"
 msgstr ""
 
-#: src/mailman/commands/cli_admins.py:61
+#: src/mailman/commands/cli_admins.py:67
 msgid ""
 "    Add and/or delete owners and moderators of a list.\n"
 "    "
 msgstr ""
 
-#: src/mailman/commands/cli_admins.py:66
+#: src/mailman/commands/cli_admins.py:72
 msgid ""
-"    Email address of the user to add with the given role.\n"
-"    May be repeated to add multiple users.\n"
+"    User to add with the given role. This may be an email address or, if\n"
+"    quoted, any display name and email address parseable by\n"
+"    email.utils.parseaddr. E.g., 'Jane Doe <jane@example.com>'. May be repeated\n"
+"    to add multiple users.\n"
 "    "
 msgstr ""
 
-#: src/mailman/commands/cli_admins.py:72
+#: src/mailman/commands/cli_admins.py:80
 msgid ""
 "    Email address of the user to be removed from the given role.\n"
 "    May be repeated to delete multiple users.\n"
 "    "
 msgstr ""
 
-#: src/mailman/commands/cli_admins.py:79
+#: src/mailman/commands/cli_admins.py:87
 msgid ""
 "    The role to add/delete. This may be 'owner' or 'moderator'.\n"
 "    If not given, then 'owner' role is assumed.\n"
 "    "
 msgstr ""
 
-#: src/mailman/commands/cli_admins.py:91
+#: src/mailman/commands/cli_admins.py:99
 msgid "Nothing to add or delete."
 msgstr ""
 
-#: src/mailman/commands/cli_admins.py:94 src/mailman/commands/cli_admins.py:97
-msgid "Invalid email address: {}"
+#: src/mailman/commands/cli_admins.py:103 src/mailman/commands/cli_admins.py:106
+#, python-brace-format
+msgid "Invalid email address: ${email}"
 msgstr ""
 
 #: src/mailman/commands/cli_aliases.py:33
