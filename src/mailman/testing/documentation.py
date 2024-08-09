@@ -23,6 +23,7 @@ distributions.  doctest discovery currently requires file system traversal.
 
 import os
 import sys
+import shlex
 
 from click.testing import CliRunner
 from contextlib import ExitStack
@@ -180,7 +181,7 @@ def cli(command_path):
     package_path, dot, name = command_path.rpartition('.')
     command = getattr(import_module(package_path), name)
     def inner(command_string, quiet=False, input=None):           # noqa: E306
-        args = command_string.split()
+        args = shlex.split(command_string)
         assert args[0] == 'mailman', args
         assert args[1] == command.name, args
         # The first two will be `mailman <command>`.  That's just for
