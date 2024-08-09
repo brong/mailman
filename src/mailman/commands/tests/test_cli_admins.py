@@ -51,6 +51,16 @@ class TestCLIAdmins(unittest.TestCase):
             'Try \'admins --help\' for help.\n\n'
             'Error: Invalid email address: bad\n')
 
+    def test_bad_email_with_dn_add(self):
+        result = self._command.invoke(admins, ('-a', 'Dn <bad@>',
+                                               'ant.example.com'))
+        self.assertEqual(result.exit_code, 2)
+        self.assertEqual(
+            result.output,
+            'Usage: admins [OPTIONS] LISTSPEC\n'
+            'Try \'admins --help\' for help.\n\n'
+            'Error: Invalid email address: Dn <bad@>\n')
+
     def test_bad_email_delete(self):
         result = self._command.invoke(admins, ('-d', 'bad', 'ant.example.com'))
         self.assertEqual(result.exit_code, 2)

@@ -20,6 +20,7 @@
 import sys
 import click
 
+from email.utils import parseaddr
 from mailman.app.membership import add_member
 from mailman.core.i18n import _
 from mailman.interfaces.address import IEmailValidator
@@ -37,21 +38,26 @@ from zope.interface import implementer
 def update_admins(ctx, add, delete, role, mlist):
     user_manager = getUtility(IUserManager)
     for email in add:
+        name, addr = parseaddr(email)
         # Ensure we have user and address records.
-        user_manager.make_user(email)
+        if name == '':
+            name = None
+        user_manager.make_user(addr, name)
         try:
-            add_member(mlist, RequestRecord(email), role)
+            if name is None:
+                name = ''
+            add_member(mlist, RequestRecord(addr, name), role)
         except AlreadySubscribedError:
-            print(_('{} is already an {} of {}').format(
-                    email, role.name, mlist.fqdn_listname), file=sys.stderr)
+            print(_('${email} is already a ${role.name} of '
+                    '${mlist.fqdn_listname}'), file=sys.stderr)
     for email in delete:
         if role.name == 'owner':
             member = mlist.owners.get_member(email)
         else:
             member = mlist.moderators.get_member(email)
         if not member:
-            print(_('{} is not an {} of {}').format(
-                    email, role.name, mlist.fqdn_listname), file=sys.stderr)
+            print(_('${email} is not a ${role.name} of '
+                    '${mlist.fqdn_listname}'), file=sys.stderr)
             continue
         member.unsubscribe()
 
@@ -64,8 +70,10 @@ def update_admins(ctx, add, delete, role, mlist):
 @click.option(
     '--add', '-a', multiple=True,
     help=_("""\
-    Email address of the user to add with the given role.
-    May be repeated to add multiple users.
+    User to add with the given role. This may be an email address or, if
+    quoted, any display name and email address parseable by
+    email.utils.parseaddr. E.g., 'Jane Doe <jane@example.com>'. May be repeated
+    to add multiple users.
     """))
 @click.option(
     '--delete', '-d', multiple=True,
@@ -90,11 +98,12 @@ def admins(ctx, add, delete, role, listspec):
     if not add and not delete:
         ctx.fail(_('Nothing to add or delete.'))
     for email in add:
-        if not email_validator.is_valid(email):
-            ctx.fail(_('Invalid email address: {}').format(email))
+        name, addr = parseaddr(email)
+        if not (addr and email_validator.is_valid(addr)):
+            ctx.fail(_('Invalid email address: ${email}'))
     for email in delete:
         if not email_validator.is_valid(email):
-            ctx.fail(_('Invalid email address: {}').format(email))
+            ctx.fail(_('Invalid email address: ${email}'))
     if role == 'owner':
         role = MemberRole.owner
     else:
