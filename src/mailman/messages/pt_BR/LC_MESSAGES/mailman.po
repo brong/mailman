@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-08-08 22:30-0700\n"
-"PO-Revision-Date: 2024-06-21 08:51+0000\n"
-"Last-Translator: SATOH Fumiyasu <fumiyas@osstech.co.jp>\n"
-"Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/gnu-mailman/mailman/pt_BR/>\n"
+"PO-Revision-Date: 2024-08-13 10:09+0000\n"
+"Last-Translator: Wellington Terumi Uemura <wellingtonuemura@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
+"gnu-mailman/mailman/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.6-rc\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:85
 #: src/mailman/chains/hold.py:166 src/mailman/handlers/acknowledge.py:56
@@ -549,18 +550,20 @@ msgstr "Lista inexistente: ${listspec}"
 #: src/mailman/commands/cli_admins.py:51
 #, python-brace-format
 msgid "${email} is already a ${role.name} of ${mlist.fqdn_listname}"
-msgstr ""
+msgstr "O ${email} já é um ${role.name} de ${mlist.fqdn_listname}"
 
 #: src/mailman/commands/cli_admins.py:59
 #, python-brace-format
 msgid "${email} is not a ${role.name} of ${mlist.fqdn_listname}"
-msgstr ""
+msgstr "O ${email} não é um ${role.name} de ${mlist.fqdn_listname}"
 
 #: src/mailman/commands/cli_admins.py:67
 msgid ""
 "    Add and/or delete owners and moderators of a list.\n"
 "    "
 msgstr ""
+"    Adicionar e/ou excluir os proprietários e os moderadores de uma lista.\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:72
 msgid ""
@@ -570,6 +573,14 @@ msgid ""
 "    to add multiple users.\n"
 "    "
 msgstr ""
+"    O usuário que será adicionado com a função fornecida. Esse pode ser um "
+"endereço de e-mail ou, se\n"
+"    for citado, qualquer nome de exibição e endereço de e-mail analisável "
+"por\n"
+"    email.utils.parseaddr. Por exemplo, 'Seu Zé <ze@exemplo.com.br>'. Pode "
+"ser repetido\n"
+"    para adicionar vários usuários.\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:80
 msgid ""
@@ -577,6 +588,9 @@ msgid ""
 "    May be repeated to delete multiple users.\n"
 "    "
 msgstr ""
+"    O endereço de e-mail do usuário que será removido da função em questão.\n"
+"    Pode ser repetido para excluir vários usuários.\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:87
 msgid ""
@@ -584,15 +598,19 @@ msgid ""
 "    If not given, then 'owner' role is assumed.\n"
 "    "
 msgstr ""
+"    A função que será adicionada ou excluída. Pode ser \"proprietário\" ou "
+"\"moderador\".\n"
+"    Se não for fornecida, será assumida a função \"proprietário\".\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:99
 msgid "Nothing to add or delete."
-msgstr ""
+msgstr "Não há nada a acrescentar ou excluir."
 
 #: src/mailman/commands/cli_admins.py:103 src/mailman/commands/cli_admins.py:106
 #, python-brace-format
 msgid "Invalid email address: ${email}"
-msgstr ""
+msgstr "Endereço de e-mail inválido: ${email}"
 
 #: src/mailman/commands/cli_aliases.py:33
 msgid "Regenerate the aliases appropriate for your MTA."
@@ -959,6 +977,13 @@ msgid ""
 "    string works best.\n"
 "    "
 msgstr ""
+"    Exibe todas as associações de um usuário ou mais usuários com endereço "
+"correspondente a um\n"
+"    padrão. Como parte do processo envolve a conversão do padrão\n"
+"    numa consulta SQL com caracteres curinga, o padrão deve ser simples. Um "
+"texto\n"
+"    simples funciona melhor.\n"
+"    "
 
 #: src/mailman/commands/cli_findmember.py:91
 msgid ""
@@ -1161,7 +1186,7 @@ msgstr ""
 
 #: src/mailman/commands/cli_lists.py:150
 msgid "    Specify a list style name."
-msgstr ""
+msgstr "    Especifique o nome de um estilo de lista."
 
 #: src/mailman/commands/cli_lists.py:155
 msgid ""
@@ -1198,7 +1223,7 @@ msgstr "Endereços de dono inválidos: ${invalid}"
 #: src/mailman/commands/cli_lists.py:196
 #, python-brace-format
 msgid "Unknown list style name: ${style_name}"
-msgstr ""
+msgstr "Nome de estilo de lista desconhecido: ${style_name}"
 
 #: src/mailman/commands/cli_lists.py:200
 #, python-brace-format
