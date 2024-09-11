@@ -50,6 +50,8 @@ Bugs fixed
   list's preferred language.  (Closes #1159)
 * The ``mailman import21`` command drops invalid regexps from the imported
   ``ban_list``.  (Closes #1166)
+* The default setting for ``bounce_matching_headers`` is shortened.
+  (Closes #1172)
 
 New Features
 ------------

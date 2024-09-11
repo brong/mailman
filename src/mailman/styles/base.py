@@ -251,15 +251,6 @@ class Moderation:
         mlist.require_explicit_destination = True
         mlist.bounce_matching_headers = """
 # This is a deprecated setting from Mailman 2.1. Use header_matches instead.
-# Here's an example. Blank lines and lines that *start* with a '#' are ignored.
-#to: friend@public.com
-#message-id: relay.comanche.denmark.eu
-#from: list@listme.com
-#from: .*@uplinkpro.com
-# If the above 4 lines were uncommented, this would cause any message with a
-# To: header matching the pattern 'friend@public.com' or similarly any message
-# with a Message-ID: or From: header matching the respective patterns to be
-# rejected.
 """
         mlist.header_matches = []
         mlist.administrivia = True
