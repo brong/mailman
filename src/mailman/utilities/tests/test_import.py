@@ -363,7 +363,7 @@ class TestBasicImport(unittest.TestCase):
 
     def test_ban_list_invalid_regex(self):
         expected = """\
-Dropping invalid regexp b'^**@example.edu' in ban_list
+Dropping invalid regexp ^**@example.edu in ban_list
 nothing to repeat at position 1"""
         banned = [
             ('^**@example.edu', 'bob@example.edu'),
