@@ -71,3 +71,15 @@ build-backend = "pdm.backend"
 [tool.pdm.version]
 source = "file"
 path = "src/mailman/version.py"
+
+[tool.pdm.build]
+source-includes = [
+    "*.rst",
+    "*.ini",
+    "*.txt",
+    "*.cfg",
+    "COPYING",
+    "*.py",
+    "*.sh",
+    ".coveragerc"
+]
