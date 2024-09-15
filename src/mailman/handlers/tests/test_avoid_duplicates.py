@@ -161,8 +161,8 @@ More things to say.
         # Don't test the whole message. The order in the Cc: varies with
         # Python version.
         ccs = msg.get('cc')
-        self.assertIn('"last, first" <other@example.com>', ccs)
-        self.assertIn('"real name (dept)" <user@example.com>', ccs)
+        self.assertIn('"last, first" <other@example.com>', str(ccs))
+        self.assertIn('"real name (dept)" <user@example.com>', str(ccs))
         del msg['cc']
         self.assertMultiLineEqual(msg.as_string(), """\
 From: anne@example.com
