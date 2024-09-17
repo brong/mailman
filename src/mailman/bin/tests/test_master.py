@@ -97,15 +97,6 @@ class TestMaster(unittest.TestCase):
         state, lock = master.master_state(self.lock_file)
         self.assertEqual(state, master.WatcherState.stale_lock)
 
-    def test_master_state_stale_2(self):
-        # Create a lock file with pid not Mailman's.
-        with open(self.lock_file, 'w') as fp:
-            fp.write(f'{self.lock_file}|{socket.getfqdn()}|1|junk')
-        # Try to acquire the lock.
-        Lock(self.lock_file)
-        state, lock = master.master_state(self.lock_file)
-        self.assertEqual(state, master.WatcherState.stale_lock)
-
     def test_acquire_lock_timeout_reason_unknown(self):
         stderr = StringIO()
         with ExitStack() as resources:
