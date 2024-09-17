@@ -52,6 +52,8 @@ Bugs fixed
   ``ban_list``.  (Closes #1166)
 * The default setting for ``bounce_matching_headers`` is shortened.
   (Closes #1172)
+* The ``--force`` option for ``mailman start`` will now remove a stale lock if
+  the ``pid`` that set it exists but is not a Mailman process.  (Closes #1174)
 
 New Features
 ------------

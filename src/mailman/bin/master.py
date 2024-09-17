@@ -128,8 +128,8 @@ def master_state(lock_file=None):
     try:
         os.kill(pid, 0)
         return WatcherState.conflict, lock
-    except ProcessLookupError:
-        # No matching process id.
+    except (ProcessLookupError, PermissionError):
+        # No matching process id or pid not Mailman's.
         return WatcherState.stale_lock, lock
 
 
