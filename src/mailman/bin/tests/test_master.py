@@ -20,6 +20,7 @@
 import os
 import time
 import signal
+import socket
 import tempfile
 import unittest
 
@@ -86,6 +87,24 @@ class TestMaster(unittest.TestCase):
         finally:
             my_lock.unlock()
         self.assertEqual(state, master.WatcherState.conflict)
+
+    def test_master_state_stale(self):
+        # Create a lock file with non-existent pid.
+        with open(self.lock_file, 'w') as fp:
+            fp.write(f'{self.lock_file}|{socket.getfqdn()}|9999999|junk')
+        # Try to acquire the lock.
+        Lock(self.lock_file)
+        state, lock = master.master_state(self.lock_file)
+        self.assertEqual(state, master.WatcherState.stale_lock)
+
+    def test_master_state_stale_2(self):
+        # Create a lock file with pid not Mailman's.
+        with open(self.lock_file, 'w') as fp:
+            fp.write(f'{self.lock_file}|{socket.getfqdn()}|1|junk')
+        # Try to acquire the lock.
+        Lock(self.lock_file)
+        state, lock = master.master_state(self.lock_file)
+        self.assertEqual(state, master.WatcherState.stale_lock)
 
     def test_acquire_lock_timeout_reason_unknown(self):
         stderr = StringIO()
