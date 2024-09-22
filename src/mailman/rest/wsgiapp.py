@@ -63,8 +63,8 @@ class Middleware:
             # Not authorized.
             realm = 'Basic realm="{}",charset="{}"'.format(REALM, UTF8)
             raise HTTPUnauthorized(
-                '401 Unauthorized',
-                'REST API authorization failed',
+                title='401 Unauthorized',
+                description='REST API authorization failed',
                 challenges=[realm])
 
 
