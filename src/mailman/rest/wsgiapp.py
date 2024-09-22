@@ -68,11 +68,11 @@ class Middleware:
                 challenges=[realm])
 
 
-def handle_ValueError(exc, request, response, params):
+def handle_ValueError(request, response, exc, params):
     """Handle ValueErrors in API code to return HTTPBadRequest.
 
     ValueErrors are raised often by Validator and should not return a 500 error
-    resposne to the client.  This is a stop-gap for 500 errors due to
+    response to the client.  This is a stop-gap for 500 errors due to
     ValueErrors, it is recommended that they be handled at the call-site,
     instead of here.
     """
