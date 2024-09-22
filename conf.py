@@ -45,7 +45,7 @@ source_suffix = '.rst'
 #source_encoding = 'utf-8-sig'
 
 # The master toctree document.
-master_doc = 'README'
+master_doc = 'index'
 
 # General information about the project.
 project = u'GNU Mailman'
@@ -233,26 +233,26 @@ man_pages = [
 ]
 
 
-def index_html():
-    import errno
-    cwd = os.getcwd()
-    try:
-        try:
-            os.makedirs('build/sphinx/html')
-        except OSError as error:
-            if error.errno != errno.EEXIST:
-                raise
-        os.chdir('build/sphinx/html')
-        try:
-            os.symlink('README.html', 'index.html')
-            print('index.html -> README.html')
-        except OSError as error:
-            if error.errno != errno.EEXIST:
-                raise
-    finally:
-        os.chdir(cwd)
+# def index_html():
+#     import errno
+#     cwd = os.getcwd()
+#     try:
+#         try:
+#             os.makedirs('build/sphinx/html')
+#         except OSError as error:
+#             if error.errno != errno.EEXIST:
+#                 raise
+#         os.chdir('build/sphinx/html')
+#         try:
+#             os.symlink('README.html', 'index.html')
+#             print('index.html -> README.html')
+#         except OSError as error:
+#             if error.errno != errno.EEXIST:
+#                 raise
+#     finally:
+#         os.chdir(cwd)
 
-import atexit
+# import atexit
 
 
-atexit.register(index_html)
+# atexit.register(index_html)

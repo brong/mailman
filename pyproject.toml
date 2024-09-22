@@ -6,7 +6,7 @@ name = "mailman"
 dynamic = ["version"]
 description = "Mailman -- the GNU mailing list manager"
 keywords = ["email"]
-readme = "README.rst"
+readme = "README.md"
 authors = [
     {name = "The Mailman Developers", email = "mailman-developers@python.org"},
 ]
@@ -75,6 +75,7 @@ path = "src/mailman/version.py"
 [tool.pdm.build]
 source-includes = [
     "*.rst",
+    "*.md",
     "*.ini",
     "*.txt",
     "*.cfg",
