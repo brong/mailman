@@ -55,7 +55,7 @@ setproctitle = ["setproctitle"]
 
 [project.urls]
 Homepage = "https://www.list.org"
-Documentation = "https://docs.mailman3.org/projects/mailman/en/latest/README.html"
+Documentation = "https://docs.mailman3.org/projects/mailman/en/latest/index.html"
 Source = "https://gitlab.com/mailman/mailman.git"
 Tracker = "https://gitlab.com/mailman/mailman/-/issues"
 
