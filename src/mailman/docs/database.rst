@@ -4,14 +4,15 @@
 
 Mailman uses the SQLAlchemy_ ORM to provide persistence of data in a
 relational database.  By default, Mailman uses Python's built-in SQLite3_
-database, however, SQLAlchemy is compatible with PostgreSQL_ and MySQL_, among
-possibly others.
+database, however, SQLAlchemy is compatible with PostgreSQL_, MariaDB_ and 
+MySQL_, among possibly others.
 
-Currently, Mailman is known to work with the SQLite3, PostgreSQL, and MySQL
-databases.  (Volunteers to port it to other databases are welcome!).  If you
-want to use SQLite3, you generally don't need to change anything, but if you
-want Mailman to use PostgreSQL or MySQL, you'll need to set those up first,
-and then change a configuration variable in your ``/etc/mailman.cfg`` file.
+Currently, Mailman is known to work with the SQLite3, PostgreSQL, MariaDB and
+MySQL databases.  (Volunteers to port it to other databases are welcome!).  If
+you want to use SQLite3, you generally don't need to change anything, but if
+you want Mailman to use PostgreSQL, MariaDB or MySQL, you'll need to set those
+up first, and then change a configuration variable in your ``/etc/mailman.cfg``
+file.
 
 Two configuration variables control which database Mailman uses.  The first
 names the class implementing the database interface.  The second names the URL
@@ -61,15 +62,15 @@ it::
 Many thanks to Stephen A. Goss for his contribution of PostgreSQL support.
 
 
-MySQL
-=====
+MariaDB / MySQL
+===============
 
-First you need to configure MySQL itself.  Let's say you create the `mailman`
-database in MySQL via::
+First you need to configure MariaDB/MySQL itself.  Let's say you create the
+`mailman` database in MariaDB/MySQL via::
 
     mysql> CREATE DATABASE mailman;
 
-You would also need the Python driver `pymysql` for MySQL.::
+You would also need the Python driver `pymysql` for MariaDB or MySQL.::
 
     $ pip install pymysql
 
@@ -127,6 +128,7 @@ integer in the database.  A more complex migration would be needed for
 .. _SQLAlchemy: https://www.sqlalchemy.org/
 .. _SQLite3: https://docs.python.org/3/library/sqlite3.html
 .. _PostgreSQL: https://www.postgresql.org/
+.. _MariaDB: https://mariadb.org/
 .. _MySQL: https://dev.mysql.com/
 .. _`Ubuntu article`: https://help.ubuntu.com/community/PostgreSQL
 .. _`Alembic`: https://alembic.readthedocs.org/en/latest/
