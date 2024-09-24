@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-08-08 22:30-0700\n"
-"PO-Revision-Date: 2024-09-21 07:11+0000\n"
+"PO-Revision-Date: 2024-09-24 09:04+0000\n"
 "Last-Translator: SATOH Fumiyasu <fumiyas@osstech.co.jp>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/gnu-mailman/"
 "mailman/ja/>\n"
@@ -550,18 +550,20 @@ msgstr "そのようなメーリングリストはありません: ${listspec}"
 #: src/mailman/commands/cli_admins.py:51
 #, python-brace-format
 msgid "${email} is already a ${role.name} of ${mlist.fqdn_listname}"
-msgstr ""
+msgstr "${email} はすでに${mlist.fqdn_listname} の ${role.name} です"
 
 #: src/mailman/commands/cli_admins.py:59
 #, python-brace-format
 msgid "${email} is not a ${role.name} of ${mlist.fqdn_listname}"
-msgstr ""
+msgstr "${email} は${mlist.fqdn_listname} の ${role.name} ではありません"
 
 #: src/mailman/commands/cli_admins.py:67
 msgid ""
 "    Add and/or delete owners and moderators of a list.\n"
 "    "
 msgstr ""
+"    メーリングリストにオーナーとモデレーターを追加・削除します。\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:72
 msgid ""
@@ -571,6 +573,11 @@ msgid ""
 "    to add multiple users.\n"
 "    "
 msgstr ""
+"    指定したロールで追加するユーザー。\n"
+"    メールアドレスまたは表示名を含むメールアドレス\n"
+"    (例: 「Jane Doe <jane@example.com>」) を指定します。\n"
+"    このオプションを繰り返して複数のユーザーを追加できます。\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:80
 msgid ""
@@ -578,6 +585,9 @@ msgid ""
 "    May be repeated to delete multiple users.\n"
 "    "
 msgstr ""
+"    指定したロールから削除するユーザー。\n"
+"    このオプションを繰り返して複数のユーザーを削除できます。\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:87
 msgid ""
@@ -585,15 +595,18 @@ msgid ""
 "    If not given, then 'owner' role is assumed.\n"
 "    "
 msgstr ""
+"    追加・削除するロール。「owner」または「moderator」を指定します。\n"
+"    指定しないときは「owner」となります。\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:99
 msgid "Nothing to add or delete."
-msgstr ""
+msgstr "追加あるいは削除するユーザーがありません。"
 
 #: src/mailman/commands/cli_admins.py:103 src/mailman/commands/cli_admins.py:106
 #, python-brace-format
 msgid "Invalid email address: ${email}"
-msgstr ""
+msgstr "無効なメールアドレスです: ${email}"
 
 #: src/mailman/commands/cli_aliases.py:33
 msgid "Regenerate the aliases appropriate for your MTA."
@@ -1167,7 +1180,7 @@ msgstr ""
 
 #: src/mailman/commands/cli_lists.py:150
 msgid "    Specify a list style name."
-msgstr ""
+msgstr "    適用するリストスタイル名を指定してください。"
 
 #: src/mailman/commands/cli_lists.py:155
 msgid ""
@@ -1204,7 +1217,7 @@ msgstr "不正なオーナーアドレスです: ${invalid}"
 #: src/mailman/commands/cli_lists.py:196
 #, python-brace-format
 msgid "Unknown list style name: ${style_name}"
-msgstr ""
+msgstr "不明なリストスタイル名です: ${style_name}"
 
 #: src/mailman/commands/cli_lists.py:200
 #, python-brace-format
