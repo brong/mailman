@@ -82,5 +82,6 @@ source-includes = [
     "COPYING",
     "*.py",
     "*.sh",
-    ".coveragerc"
+    ".coveragerc",
+    "_ext/*",
 ]

@@ -32,6 +32,10 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.viewcode',
               'sphinx.ext.graphviz',
               'sphinxcontrib.zopeext.autointerface',
+              # This is custom plugin in the `_ext/` directory in the top level
+              # directory of Mailman Core. This is primarily used to render the
+              # configuration files like schema.cfg file which uses zope.configuration
+              # syntax.
               'configplugin',
 ]
 
