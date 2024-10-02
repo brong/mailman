@@ -12,7 +12,7 @@ Here is a history of user visible changes to Mailman.
 3.3.10
 ======
 
-(2024-09-25)
+(2024-10-02)
 
 Configuration
 -------------
