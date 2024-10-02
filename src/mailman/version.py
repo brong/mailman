@@ -18,7 +18,7 @@
 """Mailman version strings."""
 
 # Mailman version.
-__version__ = '3.3.10b2'
+__version__ = '3.3.10'
 VERSION = __version__
 CODENAME = 'Tom Sawyer'
 
@@ -33,9 +33,9 @@ FINAL = 0xf
 MAJOR_REV = 3
 MINOR_REV = 3
 MICRO_REV = 10
-REL_LEVEL = BETA
+REL_LEVEL = FINAL
 # At most 15 beta releases!
-REL_SERIAL = 2
+REL_SERIAL = 0
 
 HEX_VERSION = ((MAJOR_REV << 24) | (MINOR_REV << 16) | (MICRO_REV << 8) |
                (REL_LEVEL << 4)  | (REL_SERIAL << 0))             # noqa: E221
