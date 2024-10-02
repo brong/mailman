@@ -7,6 +7,12 @@ Copyright (C) 1998-2022 by the Free Software Foundation, Inc.
 
 Here is a history of user visible changes to Mailman.
 
+.. _news-3.3.11:
+
+3.3.11
+======
+
+
 .. _news-3.3.10:
 
 3.3.10
