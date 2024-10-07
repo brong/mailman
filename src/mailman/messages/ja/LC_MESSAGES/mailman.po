@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-08-08 22:30-0700\n"
-"PO-Revision-Date: 2024-09-24 09:04+0000\n"
+"PO-Revision-Date: 2024-10-07 17:56+0000\n"
 "Last-Translator: SATOH Fumiyasu <fumiyas@osstech.co.jp>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/gnu-mailman/"
 "mailman/ja/>\n"
@@ -49,8 +49,9 @@ msgid ""
 "The content of this message was lost. It was probably cross-posted to\n"
 "multiple lists and previously handled on another list.\n"
 msgstr ""
-"このメッセージは無くなりました。おそらく複数のメーリングリストに投稿されており、\n"
-"以前に別のメーリングリストで処理されました。\n"
+"メッセージが見つかりません。おそらく複数のメーリングリストに投稿されており、"
+"\n"
+"別のメーリングリストで処理された可能性があります。\n"
 
 #: src/mailman/app/moderator.py:133
 #, python-brace-format
@@ -82,7 +83,7 @@ msgstr "元のメッセージ"
 #: src/mailman/app/moderator.py:321
 #, python-brace-format
 msgid "Request to mailing list \"${display_name}\" rejected"
-msgstr "${display_name} メーリングリスト: 申請が拒否されました"
+msgstr "${display_name} メーリングリスト: 申請を拒否しました"
 
 #: src/mailman/app/notifications.py:93
 msgid " (Digest mode)"
@@ -96,7 +97,7 @@ msgstr "メーリングリスト「${mlist.display_name}」へようこそ${digm
 #: src/mailman/app/notifications.py:130
 #, python-brace-format
 msgid "You have been unsubscribed from the ${mlist.display_name} mailing list"
-msgstr "${mlist.display_name} メーリングリスト: あなたのメールアドレスが退会されました"
+msgstr "${mlist.display_name} メーリングリスト: あなたのメールアドレスを退会しました"
 
 #: src/mailman/app/notifications.py:148
 #, python-brace-format
@@ -106,7 +107,7 @@ msgstr "${mlist.display_name} メーリングリスト: 入会通知"
 #: src/mailman/app/notifications.py:173
 #, python-brace-format
 msgid "${member}'s subscription disabled on ${mlist.display_name}"
-msgstr "${mlist.display_name} メーリングリスト: ${member} の配信が無効化されました"
+msgstr "${mlist.display_name} メーリングリスト: ${member} の配信を無効化しました"
 
 #: src/mailman/app/notifications.py:201
 #, python-brace-format
@@ -116,12 +117,14 @@ msgstr "${mlist.display_name} メーリングリスト: ${member} のバウン�
 #: src/mailman/app/notifications.py:227
 #, python-brace-format
 msgid "${member} unsubscribed from ${mlist.display_name} mailing list due to bounces"
-msgstr "${mlist.display_name} メーリングリスト: ${member} はバウンスが原因で退会されました"
+msgstr "${mlist.display_name} メーリングリスト: バウンスのため ${member} "
+"を退会しました"
 
 #: src/mailman/app/notifications.py:254
 #, python-brace-format
 msgid "Your subscription for ${mlist.display_name} mailing list has been disabled"
-msgstr "${mlist.display_name} メーリングリスト: あなたのメールアドレスヘの配信が無効化されました"
+msgstr "${mlist.display_name} メーリングリスト: "
+"あなたのメールアドレスヘの配信を無効化しました"
 
 #: src/mailman/app/subscriptions.py:328
 #, python-brace-format
@@ -274,7 +277,7 @@ msgid ""
 "    Use this only for debugging."
 msgstr ""
 "    SIGUSR1 またはエラーで終了した場合、runner プロセスを再起動しません。\n"
-"これはデバッグ用のみに用いてください。"
+"これはデバッグにのみ用いてください。"
 
 #: src/mailman/bin/master.py:598
 msgid ""
@@ -289,9 +292,12 @@ msgstr ""
 "    マスターウォッチャーが既存のマスターロックを見つけた場合、\n"
 "    通常はエラーメッセージを表示して終了します。\n"
 "    このオプションを使用すると、マスターは追加のチェックを実行します。\n"
-"    ロックファイルに記載されているホスト/プロセスIDと一致するプロセスが実行中であれば、\n"
-"    マスターは引き続き終了し、ロックを手動でクリーンアップする必要があります。\n"
-"    しかし、一致するプロセスが見つからない場合、マスターは明らかに古いロックを削除し、\n"
+"    ロックファイルに記載されているホスト/プロセス ID "
+"と一致するプロセスが実行中であれば、\n"
+"    "
+"マスターは引き続き終了し、ロックを手動でクリーンアップする必要があります。\n"
+"    しかし、一致するプロセスが見つからない場合、マスターは明らかに古いロック"
+"を削除し、\n"
 "    マスターロックの再取得を試みます。"
 
 #: src/mailman/bin/master.py:611
@@ -644,7 +650,7 @@ msgstr "メールアドレス {} は既に存在しています。変更でき�
 
 #: src/mailman/commands/cli_changeaddress.py:58
 msgid "Address changed from {} to {}."
-msgstr "メールアドレスが {} から {} に変更されました。"
+msgstr "メールアドレスを {} から {} に変更しました。"
 
 #: src/mailman/commands/cli_conf.py:53
 msgid "Print the Mailman configuration."
@@ -785,7 +791,7 @@ msgstr "PID を持つ子プロセスがしません: ${pid}"
 
 #: src/mailman/commands/cli_control.py:160
 msgid "Stale pid file removed."
-msgstr "失効した PID ファイルが削除されました。"
+msgstr "失効した PID ファイルを削除しました。"
 
 #: src/mailman/commands/cli_control.py:166
 msgid "Stop the Mailman master and runner processes."
@@ -1237,7 +1243,7 @@ msgstr "未定義のドメインです: ${domain}"
 #: src/mailman/commands/cli_lists.py:212
 #, python-brace-format
 msgid "Created mailing list: ${mlist.fqdn_listname}"
-msgstr "メーリングリストが作成されました: ${mlist.fqdn_listname}"
+msgstr "作成したメーリングリスト: ${mlist.fqdn_listname}"
 
 #: src/mailman/commands/cli_lists.py:227
 #, python-brace-format
@@ -1260,7 +1266,7 @@ msgstr "指定された仕様に一致するリストが見つかりません: $
 #: src/mailman/commands/cli_lists.py:256
 #, python-brace-format
 msgid "Removed list: ${listspec}"
-msgstr "リストが削除されました: ${listspec}"
+msgstr "削除したメーリングリスト: ${listspec}"
 
 #: src/mailman/commands/cli_members.py:89
 #, python-brace-format
@@ -1824,7 +1830,7 @@ msgstr "確認トークンが一致しませんでした"
 
 #: src/mailman/commands/eml_confirm.py:95
 msgid "Confirmed"
-msgstr "確認されました"
+msgstr "確認しました"
 
 #: src/mailman/commands/eml_confirm.py:112
 msgid "Invalid Approved: password"
@@ -1899,7 +1905,7 @@ msgstr "${person} さんは ${listname} への保留中の入会申請があり�
 #: src/mailman/commands/eml_membership.py:135
 #, python-brace-format
 msgid "Confirmation email sent to ${person}"
-msgstr "確認メールが ${person} さんに送信されました"
+msgstr "確認メールを ${person} さんに送信しました"
 
 #: src/mailman/commands/eml_membership.py:152
 #: src/mailman/commands/eml_membership.py:162
@@ -1953,7 +1959,8 @@ msgstr "${person} が ${mlist.fqdn_listname} から退会しました"
 #: src/mailman/commands/eml_membership.py:243
 #, python-brace-format
 msgid "Confirmation email sent to ${person} to leave ${mlist.fqdn_listname}"
-msgstr "${mlist.fqdn_listname} から退会するための確認メールが ${person} さんに送信されました"
+msgstr "${mlist.fqdn_listname} から退会するための確認メールを ${person} "
+"さんに送信しました"
 
 #: src/mailman/commands/eml_membership.py:253
 msgid "An alias for 'leave'."
@@ -2075,7 +2082,7 @@ msgid ""
 msgstr ""
 "添付のメッセージは ${mlist.display_name} メーリングリストの\n"
 "コンテンツフィルタリングルールに一致したため、リストメンバーへの\n"
-"配信が防止されました。破棄されたメッセージの残りを受信しています。\n"
+"配信が防止されました。破棄されたメッセージの残りを添付しています。\n"
 "\n"
 
 #: src/mailman/handlers/mime_delete.py:70
@@ -2524,7 +2531,7 @@ msgid ""
 "Size: ${size} bytes\n"
 "Desc: ${desc}\n"
 msgstr ""
-"プレインテキストダイジェストと互換性のないメッセージパートが削除されました...\n"
+"プレインテキストダイジェストと互換性のないメッセージパートを削除しました...\n"
 "名前: ${filename}\n"
 "タイプ: ${ctype}\n"
 "サイズ: ${size} バイト\n"
@@ -2536,7 +2543,7 @@ msgstr "-------------- 次のパート --------------\n"
 
 msgid "domain:admin:notice:new-list.txt"
 msgstr ""
-"メーリングリスト「$listname」が作成されました。\n"
+"メーリングリスト「$listname」を作成しました。\n"
 "以下はメーリングリストに関する基本的な情報です。\n"
 "\n"
 "ユーザー向け (管理者向けではありません) のメール送信を利用する\n"
@@ -2608,7 +2615,7 @@ msgstr ""
 msgid "list:admin:notice:disable.txt"
 msgstr ""
 "$member のバウンススコアが基準値を超えたため、メーリングリスト\n"
-"$listname の配信が無効化されました。\n"
+"$listname の配信を無効化しました。\n"
 "\n"
 "無効の契機となった配送状態通知メッセージを添付します。"
 
@@ -2626,10 +2633,10 @@ msgstr ""
 "できるだけ早く対応してください。"
 
 msgid "list:admin:notice:removal.txt"
-msgstr "$member が過度なバウンスのため $listname から退会されました。"
+msgstr "過度なバウンスのため $member を $listname から退会しました。"
 
 msgid "list:admin:notice:subscribe.txt"
-msgstr "$member が $display_name へ入会されました。"
+msgstr "$member を $display_name に入会しました。"
 
 msgid "list:admin:notice:unrecognized.txt"
 msgstr ""
@@ -2639,7 +2646,7 @@ msgstr ""
 "メーリングリスト管理者に送信するように設定されています。"
 
 msgid "list:admin:notice:unsubscribe.txt"
-msgstr "$member が $display_name から退会されました。"
+msgstr "$member を $display_name から退会しました。"
 
 msgid "list:member:digest:header.txt"
 msgstr ""
@@ -2775,8 +2782,8 @@ msgstr ""
 
 msgid "list:user:notice:post.txt"
 msgstr ""
-"下記の件名のあなたのメッセージが $display_name メーリングリストに\n"
-"受信されました。\n"
+"あなたからの下記の件名のメッセージを $display_name "
+"メーリングリストで受信しました。\n"
 "\n"
 "    $subject"
 
