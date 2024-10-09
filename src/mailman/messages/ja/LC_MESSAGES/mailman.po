@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-08-08 22:30-0700\n"
-"PO-Revision-Date: 2024-10-07 17:56+0000\n"
+"PO-Revision-Date: 2024-10-09 07:55+0000\n"
 "Last-Translator: SATOH Fumiyasu <fumiyas@osstech.co.jp>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/gnu-mailman/"
 "mailman/ja/>\n"
@@ -56,7 +56,7 @@ msgstr ""
 #: src/mailman/app/moderator.py:133
 #, python-brace-format
 msgid "Posting of your message titled \"${subject}\""
-msgstr "あなたからの件名「${subject}」の投稿"
+msgstr "あなたからの投稿 (件名「${subject}」)"
 
 #: src/mailman/app/moderator.py:134 src/mailman/app/moderator.py:278
 #: src/mailman/rest/sub_moderation.py:119
@@ -107,7 +107,7 @@ msgstr "${mlist.display_name} メーリングリスト: 入会通知"
 #: src/mailman/app/notifications.py:173
 #, python-brace-format
 msgid "${member}'s subscription disabled on ${mlist.display_name}"
-msgstr "${mlist.display_name} メーリングリスト: ${member} の配信を無効化しました"
+msgstr "${mlist.display_name} メーリングリスト: ${member} への配信を無効化しました"
 
 #: src/mailman/app/notifications.py:201
 #, python-brace-format
@@ -2782,7 +2782,7 @@ msgstr ""
 
 msgid "list:user:notice:post.txt"
 msgstr ""
-"あなたからの下記の件名のメッセージを $display_name "
+"あなたから下記の件名のメッセージを $display_name "
 "メーリングリストで受信しました。\n"
 "\n"
 "    $subject"
