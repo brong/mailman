@@ -1770,7 +1770,9 @@ Database
   - mailinglist.generic_nonmember_action has been removed (LP: #975696)
 
 * Schema migrations (LP: #1024509)
+
   - member.mailing_list -> list_id
+
 * The PostgreSQL port of the schema accidentally added a moderation_callback
   column to the mailinglist table.  Since this is unused in Mailman, it was
   simply commented out of the base schema for PostgreSQL.
@@ -1875,6 +1877,7 @@ Architecture
 Database
 --------
 * Schema changes:
+
   - welcome_msg      -> welcome_message_uri
   - goodbye_msg      -> goodbye_message_uri
   - send_welcome_msg -> send_welcome_message
@@ -1886,7 +1889,9 @@ Database
   - start_chain      -> posting_chain
   - pipeline         -> posting_pipeline
   - real_name        -> display_name (mailinglist, user, address)
+
 * Schema additions:
+
   - mailinglist.filter_action
   - mailinglist.owner_chain
   - mailinglist.owner_pipeline
@@ -1964,16 +1969,20 @@ Architecture
 * master-qrunner.pid -> master.pid
 * Four new events are created, and notifications are sent during mailing list
   lifecycle changes:
+
   - ListCreatingEvent - sent before the mailing list is created
   - ListCreatedEvent  - sent after the mailing list is created
   - ListDeletingEvent - sent before the mailing list is deleted
+
   - ListDeletedEvent  - sent after the mailing list is deleted
 * Four new events are created, and notifications are sent during domain
   lifecycle changes:
+
   - DomainCreatingEvent - sent before the domain is created
   - DomainCreatedEvent  - sent after the domain is created
   - DomainDeletingEvent - sent before the domain is deleted
   - DomainDeletedEvent  - sent after the domain is deleted
+
 * Using the above events, when a domain is deleted, associated mailing lists
   are deleted.  (LP: #837526)
 * IDomain.email_host -> .mail_host (LP: #831660)
