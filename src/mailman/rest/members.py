@@ -64,6 +64,7 @@ from mailman.rest.validator import (
 )
 from operator import attrgetter
 from public import public
+from urllib.parse import quote
 from uuid import UUID
 from zope.component import getUtility
 
@@ -114,7 +115,8 @@ class _MemberBase(CollectionMixin):
     def _get_address(self, member):
         """Get url to member's addresses."""
         return self.api.path_to(
-                'addresses/{}'.format(member.address.email))
+            f"addresses/{quote(member.address.email, '@')}",
+        )
 
     def _get_user(self, member):
         """Get url to member's user if one exists."""

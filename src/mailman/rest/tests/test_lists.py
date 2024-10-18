@@ -63,7 +63,7 @@ class TestListsMissing(unittest.TestCase):
         self.assertEqual(cm.exception.code, 404)
 
     def test_missing_list_roster_moderator_404(self):
-        # /lists/<missing>/roster/member gives 404
+        # /lists/<missing>/roster/moderator gives 404
         with self.assertRaises(HTTPError) as cm:
             call_api('http://localhost:9001/3.0/lists/missing@example.com'
                      '/roster/moderator')
@@ -321,6 +321,25 @@ class TestLists(unittest.TestCase):
         member = json['entries'][1]
         self.assertEqual(member['email'], 'bart@example.com')
         self.assertEqual(member['role'], 'member')
+
+    def test_member_not_found(self):
+        with self.assertRaises(HTTPError) as cm:
+            call_api(
+                'http://localhost:9001/3.0/lists/test.example.com'
+                '/member/bogus@example.com',
+            )
+        self.assertEqual(cm.exception.code, 404)
+
+    def test_member_has_slash_in_address(self):
+        with transaction():
+            aperson = self._usermanager.create_address('test/ext@example.com')
+            self._mlist.subscribe(aperson)
+        json, response = call_api(
+            'http://localhost:9001/3.0/lists/test.example.com'
+            '/member/test%2Fext@example.com',
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(json['email'], 'test/ext@example.com')
 
     def test_delete_list_with_acceptable_aliases(self):
         # LP: #1432239 - deleting a mailing list with acceptable aliases

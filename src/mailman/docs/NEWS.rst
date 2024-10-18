@@ -45,6 +45,7 @@ Bugs fixed
 * Unfold address containing headers before parsing in implicit_dest.
   (Closes #1229)
 * Cache manager no longer returns expired cache entries.  (Closes #1231)
+* Support email addresses with ``/`` in its local part. (Closes #774)
 
 New Features
 ------------

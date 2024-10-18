@@ -30,7 +30,7 @@ from mailman.rest.helpers import (
 )
 from mailman.rest.validator import email_or_regexp_validator, Validator
 from public import public
-from urllib.parse import quote_plus
+from urllib.parse import quote
 
 
 class _BannedBase:
@@ -45,9 +45,9 @@ class _BannedBase:
             base_location = ''
         else:
             base_location = 'lists/{}/'.format(self._mlist.list_id)
-        if email.startswith('^'):
-            email = quote_plus(email)
-        return self.api.path_to('{}bans/{}'.format(base_location, email))
+        return self.api.path_to(
+            f"{base_location}bans/{quote(email, '@')}",
+        )
 
 
 @public
@@ -118,6 +118,9 @@ class BannedEmails(_BannedBase, CollectionMixin):
             self.ban_manager.ban(email)
             created(response, self._location(email))
 
-    @child(r'^(?P<email>[^/]+)')
+    # HACK: Support email addresses with slash (`/`) in its local part.
+    # WSGI does NOT allow `%2F` (URI-encoded `/`) in path components.
+    # https://falcon.readthedocs.io/en/stable/user/faq.html#why-is-my-url-with-percent-encoded-forward-slashes-2f-routed-incorrectly
+    @child(r'^(?P<email>.+)')
     def email(self, context, segments, **kw):
-        return BannedEmail(self._mlist, kw['email'])
+        return BannedEmail(self._mlist, kw['email']), []
