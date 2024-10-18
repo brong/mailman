@@ -180,7 +180,7 @@ Welcome to the Test List mailing list.
                          'Tést List subscription notification')
         self.assertMultiLineEqual(
             admin_notice.get_payload(decode=True).decode('utf-8'),
-            '=?utf-8?q?Ann=C3=A9_Person?= <anne@example.com> has been'
+            'Anné Person <anne@example.com> has been'
             ' successfully subscribed to Tést List.\n')
         # Ensure the message is single part and properly encoded.
         raw_payload = admin_notice.get_payload()
