@@ -208,7 +208,10 @@ class LMTPHandler:
         if new_mid != message_id:
             msg.replace_header('Message-ID', new_mid)
         if msg.defects:
-            return ERR_501
+            slog.info('Message %s rejected with defects\n%s',
+                      msg['message-id'],
+                      msg.defects)
+            return ERR_501 + f': {msg.defects}'
         msg.original_size = len(envelope.content)
         add_message_hash(msg)
         msg['X-MailFrom'] = envelope.mail_from
