@@ -12,6 +12,12 @@ Here is a history of user visible changes to Mailman.
 3.3.11
 ======
 
+(xxxx-xx-xx)
+
+Bugs fixed
+----------
+* Incoming messages rejected with defects now include the defects list in the
+  status and the rejection and defects list is logged.  (Closes #351)
 
 .. _news-3.3.10:
 

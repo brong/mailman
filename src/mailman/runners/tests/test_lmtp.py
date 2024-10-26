@@ -26,7 +26,11 @@ from mailman.app.lifecycle import create_list
 from mailman.config import config
 from mailman.database.transaction import transaction
 from mailman.interfaces.domain import IDomainManager
-from mailman.testing.helpers import get_lmtp_client, get_queue_messages
+from mailman.testing.helpers import (
+    get_lmtp_client,
+    get_queue_messages,
+    LogFileMark,
+)
 from mailman.testing.layers import LMTPLayer
 from zope.component import getUtility
 
@@ -129,6 +133,26 @@ Message-ID: <ant>
         items = get_queue_messages('in', expected_count=1)
         self.assertEqual(items[0].msgdata['received_time'],
                          datetime(2005, 8, 1, 7, 49, 23))
+
+    def test_defective_message(self):
+        # A message with defects should be rejected and logged.
+        mark = LogFileMark('mailman.smtp')
+        with self.assertRaises(smtplib.SMTPDataError) as ex:
+            self._lmtp.sendmail('anne@example.com',
+                                ['test@example.com'], """\
+From: anne@example.com
+To: test@example.com
+Subject: This is a defective message
+Message-ID: <ant>
+Body line with no separator
+
+Body
+""")
+        self.assertEqual(501, ex.exception.smtp_code)
+        self.assertEqual(ex.exception.smtp_error, b'Message has defects: '
+                         b'[MissingHeaderBodySeparatorDefect()]')
+        self.assertRegex(mark.read(), 'Message <ant> rejected with defects\n'
+                         '.*[MissingHeaderBodySeparatorDefect()]')
 
     def test_queue_directory(self):
         # The LMTP runner is not queue runner, so it should not have a
