@@ -8,15 +8,17 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-08-08 22:30-0700\n"
-"PO-Revision-Date: 2024-06-21 08:51+0000\n"
-"Last-Translator: SATOH Fumiyasu <fumiyas@osstech.co.jp>\n"
-"Language-Team: Ukrainian <https://hosted.weblate.org/projects/gnu-mailman/mailman/uk/>\n"
+"PO-Revision-Date: 2024-10-31 11:00+0000\n"
+"Last-Translator: Serhii Horichenko <m@sgg.im>\n"
+"Language-Team: Ukrainian <https://hosted.weblate.org/projects/gnu-mailman/"
+"mailman/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.6-rc\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.8.2-dev\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:85
 #: src/mailman/chains/hold.py:166 src/mailman/handlers/acknowledge.py:56
@@ -549,18 +551,20 @@ msgstr "Такого списку немає: ${listspec}"
 #: src/mailman/commands/cli_admins.py:51
 #, python-brace-format
 msgid "${email} is already a ${role.name} of ${mlist.fqdn_listname}"
-msgstr ""
+msgstr "${email} вже є ${role.name} у списку ${mlist.fqdn_listname}"
 
 #: src/mailman/commands/cli_admins.py:59
 #, python-brace-format
 msgid "${email} is not a ${role.name} of ${mlist.fqdn_listname}"
-msgstr ""
+msgstr "${email} не є ${role.name} у списку ${mlist.fqdn_listname}"
 
 #: src/mailman/commands/cli_admins.py:67
 msgid ""
 "    Add and/or delete owners and moderators of a list.\n"
 "    "
 msgstr ""
+"    Додати та/або видалити власників та модераторів у списку.\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:72
 msgid ""
@@ -570,6 +574,14 @@ msgid ""
 "    to add multiple users.\n"
 "    "
 msgstr ""
+"    Користувач, який додається із зазначеною роллю. Це може бути адреса е-"
+"пошти\n"
+"     або, якщо в лапках, будь-яке ім'я та адреса е-пошти, які можна "
+"розпізнати\n"
+"    через email.utils.parseaddr. Напр., 'Jane Doe <jane@example.com>'. Можна "
+"повторити\n"
+"    для додавання декількох користувачів.\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:80
 msgid ""
@@ -577,6 +589,9 @@ msgid ""
 "    May be repeated to delete multiple users.\n"
 "    "
 msgstr ""
+"    Адреса е-пошти користувача, у якого потрібно забрати зазначену роль.\n"
+"    Можна повторити для обмеження декількох користувачів.\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:87
 msgid ""
@@ -584,15 +599,18 @@ msgid ""
 "    If not given, then 'owner' role is assumed.\n"
 "    "
 msgstr ""
+"    Роль для додавання/видалення. Може бути 'власник' або 'модератор'.\n"
+"    Якщо не вказано, буде використано роль 'власник'.\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:99
 msgid "Nothing to add or delete."
-msgstr ""
+msgstr "Немає нічого, щоб додати або видалити."
 
 #: src/mailman/commands/cli_admins.py:103 src/mailman/commands/cli_admins.py:106
 #, python-brace-format
 msgid "Invalid email address: ${email}"
-msgstr ""
+msgstr "Хибна адреса е-пошти: ${email}"
 
 #: src/mailman/commands/cli_aliases.py:33
 msgid "Regenerate the aliases appropriate for your MTA."
@@ -959,6 +977,13 @@ msgid ""
 "    string works best.\n"
 "    "
 msgstr ""
+"    Показати членство кожного користувача/-ів зі знайденими за маскою "
+"адресами\n"
+"    е-пошти. Оскільки для обробки маски з зірочками (*) потрібно більше часу "
+"для\n"
+"    SQL-запитів, краще складати запити простішими. Прості текстові рядки\n"
+"    працюють найкраще.\n"
+"    "
 
 #: src/mailman/commands/cli_findmember.py:91
 msgid ""
@@ -1161,7 +1186,7 @@ msgstr ""
 
 #: src/mailman/commands/cli_lists.py:150
 msgid "    Specify a list style name."
-msgstr ""
+msgstr "    Вкажіть назву стилю списку."
 
 #: src/mailman/commands/cli_lists.py:155
 msgid ""
@@ -1198,7 +1223,7 @@ msgstr "Хибна адреса власника: ${invalid}"
 #: src/mailman/commands/cli_lists.py:196
 #, python-brace-format
 msgid "Unknown list style name: ${style_name}"
-msgstr ""
+msgstr "Назва стилю списку невідома: ${style_name}"
 
 #: src/mailman/commands/cli_lists.py:200
 #, python-brace-format
