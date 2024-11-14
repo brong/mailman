@@ -426,7 +426,7 @@ Owners and moderators
 =====================
 
 Mailing list owners and moderators also show up in the REST API.  Cris becomes
-an owner of the `ant` mailing list and Dave becomes a moderator of the `bee`
+an owner of the `bee` mailing list and Dave becomes a moderator of the `ant`
 mailing list.
 ::
 
