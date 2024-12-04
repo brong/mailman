@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-08-08 22:30-0700\n"
-"PO-Revision-Date: 2024-01-19 07:01+0000\n"
+"PO-Revision-Date: 2024-12-04 13:55+0000\n"
 "Last-Translator: Peter Donka <peter.donka@gmail.com>\n"
-"Language-Team: Hungarian <https://hosted.weblate.org/projects/gnu-mailman/mailman/hu/>\n"
+"Language-Team: Hungarian <https://hosted.weblate.org/projects/gnu-mailman/"
+"mailman/hu/>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.9-dev\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:85
 #: src/mailman/chains/hold.py:166 src/mailman/handlers/acknowledge.py:56
@@ -550,17 +551,22 @@ msgstr "Nincs ilyen lista: ${listspec}"
 #, python-brace-format
 msgid "${email} is already a ${role.name} of ${mlist.fqdn_listname}"
 msgstr ""
+"${email} már ${role.name} szerepkörben van a ${mlist.fqdn_listname} listán"
 
 #: src/mailman/commands/cli_admins.py:59
 #, python-brace-format
 msgid "${email} is not a ${role.name} of ${mlist.fqdn_listname}"
 msgstr ""
+"${email} nem ${role.name} szerepkörben van a ${mlist.fqdn_listname} listán"
 
 #: src/mailman/commands/cli_admins.py:67
 msgid ""
 "    Add and/or delete owners and moderators of a list.\n"
 "    "
 msgstr ""
+"    Tulajdonosok és moderátorok hozzáadása és/vagy eltávolítása egy listáról."
+"\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:72
 msgid ""
@@ -570,6 +576,14 @@ msgid ""
 "    to add multiple users.\n"
 "    "
 msgstr ""
+"    Felhasználó hozzáadása a megadott szerepkörrel. Ez lehet egy e-mail cím,"
+"\n"
+"\tvagy idézőjelek között bármilyen megjelenítendő név és e-mail cím, "
+"amelyet\n"
+"\taz email.utils.parseaddr értelmezni tud. Például: 'Jane Doe <jane@example."
+"com>'.\n"
+"\tTöbbször is megadható több felhasználó hozzáadásához.\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:80
 msgid ""
@@ -577,6 +591,9 @@ msgid ""
 "    May be repeated to delete multiple users.\n"
 "    "
 msgstr ""
+"    A törlendő felhasználó e-mail címe a megadott szerepkörből.\n"
+"\tTöbbször is megadható több felhasználó eltávolításához.\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:87
 msgid ""
@@ -584,15 +601,20 @@ msgid ""
 "    If not given, then 'owner' role is assumed.\n"
 "    "
 msgstr ""
+"    A hozzáadandó vagy törlendő szerepkör. Ez lehet „tulajdonos” vagy "
+"„moderátor”.\n"
+"\tHa nincs megadva, alapértelmezés szerint a „tulajdonos” szerepkör kerül "
+"alkalmazásra.\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:99
 msgid "Nothing to add or delete."
-msgstr ""
+msgstr "Nincs semmi hozzáadandó vagy törlendő."
 
 #: src/mailman/commands/cli_admins.py:103 src/mailman/commands/cli_admins.py:106
 #, python-brace-format
 msgid "Invalid email address: ${email}"
-msgstr ""
+msgstr "Érvénytelen e-mail cím: ${email}"
 
 #: src/mailman/commands/cli_aliases.py:33
 msgid "Regenerate the aliases appropriate for your MTA."
@@ -885,9 +907,10 @@ msgid ""
 "    argument can either be a List-ID or a fully qualified list name.  Without\n"
 "    this option, operate on the digests for all mailing lists."
 msgstr ""
-"    Működjön ezen a levelezőlistán.  Több --list opció is megadható.  A\n"
-"    argumentum lehet egy lista azonosító vagy egy teljesen minősített listanév.  A  nélkül.\n"
-"    opció nélkül az összes levelezőlista kivonatával operál."
+"    A levelezőlistán végez műveleteket. Több `--list` opció is megadható.\n"
+"\tAz argumentum lehet egy List-ID vagy egy teljesen kvalifikált lista neve.\n"
+"\tEnnek az opciónak a hiányában az összes levelezőlista kivonatain hajt "
+"végre műveleteket."
 
 #: src/mailman/commands/cli_digests.py:48
 msgid ""
@@ -2103,7 +2126,7 @@ msgstr ""
 
 #: src/mailman/rules/emergency.py:47
 msgid "Emergency moderation is in effect for this list"
-msgstr ""
+msgstr "Vészhelyzeti moderálás van érvényben ezen a listán"
 
 #: src/mailman/rules/implicit_dest.py:37
 msgid "Catch messages with implicit destination."
@@ -2352,19 +2375,19 @@ msgstr ""
 
 msgid "list:admin:action:post.txt"
 msgstr ""
-"Mint a lista adminisztrátora, az Ön engedélyét kérjük a\n"
-"a következő levelezőlistára való feladáshoz:\n"
+"Mint listaadminisztrátor, az Ön engedélyére van szükség\n"
+"az alábbi levelezőlista-bejegyzéshez:\n"
 "\n"
-"    Lista:    $listanév\n"
-"    Feladó: $sender_email\n"
-"    Tárgy: $subject\n"
+"\tLista:\t$listname\n"
+"\tFeladó:\t$sender_email\n"
+"\tTárgy:\t$subject\n"
 "\n"
-"Az üzenetet azért tartjuk vissza, mert:\n"
+"Az üzenetet az alábbi ok(ok) miatt tartjuk vissza:\n"
 "\n"
 "$reasons\n"
 "\n"
-"Ha úgy gondolja, látogasson el a műszerfalra, hogy jóváhagyja vagy elutasítsa a\n"
-"kérést."
+"Kérjük, kényelmes időpontban látogasson el a vezérlőpultjára,\n"
+"hogy jóváhagyja vagy elutasítsa a kérelmet."
 
 msgid "list:admin:action:subscribe.txt"
 msgstr ""
