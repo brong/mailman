@@ -8,15 +8,17 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-08-08 22:30-0700\n"
-"PO-Revision-Date: 2024-06-21 08:51+0000\n"
-"Last-Translator: SATOH Fumiyasu <fumiyas@osstech.co.jp>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/gnu-mailman/mailman/ru/>\n"
+"PO-Revision-Date: 2024-12-07 05:00+0000\n"
+"Last-Translator: gfbdrgng <hnaofegnp@hldrive.com>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/gnu-mailman/"
+"mailman/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.6-rc\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.9-dev\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:85
 #: src/mailman/chains/hold.py:166 src/mailman/handlers/acknowledge.py:56
@@ -549,18 +551,20 @@ msgstr "Нет такой рассылки: ${listspec}"
 #: src/mailman/commands/cli_admins.py:51
 #, python-brace-format
 msgid "${email} is already a ${role.name} of ${mlist.fqdn_listname}"
-msgstr ""
+msgstr "${email} уже является ${role.name} из ${mlist.fqdn_listname}"
 
 #: src/mailman/commands/cli_admins.py:59
 #, python-brace-format
 msgid "${email} is not a ${role.name} of ${mlist.fqdn_listname}"
-msgstr ""
+msgstr "${email} не является ${role.name} из ${mlist.fqdn_listname}"
 
 #: src/mailman/commands/cli_admins.py:67
 msgid ""
 "    Add and/or delete owners and moderators of a list.\n"
 "    "
 msgstr ""
+"    Добавление и/или удаление владельцев и модераторов списка.\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:72
 msgid ""
@@ -570,6 +574,17 @@ msgid ""
 "    to add multiple users.\n"
 "    "
 msgstr ""
+"    Пользователь для добавления с заданной ролью. Это может быть адрес "
+"электронной почты или, если\n"
+"\n"
+"    в кавычках, любое отображаемое имя и адрес электронной почты, которые "
+"можно разобрать с помощью\n"
+"\n"
+"    email.utils.parseaddr. Например, 'Jane Doe <jane@example.com>'. Может "
+"повторяться\n"
+"\n"
+"    для добавления нескольких пользователей.\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:80
 msgid ""
@@ -577,6 +592,11 @@ msgid ""
 "    May be repeated to delete multiple users.\n"
 "    "
 msgstr ""
+"    Адрес электронной почты пользователя, который должен быть удален из "
+"данной роли.\n"
+"\n"
+"    Может повторяться для удаления нескольких пользователей.\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:87
 msgid ""
@@ -584,15 +604,20 @@ msgid ""
 "    If not given, then 'owner' role is assumed.\n"
 "    "
 msgstr ""
+"    Роль для добавления/удаления. Это может быть 'владелец' или 'модератор'."
+"\n"
+"\n"
+"    Если не указано, то предполагается роль 'владельца'.\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:99
 msgid "Nothing to add or delete."
-msgstr ""
+msgstr "Нечего добавить или удалить."
 
 #: src/mailman/commands/cli_admins.py:103 src/mailman/commands/cli_admins.py:106
 #, python-brace-format
 msgid "Invalid email address: ${email}"
-msgstr ""
+msgstr "Неверный адрес электронной почты: ${email}"
 
 #: src/mailman/commands/cli_aliases.py:33
 msgid "Regenerate the aliases appropriate for your MTA."
@@ -959,6 +984,16 @@ msgid ""
 "    string works best.\n"
 "    "
 msgstr ""
+"    Отображение всех членств для пользователя или пользователей с адресом, "
+"соответствующим\n"
+"\n"
+"    шаблону. Поскольку часть процесса заключается в преобразовании шаблона\n"
+"\n"
+"    в SQL-запрос с подстановочными знаками, шаблон должен быть простым. "
+"Лучше всего подходит простая\n"
+"\n"
+"    лучше всего подходит строка.\n"
+"    "
 
 #: src/mailman/commands/cli_findmember.py:91
 msgid ""
@@ -1161,7 +1196,7 @@ msgstr ""
 
 #: src/mailman/commands/cli_lists.py:150
 msgid "    Specify a list style name."
-msgstr ""
+msgstr "    Укажите имя стиля списка."
 
 #: src/mailman/commands/cli_lists.py:155
 msgid ""
@@ -1198,7 +1233,7 @@ msgstr "Недопустимый адрес владельца: ${invalid}"
 #: src/mailman/commands/cli_lists.py:196
 #, python-brace-format
 msgid "Unknown list style name: ${style_name}"
-msgstr ""
+msgstr "Неизвестное имя стиля списка: ${style_name}"
 
 #: src/mailman/commands/cli_lists.py:200
 #, python-brace-format
@@ -2166,21 +2201,25 @@ msgstr "Выполнить проверки аутентификации и пр
 #, python-brace-format
 msgid "${self.email} is already a member of mailing list ${self.fqdn_listname}"
 msgstr ""
+"${self.email} уже является участником списка рассылки ${self.fqdn_listname}"
 
 #: src/mailman/interfaces/member.py:125
 #, python-brace-format
 msgid "${self.email} is already an owner of mailing list ${self.fqdn_listname}"
 msgstr ""
+"${self.email} уже является владельцем списка рассылки ${self.fqdn_listname}"
 
 #: src/mailman/interfaces/member.py:128
 #, python-brace-format
 msgid "${self.email} is already a moderator of mailing list ${self.fqdn_listname}"
 msgstr ""
+"${self.email} уже является модератором списка рассылки ${self.fqdn_listname}"
 
 #: src/mailman/interfaces/member.py:131
 #, python-brace-format
 msgid "${self.email} is already a non-member of mailing list ${self.fqdn_listname}"
 msgstr ""
+"${self.email} уже не является членом списка рассылки ${self.fqdn_listname}"
 
 #: src/mailman/interfaces/pipeline.py:53
 msgid "[No details are available]"
