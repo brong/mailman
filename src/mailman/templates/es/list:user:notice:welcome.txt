@@ -4,7 +4,7 @@ Para publicar en esta lista, envíe sus correos a:
 
   ${listname}
 
-Puede desuscribirse o hacer ajustes de configuración vía email enviando un
+Puede desuscribirse o hacer ajustes de configuración vía correo-e enviando un
 mensaje a:
 
   ${request_email}

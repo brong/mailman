@@ -1,14 +1,14 @@
-Este es un mensaje de prueba. Puede ser ignorado.
+Este mensaje es una prueba. Puedes ignorarla.
 
-La lista de correos ${listname} ha recibido varios rebotes de correo de su parte,
-indicando que puede haber un problema con el envío de mensajes a ${sender_email}.
-Se ha adjuntado un ejemplo debajo. Por favor, revise el mensaje para asegurarse 
-de que no hay problemas con su dirección de email. Quizá deba comprobarlo junto
-a su administrador de correo para obtener más ayuda.
+La lista de correo de ${listname} ha recibido muchas devoluciones no entregadas,
+lo que indica que hay problemas en la entrega de mensajes a
+${sender_email}. A continuación se adjunta un ejemplo. Por favor, compruebe la dirección 
+del ensaje para asegurarse de que no hay problemas con su dirección. 
+En caso de duda, póngase en contacto con la administración de su sistema de correo.
 
-No necesita hacer nada para continuar siendo miembro activo de la lista de correo.
+No tiene que hacer nada más para seguir siendo suscriptor* de la lista.
 
-Si tiene dudas o problemas, puede contactar con el propietario de la lista vía
+Si tiene más preguntas o problemas, por favor póngase en contacto con
+los propietarios que figuran en la lista siguiente:
 
-
-  ${owner_email}
+     ${owner_email}

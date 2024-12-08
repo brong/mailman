@@ -1,13 +1,13 @@
-Su solicitud a la lista de correo ${listname}
+Su petición a la lista de correo de $listname
 
-    ${request}
+    $request
 
-ha sido rechazada por el moderador de la lista. El moderador adujo
-la siguiente razón para rechazarla:
+ha sido rechazada por el moderador de la lista.  El moderador dio el
+siguiente motivo para rechazar su solicitud:
 
-"${reason}"
+"$reason"
 
-Cualquier duda o comentario debería hacerse llegar al administrador de
-la lista vía:
+Cualquier pregunta u observación debe dirigirse al administrador de la lista
+en:
 
-    ${owner_email}
+    $owner_email

@@ -1,1 +1,1 @@
-$member が過度なバウンスのため $listname から退会されました。
+過度なバウンスのため $member を $listname から退会しました。
