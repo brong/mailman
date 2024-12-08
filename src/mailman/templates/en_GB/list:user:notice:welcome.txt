@@ -1,0 +1,16 @@
+Welcome to the "$display_name" mailing list!
+
+To post to this list, send your message to:
+
+  $listname
+
+You can unsubscribe or make adjustments to your options via email by sending
+a message to:
+
+  $request_email
+
+with the word 'help' in the subject or body (don't include the quotes), and
+you will get back a message with instructions.  You will need your password to
+change your options, but for security purposes, this password is not included
+here.  If you have forgotten your password you will need to reset it via the
+web UI.

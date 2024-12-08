@@ -1,0 +1,3 @@
+$member's bounce score on $listname has been incremented.
+
+The triggering DSN if available is attached.

@@ -1,0 +1,4 @@
+$member's subscription has been disabled on $listname due to their bounce score
+exceeding the mailing list's bounce_score_threshold.
+
+The triggering DSN if available is attached.
