@@ -476,6 +476,7 @@ Elle can get her memberships for each of her email addresses.
         address: http://localhost:9001/3.0/addresses/elle@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Elle Person
         email: elle@example.com
         http_etag: "..."
@@ -491,6 +492,7 @@ Elle can get her memberships for each of her email addresses.
         address: http://localhost:9001/3.0/addresses/elle@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Elle Person
         email: elle@example.com
         http_etag: "..."
@@ -527,6 +529,7 @@ does not show up in the list of memberships for his other address.
         address: http://localhost:9001/3.0/addresses/elle@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Elle Person
         email: elle@example.com
         http_etag: "..."
@@ -542,6 +545,7 @@ does not show up in the list of memberships for his other address.
         address: http://localhost:9001/3.0/addresses/elle@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Elle Person
         email: elle@example.com
         http_etag: "..."
@@ -563,6 +567,7 @@ does not show up in the list of memberships for his other address.
         address: http://localhost:9001/3.0/addresses/eperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Elle Person
         email: eperson@example.com
         http_etag: "..."

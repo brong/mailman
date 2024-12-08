@@ -51,6 +51,7 @@ the REST interface.
         address: http://localhost:9001/3.0/addresses/bperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Bart Person
         email: bperson@example.com
         http_etag: ...
@@ -72,6 +73,7 @@ Bart's specific membership can be accessed directly:
     address: http://localhost:9001/3.0/addresses/bperson@example.com
     bounce_score: 0
     delivery_mode: regular
+    delivery_status: enabled
     display_name: Bart Person
     email: bperson@example.com
     http_etag: ...
@@ -97,6 +99,7 @@ the REST interface.
         address: http://localhost:9001/3.0/addresses/bperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Bart Person
         email: bperson@example.com
         http_etag: ...
@@ -112,6 +115,7 @@ the REST interface.
         address: http://localhost:9001/3.0/addresses/cperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Cris Person
         email: cperson@example.com
         http_etag: ...
@@ -140,6 +144,7 @@ subscribes, she is returned first.
         address: http://localhost:9001/3.0/addresses/aperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Anna Person
         email: aperson@example.com
         http_etag: ...
@@ -155,6 +160,7 @@ subscribes, she is returned first.
         address: http://localhost:9001/3.0/addresses/bperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Bart Person
         email: bperson@example.com
         http_etag: ...
@@ -170,6 +176,7 @@ subscribes, she is returned first.
         address: http://localhost:9001/3.0/addresses/cperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Cris Person
         email: cperson@example.com
         http_etag: ...
@@ -204,6 +211,7 @@ User ids are different than member ids.
         address: http://localhost:9001/3.0/addresses/aperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Anna Person
         email: aperson@example.com
         http_etag: ...
@@ -219,6 +227,7 @@ User ids are different than member ids.
         address: http://localhost:9001/3.0/addresses/cperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Cris Person
         email: cperson@example.com
         http_etag: ...
@@ -234,6 +243,7 @@ User ids are different than member ids.
         address: http://localhost:9001/3.0/addresses/aperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Anna Person
         email: aperson@example.com
         http_etag: ...
@@ -249,6 +259,7 @@ User ids are different than member ids.
         address: http://localhost:9001/3.0/addresses/bperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Bart Person
         email: bperson@example.com
         http_etag: ...
@@ -264,6 +275,7 @@ User ids are different than member ids.
         address: http://localhost:9001/3.0/addresses/cperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Cris Person
         email: cperson@example.com
         http_etag: ...
@@ -287,6 +299,7 @@ We can also get just the members of a single mailing list.
         address: http://localhost:9001/3.0/addresses/aperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Anna Person
         email: aperson@example.com
         http_etag: ...
@@ -302,6 +315,7 @@ We can also get just the members of a single mailing list.
         address: http://localhost:9001/3.0/addresses/cperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Cris Person
         email: cperson@example.com
         http_etag: ...
@@ -333,6 +347,7 @@ page.
         address: http://localhost:9001/3.0/addresses/aperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Anna Person
         email: aperson@example.com
         http_etag: ...
@@ -356,6 +371,7 @@ This works with members of a single list as well as with all members.
         address: http://localhost:9001/3.0/addresses/aperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Anna Person
         email: aperson@example.com
         http_etag: ...
@@ -459,6 +475,7 @@ mailing list.
         address: http://localhost:9001/3.0/addresses/dperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name:
         email: dperson@example.com
         http_etag: ...
@@ -475,6 +492,7 @@ mailing list.
         address: http://localhost:9001/3.0/addresses/aperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Anna Person
         email: aperson@example.com
         http_etag: ...
@@ -490,6 +508,7 @@ mailing list.
         address: http://localhost:9001/3.0/addresses/cperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Cris Person
         email: cperson@example.com
         http_etag: ...
@@ -505,6 +524,7 @@ mailing list.
         address: http://localhost:9001/3.0/addresses/cperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Cris Person
         email: cperson@example.com
         http_etag: ...
@@ -521,6 +541,7 @@ mailing list.
         address: http://localhost:9001/3.0/addresses/aperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Anna Person
         email: aperson@example.com
         http_etag: ...
@@ -536,6 +557,7 @@ mailing list.
         address: http://localhost:9001/3.0/addresses/bperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Bart Person
         email: bperson@example.com
         http_etag: ...
@@ -551,6 +573,7 @@ mailing list.
         address: http://localhost:9001/3.0/addresses/cperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Cris Person
         email: cperson@example.com
         http_etag: ...
@@ -574,6 +597,7 @@ We can access all the owners of a list.
         address: http://localhost:9001/3.0/addresses/cperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Cris Person
         email: cperson@example.com
         http_etag: ...
@@ -601,6 +625,7 @@ A specific member can always be referenced by their role and address.
     address: http://localhost:9001/3.0/addresses/cperson@example.com
     bounce_score: 0
     delivery_mode: regular
+    delivery_status: enabled
     display_name: Cris Person
     email: cperson@example.com
     http_etag: ...
@@ -624,6 +649,7 @@ example, we can search for all the memberships of a particular address.
         address: http://localhost:9001/3.0/addresses/aperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Anna Person
         email: aperson@example.com
         http_etag: ...
@@ -639,6 +665,7 @@ example, we can search for all the memberships of a particular address.
         address: http://localhost:9001/3.0/addresses/aperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Anna Person
         email: aperson@example.com
         http_etag: ...
@@ -663,6 +690,7 @@ Or, we can find all the memberships for a particular mailing list.
         address: http://localhost:9001/3.0/addresses/aperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Anna Person
         email: aperson@example.com
         http_etag: ...
@@ -678,6 +706,7 @@ Or, we can find all the memberships for a particular mailing list.
         address: http://localhost:9001/3.0/addresses/bperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Bart Person
         email: bperson@example.com
         http_etag: ...
@@ -693,6 +722,7 @@ Or, we can find all the memberships for a particular mailing list.
         address: http://localhost:9001/3.0/addresses/cperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Cris Person
         email: cperson@example.com
         http_etag: ...
@@ -708,6 +738,7 @@ Or, we can find all the memberships for a particular mailing list.
         address: http://localhost:9001/3.0/addresses/cperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Cris Person
         email: cperson@example.com
         http_etag: ...
@@ -735,6 +766,7 @@ list.
         address: http://localhost:9001/3.0/addresses/cperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Cris Person
         email: cperson@example.com
         http_etag: ...
@@ -750,6 +782,7 @@ list.
         address: http://localhost:9001/3.0/addresses/cperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Cris Person
         email: cperson@example.com
         http_etag: ...
@@ -776,6 +809,7 @@ Or, we can find all the memberships for an address with a specific role.
         address: http://localhost:9001/3.0/addresses/cperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Cris Person
         email: cperson@example.com
         http_etag: ...
@@ -791,6 +825,7 @@ Or, we can find all the memberships for an address with a specific role.
         address: http://localhost:9001/3.0/addresses/cperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Cris Person
         email: cperson@example.com
         http_etag: ...
@@ -819,6 +854,7 @@ Or, we can search for all members with a specific moderation action on a list.
         address: http://localhost:9001/3.0/addresses/cperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Cris Person
         email: cperson@example.com
         http_etag: ...
@@ -849,6 +885,7 @@ Or, we can search for all members with a specific ``delivery_status`` or
         address: http://localhost:9001/3.0/addresses/bperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: by_bounces
         display_name: Bart Person
         email: bperson@example.com
         http_etag: ...
@@ -875,6 +912,7 @@ Finally, we can search for a specific member given all three criteria.
         address: http://localhost:9001/3.0/addresses/cperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Cris Person
         email: cperson@example.com
         http_etag: ...
@@ -902,6 +940,7 @@ Search can also be performed using HTTP GET queries.
         address: http://localhost:9001/3.0/addresses/cperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Cris Person
         email: cperson@example.com
         http_etag: ...
@@ -985,6 +1024,7 @@ Elly is now a known user, and a member of the mailing list.
         address: http://localhost:9001/3.0/addresses/eperson@example.com
         bounce_score: 0
         delivery_mode: plaintext_digests
+        delivery_status: by_user
         display_name: Elly Person
         email: eperson@example.com
         http_etag: ...
@@ -1039,6 +1079,7 @@ subscription::
         address: http://localhost:9001/3.0/addresses/gwen@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Gwen Person
         email: gwen@example.com
         http_etag: "..."
@@ -1069,6 +1110,7 @@ the new address.
         address: http://localhost:9001/3.0/addresses/gwen.person@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Gwen Person
         email: gwen.person@example.com
         http_etag: "..."
@@ -1147,6 +1189,7 @@ addresses.
         address: http://localhost:9001/3.0/addresses/herb@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Herb Person
         email: herb@example.com
         http_etag: "..."
@@ -1163,6 +1206,7 @@ addresses.
         address: http://localhost:9001/3.0/addresses/herb@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Herb Person
         email: herb@example.com
         http_etag: "..."
@@ -1224,6 +1268,7 @@ his membership ids have not changed.
         address: http://localhost:9001/3.0/addresses/hperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Herb Person
         email: hperson@example.com
         http_etag: "..."
@@ -1239,6 +1284,7 @@ his membership ids have not changed.
         address: http://localhost:9001/3.0/addresses/hperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Herb Person
         email: hperson@example.com
         http_etag: "..."
@@ -1272,6 +1318,7 @@ mode of delivery.
         address: http://localhost:9001/3.0/addresses/herb@example.com
         bounce_score: 0
         delivery_mode: mime_digests
+        delivery_status: enabled
         display_name: Herb Person
         email: herb@example.com
         http_etag: "..."
@@ -1329,6 +1376,7 @@ default, there is no such attribute in the resource.
     address: http://localhost:9001/3.0/addresses/hperson@example.com
     bounce_score: 0
     delivery_mode: regular
+    delivery_status: enabled
     display_name: Herb Person
     email: hperson@example.com
     http_etag: "..."
@@ -1373,6 +1421,7 @@ It can be reset to the list default by patching an empty value.
     address: http://localhost:9001/3.0/addresses/hperson@example.com
     bounce_score: 0
     delivery_mode: regular
+    delivery_status: enabled
     display_name: Herb Person
     email: hperson@example.com
     http_etag: "..."
@@ -1522,6 +1571,7 @@ And now only Kate is still a member.
         address: http://localhost:9001/3.0/addresses/kperson@example.com
         bounce_score: 0
         delivery_mode: regular
+        delivery_status: enabled
         display_name: Kate Person
         email: kperson@example.com
         http_etag: "..."
