@@ -95,6 +95,7 @@ class _MemberBase(CollectionMixin):
             'last_warning_sent': attrgetter('last_warning_sent'),
             'total_warnings_sent': attrgetter('total_warnings_sent'),
             'delivery_mode': attrgetter('delivery_mode'),
+            'delivery_status': attrgetter('delivery_status'),
             'email': attrgetter('address.email'),
             'list_id': attrgetter('list_id'),
             'subscription_mode': attrgetter('subscription_mode'),
