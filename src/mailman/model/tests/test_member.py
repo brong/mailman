@@ -31,7 +31,7 @@ from mailman.interfaces.member import (
 from mailman.interfaces.user import UnverifiedAddressError
 from mailman.interfaces.usermanager import IUserManager
 from mailman.model.member import Member, MembershipManager
-from mailman.testing.helpers import set_preferred
+from mailman.testing.helpers import LogFileMark, set_preferred
 from mailman.testing.layers import ConfigLayer
 from mailman.utilities.datetime import now
 from zope.component import getUtility
@@ -104,9 +104,12 @@ class TestMember(unittest.TestCase):
         address.verified_on = now()
         self._mlist.subscribe(address)
         self.assertEqual(len(list(self._mlist.members.members)), 1)
+        mark = LogFileMark('mailman.subscribe')
         member = self._mlist.members.get_member('anne@example.com')
         member.unsubscribe()
         self.assertEqual(len(list(self._mlist.members.members)), 0)
+        self.assertIn('test@example.com: unsubscribed anne@example.com',
+                      mark.read())
 
     def test_default_moderation_action(self):
         # Owners and moderators have their posts accepted, members and

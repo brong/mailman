@@ -637,6 +637,19 @@ approval:
         # one token still in the database.
         self._expected_pendings_count = 1
 
+    def test_send_invitation_logged(self):
+        # Test that an invitation is logged.
+        anne = self._user_manager.create_address(self._anne)
+        self.assertIsNone(anne.verified_on)
+        # Run the workflow to model the confirmation step.
+        mark = LogFileMark('mailman.subscribe')
+        workflow = SubscriptionWorkflow(self._mlist, anne, invitation=True)
+        list(workflow)
+        self.assertIn('test@example.com: subscription invitation sent to '
+                      'anne@example.com', mark.read())
+        # The token is still in the database.
+        self._expected_pendings_count = 1
+
     def test_invitation_verp_confirmations_no(self):
         # Test From: and Subject: with verp_confirmations equal no.
         anne = self._user_manager.create_address(self._anne)

@@ -18,6 +18,7 @@
 """Model for mailing lists."""
 
 import os
+import logging
 
 from mailman.config import config
 from mailman.database.model import Model
@@ -94,6 +95,7 @@ from zope.interface import implementer
 
 SPACE = ' '
 UNDERSCORE = '_'
+slog = logging.getLogger('mailman.subscribe')
 
 
 @public
@@ -537,6 +539,7 @@ class MailingList(Model):
                         subscriber=subscriber)
         member.preferences = Preferences()
         store.add(member)
+        slog.info(f'{self.fqdn_listname}: subscribed {test_email}')
         notify(SubscriptionEvent(
             self, member, send_welcome_message=send_welcome_message))
         return member

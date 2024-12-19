@@ -385,6 +385,8 @@ class SubscriptionWorkflow(_SubscriptionWorkflowCommon):
         self._set_token(TokenOwner.subscriber)
         self.push('do_confirm_verify')
         self.save()
+        log.info('{}: subscription invitation sent to {}'.format(
+            self.mlist.fqdn_listname, self.address.email))
         # Triggering this event causes the confirmation message to be sent.
         notify(SubscriptionInvitationNeededEvent(
             self.mlist, self.token, self.address.email))
