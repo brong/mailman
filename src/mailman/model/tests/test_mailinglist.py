@@ -40,6 +40,7 @@ from mailman.interfaces.usermanager import IUserManager
 from mailman.testing.helpers import (
     configuration,
     get_queue_messages,
+    LogFileMark,
     set_preferred,
 )
 from mailman.testing.layers import ConfigLayer
@@ -157,6 +158,15 @@ class TestMailingList(unittest.TestCase):
         self.assertEqual(False, self._mlist.is_subscribed(address))
         self._mlist.subscribe(address)
         self.assertEqual(True, self._mlist.is_subscribed(address))
+
+    def test_subscribe_is_logged(self):
+        manager = getUtility(IUserManager)
+        user = manager.create_user('anne@example.com', 'Anne Person')
+        set_preferred(user)
+        mark = LogFileMark('mailman.subscribe')
+        self._mlist.subscribe(user)
+        self.assertIn('ant@example.com: subscribed anne@example.com',
+                      mark.read())
 
 
 class TestListArchiver(unittest.TestCase):

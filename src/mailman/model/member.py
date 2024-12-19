@@ -17,6 +17,8 @@
 
 """Model for members."""
 
+import logging
+
 from datetime import datetime
 from mailman.core.constants import system_preferences
 from mailman.database.model import Model
@@ -47,6 +49,7 @@ from zope.interface import implementer
 
 
 uid_factory = UIDFactory(context='members')
+slog = logging.getLogger('mailman.subscribe')
 
 
 @public
@@ -228,6 +231,8 @@ class Member(Model):
         notify(UnsubscriptionEvent(self.mailing_list, self))
         store.delete(self.preferences)
         store.delete(self)
+        slog.info(f'({self.mailing_list.fqdn_listname}: '
+                  f'unsubscribed {self.address.email}')
 
 
 @public

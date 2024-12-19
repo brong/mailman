@@ -42,7 +42,6 @@ from zope.component import getUtility
 NL = '\n'
 
 vlog = logging.getLogger('mailman.vette')
-slog = logging.getLogger('mailman.subscribe')
 
 
 @public
@@ -283,7 +282,8 @@ def handle_unsubscription(mlist, id, action, comment=None):
         except NotAMemberError:
             # User has already been unsubscribed.
             pass
-        slog.info('%s: deleted %s', mlist.fqdn_listname, email)
+        # Now logged in delete_member.
+        # slog.info('%s: deleted %s', mlist.fqdn_listname, email)
     else:
         raise AssertionError('Unexpected action: {}'.format(action))
     # Delete the request from the database.
