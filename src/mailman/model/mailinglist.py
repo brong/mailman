@@ -539,7 +539,7 @@ class MailingList(Model):
                         subscriber=subscriber)
         member.preferences = Preferences()
         store.add(member)
-        slog.info(f'{self.fqdn_listname}: subscribed {test_email}')
+        slog.info(f'{self.fqdn_listname}: {role.name} subscribed {test_email}')
         notify(SubscriptionEvent(
             self, member, send_welcome_message=send_welcome_message))
         return member

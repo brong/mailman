@@ -165,7 +165,16 @@ class TestMailingList(unittest.TestCase):
         set_preferred(user)
         mark = LogFileMark('mailman.subscribe')
         self._mlist.subscribe(user)
-        self.assertIn('ant@example.com: subscribed anne@example.com',
+        self.assertIn('ant@example.com: member subscribed anne@example.com',
+                      mark.read())
+
+    def test_subscribe_nonmember_is_logged(self):
+        manager = getUtility(IUserManager)
+        user = manager.create_user('anne@example.com', 'Anne Person')
+        set_preferred(user)
+        mark = LogFileMark('mailman.subscribe')
+        self._mlist.subscribe(user, role=MemberRole.nonmember)
+        self.assertIn('ant@example.com: nonmember subscribed anne@example.com',
                       mark.read())
 
 
