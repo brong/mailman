@@ -103,7 +103,12 @@ def display_members(ctx, mlist, role, regular, digest,
         if nomail is not None:
             if member.delivery_status not in status_types:
                 continue
-        dn = address.display_name or member.user.display_name
+        # Non-members may have empty address.display_name and member.user can
+        # be None resulting in AttributeError on member.user.display_name.
+        try:
+            dn = address.display_name or member.user.display_name
+        except AttributeError:
+            dn = ''
         if email_only or not dn:
             print(address.original_email, file=outfp)
         else:
