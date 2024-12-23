@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-08-08 22:30-0700\n"
-"PO-Revision-Date: 2024-01-06 11:06+0000\n"
+"PO-Revision-Date: 2024-12-23 23:12+0000\n"
 "Last-Translator: Besnik Bleta <besnik@programeshqip.org>\n"
-"Language-Team: Albanian <https://hosted.weblate.org/projects/gnu-mailman/mailman/sq/>\n"
+"Language-Team: Albanian <https://hosted.weblate.org/projects/gnu-mailman/"
+"mailman/sq/>\n"
 "Language: sq\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.10-dev\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:85
 #: src/mailman/chains/hold.py:166 src/mailman/handlers/acknowledge.py:56
@@ -48,9 +49,8 @@ msgid ""
 "The content of this message was lost. It was probably cross-posted to\n"
 "multiple lists and previously handled on another list.\n"
 msgstr ""
-"Lënda e këtij mesazhi humbi. Ka shumë mundësi të jetë postuar\n"
-"në\n"
-"disa lista dhe trajtuar më herët në një listë tjetër.\n"
+"Lënda e këtij mesazhi humbi. Ka shumë mundësi të qe postuar\n"
+"në disa lista dhe trajtuar më herët në një listë tjetër.\n"
 
 #: src/mailman/app/moderator.py:133
 #, python-brace-format
@@ -69,7 +69,7 @@ msgstr "Përcjellje e mesazhit të moderuar"
 #: src/mailman/app/moderator.py:244
 #, python-brace-format
 msgid "New unsubscription request from ${mlist.display_name} by ${email}"
-msgstr ""
+msgstr "Kërkesë e re pajtimi prej ${mlist.display_name} nga ${email}"
 
 #: src/mailman/app/moderator.py:277
 msgid "Unsubscription request"
@@ -82,7 +82,7 @@ msgstr "Mesazhi Origjinal"
 #: src/mailman/app/moderator.py:321
 #, python-brace-format
 msgid "Request to mailing list \"${display_name}\" rejected"
-msgstr ""
+msgstr "Kërkesa te lista e postimeve “${display_name}” u hodh poshtë"
 
 #: src/mailman/app/notifications.py:93
 msgid " (Digest mode)"
@@ -91,12 +91,12 @@ msgstr " (Mënyrë përmbledhje)"
 #: src/mailman/app/notifications.py:97
 #, python-brace-format
 msgid "Welcome to the \"${mlist.display_name}\" mailing list${digmode}"
-msgstr ""
+msgstr "Mirë se vini te lista e postimeve “${mlist.display_name}”${digmode}"
 
 #: src/mailman/app/notifications.py:130
 #, python-brace-format
 msgid "You have been unsubscribed from the ${mlist.display_name} mailing list"
-msgstr ""
+msgstr "Jeni shpajtuar nga lista e postimeve ${mlist.display_name}"
 
 #: src/mailman/app/notifications.py:148
 #, python-brace-format
@@ -106,7 +106,7 @@ msgstr "njoftim pajtimi ${mlist.display_name}"
 #: src/mailman/app/notifications.py:173
 #, python-brace-format
 msgid "${member}'s subscription disabled on ${mlist.display_name}"
-msgstr ""
+msgstr "Pajtimi për ${member} te ${mlist.display_name} u çaktivizua"
 
 #: src/mailman/app/notifications.py:201
 #, python-brace-format
@@ -122,31 +122,40 @@ msgstr ""
 #, python-brace-format
 msgid "Your subscription for ${mlist.display_name} mailing list has been disabled"
 msgstr ""
+"Pajtimi juaj për listën e postimeve ${mlist.display_name} është çaktivizuar"
 
 #: src/mailman/app/subscriptions.py:328
 #, python-brace-format
 msgid "New subscription request to ${self.mlist.display_name} from ${self.address.email}"
 msgstr ""
+"Kërkesë e re pajtimi te ${self.mlist.display_name} nga ${self.address.email}"
 
 #: src/mailman/app/subscriptions.py:497
 #, python-brace-format
 msgid "New unsubscription request to ${self.mlist.display_name} from ${self.address.email}"
 msgstr ""
+"Kërkesë e re shpajtimi te ${self.mlist.display_name} nga "
+"${self.address.email}"
 
 #: src/mailman/app/subscriptions.py:629
 #, python-brace-format
 msgid "You have been invited to join the ${event.mlist.fqdn_listname} mailing list."
 msgstr ""
+"Jeni ftuar të merrni pjesë te lista e postimeve ${event.mlist.fqdn_listname}."
 
 #: src/mailman/app/subscriptions.py:632
 #, python-brace-format
 msgid "Your confirmation is needed to leave the ${event.mlist.fqdn_listname} mailing list."
 msgstr ""
+"Që të braktisni listën e postimeve ${event.mlist.fqdn_listname}, lypset "
+"ripohimi nga ju."
 
 #: src/mailman/app/subscriptions.py:636
 #, python-brace-format
 msgid "Your confirmation is needed to join the ${event.mlist.fqdn_listname} mailing list."
 msgstr ""
+"Që të merrni pjesë te lista e postimeve ${event.mlist.fqdn_listname}, lypset "
+"ripohimi nga ju."
 
 #: src/mailman/bin/mailman.py:102 src/mailman/bin/master.py:585
 #: src/mailman/bin/runner.py:96
@@ -155,16 +164,23 @@ msgid ""
 "    MAILMAN_CONFIG_FILE is consulted and used if set.  If neither are given, a\n"
 "    default configuration file is loaded."
 msgstr ""
+"    Kartelë formësimi për t’u përdorur.  Nëse s’jepet, shihet për "
+"ndryshoren\n"
+"    e mjedisit MAILMAN_CONFIG_FILE dhe përdoret, në pastë.  Nëse s’jepet as\n"
+"    njëra, as tjetra, ngarkohet një kartelë parazgjedhje formësimi."
 
 #: src/mailman/bin/mailman.py:110
 msgid ""
 "    Running mailman commands as root is not recommended and mailman will\n"
 "    refuse to run as root unless this option is specified."
 msgstr ""
+"    S’rekomandohet xhirimi i urdhrave të mailman-it si rrënjë dhe mailman-i\n"
+"    s’do të pranojë të xhirohet nga rrënjë, veç në u dhëntë kjo mundësi."
 
 #: src/mailman/bin/mailman.py:129
 msgid "    If you are sure you want to run as root, specify --run-as-root."
 msgstr ""
+"    Nëse jeni i sigurt se doni ta xhironi si rrënjë, jepni --run-as-root."
 
 #: src/mailman/bin/master.py:182
 msgid ""
@@ -327,11 +343,11 @@ msgstr "Pranoni një mesazh."
 
 #: src/mailman/chains/builtin.py:38
 msgid "The built-in moderation chain."
-msgstr "Zinxhir moderimi"
+msgstr "Zinxhiri i brendshëm i moderimit."
 
 #: src/mailman/chains/discard.py:37
 msgid "Discard a message and stop processing."
-msgstr ""
+msgstr "Hidhe tej një mesazh dhe ndale përpunimin."
 
 #: src/mailman/chains/dmarc.py:30
 msgid "Process DMARC reject or discard mitigations"
@@ -339,7 +355,7 @@ msgstr ""
 
 #: src/mailman/chains/headers.py:121
 msgid "Header \"{}\" matched a header rule"
-msgstr ""
+msgstr "Kryet “{}” kanë përkim me një rregull kryesh"
 
 #: src/mailman/chains/headers.py:136
 msgid "The built-in header matching chain"
@@ -355,17 +371,19 @@ msgstr "Njoftimi i fundit për vetëpërgjigje, për sot"
 
 #: src/mailman/chains/hold.py:133
 msgid "Hold a message and stop processing."
-msgstr "Mba pezull një mesazh dhe ndal përpunimin"
+msgstr "Mbaj pezull një mesazh dhe ndal përpunimin."
 
 #: src/mailman/chains/hold.py:205
 #, python-brace-format
 msgid "Your message to ${mlist.fqdn_listname} awaits moderator approval"
 msgstr ""
+"Mesazhi juaj te ${mlist.fqdn_listname} është në pritje të miratimit nga "
+"moderatorët"
 
 #: src/mailman/chains/hold.py:234
 #, python-brace-format
 msgid "${mlist.fqdn_listname} post from ${msg.sender} requires approval"
-msgstr ""
+msgstr "Postimi te ${mlist.fqdn_listname} nga ${msg.sender} lyp miratim"
 
 #: src/mailman/chains/hold.py:249
 msgid ""
@@ -375,6 +393,13 @@ msgid ""
 "message will be approved for posting to the list.  The Approved: header can\n"
 "also appear in the first line of the body of the reply."
 msgstr ""
+"Nëse i përgjigjeni këtij mesazhi, mbajtja të paprekura e kryeve “SubjeKt:”\n"
+"do të sjellë hedhjen tej nga Mailman-i të mesazhit të mbajtur. Bëjeni këtë\n"
+"nëse mesazhi është i padëshiruar. Nëse përgjigjeni te ky mesazh dhe "
+"përfshini\n"
+"kryet “I miratuar:” me fjalëkalimin e listë në të, mesazhi do të miratohet\n"
+"për postim te lista. Kryet “I miratuar:” mund të shfaqet edhe te rreshti\n"
+"i parë i lëndës së përgjigjes."
 
 #: src/mailman/chains/moderation.py:51
 msgid "Moderation chain"
@@ -386,13 +411,14 @@ msgstr ""
 
 #: src/mailman/chains/reject.py:44
 msgid "Reject/bounce a message and stop processing."
-msgstr ""
+msgstr "Hidhni poshtë/riktheni mbrapsht një mesazh dhe ndalni përpunimin."
 
 #: src/mailman/commands/cli_addmembers.py:73
 #: src/mailman/commands/cli_syncmembers.py:121
 #, python-brace-format
 msgid "Cannot parse as valid email address (skipping): ${line}"
 msgstr ""
+"S’mund të analizohet një adresë email e vlefshme (po anashkalohet): ${line}"
 
 #: src/mailman/commands/cli_addmembers.py:104
 #, python-brace-format
@@ -409,7 +435,7 @@ msgstr "Anëtarësia është e ndaluar (po anashkalohet): ${email}"
 #: src/mailman/commands/cli_syncmembers.py:90
 #, python-brace-format
 msgid "Subscription already pending (skipping): ${email}"
-msgstr ""
+msgstr "Pajtim tashmë në pritje të shqyrtimit (po anashkalohet): ${email}"
 
 #: src/mailman/commands/cli_addmembers.py:116
 msgid ""
@@ -435,7 +461,7 @@ msgstr ""
 
 #: src/mailman/commands/cli_addmembers.py:137
 msgid "    Override the list's setting for send_welcome_message."
-msgstr ""
+msgstr "    Anashkalo rregullimin e listë për send_welcome_message."
 
 #: src/mailman/commands/cli_addmembers.py:146 src/mailman/commands/cli_admins.py:97
 #: src/mailman/commands/cli_import.py:68 src/mailman/commands/cli_inject.py:75
@@ -449,18 +475,20 @@ msgstr "S’ka listë të tillë: ${listspec}"
 #: src/mailman/commands/cli_admins.py:51
 #, python-brace-format
 msgid "${email} is already a ${role.name} of ${mlist.fqdn_listname}"
-msgstr ""
+msgstr "${email} është tashmë një ${role.name} i ${mlist.fqdn_listname}"
 
 #: src/mailman/commands/cli_admins.py:59
 #, python-brace-format
 msgid "${email} is not a ${role.name} of ${mlist.fqdn_listname}"
-msgstr ""
+msgstr "${email} s’është një ${role.name} i ${mlist.fqdn_listname}"
 
 #: src/mailman/commands/cli_admins.py:67
 msgid ""
 "    Add and/or delete owners and moderators of a list.\n"
 "    "
 msgstr ""
+"    Shtoni dhe/ose hiqni anëtarë dhe moderatorë të një liste.\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:72
 msgid ""
@@ -470,6 +498,13 @@ msgid ""
 "    to add multiple users.\n"
 "    "
 msgstr ""
+"    Përdorues për t’u shtuar me rolin e dhënë. Kjo mund të jetë një adresë\n"
+"    email, ose, nëse vihet brenda thonjëzash, çfarëdo emri në ekran dhe "
+"adresë\n"
+"    email që mund të analizohet nga email.utils.parseaddr. P.sh., 'Jane Doe\n"
+"    <jane@example.com>'. Mund të përsëritet për të shtuar të tjerë përdorues."
+"\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:80
 msgid ""
@@ -477,6 +512,9 @@ msgid ""
 "    May be repeated to delete multiple users.\n"
 "    "
 msgstr ""
+"    Adresë email e përdoruesit që i duhet hequr roli i dhënë.\n"
+"    Mund të përsëritet, për të hequr përdorues të tjerë.\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:87
 msgid ""
@@ -484,19 +522,22 @@ msgid ""
 "    If not given, then 'owner' role is assumed.\n"
 "    "
 msgstr ""
+"    Roli për shtim/heqje. Ky mund të jetë “i zoti”, ose “moderator”.\n"
+"    Nëse s’jepet, atëherë merret si roli “i zoti”.\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:99
 msgid "Nothing to add or delete."
-msgstr ""
+msgstr "Asgjë për shtim ose heqje."
 
 #: src/mailman/commands/cli_admins.py:103 src/mailman/commands/cli_admins.py:106
 #, python-brace-format
 msgid "Invalid email address: ${email}"
-msgstr ""
+msgstr "Adresë email e pavlefshme: ${email}"
 
 #: src/mailman/commands/cli_aliases.py:33
 msgid "Regenerate the aliases appropriate for your MTA."
-msgstr ""
+msgstr "Riprodhoni aliaset e përshtatshëm për MTA-në tuaj."
 
 #: src/mailman/commands/cli_aliases.py:38
 msgid "An alternative directory to output the various MTA files to."
@@ -523,7 +564,7 @@ msgstr ""
 
 #: src/mailman/commands/cli_changeaddress.py:53
 msgid "Address {} already exists; can't change."
-msgstr "Ka tashmë një adresë {}; s’mund të ndryshohet"
+msgstr "Ka tashmë një adresë {}; s’mund të ndryshohet."
 
 #: src/mailman/commands/cli_changeaddress.py:58
 msgid "Address changed from {} to {}."
@@ -910,7 +951,7 @@ msgstr "Shfaq gjithashtu emrat e listave"
 
 #: src/mailman/commands/cli_lists.py:66
 msgid "Show also the list descriptions"
-msgstr "Shfaq gjithashtu përshkrimet e listave."
+msgstr "Shfaq gjithashtu përshkrimet e listave"
 
 #: src/mailman/commands/cli_lists.py:70
 msgid "Less verbosity"
@@ -968,7 +1009,7 @@ msgstr ""
 
 #: src/mailman/commands/cli_lists.py:161
 msgid "Print less output."
-msgstr "Shtyp më pak gjëra"
+msgstr "Shtyp më pak gjëra."
 
 #: src/mailman/commands/cli_lists.py:165
 msgid ""
@@ -1295,7 +1336,7 @@ msgstr ""
 
 #: src/mailman/commands/cli_version.py:32
 msgid "Display Mailman's version."
-msgstr "Shfaq version Mailman-i"
+msgstr "Shfaq version Mailman-i."
 
 #: src/mailman/commands/cli_withlist.py:74
 msgid "ipython is not available, set use_ipython to no"
@@ -1476,7 +1517,7 @@ msgstr ""
 
 #: src/mailman/commands/eml_end.py:33
 msgid "Stop processing commands."
-msgstr "Ndal përpunim urdhradh"
+msgstr "Ndal përpunim urdhrash."
 
 #: src/mailman/commands/eml_end.py:47
 msgid "An alias for 'end'."
@@ -1597,7 +1638,7 @@ msgstr ""
 
 #: src/mailman/commands/eml_who.py:50
 msgid "Get a list of the list members."
-msgstr "Merrni një listë të anëtarëve të listës"
+msgstr "Merrni një listë të anëtarëve të listës."
 
 #: src/mailman/commands/eml_who.py:63
 msgid "You are not authorized to see the membership list."
@@ -1745,7 +1786,7 @@ msgstr ""
 
 #: src/mailman/handlers/replybot.py:48
 msgid "Send automatic responses."
-msgstr "Dërgo përgjigje të automatizuara"
+msgstr "Dërgo përgjigje të automatizuara."
 
 #: src/mailman/handlers/replybot.py:101
 #, python-brace-format
@@ -2166,9 +2207,26 @@ msgstr ""
 
 msgid "list:member:digest:masthead.txt"
 msgstr ""
+"Dërgoni parashtrime liste postimesh $display_name te\n"
+"\t$listname\n"
+"\n"
+"Që të pajtoheni, apo shpajtoheni përmes email-i, dërgoni një mesazh me “help”"
+" te\n"
+"subjekti apo lënda, te\n"
+"\t$request_email\n"
+"\n"
+"Me personin që administron listën mund të lidheni përmes\n"
+"\t$owner_email\n"
+"\n"
+"Kur përgjigjeni, ju lutemi, përpunoni rreshtin e Subjektit tuaj, që të jetë\n"
+"më specifik se sa\n"
+"“Re: Contents of $display_name digest…”"
 
 msgid "list:member:generic:footer.txt"
 msgstr ""
+"_______________________________________________\n"
+"Lista e postimeve $display_name -- $listname\n"
+"Që të shpajtoheni, dërgoni një email te ${short_listname}-leave@${domain}"
 
 msgid "list:member:regular:header.txt"
 msgstr ""
@@ -2193,18 +2251,68 @@ msgstr ""
 
 msgid "list:user:notice:post.txt"
 msgstr ""
+"Mesazhi juaj me titull\n"
+"\n"
+"    $subject\n"
+"\n"
+"u mor me sukses nga lista e postimeve $display_name."
 
 msgid "list:user:notice:probe.txt"
 msgstr ""
 
 msgid "list:user:notice:refuse.txt"
 msgstr ""
+"Kërkesa juaj te lista e postimeve $listname\n"
+"\n"
+"    $request\n"
+"\n"
+"është hedhur poshtë nga moderatori i listës.  Moderatori dha\n"
+"arsyen vijues për hedhjen poshtë të kërkesës suaj:\n"
+"\n"
+"\"$reason\"\n"
+"\n"
+"Çfarëdo pyejtesh apo komentesh duhen drejtuar te përgjegjësi i listës\n"
+"te:\n"
+"\n"
+"    $owner_email"
 
 msgid "list:user:notice:rejected.txt"
 msgstr ""
+"Mesazhi juaj te lista e postimeve $listname u hodh poshtë për arsyet\n"
+"vijuese:\n"
+"\n"
+"$reasons\n"
+"\n"
+"Bashkëngjitet mesazhi origjinal, siç u mor nga Mailman."
 
 msgid "list:user:notice:warning.txt"
 msgstr ""
+"Pajtimi juaj te lista e postimeve $listname pështë çaktivizuar, ngaqë për "
+"të\n"
+"ka pasur një numër kthimesh që tregojnë se mund të ketë ndonjë problem "
+"dërgimi\n"
+"mesazhesh te $sender_email. Për më tepër ndihmë, mund të doni të shihni me\n"
+"përgjegjësin tuaj të email-it.\n"
+"\n"
+"Nëse keni pyetje apo probleme, mund të lidheni me të zotin e listës, te\n"
+"\n"
+"    $owner_email"
 
 msgid "list:user:notice:welcome.txt"
 msgstr ""
+"Mirë se vini te lista e postimeve “$display_name”!\n"
+"\n"
+"Që të postoni te kjo listë, dërgojeni mesazhin tuaj te:\n"
+"\n"
+"  $listname\n"
+"\n"
+"Mund të shpajtoheni, ose të bëni përimtime te mundësitë\n"
+"tuaja përmes email-i, duke dërguar një mesazh te:\n"
+"\n"
+"  $request_email\n"
+"\n"
+"me fjalën “help” te subjekti ose lënda (pa thonjëzat) dhe do të merrni një\n"
+"mesazh me udhëzime.  Do t’ju duhet fjalëkalimi juaj që të ndryshoni "
+"mundësitë\n"
+"tuaja, por për arsye sigurie, ky fjalëkalim s’tregohet këtu. Nëse e keni\n"
+"harruar fjalëkalimin tuaj, do t’ju duhet ta ricaktoni përmes ndërfaqes UI."
