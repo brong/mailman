@@ -20,6 +20,8 @@ Bugs fixed
   status and the rejection and defects list is logged.  (Closes #351)
 * A member's delivery_status is now available via REST.  (Closes #1184)
 * Subscribe and unsubscribe events are now logged.  (Closes #1143)
+* The ``mailman members`` command no longer throws AttributeError when listing
+  nonmembers with no display name and no user record.  (Closes #1187)
 
 .. _news-3.3.10:
 

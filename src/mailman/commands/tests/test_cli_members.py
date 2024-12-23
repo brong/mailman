@@ -23,9 +23,11 @@ from click.testing import CliRunner
 from mailman.app.lifecycle import create_list
 from mailman.commands.cli_members import members
 from mailman.interfaces.member import MemberRole
+from mailman.interfaces.usermanager import IUserManager
 from mailman.testing.helpers import subscribe
 from mailman.testing.layers import ConfigLayer
 from tempfile import NamedTemporaryFile
+from zope.component import getUtility
 
 
 class TestCLIMembers(unittest.TestCase):
@@ -100,6 +102,17 @@ class TestCLIMembers(unittest.TestCase):
                 lines = infp.readlines()
         self.assertEqual(len(lines), 1)
         self.assertEqual(lines[0], 'Cate Person <cperson@example.com>\n')
+
+    def test_nonmember_no_address_display_name_no_user(self):
+        address = getUtility(IUserManager).create_address('user@example.com')
+        self._mlist.subscribe(address, role=MemberRole.nonmember)
+        with NamedTemporaryFile('w', encoding='utf-8') as outfp:
+            self._command.invoke(members, (
+                '--role', 'nonmember', '-o', outfp.name, 'ant.example.com'))
+            with open(outfp.name, 'r', encoding='utf-8') as infp:
+                lines = infp.readlines()
+        self.assertEqual(len(lines), 1)
+        self.assertEqual(lines[0], 'user@example.com\n')
 
     def test_display_name_fallback(self):
         member = subscribe(self._mlist, 'Anne', role=MemberRole.member)
