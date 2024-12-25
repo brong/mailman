@@ -232,7 +232,7 @@ class Member(Model):
         store.delete(self.preferences)
         store.delete(self)
         slog.info(f'{self.mailing_list.fqdn_listname}: '
-                  f'unsubscribed {self.address.email}')
+                  f'{self.role.name} unsubscribed {self.address.email}')
 
 
 @public
