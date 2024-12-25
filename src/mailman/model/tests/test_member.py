@@ -108,7 +108,20 @@ class TestMember(unittest.TestCase):
         member = self._mlist.members.get_member('anne@example.com')
         member.unsubscribe()
         self.assertEqual(len(list(self._mlist.members.members)), 0)
-        self.assertIn('test@example.com: unsubscribed anne@example.com',
+        self.assertIn('test@example.com: member unsubscribed anne@example.com',
+                      mark.read())
+
+    def test_nonmember_unsubscribe(self):
+        address = self._usermanager.create_address('anne@example.com')
+        address.verified_on = now()
+        self._mlist.subscribe(address, MemberRole.nonmember)
+        self.assertEqual(len(list(self._mlist.nonmembers.members)), 1)
+        mark = LogFileMark('mailman.subscribe')
+        member = self._mlist.nonmembers.get_member('anne@example.com')
+        member.unsubscribe()
+        self.assertEqual(len(list(self._mlist.nonmembers.members)), 0)
+        self.assertIn('test@example.com: '
+                      'nonmember unsubscribed anne@example.com',
                       mark.read())
 
     def test_default_moderation_action(self):
