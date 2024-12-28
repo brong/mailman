@@ -1,0 +1,15 @@
+Mirë se vini te lista e postimeve “$display_name”!
+
+Që të postoni te kjo listë, dërgojeni mesazhin tuaj te:
+
+  $listname
+
+Mund të shpajtoheni, ose të bëni përimtime te mundësitë
+tuaja përmes email-i, duke dërguar një mesazh te:
+
+  $request_email
+
+me fjalën “help” te subjekti ose lënda (pa thonjëzat) dhe do të merrni një
+mesazh me udhëzime.  Do t’ju duhet fjalëkalimi juaj që të ndryshoni mundësitë
+tuaja, por për arsye sigurie, ky fjalëkalim s’tregohet këtu. Nëse e keni
+harruar fjalëkalimin tuaj, do t’ju duhet ta ricaktoni përmes ndërfaqes UI.

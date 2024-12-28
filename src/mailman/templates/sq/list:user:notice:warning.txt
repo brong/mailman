@@ -1,0 +1,8 @@
+Pajtimi juaj te lista e postimeve $listname pështë çaktivizuar, ngaqë për të
+ka pasur një numër kthimesh që tregojnë se mund të ketë ndonjë problem dërgimi
+mesazhesh te $sender_email. Për më tepër ndihmë, mund të doni të shihni me
+përgjegjësin tuaj të email-it.
+
+Nëse keni pyetje apo probleme, mund të lidheni me të zotin e listës, te
+
+    $owner_email

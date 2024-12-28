@@ -1,0 +1,3 @@
+_______________________________________________
+Lista e postimeve $display_name -- $listname
+Që të shpajtoheni, dërgoni një email te ${short_listname}-leave@${domain}

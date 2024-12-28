@@ -1,0 +1,13 @@
+Dërgoni parashtrime liste postimesh $display_name te
+	$listname
+
+Që të pajtoheni, apo shpajtoheni përmes email-i, dërgoni një mesazh me “help” te
+subjekti apo lënda, te
+	$request_email
+
+Me personin që administron listën mund të lidheni përmes
+	$owner_email
+
+Kur përgjigjeni, ju lutemi, përpunoni rreshtin e Subjektit tuaj, që të jetë
+më specifik se sa
+“Re: Contents of $display_name digest…”

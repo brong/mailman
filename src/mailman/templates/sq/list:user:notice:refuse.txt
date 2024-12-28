@@ -1,0 +1,13 @@
+Kërkesa juaj te lista e postimeve $listname
+
+    $request
+
+është hedhur poshtë nga moderatori i listës.  Moderatori dha
+arsyen vijues për hedhjen poshtë të kërkesës suaj:
+
+"$reason"
+
+Çfarëdo pyejtesh apo komentesh duhen drejtuar te përgjegjësi i listës
+te:
+
+    $owner_email

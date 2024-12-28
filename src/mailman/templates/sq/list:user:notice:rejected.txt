@@ -1,0 +1,6 @@
+Mesazhi juaj te lista e postimeve $listname u hodh poshtë për arsyet
+vijuese:
+
+$reasons
+
+Bashkëngjitet mesazhi origjinal, siç u mor nga Mailman.
