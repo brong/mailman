@@ -35,6 +35,7 @@ from mailman.model.mailinglist import MailingList
 from public import public
 from sqlalchemy import Column, func, Integer, select
 from sqlalchemy.orm import relationship
+from sqlalchemy.orm.exc import NoResultFound
 from zope.component import getUtility
 from zope.event import notify
 from zope.interface import implementer
@@ -162,12 +163,10 @@ class DomainManager:
     @dbconnection
     def get(self, store, mail_host, default=None):
         """See `IDomainManager`."""
-        domains = store.query(Domain).filter_by(mail_host=mail_host)
-        if domains.count() < 1:
+        try:
+            return store.query(Domain).filter_by(mail_host=mail_host).one()
+        except NoResultFound:
             return default
-        assert domains.count() == 1, (
-            'Too many matching domains: %s' % mail_host)
-        return domains.one()
 
     def __getitem__(self, mail_host):
         """See `IDomainManager`."""
