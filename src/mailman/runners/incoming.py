@@ -49,8 +49,6 @@ class IncomingRunner(Runner):
 
     def _dispose(self, mlist, msg, msgdata):
         """See `IRunner`."""
-        if msgdata.get('envsender') is None:
-            msgdata['envsender'] = mlist.no_reply_address
         # Do replybot actions for posts and -owner.
         message_id = msg.get('message-id', 'n/a')
         replybot = config.handlers['replybot']
