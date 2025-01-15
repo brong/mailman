@@ -85,7 +85,6 @@ class TestOwnerNotificationMessage(unittest.TestCase):
 
         self.assertTrue(items[0].msgdata.get('nodecorate'))
         self.assertTrue(items[0].msgdata.get('reduced_list_headers'))
-        # Fails by the known issue #1191
         self.assertEqual(
             items[0].msgdata.get('sender'),
             config.mailman.site_owner

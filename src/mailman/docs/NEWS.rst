@@ -20,6 +20,8 @@ Bugs fixed
   status and the rejection and defects list is logged.  (Closes #351)
 * The ``mailman members`` command no longer throws AttributeError when listing
   nonmembers with no display name and no user record.  (Closes #1187)
+* OwnerNotification uses the site owner address as the envelope sender.
+  (Closes #1191)
 
 New Features
 ------------
