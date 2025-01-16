@@ -1983,8 +1983,8 @@ Architecture
   - ListCreatingEvent - sent before the mailing list is created
   - ListCreatedEvent  - sent after the mailing list is created
   - ListDeletingEvent - sent before the mailing list is deleted
-
   - ListDeletedEvent  - sent after the mailing list is deleted
+
 * Four new events are created, and notifications are sent during domain
   lifecycle changes:
 
