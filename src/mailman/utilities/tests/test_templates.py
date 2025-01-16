@@ -63,8 +63,8 @@ class TestSearchOrder(unittest.TestCase):
         # tree.  The former will use /v/ as the root and the latter will use
         # /m/ as the root.
         with ExitStack() as resources:
-            in_tree = str(resources.enter_context(
-                resource_path('mailman').joinpath('templates')).parent)
+            in_tree = str(
+                resource_path('mailman').joinpath('templates').parent)
             raw_search_order = search(
                 resources, template_file, mailing_list, language)
         for path in raw_search_order:
