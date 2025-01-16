@@ -18,10 +18,13 @@ Bugs fixed
 ----------
 * Incoming messages rejected with defects now include the defects list in the
   status and the rejection and defects list is logged.  (Closes #351)
-* A member's delivery_status is now available via REST.  (Closes #1184)
-* Subscribe and unsubscribe events are now logged.  (Closes #1143)
 * The ``mailman members`` command no longer throws AttributeError when listing
   nonmembers with no display name and no user record.  (Closes #1187)
+
+New Features
+------------
+* A member's delivery_status is now available via REST.  (Closes #1184)
+* Subscribe and unsubscribe events are now logged.  (Closes #1143)
 
 .. _news-3.3.10:
 
@@ -1983,8 +1986,8 @@ Architecture
   - ListCreatingEvent - sent before the mailing list is created
   - ListCreatedEvent  - sent after the mailing list is created
   - ListDeletingEvent - sent before the mailing list is deleted
-
   - ListDeletedEvent  - sent after the mailing list is deleted
+
 * Four new events are created, and notifications are sent during domain
   lifecycle changes:
 
