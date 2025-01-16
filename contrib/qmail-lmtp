@@ -14,8 +14,8 @@ try:
     lmtp = smtplib.LMTP(lmtp_host, int(sys.argv[1]))
 
     try:
-        # See <http://www.qmail.org/man/man8/qmail-command.html> for qmail command
-        # docs and supplied environment variables. We need to replace "1" with an 
+        # See <http://qmail.org/man/man8/qmail-command.html> for qmail command
+        # docs and supplied environment variables. We need to replace "1" with an
         # empty string, as qmail only supports EXT, EXT2, EXT3, EXT4.
         arg_ext = sys.argv[2] if sys.argv[2] != "1" else ""
         lmtp.sendmail(
@@ -24,12 +24,11 @@ try:
             sys.stdin.buffer.read()
         )
     except smtplib.SMTPResponseException as e:
-        if 400 <= e.smtp_code < 500:
-            exit(111)
-        # otherwise, it's either a 5xx aka permanent error or something else
-        # is already b0rked, thus raise -> exit(100) -> have qmail return a
-        # 5xx error
+        # permanent error
+        if e.smtp_code >= 500:
+            exit(100)
         else:
             raise
 except:
-    exit(100)
+    # temporary error
+    exit(111)
