@@ -164,8 +164,7 @@ class AbstractStyle:
 
     def test_find_pluggable_components_by_plugin_name(self):
         with ExitStack() as resources:
-            testing_path = resources.enter_context(
-                files('mailman.plugins.testing'))
+            testing_path = files('mailman.plugins.testing')
             resources.enter_context(hack_syspath(0, str(testing_path)))
             resources.enter_context(configuration('plugin.example', **{
                 'class': 'example.hooks.ExamplePlugin',
@@ -176,8 +175,7 @@ class AbstractStyle:
 
     def test_find_pluggable_components_by_component_package(self):
         with ExitStack() as resources:
-            testing_path = resources.enter_context(
-                files('mailman.plugins.testing'))
+            testing_path = files('mailman.plugins.testing')
             resources.enter_context(hack_syspath(0, str(testing_path)))
             resources.enter_context(configuration('plugin.example', **{
                 'class': 'example.hooks.ExamplePlugin',
