@@ -26,7 +26,8 @@ from email.parser import FeedParser
 from email.utils import _has_surrogates
 from importlib.resources import path
 from mailman.app.lifecycle import create_list
-from mailman.email.message import Message, UserNotification
+from mailman.config import config
+from mailman.email.message import Message, OwnerNotification, UserNotification
 from mailman.testing.helpers import (
     get_queue_messages,
     specialized_message_from_string as mfs,
@@ -34,9 +35,7 @@ from mailman.testing.helpers import (
 from mailman.testing.layers import ConfigLayer
 
 
-class TestMessage(unittest.TestCase):
-    """Test the message API."""
-
+class TestUserNotificationMessage(unittest.TestCase):
     layer = ConfigLayer
 
     def setUp(self):
@@ -58,11 +57,46 @@ class TestMessage(unittest.TestCase):
         self.assertEqual(items[0].msg.get_all('precedence'),
                          ['omg wtf bbq'])
 
-    def test_reduced_rfc_2369_headers(self):
-        # Notifications should get reduced List-* headers.
+    def test_msgdata(self):
         self._msg.send(self._mlist)
         items = get_queue_messages('virgin', expected_count=1)
+        # Notifications should get reduced List-* headers.
         self.assertTrue(items[0].msgdata.get('reduced_list_headers'))
+        # Notifications should not apply the decorate handler.
+        self.assertTrue(items[0].msgdata.get('nodecorate'))
+        # No envelope sender address specified.
+        self.assertIsNone(items[0].msgdata.get('sender'))
+
+
+class TestOwnerNotificationMessage(unittest.TestCase):
+    layer = ConfigLayer
+
+    def setUp(self):
+        self._mlist = create_list('test@example.com')
+        self._msg = OwnerNotification(
+            self._mlist,
+            'Something owner notification',
+            'I needed to tell you this.'
+        )
+
+    def test_owner_notification(self):
+        self._msg.send(self._mlist)
+        items = get_queue_messages('virgin', expected_count=1)
+
+        self.assertTrue(items[0].msgdata.get('nodecorate'))
+        self.assertTrue(items[0].msgdata.get('reduced_list_headers'))
+        self.assertEqual(
+            items[0].msgdata.get('sender'),
+            config.mailman.site_owner
+        )
+        self.assertEqual(
+            items[0].msg.get_all('from'),
+            [config.mailman.site_owner]
+        )
+        self.assertEqual(
+            items[0].msg.get_all('to'),
+            [config.mailman.site_owner]
+        )
 
 
 class TestMessageSubclass(unittest.TestCase):

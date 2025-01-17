@@ -211,7 +211,9 @@ class UserNotification(Message):
             recipients=self.recipients,
             nodecorate=True,
             reduced_list_headers=True,
-            )
+        )
+        if (envelope_sender := self.get_unixfrom()) is not None:
+            enqueue_kws['sender'] = envelope_sender
         if mlist is not None:
             enqueue_kws['listid'] = mlist.list_id
         enqueue_kws.update(_kws)
@@ -230,21 +232,10 @@ class OwnerNotification(UserNotification):
             recipients = set(address.email for address in roster.addresses)
             to = mlist.owner_address
         sender = config.mailman.site_owner
-        UserNotification.__init__(self, recipients, sender, subject,
-                                  text, mlist.preferred_language)
+        super().__init__(recipients, sender, subject, text,
+                         mlist.preferred_language)
+        # Envelope sender
+        self.set_unixfrom(sender)
         # Hack the To header to look like it's going to the -owner address
         del self['to']
         self['To'] = to
-        self._sender = sender
-
-    def _enqueue(self, mlist, **_kws):
-        # Not imported at module scope to avoid import loop
-        virginq = config.switchboards['virgin']
-        # The message metadata better have a `recip' attribute
-        virginq.enqueue(self,
-                        listid=mlist.list_id,
-                        recipients=self.recipients,
-                        nodecorate=True,
-                        reduced_list_headers=True,
-                        envsender=self._sender,
-                        **_kws)
