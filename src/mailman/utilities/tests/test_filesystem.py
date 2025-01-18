@@ -25,7 +25,7 @@ import unittest
 from mailman.utilities.filesystem import first_inexistent_directory, makedirs
 
 
-def fake_makedirs(path, mode):
+def fake_makedirs(path, mode, exist_ok=False):
     """A fake makedirs function"""
 
     with open(path, 'a'):
