@@ -141,7 +141,6 @@ Now the message is in the pipeline queue.
     >>> from mailman.testing.documentation import dump_msgdata    
     >>> dump_msgdata(messages[0].msgdata)
     _parsemsg    : False
-    envsender    : noreply@example.com
     ...
 
 

@@ -281,7 +281,6 @@ Messages to the `-owner` address also go to the incoming processor.
     1
     >>> dump_msgdata(messages[0].msgdata)
     _parsemsg    : False
-    envsender    : noreply@example.com
     listid       : mylist.example.com
     original_size: ...
     subaddress   : owner

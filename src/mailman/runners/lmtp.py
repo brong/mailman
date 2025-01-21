@@ -261,13 +261,10 @@ class LMTPHandler:
                 else:
                     # A valid subaddress.
                     msgdata['subaddress'] = canonical_subaddress
-                    if subaddress == 'request':
+                    if canonical_subaddress == 'request':
                         msgdata['to_request'] = True
-                    if canonical_subaddress == 'owner':
-                        msgdata.update(dict(
-                            to_owner=True,
-                            envsender=config.mailman.site_owner,
-                            ))
+                    elif canonical_subaddress == 'owner':
+                        msgdata['to_owner'] = True
                         queue = 'in'
                 # If we found a valid destination, enqueue the message and add
                 # a success status for this recipient.
