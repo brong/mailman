@@ -65,12 +65,12 @@ def makedirs(path, mode=0o0755):
             return
 
         try:
-            os.makedirs(path, mode)
+            os.makedirs(path, mode, exist_ok=True)
         except FileExistsError:
-            if not os.path.isdir(path):
-                raise FileExistsError((
-                   "A race condition might have happened. {} actually "
-                   "exists and is not a directory.").format(path))
+            raise FileExistsError(
+                "A race condition might have happened. "
+                f"{path} actually exists and is not a directory."
+            )
 
     # Some systems such as FreeBSD ignore mkdir's mode, so walk the just
     # created directories and try to set the mode, ignoring any OSErrors that
@@ -99,13 +99,15 @@ def first_inexistent_directory(path):
     rhs = None
 
     while True:
-        if os.path.isdir(directory):
+        if os.path.exists(directory):
+            if not os.path.isdir(directory):
+                raise FileExistsError(
+                    f"The path {directory} exists but is not a directory."
+                )
+
             if rhs is None:
                 return None
-            else:
-                return os.path.join(directory, rhs)
-        elif os.path.exists(directory):
-            raise FileExistsError(
-                "The path %s exists but is not a directory.",
-                directory)
+
+            return os.path.join(directory, rhs)
+
         directory, rhs = os.path.split(directory)

@@ -22,6 +22,8 @@ Bugs fixed
   nonmembers with no display name and no user record.  (Closes #1187)
 * OwnerNotification uses the site owner address as the envelope sender.
   (Closes #1191)
+* Remove a race condition in makedirs() utility function that causes a
+  FileExistsError exception.  (Closes #1192)
 
 New Features
 ------------
