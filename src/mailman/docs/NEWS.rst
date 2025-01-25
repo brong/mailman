@@ -30,6 +30,11 @@ New Features
 * A member's delivery_status is now available via REST.  (Closes #1184)
 * Subscribe and unsubscribe events are now logged.  (Closes #1143)
 
+Other
+-----
+* The subject of uncaught bounce notifications include a list's display name.
+  (Closes #1194)
+
 .. _news-3.3.10:
 
 3.3.10

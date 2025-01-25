@@ -263,7 +263,7 @@ def maybe_forward(mlist, msg):
     # The notification is either going to go to the list's administrators
     # (owners and moderators), or to the site administrators.  Most of the
     # notification is exactly the same in either case.
-    subject = _('Uncaught bounce notification')
+    subject = _('${mlist.display_name} uncaught bounce notification')
     template = getUtility(ITemplateLoader).get(
         'list:admin:notice:unrecognized', mlist)
     text = expand(template, mlist)
