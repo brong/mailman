@@ -468,7 +468,7 @@ Message-ID: <first>
         maybe_forward(self._mlist, self._msg)
         items = get_queue_messages('virgin', expected_count=1)
         msg = items[0].msg
-        self.assertEqual(msg['subject'], 'Uncaught bounce notification')
+        self.assertEqual(msg['subject'], 'Test uncaught bounce notification')
         self.assertEqual(msg['from'], 'postmaster@example.com')
         self.assertEqual(msg['to'], 'test-owner@example.com')
         # The first attachment is a notification message with a url.
@@ -516,7 +516,7 @@ the list administrator(s).
         maybe_forward(self._mlist, self._msg)
         items = get_queue_messages('virgin', expected_count=1)
         msg = items[0].msg
-        self.assertEqual(msg['subject'], 'Uncaught bounce notification')
+        self.assertEqual(msg['subject'], 'Test uncaught bounce notification')
         self.assertEqual(msg['from'], 'postmaster@example.com')
         self.assertEqual(msg['to'], 'postmaster@example.com')
         # The first attachment is a notification message with a url.
