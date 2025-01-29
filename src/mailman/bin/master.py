@@ -89,6 +89,14 @@ PRESERVE_ENVS = {
     'PYTHONUSERBASE',
     'PYTHONVERBOSE',
     'PYTHONWARNINGS',
+
+    # HTTP proxy configuration
+    'http_proxy',
+    'HTTP_PROXY',
+    'https_proxy',
+    'HTTPS_PROXY',
+    'no_proxy',
+    'NO_PROXY',
     }
 
 
