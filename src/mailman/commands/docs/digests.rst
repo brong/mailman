@@ -45,4 +45,4 @@ Complete information about command options may be obtained by running
       -v, --verbose    Print some additional status.
       -p, --periodic   Send any collected digests for the List only if their
                        digest_send_periodic is set to True.
-      -h, --help       Show this message and exit.
+      --help           Show this message and exit.
