@@ -1,0 +1,23 @@
+From: someone@example.com
+To: list@example.com
+Message-ID: 123456789@example.com
+Subject: A test
+Content-Type: multipart/mixed; boundary="xxxyyyzzz"
+
+--xxxyyyzzz
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+--xxxyyyzzz
+Content-Type: application/pdf; name="someExample.pdf"
+Content-Disposition: attachment; filename="someExample.pdf"
+Content-Transfer-Encoding: base64
+
+JVBERi0xLjcKJcOkw7zDtsOfCjIgMCBvYmoKPDwvTGVuZ3RoIDMgMCBSL0ZpbHRlci9GbGF0ZURl
+Y29kZT4+CnN0cmVhbQp477+9Le+/vU0KICAgICDvv70w77+977+9eO+/vdC+77+91q3vv70xcO+/
+ve+/ve+/ve+/ve+/ve+/ve+/vTpRUO+/ve+/ve+/vVvvv73vv73vv70sWFvvv71d77+977+9XAlb
+KE/vv70tNO+/ve+/vTzvv70+77+9fe+/ve+/vS/vv71iXcuxO++/ve+/vWnvv73vv71QIlzvv711
+ZAphUe+/vcmzCkllSjZRNe+/vUbvv73vv73vv73vv70377+9CiAgICAgICAgICAgICAgXijvv70K
+ZW5kc3RyZWFtCmVuZG9iago=
+
+--xxxyyyzzz--

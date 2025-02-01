@@ -24,6 +24,8 @@ Bugs fixed
   (Closes #1191)
 * Remove a race condition in makedirs() utility function that causes a
   FileExistsError exception.  (Closes #1192)
+* Multipart messages with an emtpy part and a non-text part are now properly
+  recast during content filtering.  (Closes #1196)
 
 New Features
 ------------

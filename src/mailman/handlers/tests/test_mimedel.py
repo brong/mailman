@@ -541,6 +541,26 @@ Part 4
         self.assertEqual(msg.get_payload(0).get_payload(), 'Part 1\n')
         self.assertEqual(msg.get_payload(1).get_payload(), 'Part 2\n')
 
+    def test_recast_empty_part_plus_nontext_part(self):
+        with resource_open(
+                'mailman.handlers.tests.data',
+                'empty_plus_nontext.eml') as fp:
+            msg = email.message_from_binary_file(fp)
+        process = config.handlers['mime-delete'].process
+        process(self._mlist, msg, {})
+        self.assertFalse(msg.is_multipart())
+        self.assertEqual(msg.get_content_type(), 'application/pdf')
+        self.assertEqual(msg['content-transfer-encoding'], 'base64')
+        expected = """\
+JVBERi0xLjcKJcOkw7zDtsOfCjIgMCBvYmoKPDwvTGVuZ3RoIDMgMCBSL0ZpbHRlci9GbGF0ZURl
+Y29kZT4+CnN0cmVhbQp477+9Le+/vU0KICAgICDvv70w77+977+9eO+/vdC+77+91q3vv70xcO+/
+ve+/ve+/ve+/ve+/ve+/ve+/vTpRUO+/ve+/ve+/vVvvv73vv73vv70sWFvvv71d77+977+9XAlb
+KE/vv70tNO+/ve+/vTzvv70+77+9fe+/ve+/vS/vv71iXcuxO++/ve+/vWnvv73vv71QIlzvv711
+ZAphUe+/vcmzCkllSjZRNe+/vUbvv73vv73vv73vv70377+9CiAgICAgICAgICAgICAgXijvv70K
+ZW5kc3RyZWFtCmVuZG9iago=
+"""
+        self.assertEqual(msg.get_payload(), expected)
+
     def test_msg_rfc822(self):
         with resource_open(
                 'mailman.handlers.tests.data', 'msg_rfc822.eml') as fp:
