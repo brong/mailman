@@ -221,8 +221,12 @@ Replaced multipart/alternative part with first alternative.
 
 def reset_payload(msg, subpart):
     # Reset payload of msg to contents of subpart, and fix up content headers
-    if subpart.is_multipart():
+    if subpart.is_multipart() or subpart.get_content_maintype() != 'text':
         msg.set_payload(subpart.get_payload())
+        if cte := subpart.get('content-transfer-encoding'):
+            # The msg won't have one as it was multipart, but be sure.
+            del msg['Content-Transfer-Encoding']
+            msg['Content-Transfer-Encoding'] = cte
     else:
         cset = subpart.get_content_charset() or 'us-ascii'
         msg.set_payload(subpart.get_payload(decode=True).decode(
