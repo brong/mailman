@@ -243,6 +243,38 @@ Message-Id: <first>
         self.assertEqual(str(msg['subject']),
                          'Test mailing list probe message')
 
+    @configuration('mta', verp_probes='yes', probe_add_dsn='yes')
+    def test_probe_has_dsn_attached(self):
+        # Test that the probe has DSN attached.
+        self._mlist.send_welcome_message = False
+        self._mlist.bounce_score_threshold = 0
+        member = self._subscribe_and_add_bounce_event('anne@example.com')
+        member.bounce_score = 1
+        # Process events.
+        self._process_pending_events()
+        messages = get_queue_messages('virgin', expected_count=1)
+        msg = messages[0].msg
+        self.assertEqual(str(msg['subject']),
+                         'Test mailing list probe message')
+        self.assertTrue(msg.is_multipart())
+        self.assertEqual(str(msg.get_payload(1).get_payload()[0]),
+                         self._msg.as_string())
+
+    @configuration('mta', verp_probes='yes', probe_add_dsn='no')
+    def test_probe_has_dsn_not_attached(self):
+        # Test that the probe doesn't have DSN attached.
+        self._mlist.send_welcome_message = False
+        self._mlist.bounce_score_threshold = 0
+        member = self._subscribe_and_add_bounce_event('anne@example.com')
+        member.bounce_score = 1
+        # Process events.
+        self._process_pending_events()
+        messages = get_queue_messages('virgin', expected_count=1)
+        msg = messages[0].msg
+        self.assertEqual(str(msg['subject']),
+                         'Test mailing list probe message')
+        self.assertEqual(len(msg.get_payload()), 1)
+
     def test_bounce_event_probe_disables_delivery(self):
         # That that bounce probe disables delivery immidiately.
         member = self._subscribe_and_add_bounce_event(
