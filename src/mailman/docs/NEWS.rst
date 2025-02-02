@@ -31,6 +31,10 @@ New Features
 ------------
 * A member's delivery_status is now available via REST.  (Closes #1184)
 * Subscribe and unsubscribe events are now logged.  (Closes #1143)
+* There is a new ``probe_add_dsn`` setting in the ``mta`` section of
+  mailman.cfg. This defaults to ``yes`` to keep current behavior but can be set
+  to ``no`` to prevent adding the triggering DSN to bounce probes when probes
+  are enabled.  (Closes #1195)
 
 Other
 -----

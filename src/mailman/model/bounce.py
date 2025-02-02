@@ -231,7 +231,10 @@ class BounceProcessor:
             # Try to get the dsn from the message store.  It should be there.
             msg = getUtility(IMessageStore).get_message_by_id(event.message_id)
             if as_boolean(config.mta.verp_probes):
-                send_probe(member, msg=msg, message_id=event.message_id)
+                if as_boolean(config.mta.probe_add_dsn):
+                    send_probe(member, msg=msg, message_id=event.message_id)
+                else:
+                    send_probe(member, message_id=event.message_id)
                 action = 'sending probe'
             else:
                 # Bounce score is reset by sending a probe but needs to be
