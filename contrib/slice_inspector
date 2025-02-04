@@ -22,13 +22,15 @@
 
 """Utility for inspecting queue slices."""
 
-import click
 import os
+import click
 import psutil
+
 from mailman.config import config
 from mailman.core.initialize import initialize
 from mailman.utilities.string import expand
 from signal import SIGUSR1 as USR1
+
 
 # 20 bytes of all bits set, maximum hashlib.sha.digest() value.  We do it this
 # way for Python 2/3 compatibility.
