@@ -40,6 +40,8 @@ Other
 -----
 * The subject of uncaught bounce notifications include a list's display name.
   (Closes #1194)
+* Documented that the ``mailman remove`` command doesn't remove archives.
+  (See #1198)
 
 .. _news-3.3.10:
 

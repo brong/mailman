@@ -238,7 +238,7 @@ class Create:
 
 @click.command(
     cls=I18nCommand,
-    help=_('Remove a mailing list.'))
+    help=_('Remove a mailing list (does not remove archives).'))
 @click.option(
     '--quiet', '-q',
     is_flag=True, default=False,
