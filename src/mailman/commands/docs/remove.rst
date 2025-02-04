@@ -3,6 +3,7 @@ Command line list removal
 =========================
 
 A system administrator can remove mailing lists by the command line.
+Note that this does not remove any archives.
 ::
 
     >>> from mailman.app.lifecycle import create_list   
