@@ -8,15 +8,17 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-08-08 22:30-0700\n"
-"PO-Revision-Date: 2022-03-23 03:38+0000\n"
-"Last-Translator: Szylu <chipolade@gmail.com>\n"
-"Language-Team: Polish <https://hosted.weblate.org/projects/gnu-mailman/mailman/pl/>\n"
+"PO-Revision-Date: 2025-02-11 01:02+0000\n"
+"Last-Translator: Tomasz Berner <tom@lodz.pl>\n"
+"Language-Team: Polish <https://hosted.weblate.org/projects/gnu-mailman/"
+"mailman/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.12-dev\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.10-dev\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:85
 #: src/mailman/chains/hold.py:166 src/mailman/handlers/acknowledge.py:56
@@ -27,16 +29,16 @@ msgstr "(brak tematu)"
 
 #: src/mailman/app/bounces.py:78
 msgid "[No bounce details are available]"
-msgstr "[Szczegóły odesłania nie są dostępne]"
+msgstr "[Szczegóły zwrotu nie są dostępne]"
 
 #: src/mailman/app/bounces.py:230
 #, python-brace-format
 msgid "${mlist.display_name} mailing list probe message"
-msgstr ""
+msgstr "Wiadomość sonda listy {mlist.display_name}"
 
 #: src/mailman/app/bounces.py:266
 msgid "Uncaught bounce notification"
-msgstr "Nieprzechwycone powiadomienie o odesłaniu"
+msgstr "Nieprzechwycone powiadomienie o zwrocie"
 
 #: src/mailman/app/membership.py:147
 #, python-brace-format
@@ -48,6 +50,8 @@ msgid ""
 "The content of this message was lost. It was probably cross-posted to\n"
 "multiple lists and previously handled on another list.\n"
 msgstr ""
+"Treść tej wiadomości została utracona. Prawdopodobnie została wysłana\n"
+"na kilka list i została już obsłużona\n"
 
 #: src/mailman/app/moderator.py:133
 #, python-brace-format
@@ -57,16 +61,18 @@ msgstr "Publikowanie wiadomości zatytułowanej „${subject}”"
 #: src/mailman/app/moderator.py:134 src/mailman/app/moderator.py:278
 #: src/mailman/rest/sub_moderation.py:119
 msgid "[No reason given]"
-msgstr ""
+msgstr "[Nie podano przyczyny]"
 
 #: src/mailman/app/moderator.py:185
 msgid "Forward of moderated message"
-msgstr "Przekazywanie moderowanej wiadomości"
+msgstr "Przekazanie moderowanej wiadomości"
 
 #: src/mailman/app/moderator.py:244
 #, python-brace-format
 msgid "New unsubscription request from ${mlist.display_name} by ${email}"
-msgstr "Nowa prośba o rezygnację z subskrypcji z ${mlist.display_name} od ${email}"
+msgstr ""
+"Nowa prośba o rezygnację z subskrypcji listy ${mlist.display_name} od "
+"${email}"
 
 #: src/mailman/app/moderator.py:277
 msgid "Unsubscription request"
@@ -74,21 +80,21 @@ msgstr "Prośba o rezygnację z subskrypcji"
 
 #: src/mailman/app/moderator.py:318
 msgid "Original Message"
-msgstr "Oryginalna wiadomość"
+msgstr "Wiadomość oryginalna"
 
 #: src/mailman/app/moderator.py:321
 #, python-brace-format
 msgid "Request to mailing list \"${display_name}\" rejected"
-msgstr "Żądanie na listę mailingową „${display_name}” odrzucone"
+msgstr "Prośba do listy mailingowej „${display_name}” została odrzucona"
 
 #: src/mailman/app/notifications.py:93
 msgid " (Digest mode)"
-msgstr ""
+msgstr " (Tryb paczek)"
 
 #: src/mailman/app/notifications.py:97
 #, python-brace-format
 msgid "Welcome to the \"${mlist.display_name}\" mailing list${digmode}"
-msgstr "Witamy na liście dyskusyjnej „${mlist.display_name}”${digmode}"
+msgstr "Witamy na liście mailingowej „${mlist.display_name}”${digmode}"
 
 #: src/mailman/app/notifications.py:130
 #, python-brace-format
@@ -104,46 +110,60 @@ msgstr "Powiadomienie o subskrypcji ${mlist.display_name}"
 #, python-brace-format
 msgid "${member}'s subscription disabled on ${mlist.display_name}"
 msgstr ""
+"Subskrypcja listy ${mlist.display_name} użytkownika ${member} została "
+"wyłączona."
 
 #: src/mailman/app/notifications.py:201
 #, python-brace-format
 msgid "${member}'s bounce score incremented on ${mlist.display_name}"
 msgstr ""
+"Punktacja za zwroty ${member}  dla listy ${mlist.display_name} została "
+"zwiększona"
 
 #: src/mailman/app/notifications.py:227
 #, python-brace-format
 msgid "${member} unsubscribed from ${mlist.display_name} mailing list due to bounces"
 msgstr ""
+"${member} został wypisany z listy ${mlist.display_name} z powodu zbyt wielu "
+"zwrotów"
 
 #: src/mailman/app/notifications.py:254
 #, python-brace-format
 msgid "Your subscription for ${mlist.display_name} mailing list has been disabled"
-msgstr ""
+msgstr "Twoja subskrypcja listy ${mlist.display_name} została zawieszona"
 
 #: src/mailman/app/subscriptions.py:328
 #, python-brace-format
 msgid "New subscription request to ${self.mlist.display_name} from ${self.address.email}"
 msgstr ""
+"Nowa prośba o subskrypcję ${self.mlist.display_name} od ${self.address.email}"
 
 #: src/mailman/app/subscriptions.py:497
 #, python-brace-format
 msgid "New unsubscription request to ${self.mlist.display_name} from ${self.address.email}"
 msgstr ""
+"Nowa prośba o rezygnację z subskrypcji ${self.mlist.display_name} od "
+"${self.address.email}"
 
 #: src/mailman/app/subscriptions.py:629
 #, python-brace-format
 msgid "You have been invited to join the ${event.mlist.fqdn_listname} mailing list."
 msgstr ""
+"Zostałeś zaproszony do dołączenia do listy ${event.mlist.fqdn_listname}."
 
 #: src/mailman/app/subscriptions.py:632
 #, python-brace-format
 msgid "Your confirmation is needed to leave the ${event.mlist.fqdn_listname} mailing list."
 msgstr ""
+"Potrzebne jest Twoje potwierdzenie opuszczenia listy "
+"${event.mlist.fqdn_listname}."
 
 #: src/mailman/app/subscriptions.py:636
 #, python-brace-format
 msgid "Your confirmation is needed to join the ${event.mlist.fqdn_listname} mailing list."
 msgstr ""
+"Potrzebne jest Twoje potwierdzenie dołączenia do listy "
+"${event.mlist.fqdn_listname}."
 
 #: src/mailman/bin/mailman.py:102 src/mailman/bin/master.py:585
 #: src/mailman/bin/runner.py:96
