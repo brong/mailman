@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-08-08 22:30-0700\n"
-"PO-Revision-Date: 2025-02-11 01:02+0000\n"
+"PO-Revision-Date: 2025-02-11 15:53+0000\n"
 "Last-Translator: Tomasz Berner <tom@lodz.pl>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/gnu-mailman/"
 "mailman/pl/>\n"
@@ -111,13 +111,13 @@ msgstr "Powiadomienie o subskrypcji ${mlist.display_name}"
 msgid "${member}'s subscription disabled on ${mlist.display_name}"
 msgstr ""
 "Subskrypcja listy ${mlist.display_name} użytkownika ${member} została "
-"wyłączona."
+"wyłączona"
 
 #: src/mailman/app/notifications.py:201
 #, python-brace-format
 msgid "${member}'s bounce score incremented on ${mlist.display_name}"
 msgstr ""
-"Punktacja za zwroty ${member}  dla listy ${mlist.display_name} została "
+"Punktacja za zwroty ${member} dla listy ${mlist.display_name} została "
 "zwiększona"
 
 #: src/mailman/app/notifications.py:227
@@ -2142,6 +2142,10 @@ msgstr ""
 
 msgid "list:admin:action:unsubscribe.txt"
 msgstr ""
+"Wymagane jest potwierdzenie prośby o wypisanie się z listy:\n"
+"\n"
+"    Dla:  $member\n"
+"    Lista: $listname"
 
 msgid "list:admin:notice:disable.txt"
 msgstr ""
