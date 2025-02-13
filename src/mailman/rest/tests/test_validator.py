@@ -36,6 +36,7 @@ from mailman.rest.validator import (
     list_of_emails_validator,
     list_of_strings_validator,
     subscriber_validator,
+    url_or_empty_validator,
     url_validator,
     Validator,
 )
@@ -231,6 +232,29 @@ class TestValidators(unittest.TestCase):
         self.assertRaises(
             ValueError,
             url_validator,
+            'example.com/mailman3')
+
+    def test_url_or_empty_validator(self):
+        self.assertEqual(
+            url_or_empty_validator('http://example.com/mailma3'),
+            'http://example.com/mailma3')
+        self.assertEqual(
+            url_or_empty_validator('https://example.com/postorius'),
+            'https://example.com/postorius')
+        self.assertEqual(
+            url_or_empty_validator(''),
+            '')
+        self.assertIsNone(
+            url_or_empty_validator(None))
+        # Missing /postorius or /mailman3 in the end.
+        self.assertRaises(
+            ValueError,
+            url_or_empty_validator,
+            'https://example.com')
+        # missing scheme.
+        self.assertRaises(
+            ValueError,
+            url_or_empty_validator,
             'example.com/mailman3')
 
 
