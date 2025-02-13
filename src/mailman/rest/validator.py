@@ -257,6 +257,17 @@ def url_validator(value):
 
 
 @public
+def url_or_empty_validator(value):
+    """Validate the value if non-empty is a valid web url."""
+    if value in (None, ''):
+        return value
+    parsed = urlparse(value)
+    if parsed.scheme and parsed.netloc and parsed.path:
+        return value
+    raise ValueError("Invalid URL: {value}.".format(value=value))
+
+
+@public
 class Validator:
     """A validator of parameter input."""
 

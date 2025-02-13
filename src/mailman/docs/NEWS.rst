@@ -26,6 +26,8 @@ Bugs fixed
   FileExistsError exception.  (Closes #1192)
 * Multipart messages with an emtpy part and a non-text part are now properly
   recast during content filtering.  (Closes #1196)
+* The REST API now can create/edit domains with an empty ``base_url`` parameter
+  (Fixes #1201)
 
 New Features
 ------------

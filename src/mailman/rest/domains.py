@@ -39,7 +39,7 @@ from mailman.rest.uris import ADomainURI, AllDomainURIs
 from mailman.rest.users import ListOfDomainOwners, OwnersForDomain
 from mailman.rest.validator import (
     list_of_strings_validator,
-    url_validator,
+    url_or_empty_validator,
     Validator,
 )
 from public import public
@@ -96,7 +96,8 @@ class ADomain(_DomainBase):
         kws = dict(
             alias_domain=GetterSetter(str),
             description=GetterSetter(str),
-            base_url=GetterSetter(url_validator),
+            base_url=GetterSetter(url_or_empty_validator),
+
             owner=ListOfDomainOwners(list_of_strings_validator),
             )
         if is_optional:
@@ -169,7 +170,7 @@ class AllDomains(_DomainBase):
             validator = Validator(mail_host=str,
                                   description=str,
                                   alias_domain=str,
-                                  base_url=url_validator,
+                                  base_url=url_or_empty_validator,
                                   owner=list_of_strings_validator,
                                   _optional=('description',
                                              'owner',
