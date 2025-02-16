@@ -27,6 +27,8 @@ from mailman.interfaces.action import Action
 from mailman.interfaces.usermanager import IUserManager
 from mailman.rest import helpers
 from mailman.rest.validator import (
+    domain_or_empty_validator,
+    domain_validator,
     email_or_regexp_validator,
     email_validator,
     enum_validator,
@@ -256,6 +258,80 @@ class TestValidators(unittest.TestCase):
             ValueError,
             url_or_empty_validator,
             'example.com/mailman3')
+
+    def test_domain_validator(self):
+        self.assertEqual(
+            domain_validator('example.com'),
+            'example.com')
+        self.assertEqual(
+            domain_validator('sub-domain.example.com'),
+            'sub-domain.example.com')
+        # Empty is not valid.
+        self.assertRaises(
+            ValueError,
+            domain_validator,
+            '')
+        # List is not valid.
+        self.assertRaises(
+            ValueError,
+            domain_validator,
+            [])
+        # An undotted name, e.g.localhost, is OK.
+        self.assertEqual(
+            domain_validator('localhost'),
+            'localhost')
+        # starts with hyphen.
+        self.assertRaises(
+            ValueError,
+            domain_validator,
+            '-example.com')
+        # part ends with hyphen.
+        self.assertRaises(
+            ValueError,
+            domain_validator,
+            'example-.com')
+        # Has bad character.
+        self.assertRaises(
+            ValueError,
+            domain_validator,
+            'example_.com')
+
+    def test_domain_or_empty_validator(self):
+        self.assertEqual(
+            domain_or_empty_validator('example.com'),
+            'example.com')
+        self.assertEqual(
+            domain_or_empty_validator('sub-domain.example.com'),
+            'sub-domain.example.com')
+        # An undotted name, e.g.localhost, is OK.
+        self.assertEqual(
+            domain_or_empty_validator('localhost'),
+            'localhost')
+        # starts with hyphen.
+        self.assertRaises(
+            ValueError,
+            domain_or_empty_validator,
+            '-example.com')
+        # part ends with hyphen.
+        self.assertRaises(
+            ValueError,
+            domain_validator,
+            'example-.com')
+        # Has bad character.
+        self.assertRaises(
+            ValueError,
+            domain_or_empty_validator,
+            'example_.com')
+        self.assertEqual(
+            domain_or_empty_validator(''),
+            '')
+        self.assertIsNone(
+            domain_or_empty_validator(None))
+        # List is not valid.
+        self.assertRaises(
+            ValueError,
+            domain_or_empty_validator,
+            [])
 
 
 class TestGetterSetter(unittest.TestCase):
