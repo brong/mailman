@@ -38,7 +38,9 @@ from mailman.rest.lists import ListsForDomain
 from mailman.rest.uris import ADomainURI, AllDomainURIs
 from mailman.rest.users import ListOfDomainOwners, OwnersForDomain
 from mailman.rest.validator import (
-    list_of_strings_validator,
+    domain_or_empty_validator,
+    domain_validator,
+    list_of_emails_validator,
     url_or_empty_validator,
     Validator,
 )
@@ -94,11 +96,11 @@ class ADomain(_DomainBase):
         if domain is None:
             not_found(response)
         kws = dict(
-            alias_domain=GetterSetter(str),
+            alias_domain=GetterSetter(domain_or_empty_validator),
             description=GetterSetter(str),
             base_url=GetterSetter(url_or_empty_validator),
 
-            owner=ListOfDomainOwners(list_of_strings_validator),
+            owner=ListOfDomainOwners(list_of_emails_validator),
             )
         if is_optional:
             # For a PATCH, all attributes are optional.
@@ -167,11 +169,11 @@ class AllDomains(_DomainBase):
         """Create a new domain."""
         domain_manager = getUtility(IDomainManager)
         try:
-            validator = Validator(mail_host=str,
+            validator = Validator(mail_host=domain_validator,
                                   description=str,
-                                  alias_domain=str,
+                                  alias_domain=domain_or_empty_validator,
                                   base_url=url_or_empty_validator,
-                                  owner=list_of_strings_validator,
+                                  owner=list_of_emails_validator,
                                   _optional=('description',
                                              'owner',
                                              'alias_domain',

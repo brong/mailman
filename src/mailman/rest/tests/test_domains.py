@@ -61,6 +61,48 @@ class TestDomains(unittest.TestCase):
         self.assertEqual(cm.exception.code, 400)
         self.assertEqual(cm.exception.reason, 'Unexpected parameters: random')
 
+    def test_create_domain_bad_host(self):
+        # Test mail_host validation.
+        data = dict(
+            mail_host='invalid_domain',
+            )
+        with self.assertRaises(HTTPError) as cm:
+            content, response = call_api(
+                'http://localhost:9001/3.0/domains', data, method="POST")
+        self.assertEqual(cm.exception.code, 400)
+        self.assertEqual(cm.exception.reason,
+                         'Invalid Parameter "mail_host": '
+                         'Expected a valid domain name, got invalid_domain.')
+
+    def test_create_domain_bad_alias_domain(self):
+        # Test alias_domain validation.
+        data = dict(
+            mail_host='example.org',
+            alias_domain='invalid_domain',
+            )
+        with self.assertRaises(HTTPError) as cm:
+            content, response = call_api(
+                'http://localhost:9001/3.0/domains', data, method="POST")
+        self.assertEqual(cm.exception.code, 400)
+        self.assertEqual(cm.exception.reason,
+                         'Invalid Parameter "alias_domain": '
+                         'Expected a valid domain name, got invalid_domain.')
+
+    def test_create_domain_bad_owners(self):
+        # Test owner validation.
+        data = dict(
+            mail_host='example.org',
+            owner=['someone@example.com', 'secondowner_example.com'],
+            )
+        with self.assertRaises(HTTPError) as cm:
+            content, response = call_api(
+                'http://localhost:9001/3.0/domains', data, method="POST")
+        self.assertEqual(cm.exception.code, 400)
+        self.assertEqual(cm.exception.reason,
+                         'Invalid Parameter "owner": '
+                         'Expected email address, got '
+                         "'secondowner_example.com'.")
+
     def test_patch_domain_description(self):
         # Patch the example.com description.
         data = {'description': 'Patched example domain'}
@@ -116,6 +158,22 @@ class TestDomains(unittest.TestCase):
         owners = [list(owner.addresses)[0].email for owner in domain.owners]
         owners.sort()
         self.assertEqual(owners, ['anne@example.com', 'other@example.net'])
+
+    def test_patch_domain_bad_owner(self):
+        # Patch the example.com domain with a bad owner.
+        data = {'owner': 'bad_example.com'}
+        with self.assertRaises(HTTPError) as cm:
+            content, response = call_api(
+                'http://localhost:9001/3.0/domains', data, method="PATCH")
+        self.assertEqual(cm.exception.code, 405)
+
+    def test_patch_domain_bad_alias_domain(self):
+        # Patch the example.com domain with a bad alias domain.
+        data = {'alias_domain': 'bad_example.com'}
+        with self.assertRaises(HTTPError) as cm:
+            content, response = call_api(
+                'http://localhost:9001/3.0/domains', data, method="PATCH")
+        self.assertEqual(cm.exception.code, 405)
 
     def test_patch_domain_readonly(self):
         # Attempt to patch mail_host.

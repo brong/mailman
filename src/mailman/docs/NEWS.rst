@@ -27,7 +27,9 @@ Bugs fixed
 * Multipart messages with an emtpy part and a non-text part are now properly
   recast during content filtering.  (Closes #1196)
 * The REST API now can create/edit domains with an empty ``base_url`` parameter
-  (Fixes #1201)
+  (Closes #1201)
+* The REST API now does mor validation of parameters when creating/editing
+  domains.  (Closes #1202)
 
 New Features
 ------------

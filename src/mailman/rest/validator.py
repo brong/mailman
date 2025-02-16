@@ -30,6 +30,8 @@ from zope.component import getUtility
 
 
 COMMASPACE = ', '
+_valid_domain = re.compile('[-a-z0-9]', re.IGNORECASE)
+# These are the only characters allowed in domain parts.
 
 
 @public
@@ -265,6 +267,42 @@ def url_or_empty_validator(value):
     if parsed.scheme and parsed.netloc and parsed.path:
         return value
     raise ValueError("Invalid URL: {value}.".format(value=value))
+
+
+@public
+def domain_validator(value):
+    """Validate the value is a valid domain name."""
+    if not isinstance(value, str):
+        raise ValueError(
+            f'Expected a valid domain name, got {value}')
+    parts = value.split('.')
+    for part in parts:
+        if (len(part) == 0 or
+                _valid_domain.sub('', part) or
+                part.startswith('-') or
+                part.endswith('-')):
+            raise ValueError(
+                f'Expected a valid domain name, got {value}')
+    return value
+
+
+@public
+def domain_or_empty_validator(value):
+    """Validate the value if non-empty is a valid domain name."""
+    if value in (None, ''):
+        return value
+    if not isinstance(value, str):
+        raise ValueError(
+            f'Expected a valid domain name, got {value}')
+    parts = value.split('.')
+    for part in parts:
+        if (len(part) == 0 or
+                _valid_domain.sub('', part) or
+                part.startswith('-') or
+                part.endswith('-')):
+            raise ValueError(
+                f'Expected a valid domain name, got {value}')
+    return value
 
 
 @public
