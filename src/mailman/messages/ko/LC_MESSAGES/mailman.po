@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-08 22:30-0700\n"
+"POT-Creation-Date: 2025-02-15 19:33-0800\n"
 "PO-Revision-Date: 2024-06-21 08:51+0000\n"
 "Last-Translator: SATOH Fumiyasu <fumiyas@osstech.co.jp>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/gnu-mailman/mailman/ko/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 5.6-rc\n"
 
-#: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:85
+#: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:84
 #: src/mailman/chains/hold.py:166 src/mailman/handlers/acknowledge.py:56
 #: src/mailman/handlers/subject_prefix.py:46
 #: src/mailman/handlers/subject_prefix.py:91 src/mailman/runners/digest.py:88
@@ -35,40 +35,41 @@ msgid "${mlist.display_name} mailing list probe message"
 msgstr "${mlist.display_name} 메일 링리스트 프로브 메시지"
 
 #: src/mailman/app/bounces.py:266
-msgid "Uncaught bounce notification"
-msgstr "잡히지 않은 반송 알림"
+#, python-brace-format
+msgid "${mlist.display_name} uncaught bounce notification"
+msgstr ""
 
 #: src/mailman/app/membership.py:147
 #, python-brace-format
 msgid "${mlist.display_name} unsubscription notification"
 msgstr "${mlist.display_name} 구독취소 알림"
 
-#: src/mailman/app/moderator.py:97
+#: src/mailman/app/moderator.py:96
 msgid ""
 "The content of this message was lost. It was probably cross-posted to\n"
 "multiple lists and previously handled on another list.\n"
 msgstr ""
 
-#: src/mailman/app/moderator.py:133
+#: src/mailman/app/moderator.py:132
 #, python-brace-format
 msgid "Posting of your message titled \"${subject}\""
 msgstr "\"${subject}\"라는 제목의 메시지 게시"
 
-#: src/mailman/app/moderator.py:134 src/mailman/app/moderator.py:278
+#: src/mailman/app/moderator.py:133 src/mailman/app/moderator.py:277
 #: src/mailman/rest/sub_moderation.py:119
 msgid "[No reason given]"
 msgstr "[이유 없음]"
 
-#: src/mailman/app/moderator.py:185
+#: src/mailman/app/moderator.py:184
 msgid "Forward of moderated message"
 msgstr "관리 조정된 메시지 전달"
 
-#: src/mailman/app/moderator.py:244
+#: src/mailman/app/moderator.py:243
 #, python-brace-format
 msgid "New unsubscription request from ${mlist.display_name} by ${email}"
 msgstr "${email}을 통한 ${mlist.display_name}의 새로운 구독 취소 요청"
 
-#: src/mailman/app/moderator.py:277
+#: src/mailman/app/moderator.py:276
 msgid "Unsubscription request"
 msgstr "구독취소 요청"
 
@@ -125,27 +126,27 @@ msgstr "${mlist.display_name} 메일링 목록에 대한 구독이 비활성화�
 msgid "New subscription request to ${self.mlist.display_name} from ${self.address.email}"
 msgstr "${self.address.email}에서 ${self.mlist.display_name}에 대한 새로운 구독 요청"
 
-#: src/mailman/app/subscriptions.py:497
+#: src/mailman/app/subscriptions.py:499
 #, python-brace-format
 msgid "New unsubscription request to ${self.mlist.display_name} from ${self.address.email}"
 msgstr "${self.address.email}에서 ${self.mlist.display_name}에 대한 새로운 구독 취소 요청"
 
-#: src/mailman/app/subscriptions.py:629
+#: src/mailman/app/subscriptions.py:631
 #, python-brace-format
 msgid "You have been invited to join the ${event.mlist.fqdn_listname} mailing list."
 msgstr "${event.mlist.fqdn_listname} 메일링 목록에 가입하도록 초대받았습니다."
 
-#: src/mailman/app/subscriptions.py:632
+#: src/mailman/app/subscriptions.py:634
 #, python-brace-format
 msgid "Your confirmation is needed to leave the ${event.mlist.fqdn_listname} mailing list."
 msgstr "${event.mlist.fqdn_listname} 메일링 목록을 떠나려면 확인이 필요합니다."
 
-#: src/mailman/app/subscriptions.py:636
+#: src/mailman/app/subscriptions.py:638
 #, python-brace-format
 msgid "Your confirmation is needed to join the ${event.mlist.fqdn_listname} mailing list."
 msgstr "${event.mlist.fqdn_listname} 메일링 목록에 가입하려면 확인이 필요합니다."
 
-#: src/mailman/bin/mailman.py:102 src/mailman/bin/master.py:585
+#: src/mailman/bin/mailman.py:102 src/mailman/bin/master.py:593
 #: src/mailman/bin/runner.py:96
 msgid ""
 "    Configuration file to use.  If not given, the environment variable\n"
@@ -166,7 +167,7 @@ msgstr ""
 msgid "    If you are sure you want to run as root, specify --run-as-root."
 msgstr ""
 
-#: src/mailman/bin/master.py:182
+#: src/mailman/bin/master.py:190
 msgid ""
 "The master lock could not be acquired because it appears as though another\n"
 "master is already running."
@@ -174,7 +175,7 @@ msgstr ""
 "마치 다른 것처럼 보이기 때문에 마스터 잠금을 획득 할 수 없습니다\n"
 "마스터가 이미 실행 중입니다."
 
-#: src/mailman/bin/master.py:188
+#: src/mailman/bin/master.py:196
 #, python-brace-format
 msgid ""
 "The master lock could not be acquired.  It appears as though there is a stale\n"
@@ -183,7 +184,7 @@ msgstr ""
 "마스터 잠금을 획득 할 수 없습니다. ··마스터 잠금이 부실 한 것처럼 보입니다.\n"
 "··--force 플래그를 사용하여 ${program}을 다시 실행하십시오."
 
-#: src/mailman/bin/master.py:194
+#: src/mailman/bin/master.py:202
 #, python-brace-format
 msgid ""
 "The master lock could not be acquired, because it appears as if some process\n"
@@ -202,7 +203,7 @@ msgstr ""
 "\n"
 "나가기."
 
-#: src/mailman/bin/master.py:207
+#: src/mailman/bin/master.py:215
 #, python-brace-format
 msgid ""
 "For unknown reasons, the master lock could not be acquired.\n"
@@ -219,7 +220,7 @@ msgstr ""
 "\n"
 "나가기."
 
-#: src/mailman/bin/master.py:561
+#: src/mailman/bin/master.py:569
 msgid ""
 "    Master subprocess watcher.\n"
 "\n"
@@ -249,7 +250,7 @@ msgstr ""
 "\n"
 "마스터는 또한 SIGINT, SIGTERM, SIGUSR1 및 SIGHUP에 응답하며, 단순히 러너에게 전달됩니다. 마스터는 SIGHUP을 수신하면 자체 로그 파일을 닫았다가 다시 엽니 다. 마스터는 또한 구성 파일에 지정된 파일에 자체 프로세스 ID를 남겨 두지 만 일반적으로이 PID를 직접 사용할 필요는 없습니다."
 
-#: src/mailman/bin/master.py:592
+#: src/mailman/bin/master.py:600
 msgid ""
 "    Don't restart the runners when they exit because of an error or a SIGUSR1.\n"
 "    Use this only for debugging."
@@ -257,7 +258,7 @@ msgstr ""
 "    ····오류 또는 SIGUSR1로 인해 종료 할 때 러너를 다시 시작하지 마십시오.\n"
 "····디버깅에만 사용하십시오."
 
-#: src/mailman/bin/master.py:598
+#: src/mailman/bin/master.py:606
 msgid ""
 "    If the master watcher finds an existing master lock, it will normally exit\n"
 "    with an error message.  With this option,the master will perform an extra\n"
@@ -272,14 +273,14 @@ msgstr ""
 "···잠금 파일에 설명 된 호스트 / pid와 일치하는 프로세스가 실행중인 경우 마스터가 여전히 종료되므로 잠금을 수동으로 정리해야합니다.\n"
 "···그러나 일치하는 프로세스를 찾지 못하면, 마스터는 오래된 잠금을 제거하고 마스터 잠금을 다시 시도합니다."
 
-#: src/mailman/bin/master.py:611
+#: src/mailman/bin/master.py:619
 msgid ""
 "    Override the default set of runners that the master will invoke, which is\n"
 "    typically defined in the configuration file.  Multiple -r options may be\n"
 "    given.  The values for -r are passed straight through to bin/runner."
 msgstr "    ···마스터가 호출할 기본 실행자 세트(일반적으로 구성 파일에 정의됩니다)를 우선합니다. 여러 개의 -r 옵션이 제공 될 수 있습니다. -r의 값은 bin / runner로 바로 전달됩니다."
 
-#: src/mailman/bin/master.py:618 src/mailman/bin/runner.py:133
+#: src/mailman/bin/master.py:626 src/mailman/bin/runner.py:133
 msgid "Display more debugging information to the log file."
 msgstr "더 많은 디버깅 정보를 로그 파일에 표시하십시오."
 
@@ -482,7 +483,7 @@ msgstr ""
 
 #: src/mailman/commands/cli_addmembers.py:146 src/mailman/commands/cli_admins.py:97
 #: src/mailman/commands/cli_import.py:68 src/mailman/commands/cli_inject.py:75
-#: src/mailman/commands/cli_members.py:206
+#: src/mailman/commands/cli_members.py:211
 #: src/mailman/commands/cli_syncmembers.py:204
 #: src/mailman/commands/cli_withlist.py:291 src/mailman/commands/cli_withlist.py:298
 #, python-brace-format
@@ -1071,8 +1072,8 @@ msgid "Your new mailing list: ${fqdn_listname}"
 msgstr "당신의 새 메일 링리스트 : ${fqdn_listname}"
 
 #: src/mailman/commands/cli_lists.py:241
-msgid "Remove a mailing list."
-msgstr "메일 링리스트를 제거하십시오."
+msgid "Remove a mailing list (does not remove archives)."
+msgstr ""
 
 #: src/mailman/commands/cli_lists.py:245
 msgid "Suppress status messages"
@@ -1093,7 +1094,7 @@ msgstr "제거 된 목록 : ${listspec}"
 msgid "${mlist.list_id} has no members"
 msgstr "제거 된 목록 : ${listspec}"
 
-#: src/mailman/commands/cli_members.py:116
+#: src/mailman/commands/cli_members.py:121
 msgid ""
 "    Display a mailing list's members.\n"
 "    Filtering along various criteria can be done when displaying.\n"
@@ -1102,32 +1103,32 @@ msgid ""
 "    "
 msgstr ""
 
-#: src/mailman/commands/cli_members.py:125
+#: src/mailman/commands/cli_members.py:130
 msgid ""
 "    [MODE] Add all member addresses in FILENAME.  This option is removed.\n"
 "    Use 'mailman addmembers' instead."
 msgstr ""
 
-#: src/mailman/commands/cli_members.py:131
+#: src/mailman/commands/cli_members.py:136
 msgid ""
 "    [MODE] Delete all member addresses found in FILENAME.\n"
 "    This option is removed. Use 'mailman delmembers' instead."
 msgstr ""
 
-#: src/mailman/commands/cli_members.py:137
+#: src/mailman/commands/cli_members.py:142
 msgid ""
 "    [MODE] Synchronize all member addresses of the specified mailing list\n"
 "    with the member addresses found in FILENAME.\n"
 "    This option is removed. Use 'mailman syncmembers' instead."
 msgstr ""
 
-#: src/mailman/commands/cli_members.py:144
+#: src/mailman/commands/cli_members.py:149
 msgid ""
 "    Display output to FILENAME instead of stdout.  FILENAME\n"
 "    can be '-' to indicate standard output."
 msgstr ""
 
-#: src/mailman/commands/cli_members.py:151
+#: src/mailman/commands/cli_members.py:156
 msgid ""
 "    Display only members with a given ROLE.\n"
 "    The role may be 'any', 'member', 'nonmember', 'owner', 'moderator',\n"
@@ -1135,22 +1136,22 @@ msgid ""
 "    If not given, then 'member' role is assumed."
 msgstr ""
 
-#: src/mailman/commands/cli_members.py:159
+#: src/mailman/commands/cli_members.py:164
 msgid "    Display only regular delivery members."
 msgstr ""
 
-#: src/mailman/commands/cli_members.py:176
+#: src/mailman/commands/cli_members.py:181
 msgid "    This option has no effect. It exists for backwards compatibility only."
 msgstr ""
 
-#: src/mailman/commands/cli_members.py:182
+#: src/mailman/commands/cli_members.py:187
 msgid ""
 "    Display only digest members of kind.\n"
 "    'any' means any digest type, 'plaintext' means only plain text (rfc 1153)\n"
 "    type digests, 'mime' means MIME type digests."
 msgstr ""
 
-#: src/mailman/commands/cli_members.py:190
+#: src/mailman/commands/cli_members.py:195
 msgid ""
 "    Display only members with a given delivery status.\n"
 "    'enabled' means all members whose delivery is enabled, 'any' means\n"
@@ -1828,19 +1829,19 @@ msgstr "메시지의 파일 확장자가 명시 적으로 허용되지 않음"
 msgid "After content filtering, the message was empty"
 msgstr "내용 필터링 후 메시지가 비어있음"
 
-#: src/mailman/handlers/mime_delete.py:154 src/mailman/handlers/mime_delete.py:317
+#: src/mailman/handlers/mime_delete.py:154 src/mailman/handlers/mime_delete.py:321
 msgid ""
 "\n"
 "Replaced multipart/alternative part with first alternative.\n"
 msgstr ""
 
-#: src/mailman/handlers/mime_delete.py:265 src/mailman/handlers/mime_delete.py:272
-#: src/mailman/handlers/mime_delete.py:281 src/mailman/handlers/mime_delete.py:287
+#: src/mailman/handlers/mime_delete.py:269 src/mailman/handlers/mime_delete.py:276
+#: src/mailman/handlers/mime_delete.py:285 src/mailman/handlers/mime_delete.py:291
 #, python-brace-format
 msgid "Name: ${fname}\n"
 msgstr ""
 
-#: src/mailman/handlers/mime_delete.py:400
+#: src/mailman/handlers/mime_delete.py:404
 msgid "Filter the MIME content of messages."
 msgstr "메시지의 MIME 내용 필터링합니다."
 
@@ -2326,6 +2327,12 @@ msgstr "\"이 메시지는 무시할 수 있습니다.이 메시지는 무시해
 
 msgid "list:user:notice:welcome.txt"
 msgstr "\"${display_name}\" 메일링 리스트에 오신 것을 환영합니다!이 목록에 게시하려면 다음 주소로 e-메일 보내기: ${listname}제목이나 본문에 '도움말'이라는 단어가 포함된 ${request_email}로 이메일을 보내 옵션을 구독 취소하거나 조정할 수 있으며, 지침과 함께 메시지를 다시 받을 수 있다. 옵션을 변경하려면 암호가 필요하지만 보안을 위해 이 암호는 여기에 포함되지 않는다. 암호를 잊어버린 경우 웹 UI를 통해 암호를 재설정해야 한다.\""
+
+#~ msgid "Uncaught bounce notification"
+#~ msgstr "잡히지 않은 반송 알림"
+
+#~ msgid "Remove a mailing list."
+#~ msgstr "메일 링리스트를 제거하십시오."
 
 #~ msgid ""
 #~ "    Start a runner.\n"

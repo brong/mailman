@@ -7,20 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-08 22:30-0700\n"
+"POT-Creation-Date: 2025-02-15 19:33-0800\n"
 "PO-Revision-Date: 2024-12-07 05:00+0000\n"
 "Last-Translator: gfbdrgng <hnaofegnp@hldrive.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/gnu-mailman/"
-"mailman/ru/>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/gnu-mailman/mailman/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Weblate 5.9-dev\n"
 
-#: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:85
+#: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:84
 #: src/mailman/chains/hold.py:166 src/mailman/handlers/acknowledge.py:56
 #: src/mailman/handlers/subject_prefix.py:46
 #: src/mailman/handlers/subject_prefix.py:91 src/mailman/runners/digest.py:88
@@ -37,15 +35,16 @@ msgid "${mlist.display_name} mailing list probe message"
 msgstr "Тестовое сообщение списка рассылки ${mlist.display_name}"
 
 #: src/mailman/app/bounces.py:266
-msgid "Uncaught bounce notification"
-msgstr "Непойманное уведомление отказа в доставке"
+#, python-brace-format
+msgid "${mlist.display_name} uncaught bounce notification"
+msgstr ""
 
 #: src/mailman/app/membership.py:147
 #, python-brace-format
 msgid "${mlist.display_name} unsubscription notification"
 msgstr "Уведомление об отказе от подписки на рассылку ${mlist.display_name}"
 
-#: src/mailman/app/moderator.py:97
+#: src/mailman/app/moderator.py:96
 msgid ""
 "The content of this message was lost. It was probably cross-posted to\n"
 "multiple lists and previously handled on another list.\n"
@@ -53,26 +52,26 @@ msgstr ""
 "Содержимое этого сообщения утрачено. Вероятно, оно было отправлено\n"
 "в несколько списков рассылок и ранее обработано в другом списке.\n"
 
-#: src/mailman/app/moderator.py:133
+#: src/mailman/app/moderator.py:132
 #, python-brace-format
 msgid "Posting of your message titled \"${subject}\""
 msgstr "Публикация вашего сообщения под заголовком ${subject}"
 
-#: src/mailman/app/moderator.py:134 src/mailman/app/moderator.py:278
+#: src/mailman/app/moderator.py:133 src/mailman/app/moderator.py:277
 #: src/mailman/rest/sub_moderation.py:119
 msgid "[No reason given]"
 msgstr "[Причина не указана]"
 
-#: src/mailman/app/moderator.py:185
+#: src/mailman/app/moderator.py:184
 msgid "Forward of moderated message"
 msgstr "Пересылка модерируемого сообщения"
 
-#: src/mailman/app/moderator.py:244
+#: src/mailman/app/moderator.py:243
 #, python-brace-format
 msgid "New unsubscription request from ${mlist.display_name} by ${email}"
 msgstr "Новый запрос на отписку от списка рассылки ${mlist.display_name} от ${email}"
 
-#: src/mailman/app/moderator.py:277
+#: src/mailman/app/moderator.py:276
 msgid "Unsubscription request"
 msgstr "Запрос на отмену подписки"
 
@@ -129,27 +128,27 @@ msgstr "Ваша подписка на список рассылки ${mlist.dis
 msgid "New subscription request to ${self.mlist.display_name} from ${self.address.email}"
 msgstr "Новый запрос на подписку на список рассылки ${self.mlist.display_name} от ${self.address.email}"
 
-#: src/mailman/app/subscriptions.py:497
+#: src/mailman/app/subscriptions.py:499
 #, python-brace-format
 msgid "New unsubscription request to ${self.mlist.display_name} from ${self.address.email}"
 msgstr "Новый запрос на отписку от списка рассылки ${self.mlist.display_name} от ${self.address.email}"
 
-#: src/mailman/app/subscriptions.py:629
+#: src/mailman/app/subscriptions.py:631
 #, python-brace-format
 msgid "You have been invited to join the ${event.mlist.fqdn_listname} mailing list."
 msgstr "Вы были приглашены присоединиться к списку рассылки ${event.mlist.fqdn_listname}."
 
-#: src/mailman/app/subscriptions.py:632
+#: src/mailman/app/subscriptions.py:634
 #, python-brace-format
 msgid "Your confirmation is needed to leave the ${event.mlist.fqdn_listname} mailing list."
 msgstr "Необходимо ваше подтверждение для отписки от списка рассылки ${event.mlist.fqdn_listname}."
 
-#: src/mailman/app/subscriptions.py:636
+#: src/mailman/app/subscriptions.py:638
 #, python-brace-format
 msgid "Your confirmation is needed to join the ${event.mlist.fqdn_listname} mailing list."
 msgstr "Необходимо ваше подтверждение для подписки на список рассылки ${event.mlist.fqdn_listname}."
 
-#: src/mailman/bin/mailman.py:102 src/mailman/bin/master.py:585
+#: src/mailman/bin/mailman.py:102 src/mailman/bin/master.py:593
 #: src/mailman/bin/runner.py:96
 msgid ""
 "    Configuration file to use.  If not given, the environment variable\n"
@@ -172,7 +171,7 @@ msgstr ""
 msgid "    If you are sure you want to run as root, specify --run-as-root."
 msgstr "    Если вы уверены, что необходим запуск от пользователя root, укажите параметр --run-as-root."
 
-#: src/mailman/bin/master.py:182
+#: src/mailman/bin/master.py:190
 msgid ""
 "The master lock could not be acquired because it appears as though another\n"
 "master is already running."
@@ -180,7 +179,7 @@ msgstr ""
 "Блокировка master-процесса не может быть захвачена.\n"
 "Вероятно, уже работает другой master-процесс."
 
-#: src/mailman/bin/master.py:188
+#: src/mailman/bin/master.py:196
 #, python-brace-format
 msgid ""
 "The master lock could not be acquired.  It appears as though there is a stale\n"
@@ -189,7 +188,7 @@ msgstr ""
 "Блокировка master-процесса не может быть захвачена. Похоже, не снята блокировка\n"
 "от старого master-процесса. Попробуйте перезапустить ${program} с параметром --force."
 
-#: src/mailman/bin/master.py:194
+#: src/mailman/bin/master.py:202
 #, python-brace-format
 msgid ""
 "The master lock could not be acquired, because it appears as if some process\n"
@@ -210,7 +209,7 @@ msgstr ""
 "\n"
 "Выход."
 
-#: src/mailman/bin/master.py:207
+#: src/mailman/bin/master.py:215
 #, python-brace-format
 msgid ""
 "For unknown reasons, the master lock could not be acquired.\n"
@@ -227,7 +226,7 @@ msgstr ""
 "\n"
 "Выход."
 
-#: src/mailman/bin/master.py:561
+#: src/mailman/bin/master.py:569
 msgid ""
 "    Master subprocess watcher.\n"
 "\n"
@@ -269,7 +268,7 @@ msgstr ""
 "    свой собственный идентификатор процесса в файле, указанном в файле конфигурации,\n"
 "    но обычно вам не нужно использовать этот PID напрямую."
 
-#: src/mailman/bin/master.py:592
+#: src/mailman/bin/master.py:600
 msgid ""
 "    Don't restart the runners when they exit because of an error or a SIGUSR1.\n"
 "    Use this only for debugging."
@@ -277,7 +276,7 @@ msgstr ""
 "    Не перезапускать процессы-исполнители, если они завершаются по ошибке или сигналу SIGUSR1\n"
 "Используйте этот параметр только для отладки."
 
-#: src/mailman/bin/master.py:598
+#: src/mailman/bin/master.py:606
 msgid ""
 "    If the master watcher finds an existing master lock, it will normally exit\n"
 "    with an error message.  With this option,the master will perform an extra\n"
@@ -295,7 +294,7 @@ msgstr ""
 "    такого процесса не найдено, главный процесс сам снимет старую блокировку и\n"
 "    попробует захватить ее еще раз."
 
-#: src/mailman/bin/master.py:611
+#: src/mailman/bin/master.py:619
 msgid ""
 "    Override the default set of runners that the master will invoke, which is\n"
 "    typically defined in the configuration file.  Multiple -r options may be\n"
@@ -305,7 +304,7 @@ msgstr ""
 "    вызывать главный процесс, который обычно определяется в файле конфигурации.\n"
 "    Можно указать несколько опций -r.  Значения -r передаются напрямую в bin/runner."
 
-#: src/mailman/bin/master.py:618 src/mailman/bin/runner.py:133
+#: src/mailman/bin/master.py:626 src/mailman/bin/runner.py:133
 msgid "Display more debugging information to the log file."
 msgstr "Записывать больше отладочной информации в файл журнала."
 
@@ -541,7 +540,7 @@ msgstr "    Переопределение настройки рассылки -
 
 #: src/mailman/commands/cli_addmembers.py:146 src/mailman/commands/cli_admins.py:97
 #: src/mailman/commands/cli_import.py:68 src/mailman/commands/cli_inject.py:75
-#: src/mailman/commands/cli_members.py:206
+#: src/mailman/commands/cli_members.py:211
 #: src/mailman/commands/cli_syncmembers.py:204
 #: src/mailman/commands/cli_withlist.py:291 src/mailman/commands/cli_withlist.py:298
 #, python-brace-format
@@ -574,14 +573,11 @@ msgid ""
 "    to add multiple users.\n"
 "    "
 msgstr ""
-"    Пользователь для добавления с заданной ролью. Это может быть адрес "
-"электронной почты или, если\n"
+"    Пользователь для добавления с заданной ролью. Это может быть адрес электронной почты или, если\n"
 "\n"
-"    в кавычках, любое отображаемое имя и адрес электронной почты, которые "
-"можно разобрать с помощью\n"
+"    в кавычках, любое отображаемое имя и адрес электронной почты, которые можно разобрать с помощью\n"
 "\n"
-"    email.utils.parseaddr. Например, 'Jane Doe <jane@example.com>'. Может "
-"повторяться\n"
+"    email.utils.parseaddr. Например, 'Jane Doe <jane@example.com>'. Может повторяться\n"
 "\n"
 "    для добавления нескольких пользователей.\n"
 "    "
@@ -592,8 +588,7 @@ msgid ""
 "    May be repeated to delete multiple users.\n"
 "    "
 msgstr ""
-"    Адрес электронной почты пользователя, который должен быть удален из "
-"данной роли.\n"
+"    Адрес электронной почты пользователя, который должен быть удален из данной роли.\n"
 "\n"
 "    Может повторяться для удаления нескольких пользователей.\n"
 "    "
@@ -604,8 +599,7 @@ msgid ""
 "    If not given, then 'owner' role is assumed.\n"
 "    "
 msgstr ""
-"    Роль для добавления/удаления. Это может быть 'владелец' или 'модератор'."
-"\n"
+"    Роль для добавления/удаления. Это может быть 'владелец' или 'модератор'.\n"
 "\n"
 "    Если не указано, то предполагается роль 'владельца'.\n"
 "    "
@@ -984,13 +978,11 @@ msgid ""
 "    string works best.\n"
 "    "
 msgstr ""
-"    Отображение всех членств для пользователя или пользователей с адресом, "
-"соответствующим\n"
+"    Отображение всех членств для пользователя или пользователей с адресом, соответствующим\n"
 "\n"
 "    шаблону. Поскольку часть процесса заключается в преобразовании шаблона\n"
 "\n"
-"    в SQL-запрос с подстановочными знаками, шаблон должен быть простым. "
-"Лучше всего подходит простая\n"
+"    в SQL-запрос с подстановочными знаками, шаблон должен быть простым. Лучше всего подходит простая\n"
 "\n"
 "    лучше всего подходит строка.\n"
 "    "
@@ -1261,8 +1253,8 @@ msgid "Your new mailing list: ${fqdn_listname}"
 msgstr "Ваш новый список рассылки: ${fqdn_listname}"
 
 #: src/mailman/commands/cli_lists.py:241
-msgid "Remove a mailing list."
-msgstr "Удаление списка рассылки."
+msgid "Remove a mailing list (does not remove archives)."
+msgstr ""
 
 #: src/mailman/commands/cli_lists.py:245
 msgid "Suppress status messages"
@@ -1283,7 +1275,7 @@ msgstr "Удален список рассылки: ${listspec}"
 msgid "${mlist.list_id} has no members"
 msgstr "В списке рассылки ${mlist.list_id} нет подписчиков"
 
-#: src/mailman/commands/cli_members.py:116
+#: src/mailman/commands/cli_members.py:121
 msgid ""
 "    Display a mailing list's members.\n"
 "    Filtering along various criteria can be done when displaying.\n"
@@ -1297,7 +1289,7 @@ msgstr ""
 "    на стандартный вывод является режимом по умолчанию.\n"
 "    "
 
-#: src/mailman/commands/cli_members.py:125
+#: src/mailman/commands/cli_members.py:130
 msgid ""
 "    [MODE] Add all member addresses in FILENAME.  This option is removed.\n"
 "    Use 'mailman addmembers' instead."
@@ -1305,7 +1297,7 @@ msgstr ""
 "    [MODE] Добавляет все адреса подписчиков из FILENAME.\n"
 "Параметр в текущей версии удален, используйте 'mailman addmembers'."
 
-#: src/mailman/commands/cli_members.py:131
+#: src/mailman/commands/cli_members.py:136
 msgid ""
 "    [MODE] Delete all member addresses found in FILENAME.\n"
 "    This option is removed. Use 'mailman delmembers' instead."
@@ -1313,7 +1305,7 @@ msgstr ""
 "    [MODE] Удаляет все адреса подписчиков из FILENAME.\n"
 "    Параметр в текущей версии удален, используйте 'mailman delmembers'."
 
-#: src/mailman/commands/cli_members.py:137
+#: src/mailman/commands/cli_members.py:142
 msgid ""
 "    [MODE] Synchronize all member addresses of the specified mailing list\n"
 "    with the member addresses found in FILENAME.\n"
@@ -1323,7 +1315,7 @@ msgstr ""
 "с адресами из FILENAME.\n"
 "    Параметр в текущей версии удален, используйте 'mailman syncmembers'."
 
-#: src/mailman/commands/cli_members.py:144
+#: src/mailman/commands/cli_members.py:149
 msgid ""
 "    Display output to FILENAME instead of stdout.  FILENAME\n"
 "    can be '-' to indicate standard output."
@@ -1331,7 +1323,7 @@ msgstr ""
 "    Отображение вывода в FILENAME вместо стандартного вывода.  FILENAME\n"
 "    может быть «-» для обозначения стандартного вывода."
 
-#: src/mailman/commands/cli_members.py:151
+#: src/mailman/commands/cli_members.py:156
 msgid ""
 "    Display only members with a given ROLE.\n"
 "    The role may be 'any', 'member', 'nonmember', 'owner', 'moderator',\n"
@@ -1343,15 +1335,15 @@ msgstr ""
 "    «модератор» или «администратор» (т. е. владельцы и модераторы).\n"
 "    Если не указано, предполагается роль «подписчик»."
 
-#: src/mailman/commands/cli_members.py:159
+#: src/mailman/commands/cli_members.py:164
 msgid "    Display only regular delivery members."
 msgstr "    Отображать только постоянных участников доставки."
 
-#: src/mailman/commands/cli_members.py:176
+#: src/mailman/commands/cli_members.py:181
 msgid "    This option has no effect. It exists for backwards compatibility only."
 msgstr "    Эта опция не имеет никакого эффекта. Она существует только для обратной совместимости."
 
-#: src/mailman/commands/cli_members.py:182
+#: src/mailman/commands/cli_members.py:187
 msgid ""
 "    Display only digest members of kind.\n"
 "    'any' means any digest type, 'plaintext' means only plain text (rfc 1153)\n"
@@ -1361,7 +1353,7 @@ msgstr ""
 "    'любой' означает любой тип дайджеста, 'простой текст' означает только\n"
 "    дайджесты типа обычного текста (rfc 1153), 'mime' означает дайджесты типа MIME."
 
-#: src/mailman/commands/cli_members.py:190
+#: src/mailman/commands/cli_members.py:195
 msgid ""
 "    Display only members with a given delivery status.\n"
 "    'enabled' means all members whose delivery is enabled, 'any' means\n"
@@ -2130,7 +2122,7 @@ msgstr "Расширение файла сообщения не было явн�
 msgid "After content filtering, the message was empty"
 msgstr "После фильтрации контента сообщение оказалось пустым"
 
-#: src/mailman/handlers/mime_delete.py:154 src/mailman/handlers/mime_delete.py:317
+#: src/mailman/handlers/mime_delete.py:154 src/mailman/handlers/mime_delete.py:321
 msgid ""
 "\n"
 "Replaced multipart/alternative part with first alternative.\n"
@@ -2138,13 +2130,13 @@ msgstr ""
 "\n"
 "Заменена составная/альтернативная часть на первую альтернативу.\n"
 
-#: src/mailman/handlers/mime_delete.py:265 src/mailman/handlers/mime_delete.py:272
-#: src/mailman/handlers/mime_delete.py:281 src/mailman/handlers/mime_delete.py:287
+#: src/mailman/handlers/mime_delete.py:269 src/mailman/handlers/mime_delete.py:276
+#: src/mailman/handlers/mime_delete.py:285 src/mailman/handlers/mime_delete.py:291
 #, python-brace-format
 msgid "Name: ${fname}\n"
 msgstr "Имя: ${fname}\n"
 
-#: src/mailman/handlers/mime_delete.py:400
+#: src/mailman/handlers/mime_delete.py:404
 msgid "Filter the MIME content of messages."
 msgstr "Фильтровать MIME-содержимое сообщений."
 
@@ -2200,26 +2192,22 @@ msgstr "Выполнить проверки аутентификации и пр
 #: src/mailman/interfaces/member.py:122
 #, python-brace-format
 msgid "${self.email} is already a member of mailing list ${self.fqdn_listname}"
-msgstr ""
-"${self.email} уже является участником списка рассылки ${self.fqdn_listname}"
+msgstr "${self.email} уже является участником списка рассылки ${self.fqdn_listname}"
 
 #: src/mailman/interfaces/member.py:125
 #, python-brace-format
 msgid "${self.email} is already an owner of mailing list ${self.fqdn_listname}"
-msgstr ""
-"${self.email} уже является владельцем списка рассылки ${self.fqdn_listname}"
+msgstr "${self.email} уже является владельцем списка рассылки ${self.fqdn_listname}"
 
 #: src/mailman/interfaces/member.py:128
 #, python-brace-format
 msgid "${self.email} is already a moderator of mailing list ${self.fqdn_listname}"
-msgstr ""
-"${self.email} уже является модератором списка рассылки ${self.fqdn_listname}"
+msgstr "${self.email} уже является модератором списка рассылки ${self.fqdn_listname}"
 
 #: src/mailman/interfaces/member.py:131
 #, python-brace-format
 msgid "${self.email} is already a non-member of mailing list ${self.fqdn_listname}"
-msgstr ""
-"${self.email} уже не является членом списка рассылки ${self.fqdn_listname}"
+msgstr "${self.email} уже не является членом списка рассылки ${self.fqdn_listname}"
 
 #: src/mailman/interfaces/pipeline.py:53
 msgid "[No details are available]"
@@ -2867,6 +2855,12 @@ msgstr ""
 "вам понадобится пароль, но в целях безопасности этот пароль здесь не указан.\n"
 "Если вы забыли свой пароль, вам потребуется сбросить его через\n"
 "веб-интерфейс."
+
+#~ msgid "Uncaught bounce notification"
+#~ msgstr "Непойманное уведомление отказа в доставке"
+
+#~ msgid "Remove a mailing list."
+#~ msgstr "Удаление списка рассылки."
 
 #~ msgid ""
 #~ "    Display all memberships for a user or users with address matching a\n"

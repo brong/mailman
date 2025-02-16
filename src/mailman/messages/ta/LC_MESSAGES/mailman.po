@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-08 22:30-0700\n"
+"POT-Creation-Date: 2025-02-15 19:33-0800\n"
 "PO-Revision-Date: 2024-12-30 04:00+0000\n"
 "Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
-"Language-Team: Tamil <https://hosted.weblate.org/projects/gnu-mailman/"
-"mailman/ta/>\n"
+"Language-Team: Tamil <https://hosted.weblate.org/projects/gnu-mailman/mailman/ta/>\n"
 "Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,8 +18,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.10-dev\n"
 
-#: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:85 src/mailman/chains/hold.py:166
-#: src/mailman/handlers/acknowledge.py:56 src/mailman/handlers/subject_prefix.py:46
+#: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:84
+#: src/mailman/chains/hold.py:166 src/mailman/handlers/acknowledge.py:56
+#: src/mailman/handlers/subject_prefix.py:46
 #: src/mailman/handlers/subject_prefix.py:91 src/mailman/runners/digest.py:88
 msgid "(no subject)"
 msgstr "(பொருள் இல்லை)"
@@ -35,15 +35,16 @@ msgid "${mlist.display_name} mailing list probe message"
 msgstr "$ {mlist.display_name} அஞ்சல் பட்டியல் ஆய்வு செய்தி"
 
 #: src/mailman/app/bounces.py:266
-msgid "Uncaught bounce notification"
-msgstr "அறியப்படாத பவுன்ச் அறிவிப்பு"
+#, python-brace-format
+msgid "${mlist.display_name} uncaught bounce notification"
+msgstr ""
 
 #: src/mailman/app/membership.py:147
 #, python-brace-format
 msgid "${mlist.display_name} unsubscription notification"
 msgstr "$ {mlist.display_name} குழுவிலக அறிவிப்பு"
 
-#: src/mailman/app/moderator.py:97
+#: src/mailman/app/moderator.py:96
 msgid ""
 "The content of this message was lost. It was probably cross-posted to\n"
 "multiple lists and previously handled on another list.\n"
@@ -51,27 +52,26 @@ msgstr ""
 "இந்த செய்தியின் உள்ளடக்கம் இழந்தது. இது அநேகமாக குறுக்கு இடுகையிடப்பட்டது\n"
 " பல பட்டியல்கள் மற்றும் முன்னர் மற்றொரு பட்டியலில் கையாளப்பட்டது.\n"
 
-#: src/mailman/app/moderator.py:133
+#: src/mailman/app/moderator.py:132
 #, python-brace-format
 msgid "Posting of your message titled \"${subject}\""
 msgstr "\"$ {subject}\" என்ற தலைப்பில் உங்கள் செய்தியை இடுகையிடுவது"
 
-#: src/mailman/app/moderator.py:134 src/mailman/app/moderator.py:278 src/mailman/rest/sub_moderation.py:119
+#: src/mailman/app/moderator.py:133 src/mailman/app/moderator.py:277
+#: src/mailman/rest/sub_moderation.py:119
 msgid "[No reason given]"
 msgstr "[எந்த காரணமும் கொடுக்கப்படவில்லை]"
 
-#: src/mailman/app/moderator.py:185
+#: src/mailman/app/moderator.py:184
 msgid "Forward of moderated message"
 msgstr "மிதமான செய்தியை முன்னோக்கி"
 
-#: src/mailman/app/moderator.py:244
+#: src/mailman/app/moderator.py:243
 #, python-brace-format
 msgid "New unsubscription request from ${mlist.display_name} by ${email}"
-msgstr ""
-"$ {Mlist.display_name இருந்து இலிருந்து புதிய குழுவிலகும் கோரிக்கை $ "
-"{mlist.display_name}"
+msgstr "$ {Mlist.display_name இருந்து இலிருந்து புதிய குழுவிலகும் கோரிக்கை $ {mlist.display_name}"
 
-#: src/mailman/app/moderator.py:277
+#: src/mailman/app/moderator.py:276
 msgid "Unsubscription request"
 msgstr "குழுவிலக கோரிக்கை"
 
@@ -96,8 +96,7 @@ msgstr "\"$ {mlist.display_name}\" அஞ்சல் பட்டியல் $
 #: src/mailman/app/notifications.py:130
 #, python-brace-format
 msgid "You have been unsubscribed from the ${mlist.display_name} mailing list"
-msgstr ""
-"$ {mlist.display_name} அஞ்சல் பட்டியலிலிருந்து நீங்கள் குழுவிலகப்பட்டீர்கள்"
+msgstr "$ {mlist.display_name} அஞ்சல் பட்டியலிலிருந்து நீங்கள் குழுவிலகப்பட்டீர்கள்"
 
 #: src/mailman/app/notifications.py:148
 #, python-brace-format
@@ -107,8 +106,7 @@ msgstr "$ {mlist.display_name} சந்தா அறிவிப்பு"
 #: src/mailman/app/notifications.py:173
 #, python-brace-format
 msgid "${member}'s subscription disabled on ${mlist.display_name}"
-msgstr ""
-"$ {member} இல் முடக்கப்பட்டுள்ளது $ {உறுப்பினர் சந்தா முடக்கப்பட்டுள்ளது"
+msgstr "$ {member} இல் முடக்கப்பட்டுள்ளது $ {உறுப்பினர் சந்தா முடக்கப்பட்டுள்ளது"
 
 #: src/mailman/app/notifications.py:201
 #, python-brace-format
@@ -118,57 +116,47 @@ msgstr "$ {member {member} இல் அதிகரிக்கப்பட்�
 #: src/mailman/app/notifications.py:227
 #, python-brace-format
 msgid "${member} unsubscribed from ${mlist.display_name} mailing list due to bounces"
-msgstr ""
-"$ {member} பவுன்ச் காரணமாக $ {mlist.display_name} அஞ்சல் பட்டியலிலிருந்து "
-"குழுவிலகப்படாதது"
+msgstr "$ {member} பவுன்ச் காரணமாக $ {mlist.display_name} அஞ்சல் பட்டியலிலிருந்து குழுவிலகப்படாதது"
 
 #: src/mailman/app/notifications.py:254
 #, python-brace-format
 msgid "Your subscription for ${mlist.display_name} mailing list has been disabled"
-msgstr ""
-"$ {mlist.display_name} அஞ்சல் பட்டியலுக்கான உங்கள் சந்தா முடக்கப்பட்டுள்ளது"
+msgstr "$ {mlist.display_name} அஞ்சல் பட்டியலுக்கான உங்கள் சந்தா முடக்கப்பட்டுள்ளது"
 
 #: src/mailman/app/subscriptions.py:328
 #, python-brace-format
 msgid "New subscription request to ${self.mlist.display_name} from ${self.address.email}"
-msgstr ""
-"$ {Self.mlist.display_name க்கு க்கு புதிய சந்தா கோரிக்கை $ "
-"{self.mlist.display_name}"
+msgstr "$ {Self.mlist.display_name க்கு க்கு புதிய சந்தா கோரிக்கை $ {self.mlist.display_name}"
 
-#: src/mailman/app/subscriptions.py:497
+#: src/mailman/app/subscriptions.py:499
 #, python-brace-format
 msgid "New unsubscription request to ${self.mlist.display_name} from ${self.address.email}"
-msgstr ""
-"$ {Self.mlist.display_name க்கு க்கு புதிய குழுவிலகும் கோரிக்கை $ "
-"{self.mlist.display_name}"
+msgstr "$ {Self.mlist.display_name க்கு க்கு புதிய குழுவிலகும் கோரிக்கை $ {self.mlist.display_name}"
 
-#: src/mailman/app/subscriptions.py:629
+#: src/mailman/app/subscriptions.py:631
 #, python-brace-format
 msgid "You have been invited to join the ${event.mlist.fqdn_listname} mailing list."
-msgstr ""
-"{event.mlist.fqdn_listname} அஞ்சல் பட்டியலில் சேர நீங்கள் அழைக்கப்பட்டுள்ளீர்கள்."
+msgstr "{event.mlist.fqdn_listname} அஞ்சல் பட்டியலில் சேர நீங்கள் அழைக்கப்பட்டுள்ளீர்கள்."
 
-#: src/mailman/app/subscriptions.py:632
+#: src/mailman/app/subscriptions.py:634
 #, python-brace-format
 msgid "Your confirmation is needed to leave the ${event.mlist.fqdn_listname} mailing list."
-msgstr ""
-"{event.mlist.fqdn_listname} அஞ்சல் பட்டியலை விட்டுச் செல்ல உங்கள் உறுதிப்படுத்தல் தேவை."
+msgstr "{event.mlist.fqdn_listname} அஞ்சல் பட்டியலை விட்டுச் செல்ல உங்கள் உறுதிப்படுத்தல் தேவை."
 
-#: src/mailman/app/subscriptions.py:636
+#: src/mailman/app/subscriptions.py:638
 #, python-brace-format
 msgid "Your confirmation is needed to join the ${event.mlist.fqdn_listname} mailing list."
-msgstr ""
-"{event.mlist.fqdn_listname} அஞ்சல் பட்டியலில் சேர உங்கள் உறுதிப்படுத்தல் தேவை."
+msgstr "{event.mlist.fqdn_listname} அஞ்சல் பட்டியலில் சேர உங்கள் உறுதிப்படுத்தல் தேவை."
 
-#: src/mailman/bin/mailman.py:102 src/mailman/bin/master.py:585 src/mailman/bin/runner.py:96
+#: src/mailman/bin/mailman.py:102 src/mailman/bin/master.py:593
+#: src/mailman/bin/runner.py:96
 msgid ""
 "    Configuration file to use.  If not given, the environment variable\n"
 "    MAILMAN_CONFIG_FILE is consulted and used if set.  If neither are given, a\n"
 "    default configuration file is loaded."
 msgstr ""
 "    பயன்படுத்த உள்ளமைவு கோப்பு. வழங்கப்படாவிட்டால், சூழல் மாறுபடும்\n"
-" Mailman_config_file ஆலோசப்பட்டு அமைக்கப்பட்டால் பயன்படுத்தப்படுகிறது. இரண்டுமே "
-"கொடுக்கப்படவில்லை என்றால், அ\n"
+" Mailman_config_file ஆலோசப்பட்டு அமைக்கப்பட்டால் பயன்படுத்தப்படுகிறது. இரண்டுமே கொடுக்கப்படவில்லை என்றால், அ\n"
 " இயல்புநிலை உள்ளமைவு கோப்பு ஏற்றப்படுகிறது."
 
 #: src/mailman/bin/mailman.py:110
@@ -176,16 +164,14 @@ msgid ""
 "    Running mailman commands as root is not recommended and mailman will\n"
 "    refuse to run as root unless this option is specified."
 msgstr ""
-"    ரூட் பரிந்துரைக்கப்படவில்லை மற்றும் மெயில்மேன் செய்வார் என மெயில்மேன் கட்டளைகளை "
-"இயக்குவது\n"
+"    ரூட் பரிந்துரைக்கப்படவில்லை மற்றும் மெயில்மேன் செய்வார் என மெயில்மேன் கட்டளைகளை இயக்குவது\n"
 " இந்த விருப்பம் குறிப்பிடப்படாவிட்டால் ரூட்டாக இயக்க மறுக்கவும்."
 
 #: src/mailman/bin/mailman.py:129
 msgid "    If you are sure you want to run as root, specify --run-as-root."
-msgstr ""
-"    நீங்கள் ரூட்டாக இயக்க விரும்புகிறீர்கள் என்பது உறுதி என்றால்,-ரன்-ரூட் குறிப்பிடவும்."
+msgstr "    நீங்கள் ரூட்டாக இயக்க விரும்புகிறீர்கள் என்பது உறுதி என்றால்,-ரன்-ரூட் குறிப்பிடவும்."
 
-#: src/mailman/bin/master.py:182
+#: src/mailman/bin/master.py:190
 msgid ""
 "The master lock could not be acquired because it appears as though another\n"
 "master is already running."
@@ -193,7 +179,7 @@ msgstr ""
 "மாச்டர் பூட்டை வாங்க முடியவில்லை, ஏனெனில் அது இன்னொன்று போல் தோன்றுகிறது\n"
 " மாச்டர் ஏற்கனவே இயங்குகிறார்."
 
-#: src/mailman/bin/master.py:188
+#: src/mailman/bin/master.py:196
 #, python-brace-format
 msgid ""
 "The master lock could not be acquired.  It appears as though there is a stale\n"
@@ -202,7 +188,7 @@ msgstr ""
 "மாச்டர் லாக் பெற முடியவில்லை. இது ஒரு பழமையானது போல் தோன்றுகிறது\n"
 " முதன்மை பூட்டு. --ஃபோர்ச் கொடியுடன் $ {நிரலை மீண்டும் இயக்க முயற்சிக்கவும்."
 
-#: src/mailman/bin/master.py:194
+#: src/mailman/bin/master.py:202
 #, python-brace-format
 msgid ""
 "The master lock could not be acquired, because it appears as if some process\n"
@@ -223,7 +209,7 @@ msgstr ""
 "\n"
 " வெளியேறுதல்."
 
-#: src/mailman/bin/master.py:207
+#: src/mailman/bin/master.py:215
 #, python-brace-format
 msgid ""
 "For unknown reasons, the master lock could not be acquired.\n"
@@ -240,7 +226,7 @@ msgstr ""
 "\n"
 " வெளியேறுதல்."
 
-#: src/mailman/bin/master.py:561
+#: src/mailman/bin/master.py:569
 msgid ""
 "    Master subprocess watcher.\n"
 "\n"
@@ -264,42 +250,33 @@ msgid ""
 msgstr ""
 "    மாச்டர் சப்ரோசெச் வாட்சர்.\n"
 "\n"
-" கட்டமைக்கப்பட்ட ஓட்டப்பந்தய வீரர்களைத் தொடங்கி பாருங்கள், அவர்கள் உயிருடன் இருப்பதை "
-"உறுதிசெய்கிறார்கள்\n"
-" உதைத்தல். ஒவ்வொரு ஓட்டப்பந்தய வீரரும் முட்கரண்டி மற்றும் மாச்டர் காத்திருப்பதன் மூலம் "
-"செயல்படுத்தப்படுகிறார்\n"
-" அவற்றின் செயல்முறை ஐடிகளில். இது ஒரு குழந்தை ஓட்டப்பந்தய வீரர் வெளியேறுவதைக் கண்டறிந்தால்"
-", அது இருக்கலாம்\n"
+" கட்டமைக்கப்பட்ட ஓட்டப்பந்தய வீரர்களைத் தொடங்கி பாருங்கள், அவர்கள் உயிருடன் இருப்பதை உறுதிசெய்கிறார்கள்\n"
+" உதைத்தல். ஒவ்வொரு ஓட்டப்பந்தய வீரரும் முட்கரண்டி மற்றும் மாச்டர் காத்திருப்பதன் மூலம் செயல்படுத்தப்படுகிறார்\n"
+" அவற்றின் செயல்முறை ஐடிகளில். இது ஒரு குழந்தை ஓட்டப்பந்தய வீரர் வெளியேறுவதைக் கண்டறிந்தால், அது இருக்கலாம்\n"
 " அதை மறுதொடக்கம் செய்யுங்கள்.\n"
 "\n"
-" ஓட்டப்பந்தய வீரர்கள் SIGINT, SIGTERM, SIGUSR1 மற்றும் SIGUP க்கு பதிலளிக்கின்றனர். "
-"Sigint,\n"
-" Sigterm மற்றும் Sigusr1 அனைத்தும் ஒரு ரன்னர் சுத்தமாக வெளியேற காரணமாகின்றன. மாச்டர் "
-"வில்\n"
-" ஒரு SIGUSR1 அல்லது சில வகையான காரணமாக வெளியேறும் ஓட்டப்பந்தய வீரர்களை மறுதொடக்கம் "
-"செய்யுங்கள்\n"
-" வெளியேறும் நிபந்தனை (கவனிக்கப்படாத விதிவிலக்கு காரணமாக சொல்லுங்கள்). CIGHUP "
-"ஏற்படுகிறது\n"
+" ஓட்டப்பந்தய வீரர்கள் SIGINT, SIGTERM, SIGUSR1 மற்றும் SIGUP க்கு பதிலளிக்கின்றனர். Sigint,\n"
+" Sigterm மற்றும் Sigusr1 அனைத்தும் ஒரு ரன்னர் சுத்தமாக வெளியேற காரணமாகின்றன. மாச்டர் வில்\n"
+" ஒரு SIGUSR1 அல்லது சில வகையான காரணமாக வெளியேறும் ஓட்டப்பந்தய வீரர்களை மறுதொடக்கம் செய்யுங்கள்\n"
+" வெளியேறும் நிபந்தனை (கவனிக்கப்படாத விதிவிலக்கு காரணமாக சொல்லுங்கள்). CIGHUP ஏற்படுகிறது\n"
 " மாச்டர் மற்றும் ரன்னர்கள் தங்கள் பதிவுக் கோப்புகளை மூட, பின்னர் மீண்டும் திறக்கவும்\n"
 " அடுத்த அச்சிடப்பட்ட செய்தி.\n"
 "\n"
 " மாச்டர் SIGINT, SIGTERM, Sigusr1 மற்றும் Sighup க்கும் பதிலளிக்கிறார், அது\n"
 " வெறுமனே ஓட்டப்பந்தய வீரர்களுக்கு செல்கிறது. மாச்டர் மூடுவார் என்பதை நினைவில் கொள்க\n"
-" ஒரு அளவிலான ரசீதில் அதன் சொந்த பதிவு கோப்புகளை மீண்டும் திறக்கவும். மாச்டர் "
-"வெளியேறுகிறார்\n"
+" ஒரு அளவிலான ரசீதில் அதன் சொந்த பதிவு கோப்புகளை மீண்டும் திறக்கவும். மாச்டர் வெளியேறுகிறார்\n"
 " உள்ளமைவு கோப்பில் குறிப்பிடப்பட்டுள்ள கோப்பில் அதன் சொந்த செயல்முறை ஐடி ஆனால் நீங்கள்\n"
 " பொதுவாக இந்த பிஐடியை நேரடியாகப் பயன்படுத்த தேவையில்லை."
 
-#: src/mailman/bin/master.py:592
+#: src/mailman/bin/master.py:600
 msgid ""
 "    Don't restart the runners when they exit because of an error or a SIGUSR1.\n"
 "    Use this only for debugging."
 msgstr ""
-"    பிழை அல்லது SIGUSR1 காரணமாக வெளியேறும்போது ஓட்டப்பந்தய வீரர்கள் மறுதொடக்கம் செய்ய "
-"வேண்டாம்.\n"
+"    பிழை அல்லது SIGUSR1 காரணமாக வெளியேறும்போது ஓட்டப்பந்தய வீரர்கள் மறுதொடக்கம் செய்ய வேண்டாம்.\n"
 " பிழைத்திருத்தத்திற்கு மட்டுமே இதைப் பயன்படுத்தவும்."
 
-#: src/mailman/bin/master.py:598
+#: src/mailman/bin/master.py:606
 msgid ""
 "    If the master watcher finds an existing master lock, it will normally exit\n"
 "    with an error message.  With this option,the master will perform an extra\n"
@@ -312,14 +289,12 @@ msgstr ""
 "    மாச்டர் வாட்சர் ஏற்கனவே இருக்கும் மாச்டர் பூட்டைக் கண்டால், அது பொதுவாக வெளியேறும்\n"
 " பிழை செய்தியுடன். இந்த விருப்பத்துடன், மாச்டர் கூடுதல் செய்வார்\n"
 " சோதனை நிலை. விவரிக்கப்பட்டுள்ள ஓச்ட்/பிஐடியுடன் பொருந்தக்கூடிய ஒரு செயல்முறை என்றால்\n"
-" பூட்டு கோப்பு இயங்குகிறது, மாச்டர் இன்னும் வெளியேறுவார், உங்களுக்கு கைமுறையாக "
-"தேவைப்படுகிறது\n"
-" பூட்டை தூய்மை செய்யுங்கள். ஆனால் பொருந்தக்கூடிய செயல்முறை எதுவும் கிடைக்கவில்லை என்றால், "
-"மாச்டர் செய்வார்\n"
+" பூட்டு கோப்பு இயங்குகிறது, மாச்டர் இன்னும் வெளியேறுவார், உங்களுக்கு கைமுறையாக தேவைப்படுகிறது\n"
+" பூட்டை தூய்மை செய்யுங்கள். ஆனால் பொருந்தக்கூடிய செயல்முறை எதுவும் கிடைக்கவில்லை என்றால், மாச்டர் செய்வார்\n"
 " வெளிப்படையான பழமையான பூட்டை அகற்றி, உரிமை கோர மற்றொரு முயற்சியை மேற்கொள்ளுங்கள்\n"
 " முதன்மை பூட்டு."
 
-#: src/mailman/bin/master.py:611
+#: src/mailman/bin/master.py:619
 msgid ""
 "    Override the default set of runners that the master will invoke, which is\n"
 "    typically defined in the configuration file.  Multiple -r options may be\n"
@@ -329,7 +304,7 @@ msgstr ""
 " பொதுவாக உள்ளமைவு கோப்பில் வரையறுக்கப்படுகிறது. பல -ஆர் விருப்பங்கள் இருக்கலாம்\n"
 " கொடுக்கப்பட்ட. -R க்கான மதிப்புகள் நேராக பின்/ரன்னருக்கு அனுப்பப்படுகின்றன."
 
-#: src/mailman/bin/master.py:618 src/mailman/bin/runner.py:133
+#: src/mailman/bin/master.py:626 src/mailman/bin/runner.py:133
 msgid "Display more debugging information to the log file."
 msgstr "பதிவு கோப்பில் மேலும் பிழைத்திருத்த தகவல்களைக் காண்பி."
 
@@ -364,19 +339,15 @@ msgstr ""
 "    ஒரு ரன்னரைத் தொடங்குங்கள்.\n"
 "\n"
 " கட்டளை வரியில் பெயரிடப்பட்ட ரன்னர் தொடங்கப்பட்டது, அது இயங்கலாம்\n"
-" அதன் முதன்மையான வளையத்தின் மூலம் ஒரு முறை (இதை ஆதரிக்கும் அந்த ஓட்டப்பந்தய வீரர்களுக்கு) "
-"அல்லது\n"
+" அதன் முதன்மையான வளையத்தின் மூலம் ஒரு முறை (இதை ஆதரிக்கும் அந்த ஓட்டப்பந்தய வீரர்களுக்கு) அல்லது\n"
 " தொடர்ச்சியாக. பிந்தையது மாச்டர் ரன்னர் அதன் அனைத்தையும் எவ்வாறு தொடங்குகிறது என்பதுதான்\n"
 " துணை செயலாக்கங்கள்.\n"
 "\n"
-" -l அல்லது -h கொடுக்கப்படாவிட்டால் -r தேவைப்படுகிறது, மேலும் அதன் உரையாடல் ஒன்றாக இருக்"
-"க வேண்டும்\n"
+" -l அல்லது -h கொடுக்கப்படாவிட்டால் -r தேவைப்படுகிறது, மேலும் அதன் உரையாடல் ஒன்றாக இருக்க வேண்டும்\n"
 " -l சுவிட்சால் காட்டப்படும் பெயர்கள்.\n"
 "\n"
-" பொதுவாக, இந்த ச்கிரிப்ட் `மெயில்மேன் ச்டார்ட்` இலிருந்து தொடங்கப்பட வேண்டும். அதை "
-"இயக்குகிறது\n"
-" தனித்தனியாக அல்லது -o பொதுவாக பிழைத்திருத்தத்திற்கு மட்டுமே பயனுள்ளதாக இருக்கும். "
-"ஓடும்போது\n"
+" பொதுவாக, இந்த ச்கிரிப்ட் `மெயில்மேன் ச்டார்ட்` இலிருந்து தொடங்கப்பட வேண்டும். அதை இயக்குகிறது\n"
+" தனித்தனியாக அல்லது -o பொதுவாக பிழைத்திருத்தத்திற்கு மட்டுமே பயனுள்ளதாக இருக்கும். ஓடும்போது\n"
 " இந்த வழியில், சுற்றுச்சூழல் மாறி $ mailman_under_master_control இருக்கும்\n"
 " சில பிழை கையாளுதல் நடத்தையை நுட்பமாக மாற்றும்.\n"
 "    "
@@ -391,8 +362,7 @@ msgid ""
 "    runner runs indefinitely until the process receives a signal.  This is not\n"
 "    compatible with runners that cannot be run once."
 msgstr ""
-"    பெயரிடப்பட்ட ரன்னரை அதன் முதன்மையான வளையத்தின் மூலம் ஒரு முறை இயக்கவும். இல்லையெனில்"
-", தி\n"
+"    பெயரிடப்பட்ட ரன்னரை அதன் முதன்மையான வளையத்தின் மூலம் ஒரு முறை இயக்கவும். இல்லையெனில், தி\n"
 " செயல்முறை ஒரு சமிக்ஞையைப் பெறும் வரை ரன்னர் காலவரையின்றி ஓடுகிறார். இது இல்லை\n"
 " ஒரு முறை இயக்க முடியாத ஓட்டப்பந்தய வீரர்களுடன் இணக்கமானது."
 
@@ -414,22 +384,17 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"    பெயரிடப்பட்ட ரன்னரைத் தொடங்குங்கள், இது -l ஆல் திரும்பிய சரங்களில் ஒன்றாக இருக்க "
-"வேண்டும்\n"
+"    பெயரிடப்பட்ட ரன்னரைத் தொடங்குங்கள், இது -l ஆல் திரும்பிய சரங்களில் ஒன்றாக இருக்க வேண்டும்\n"
 " விருப்பம்.\n"
 "\n"
-" வரிசை கோப்பகத்தை நிர்வகிக்கும் ஓட்டப்பந்தய வீரர்களுக்கு, விருப்பமான `துண்டு: வரம்பு` "
-"கொடுக்கப்பட்டால்\n"
+" வரிசை கோப்பகத்தை நிர்வகிக்கும் ஓட்டப்பந்தய வீரர்களுக்கு, விருப்பமான `துண்டு: வரம்பு` கொடுக்கப்பட்டால்\n"
 " அந்த வரிசையில் பல ரன்னர் செயல்முறைகளை ஒதுக்க பயன்படுகிறது. வரம்பு\n"
 " வரிசையில் வரிசைக்கான மொத்த ஓட்டப்பந்தய வீரர்களின் எண்ணிக்கை இதன் எண்ணிக்கை\n"
-" [0..Range) இலிருந்து ரன்னர். ஒரு வரிசையை நிர்வகிக்காத ஓட்டப்பந்தய வீரர்களுக்கு, துண்டு "
-"மற்றும்\n"
+" [0..Range) இலிருந்து ரன்னர். ஒரு வரிசையை நிர்வகிக்காத ஓட்டப்பந்தய வீரர்களுக்கு, துண்டு மற்றும்\n"
 " வரம்பு புறக்கணிக்கப்படுகிறது.\n"
 "\n"
-" `ச்லைச்: ரேஞ்ச்` படிவத்தைப் பயன்படுத்தும் போது, ஒவ்வொரு ஓட்டப்பந்தய வீரரையும் நீங்கள் "
-"உறுதிப்படுத்த வேண்டும்\n"
-" வரிசையில் அதே வரம்பு மதிப்பு வழங்கப்படுகிறது. `துண்டு: ரன்னர்` வழங்கப்படவில்லை என்றால், "
-"பின்னர்\n"
+" `ச்லைச்: ரேஞ்ச்` படிவத்தைப் பயன்படுத்தும் போது, ஒவ்வொரு ஓட்டப்பந்தய வீரரையும் நீங்கள் உறுதிப்படுத்த வேண்டும்\n"
+" வரிசையில் அதே வரம்பு மதிப்பு வழங்கப்படுகிறது. `துண்டு: ரன்னர்` வழங்கப்படவில்லை என்றால், பின்னர்\n"
 " 1: 1 பயன்படுத்தப்படுகிறது.\n"
 "    "
 
@@ -481,14 +446,12 @@ msgstr "ஒரு செய்தியை வைத்து செயலாக
 #: src/mailman/chains/hold.py:205
 #, python-brace-format
 msgid "Your message to ${mlist.fqdn_listname} awaits moderator approval"
-msgstr ""
-"$ {Mlist.fqdn_listname க்கு உங்கள் செய்தி மதிப்பீட்டாளர் ஒப்புதலுக்காக காத்திருக்கிறது"
+msgstr "$ {Mlist.fqdn_listname க்கு உங்கள் செய்தி மதிப்பீட்டாளர் ஒப்புதலுக்காக காத்திருக்கிறது"
 
 #: src/mailman/chains/hold.py:234
 #, python-brace-format
 msgid "${mlist.fqdn_listname} post from ${msg.sender} requires approval"
-msgstr ""
-"$ {msg.sender இலிருந்து இடுகையிட்ட $ {mlist.fqdn_listname} ஒப்புதல் தேவை"
+msgstr "$ {msg.sender இலிருந்து இடுகையிட்ட $ {mlist.fqdn_listname} ஒப்புதல் தேவை"
 
 #: src/mailman/chains/hold.py:249
 msgid ""
@@ -498,10 +461,8 @@ msgid ""
 "message will be approved for posting to the list.  The Approved: header can\n"
 "also appear in the first line of the body of the reply."
 msgstr ""
-"இந்த செய்திக்கு நீங்கள் பதிலளித்தால், விசயத்தை வைத்திருத்தல்: தலைப்பு அப்படியே, மெயில்மேன் "
-"செய்வார்\n"
-" வைத்திருக்கும் செய்தியை நிராகரிக்கவும். செய்தி ச்பேம் என்றால் இதைச் செய்யுங்கள். நீங்கள் "
-"பதிலளித்தால்\n"
+"இந்த செய்திக்கு நீங்கள் பதிலளித்தால், விசயத்தை வைத்திருத்தல்: தலைப்பு அப்படியே, மெயில்மேன் செய்வார்\n"
+" வைத்திருக்கும் செய்தியை நிராகரிக்கவும். செய்தி ச்பேம் என்றால் இதைச் செய்யுங்கள். நீங்கள் பதிலளித்தால்\n"
 " இந்த செய்தி மற்றும் அங்கீகரிக்கப்பட்டவை: அதில் உள்ள பட்டியல் கடவுச்சொல்லுடன் தலைப்பு, தி\n"
 " பட்டியலில் இடுகையிட செய்தி அங்கீகரிக்கப்படும். அங்கீகரிக்கப்பட்ட: தலைப்பு முடியும்\n"
 " பதிலின் உடலின் முதல் வரியிலும் தோன்றும்."
@@ -518,23 +479,25 @@ msgstr "உள்ளமைக்கப்பட்ட -உரிமையாள�
 msgid "Reject/bounce a message and stop processing."
 msgstr "ஒரு செய்தியை நிராகரிக்கவும்/துள்ளவும், செயலாக்கத்தை நிறுத்தவும்."
 
-#: src/mailman/commands/cli_addmembers.py:73 src/mailman/commands/cli_syncmembers.py:121
+#: src/mailman/commands/cli_addmembers.py:73
+#: src/mailman/commands/cli_syncmembers.py:121
 #, python-brace-format
 msgid "Cannot parse as valid email address (skipping): ${line}"
-msgstr ""
-"செல்லுபடியாகும் மின்னஞ்சல் முகவரியாக (ச்கிப்பிங்) அலச முடியாது: $ {line}"
+msgstr "செல்லுபடியாகும் மின்னஞ்சல் முகவரியாக (ச்கிப்பிங்) அலச முடியாது: $ {line}"
 
 #: src/mailman/commands/cli_addmembers.py:104
 #, python-brace-format
 msgid "Already subscribed (skipping): ${email}"
 msgstr "ஏற்கனவே சந்தா (தவிர்க்கவும்): $ {email}"
 
-#: src/mailman/commands/cli_addmembers.py:107 src/mailman/commands/cli_syncmembers.py:87
+#: src/mailman/commands/cli_addmembers.py:107
+#: src/mailman/commands/cli_syncmembers.py:87
 #, python-brace-format
 msgid "Membership is banned (skipping): ${email}"
 msgstr "உறுப்பினர் தடைசெய்யப்பட்டுள்ளது (தவிர்க்கவும்): $ {email}"
 
-#: src/mailman/commands/cli_addmembers.py:110 src/mailman/commands/cli_syncmembers.py:90
+#: src/mailman/commands/cli_addmembers.py:110
+#: src/mailman/commands/cli_syncmembers.py:90
 #, python-brace-format
 msgid "Subscription already pending (skipping): ${email}"
 msgstr "சந்தா ஏற்கனவே நிலுவையில் உள்ளது (தவிர்க்கவும்): $ {email}"
@@ -558,11 +521,9 @@ msgid ""
 "    or no delivery.  If not given, the default is regular.  Ignored for invited\n"
 "    members."
 msgstr ""
-"    சேர்க்கப்பட்ட உறுப்பினர்கள் விநியோக பயன்முறையை 'வழக்கமான', 'மைம்', 'வெற்று', என "
-"அமைக்கவும்\n"
+"    சேர்க்கப்பட்ட உறுப்பினர்கள் விநியோக பயன்முறையை 'வழக்கமான', 'மைம்', 'வெற்று', என அமைக்கவும்\n"
 " 'சுருக்கம்' அல்லது 'முடக்கப்பட்டது'. அதாவது, வழக்கமான, மூன்று முறைகளில் ஒன்று\n"
-" அல்லது டெலிவரி இல்லை. வழங்கப்படாவிட்டால், இயல்புநிலை வழக்கமானதாகும். அழைக்கப்பட்டதற்காக "
-"புறக்கணிக்கப்பட்டது\n"
+" அல்லது டெலிவரி இல்லை. வழங்கப்படாவிட்டால், இயல்புநிலை வழக்கமானதாகும். அழைக்கப்பட்டதற்காக புறக்கணிக்கப்பட்டது\n"
 " உறுப்பினர்கள்."
 
 #: src/mailman/commands/cli_addmembers.py:132
@@ -579,7 +540,8 @@ msgstr "    Send_welcome_message க்கான பட்டியலின் 
 
 #: src/mailman/commands/cli_addmembers.py:146 src/mailman/commands/cli_admins.py:97
 #: src/mailman/commands/cli_import.py:68 src/mailman/commands/cli_inject.py:75
-#: src/mailman/commands/cli_members.py:206 src/mailman/commands/cli_syncmembers.py:204
+#: src/mailman/commands/cli_members.py:211
+#: src/mailman/commands/cli_syncmembers.py:204
 #: src/mailman/commands/cli_withlist.py:291 src/mailman/commands/cli_withlist.py:298
 #, python-brace-format
 msgid "No such list: ${listspec}"
@@ -611,11 +573,9 @@ msgid ""
 "    to add multiple users.\n"
 "    "
 msgstr ""
-"    கொடுக்கப்பட்ட பாத்திரத்துடன் சேர்க்க பயனர். இது ஒரு மின்னஞ்சல் முகவரியாக இருக்கலாம் "
-"அல்லது என்றால்\n"
+"    கொடுக்கப்பட்ட பாத்திரத்துடன் சேர்க்க பயனர். இது ஒரு மின்னஞ்சல் முகவரியாக இருக்கலாம் அல்லது என்றால்\n"
 " மேற்கோள் காட்டப்பட்டால், எந்த காட்சி பெயர் மற்றும் மின்னஞ்சல் முகவரி பாகுபடுத்தக்கூடியது\n"
-" மின்னஞ்சல்.utils.parseaddr. எ.கா., 'சேன் டோ <jane@example.com>'. மீண்டும் மீண்டும் "
-"இருக்கலாம்\n"
+" மின்னஞ்சல்.utils.parseaddr. எ.கா., 'சேன் டோ <jane@example.com>'. மீண்டும் மீண்டும் இருக்கலாம்\n"
 " பல பயனர்களைச் சேர்க்க.\n"
 "    "
 
@@ -662,8 +622,7 @@ msgid ""
 "    new_address.\n"
 "    "
 msgstr ""
-"    ஒரு பயனரின் மின்னஞ்சல் முகவரியை பழைய_அடிரெச்சிலிருந்து வழக்கு-பாதுகாக்கப்பட்டதாக "
-"மாற்றவும்\n"
+"    ஒரு பயனரின் மின்னஞ்சல் முகவரியை பழைய_அடிரெச்சிலிருந்து வழக்கு-பாதுகாக்கப்பட்டதாக மாற்றவும்\n"
 " new_address.\n"
 "    "
 
@@ -704,8 +663,7 @@ msgid ""
 "    Section to use for the lookup.  If no key is given, all the key-value pairs\n"
 "    of the given section will be displayed."
 msgstr ""
-"    தேடலுக்கு பயன்படுத்த வேண்டிய பிரிவு. திறவுகோல் எதுவும் கொடுக்கப்படவில்லை என்றால், "
-"அனைத்து முக்கிய மதிப்பு சோடிகளும்\n"
+"    தேடலுக்கு பயன்படுத்த வேண்டிய பிரிவு. திறவுகோல் எதுவும் கொடுக்கப்படவில்லை என்றால், அனைத்து முக்கிய மதிப்பு சோடிகளும்\n"
 " கொடுக்கப்பட்ட பிரிவின் காண்பிக்கப்படும்."
 
 #: src/mailman/commands/cli_conf.py:67
@@ -713,8 +671,7 @@ msgid ""
 "    Key to use for the lookup.  If no section is given, all the key-values pair\n"
 "    from any section matching the given key will be displayed."
 msgstr ""
-"    தேடலுக்கு பயன்படுத்த விசை. எந்த பகுதியும் கொடுக்கப்படவில்லை என்றால், அனைத்து முக்கிய "
-"மதிப்புகளும் இணை\n"
+"    தேடலுக்கு பயன்படுத்த விசை. எந்த பகுதியும் கொடுக்கப்படவில்லை என்றால், அனைத்து முக்கிய மதிப்புகளும் இணை\n"
 " கொடுக்கப்பட்ட விசையுடன் பொருந்தக்கூடிய எந்த பிரிவிலிருந்தும் காண்பிக்கப்படும்."
 
 #: src/mailman/commands/cli_control.py:42
@@ -734,10 +691,8 @@ msgstr ""
 "    மாச்டர் வாட்சர் ஏற்கனவே இருக்கும் மாச்டர் பூட்டைக் கண்டால், அது பொதுவாக வெளியேறும்\n"
 " பிழை செய்தியுடன். இந்த விருப்பத்துடன், மாச்டர் கூடுதல் செய்வார்\n"
 " சோதனை நிலை. விவரிக்கப்பட்டுள்ள ஓச்ட்/பிஐடியுடன் பொருந்தக்கூடிய ஒரு செயல்முறை என்றால்\n"
-" பூட்டு கோப்பு இயங்குகிறது, மாச்டர் இன்னும் வெளியேறுவார், உங்களுக்கு கைமுறையாக "
-"தேவைப்படுகிறது\n"
-" பூட்டை தூய்மை செய்யுங்கள். ஆனால் பொருந்தக்கூடிய செயல்முறை எதுவும் கிடைக்கவில்லை என்றால், "
-"மாச்டர் செய்வார்\n"
+" பூட்டு கோப்பு இயங்குகிறது, மாச்டர் இன்னும் வெளியேறுவார், உங்களுக்கு கைமுறையாக தேவைப்படுகிறது\n"
+" பூட்டை தூய்மை செய்யுங்கள். ஆனால் பொருந்தக்கூடிய செயல்முறை எதுவும் கிடைக்கவில்லை என்றால், மாச்டர் செய்வார்\n"
 " வெளிப்படையான பழமையான பூட்டை அகற்றி, உரிமை கோர மற்றொரு முயற்சியை மேற்கொள்ளுங்கள்\n"
 " முதன்மை பூட்டு."
 
@@ -749,10 +704,8 @@ msgid ""
 "    start of mailman3 server. Setting this option to true will make this\n"
 "    script create the files and thus allow the MTA to operate smoothly."
 msgstr ""
-"    தொடக்கத்தில் MTA மாற்றுப்பெயர் கோப்புகளை உருவாக்குங்கள். போச்ட்ஃபிக்ச் போன்ற சில எம்.டி"
-".ஏ முடியாது\n"
-" அதன் உள்ளமைவில் குறிப்பிடப்பட்டுள்ள மாற்றுப்பெயர் கோப்புகள் இல்லை என்றால் மின்னஞ்சலை வழங்கவும்"
-"\n"
+"    தொடக்கத்தில் MTA மாற்றுப்பெயர் கோப்புகளை உருவாக்குங்கள். போச்ட்ஃபிக்ச் போன்ற சில எம்.டி.ஏ முடியாது\n"
+" அதன் உள்ளமைவில் குறிப்பிடப்பட்டுள்ள மாற்றுப்பெயர் கோப்புகள் இல்லை என்றால் மின்னஞ்சலை வழங்கவும்\n"
 " தற்போது. சில சூழ்நிலைகளில், இது முதலில் ஒரு முட்டுக்கட்டைக்கு வழிவகுக்கும்\n"
 " மெயில்மேன் 3 சேவையகத்தின் தொடக்க. இந்த விருப்பத்தை உண்மைக்கு அமைப்பது இதை உருவாக்கும்\n"
 " ச்கிரிப்ட் கோப்புகளை உருவாக்கி, இதனால் எம்.டி.ஏ சீராக செயல்பட அனுமதிக்கிறது."
@@ -774,8 +727,7 @@ msgid ""
 "    archives through the web.  Tough luck!"
 msgstr ""
 "    பொதுவாக, பயனர் ஐடி மற்றும் குழு ஐடி இருந்தால் இந்த ச்கிரிப்ட் இயக்க மறுக்கும்\n"
-" 'மெயில்மேன்' பயனர் மற்றும் குழுவிற்கு அமைக்கப்படவில்லை (நீங்கள் கட்டமைக்கும்போது "
-"வரையறுக்கப்பட்டுள்ளது\n"
+" 'மெயில்மேன்' பயனர் மற்றும் குழுவிற்கு அமைக்கப்படவில்லை (நீங்கள் கட்டமைக்கும்போது வரையறுக்கப்பட்டுள்ளது\n"
 " அஞ்சல் வீரர்). ரூட்டாக இயக்கப்பட்டால், இந்த ச்கிரிப்ட் இந்த பயனர் மற்றும் குழுவிற்கு மாறும்\n"
 " காசோலை செய்யப்படுவதற்கு முன்.\n"
 "\n"
@@ -803,9 +755,7 @@ msgstr "குனு மெயில்மேன் ஏற்கனவே இய
 
 #: src/mailman/commands/cli_control.py:97
 msgid "A previous run of GNU Mailman did not exit cleanly ({}).  Try using --force"
-msgstr ""
-"குனு மெயில்மேனின் முந்தைய ஓட்டம் சுத்தமாக வெளியேறவில்லை ({}). -ஃபோர்ச் பயன்படுத்த "
-"முயற்சிக்கவும்"
+msgstr "குனு மெயில்மேனின் முந்தைய ஓட்டம் சுத்தமாக வெளியேறவில்லை ({}). -ஃபோர்ச் பயன்படுத்த முயற்சிக்கவும்"
 
 #: src/mailman/commands/cli_control.py:105
 msgid "Starting Mailman's master runner"
@@ -843,8 +793,7 @@ msgstr "மெயில்மேனின் மாச்டர் ரன்ன�
 
 #: src/mailman/commands/cli_control.py:188
 msgid "Signal the Mailman processes to re-open their log files."
-msgstr ""
-"மெயில்மேன் அவர்களின் பதிவு கோப்புகளை மீண்டும் திறக்க செயல்முறைகளை சமிக்ஞை செய்யுங்கள்."
+msgstr "மெயில்மேன் அவர்களின் பதிவு கோப்புகளை மீண்டும் திறக்க செயல்முறைகளை சமிக்ஞை செய்யுங்கள்."
 
 #: src/mailman/commands/cli_control.py:197
 msgid "Reopening the Mailman runners"
@@ -884,8 +833,7 @@ msgid ""
 msgstr ""
 "    பட்டியல் உறுப்பினர்களை நீக்கு\n"
 " -m/-உறுப்பினர் ஏதேனும் இருந்தால் குறிப்பிடப்பட்டுள்ளது. கோப்பு பெயர் '-' ஆக இருக்கலாம்\n"
-" நிலையான உள்ளீடு. '#' உடன் தொடங்கும் வெற்று கோடுகள் மற்றும் கோடுகள் புறக்கணிக்கப்படுகின்றன."
-"\n"
+" நிலையான உள்ளீடு. '#' உடன் தொடங்கும் வெற்று கோடுகள் மற்றும் கோடுகள் புறக்கணிக்கப்படுகின்றன.\n"
 "    "
 
 #: src/mailman/commands/cli_delmembers.py:71
@@ -896,8 +844,7 @@ msgid ""
 "    "
 msgstr ""
 "    பட்டியல் உறுப்பினரை நீக்கு\n"
-" -f/-கோப்பு ஏதேனும் இருந்தால் குறிப்பிடப்பட்டுள்ளது. இந்த விருப்பம் மீண்டும் மீண்டும் "
-"செய்யப்படலாம்\n"
+" -f/-கோப்பு ஏதேனும் இருந்தால் குறிப்பிடப்பட்டுள்ளது. இந்த விருப்பம் மீண்டும் மீண்டும் செய்யப்படலாம்\n"
 " பல முகவரிகள்.\n"
 "    "
 
@@ -907,8 +854,7 @@ msgid ""
 "    -m/--member or --fromall may be specified.\n"
 "    "
 msgstr ""
-"    பட்டியலின் அனைத்து உறுப்பினர்களையும் நீக்கவும். குறிப்பிடப்பட்டால், -f/-கோப்பு எதுவும் "
-"இல்லை,\n"
+"    பட்டியலின் அனைத்து உறுப்பினர்களையும் நீக்கவும். குறிப்பிடப்பட்டால், -f/-கோப்பு எதுவும் இல்லை,\n"
 " -m/-உறுப்பினர் அல்லது --fromall குறிப்பிடப்படலாம்.\n"
 "    "
 
@@ -919,13 +865,13 @@ msgid ""
 "    -a/--all or -l/--list.\n"
 "    "
 msgstr ""
-"    அனைவரிடமிருந்தும் -m/-உறுப்பினர் மற்றும்/அல்லது -f/-கோப்பால் குறிப்பிடப்பட்ட உறுப்பினர்"
-" (களை) நீக்கு\n"
+"    அனைவரிடமிருந்தும் -m/-உறுப்பினர் மற்றும்/அல்லது -f/-கோப்பால் குறிப்பிடப்பட்ட உறுப்பினர் (களை) நீக்கு\n"
 " நிறுவலில் பட்டியல்கள். இது ஒன்றாக குறிப்பிடப்படாமல் இருக்கலாம்\n"
 " -a/-அனைத்தும் அல்லது -l/-பட்டியல்.\n"
 "    "
 
-#: src/mailman/commands/cli_delmembers.py:93 src/mailman/commands/cli_syncmembers.py:182
+#: src/mailman/commands/cli_delmembers.py:93
+#: src/mailman/commands/cli_syncmembers.py:182
 msgid ""
 "    Override the list's setting for send_goodbye_message to\n"
 "    deleted members."
@@ -933,7 +879,8 @@ msgstr ""
 "    Send_goodbye_message க்கான பட்டியலின் அமைப்பை மீறவும்\n"
 " நீக்கப்பட்ட உறுப்பினர்கள்."
 
-#: src/mailman/commands/cli_delmembers.py:98 src/mailman/commands/cli_syncmembers.py:187
+#: src/mailman/commands/cli_delmembers.py:98
+#: src/mailman/commands/cli_syncmembers.py:187
 msgid "    Override the list's setting for admin_notify_mchanges."
 msgstr "    Admin_notify_mchanges க்கான பட்டியலின் அமைப்பை மேலெழுதவும்."
 
@@ -953,8 +900,7 @@ msgid ""
 "    this option, operate on the digests for all mailing lists."
 msgstr ""
 "    இந்த அஞ்சல் பட்டியலில் இயக்கவும். பல -பட்டியல் விருப்பங்கள் வழங்கப்படலாம். தி\n"
-" உரையாடல் ஒரு பட்டியல்-ஐடி அல்லது முழு தகுதி வாய்ந்த பட்டியல் பெயராக இருக்கலாம். இல்லாமல்"
-"\n"
+" உரையாடல் ஒரு பட்டியல்-ஐடி அல்லது முழு தகுதி வாய்ந்த பட்டியல் பெயராக இருக்கலாம். இல்லாமல்\n"
 " இந்த விருப்பம், அனைத்து அஞ்சல் பட்டியல்களுக்கும் செரிமானங்களில் இயங்குகிறது."
 
 #: src/mailman/commands/cli_digests.py:48
@@ -962,8 +908,7 @@ msgid ""
 "    Send any collected digests right now, even if the size threshold has not\n"
 "    yet been met."
 msgstr ""
-"    சேகரிக்கப்பட்ட எந்த செரிமானங்களையும் இப்போதே அனுப்புங்கள், அளவு வாசல் இல்லாவிட்டாலும் "
-"கூட\n"
+"    சேகரிக்கப்பட்ட எந்த செரிமானங்களையும் இப்போதே அனுப்புங்கள், அளவு வாசல் இல்லாவிட்டாலும் கூட\n"
 " இன்னும் சந்திக்கப்பட்டன."
 
 #: src/mailman/commands/cli_digests.py:54
@@ -993,8 +938,7 @@ msgid ""
 "    Send any collected digests for the List only if their digest_send_periodic\n"
 "    is set to True."
 msgstr ""
-"    அவற்றின் டைசச்ட்_செண்ட்_பெரியோடிக் என்றால் மட்டுமே பட்டியலுக்கு சேகரிக்கப்பட்ட "
-"செரிமானங்களை அனுப்பவும்\n"
+"    அவற்றின் டைசச்ட்_செண்ட்_பெரியோடிக் என்றால் மட்டுமே பட்டியலுக்கு சேகரிக்கப்பட்ட செரிமானங்களை அனுப்பவும்\n"
 " உண்மை என அமைக்கப்பட்டுள்ளது."
 
 #: src/mailman/commands/cli_digests.py:79
@@ -1009,23 +953,17 @@ msgstr "அத்தகைய பட்டியல் எதுவும் க
 #: src/mailman/commands/cli_digests.py:100
 #, python-brace-format
 msgid "${mlist.list_id} is at volume ${mlist.volume}, number ${mlist.next_digest_number}"
-msgstr ""
-"$ {mlist.list_id} தொகுதிகளில் உள்ளது $ {mlist.volume}, எண் $ "
-"{mlist.next_digest_number}"
+msgstr "$ {mlist.list_id} தொகுதிகளில் உள்ளது $ {mlist.volume}, எண் $ {mlist.next_digest_number}"
 
 #: src/mailman/commands/cli_digests.py:106
 #, python-brace-format
 msgid "${mlist.list_id} bumped to volume ${mlist.volume}, number ${mlist.next_digest_number}"
-msgstr ""
-"$ {mlist.list_id} தொகுதிக்கு ஏற்றப்பட்டது $ {mlist.volume}, எண் $ "
-"{mlist.next_digest_number}"
+msgstr "$ {mlist.list_id} தொகுதிக்கு ஏற்றப்பட்டது $ {mlist.volume}, எண் $ {mlist.next_digest_number}"
 
 #: src/mailman/commands/cli_digests.py:112 src/mailman/commands/cli_digests.py:122
 #, python-brace-format
 msgid "${mlist.list_id} sent volume ${mlist.volume}, number ${mlist.next_digest_number}"
-msgstr ""
-"$ {mlist.list_id} அனுப்பப்பட்ட தொகுதி $ {mlist.volume}, எண் $ "
-"{mlist.next_digest_number}"
+msgstr "$ {mlist.list_id} அனுப்பப்பட்ட தொகுதி $ {mlist.volume}, எண் $ {mlist.next_digest_number}"
 
 #: src/mailman/commands/cli_findmember.py:81
 msgid ""
@@ -1035,8 +973,7 @@ msgid ""
 "    string works best.\n"
 "    "
 msgstr ""
-"    முகவரி பொருந்தக்கூடிய ஒரு பயனர் அல்லது பயனர்களுக்கான அனைத்து உறுப்பினர்களையும் "
-"காண்பி\n"
+"    முகவரி பொருந்தக்கூடிய ஒரு பயனர் அல்லது பயனர்களுக்கான அனைத்து உறுப்பினர்களையும் காண்பி\n"
 " முறை. ஏனெனில் செயல்முறையின் ஒரு பகுதி வடிவத்தை மாற்றுவதை உள்ளடக்குகிறது\n"
 " வைல்டு கார்டுகளுடன் ஒரு கவிமொ வினவலுக்கு, முறை எளிமையாக இருக்க வேண்டும். ஒரு எளிய\n"
 " சரம் சிறப்பாக செயல்படுகிறது.\n"
@@ -1047,8 +984,7 @@ msgid ""
 "    Display only memberships with the given role.  If not given, 'all' role,\n"
 "    i.e. all roles, is the default."
 msgstr ""
-"    கொடுக்கப்பட்ட பாத்திரத்துடன் உறுப்பினர்களை மட்டுமே காண்பி. கொடுக்கப்படாவிட்டால், "
-"'அனைத்தும்' பாத்திரம்,\n"
+"    கொடுக்கப்பட்ட பாத்திரத்துடன் உறுப்பினர்களை மட்டுமே காண்பி. கொடுக்கப்படாவிட்டால், 'அனைத்தும்' பாத்திரம்,\n"
 " அதாவது அனைத்து பாத்திரங்களும் இயல்புநிலை."
 
 #: src/mailman/commands/cli_findmember.py:115
@@ -1065,8 +1001,7 @@ msgstr "{}"
 
 #: src/mailman/commands/cli_gatenews.py:170
 msgid "Poll the NNTP server for messages to be gatewayed to mailing lists."
-msgstr ""
-"அஞ்சல் பட்டியல்களுக்கு நுழைவாயிலாக செய்திகளுக்கு என்என்டிபி சேவையகத்தை வாக்கெடுப்பு."
+msgstr "அஞ்சல் பட்டியல்களுக்கு நுழைவாயிலாக செய்திகளுக்கு என்என்டிபி சேவையகத்தை வாக்கெடுப்பு."
 
 #: src/mailman/commands/cli_gatenews.py:177
 msgid ""
@@ -1098,8 +1033,7 @@ msgid ""
 "    thereof. This will normally be the Mailman 2.1 charset of the list's\n"
 "    preferred_language."
 msgstr ""
-"    யுடிஎஃப் -8 அல்லது துணைக்குழு இல்லையென்றால் ஊறுகாய்_பிலில் சரங்களின் குறியாக்கத்தைக் "
-"குறிப்பிடவும்\n"
+"    யுடிஎஃப் -8 அல்லது துணைக்குழு இல்லையென்றால் ஊறுகாய்_பிலில் சரங்களின் குறியாக்கத்தைக் குறிப்பிடவும்\n"
 " அதன். இது பொதுவாக பட்டியலின் மெயில்மேன் 2.1 சார்சமாக இருக்கும்\n"
 " விருப்பமான_ மொழி."
 
@@ -1118,9 +1052,7 @@ msgstr "இந்த மெயில்மேன் நிகழ்வு பற
 
 #: src/mailman/commands/cli_info.py:40
 msgid "    File to send the output to.  If not given, standard output is used."
-msgstr ""
-"    வெளியீட்டை அனுப்ப கோப்பு. கொடுக்கப்படாவிட்டால், நிலையான வெளியீடு "
-"பயன்படுத்தப்படுகிறது."
+msgstr "    வெளியீட்டை அனுப்ப கோப்பு. கொடுக்கப்படாவிட்டால், நிலையான வெளியீடு பயன்படுத்தப்படுகிறது."
 
 #: src/mailman/commands/cli_info.py:45
 msgid ""
@@ -1132,8 +1064,7 @@ msgstr ""
 
 #: src/mailman/commands/cli_inject.py:45
 msgid "Inject a message from a file into a mailing list's queue."
-msgstr ""
-"ஒரு கோப்பிலிருந்து ஒரு செய்தியை ஒரு அஞ்சல் பட்டியலின் வரிசையில் செலுத்துங்கள்."
+msgstr "ஒரு கோப்பிலிருந்து ஒரு செய்தியை ஒரு அஞ்சல் பட்டியலின் வரிசையில் செலுத்துங்கள்."
 
 #: src/mailman/commands/cli_inject.py:48
 msgid ""
@@ -1147,8 +1078,7 @@ msgstr ""
 
 #: src/mailman/commands/cli_inject.py:56
 msgid "Show a list of all available queue names and exit."
-msgstr ""
-"கிடைக்கக்கூடிய அனைத்து வரிசை பெயர்களின் பட்டியலையும் வெளியேறுங்கள் மற்றும் வெளியேறவும்."
+msgstr "கிடைக்கக்கூடிய அனைத்து வரிசை பெயர்களின் பட்டியலையும் வெளியேறுங்கள் மற்றும் வெளியேறவும்."
 
 #: src/mailman/commands/cli_inject.py:60
 msgid ""
@@ -1179,8 +1109,7 @@ msgstr "அனைத்து அஞ்சல் பட்டியல்கள�
 
 #: src/mailman/commands/cli_lists.py:58
 msgid "List only those mailing lists that are publicly advertised"
-msgstr ""
-"பகிரங்கமாக விளம்பரப்படுத்தப்பட்ட அந்த அஞ்சல் பட்டியல்களை மட்டுமே பட்டியலிடுங்கள்"
+msgstr "பகிரங்கமாக விளம்பரப்படுத்தப்பட்ட அந்த அஞ்சல் பட்டியல்களை மட்டுமே பட்டியலிடுங்கள்"
 
 #: src/mailman/commands/cli_lists.py:62
 msgid "Show also the list names"
@@ -1200,8 +1129,7 @@ msgid ""
 "    must be the email host name.  Multiple -d options may be given.\n"
 "    "
 msgstr ""
-"    கொடுக்கப்பட்ட டொமைனில் புரவலன் செய்யப்பட்ட அந்த அஞ்சல் பட்டியல்களை மட்டுமே பட்டியலிடுங்கள்"
-", இது\n"
+"    கொடுக்கப்பட்ட டொமைனில் புரவலன் செய்யப்பட்ட அந்த அஞ்சல் பட்டியல்களை மட்டுமே பட்டியலிடுங்கள், இது\n"
 " மின்னஞ்சல் புரவலன் பெயராக இருக்க வேண்டும். பல -டி விருப்பங்கள் வழங்கப்படலாம்.\n"
 "    "
 
@@ -1225,18 +1153,15 @@ msgstr ""
 "    ஒரு அஞ்சல் பட்டியலை உருவாக்கவும்.\n"
 "\n"
 " 'முழு தகுதி வாய்ந்த பட்டியல் பெயர்', அதாவது அஞ்சலின் இடுகையிடும் முகவரி\n"
-" பட்டியல் தேவை. இது செல்லுபடியாகும் மின்னஞ்சல் முகவரியாக இருக்க வேண்டும் மற்றும் டொமைன் "
-"இருக்க வேண்டும்\n"
-" மெயில்மேனுடன் பதிவு செய்யப்பட்டுள்ளது. பட்டியல் பெயர்கள் சிறிய வழக்குக்கு "
-"கட்டாயப்படுத்தப்படுகின்றன."
+" பட்டியல் தேவை. இது செல்லுபடியாகும் மின்னஞ்சல் முகவரியாக இருக்க வேண்டும் மற்றும் டொமைன் இருக்க வேண்டும்\n"
+" மெயில்மேனுடன் பதிவு செய்யப்பட்டுள்ளது. பட்டியல் பெயர்கள் சிறிய வழக்குக்கு கட்டாயப்படுத்தப்படுகின்றன."
 
 #: src/mailman/commands/cli_lists.py:136
 msgid ""
 "    Set the list's preferred language to CODE, which must be a registered two\n"
 "    letter language code."
 msgstr ""
-"    பட்டியலின் விருப்பமான மொழியை குறியீடாக அமைக்கவும், இது பதிவுசெய்யப்பட்ட இரண்டாக "
-"இருக்க வேண்டும்\n"
+"    பட்டியலின் விருப்பமான மொழியை குறியீடாக அமைக்கவும், இது பதிவுசெய்யப்பட்ட இரண்டாக இருக்க வேண்டும்\n"
 " கடிதம் மொழி குறியீடு."
 
 #: src/mailman/commands/cli_lists.py:142
@@ -1247,12 +1172,10 @@ msgid ""
 "    send a list creation notice to the address.  More than one owner can be\n"
 "    specified."
 msgstr ""
-"    பட்டியல் உரிமையாளர் மின்னஞ்சல் முகவரியைக் குறிப்பிடவும். முகவரி தற்போது இல்லை என்றால்"
-"\n"
+"    பட்டியல் உரிமையாளர் மின்னஞ்சல் முகவரியைக் குறிப்பிடவும். முகவரி தற்போது இல்லை என்றால்\n"
 " மெயில்மேனுடன் பதிவுசெய்யப்பட்ட முகவரி பதிவு செய்யப்பட்டு பயனருடன் இணைக்கப்பட்டுள்ளது.\n"
 " மெயில்மேன் முகவரிக்கு உறுதிப்படுத்தும் செய்தியை அனுப்புவார், ஆனால் அதுவும் இருக்கும்\n"
-" முகவரிக்கு பட்டியல் உருவாக்கும் அறிவிப்பை அனுப்பவும். ஒன்றுக்கு மேற்பட்ட உரிமையாளர்கள் "
-"இருக்க முடியும்\n"
+" முகவரிக்கு பட்டியல் உருவாக்கும் அறிவிப்பை அனுப்பவும். ஒன்றுக்கு மேற்பட்ட உரிமையாளர்கள் இருக்க முடியும்\n"
 " குறிப்பிடப்பட்டது."
 
 #: src/mailman/commands/cli_lists.py:150
@@ -1322,8 +1245,8 @@ msgid "Your new mailing list: ${fqdn_listname}"
 msgstr "உங்கள் புதிய அஞ்சல் பட்டியல்: $ {fqdn_listname}"
 
 #: src/mailman/commands/cli_lists.py:241
-msgid "Remove a mailing list."
-msgstr "ஒரு அஞ்சல் பட்டியலை அகற்று."
+msgid "Remove a mailing list (does not remove archives)."
+msgstr ""
 
 #: src/mailman/commands/cli_lists.py:245
 msgid "Suppress status messages"
@@ -1344,7 +1267,7 @@ msgstr "அகற்றப்பட்ட பட்டியல்: $ {listspec}
 msgid "${mlist.list_id} has no members"
 msgstr "$ {mlist.list_id} உறுப்பினர்கள் இல்லை"
 
-#: src/mailman/commands/cli_members.py:116
+#: src/mailman/commands/cli_members.py:121
 msgid ""
 "    Display a mailing list's members.\n"
 "    Filtering along various criteria can be done when displaying.\n"
@@ -1352,21 +1275,18 @@ msgid ""
 "    to stdout is the default mode.\n"
 "    "
 msgstr ""
-"    அஞ்சல் பட்டியல் உறுப்பினர்களைக் காண்பி. காண்பிக்கும் போது பல்வேறு அளவுகோல்களுடன் "
-"வடிகட்டலாம். எந்த விருப்பங்களும் கொடுக்கப்படாமல், அஞ்சல் பட்டியல் உறுப்பினர்களை stdout க்கு "
-"காண்பிப்பது இயல்புநிலை பயன்முறையாகும்.\n"
+"    அஞ்சல் பட்டியல் உறுப்பினர்களைக் காண்பி. காண்பிக்கும் போது பல்வேறு அளவுகோல்களுடன் வடிகட்டலாம். எந்த விருப்பங்களும் கொடுக்கப்படாமல், அஞ்சல் பட்டியல் உறுப்பினர்களை stdout க்கு காண்பிப்பது இயல்புநிலை பயன்முறையாகும்.\n"
 "    "
 
-#: src/mailman/commands/cli_members.py:125
+#: src/mailman/commands/cli_members.py:130
 msgid ""
 "    [MODE] Add all member addresses in FILENAME.  This option is removed.\n"
 "    Use 'mailman addmembers' instead."
 msgstr ""
-"    [பயன்முறை] அனைத்து உறுப்பினர் முகவரிகளையும் கோப்பு பெயரில் சேர்க்கவும். இந்த விருப்பம்"
-" அகற்றப்பட்டது.\n"
+"    [பயன்முறை] அனைத்து உறுப்பினர் முகவரிகளையும் கோப்பு பெயரில் சேர்க்கவும். இந்த விருப்பம் அகற்றப்பட்டது.\n"
 " அதற்கு பதிலாக 'மெயில்மேன் சேர்க்கை' பயன்படுத்தவும்."
 
-#: src/mailman/commands/cli_members.py:131
+#: src/mailman/commands/cli_members.py:136
 msgid ""
 "    [MODE] Delete all member addresses found in FILENAME.\n"
 "    This option is removed. Use 'mailman delmembers' instead."
@@ -1374,18 +1294,17 @@ msgstr ""
 "    [பயன்முறை] கோப்பு பெயரில் காணப்படும் அனைத்து உறுப்பினர் முகவரிகளையும் நீக்கு.\n"
 " இந்த விருப்பம் அகற்றப்பட்டது. அதற்கு பதிலாக 'மெயில்மேன் டெல்மெம்பர்ச்' ஐப் பயன்படுத்தவும்."
 
-#: src/mailman/commands/cli_members.py:137
+#: src/mailman/commands/cli_members.py:142
 msgid ""
 "    [MODE] Synchronize all member addresses of the specified mailing list\n"
 "    with the member addresses found in FILENAME.\n"
 "    This option is removed. Use 'mailman syncmembers' instead."
 msgstr ""
-"    [பயன்முறை] குறிப்பிட்ட அஞ்சல் பட்டியலின் அனைத்து உறுப்பினர் முகவரிகளையும் "
-"ஒத்திசைக்கவும்\n"
+"    [பயன்முறை] குறிப்பிட்ட அஞ்சல் பட்டியலின் அனைத்து உறுப்பினர் முகவரிகளையும் ஒத்திசைக்கவும்\n"
 " கோப்பு பெயரில் காணப்படும் உறுப்பினர் முகவரிகளுடன்.\n"
 " இந்த விருப்பம் அகற்றப்பட்டது. அதற்கு பதிலாக 'மெயில்மேன் ஒத்திசைவர்கள்' பயன்படுத்தவும்."
 
-#: src/mailman/commands/cli_members.py:144
+#: src/mailman/commands/cli_members.py:149
 msgid ""
 "    Display output to FILENAME instead of stdout.  FILENAME\n"
 "    can be '-' to indicate standard output."
@@ -1393,7 +1312,7 @@ msgstr ""
 "    Stdout க்கு பதிலாக கோப்பு பெயருக்கு வெளியீட்டைக் காண்பி. கோப்பு பெயர்\n"
 " நிலையான வெளியீட்டைக் குறிக்க '-' ஆக இருக்கலாம்."
 
-#: src/mailman/commands/cli_members.py:151
+#: src/mailman/commands/cli_members.py:156
 msgid ""
 "    Display only members with a given ROLE.\n"
 "    The role may be 'any', 'member', 'nonmember', 'owner', 'moderator',\n"
@@ -1405,28 +1324,25 @@ msgstr ""
 " அல்லது 'நிர்வாகி' (அதாவது உரிமையாளர்கள் மற்றும் மதிப்பீட்டாளர்கள்).\n"
 " கொடுக்கப்படாவிட்டால், 'உறுப்பினர்' பங்கு கருதப்படுகிறது."
 
-#: src/mailman/commands/cli_members.py:159
+#: src/mailman/commands/cli_members.py:164
 msgid "    Display only regular delivery members."
 msgstr "    வழக்கமான விநியோக உறுப்பினர்களை மட்டுமே காண்பி."
 
-#: src/mailman/commands/cli_members.py:176
+#: src/mailman/commands/cli_members.py:181
 msgid "    This option has no effect. It exists for backwards compatibility only."
-msgstr ""
-"    இந்த விருப்பம் எந்த விளைவையும் ஏற்படுத்தாது. இது பின்னோக்கி பொருந்தக்கூடிய தன்மைக்கு "
-"மட்டுமே உள்ளது."
+msgstr "    இந்த விருப்பம் எந்த விளைவையும் ஏற்படுத்தாது. இது பின்னோக்கி பொருந்தக்கூடிய தன்மைக்கு மட்டுமே உள்ளது."
 
-#: src/mailman/commands/cli_members.py:182
+#: src/mailman/commands/cli_members.py:187
 msgid ""
 "    Display only digest members of kind.\n"
 "    'any' means any digest type, 'plaintext' means only plain text (rfc 1153)\n"
 "    type digests, 'mime' means MIME type digests."
 msgstr ""
 "    வகையான உறுப்பினர்களை மட்டுமே டைசச்ட் செய்யுங்கள்.\n"
-" 'ஏதேனும்' என்பது எந்த டைசச்ட் வகையையும் குறிக்கிறது, 'எளிய உரை' என்பது எளிய உரை "
-"மட்டுமே (RFC 1153)\n"
+" 'ஏதேனும்' என்பது எந்த டைசச்ட் வகையையும் குறிக்கிறது, 'எளிய உரை' என்பது எளிய உரை மட்டுமே (RFC 1153)\n"
 " செரிமானங்களைத் தட்டச்சு செய்க, 'மைம்' என்றால் மைம் வகை செரிமானங்கள்."
 
-#: src/mailman/commands/cli_members.py:190
+#: src/mailman/commands/cli_members.py:195
 msgid ""
 "    Display only members with a given delivery status.\n"
 "    'enabled' means all members whose delivery is enabled, 'any' means\n"
@@ -1438,8 +1354,7 @@ msgid ""
 "    for unknown (legacy) reasons."
 msgstr ""
 "    கொடுக்கப்பட்ட விநியோக நிலையுடன் உறுப்பினர்களை மட்டுமே காண்பி.\n"
-" 'இயக்கப்பட்டது' என்பது மகப்பேறு இயக்கப்பட்ட அனைத்து உறுப்பினர்களையும் குறிக்கிறது, "
-"'ஏதேனும்' பொருள்\n"
+" 'இயக்கப்பட்டது' என்பது மகப்பேறு இயக்கப்பட்ட அனைத்து உறுப்பினர்களையும் குறிக்கிறது, 'ஏதேனும்' பொருள்\n"
 " எந்தவொரு காரணத்திற்காகவும் வழங்கப்படும் உறுப்பினர்கள், 'BYUSER' என்றால்\n"
 " உறுப்பினர் தங்கள் சொந்த விநியோகத்தை முடக்கியுள்ளார், 'பைபவுன்ச்' என்றால் அது\n"
 " தானியங்கு பவுன்ச் செயலியால் டெலிவரி முடக்கப்பட்டது,\n"
@@ -1449,8 +1364,7 @@ msgstr ""
 
 #: src/mailman/commands/cli_notify.py:40
 msgid "Notify list owners/moderators of pending requests."
-msgstr ""
-"பட்டியல் உரிமையாளர்கள்/நிலுவையில் உள்ள கோரிக்கைகளின் மதிப்பீட்டாளர்களுக்கு அறிவிக்கவும்."
+msgstr "பட்டியல் உரிமையாளர்கள்/நிலுவையில் உள்ள கோரிக்கைகளின் மதிப்பீட்டாளர்களுக்கு அறிவிக்கவும்."
 
 #: src/mailman/commands/cli_notify.py:43
 msgid ""
@@ -1459,8 +1373,7 @@ msgid ""
 "    this option, operate on the requests for all mailing lists."
 msgstr ""
 "    இந்த அஞ்சல் பட்டியலில் இயக்கவும். பல -பட்டியல் விருப்பங்கள் வழங்கப்படலாம். தி\n"
-" உரையாடல் ஒரு பட்டியல்-ஐடி அல்லது முழு தகுதி வாய்ந்த பட்டியல் பெயராக இருக்கலாம். இல்லாமல்"
-"\n"
+" உரையாடல் ஒரு பட்டியல்-ஐடி அல்லது முழு தகுதி வாய்ந்த பட்டியல் பெயராக இருக்கலாம். இல்லாமல்\n"
 " இந்த விருப்பம், அனைத்து அஞ்சல் பட்டியல்களுக்கான கோரிக்கைகளில் செயல்படுகிறது."
 
 #: src/mailman/commands/cli_notify.py:80 src/mailman/commands/cli_notify.py:141
@@ -1532,8 +1445,7 @@ msgid ""
 msgstr ""
 "    பொருளை அழகாக அச்சிட முயற்சிக்காதீர்கள். சில இருந்தால் இது பயனுள்ளதாக இருக்கும்\n"
 " பொருளின் சிக்கல் மற்றும் நீங்கள் ஒரு திறக்கப்பட வேண்டும்\n"
-" பிரதிநிதித்துவம். 'மெயில்மேன் qfile -i <file>' உடன் பயனுள்ளதாக இருக்கும். அந்த "
-"விசயத்தில், தி\n"
+" பிரதிநிதித்துவம். 'மெயில்மேன் qfile -i <file>' உடன் பயனுள்ளதாக இருக்கும். அந்த விசயத்தில், தி\n"
 " திறக்கப்படாத பொருட்களின் பட்டியல் 'எம்' எனப்படும் மாறியில் விடப்படும்."
 
 #: src/mailman/commands/cli_qfile.py:50
@@ -1583,8 +1495,7 @@ msgstr "குனு மெயில்மேன் நிறுத்தப்�
 #: src/mailman/commands/cli_status.py:50
 #, python-brace-format
 msgid "GNU Mailman is in an unexpected state (${hostname} != ${fqdn_name})"
-msgstr ""
-"குனு மெயில்மேன் எதிர்பாராத நிலையில் உள்ளார் ($ {hostname}! = $ {fqdn_name})"
+msgstr "குனு மெயில்மேன் எதிர்பாராத நிலையில் உள்ளார் ($ {hostname}! = $ {fqdn_name})"
 
 #: src/mailman/commands/cli_syncmembers.py:136
 #, python-format
@@ -1617,8 +1528,7 @@ msgstr ""
 " புறக்கணிக்கப்பட்டது. தற்போதைய பட்டியல் உறுப்பினர்கள் இல்லாத கோப்பு பெயரில் உள்ள முகவரிகள்\n"
 " குறிப்பிடப்பட்டுள்ளபடி டெலிவரி பயன்முறையுடன் பட்டியலில் சேர்க்கப்படும்\n"
 " -d/-டெலிவரி. கோப்பு பெயரில் இல்லாத முகவரிகள் அல்ல\n"
-" பட்டியலிலிருந்து அகற்றப்படும். நிலையான உள்ளீட்டைக் குறிக்க கோப்பு பெயர் '-' ஆக இருக்கலாம்."
-"\n"
+" பட்டியலிலிருந்து அகற்றப்படும். நிலையான உள்ளீட்டைக் குறிக்க கோப்பு பெயர் '-' ஆக இருக்கலாம்.\n"
 "    "
 
 #: src/mailman/commands/cli_syncmembers.py:172
@@ -1627,23 +1537,20 @@ msgid ""
 "    'summary' or 'disabled'.  I.e., one of regular, three modes of digest\n"
 "    or no delivery.  If not given, the default is regular."
 msgstr ""
-"    சேர்க்கப்பட்ட உறுப்பினர்கள் விநியோக பயன்முறையை 'வழக்கமான', 'மைம்', 'வெற்று', என "
-"அமைக்கவும்\n"
+"    சேர்க்கப்பட்ட உறுப்பினர்கள் விநியோக பயன்முறையை 'வழக்கமான', 'மைம்', 'வெற்று', என அமைக்கவும்\n"
 " 'சுருக்கம்' அல்லது 'முடக்கப்பட்டது'. அதாவது, வழக்கமான, மூன்று முறைகளில் ஒன்று\n"
 " அல்லது டெலிவரி இல்லை. வழங்கப்படாவிட்டால், இயல்புநிலை வழக்கமானதாகும்."
 
 #: src/mailman/commands/cli_syncmembers.py:178
 msgid "    Override the list's setting for send_welcome_message to added members."
-msgstr ""
-"    கூடுதல் உறுப்பினர்களுக்கு send_welcome_message க்கான பட்டியலின் அமைப்பை மீறுங்கள்."
+msgstr "    கூடுதல் உறுப்பினர்களுக்கு send_welcome_message க்கான பட்டியலின் அமைப்பை மீறுங்கள்."
 
 #: src/mailman/commands/cli_syncmembers.py:192
 msgid ""
 "    Don't actually make the changes.  Instead, print out what would be\n"
 "    done to the list."
 msgstr ""
-"    உண்மையில் மாற்றங்களைச் செய்ய வேண்டாம். அதற்கு பதிலாக, என்னவாக இருக்கும் என்பதை "
-"அச்சிடுங்கள்\n"
+"    உண்மையில் மாற்றங்களைச் செய்ய வேண்டாம். அதற்கு பதிலாக, என்னவாக இருக்கும் என்பதை அச்சிடுங்கள்\n"
 " பட்டியலில் முடிந்தது."
 
 #: src/mailman/commands/cli_unshunt.py:33
@@ -1655,8 +1562,7 @@ msgid ""
 "    Discard all shunted messages instead of moving them back to their original\n"
 "    queue."
 msgstr ""
-"    சன்ட் செய்யப்பட்ட அனைத்து செய்திகளையும் அவற்றின் அசல் நிலைக்கு நகர்த்துவதற்குப் பதிலாக "
-"அவற்றை நிராகரிக்கவும்\n"
+"    சன்ட் செய்யப்பட்ட அனைத்து செய்திகளையும் அவற்றின் அசல் நிலைக்கு நகர்த்துவதற்குப் பதிலாக அவற்றை நிராகரிக்கவும்\n"
 " வரிசை."
 
 #: src/mailman/commands/cli_unshunt.py:50
@@ -1700,10 +1606,8 @@ msgid ""
 "variable 'm' will be available in the global namespace.  It will reference the\n"
 "mailing list object."
 msgstr ""
-"இந்த ச்கிரிப்டைப் பயன்படுத்த இரண்டு வழிகள் உள்ளன: ஊடாடும் வகையில் அல்லது நிரலாக்க ரீதியாக."
-"\n"
-" அதைப் பயன்படுத்துவது ஒரு அஞ்சலுடன் விளையாடவும், ஆராயவும் மாற்றவும் உங்களை அனுமதிக்கிறது"
-"\n"
+"இந்த ச்கிரிப்டைப் பயன்படுத்த இரண்டு வழிகள் உள்ளன: ஊடாடும் வகையில் அல்லது நிரலாக்க ரீதியாக.\n"
+" அதைப் பயன்படுத்துவது ஒரு அஞ்சலுடன் விளையாடவும், ஆராயவும் மாற்றவும் உங்களை அனுமதிக்கிறது\n"
 " பைத்தானின் ஊடாடும் மொழிபெயர்ப்பாளரிடமிருந்து பட்டியல். ஊடாடும் போது, தி\n"
 " மாறி 'எம்' உலகளாவிய பெயர்வெளியில் கிடைக்கும். அது குறிக்கும்\n"
 " அஞ்சல் பட்டியல் பொருள்."
@@ -1720,8 +1624,7 @@ msgid ""
 "(e.g. ant@example.com), or the List-ID (e.g. ant.example.com)."
 msgstr ""
 "நிரலாக்க ரீதியாக, நீங்கள் ஒரு அஞ்சல் பட்டியலில் செயல்பட ஒரு செயல்பாட்டை எழுதலாம், மற்றும்\n"
-" இந்த ச்கிரிப்ட் வீட்டு பராமரிப்பை கவனித்துக்கொள்ளும் (எடுத்துக்காட்டுகளுக்கு கீழே காண்க). இல்"
-"\n"
+" இந்த ச்கிரிப்ட் வீட்டு பராமரிப்பை கவனித்துக்கொள்ளும் (எடுத்துக்காட்டுகளுக்கு கீழே காண்க). இல்\n"
 " அந்த வழக்கு, பொதுவான பயன்பாட்டு தொடரியல்:\n"
 "\n"
 " % மெயில்மேன் வித்ச்லிச்ட் [விருப்பங்கள்] -எல் லிச்ட்ச்பெக் [ஆர்க்ச் ...]\n"
@@ -1747,8 +1650,7 @@ msgid ""
 "\n"
 "If -l is not given then you can run a function that takes no arguments.\n"
 msgstr ""
-"-ரன் விருப்பத்தை எவ்வாறு பயன்படுத்துவது என்பதற்கான எடுத்துக்காட்டு இங்கே. உங்களிடம் ஒரு "
-"கோப்பு உள்ளது என்று சொல்லுங்கள்\n"
+"-ரன் விருப்பத்தை எவ்வாறு பயன்படுத்துவது என்பதற்கான எடுத்துக்காட்டு இங்கே. உங்களிடம் ஒரு கோப்பு உள்ளது என்று சொல்லுங்கள்\n"
 " மெயில்மேன் நிறுவல் அடைவு 'ListAddr.py' என்று அழைக்கப்படுகிறது, பின்வரும் இரண்டோடு\n"
 " செயல்பாடுகள்:\n"
 "\n"
@@ -1762,8 +1664,7 @@ msgstr ""
 " ஆன். கட்டளை வரியில் கொடுக்கப்பட்ட கூடுதல் வாதங்கள் எதுவும் அனுப்பப்படுகின்றன\n"
 " அழைக்கக்கூடிய நிலை வாதங்கள்.\n"
 "\n"
-" -எல் வழங்கப்படாவிட்டால், எந்த வாதங்களையும் எடுக்காத ஒரு செயல்பாட்டை நீங்கள் இயக்க முடியும்."
-"\n"
+" -எல் வழங்கப்படாவிட்டால், எந்த வாதங்களையும் எடுக்காத ஒரு செயல்பாட்டை நீங்கள் இயக்க முடியும்.\n"
 
 #: src/mailman/commands/cli_withlist.py:187
 msgid ""
@@ -1775,8 +1676,7 @@ msgid ""
 "Running listaddr.listaddr() ...\n"
 "ant@example.com"
 msgstr ""
-"பின்வருவனவற்றிலிருந்து இயக்குவதன் மூலம் பட்டியலின் இடுகையிடும் முகவரியை நீங்கள் அச்சிடலாம்"
-"\n"
+"பின்வருவனவற்றிலிருந்து இயக்குவதன் மூலம் பட்டியலின் இடுகையிடும் முகவரியை நீங்கள் அச்சிடலாம்\n"
 " கட்டளை வரி:\n"
 "\n"
 " % மெயில்மேன் withlist -r listaddr -l ant@example.com\n"
@@ -1816,8 +1716,7 @@ msgid ""
 "Note that you do not have to explicitly commit any database transactions, as\n"
 "Mailman will do this for you (assuming no errors occured)."
 msgstr ""
-"மற்றொரு எடுத்துக்காட்டு, ஒரு குறிப்பிட்ட காட்சி பெயரை மாற்ற விரும்புகிறீர்கள் என்று "
-"சொல்லுங்கள்\n"
+"மற்றொரு எடுத்துக்காட்டு, ஒரு குறிப்பிட்ட காட்சி பெயரை மாற்ற விரும்புகிறீர்கள் என்று சொல்லுங்கள்\n"
 " அஞ்சல் பட்டியல். பின்வரும் செயல்பாட்டை நீங்கள் அழைக்கப்படும் கோப்பில் வைக்கலாம்\n"
 " `Chance.py`:\n"
 "\n"
@@ -1828,8 +1727,7 @@ msgstr ""
 "\n"
 " % mailman withlist -r மாற்றம் -l ant@example.com 'எனது பட்டியல்'\n"
 "\n"
-" எந்தவொரு தரவுத்தள பரிவர்த்தனைகளையும் நீங்கள் வெளிப்படையாக செய்ய வேண்டியதில்லை என்பதை "
-"நினைவில் கொள்க\n"
+" எந்தவொரு தரவுத்தள பரிவர்த்தனைகளையும் நீங்கள் வெளிப்படையாக செய்ய வேண்டியதில்லை என்பதை நினைவில் கொள்க\n"
 " மெயில்மேன் உங்களுக்காக இதைச் செய்வார் (பிழைகள் எதுவும் ஏற்படவில்லை என்று கருதி)."
 
 #: src/mailman/commands/cli_withlist.py:223
@@ -1894,10 +1792,8 @@ msgstr ""
 "    செயல்பட அஞ்சல் பட்டியலின் விவரக்குறிப்பு. இது இடுகையாக இருக்கலாம்\n"
 " பட்டியலின் முகவரி, அல்லது அதன் பட்டியல்-ஐடி. உரையாடல் ஒரு மலைப்பாம்பாகவும் இருக்கலாம்\n"
 " வழக்கமான வெளிப்பாடு, இந்த விசயத்தில் இது இடுகை இரண்டிற்கும் பொருந்துகிறது\n"
-" அனைத்து அஞ்சல் பட்டியல்களின் முகவரி மற்றும் பட்டியல்-ஐடி. வழக்கமான வெளிப்பாட்டைப் "
-"பயன்படுத்த,\n"
-" ListSpec A ^ உடன் தொடங்க வேண்டும் (மேலும் பொருந்தக்கூடியது Re.Match () உடன் "
-"செய்யப்படுகிறது.\n"
+" அனைத்து அஞ்சல் பட்டியல்களின் முகவரி மற்றும் பட்டியல்-ஐடி. வழக்கமான வெளிப்பாட்டைப் பயன்படுத்த,\n"
+" ListSpec A ^ உடன் தொடங்க வேண்டும் (மேலும் பொருந்தக்கூடியது Re.Match () உடன் செய்யப்படுகிறது.\n"
 " -ரன் வழங்கப்படாவிட்டால் லிச்ட்ச்பெக் ஒரு வழக்கமான வெளிப்பாடாக இருக்க முடியாது."
 
 #: src/mailman/commands/cli_withlist.py:272
@@ -1977,10 +1873,8 @@ msgstr ""
 "உங்கள் சந்தா கோரிக்கையை உறுதிப்படுத்தும்படி கேட்கப்படுவீர்கள், உங்களுக்கு வழங்கப்படலாம்\n"
 " தற்காலிக கடவுச்சொல்.\n"
 "\n"
-" 'டைசச்ட்' விருப்பத்தைப் பயன்படுத்துவதன் மூலம், நீங்கள் டைசச்ட் டெலிவரி வேண்டுமா என்பதைக் "
-"குறிப்பிடலாம்\n"
-" அல்லது இல்லை. குறிப்பிடப்படாவிட்டால், அஞ்சல் பட்டியலின் இயல்புநிலை விநியோக முறை இருக்கும்"
-"\n"
+" 'டைசச்ட்' விருப்பத்தைப் பயன்படுத்துவதன் மூலம், நீங்கள் டைசச்ட் டெலிவரி வேண்டுமா என்பதைக் குறிப்பிடலாம்\n"
+" அல்லது இல்லை. குறிப்பிடப்படாவிட்டால், அஞ்சல் பட்டியலின் இயல்புநிலை விநியோக முறை இருக்கும்\n"
 " பயன்படுத்தப்பட்டது. முகவரியின் சந்தாவைக் கோர 'முகவரி' விருப்பத்தைப் பயன்படுத்தலாம்\n"
 " கட்டளை அனுப்புநரைத் தவிர.\n"
 
@@ -2003,7 +1897,8 @@ msgstr "$ {நபர் the $ {person}"
 msgid "Confirmation email sent to ${person}"
 msgstr "உறுதிப்படுத்தல் மின்னஞ்சல் $ {person} க்கு அனுப்பப்பட்டது"
 
-#: src/mailman/commands/eml_membership.py:152 src/mailman/commands/eml_membership.py:162
+#: src/mailman/commands/eml_membership.py:152
+#: src/mailman/commands/eml_membership.py:162
 #, python-brace-format
 msgid "bad argument: ${argument}"
 msgstr "மோசமான வாதம்: $ {argument}"
@@ -2072,10 +1967,8 @@ msgstr ""
 "உறுப்பினர் பெயர்கள் மற்றும் மின்னஞ்சல் முகவரிகளின் பட்டியலை உருவாக்குகிறது.\n"
 "\n"
 " அறிக்கையை மட்டுப்படுத்த விருப்ப விநியோக = மற்றும் பயன்முறை = வாதங்கள் பயன்படுத்தப்படலாம்\n"
-" பொருந்தக்கூடிய விநியோக நிலை மற்றும்/அல்லது விநியோக முறை கொண்ட உறுப்பினர்களுக்கு. "
-"என்றால்\n"
-" டெலிவரி = அல்லது பயன்முறை = ஒன்றுக்கு மேற்பட்ட முறை குறிப்பிடப்பட்டுள்ளது, கடைசி "
-"நிகழ்வு மட்டுமே\n"
+" பொருந்தக்கூடிய விநியோக நிலை மற்றும்/அல்லது விநியோக முறை கொண்ட உறுப்பினர்களுக்கு. என்றால்\n"
+" டெலிவரி = அல்லது பயன்முறை = ஒன்றுக்கு மேற்பட்ட முறை குறிப்பிடப்பட்டுள்ளது, கடைசி நிகழ்வு மட்டுமே\n"
 " பயன்படுத்தப்படுகிறது.\n"
 
 #: src/mailman/commands/eml_who.py:50
@@ -2117,8 +2010,7 @@ msgstr "வெற்றிகரமான இடுகைக்குப் ப�
 
 #: src/mailman/handlers/arc_sign.py:66
 msgid "Perform ARC auth checks and attach resulting headers"
-msgstr ""
-"வில் அங்கீகார சோதனைகளைச் செய்து, இதன் விளைவாக வரும் தலைப்புகளை இணைக்கவும்"
+msgstr "வில் அங்கீகார சோதனைகளைச் செய்து, இதன் விளைவாக வரும் தலைப்புகளை இணைக்கவும்"
 
 #: src/mailman/handlers/avoid_duplicates.py:44
 msgid "Suppress some duplicates of the same message."
@@ -2219,7 +2111,7 @@ msgstr "செய்தியின் கோப்பு நீட்டிப�
 msgid "After content filtering, the message was empty"
 msgstr "உள்ளடக்க வடிகட்டலுக்குப் பிறகு, செய்தி காலியாக இருந்தது"
 
-#: src/mailman/handlers/mime_delete.py:154 src/mailman/handlers/mime_delete.py:317
+#: src/mailman/handlers/mime_delete.py:154 src/mailman/handlers/mime_delete.py:321
 msgid ""
 "\n"
 "Replaced multipart/alternative part with first alternative.\n"
@@ -2227,13 +2119,13 @@ msgstr ""
 "\n"
 "மல்டிபார்ட்/மாற்று பகுதியை முதல் மாற்றுடன் மாற்றியது.\n"
 
-#: src/mailman/handlers/mime_delete.py:265 src/mailman/handlers/mime_delete.py:272
-#: src/mailman/handlers/mime_delete.py:281 src/mailman/handlers/mime_delete.py:287
+#: src/mailman/handlers/mime_delete.py:269 src/mailman/handlers/mime_delete.py:276
+#: src/mailman/handlers/mime_delete.py:285 src/mailman/handlers/mime_delete.py:291
 #, python-brace-format
 msgid "Name: ${fname}\n"
 msgstr "பெயர்: $ {fname}\n"
 
-#: src/mailman/handlers/mime_delete.py:400
+#: src/mailman/handlers/mime_delete.py:404
 msgid "Filter the MIME content of messages."
 msgstr "செய்திகளின் MIME உள்ளடக்கத்தை வடிகட்டவும்."
 
@@ -2248,8 +2140,7 @@ msgstr "தானியங்கி பதில்களை அனுப்ப�
 #: src/mailman/handlers/replybot.py:101
 #, python-brace-format
 msgid "Auto-response for your message to the \"${display_name}\" mailing list"
-msgstr ""
-"உங்கள் செய்தியை \"$ {display_name}\" அஞ்சல் பட்டியலுக்கு தானாக பதிலளிக்கவும்"
+msgstr "உங்கள் செய்தியை \"$ {display_name}\" அஞ்சல் பட்டியலுக்கு தானாக பதிலளிக்கவும்"
 
 #: src/mailman/handlers/replybot.py:114
 msgid "The Mailman Replybot"
@@ -2290,28 +2181,22 @@ msgstr "அங்கீகார சோதனைகளைச் செய்த�
 #: src/mailman/interfaces/member.py:122
 #, python-brace-format
 msgid "${self.email} is already a member of mailing list ${self.fqdn_listname}"
-msgstr ""
-"$ {self.email} ஏற்கனவே அஞ்சல் பட்டியலில் உறுப்பினராக உள்ளார் $ {self.fqdn_listname}"
+msgstr "$ {self.email} ஏற்கனவே அஞ்சல் பட்டியலில் உறுப்பினராக உள்ளார் $ {self.fqdn_listname}"
 
 #: src/mailman/interfaces/member.py:125
 #, python-brace-format
 msgid "${self.email} is already an owner of mailing list ${self.fqdn_listname}"
-msgstr ""
-"$ {self.email} என்பது ஏற்கனவே அஞ்சல் பட்டியலின் உரிமையாளர் $ {self.fqdn_listname}"
+msgstr "$ {self.email} என்பது ஏற்கனவே அஞ்சல் பட்டியலின் உரிமையாளர் $ {self.fqdn_listname}"
 
 #: src/mailman/interfaces/member.py:128
 #, python-brace-format
 msgid "${self.email} is already a moderator of mailing list ${self.fqdn_listname}"
-msgstr ""
-"$ {self.email} என்பது ஏற்கனவே அஞ்சல் பட்டியலின் மதிப்பீட்டாளராக உள்ளது "
-"{self.fqdn_listname}"
+msgstr "$ {self.email} என்பது ஏற்கனவே அஞ்சல் பட்டியலின் மதிப்பீட்டாளராக உள்ளது {self.fqdn_listname}"
 
 #: src/mailman/interfaces/member.py:131
 #, python-brace-format
 msgid "${self.email} is already a non-member of mailing list ${self.fqdn_listname}"
-msgstr ""
-"$ {self.email} என்பது ஏற்கனவே அஞ்சல் பட்டியலில் உறுப்பினர் அல்லாதவர் $ "
-"{self.fqdn_listname}"
+msgstr "$ {self.email} என்பது ஏற்கனவே அஞ்சல் பட்டியலில் உறுப்பினர் அல்லாதவர் $ {self.fqdn_listname}"
 
 #: src/mailman/interfaces/pipeline.py:53
 msgid "[No details are available]"
@@ -2351,8 +2236,7 @@ msgstr "முந்தைய விதி வெற்றியைப் பா
 
 #: src/mailman/rules/approved.py:45
 msgid "The message has a matching Approve or Approved header."
-msgstr ""
-"செய்தியில் பொருந்தக்கூடிய ஒப்புதல் அல்லது அங்கீகரிக்கப்பட்ட தலைப்பு உள்ளது."
+msgstr "செய்தியில் பொருந்தக்கூடிய ஒப்புதல் அல்லது அங்கீகரிக்கப்பட்ட தலைப்பு உள்ளது."
 
 #: src/mailman/rules/banned_address.py:33
 msgid "Match messages sent by banned addresses."
@@ -2384,14 +2268,8 @@ msgstr "DMARC மிதமான"
 
 #: src/mailman/rules/dmarc.py:341
 #, python-brace-format
-msgid ""
-"You are not allowed to post to this mailing list From: a domain which publishes a DMARC policy of reject or "
-"quarantine, and your message has been automatically rejected.  If you think that your messages are being "
-"rejected in error, contact the mailing list owner at ${listowner}."
-msgstr ""
-"இதிலிருந்து இந்த அஞ்சல் பட்டியலில் இடுகையிட உங்களுக்கு இசைவு இல்லை: நிராகரிக்க அல்லது "
-"தனிமைப்படுத்தப்பட்ட ஒரு டி.எம்.ஏ.சி. உங்கள் செய்திகள் பிழையாக நிராகரிக்கப்படுகின்றன என்று "
-"நீங்கள் நினைத்தால், அஞ்சல் பட்டியல் உரிமையாளரை $ {listowner} என்ற எண்ணில் தொடர்பு கொள்ளவும்."
+msgid "You are not allowed to post to this mailing list From: a domain which publishes a DMARC policy of reject or quarantine, and your message has been automatically rejected.  If you think that your messages are being rejected in error, contact the mailing list owner at ${listowner}."
+msgstr "இதிலிருந்து இந்த அஞ்சல் பட்டியலில் இடுகையிட உங்களுக்கு இசைவு இல்லை: நிராகரிக்க அல்லது தனிமைப்படுத்தப்பட்ட ஒரு டி.எம்.ஏ.சி. உங்கள் செய்திகள் பிழையாக நிராகரிக்கப்படுகின்றன என்று நீங்கள் நினைத்தால், அஞ்சல் பட்டியல் உரிமையாளரை $ {listowner} என்ற எண்ணில் தொடர்பு கொள்ளவும்."
 
 #: src/mailman/rules/emergency.py:34
 msgid ""
@@ -2581,8 +2459,7 @@ msgstr "உங்கள் மின்னஞ்சல் கட்டளைக�
 #: src/mailman/runners/digest.py:55
 #, python-brace-format
 msgid "${mlist.display_name} Digest, Vol ${volume}, Issue ${digest_number}"
-msgstr ""
-"$ {mlist.display_name} டைசச்ட், தொகுதி $ {volume}, வெளியீடு $ {digest_number}"
+msgstr "$ {mlist.display_name} டைசச்ட், தொகுதி $ {volume}, வெளியீடு $ {digest_number}"
 
 #: src/mailman/runners/digest.py:84
 msgid "Today's Topics:\n"
@@ -2660,10 +2537,8 @@ msgstr ""
 "அஞ்சல் பட்டியல் '$ பட்டியல் பெயர்' உங்களுக்காக உருவாக்கப்பட்டுள்ளது. தி\n"
 " உங்கள் அஞ்சல் பட்டியல் பற்றிய சில அடிப்படை தகவல்கள் பின்வருமாறு.\n"
 "\n"
-" உங்கள் பட்டியலின் பயனர்களுக்கு (நிர்வாகிகள் அல்ல) மின்னஞ்சல் அடிப்படையிலான இடைமுகம் உள்ளது;"
-"\n"
-" 'உதவி' என்ற வார்த்தையுடன் ஒரு செய்தியை அனுப்புவதன் மூலம் அதைப் பயன்படுத்துவது பற்றிய "
-"தகவலைப் பெறலாம்\n"
+" உங்கள் பட்டியலின் பயனர்களுக்கு (நிர்வாகிகள் அல்ல) மின்னஞ்சல் அடிப்படையிலான இடைமுகம் உள்ளது;\n"
+" 'உதவி' என்ற வார்த்தையுடன் ஒரு செய்தியை அனுப்புவதன் மூலம் அதைப் பயன்படுத்துவது பற்றிய தகவலைப் பெறலாம்\n"
 " பொருள் அல்லது உடலில், க்கு:\n"
 "\n"
 " $ request_email\n"
@@ -2676,15 +2551,13 @@ msgstr ""
 "\n"
 " இது குனு மெயில்மேன் பட்டியலின் பதிப்பு $ பதிப்பிற்கான மின்னஞ்சல் கட்டளை 'உதவி'\n"
 " $ டொமைனில் மேலாளர். நீங்கள் பெற அனுப்பக்கூடிய கட்டளைகளை பின்வரும் விவரிக்கிறது\n"
-" இந்த தளத்தில் மெயில்மேன் பட்டியல்களுக்கான உங்கள் சந்தாவைப் பற்றிய தகவல்கள் மற்றும் "
-"கட்டுப்படுத்தவும்.\n"
+" இந்த தளத்தில் மெயில்மேன் பட்டியல்களுக்கான உங்கள் சந்தாவைப் பற்றிய தகவல்கள் மற்றும் கட்டுப்படுத்தவும்.\n"
 " ஒரு கட்டளை பொருள் வரியில் அல்லது செய்தியின் உடலில் இருக்கலாம்.\n"
 "\n"
 " கட்டளைகள் $ {listname} -request@$ {domain} முகவரிக்கு அனுப்பப்பட வேண்டும்.\n"
 "\n"
 " விளக்கங்களைப் பற்றி - \"<>\" இன் சொற்கள் தேவையான உருப்படிகளைக் குறிக்கின்றன\n"
-" \"[]\" இல் உள்ள சொற்கள் விருப்ப உருப்படிகளைக் குறிக்கின்றன. \"<>\" கள் அல்லது சேர்க்க "
-"வேண்டாம்\n"
+" \"[]\" இல் உள்ள சொற்கள் விருப்ப உருப்படிகளைக் குறிக்கின்றன. \"<>\" கள் அல்லது சேர்க்க வேண்டாம்\n"
 " \"[]\" நீங்கள் கட்டளைகளைப் பயன்படுத்தும்போது.\n"
 "\n"
 " பின்வரும் கட்டளைகள் செல்லுபடியாகும்:\n"
@@ -2729,8 +2602,7 @@ msgstr ""
 
 msgid "list:admin:notice:disable.txt"
 msgstr ""
-"$ உறுப்பினரின் சந்தா அவர்களின் பவுன்ச் மதிப்பெண் காரணமாக $ பட்டியல் பெயரில் "
-"முடக்கப்பட்டுள்ளது\n"
+"$ உறுப்பினரின் சந்தா அவர்களின் பவுன்ச் மதிப்பெண் காரணமாக $ பட்டியல் பெயரில் முடக்கப்பட்டுள்ளது\n"
 " அஞ்சல் பட்டியலின் பவுன்ச்_ச்கோர்_நெர்சோல்டை மீறுகிறது.\n"
 "\n"
 " கிடைத்தால் தூண்டுதல் டி.எச்.என் இணைக்கப்பட்டுள்ளது."
@@ -2749,8 +2621,7 @@ msgstr ""
 " உங்கள் ஆரம்ப வசதியில் இதில் கலந்து கொள்ளுங்கள்."
 
 msgid "list:admin:notice:removal.txt"
-msgstr ""
-"$ உறுப்பினர் அதிகப்படியான பவுன்ச் காரணமாக $ பட்டியல் பெயரில் இருந்து குழுவிலகப்பட்டார்."
+msgstr "$ உறுப்பினர் அதிகப்படியான பவுன்ச் காரணமாக $ பட்டியல் பெயரில் இருந்து குழுவிலகப்பட்டார்."
 
 msgid "list:admin:notice:subscribe.txt"
 msgstr "$ உறுப்பினர் வெற்றிகரமாக $ display_name க்கு சந்தா செலுத்தியுள்ளார்."
@@ -2758,8 +2629,7 @@ msgstr "$ உறுப்பினர் வெற்றிகரமாக $ dis
 msgid "list:admin:notice:unrecognized.txt"
 msgstr ""
 "இணைக்கப்பட்ட செய்தி ஒரு துள்ளலாக பெறப்பட்டது, ஆனால் பவுன்ச் வடிவம்\n"
-" அங்கீகரிக்கப்படவில்லை, அல்லது அதிலிருந்து எந்த உறுப்பினர் முகவரிகளும் பிரித்தெடுக்க "
-"முடியாது. இது\n"
+" அங்கீகரிக்கப்படவில்லை, அல்லது அதிலிருந்து எந்த உறுப்பினர் முகவரிகளும் பிரித்தெடுக்க முடியாது. இது\n"
 " அங்கீகரிக்கப்படாத அனைத்து பவுன்ச் செய்திகளையும் அனுப்ப அஞ்சல் பட்டியல் கட்டமைக்கப்பட்டுள்ளது\n"
 " பட்டியல் நிர்வாகி (கள்)."
 
@@ -2774,24 +2644,21 @@ msgstr ""
 "$ டிச்ப்ளே_பேம் அஞ்சல் பட்டியல் சமர்ப்பிப்புகளை அனுப்பவும்\n"
 " $ பட்டியல் பெயர்\n"
 "\n"
-" மின்னஞ்சல் வழியாக குழுசேர அல்லது குழுவிலகுவதற்கு, பொருள் அல்லது உடலுடன் ஒரு செய்தியை "
-"அனுப்பவும்\n"
+" மின்னஞ்சல் வழியாக குழுசேர அல்லது குழுவிலகுவதற்கு, பொருள் அல்லது உடலுடன் ஒரு செய்தியை அனுப்பவும்\n"
 " 'உதவி'\n"
 " $ request_email\n"
 "\n"
 " பட்டியலை நிர்வகிக்கும் நபரை நீங்கள் அடையலாம்\n"
 " $ உரிமையாளர்_மெயில்\n"
 "\n"
-" பதிலளிக்கும் போது, தயவுசெய்து உங்கள் பொருள் வரியைத் திருத்தவும், எனவே இது மிகவும் "
-"குறிப்பிட்டது\n"
+" பதிலளிக்கும் போது, தயவுசெய்து உங்கள் பொருள் வரியைத் திருத்தவும், எனவே இது மிகவும் குறிப்பிட்டது\n"
 " \"மறு: $ டிச்ப்ளே_பேம் டைசெச்டின் உள்ளடக்கங்கள் ...\""
 
 msgid "list:member:generic:footer.txt"
 msgstr ""
 "___________________________________________\n"
 " $ display_name அஞ்சல் பட்டியல் - $ பட்டியல் பெயர்\n"
-" குழுவிலகுவதற்கு $ {short_listname} -leave@$ {domain} க்கு ஒரு மின்னஞ்சலை "
-"அனுப்பவும்"
+" குழுவிலகுவதற்கு $ {short_listname} -leave@$ {domain} க்கு ஒரு மின்னஞ்சலை அனுப்பவும்"
 
 msgid "list:member:regular:header.txt"
 msgstr ""
@@ -2824,8 +2691,7 @@ msgstr ""
 "\n"
 " $ user_email\n"
 "\n"
-" இந்த தளத்தில் குனு மெயில்மேனைப் பயன்படுத்தத் தொடங்குவதற்கு முன், நீங்கள் முதலில் உறுதிப்படுத்"
-"த வேண்டும்\n"
+" இந்த தளத்தில் குனு மெயில்மேனைப் பயன்படுத்தத் தொடங்குவதற்கு முன், நீங்கள் முதலில் உறுதிப்படுத்த வேண்டும்\n"
 " இது உங்கள் மின்னஞ்சல் முகவரி என்று. இந்த செய்திக்கு பதிலளிப்பதன் மூலம் இதைச் செய்யலாம்.\n"
 "\n"
 " அல்லது நீங்கள் பின்வரும் வரியை சேர்க்க வேண்டும் - பின்வருவனவற்றை மட்டுமே\n"
@@ -2837,8 +2703,7 @@ msgstr ""
 " பெரும்பாலான அஞ்சல் வாசகர்கள்.\n"
 "\n"
 " இந்த மின்னஞ்சல் முகவரியை நீங்கள் பதிவு செய்ய விரும்பவில்லை என்றால், இதை புறக்கணிக்கவும்\n"
-" செய்தி. நீங்கள் பட்டியலில் தீங்கிழைக்கும் வகையில் குழுசேர்கிறீர்கள் என்று நீங்கள் நினைத்தால், "
-"அல்லது\n"
+" செய்தி. நீங்கள் பட்டியலில் தீங்கிழைக்கும் வகையில் குழுசேர்கிறீர்கள் என்று நீங்கள் நினைத்தால், அல்லது\n"
 " வேறு ஏதேனும் கேள்விகள் உள்ளன, நீங்கள் தொடர்பு கொள்ளலாம்\n"
 "\n"
 " $ உரிமையாளர்_மெயில்"
@@ -2853,8 +2718,7 @@ msgstr ""
 "\n"
 " $ user_email\n"
 "\n"
-" குனு மெயில்மேன் உங்களை குழுவிலகுவதற்கு முன், முதலில் உங்கள் கோரிக்கையை உறுதிப்படுத்த "
-"வேண்டும்.\n"
+" குனு மெயில்மேன் உங்களை குழுவிலகுவதற்கு முன், முதலில் உங்கள் கோரிக்கையை உறுதிப்படுத்த வேண்டும்.\n"
 " இந்த செய்திக்கு வெறுமனே பதிலளிப்பதன் மூலம் இதைச் செய்யலாம்.\n"
 "\n"
 " அல்லது நீங்கள் பின்வரும் வரியை சேர்க்க வேண்டும் - பின்வருவனவற்றை மட்டுமே\n"
@@ -2866,8 +2730,7 @@ msgstr ""
 " பெரும்பாலான அஞ்சல் வாசகர்கள்.\n"
 "\n"
 " இந்த மின்னஞ்சல் முகவரியை குழுவிலக நீங்கள் விரும்பவில்லை என்றால், இதை புறக்கணிக்கவும்\n"
-" செய்தி. நீங்கள் பட்டியலில் இருந்து தீங்கிழைக்கும் வகையில் குழுவிலகப்படுகிறீர்கள் என்று நீங்கள் "
-"நினைத்தால்,\n"
+" செய்தி. நீங்கள் பட்டியலில் இருந்து தீங்கிழைக்கும் வகையில் குழுவிலகப்படுகிறீர்கள் என்று நீங்கள் நினைத்தால்,\n"
 " அல்லது வேறு ஏதேனும் கேள்விகள் உள்ளன, நீங்கள் தொடர்பு கொள்ளலாம்\n"
 "\n"
 " $ உரிமையாளர்_மெயில்"
@@ -2899,8 +2762,7 @@ msgstr ""
 " மின்னஞ்சல் ரோபோக்களுக்கு இடையில் அஞ்சல் சுழல்கள், நாங்கள் உங்களுக்கு மேலும் அனுப்ப மாட்டோம்\n"
 " இன்று பதில்கள். நாளை மீண்டும் முயற்சிக்கவும்.\n"
 "\n"
-" இந்த செய்தி பிழையாக இருப்பதாக நீங்கள் நம்பினால், அல்லது உங்களுக்கு ஏதேனும் கேள்விகள் "
-"இருந்தால், தயவுசெய்து\n"
+" இந்த செய்தி பிழையாக இருப்பதாக நீங்கள் நம்பினால், அல்லது உங்களுக்கு ஏதேனும் கேள்விகள் இருந்தால், தயவுசெய்து\n"
 " பட்டியல் உரிமையாளரை $ உரிமையாளர்_மெயில் தொடர்பு கொள்ளவும்."
 
 msgid "list:user:notice:post.txt"
@@ -2918,14 +2780,12 @@ msgstr ""
 " $ பட்டியல் பெயர் அஞ்சல் பட்டியல் உங்களிடமிருந்து பல பவுன்ச் பெற்றுள்ளது,\n"
 " $ sender_email க்கு செய்திகளை வழங்குவதில் சிக்கல் இருக்கலாம் என்பதைக் குறிக்கிறது. A\n"
 " மாதிரி கீழே இணைக்கப்பட்டுள்ளது. இருப்பதை உறுதிப்படுத்த இந்த செய்தியை ஆராயுங்கள்\n"
-" உங்கள் மின்னஞ்சல் முகவரியில் எந்த பிரச்சனையும் இல்லை. உங்கள் அஞ்சலுடன் சரிபார்க்க விரும்பலாம்"
-"\n"
+" உங்கள் மின்னஞ்சல் முகவரியில் எந்த பிரச்சனையும் இல்லை. உங்கள் அஞ்சலுடன் சரிபார்க்க விரும்பலாம்\n"
 " மேலும் உதவிக்கு நிர்வாகி.\n"
 "\n"
 " அஞ்சல் பட்டியலில் இயக்கப்பட்ட உறுப்பினராக இருக்க நீங்கள் எதுவும் செய்ய தேவையில்லை.\n"
 "\n"
-" உங்களிடம் ஏதேனும் கேள்விகள் அல்லது சிக்கல்கள் இருந்தால், நீங்கள் அஞ்சல் பட்டியல் உரிமையாளரை "
-"தொடர்பு கொள்ளலாம்\n"
+" உங்களிடம் ஏதேனும் கேள்விகள் அல்லது சிக்கல்கள் இருந்தால், நீங்கள் அஞ்சல் பட்டியல் உரிமையாளரை தொடர்பு கொள்ளலாம்\n"
 " at\n"
 "\n"
 " $ உரிமையாளர்_மெயில்"
@@ -2962,8 +2822,7 @@ msgstr ""
 " $ sender_email க்கு செய்திகள். உங்கள் அஞ்சல் நிர்வாகியுடன் நீங்கள் சரிபார்க்க விரும்பலாம்\n"
 " மேலும் உதவிக்கு.\n"
 "\n"
-" உங்களிடம் ஏதேனும் கேள்விகள் அல்லது சிக்கல்கள் இருந்தால், நீங்கள் அஞ்சல் பட்டியல் உரிமையாளரை "
-"தொடர்பு கொள்ளலாம்\n"
+" உங்களிடம் ஏதேனும் கேள்விகள் அல்லது சிக்கல்கள் இருந்தால், நீங்கள் அஞ்சல் பட்டியல் உரிமையாளரை தொடர்பு கொள்ளலாம்\n"
 "\n"
 " $ உரிமையாளர்_மெயில்"
 
@@ -2975,16 +2834,19 @@ msgstr ""
 "\n"
 " $ பட்டியல் பெயர்\n"
 "\n"
-" அனுப்புவதன் மூலம் மின்னஞ்சல் வழியாக உங்கள் விருப்பங்களில் நீங்கள் குழுவிலகலாம் அல்லது "
-"மாற்றங்களைச் செய்யலாம்\n"
+" அனுப்புவதன் மூலம் மின்னஞ்சல் வழியாக உங்கள் விருப்பங்களில் நீங்கள் குழுவிலகலாம் அல்லது மாற்றங்களைச் செய்யலாம்\n"
 " இதற்கு ஒரு செய்தி:\n"
 "\n"
 " $ request_email\n"
 "\n"
 " பொருள் அல்லது உடலில் 'உதவி' என்ற வார்த்தையுடன் (மேற்கோள்களை சேர்க்க வேண்டாம்), மற்றும்\n"
-" அறிவுறுத்தல்களுடன் ஒரு செய்தியை நீங்கள் திரும்பப் பெறுவீர்கள். உங்கள் கடவுச்சொல் உங்களுக்குத் "
-"தேவைப்படும்\n"
-" உங்கள் விருப்பங்களை மாற்றவும், ஆனால் பாதுகாப்பு நோக்கங்களுக்காக, இந்த கடவுச்சொல் "
-"சேர்க்கப்படவில்லை\n"
+" அறிவுறுத்தல்களுடன் ஒரு செய்தியை நீங்கள் திரும்பப் பெறுவீர்கள். உங்கள் கடவுச்சொல் உங்களுக்குத் தேவைப்படும்\n"
+" உங்கள் விருப்பங்களை மாற்றவும், ஆனால் பாதுகாப்பு நோக்கங்களுக்காக, இந்த கடவுச்சொல் சேர்க்கப்படவில்லை\n"
 " இங்கே. உங்கள் கடவுச்சொல்லை நீங்கள் மறந்துவிட்டால், அதை மீட்டமைக்க வேண்டும்\n"
 " வலை இடைமுகம்."
+
+#~ msgid "Uncaught bounce notification"
+#~ msgstr "அறியப்படாத பவுன்ச் அறிவிப்பு"
+
+#~ msgid "Remove a mailing list."
+#~ msgstr "ஒரு அஞ்சல் பட்டியலை அகற்று."
