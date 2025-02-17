@@ -603,6 +603,37 @@ spreadsheet
 Plain text
 """)
 
+    def test_pass_ext_passes(self):
+        msg = mfs("""\
+From: anne@example.com
+To: test@example.com
+Subject: Testing mixed extension
+Message-ID: <ant>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="AAAA"
+
+--AAAA
+Content-Type: text/plain; charset="utf-8"
+
+Plain text
+
+--AAAA
+Content-Type: application/octet-stream; name="test.xlsx"
+Content-Disposition: attachment; filename="test.xlsx"
+
+spreadsheet
+
+--AAAA--
+""")
+        self._mlist.filter_extensions = []
+        self._mlist.pass_extensions = ['xlsx']
+        process = config.handlers['mime-delete'].process
+        process(self._mlist, msg, {})
+        # Nothing should be removed.
+        self.assertEqual(msg['content-type'],
+                         'multipart/mixed; boundary="AAAA"')
+        self.assertEqual(len(msg.get_payload()), 2)
+
     def test_report(self):
         # Hit all the pass and filter conditions for reporting
         self._mlist.pass_extensions = ['txt']
