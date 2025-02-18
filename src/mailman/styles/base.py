@@ -211,6 +211,9 @@ class Private:
         mlist.advertised = False
         mlist.archive_policy = ArchivePolicy.private
         mlist.subscription_policy = SubscriptionPolicy.confirm_then_moderate
+        mlist.reply_goes_to_list = ReplyToMunging.no_munging
+        mlist.reply_to_address = ''
+        mlist.first_strip_reply_to = False
 
 
 @public
