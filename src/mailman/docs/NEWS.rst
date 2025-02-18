@@ -30,6 +30,9 @@ Bugs fixed
   (Closes #1201)
 * The REST API now does mor validation of parameters when creating/editing
   domains.  (Closes #1202)
+* Creating a list with ``private-default`` style now explicitly sets the
+  ``first_strip_reply_to``, ``reply_goes_to_list`` and ``reply_to_address``
+  attributes.  Closes (#1205)
 
 New Features
 ------------
