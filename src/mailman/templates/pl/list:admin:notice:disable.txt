@@ -1,0 +1,4 @@
+Subskrypcja $member została wyłączona na liście $listname z powodu punktacji za zwroty
+przekraczającej próg bounce_score_threshold listy mailingowej.
+
+DSN powodujący niniejszą akcję, jeśli jest dostępny, jest dołączony do tej wiadomości.

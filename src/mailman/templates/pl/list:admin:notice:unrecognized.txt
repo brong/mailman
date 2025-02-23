@@ -1,0 +1,4 @@
+Załączona wiadomość została odebrana jako zwrot, ale albo format zwrotu
+nie został rozpoznany albo nie można było wyodrębnić z niego żadnych adresów subskrybentów.
+Ta lista mailingowa została skonfigurowana do wysyłania wszystkich nierozpoznanych wiadomości
+do administratora(ów) listy.

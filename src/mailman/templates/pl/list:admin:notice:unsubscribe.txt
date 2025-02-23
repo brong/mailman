@@ -1,0 +1,1 @@
+$member został usunięty z $display_name.

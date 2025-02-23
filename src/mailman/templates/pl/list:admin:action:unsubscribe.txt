@@ -1,0 +1,5 @@
+Wymagana jest twoja autoryzacja do zatwierdzenia prośby 
+wypisania z listy mailingowej:
+
+    For:  $member
+    Lista: $listname

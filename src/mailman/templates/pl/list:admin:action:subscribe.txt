@@ -1,0 +1,5 @@
+Wymagana jest twoja autoryzacja do zatwierdzenia prośby 
+zapisania na listę mailingową:
+
+    For:  $member
+    Lista: $listname

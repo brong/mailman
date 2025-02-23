@@ -1,0 +1,10 @@
+Lista mailingowa „$listname” została właśnie utworzona.
+Poniżej znajdują się podstawowe informacje o twojej liście mailingowej.
+
+Istnieje interfejs e-mail dla użytkowników (nie administratorów) listy;
+Informacje na temat korzystania z niego można uzyskać, wysyłając wiadomość ze słowem „help
+jako temat lub treść wiadomości, na adres:
+
+    $request_email
+
+Wszelkie pytania należy kierować na adres $site_email.

@@ -1,0 +1,13 @@
+Jako administrator listy jesteś proszony o autoryzację dla
+następującej wiadomości skierowanej na listę mailingową:
+
+    Lista:    $listname
+    Od: $sender_email
+    Temat: $subject
+
+Wiadomość jest wstrzymana, ponieważ:
+
+$reasons
+
+W dogodnym dla siebie czasie odwiedź pulpit nawigacyjny, aby zatwierdzić lub odrzucić
+żądanie.

@@ -1,0 +1,3 @@
+Punktacja zwrotów subskrybenta $member na $listname została zwiększona.
+
+DSN powodujący niniejszą akcję, jeśli jest dostępny, jest dołączony do tej wiadomości.

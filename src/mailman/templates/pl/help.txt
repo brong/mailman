@@ -1,0 +1,20 @@
+Pomoc dla listy mailingowej $listname
+
+To jest polecenie e-mail 'help' dla wersji $version menedżera list GNU Mailman
+pod adresem $domain.  Poniżej opisano polecenia, które można wysłać, aby uzyskać
+informacje i kontrolować subskrypcję list Mailman w tej witrynie.
+Polecenie może znajdować się w linii tematu lub w treści wiadomości.
+
+Polecenia powinny być wysyłane na adres ${listname}-request@${domain}.
+
+Opisy - słowa w „<>” oznaczają elementy WYMAGANE, a słowa w „[]”
+oznaczają elementy OPCJONALNE.  Nie należy używać znaków „<>” lub
+„[]” podczas używania poleceń.
+
+Następujące polecenia są prawidłowe:
+
+    $commands
+
+Pytania i wątpliwości można kierować do:
+
+    $administrator

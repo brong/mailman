@@ -1,0 +1,4 @@
+Lista $listname ma $count oczekujących zadań moderacji.
+
+$data
+Prosimy o zajęcie się tym jak najszybciej.

@@ -1,0 +1,1 @@
+Użytkownik $member został wypisany z listy $listname z powodu nadmiernej liczby zwrotów.
