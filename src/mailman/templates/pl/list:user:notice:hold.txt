@@ -1,0 +1,12 @@
+Wiadomość do '$listname' z tematem
+
+    $subject
+
+Jest wstrzymana do czasu, aż moderator listy będzie mógł ją przejrzeć i zatwierdzić.
+
+Wiadomość jest wstrzymana, ponieważ:
+
+$reasons
+
+Wiadomość zostanie opublikowana na liście lub otrzymasz 
+powiadomienie o decyzji moderatora.

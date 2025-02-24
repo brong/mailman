@@ -1,0 +1,24 @@
+Potwierdzenie rejestracji adresu e-mail
+
+Witam, tu serwer GNU Mailman w domenie $.
+
+Otrzymaliśmy prośbę o rejestrację adresu e-mail
+
+    $user_email
+
+Zanim będziesz mógł zacząć korzystać z GNU Mailman w tej witrynie, musisz najpierw potwierdzić, 
+że jest to Twój adres e-mail. Możesz to zrobić odpowiadając na tę wiadomość.
+
+Lub możesz dołączyć następującą linię - i tylko następującą linię
+w wiadomości wysyłanej na adres $request_email:
+
+    confirm $token
+
+Zauważ, że zwykłe wysłanie `odpowiedzi' na tę wiadomość powinno działać z
+większości czytników poczty.
+
+Jeśli nie chcesz rejestrować tego adresu e-mail, po prostu zignoruj tę wiadomość.
+Jeśli uważasz, że jesteś złośliwie subskrybowany na listę lub
+masz inne pytania, możesz skontaktować się z
+
+    $owner_email

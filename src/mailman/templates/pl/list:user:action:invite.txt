@@ -1,0 +1,15 @@
+Twój adres „$user_email” został zaproszony do dołączenia do listy mailingowej $short_listname
+w domenie $domain przez właściciela listy mailingowej $short_listname.
+Możesz zaakceptować zaproszenie po prostu odpowiadając na tę wiadomość.
+
+Lub możesz dołączyć następującą linię - i tylko następującą linię
+w wiadomości wysyłanej na adres $request_email:
+
+    confirm $token
+
+Zauważ, że zwykłe wysłanie `odpowiedzi' na tę wiadomość powinno działać z
+większości czytników poczty.
+
+Jeśli chcesz odrzucić to zaproszenie, po prostu zignoruj tę wiadomość.
+Jeśli masz jakieś pytania, wyślij je na adres
+$owner_email.

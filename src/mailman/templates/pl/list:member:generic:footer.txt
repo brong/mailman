@@ -1,0 +1,3 @@
+_______________________________________________
+Lista mailingowa $display_name -- $listname
+Aby zrezygnować z subskrypcji, wyślij wiadomość e-mail na adres ${short_listname}-leave@${domain}

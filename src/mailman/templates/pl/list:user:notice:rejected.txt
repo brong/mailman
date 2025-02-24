@@ -1,0 +1,6 @@
+Twoja wiadomość do listy mailingowej $listname została odrzucona z następujących
+powodów:
+
+$reasons
+
+Oryginalna wiadomość otrzymana przez Mailman'a została załączona.

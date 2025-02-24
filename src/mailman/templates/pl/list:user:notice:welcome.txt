@@ -1,0 +1,16 @@
+Witamy na liście mailingowej „$display_name”!
+
+Aby wysłać wiadomość na tę listę, wyślij ją na adres:
+
+  $listname
+
+Możesz zrezygnować z subskrypcji lub dokonać zmian w opcjach 
+za pośrednictwem poczty e-mail, wysyłając wiadomość na adres:
+
+  $request_email
+
+ze słowem „help” w temacie lub treści (bez cudzysłowów), 
+a otrzymasz wiadomość zwrotną z instrukcjami.
+Będziesz potrzebować hasła, do zmiany opcji, ale ze względów bezpieczeństwa
+hasło to nie jest przekazywane w tej wiadomości. Jeśli zapomniałeś hasła,
+musisz je zresetować za pośrednictwem interfejsu webowego użytkownika.

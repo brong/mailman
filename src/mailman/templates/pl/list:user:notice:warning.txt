@@ -1,0 +1,8 @@
+Twoja subskrypcja została wyłączona na liście mailingowej $listname, ponieważ
+otrzymała pewną liczbę zwrotów wskazujących, że może być problem z dostarczaniem
+wiadomości na adres $sender_email. Możesz skontaktować się z administratorem poczty
+w celu uzyskania pomocy.
+
+W razie jakichkolwiek pytań lub problemów można skontaktować się z właścicielem listy mailingowej pod adresem
+
+    $owner_email

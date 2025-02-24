@@ -1,0 +1,9 @@
+Otrzymaliśmy wiadomość z adresu <$sender_email> z prośbą o
+automatyczną odpowiedź z listy mailingowej $listname.
+
+Liczba wiadomości, którą otrzymaliśmy dzisiaj z tego adresu to $count.
+Aby uniknąć problemów takich jak pętle pocztowe między robotami pocztowymi,
+nie będziemy dziś wysyłać żadnych dalszych odpowiedzi. Spróbuj ponownie jutro.
+
+Jeśli uważasz, że ta wiadomość jest błędna lub jeśli masz jakieś pytania, prosimy
+skontaktować się z właścicielem listy pod adresem $owner_email.

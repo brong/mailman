@@ -1,0 +1,12 @@
+Wysyłaj wiadomości na listę mailingową $display_name na adres
+	$listname
+
+Aby zapisać lub wypisać się z listy przez e-mail, wyślij wiadomość z tematem lub treścią
+'help' na adres
+	$request_email
+
+Możesz skontaktować się z osobą zarządzającą listą pod adresem
+	$owner_email
+
+Odpowiadając, zmień temat wiadomości tak, aby był bardziej szczegółowy niż
+„Re: Zawartość paczki $display_name...”

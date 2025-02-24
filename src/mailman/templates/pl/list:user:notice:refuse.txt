@@ -1,0 +1,13 @@
+Prośba do listy mailingowej $listname
+
+    $request
+
+została odrzucona przez moderatora listy. Moderator podał
+następujący powód odrzucenia:
+
+„$reason”
+
+Wszelkie pytania lub komentarze należy kierować do administratora listy
+na adres:
+
+    $owner_email

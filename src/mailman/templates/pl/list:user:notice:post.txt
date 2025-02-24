@@ -1,0 +1,5 @@
+Wiadomość zatytułowana
+
+    $subject
+
+została pomyślnie odebrana przez listę mailingową $display_name.

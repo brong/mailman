@@ -1,0 +1,14 @@
+To jest komunikat sondy pocztowej. Możesz zignorować tę wiadomość.
+
+Lista mailingowa $listname otrzymała od ciebie pewną liczbę zwrotów,
+co wskazuje, że może występować problem z dostarczaniem wiadomości na adres $sender_email.
+Próbka jest załączona poniżej. Sprawdź tę wiadomość, aby upewnić się, że
+nie ma problemów z adresem e-mail. Możesz skontaktować się z administratorem
+w celu uzyskania pomocy.
+
+Nie musisz nic robić, aby pozostać aktywnym członkiem listy mailingowej.
+
+W razie jakichkolwiek pytań lub problemów można skontaktować się z właścicielem listy mailingowej
+pod adresem
+
+    $owner_email
