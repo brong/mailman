@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-15 19:33-0800\n"
-"PO-Revision-Date: 2025-02-24 17:54+0000\n"
+"PO-Revision-Date: 2025-02-24 21:56+0000\n"
 "Last-Translator: Tomasz Berner <tom@lodz.pl>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/gnu-mailman/"
 "mailman/pl/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.10.1-dev\n"
+"X-Generator: Weblate 5.10.2-dev\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:84
 #: src/mailman/chains/hold.py:166 src/mailman/handlers/acknowledge.py:56
@@ -992,6 +992,11 @@ msgid ""
 "    given with --send, the volume number is incremented before any current\n"
 "    digests are sent."
 msgstr ""
+"    Zwiększenie numeru woluminu paczki i zresetowanie numeru paczki do "
+"jeden. Jeśli\n"
+"    użyte z --send, numer woluminu jest zwiększany przed wysłaniem "
+"bieżących\n"
+"    paczek."
 
 #: src/mailman/commands/cli_digests.py:61 src/mailman/commands/cli_notify.py:50
 msgid ""
@@ -1053,12 +1058,21 @@ msgid ""
 "    string works best.\n"
 "    "
 msgstr ""
+"    Wyświetla wszystkie subskrypcje dla użytkownika lub użytkowników z "
+"adresem pasującym do\n"
+"    wzorca. Ponieważ część procesu obejmuje konwersję wzorca\n"
+"    na zapytanie SQL z symbolami wieloznacznymi, wzorzec powinien być "
+"prosty. Prosty tekst\n"
+"    działa najlepiej.\n"
+"    "
 
 #: src/mailman/commands/cli_findmember.py:91
 msgid ""
 "    Display only memberships with the given role.  If not given, 'all' role,\n"
 "    i.e. all roles, is the default."
 msgstr ""
+"    Wyświetla tylko członkostwa z podaną rolą. Jeśli nie podano,\n"
+"    domyślnie wyświetlana jest rola 'all', czyli wszystkie role."
 
 #: src/mailman/commands/cli_findmember.py:115
 msgid "Email: {}"
@@ -1099,6 +1113,9 @@ msgid ""
 "    Import Mailman 2.1 list data.  Requires the fully-qualified name of the\n"
 "    list to import and the path to the Mailman 2.1 pickle file."
 msgstr ""
+"    Import danych listy z Mailman 2.1. Wymaga podania w pełni kwalifikowanej "
+"nazwy listy\n"
+"    do zaimportowania i ścieżka do pliku pickle programu Mailman 2.1."
 
 #: src/mailman/commands/cli_import.py:56
 msgid ""
@@ -1106,6 +1123,10 @@ msgid ""
 "    thereof. This will normally be the Mailman 2.1 charset of the list's\n"
 "    preferred_language."
 msgstr ""
+"    Określa kodowanie łańcuchów w PICKLE_FILE, jeśli nie jest to utf-8 lub "
+"jego podzbiór.\n"
+"    Zazwyczaj będzie to zestaw znaków Mailman 2.1 list określony przez\n"
+"    preferred_language."
 
 #: src/mailman/commands/cli_import.py:82
 #, python-brace-format
@@ -1144,6 +1165,9 @@ msgid ""
 "    directories inside the queue directory.  If omitted, the incoming queue is\n"
 "    used."
 msgstr ""
+"    Nazwa kolejki, do której ma zostać wstrzyknięta wiadomość.\n"
+"    QUEUE musi być jednym z katalogów wewnątrz katalogu kolejki.\n"
+"    W przypadku pominięcia, używana jest kolejka przychodząca."
 
 #: src/mailman/commands/cli_inject.py:56
 msgid "Show a list of all available queue names and exit."
@@ -1154,6 +1178,9 @@ msgid ""
 "    Name of file containing the message to inject.  If not given, or\n"
 "    '-' (without the quotes) standard input is used."
 msgstr ""
+"    Nazwa pliku zawierającego wiadomość do wstrzyknięcia. Jeśli nie podano "
+"lub\n"
+"    '-' (bez cudzysłowów) używane jest standardowe wejście."
 
 #: src/mailman/commands/cli_inject.py:66
 msgid ""
@@ -1161,6 +1188,10 @@ msgid ""
 "    dictionary.  Use the format key=value.  Multiple -m options are\n"
 "    allowed."
 msgstr ""
+"    Dodatkowe pary klucz/wartość metadanych do dodania do słownika "
+"metadanych wiadomości\n"
+"    Należy użyć formatu klucz=wartość.\n"
+"    Dozwolonych jest wiele opcji -m."
 
 #: src/mailman/commands/cli_inject.py:79
 #, python-brace-format
@@ -1193,6 +1224,10 @@ msgid ""
 "    must be the email host name.  Multiple -d options may be given.\n"
 "    "
 msgstr ""
+"    Wyświetla listę tylko tych list mailingowych, które są hostowane w "
+"podanej domenie, która\n"
+"    musi być nazwą hosta poczty e-mail. Można podać wiele opcji -d.\n"
+"    "
 
 #: src/mailman/commands/cli_lists.py:92
 msgid "No matching mailing lists found"
@@ -1211,12 +1246,20 @@ msgid ""
 "    list is required.  It must be a valid email address and the domain must be\n"
 "    registered with Mailman.  List names are forced to lower case."
 msgstr ""
+"    Utwórz listę mailingową.\n"
+"\n"
+"    Wymagana jest „w pełni kwalifikowana nazwa listy”, tj. adres pocztowy "
+"listy mailingowej\n"
+"    jest wymagany.  Musi to być prawidłowy adres e-mail, a domena musi być\n"
+"    zarejestrowana w Mailman'ie. Nazwy list są wymuszane małymi literami."
 
 #: src/mailman/commands/cli_lists.py:136
 msgid ""
 "    Set the list's preferred language to CODE, which must be a registered two\n"
 "    letter language code."
 msgstr ""
+"    Ustaw preferowany język listy na CODE, który musi być zarejestrowanym\n"
+"    dwuliterowym kodem języka."
 
 #: src/mailman/commands/cli_lists.py:142
 msgid ""
@@ -1226,6 +1269,12 @@ msgid ""
 "    send a list creation notice to the address.  More than one owner can be\n"
 "    specified."
 msgstr ""
+"    Określ adres e-mail właściciela listy. Jeśli adres nie jest obecnie\n"
+"    zarejestrowany w Mailman'ie, zostanie zarejestrowany i powiązany z "
+"użytkownikiem.\n"
+"    Mailman wyśle na ten adres wiadomość z potwierdzeniem,\n"
+"    a także powiadomienie o utworzeniu listy.\n"
+"    Można określić więcej niż jednego właściciela listy."
 
 #: src/mailman/commands/cli_lists.py:150
 msgid "    Specify a list style name."
@@ -1250,6 +1299,10 @@ msgid ""
 "    the default behavior, but these options are provided for backward\n"
 "    compatibility.  With -D do not register the mailing list's domain."
 msgstr ""
+"    Zarejestruj domenę listy mailingowej, jeśli nie została jeszcze "
+"zarejestrowana.\n"
+"    Jest to domyślne zachowanie, ale te opcje są dostępne dla wstecznej\n"
+"    kompatybilności. Z opcją -D nie rejestruje domeny listy mailingowej."
 
 #: src/mailman/commands/cli_lists.py:177
 #, python-brace-format
@@ -1322,18 +1375,28 @@ msgid ""
 "    to stdout is the default mode.\n"
 "    "
 msgstr ""
+"    Wyświetla członków listy mailingowej.\n"
+"    Podczas wyświetlania można filtrować według różnych kryteriów.\n"
+"    Bez podanych opcji, wyświetlanie członków listy mailingowej\n"
+"    na standardowe wyjście jest trybem domyślnym.\n"
+"    "
 
 #: src/mailman/commands/cli_members.py:130
 msgid ""
 "    [MODE] Add all member addresses in FILENAME.  This option is removed.\n"
 "    Use 'mailman addmembers' instead."
 msgstr ""
+"    [MODE] Dodaj wszystkie adresy subskrybentów w FILENAME. Ta opcja została "
+"usunięta.\n"
+"    Zamiast niej należy użyć „mailman addmembers”."
 
 #: src/mailman/commands/cli_members.py:136
 msgid ""
 "    [MODE] Delete all member addresses found in FILENAME.\n"
 "    This option is removed. Use 'mailman delmembers' instead."
 msgstr ""
+"    [MODE] Usuń wszystkie adresy subskrybentów znalezione w FILENAME.\n"
+"    Ta opcja została usunięta. Zamiast niej należy użyć „mailman delmembers”."
 
 #: src/mailman/commands/cli_members.py:142
 msgid ""
@@ -1341,12 +1404,19 @@ msgid ""
 "    with the member addresses found in FILENAME.\n"
 "    This option is removed. Use 'mailman syncmembers' instead."
 msgstr ""
+"    [MODE] Synchronizuje wszystkie adresy subskrybentów określonej listy "
+"mailingowej\n"
+"    z adresami znalezionymi w FILENAME.\n"
+"    Ta opcja została usunięta. Zamiast niej należy użyć „mailman "
+"syncmembers”."
 
 #: src/mailman/commands/cli_members.py:149
 msgid ""
 "    Display output to FILENAME instead of stdout.  FILENAME\n"
 "    can be '-' to indicate standard output."
 msgstr ""
+"    Kieruje dane wyjściowe do FILENAME zamiast stdout. FILENAME\n"
+"    może być '-', aby wskazać standardowe wyjście."
 
 #: src/mailman/commands/cli_members.py:156
 msgid ""
@@ -1355,6 +1425,10 @@ msgid ""
 "    or 'administrator' (i.e. owners and moderators).\n"
 "    If not given, then 'member' role is assumed."
 msgstr ""
+"    Wyświetla tylko członków z daną ROLĄ.\n"
+"    Rola może być 'any', 'member', 'nonmember', 'owner', 'moderator',\n"
+"    lub 'administrator' (tj. właściciele i moderatorzy).\n"
+"    Jeśli nie zostanie podana, przyjmowana jest rola 'member'."
 
 #: src/mailman/commands/cli_members.py:164
 msgid "    Display only regular delivery members."
@@ -1372,6 +1446,10 @@ msgid ""
 "    'any' means any digest type, 'plaintext' means only plain text (rfc 1153)\n"
 "    type digests, 'mime' means MIME type digests."
 msgstr ""
+"    Wyświetla tylko elementy typu paczka.\n"
+"    'any' oznacza dowolny typ paczki, 'plaintext' oznacza tylko zwykły tekst "
+"(rfc 1153)\n"
+"    'mime' oznacza paczki typu MIME."
 
 #: src/mailman/commands/cli_members.py:195
 msgid ""
@@ -1408,6 +1486,11 @@ msgid ""
 "    argument can either be a List-ID or a fully qualified list name.  Without\n"
 "    this option, operate on the requests for all mailing lists."
 msgstr ""
+"    Działa na tej liście mailingowej. Można podać wiele opcji --list. "
+"Argument\n"
+"    może być identyfikatorem listy lub w pełni kwalifikowaną nazwą listy. "
+"Bez\n"
+"    tej opcji, operuje na prośbach dla wszystkich list mailingowych."
 
 #: src/mailman/commands/cli_notify.py:80 src/mailman/commands/cli_notify.py:141
 msgid "The {} list has {} moderation requests waiting."
@@ -1476,27 +1559,33 @@ msgid ""
 "    representation.  Useful with 'mailman qfile -i <file>'.  In that case, the\n"
 "    list of unpickled objects will be left in a variable called 'm'."
 msgstr ""
+"    Nie próbuj ładnie wyświetlać obiektu. Jest to przydatne, jeśli istnieje "
+"jakiś\n"
+"    problem z obiektem i po prostu chcesz uzyskać niepiklowaną jego\n"
+"    reprezentację. Przydatne z „mailman qfile -i <plik>”. W takim przypadku\n"
+"    lista niepiklowana obiektów zostanie pozostawiona w zmiennej o nazwie "
+"'m'."
 
 #: src/mailman/commands/cli_qfile.py:50
 msgid ""
 "    Start an interactive Python session, with a variable called 'm'\n"
 "    containing the list of unpickled objects."
 msgstr ""
+"    Uruchom interaktywną sesję Pythona ze zmienną o nazwie 'm'\n"
+"    zawierającą listę niepiklowanych obiektów."
 
 #: src/mailman/commands/cli_qfile.py:67
-#, fuzzy
 msgid "[----- start pickle -----]"
-msgstr "[----- start pickle -----]"
+msgstr "[----- początek pickle -----]"
 
 #: src/mailman/commands/cli_qfile.py:70
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "<----- start object ${count} ----->"
-msgstr "<----- start object ${count} ----->"
+msgstr "<----- początek obiektu ${count} ----->"
 
 #: src/mailman/commands/cli_qfile.py:75
-#, fuzzy
 msgid "[----- end pickle -----]"
-msgstr "[----- end pickle -----]"
+msgstr "[----- koniec pickle -----]"
 
 #: src/mailman/commands/cli_qfile.py:77
 #, python-brace-format
@@ -1572,6 +1661,11 @@ msgid ""
 "    'summary' or 'disabled'.  I.e., one of regular, three modes of digest\n"
 "    or no delivery.  If not given, the default is regular."
 msgstr ""
+"    Ustaw tryb dostarczania dodanych subskrybentów na „regular”, „mime”, "
+"„plain”,\n"
+"    „summary” lub »disabled«. Tj. jeden z regularnych, trzy tryby paczki\n"
+"    lub brak dostarczania. Jeśli nie podano nic, domyślnym trybem jest "
+"\"regular\"."
 
 #: src/mailman/commands/cli_syncmembers.py:178
 msgid "    Override the list's setting for send_welcome_message to added members."
@@ -1584,6 +1678,9 @@ msgid ""
 "    Don't actually make the changes.  Instead, print out what would be\n"
 "    done to the list."
 msgstr ""
+"    W rzeczywistości nie wprowadzaj zmian. Zamiast tego wyświetl, co "
+"zostanie\n"
+"    zmienione na liście."
 
 #: src/mailman/commands/cli_unshunt.py:33
 msgid "Unshunt messages."
@@ -1638,6 +1735,14 @@ msgid ""
 "variable 'm' will be available in the global namespace.  It will reference the\n"
 "mailing list object."
 msgstr ""
+"Istnieją dwa sposoby korzystania z tego skryptu: interaktywnie lub "
+"programowo.\n"
+"Używanie go interaktywnie pozwala badać i modyfikować listę mailingową\n"
+"z poziomu interaktywnego interpretera Pythona. Podczas uruchamiania "
+"interaktywnego,\n"
+"zmienna „m” będzie dostępna w globalnej przestrzeni nazw. Będzie ona "
+"odwoływać się\n"
+"do obiektu listy mailingowej."
 
 #: src/mailman/commands/cli_withlist.py:159
 msgid ""
@@ -1650,6 +1755,15 @@ msgid ""
 "where `listspec` is either the posting address of the mailing list\n"
 "(e.g. ant@example.com), or the List-ID (e.g. ant.example.com)."
 msgstr ""
+"Programowo można napisać funkcję do obsługi listy mailingowej, a skrypt\n"
+"ten skrypt zajmie się utrzymaniem porządku (przykłady znajdują się poniżej)."
+"\n"
+"W takim przypadku ogólna składnia użycia to:\n"
+"\n"
+"% mailman withlist [options] -l listspec [args ...]\n"
+"\n"
+"gdzie `listspec` to albo adres pocztowy listy mailingowej\n"
+"(np. ant@example.com) lub identyfikator listy List-ID (np. ant.example.com)."
 
 #: src/mailman/commands/cli_withlist.py:169
 msgid ""
@@ -1698,6 +1812,13 @@ msgid ""
 "Running listaddr.listaddr() ...\n"
 "ant@example.com"
 msgstr ""
+"Adres pocztowy listy można wyświetlić, uruchamiając następujące polecenie z\n"
+"wiersza poleceń:\n"
+"\n"
+"% mailman withlist -r listaddr -l ant@example.com\n"
+"Importowanie listaddr ...\n"
+"Uruchamianie listaddr.listaddr() ...\n"
+"ant@example.com"
 
 #: src/mailman/commands/cli_withlist.py:196
 msgid ""
@@ -1708,6 +1829,13 @@ msgid ""
 "Running listaddr.requestaddr() ...\n"
 "ant-request@example.com"
 msgstr ""
+"Adres zgłaszania próśb listy można wyświetlić, uruchamiając następujące "
+"polecenie:\n"
+"\n"
+"% mailman withlist -r listaddr.requestaddr -l ant@example.com\n"
+"Importowanie listaddr ...\n"
+"Uruchamianie listaddr.requestaddr() ...\n"
+"ant-request@example.com"
 
 #: src/mailman/commands/cli_withlist.py:204
 msgid ""
@@ -1725,6 +1853,21 @@ msgid ""
 "Note that you do not have to explicitly commit any database transactions, as\n"
 "Mailman will do this for you (assuming no errors occured)."
 msgstr ""
+"Jako inny przykład, powiedzmy, że chcesz zmienić wyświetlaną nazwę dla "
+"konkretnej listy mailingowej.\n"
+"Mógłbyś umieścić następującą funkcję w pliku o nazwie\n"
+"`change.py`:\n"
+"\n"
+"def change(mlist, display_name):\n"
+"    mlist.display_name = display_name\n"
+"\n"
+"i uruchomić ją z wiersza poleceń:\n"
+"\n"
+"% mailman withlist -r change -l ant@example.com 'My List'\n"
+"\n"
+"Zwróć uwagę, że nie musisz jawnie zatwierdzać żadnych transakcji w bazie "
+"danych, ponieważ\n"
+"Mailman zrobi to za Ciebie (zakładając, że nie wystąpiły żadne błędy)."
 
 #: src/mailman/commands/cli_withlist.py:223
 msgid ""
@@ -1743,6 +1886,9 @@ msgid ""
 "    Leaves you at an interactive prompt after all other processing is complete.\n"
 "    This is the default unless the --run option is given."
 msgstr ""
+"    Pozostawia użytkownika w interaktywnym wierszu poleceń po zakończeniu "
+"wszystkich innych procesów przetwarzania.\n"
+"    Jest to ustawienie domyślne, chyba że podano opcję --run."
 
 #: src/mailman/commands/cli_withlist.py:236
 msgid ""
@@ -1788,6 +1934,16 @@ msgid ""
 "    LISTSPEC must start with a ^ (and the matching is done with re.match().\n"
 "    LISTSPEC cannot be a regular expression unless --run is given."
 msgstr ""
+"    Określenie listy mailingowej, która ma być obsługiwana. Może to być "
+"adres\n"
+"    wysyłkowy listy lub jej List-ID.  Argumentem może być również wyrażenie "
+"regularne Pythona,\n"
+"    w którym to przypadku jest ono dopasowywane zarówno do adresu "
+"wysyłkowego\n"
+"    i List-ID wszystkich list mailingowych. Aby użyć wyrażenia regularnego,\n"
+"    LISTSPEC musi zaczynać się od ^ (a dopasowanie jest wykonywane za pomocą "
+"re.match().\n"
+"    LISTSPEC nie może być wyrażeniem regularnym, chyba że podano opcję --run."
 
 #: src/mailman/commands/cli_withlist.py:272
 msgid "Regular expression requires --run"
@@ -1863,6 +2019,16 @@ msgid ""
 "used.  You can use the 'address' option to request subscription of an address\n"
 "other than the sender of the command.\n"
 msgstr ""
+"Zostaniesz poproszony o potwierdzenie prośby o subskrypcję i możesz "
+"otrzymać\n"
+"hasło tymczasowe .\n"
+"\n"
+"Korzystając z opcji „digest”, możesz określić, czy chcesz otrzymywać paczkę, "
+"czy nie.\n"
+"Jeśli nie zostanie to określone, zostanie użyty domyślny tryb dostarczania "
+"dla listy mailingowej.\n"
+"Możesz użyć opcji „address”, aby zażądać subskrypcji adresu\n"
+"innego niż adres nadawcy polecenia.\n"
 
 #: src/mailman/commands/eml_membership.py:79
 msgid "Join this mailing list."
@@ -1954,6 +2120,14 @@ msgid ""
 "either delivery= or mode= is specified more than once, only the last occurrence\n"
 "is used.\n"
 msgstr ""
+"Tworzy listę nazw i adresów e-mail subskrybentów.\n"
+"\n"
+"Opcjonalne argumenty delivery= i mode= mogą być użyte do ograniczenia "
+"raportu\n"
+"do subskrybentów z pasującym statusem dostawy i/lub trybem dostawy. Jeśli\n"
+"delivery= lub mode= jest określony więcej niż raz, używane jest tylko "
+"ostatnie\n"
+"jego wystąpienie.\n"
 
 #: src/mailman/commands/eml_who.py:50
 msgid "Get a list of the list members."
@@ -2020,7 +2194,7 @@ msgstr "Udekoruj wiadomość nagłówkami i stopkami."
 #: src/mailman/handlers/dmarc.py:128
 #, python-brace-format
 msgid "${realname} via ${mlist.display_name}"
-msgstr "${realname} via ${mlist.display_name}"
+msgstr "${realname} przez ${mlist.display_name}"
 
 #: src/mailman/handlers/dmarc.py:229
 msgid "Apply DMARC mitigations."
@@ -2041,6 +2215,11 @@ msgid ""
 "authorized for delivery.  The original message as received by Mailman is\n"
 "attached.\n"
 msgstr ""
+"Twoja pilna wiadomość do listy mailingowej ${mlist.display_name} nie "
+"została\n"
+"autoryzowana do dostarczenia. Oryginalna wiadomość odebrana przez Mailman'a "
+"została\n"
+"załączona.\n"
 
 #: src/mailman/handlers/mime_delete.py:63
 #, python-brace-format
@@ -2051,6 +2230,11 @@ msgid ""
 "message.\n"
 "\n"
 msgstr ""
+"Załączona wiadomość była zgodna z regułami filtrowania zawartości\n"
+"listy mailingowej ${mlist.display_name} i nie została przekazana dalej\n"
+"do subskrybentów listy. Otrzymujesz jedyną pozostałą kopię\n"
+"odrzuconej wiadomości.\n"
+"\n"
 
 #: src/mailman/handlers/mime_delete.py:70
 msgid "Content filter message notification"
@@ -2255,6 +2439,11 @@ msgstr "Moderacja DMARC"
 #, python-brace-format
 msgid "You are not allowed to post to this mailing list From: a domain which publishes a DMARC policy of reject or quarantine, and your message has been automatically rejected.  If you think that your messages are being rejected in error, contact the mailing list owner at ${listowner}."
 msgstr ""
+"Nie możesz wysyłać wiadomości na tę listę mailingową z domeny, która "
+"publikuje politykę DMARC odrzucania lub kwarantanny, twoja wiadomość została "
+"automatycznie odrzucona. Jeśli uważasz, że Twoje wiadomości są błędnie "
+"odrzucane, skontaktuj się z właścicielem listy mailingowej pod adresem "
+"${listowner}."
 
 #: src/mailman/rules/emergency.py:34
 msgid ""
@@ -2262,6 +2451,10 @@ msgid ""
 "        pre-approved by the list administrator.\n"
 "        "
 msgstr ""
+"Lista mailingowa jest w trybie awaryjnej moderacji, a ta wiadomość nie "
+"została\n"
+"        wstępnie zatwierdzona przez administratora listy.\n"
+"        "
 
 #: src/mailman/rules/emergency.py:47
 msgid "Emergency moderation is in effect for this list"
@@ -2505,9 +2698,13 @@ msgid ""
 "Size: ${size} bytes\n"
 "Desc: ${desc}\n"
 msgstr ""
+"Usunięto część wiadomości niekompatybilną z paczką pain/text ...\n"
+"Nazwa: ${filename}\n"
+"Typ: ${ctype}\n"
+"Rozmiar: ${size} bajtów\n"
+"Opis: ${desc}\n"
 
 #: src/mailman/utilities/scrubber.py:58
-#, fuzzy
 msgid "-------------- next part --------------\n"
 msgstr "-------------- next part --------------\n"
 
