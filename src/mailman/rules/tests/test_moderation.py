@@ -201,13 +201,11 @@ A message body.
             'bill@example.com': 'hold',
             'chris@example.com': 'reject',
             'dana@example.com': 'discard',
-            # Fails by the known issue #1207
             'EVE@example.com': 'accept',
             '^anne-.*@example.com': 'accept',
             '^bill-.*@example.com': 'hold',
             '^chris-.*@example.com': 'reject',
             '^dana-.*@example.com': 'discard',
-            # Fails by the known issue #1207
             '^eve-.*@Example.Com': 'accept',
         }
         rule = moderation.NonmemberModeration()
