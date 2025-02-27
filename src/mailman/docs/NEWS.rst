@@ -32,7 +32,9 @@ Bugs fixed
   domains.  (Closes #1202)
 * Creating a list with ``private-default`` style now explicitly sets the
   ``first_strip_reply_to``, ``reply_goes_to_list`` and ``reply_to_address``
-  attributes.  Closes (#1205)
+  attributes.  (Closes #1205)
+* The ``*_these_nonmembers`` lists perform case-insensitive matching.
+  (Closes #1207)
 
 New Features
 ------------

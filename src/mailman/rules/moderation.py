@@ -188,9 +188,14 @@ class NonmemberModeration:
                 checklist = getattr(mlist, legacy_attribute_name)
                 for addr in checklist:
                     try:
-                        if ((addr.startswith('^') and re.match(addr, sender))
-                                or _at_list(mlist, action_name, addr, sender)
-                                or addr == sender):     # noqa: W503
+                        if (
+                            (
+                                addr.startswith('^')
+                                and re.match(addr, sender, re.IGNORECASE)
+                            )
+                            or _at_list(mlist, action_name, addr, sender)
+                            or addr.lower() == sender
+                        ):
                             # accept_these_nonmembers should 'defer'.
                             if action_name == 'accept':
                                 return False

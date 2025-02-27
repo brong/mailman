@@ -201,11 +201,13 @@ A message body.
             'bill@example.com': 'hold',
             'chris@example.com': 'reject',
             'dana@example.com': 'discard',
+            'EVE@example.com': 'accept',
             '^anne-.*@example.com': 'accept',
             '^bill-.*@example.com': 'hold',
             '^chris-.*@example.com': 'reject',
             '^dana-.*@example.com': 'discard',
-            }
+            '^eve-.*@Example.Com': 'accept',
+        }
         rule = moderation.NonmemberModeration()
         user_manager = getUtility(IUserManager)
         for address, action_name in actions.items():
@@ -229,13 +231,20 @@ A message body.
             result = rule.check(self._mlist, msg, msgdata)
             if action_name == 'accept':
                 self.assertFalse(
-                    result, 'NonmemberModeration rule should miss')
+                    result,
+                    f'NonmemberModeration rule should miss: {address}'
+                )
             else:
-                self.assertTrue(result, 'NonmemberModeration rule should hit')
+                self.assertTrue(
+                    result,
+                    f'NonmemberModeration rule should hit: {address}'
+                )
                 self.assertIn('member_moderation_action', msgdata)
                 self.assertEqual(
-                    msgdata['member_moderation_action'], action_name,
-                    'Wrong action for {}: {}'.format(address, action_name))
+                    msgdata['member_moderation_action'],
+                    action_name,
+                    f'Wrong action for {address}: {action_name}'
+                )
 
     def test_accept_these_nonmembers_at_list(self):
         # Test the legacy @fqdn_listname feature.
