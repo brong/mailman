@@ -258,7 +258,8 @@ also appear in the first line of the body of the reply.""")),
                 dmsg['Date'] = formatdate(localtime=True)
                 dmsg['Message-ID'] = make_msgid()
                 nmsg.attach(text)
-                nmsg.attach(MIMEMessage(msg))
+                if mlist.admin_notify_held_with_attachment:
+                    nmsg.attach(MIMEMessage(msg))
                 nmsg.attach(MIMEMessage(dmsg))
                 nmsg.send(mlist)
         # Log the held message.  Log messages are not translated, so recast
