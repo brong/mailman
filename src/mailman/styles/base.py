@@ -78,6 +78,7 @@ class BasicOperation:
         # Notify the administrator of pending requests and membership changes.
         mlist.admin_immed_notify = True
         mlist.admin_notify_mchanges = False
+        mlist.admin_notify_held_with_attachment = True
         mlist.respond_to_post_requests = True
         mlist.obscure_addresses = True
         mlist.collapse_alternatives = True

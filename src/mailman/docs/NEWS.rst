@@ -44,6 +44,8 @@ New Features
   mailman.cfg. This defaults to ``yes`` to keep current behavior but can be set
   to ``no`` to prevent adding the triggering DSN to bounce probes when probes
   are enabled.  (Closes #1195)
+* A new ``admin_notify_held_with_attachment`` parameter allows disabling
+  sending held messages as attachments when notifying moderators (Closes #670)
 
 Other
 -----

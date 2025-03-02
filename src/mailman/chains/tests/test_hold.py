@@ -20,6 +20,7 @@
 import unittest
 
 from email import message_from_bytes as mfb
+from email.iterators import typed_subpart_iterator
 from importlib.resources import read_binary
 from mailman.app.lifecycle import create_list
 from mailman.chains.builtin import BuiltInChain
@@ -324,3 +325,22 @@ A message body.
                 self.fail('Unexpected message: %s' % item.msg)
         self.assertEqual(held_message['x-mailman-rule-misses'],
                          SEMISPACE.join(rule_misses))
+
+    def test_hold_without_attachment(self):
+        # Ensure attachment is not added if
+        # admin_notify_held_with_attachment = False
+        self._mlist.admin_immed_notify = True
+        self._mlist.respond_to_post_requests = False
+        self._mlist.admin_notify_held_with_attachment = False
+        bart = self._user_manager.create_user('bart@example.com', 'Bart User')
+        address = set_preferred(bart)
+        self._mlist.subscribe(address, MemberRole.moderator)
+        msg = mfb(read_binary('mailman.chains.tests', 'issue144.eml'))
+        msg.sender = 'anne@example.com'
+        process_chain(self._mlist, msg, {}, start_chain='hold')
+        items = get_queue_messages('virgin', expected_count=1)
+        msg = items[0].msg
+        message_parts = list(typed_subpart_iterator(msg, 'message', 'rfc822'))
+        self.assertEqual(len(message_parts), 1)
+        self.assertEqual(message_parts[0].get_payload(0)['subject'][:8],
+                         'confirm ')
