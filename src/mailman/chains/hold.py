@@ -258,7 +258,7 @@ also appear in the first line of the body of the reply.""")),
                 dmsg['Date'] = formatdate(localtime=True)
                 dmsg['Message-ID'] = make_msgid()
                 nmsg.attach(text)
-                if mlist.admin_notify_held_with_attachment:
+                if getattr(mlist, 'admin_notify_held_with_attachment', True):
                     nmsg.attach(MIMEMessage(msg))
                 nmsg.attach(MIMEMessage(dmsg))
                 nmsg.send(mlist)
