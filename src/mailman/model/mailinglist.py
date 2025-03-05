@@ -133,6 +133,7 @@ class MailingList(Model):
     # will change as the schema and implementation is developed.
     accept_these_nonmembers = Column(MutableList.as_mutable(PickleType))  # XXX
     admin_immed_notify = Column(Boolean)
+    admin_notify_held_with_attachment = Column(Boolean)
     admin_notify_mchanges = Column(Boolean)
     administrivia = Column(Boolean)
     archive_policy = Column(Enum(ArchivePolicy))
