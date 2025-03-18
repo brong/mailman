@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-15 19:33-0800\n"
-"PO-Revision-Date: 2024-06-25 17:09+0000\n"
-"Last-Translator: Mark Sapiro <mark@msapiro.net>\n"
-"Language-Team: Catalan <https://hosted.weblate.org/projects/gnu-mailman/mailman/ca/>\n"
+"PO-Revision-Date: 2025-03-18 13:02+0000\n"
+"Last-Translator: Leandro Navarro <leandro@pangea.org>\n"
+"Language-Team: Catalan <https://hosted.weblate.org/projects/gnu-mailman/"
+"mailman/ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6-rc\n"
+"X-Generator: Weblate 5.11-dev\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:84
 #: src/mailman/chains/hold.py:166 src/mailman/handlers/acknowledge.py:56
@@ -37,7 +38,7 @@ msgstr "${mlist.display_name} missatge de prova de la llista de correu"
 #: src/mailman/app/bounces.py:266
 #, python-brace-format
 msgid "${mlist.display_name} uncaught bounce notification"
-msgstr ""
+msgstr "${mlist.display_name} notificació de rebot no capturada"
 
 #: src/mailman/app/membership.py:147
 #, python-brace-format
@@ -336,6 +337,27 @@ msgid ""
 "    set which subtly changes some error handling behavior.\n"
 "    "
 msgstr ""
+"    Inicia un corredor.\n"
+"\n"
+"    S'inicia el corredor indicat a la línia de comandes, i es pot executar\n"
+"    a través del seu bucle principal una vegada (per a aquells corredors que "
+"suportin això) o\n"
+"    contínuament. Això últim és com el corredor principal inicia tots els "
+"seus\n"
+"    subprocessos.\n"
+"\n"
+"    -r cal llevat que es doni -l o -h, i el seu argument ha de ser un dels\n"
+"    els noms mostrats pel modificador -l.\n"
+"\n"
+"    Normalment, aquest script s'ha d'iniciar des `mailman start`. Executar-"
+"lo\n"
+"    per separat o amb -o és generalment útil només per a depuració. Quan s'"
+"executa\n"
+"    d'aquesta manera, la variable d'entorn $MAILMAN_UNDER_MASTER_CONTROL "
+"serà\n"
+"    definida el que canvia subtilment algun comportament de control d'errors."
+"\n"
+"    "
 
 #: src/mailman/bin/runner.py:103
 msgid "List the available runner names and exit."
@@ -480,13 +502,13 @@ msgstr "Ja subscrit (ometent): ${email}"
 #: src/mailman/commands/cli_syncmembers.py:87
 #, python-brace-format
 msgid "Membership is banned (skipping): ${email}"
-msgstr ""
+msgstr "La pertinença està prohibida (s'omet): ${email}"
 
 #: src/mailman/commands/cli_addmembers.py:110
 #: src/mailman/commands/cli_syncmembers.py:90
 #, python-brace-format
 msgid "Subscription already pending (skipping): ${email}"
-msgstr ""
+msgstr "La subscripció ja està pendent (s'omet): ${email}"
 
 #: src/mailman/commands/cli_addmembers.py:116
 msgid ""
