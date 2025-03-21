@@ -39,7 +39,6 @@ dependencies = [
     "lazr.config",
     'nntplib; python_version>="3.13"',
     "passlib",
-    "python-dateutil>=2.0",
     "requests",
     "sqlalchemy>=1.4.0",
     "zope.component",
