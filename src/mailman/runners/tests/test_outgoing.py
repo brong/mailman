@@ -288,7 +288,6 @@ class TestSomeRecipientsFailed(unittest.TestCase):
     layer = ConfigLayer
 
     def setUp(self):
-        global temporary_failures, permanent_failures
         del temporary_failures[:]
         del permanent_failures[:]
         self._processor = getUtility(IBounceProcessor)

@@ -45,7 +45,6 @@ from zope.interface import implementer
 
 def get_addr(display_name, email):
     """Return an existing address record if available, otherwise make one."""
-    global user_manager
     addr = user_manager.get_address(email)
     if addr is not None:
         # We have an address with this email.  Return that.
@@ -58,7 +57,6 @@ def get_addr(display_name, email):
 @transactional
 def add_members(mlist, member, delivery, welcome_msg):
     """Add members to a mailing list."""
-    global registrar
     display_name, email = parseaddr(member)
     subscriber = get_addr(display_name, email)
     # For error messages.
@@ -95,7 +93,6 @@ def add_members(mlist, member, delivery, welcome_msg):
 def sync_members(mlist, in_fp, delivery, welcome_msg, goodbye_msg,
                  admin_notify, no_change):
     """Add and delete mailing list members to match an input file."""
-    global email_validator
     subscribers = mlist.members
     addresses = list(subscribers.addresses)
     # Variable that shows if something was done to the original mailing list
