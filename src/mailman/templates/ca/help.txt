@@ -1,1 +1,20 @@
-Ajuda per a la llista de correu ${listname} Aquesta és la comanda d'ajuda de correu 'help' per a la versió ${version} del gestor de llistes GNU Mailman a ${domain}.  A continuació, es descriuen les comandes que podeu enviar per obtenir informació i controlar la seva subscripció a les llistes de Mailman en aquest lloc. Les comandes poden estar a la línia de l’assumpte o al cos del missatge. Les comandes s’han d’enviar a l’adreça ${listname}-request@${domain}. Quant a les descripcions, les paraules amb "<>" signifiquen els elements i les paraules clau NECESSARIS i amb "[ ] "denota elements OPCIONALS. No incloguin els "<>" o "[]" quan utilitzi les comandes. Les següents comandes són vàlides:    ${commands} Questions i dubtes per l'atenció d'una persona han de ser enviades a:    ${administrator}
+Ajuda per a la llista de correu $listname
+
+Aquesta és l'ordre de correu electrònic 'help' per a la versió $version de la llista del gestor 
+de llistes GNU Mailman a $domain. A continuació es descriuen les ordres que podeu enviar per rebre
+informació i controlar la vostra subscripció a les llistes de Mailman en aquest lloc.
+Una ordre pot estar a la línia Assumpte o al cos del missatge.
+
+Les ordres s'han d'enviar a l'adreça ${listname}-request@${domain}.
+
+Quant a les descripcions: les paraules amb "<>" signifiquen elements OBLIGATORIS i
+les paraules amb "[]" denoten elements OPCIONALS. No inclogueu els "<>" o
+"[]" és quan feu servir les ordres.
+
+Les ordres següents són vàlides:
+
+     $commands
+
+Les preguntes i inquietuds per a l'atenció d'una persona s'han d'enviar a:
+
+     $administrador

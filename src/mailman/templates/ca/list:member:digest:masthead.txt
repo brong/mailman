@@ -1,1 +1,12 @@
-Enviar a ${listname} missatges a la llista de distribució ${display_name} . Per subscriure-us o donar de baixa la subscripció via correu, envieu a ${request_email} un missatge amb la paraula 'help' a l'assumpte o cos. Pot contactar amb la persona que gestiona la llista a ${propietari_email}	Quan respongueu, modifiqueu la línia de l'assumpte de manera que sigui més específic que "Re: Contingut de ${display_name} digest ..."
+Envieu enviaments de la llista de correu $display_name a
+	$listname
+
+Per subscriure's o donar-te de baixa per correu electrònic, envia un missatge amb l'assumpte o el cos
+'help' a
+	$request_email
+
+Podeu contactar amb la persona que gestiona la llista a
+	$owner_email
+
+Quan respongueu, editeu la vostra línia d'assumpte perquè sigui més específica que
+"Re: Contingut del resum $display_name ..."

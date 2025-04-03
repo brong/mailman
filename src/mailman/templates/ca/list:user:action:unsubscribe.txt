@@ -1,1 +1,24 @@
-Confirmació de baixa de l'adreça de correu Hola, aquest és el servidor GNU Mailman a ${domain}. Hem rebut una sol·licitud de baixa de l'adreça de correu electrònic    ${user_email} Abans que GNU Mailman pot donar-la de baixa, primer ha de confirmar la seva sol·licitud. Podeu fer-ho responent aquest missatge, mantenint l’encapçalament de Assumpte. Si no voleu donar de baixa aquesta adreça de correu, simplement ignoreu aquest missatge. Si creieu que se us ha donat de baixa de la llista de forma maliciosa o que teniu cap altra pregunta, podeu contactar amb    ${propietari_email}
+Confirmació de baixa de l'adreça electrònica
+
+Hola, aquest és el servidor GNU Mailman a $domain.
+
+Hem rebut una sol·licitud de baixa de l'adreça de correu electrònic
+
+    $user_email
+
+Abans que GNU Mailman us pugui cancel·lar la subscripció, primer heu de confirmar la vostra sol·licitud.
+Pots fer-ho simplement responent a aquest missatge.
+
+O hauríeu d'incloure la línia següent, i només la següent
+línia -- en un missatge a $request_email:
+
+    confirm $token
+
+Tingueu en compte que simplement enviar una "resposta" a aquest missatge hauria de funcionar des de
+la majoria de lectors de correu.
+
+Si no voleu cancel·lar la subscripció a aquesta adreça de correu electrònic, simplement ignoreu-ho
+missatge. Si creieu que s'està cancel·lant la subscripció de la llista de manera malintencionada,
+o si tens qualsevol altra pregunta, pots contactar
+
+    $owner_email

@@ -1,1 +1,5 @@
-La vostra autorització és necessària per a una sol·licitud de subscripció a la llista de correu:    Per:  ${member}    Llista: ${listname}
+Cal la vostra autorització per a una sol·licitud de subscripció a una llista de correu
+per l'aprovació:
+
+    Per a:  $member
+    Llista: $listname

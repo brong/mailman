@@ -1,1 +1,9 @@
-Hem rebut un missatge de la vostra adreça <${sender_email}> per sol·licitar una resposta automàtica de la llista de correu ${listname}. El número que hem vist avui: ${count}. Per evitar problemes com ara bucles de correu electrònic entre robots de correu electrònic, avui no enviarem més respostes. Si us plau, torneu-ho a provar demà. Si creieu que aquest missatge és un error o si teniu cap pregunta, poseu-vos en contacte amb el propietari de la llista a ${owner_email}.
+Hem rebut un missatge de la vostra adreça <$sender_email> sol·licitant una
+resposta automàtica de la llista de correu $listname.
+
+El nombre que hem vist avui: $count.  Per tal d'evitar problemes com ara
+bucles de correu entre robots de correu electrònic, no us enviarem més
+respostes avui.  Si us plau, torna-ho a provar demà.
+
+Si creieu que aquest missatge és un error o si teniu cap pregunta, si us plau
+contacteu amb el propietari de la llista a $owner_email.

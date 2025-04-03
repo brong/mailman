@@ -1,1 +1,14 @@
-Aquest és un missatge de sonda.  Podeu ignorar aquest missatge. La llista de correu ${listname} ha rebut diversos rebots de la vostra part, indicant que pot haver-hi un problema al enviar missatges a ${sender_email}. Una mostra s'adjunta a continuació.  Consulteu aquest missatge per assegurar-vos que no hi hagi problemes amb la seva adreça de correu.  Potser voldreu consultar amb el vostre administrador de correu per obtenir més ajuda. No heu de fer res per seguir sent un membre actiu de la llista de correu. Si teniu cap pregunta o problema, podeu fer-ho contactant amb el propietari de la llista de distribució a    ${owner_email}
+Aquest és un missatge de sonda.  Podeu ignorar aquest missatge.
+
+La llista de correu $listname ha rebut una sèrie de rebots de part teva,
+indicant que pot haver-hi un problema en enviar missatges a $sender_email. 
+S'adjunta una mostra a continuació. Si us plau, examineu aquest missatge per assegurar-vos que n'hi ha
+cap problema amb la teva adreça de correu electrònic. Podeu consultar amb el vostre
+administrador de correu per obtenir més ajuda.
+
+No cal que feu res per continuar com a membre habilitat de la llista de correu.
+
+Si teniu cap pregunta o problema, podeu contactar amb el propietari de la llista de correu
+a 
+
+     $owner_email

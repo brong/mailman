@@ -1,1 +1,8 @@
-Aquest és un missatge de sonda.  Podeu ignorar aquest missatge. La llista de correu ${listname} ha rebut diversos rebots de la vostra part, indicant que pot haver-hi un problema al enviar missatges a ${sender_email}. Una mostra s'adjunta a continuació.  Consulteu aquest missatge per assegurar-vos que no hi hagi problemes amb la seva adreça de correu.  Potser voldreu consultar amb el vostre administrador de correu per obtenir més ajuda. No heu de fer res per seguir sent un membre actiu de la llista de correu. Si teniu cap pregunta o problema, podeu fer-ho contactant amb el propietari de la llista de distribució a    ${owner_email}
+La vostra subscripció s'ha desactivat a la llista de correu $listname perquè s'han
+rebut una sèrie de rebots que indiquen que pot haver-hi un problema en el lliurament
+de missatges a $sender_email. És possible que vulgueu consultar amb el vostre administrador de correu
+per a més ajuda.
+
+Si teniu cap pregunta o problema, podeu contactar amb el propietari de la llista de correu a
+
+     $owner_email

@@ -1,1 +1,16 @@
-Benvingut a la llista de correu "${display_name} "! Per a publicar en aquesta llista, envieu el vostre correu electrònic a:  ${listname}. Podeu donar-vos de baixa o fer ajustos a les vostres opcions per correu electrònic enviant un missatge a: ${request_email} amb la paraula 'help' en l'assumpte o el cos (no inclogueu les cometes) i rebreu un missatge amb instruccions. Necessitareu la vostra contrasenya per a canviar les opcions, però, a efectes de seguretat, aquesta contrasenya no s’hi inclourà. Si heu oblidat la contrasenya, haureu de restablir-la mitjançant la interfície d'usuari web.
+Benvingut a la llista de correu "$display_name"!
+
+Per publicar a aquesta llista, envieu el vostre missatge a:
+
+    $listname
+
+Podeu donar-vos de baixa o fer ajustos a les vostres opcions per correu electrònic enviant
+un missatge a:
+
+    $request_email
+
+amb la paraula 'help' a l'assumpte o al cos (no incloure les cometes), i
+rebreu un missatge ampb instruccions. Necessitaràs la teva contrasenya per
+canvieu les vostres opcions, però per motius de seguretat, aquesta contrasenya no està inclosa
+aquí.  Si heu oblidat la vostra contrasenya, haureu de restablir-la a través de
+interfície d'usuari web.

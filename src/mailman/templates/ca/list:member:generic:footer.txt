@@ -1,1 +1,3 @@
-_______________________________________________Llista de correu ${display_name} -- ${listname} Per donar-se de baixa envieu un correu a ${short_listname}-leave@${domain}
+________________________________________________
+$display_name llista de correu -- $listname
+Per cancel·lar la subscripció, envieu un correu electrònic a ${short_listname}-leave@${domain}

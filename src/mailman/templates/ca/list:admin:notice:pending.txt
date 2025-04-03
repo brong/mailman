@@ -1,0 +1,4 @@
+La llista $listname té $count sol·licituds de moderació pendents.
+
+$data
+Si us plau, atengueu això el més aviat possible.

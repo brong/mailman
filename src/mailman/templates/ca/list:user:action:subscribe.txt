@@ -1,1 +1,24 @@
-Confirmació de registre d'adreça de correu electrònic Hola, aquest és el servidor GNU Mailman de ${domain}. Hem rebut una sol·licitud de registre per a l'adreça de correu ${user_email}. Abans de poder començar a utilitzar GNU Mailman en aquest lloc, primer heu de confirmar que aquesta és la vostra adreça de correu.  Fes-ho responent a aquest missatge mantenint intacte la capçalera de l’assumpte. Si no desitja registrar aquesta adreça de correu electrònic, simplement ignora aquesta missatge. Si creu que està sent subscrit a aquesta llista de forma maliciosa, pot contactar ${owner_email}
+Confirmació de registre de l'adreça electrònica
+
+Hola, aquest és el servidor GNU Mailman a $domain.
+
+Hem rebut una sol·licitud de registre per a l'adreça de correu electrònic
+
+    $user_email
+
+Abans de poder començar a utilitzar GNU Mailman en aquest lloc, primer heu de confirmar
+que aquesta és la teva adreça de correu electrònic. Pots fer-ho responent a aquest missatge.
+
+O hauríeu d'incloure la línia següent, i només la següent
+línia -- en un missatge a $request_email:
+
+     confirm $token
+
+Tingueu en compte que simplement enviar una "resposta" a aquest missatge hauria de funcionar des de
+la majoria de lectors de correu.
+
+Si no voleu registrar aquesta adreça de correu electrònic, simplement ignoreu aquest
+missatge.  Si creieu que s'està subscrit de manera malintencionada a la llista, o bé
+si tens qualsevol altra pregunta, pots contactar
+
+     $owner_email

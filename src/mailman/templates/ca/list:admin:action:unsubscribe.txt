@@ -1,1 +1,5 @@
-La vostra autorització és necessària per a l'aprovació d'una sol·licitud de baixa de llista de correu: Per: ${member} Llista: $listname
+Cal la vostra autorització per aprovar la baixa la subscripció a la 
+llista de correu:
+
+    Per a:   $member
+    Llista: $listname

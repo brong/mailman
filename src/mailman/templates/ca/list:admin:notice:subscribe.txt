@@ -1,1 +1,1 @@
-${member} s'ha subscrit amb èxit a ${display_name}.
+$member s'ha subscrit correctament a $display_name.

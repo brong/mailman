@@ -1,1 +1,4 @@
-${member} s'ha subscrit amb èxit a ${display_name}.
+La subscripció de $member s'ha desactivat a $listname a causa de la seva puntuació de rebot
+superant el llindar de bounce_score_threshold de la llista de correu.
+
+S'adjunta l'activador DSN si està disponible.

@@ -1,1 +1,1 @@
-${member} s'ha subscrit amb èxit a ${display_name}.
+$member s'ha donat de baixa a $listname a causa de rebots excessius.

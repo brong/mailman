@@ -1,1 +1,13 @@
-La seva sol·licitud a la llista de correu ${listname}      ${request} has estat rebutjada pel moderador de la llista.  El moderador va donar el motiu següent per rebutjar la seva petició: "${reason}" Qualsevol pregunta o comentari ha de dirigir-se a l'administrador de la llista:    ${owner} _email
+La vostra sol·licitud a la llista de correu $listname
+
+     $request
+
+ha estat rebutjat pel moderador de la llista. El moderador va donar el
+motiu següent per rebutjar la seva sol·licitud:
+
+"$reason"
+
+Qualsevol pregunta o comentari s'ha de dirigir a l'administrador de la llista
+a:
+
+     $owner_email
