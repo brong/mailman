@@ -20,7 +20,6 @@
 import time
 import logging
 
-from dateutil.tz import tzlocal
 from email.utils import formatdate, getaddresses, make_msgid
 from mailman.app.membership import delete_member
 from mailman.config import config
@@ -151,7 +150,9 @@ def handle_message(mlist, id, action, comment=None, forward=None):
         # here can lead to a huge delay in web turnaround.  Log the moderation
         # and add a header.
         msg['X-Mailman-Approved-At'] = formatdate(
-            time.mktime(now(tz=tzlocal()).timetuple()), localtime=True)
+            time.mktime(now(tz=None).timetuple()),
+            localtime=True
+        )
         vlog.info('held message approved, message-id: %s',
                   msg.get('message-id', 'n/a').strip())
         # Stick the message back in the incoming queue for further
