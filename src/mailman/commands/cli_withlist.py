@@ -104,7 +104,6 @@ def start_python(overrides, banner):
 
 
 def do_interactive(ctx, banner):
-    global m, r
     overrides = dict(
         m=m,
         commit=config.db.commit,
