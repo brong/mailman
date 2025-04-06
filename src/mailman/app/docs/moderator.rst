@@ -297,6 +297,18 @@ the mailing list.
 Notifications
 =============
 
+Held messages notification
+--------------------------
+
+When a message is being held for some reason, the list administrators are being
+notified immediately or via a daily cron job. They can choose whether they want
+to see the held message attached to the immediate notification or not (the
+latter might be useful to avoid getting spam message copies).
+
+    >>> from mailman.interfaces.mailinglist import SubscriptionPolicy
+    >>> mlist.admin_immed_notify = True
+    >>> mlist.admin_notify_held_with_attachment = False
+
 Membership change requests
 --------------------------
 

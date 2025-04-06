@@ -739,6 +739,14 @@ class IMailingList(Interface):
         notifications.
         """)
 
+    admin_notify_held_with_attachment = Attribute(
+        """Flag controlling message attachment in notification of held
+        messages.
+
+        List moderators can receive notifications for messages getting held
+        with or without a copy of the held message attached.
+        """)
+
     send_welcome_message = Attribute(
         """Flag indicating whether a welcome message should be sent.""")
 
