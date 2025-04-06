@@ -46,6 +46,7 @@ RESOURCE = dict(
         ],
     admin_immed_notify=False,
     admin_notify_mchanges=True,
+    admin_notify_held_with_attachment=True,
     administrivia=False,
     advertised=False,
     allow_list_posts=False,

@@ -21,6 +21,7 @@ All readable attributes for a list are available on a sub-resource.
     accept_these_nonmembers: []
     acceptable_aliases: []
     admin_immed_notify: True
+    admin_notify_held_with_attachment: True
     admin_notify_mchanges: False
     administrivia: True
     advertised: True
@@ -135,6 +136,7 @@ When using ``PUT``, all writable attributes must be included.
     ...             acceptable_aliases=['one@example.com', 'two@example.com'],
     ...             accept_these_nonmembers=['aperson@example.com'],
     ...             admin_immed_notify=False,
+    ...             admin_notify_held_with_attachment=True,
     ...             admin_notify_mchanges=True,
     ...             administrivia=False,
     ...             advertised=False,
@@ -221,6 +223,7 @@ These values are changed permanently.
     accept_these_nonmembers: ['aperson@example.com']
     acceptable_aliases: ['one@example.com', 'two@example.com']
     admin_immed_notify: False
+    admin_notify_held_with_attachment: True
     admin_notify_mchanges: True
     administrivia: False
     advertised: False

@@ -171,6 +171,7 @@ ATTRIBUTES = dict(
         list_of_emails_or_regexp_or_atlist_validator),
     admin_immed_notify=GetterSetter(as_boolean),
     admin_notify_mchanges=GetterSetter(as_boolean),
+    admin_notify_held_with_attachment=GetterSetter(as_boolean),
     administrivia=GetterSetter(as_boolean),
     advertised=GetterSetter(as_boolean),
     allow_list_posts=GetterSetter(as_boolean),
