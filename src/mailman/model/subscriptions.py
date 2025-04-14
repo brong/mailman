@@ -73,12 +73,9 @@ class SubscriptionService:
     @dbconnection
     def get_member(self, store, member_id):
         """See `ISubscriptionService`."""
-        members = store.query(Member).filter(Member._member_id == member_id)
-        if members.count() == 0:
-            return None
-        else:
-            assert members.count() == 1, 'Too many matching members'
-            return members[0]
+        return store.query(Member).filter(
+            Member._member_id == member_id
+        ).one_or_none()
 
     @dbconnection
     def _find_members(self, store, subscriber, list_id, role,

@@ -156,11 +156,8 @@ class User(Model):
     @dbconnection
     def controls(self, store, email):
         """See `IUser`."""
-        found = store.query(Address).filter_by(email=email)
-        if found.count() == 0:
-            return False
-        assert found.count() == 1, 'Unexpected count'
-        return found[0].user is self
+        found = store.query(Address).filter_by(email=email).one_or_none()
+        return found.user is self if found else False
 
     @dbconnection
     def register(self, store, email, display_name=None):

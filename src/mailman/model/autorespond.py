@@ -84,9 +84,8 @@ class AutoResponseSet:
     @dbconnection
     def last_response(self, store, address, response_type):
         """See `IAutoResponseSet`."""
-        results = store.query(AutoResponseRecord).filter_by(
+        return store.query(AutoResponseRecord).filter_by(
             address=address,
             mailing_list=self._mailing_list,
             response_type=response_type
-            ).order_by(desc(AutoResponseRecord.date_sent))
-        return (None if results.count() == 0 else results.first())
+        ).order_by(desc(AutoResponseRecord.date_sent)).first()

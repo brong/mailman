@@ -94,10 +94,7 @@ class UserManager:
     @dbconnection
     def get_user_by_id(self, store, user_id):
         """See `IUserManager`."""
-        users = store.query(User).filter_by(_user_id=user_id)
-        if users.count() == 0:
-            return None
-        return users.one()
+        return store.query(User).filter_by(_user_id=user_id).one_or_none()
 
     @property
     @dbconnection
@@ -108,11 +105,11 @@ class UserManager:
     @dbconnection
     def create_address(self, store, email, display_name=None):
         """See `IUserManager`."""
-        addresses = store.query(Address).filter(Address.email == email.lower())
-        if addresses.count() == 1:
-            found = addresses[0]
+        found = store.query(Address).filter(
+            Address.email == email.lower()
+        ).one_or_none()
+        if found:
             raise ExistingAddressError(found.original_email)
-        assert addresses.count() == 0, 'Unexpected results'
         if display_name is None:
             display_name = ''
         # It's okay not to lower case the 'email' argument because the
