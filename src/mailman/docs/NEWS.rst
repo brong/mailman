@@ -40,6 +40,8 @@ Bugs fixed
   insensitive.  (Closes #1223)
 * Logging from a socket.error in outgoing runner now includes the error
   message.  (Closes #514)
+* The ``mailman import21`` command does not add duplicate entry to
+  the ``*_these_nonmembers`` lists. (Closes #1213)
 
 New Features
 ------------

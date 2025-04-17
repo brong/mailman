@@ -1388,6 +1388,24 @@ class TestRosterImport(unittest.TestCase):
                 self.assertTrue(
                     all(addr.startswith('^') for addr in list_prop))
 
+    def test_nonmembers_skip_duplicates(self):
+        import_config_pck(self._mlist, self._pckdict)
+        error_log = LogFileMark('mailman.error')
+        import_config_pck(self._mlist, self._pckdict)
+        error_logs = error_log.read()
+        for action_name in ('accept', 'hold', 'reject', 'discard'):
+            prop_name = f'{action_name}_these_nonmembers'
+            list_prop = getattr(self._mlist, prop_name)
+            with self.subTest(prop_name):
+                self.assertEqual(
+                    len(list_prop), len(set(list_prop)),
+                    f'{prop_name} has duplicate entry'
+                )
+                self.assertIn(
+                    f'Skipping duplicate entry in {prop_name}:',
+                    error_logs
+                )
+
     def test_nonmember_following_member(self):
         self._pckdict['hold_these_nonmembers'] = [
             'linda@example.com',
