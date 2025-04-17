@@ -82,7 +82,7 @@ def trusted_auth_res(msg):
             return
 
 
-@retry(Timeout, NUM_TIMEOUT_RETRIES)
+@retry(Timeout, 1 + NUM_TIMEOUT_RETRIES)
 def authenticate(msg, msgdata):
     """ARC verify a message and update the Authentication-Results header.
 
