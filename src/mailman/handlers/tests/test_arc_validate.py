@@ -394,5 +394,5 @@ This is a test!
         with self.assertRaises(Timeout):
             ValidateAuthenticity().process(mlist, msg, {})
 
-        # Make sure that timeout was called twice.
-        self.assertEqual(self.mock_timeout.counter, 2)
+        # Make sure that timeout was called 3 times.
+        self.assertEqual(self.mock_timeout.counter, 3)
