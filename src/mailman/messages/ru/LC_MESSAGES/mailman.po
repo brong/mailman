@@ -8,15 +8,17 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-15 19:33-0800\n"
-"PO-Revision-Date: 2024-12-07 05:00+0000\n"
-"Last-Translator: gfbdrgng <hnaofegnp@hldrive.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/gnu-mailman/mailman/ru/>\n"
+"PO-Revision-Date: 2025-04-27 19:55+0000\n"
+"Last-Translator: Sergey Ponomarev <stokito@gmail.com>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/gnu-mailman/"
+"mailman/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.9-dev\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.12-dev\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:84
 #: src/mailman/chains/hold.py:166 src/mailman/handlers/acknowledge.py:56
@@ -37,7 +39,7 @@ msgstr "Тестовое сообщение списка рассылки ${mlis
 #: src/mailman/app/bounces.py:266
 #, python-brace-format
 msgid "${mlist.display_name} uncaught bounce notification"
-msgstr ""
+msgstr "${mlist.display_name} неперехваченное событие про отказ"
 
 #: src/mailman/app/membership.py:147
 #, python-brace-format
@@ -1254,7 +1256,7 @@ msgstr "Ваш новый список рассылки: ${fqdn_listname}"
 
 #: src/mailman/commands/cli_lists.py:241
 msgid "Remove a mailing list (does not remove archives)."
-msgstr ""
+msgstr "Удалить список рассылки (архивы не удаляются)."
 
 #: src/mailman/commands/cli_lists.py:245
 msgid "Suppress status messages"
