@@ -45,7 +45,8 @@ New Features
   to ``no`` to prevent adding the triggering DSN to bounce probes when probes
   are enabled.  (Closes #1195)
 * A new ``admin_notify_held_with_attachment`` parameter allows disabling
-  sending held messages as attachments when notifying moderators (Closes #670)
+  sending held messages as attachments when notifying moderators. (Closes #670)
+* A list's ``max_days_to_hold`` setting is now implemented.  (Closes #1215)
 
 Other
 -----

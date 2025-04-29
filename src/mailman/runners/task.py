@@ -20,14 +20,16 @@
 import os
 import logging
 
-from datetime import datetime
+from datetime import datetime, timedelta
 from lazr.config import as_timedelta
 from mailman.config import config
 from mailman.core.runner import Runner
 from mailman.database.transaction import dbconnection, transactional
 from mailman.interfaces.cache import ICacheManager
+from mailman.interfaces.listmanager import IListManager
 from mailman.interfaces.messages import IMessageStore
 from mailman.interfaces.pending import IPendings
+from mailman.interfaces.requests import IListRequests, RequestType
 from mailman.interfaces.workflow import IWorkflowStateManager
 from mailman.model.bounce import BounceEvent
 from mailman.model.requests import _Request
@@ -65,6 +67,7 @@ class TaskRunner(Runner):
         self._evict_pendings()
         self._evict_expired_bounce_events()
         self._evict_cache()
+        self._delete_old_helds()
 
     @dbconnection
     def _get_requests(self, store):
@@ -157,3 +160,25 @@ class TaskRunner(Runner):
     def _evict_cache(self):
         getUtility(ICacheManager).evict_expired()
         tlog.info('Task runner evicted expired cache entries')
+
+    def _delete_old_helds(self):
+        for mlist in getUtility(IListManager):
+            if mlist.max_days_to_hold == 0:
+                continue
+            cutoff = (now() - timedelta(mlist.max_days_to_hold))
+            helds = IListRequests(mlist).of_type(RequestType.held_message)
+            count = 0
+            for held in helds:
+                pending = getUtility(IPendings).confirm(
+                    held.data_hash, expunge=False)
+                date = False
+                for key, value in pending.items():
+                    if key == '_mod_hold_date':
+                        date = value
+                        break
+                if date and datetime.fromisoformat(date) < cutoff:
+                    IListRequests(mlist).delete_request(held.id)
+                    count += 1
+            if count > 0:
+                tlog.info('Task runner deleted %d old held messages from %s',
+                          count, mlist.list_id)
