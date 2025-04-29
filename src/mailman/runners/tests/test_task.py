@@ -146,6 +146,55 @@ second message
         log = mark.read()
         self.assertIn('Task runner deleted 1 orphaned messages', log)
 
+    def test_task_runner_deletes_old_helds(self):
+        # Test that the task runner deletes held messages older than the list's
+        # max_days_to_hold.
+        self._mlist.max_days_to_hold = 2
+        mark = LogFileMark('mailman.task')
+        # There are two held messages.
+        self.assertEqual(self._listrequests.count, 2)
+        # Go forward 3 days.
+        factory.fast_forward(days=3)
+        self._runner.run()
+        # Now the helds are gone.
+        self.assertEqual(self._listrequests.count, 0)
+        # and logged.
+        log = mark.read()
+        self.assertIn('Task runner deleted 2 old held messages '
+                      'from ant.example.com', log)
+
+    def test_task_runner_keeps_newer_helds(self):
+        # Test that the task runner doesn't delete held messages newer than the
+        # list's max_days_to_hold.
+        self._mlist.max_days_to_hold = 2
+        mark = LogFileMark('mailman.task')
+        # There are two held messages.
+        self.assertEqual(self._listrequests.count, 2)
+        # Go forward 1 day.
+        factory.fast_forward(days=1)
+        self._runner.run()
+        # The helds are still there.
+        self.assertEqual(self._listrequests.count, 2)
+        # and not logged.
+        log = mark.read()
+        self.assertNotIn('old held messages', log)
+
+    def test_task_runner_keeps_helds_max_is_zero(self):
+        # Test that the task runner doesn't delete held messages if the
+        # list's max_days_to_hold is zero.
+        self._mlist.max_days_to_hold = 0
+        mark = LogFileMark('mailman.task')
+        # There are two held messages.
+        self.assertEqual(self._listrequests.count, 2)
+        # Go forward 3 days.
+        factory.fast_forward(days=3)
+        self._runner.run()
+        # The helds are still there.
+        self.assertEqual(self._listrequests.count, 2)
+        # and not logged.
+        log = mark.read()
+        self.assertNotIn('old held messages', log)
+
     @dbconnection
     def test_task_runner_message_files(self, store):
         # Test that task runner deletes message files with no entry in the
