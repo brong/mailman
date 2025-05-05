@@ -37,7 +37,7 @@ dependencies = [
     "flufl.lock>=5.1",
     "gunicorn",
     "lazr.config",
-    'nntplib; python_version>="3.13"',
+    'standard-nntplib; python_version>="3.13"',
     "passlib",
     "requests",
     "sqlalchemy>=1.4.0",
