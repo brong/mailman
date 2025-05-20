@@ -2,7 +2,7 @@
 ARC Signing
 ===========
 
-It is highly recommended that Mailman maintainers configure ARC siging of their
+It is highly recommended that Mailman maintainers configure ARC signing of their
 outgoing email.  ARC is the standard protocol for authenticating the content
 and authenticity of indirect email flows. These are systems that are more
 complex than a basic sender -> reciever flow.  Mailing lists are a primary
