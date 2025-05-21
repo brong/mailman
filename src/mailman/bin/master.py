@@ -66,6 +66,7 @@ PRESERVE_ENVS = {
     'LOCALE_ARCHIVE',
     'MAILMAN_EXTRA_TESTING_CFG',
     'MAILMAN_VAR_DIR',
+    'REQUESTS_CA_BUNDLE',
 
     # These variables tweak the behavior of the Python interpreter.
     # If the user specifies them for the master process, they should
