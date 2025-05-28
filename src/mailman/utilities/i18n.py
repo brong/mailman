@@ -61,7 +61,7 @@ def search(resources, template_file, mlist=None, language=None):
     * The site-wide language directory
       $template_dir/site/<language>
 
-    * The template direcotry within the mailman source tree
+    * The template directory within the mailman source tree
     * <source_dir>/templates/<language>
 
     The <language> path component is calculated as follows, in this order:
