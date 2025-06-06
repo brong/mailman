@@ -1,0 +1,3 @@
+_______________________________________________
+Sändlistan $display_name -- $listname
+För att avsluta prenumerationen, skicka ett e-postmeddelande till ${short_listname}-leave@${domain}

@@ -1,0 +1,5 @@
+Ditt meddelande med rubriken
+
+$subject
+
+har mottagits av sändlistan $display_name.

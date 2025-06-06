@@ -1,0 +1,4 @@
+Listan $listname har $count modereringsförfrågningar som väntar.
+
+$data
+Ta hand om detta så snart som möjligt.

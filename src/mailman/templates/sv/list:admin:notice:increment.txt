@@ -1,0 +1,3 @@
+Studsningspoängen för $member på $listnamn har ökats.
+
+Den utlösande DSN, om tillgänglig, bifogas.

@@ -1,0 +1,13 @@
+Som listadministratör begärs din behörighet för
+följande inlägg på sändlistan:
+
+    Lista: $listname
+    Från: $sender_email
+    Ämne: $subject
+
+Meddelandet hålls tillbaka på grund av:
+
+$reasons
+
+När det passar dig kan du besöka din instrumentpanel för att godkänna
+eller avslå begäran.

@@ -1,0 +1,9 @@
+Vi har fått ett meddelande från din adress <$sender_email> med en begäran om ett
+automatiskt svar från sändlistan $listname.
+
+Antalet meddelanden vi har sett idag: $count. För att undvika problem som
+e-postloopar mellan e-postrobotar kommer vi inte att skicka några fler
+svar idag. Försök igen imorgon.
+
+Om du tror att detta meddelande är felaktigt eller om du har några frågor,
+kontakta listans ägare på $owner_email.

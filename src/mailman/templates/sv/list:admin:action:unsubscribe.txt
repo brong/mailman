@@ -1,0 +1,4 @@
+Din godkännande krävs för att avsluta prenumerationen på en sändlista:
+
+    För: $member
+    Lista: $listname

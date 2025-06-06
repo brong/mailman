@@ -1,0 +1,6 @@
+Ditt meddelande till sändlistan $listname avvisades av följande
+skäl:
+
+$reasons
+
+Det ursprungliga meddelandet som Mailman mottog bifogas.

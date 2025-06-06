@@ -1,0 +1,10 @@
+Sändlistan ’$listname’ har just skapats åt dig.
+Här följer lite grundläggande information om din sändlista.
+
+Det finns ett e-postbaserat gränssnitt för användare (inte administratörer) av din lista.
+Du kan få information om hur du använder det genom att skicka ett meddelande med bara ordet ’help’
+som ämne eller i meddelandetexten till:
+
+    $request_email
+
+Rikta alla frågor till $site_email.

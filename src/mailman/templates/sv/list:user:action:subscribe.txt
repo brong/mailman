@@ -1,0 +1,24 @@
+Bekräftelse av e-postadressregistrering
+
+Hej, detta är GNU Mailman-servern på $domain.
+
+Vi har mottagit en registreringsbegäran för e-postadressen
+
+    $user_email
+
+Innan du kan börja använda GNU Mailman på denna webbplats måste du först bekräfta
+att detta är din e-postadress. Du kan göra detta genom att svara på detta meddelande.
+
+Eller så ska du inkludera följande rad – och endast följande
+raden -- i ett meddelande till $request_email:
+
+    confirm $token
+
+Observera att det räcker att skicka ett ”svar” på detta meddelande från
+de flesta e-postprogram.
+
+Om du inte vill registrera denna e-postadress kan du helt enkelt ignorera detta
+meddelande. Om du tror att du har blivit registrerad på listan av någon som vill dig illa,
+eller har några andra frågor, kan du kontakta
+
+    $owner_email

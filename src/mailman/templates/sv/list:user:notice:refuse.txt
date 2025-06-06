@@ -1,0 +1,13 @@
+Din begäran till sändlistan $listname
+
+    $request
+
+har avvisats av listmoderatorn. Moderatorn angav
+följande skäl för att avvisa din begäran:
+
+”$reason”
+
+Frågor eller kommentarer ska riktas till listadministratören
+på:
+
+    $owner_email

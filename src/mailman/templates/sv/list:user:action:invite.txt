@@ -1,0 +1,15 @@
+Din adress ”$user_email” har blivit inbjuden att gå med i sändlistan $short_listname
+på $domain av ägaren till sändlistan $short_listname.
+Du kan acceptera inbjudan genom att helt enkelt svara på detta meddelande.
+
+Eller så kan du inkludera följande rad -- och endast följande
+rad -- i ett meddelande till $request_email:
+
+    confirm $token
+
+Observera att det räcker att skicka ett ”svar” på detta meddelande från
+de flesta e-postprogram.
+
+Om du vill avböja inbjudan kan du helt enkelt ignorera detta
+meddelande. Om du har några frågor, skicka dem till
+$owner_email.

@@ -1,0 +1,16 @@
+Välkommen till sändlistan ”$display_name”!
+
+För att skicka ett meddelande till listan, skicka det till:
+
+$listname
+
+Du kan avsluta prenumerationen eller ändra dina inställningar via e-post genom
+att skicka ett meddelande till:
+
+$request_email
+
+med ordet ”help” i ämnesraden eller i meddelandet (utan citattecken), och
+du får ett svar med instruktioner. Du behöver ditt lösenord för att
+ändra dina inställningar, men av säkerhetsskäl anges inte detta lösenord
+här. Om du har glömt ditt lösenord måste du återställa det via
+webbgränssnittet.

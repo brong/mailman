@@ -1,0 +1,8 @@
+Din prenumeration har inaktiverats på sändlistan $listname eftersom den har
+fått ett antal returmeddelanden som indikerar att det kan finnas ett problem med
+att leverera meddelanden till $sender_email. Du kan kontakta din
+e-postadministratör för mer hjälp.
+
+Om du har några frågor eller problem kan du kontakta sändlistans ägare på
+
+    $owner_email

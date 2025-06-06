@@ -1,0 +1,12 @@
+Ditt meddelande till ’$listname’ med ämnet
+
+    $subject
+
+hålls kvar tills listmoderatorn har granskat det för godkännande.
+
+Meddelandet hålls kvar på grund av:
+
+$reasons
+
+Antingen kommer meddelandet att publiceras på listan eller så kommer du att få
+ett meddelande om moderatorns beslut.

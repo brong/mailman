@@ -1,0 +1,12 @@
+Skicka inlägg för sändlistan $display_name till
+	$listname
+
+För att prenumerera eller avsluta prenumerationen via e-post,
+skicka ett meddelande med ämne eller texten ’help’ till
+	$request_email
+
+Du kan nå personen som hanterar listan på
+	$owner_email
+
+När du svarar, redigera ämnesraden så att den är mer specifik än
+”Re: Innehållssammanfattning för $display_name...”

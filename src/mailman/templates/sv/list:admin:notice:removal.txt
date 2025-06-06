@@ -1,0 +1,1 @@
+$member har avprenumererats från $listname på grund av för många studsande meddelanden.

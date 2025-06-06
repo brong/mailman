@@ -1,0 +1,4 @@
+Prenumerationen för $member har inaktiverats på $listname på grund av att deras
+studsningspoäng överskrider sändlistans bounce_score_threshold.
+
+Den utlösande DSN bifogas, om tillgänglig.

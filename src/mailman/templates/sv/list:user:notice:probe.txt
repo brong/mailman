@@ -1,0 +1,14 @@
+Detta är ett testmeddelande. Du kan ignorera detta meddelande.
+
+Sändlistan $listname har fått ett antal returmeddelanden från dig,
+vilket tyder på att det kan finnas ett problem med att leverera meddelanden till
+$sender_email. Ett exempel bifogas nedan. Kontrollera detta meddelande för att
+se till att det inte finns några problem med din e-postadress. Du kan kontakta
+din e-postadministratör för mer hjälp.
+
+Du behöver inte göra något för att förbli en aktiv medlem i sändlistan.
+
+Om du har några frågor eller problem kan du kontakta sändlistans ägare
+på
+
+    $owner_email

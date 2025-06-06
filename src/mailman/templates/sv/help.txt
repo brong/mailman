@@ -1,0 +1,20 @@
+Hjälp för sändlistan $listname
+
+Detta är e-postkommandot ”help” för version $version av GNU Mailman list
+manager på $domain. Nedan beskrivs kommandon som du kan skicka för att få
+information om och kontrollera din prenumeration på Mailman-listor på denna
+webbplats. Ett kommando kan skrivas i ämnesraden eller i meddelandetexten.
+
+Kommandon ska skickas till adressen ${listname}-request@${domain}.
+
+Om beskrivningarna - ord inom ”<>” betyder OBLIGATORISKA uppgifter och
+ord inom ”[]” betyder VALFRIA uppgifter. Ta inte med ”<>” eller
+”[]” när du använder kommandona.
+
+Följande kommandon är giltiga:
+
+    $commands
+
+Frågor och synpunkter som ska observeras av en person ska skickas till:
+
+    $administrator

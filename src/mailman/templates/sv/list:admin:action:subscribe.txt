@@ -1,0 +1,4 @@
+Din godkännande krävs för en begäran om prenumeration på sändlista:
+
+   För: $member
+   Lista: $listname

@@ -1,0 +1,4 @@
+Det bifogade meddelandet har returnerats som en studs, men antingen har
+returformatet inte kunnat identifieras eller så har inga medlemsadresser
+kunnat extraheras.  Denna sändlista har konfigurerats så att alla okända
+studsmeddelanden skickas till listadministratören.
