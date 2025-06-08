@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-15 19:33-0800\n"
-"PO-Revision-Date: 2025-06-06 17:28+0000\n"
+"PO-Revision-Date: 2025-06-08 08:03+0000\n"
 "Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/gnu-mailman/"
 "mailman/sv/>\n"
@@ -90,7 +90,7 @@ msgstr "Begäran till sändlistan \"${display_name}\" avvisad"
 
 #: src/mailman/app/notifications.py:93
 msgid " (Digest mode)"
-msgstr " (sammanfattningsläge)"
+msgstr " (Sammanfattningsläge)"
 
 #: src/mailman/app/notifications.py:97
 #, python-brace-format
@@ -268,7 +268,7 @@ msgid ""
 msgstr ""
 "    Master subprocess watcher.\n"
 "\n"
-"    Startar och övervakar de konfigurerade löparna och ser till att de "
+"    Startar och övervakar de konfigurerade runners och ser till att de "
 "håller sig vid liv och\n"
 "    sparkar.  Varje runner förgrenas och körs i tur och ordning, med "
 "mästaren som väntar\n"
@@ -289,7 +289,7 @@ msgstr ""
 "\n"
 "    Mastern svarar också på SIGINT, SIGTERM, SIGUSR1 och SIGHUP, som den "
 "helt enkelt\n"
-"    vidarebefordras till löparna.  Observera att mastern kommer att stänga "
+"    vidarebefordras till runners.  Observera att mastern kommer att stänga "
 "och\n"
 "    öppnar sina egna loggfiler igen efter att ha mottagit ett SIGHUP.  "
 "Mastern lämnar också\n"
@@ -302,7 +302,7 @@ msgid ""
 "    Don't restart the runners when they exit because of an error or a SIGUSR1.\n"
 "    Use this only for debugging."
 msgstr ""
-"    Starta inte om löparna när de avslutas på grund av ett fel eller en "
+"    Starta inte om runners när de avslutas på grund av ett fel eller en "
 "SIGUSR1.\n"
 "    Använd detta endast för felsökning."
 
@@ -349,7 +349,7 @@ msgstr "Visa mer felsökningsinformation i loggfilen."
 #: src/mailman/bin/runner.py:50
 #, python-brace-format
 msgid "Undefined runner name: ${name}"
-msgstr "Odefinierat löparnamn: ${name}"
+msgstr "Odefinierat runner-namn: ${name}"
 
 #: src/mailman/bin/runner.py:58
 #, python-brace-format
@@ -396,7 +396,7 @@ msgstr ""
 
 #: src/mailman/bin/runner.py:103
 msgid "List the available runner names and exit."
-msgstr "Lista de tillgängliga löparnas namn och utgång."
+msgstr "Lista de tillgängliga runner-namn och avsluta."
 
 #: src/mailman/bin/runner.py:107
 msgid ""
@@ -433,7 +433,7 @@ msgstr ""
 "\n"
 "    För runner som hanterar en kökatalog används det valfria `slice:range` "
 "om det anges\n"
-"    användas för att tilldela flera löparprocesser till den kön. range är "
+"    användas för att tilldela flera runner-processer till den kön. range är "
 "det\n"
 "    totala antalet runner för kön medan slice är numret på den här runnern\n"
 "    runner från [0..intervall).  För runner som inte hanterar en kö "
@@ -466,7 +466,7 @@ msgstr "Den inbyggda modereringskedjan."
 
 #: src/mailman/chains/discard.py:37
 msgid "Discard a message and stop processing."
-msgstr "Kassera ett meddelande och avbryt behandlingen."
+msgstr "Förkasta ett meddelande och avbryt behandlingen."
 
 #: src/mailman/chains/dmarc.py:30
 msgid "Process DMARC reject or discard mitigations"
@@ -524,7 +524,7 @@ msgstr ""
 
 #: src/mailman/chains/moderation.py:51
 msgid "Moderation chain"
-msgstr "Modereringskedjan"
+msgstr "Modereringskedja"
 
 #: src/mailman/chains/owner.py:38
 msgid "The built-in -owner posting chain."
@@ -1380,7 +1380,7 @@ msgstr "Ingen sådan lista som matchar spec: ${listspec}"
 #: src/mailman/commands/cli_lists.py:256
 #, python-brace-format
 msgid "Removed list: ${listspec}"
-msgstr "Borttagen lista: ${listspec}"
+msgstr "Tog bort lista: ${listspec}"
 
 #: src/mailman/commands/cli_members.py:89
 #, python-brace-format
@@ -1593,7 +1593,7 @@ msgstr ""
 
 #: src/mailman/commands/cli_qfile.py:67
 msgid "[----- start pickle -----]"
-msgstr "[----- start pickle -----]"
+msgstr "[----- starta pickle -----]"
 
 #: src/mailman/commands/cli_qfile.py:70
 #, python-brace-format
@@ -1709,7 +1709,7 @@ msgid ""
 "    Discard all shunted messages instead of moving them back to their original\n"
 "    queue."
 msgstr ""
-"    Kassera alla shuntade meddelanden istället för att flytta tillbaka dem "
+"    Förkasta alla shuntade meddelanden istället för att flytta tillbaka dem "
 "till deras\n"
 "    ursprungliga kö."
 
@@ -1728,7 +1728,7 @@ msgstr "Visa Mailmans version."
 
 #: src/mailman/commands/cli_withlist.py:74
 msgid "ipython is not available, set use_ipython to no"
-msgstr "ipython inte är tillgängligt, sätt use_ipython till no"
+msgstr "ipython inte är tillgängligt, ställ in use_ipython till no"
 
 #: src/mailman/commands/cli_withlist.py:84
 msgid "readline not available"
@@ -1983,7 +1983,7 @@ msgstr "Bekräftad"
 
 #: src/mailman/commands/eml_confirm.py:112
 msgid "Invalid Approved: password"
-msgstr "Ogiltigt Godkänt: lösenord"
+msgstr "Ogiltig Godkänt: lösenord"
 
 #: src/mailman/commands/eml_confirm.py:115
 #, python-brace-format
@@ -2119,7 +2119,7 @@ msgstr ""
 
 #: src/mailman/commands/eml_membership.py:253
 msgid "An alias for 'leave'."
-msgstr "Ett alias för \"lämna\"."
+msgstr "Ett alias för \"leave\"."
 
 #: src/mailman/commands/eml_who.py:42
 msgid ""
@@ -2242,7 +2242,7 @@ msgstr ""
 "Det bifogade meddelandet matchade ${mlist.display_name} sändlistans "
 "innehållsfiltreringsregler\n"
 "filtreringsregler och hindrades från att vidarebefordras till listans\n"
-"medlemskap.  Du får den enda återstående kopian av det kasserade\n"
+"medlemskap.  Du får den enda återstående kopian av det förkastade\n"
 "meddelandet.\n"
 "\n"
 
@@ -2315,7 +2315,7 @@ msgstr "Autosvar för ditt meddelande till sändlistan \"${display_name}\""
 
 #: src/mailman/handlers/replybot.py:114
 msgid "The Mailman Replybot"
-msgstr "Brevbäraren Svarsbot"
+msgstr "Mailmans Replybot"
 
 #: src/mailman/handlers/rfc_2369.py:131
 msgid "Add the RFC 2369 List-* headers."
@@ -2381,15 +2381,15 @@ msgstr "[Inga skäl anges]"
 
 #: src/mailman/pipelines/builtin.py:30
 msgid "The built-in owner pipeline."
-msgstr "Den inbyggda pipelinen för ägare."
+msgstr "Den inbyggda rörledningen för ägare."
 
 #: src/mailman/pipelines/builtin.py:44
 msgid "The built-in posting pipeline."
-msgstr "Den inbyggda pipelinen för utstationering."
+msgstr "Den inbyggda rörledningen för postningar."
 
 #: src/mailman/pipelines/virgin.py:32
 msgid "The virgin queue pipeline."
-msgstr "Den jungfruliga kö pipeline."
+msgstr "Den jungfruliga rörledningen för köer."
 
 #: src/mailman/rest/sub_moderation.py:121
 msgid "Subscription request"
@@ -2437,7 +2437,7 @@ msgstr "Hitta DMARC-policy för From: domän."
 
 #: src/mailman/rules/dmarc.py:335
 msgid "DMARC moderation"
-msgstr "DMARC moderering"
+msgstr "DMARC-moderering"
 
 #: src/mailman/rules/dmarc.py:341
 #, python-brace-format
@@ -2645,7 +2645,7 @@ msgstr "Dagens ämnen:\n"
 
 #: src/mailman/runners/digest.py:153
 msgid "Digest Header"
-msgstr "Digest rubrik"
+msgstr "Sidhuvud för sammanställning"
 
 #: src/mailman/runners/digest.py:173
 #, python-brace-format
@@ -2654,7 +2654,7 @@ msgstr "Dagens ämnen (${count} meddelanden)"
 
 #: src/mailman/runners/digest.py:195 src/mailman/runners/digest.py:270
 msgid "Digest Footer"
-msgstr "Sammanfattning sidfot"
+msgstr "Sidfot för sammanställning"
 
 #: src/mailman/runners/digest.py:202 src/mailman/runners/digest.py:277
 msgid "End of "
@@ -2819,7 +2819,7 @@ msgid "list:admin:notice:unsubscribe.txt"
 msgstr "$member har tagits bort från $display_name."
 
 msgid "list:member:digest:header.txt"
-msgstr "lista:medlem:sammanfattning:rubrik.txt"
+msgstr ""
 
 msgid "list:member:digest:masthead.txt"
 msgstr ""
@@ -2844,7 +2844,7 @@ msgstr ""
 "${short_listname}-leave@${domain}"
 
 msgid "list:member:regular:header.txt"
-msgstr "lista:medlem:vanlig:header.txt"
+msgstr ""
 
 msgid "list:user:action:invite.txt"
 msgstr ""
@@ -2926,7 +2926,7 @@ msgstr ""
 "    $owner_email"
 
 msgid "list:user:notice:goodbye.txt"
-msgstr "lista:användare:meddelande:adjö.txt"
+msgstr ""
 
 msgid "list:user:notice:hold.txt"
 msgstr ""
