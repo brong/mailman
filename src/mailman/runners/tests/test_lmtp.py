@@ -35,7 +35,19 @@ from mailman.testing.layers import LMTPLayer
 from zope.component import getUtility
 
 
-class TestLMTP(unittest.TestCase):
+class TestLMTPBase(unittest.TestCase):
+    def _must_lmtp_sendmail(self, *args, **kwargs):
+        mark = LogFileMark('mailman.smtp')
+        try:
+            return self._lmtp.sendmail(*args, *kwargs)
+        except Exception as e:
+            log = f"\n{mark.read()}".replace("\n", "\n  LMTP runner log: ")
+            raise Exception(
+                f"LMTP runner may have failed: {log}",
+            ) from e
+
+
+class TestLMTP(TestLMTPBase):
     """Test various aspects of the LMTP server."""
 
     layer = LMTPLayer
@@ -49,7 +61,7 @@ class TestLMTP(unittest.TestCase):
 
     def test_unixfrom_in_message(self):
         # Ensure a unixfrom is added to the message object.
-        self._lmtp.sendmail('anne@example.com', ['test@example.com'], """\
+        self._must_lmtp_sendmail('anne@example.com', ['test@example.com'], """\
 From: anne@example.com
 To: test@example.com
 Subject: Test unixfrom
@@ -61,7 +73,7 @@ Message-ID: <msg@example.com>
 
     def test_message_id_supplied_if_missing(self):
         # A Message-ID header is generated if the message doesn't have one.
-        self._lmtp.sendmail('anne@example.com', ['test@example.com'], """\
+        self._must_lmtp_sendmail('anne@example.com', ['test@example.com'], """\
 From: anne@example.com
 To: test@example.com
 Subject: This has no Message-ID header
@@ -72,7 +84,7 @@ Subject: This has no Message-ID header
 
     def test_bogus_message_id_is_fixed(self):
         # fix bogus Message-ID with []
-        self._lmtp.sendmail('anne@example.com', ['test@example.com'], """\
+        self._must_lmtp_sendmail('anne@example.com', ['test@example.com'], """\
 From: anne@example.com
 To: test@example.com
 Subject: Bogus [] Message-ID
@@ -84,7 +96,7 @@ Message-ID: [bogus@example.com]
 
     def test_other_bogus_message_id_is_fixed(self):
         # fix bogus Message-ID with <[]>
-        self._lmtp.sendmail('anne@example.com', ['test@example.com'], """\
+        self._must_lmtp_sendmail('anne@example.com', ['test@example.com'], """\
 From: anne@example.com
 To: test@example.com
 Subject: Bogus <[]> Message-ID
@@ -95,7 +107,7 @@ Message-ID: <[bogus@example.com]>
         self.assertEqual('<bogus@example.com>', items[0].msg.get('message-id'))
 
     def test_message_id_hash_is_added(self):
-        self._lmtp.sendmail('anne@example.com', ['test@example.com'], """\
+        self._must_lmtp_sendmail('anne@example.com', ['test@example.com'], """\
 From: anne@example.com
 To: test@example.com
 Message-ID: <ant>
@@ -107,7 +119,7 @@ Subject: This has a Message-ID but no Message-ID-Hash
                          'MS6QLWERIJLGCRF44J7USBFDELMNT2BW')
 
     def test_original_message_id_hash_is_overwritten(self):
-        self._lmtp.sendmail('anne@example.com', ['test@example.com'], """\
+        self._must_lmtp_sendmail('anne@example.com', ['test@example.com'], """\
 From: anne@example.com
 To: test@example.com
 Message-ID: <ant>
@@ -123,7 +135,7 @@ Subject: This has a Message-ID but no Message-ID-Hash
 
     def test_received_time(self):
         # The LMTP runner adds a `received_time` key to the metadata.
-        self._lmtp.sendmail('anne@example.com', ['test@example.com'], """\
+        self._must_lmtp_sendmail('anne@example.com', ['test@example.com'], """\
 From: anne@example.com
 To: test@example.com
 Subject: This has no Message-ID header
@@ -213,7 +225,8 @@ Message-ID: <aardvark>
         manager = getUtility(IDomainManager)
         with transaction():
             manager.get('example.com').alias_domain = 'x.example.com'
-        self._lmtp.sendmail('anne@example.com', ['test@x.example.com'], """\
+        self._must_lmtp_sendmail('anne@example.com', ['test@x.example.com'],
+                                 """\
 From: anne.person@example.com
 To: test@example.com
 Subject: An interesting message
@@ -261,7 +274,8 @@ Message-ID: <aardvark>
         # the mailing list, not as a command.
         with transaction():
             create_list('test-join@example.com')
-        self._lmtp.sendmail('anne@example.com', ['test-join@example.com'], """\
+        self._must_lmtp_sendmail('anne@example.com', ['test-join@example.com'],
+                                 """\
 From: anne@example.com
 To: test-join@example.com
 Message-ID: <ant>
@@ -276,8 +290,8 @@ Subject: This should not be recognized as a join command
         # Like above, but we can still send a command to the mailing list.
         with transaction():
             create_list('test-join@example.com')
-        self._lmtp.sendmail('anne@example.com',
-                            ['test-join-join@example.com'], """\
+        self._must_lmtp_sendmail('anne@example.com',
+                                 ['test-join-join@example.com'], """\
 From: anne@example.com
 To: test-join-join@example.com
 Message-ID: <ant>
@@ -292,8 +306,8 @@ Subject: This will be recognized as a join command.
         # Test that we can post to a list whose name is a subaddress.
         with transaction():
             create_list('join@example.com')
-        self._lmtp.sendmail('anne@example.com',
-                            ['join@example.com'], """\
+        self._must_lmtp_sendmail('anne@example.com',
+                                 ['join@example.com'], """\
 From: anne@example.com
 To: join@example.com
 Message-ID: <ant>
@@ -308,8 +322,8 @@ Subject: This will be recognized as a post to the join list.
         # Test that we can post to a list whose name is -subaddress.
         with transaction():
             create_list('-join@example.com')
-        self._lmtp.sendmail('anne@example.com',
-                            ['-join@example.com'], """\
+        self._must_lmtp_sendmail('anne@example.com',
+                                 ['-join@example.com'], """\
 From: anne@example.com
 To: -join@example.com
 Message-ID: <ant>
@@ -327,7 +341,8 @@ Subject: This will be recognized as a post to the -join list.
         with transaction():
             self._mlist.list_name = 'renamed'
         self.assertEqual(self._mlist.posting_address, 'renamed@example.com')
-        self._lmtp.sendmail('anne@example.com', ['renamed@example.com'], """\
+        self._must_lmtp_sendmail('anne@example.com', ['renamed@example.com'],
+                                 """\
 From: anne@example.com
 To: renamed@example.com
 Message-ID: <ant>
@@ -339,7 +354,7 @@ Subject: This should be accepted.
         self.assertEqual(items[0].msgdata['listid'], 'test.example.com')
 
 
-class TestBugs(unittest.TestCase):
+class TestBugs(TestLMTPBase):
     """Test some LMTP related bugs."""
 
     layer = LMTPLayer
@@ -352,7 +367,8 @@ class TestBugs(unittest.TestCase):
         # Upper cased list names can't be sent to via LMTP.
         with transaction():
             create_list('my-LIST@example.com')
-        self._lmtp.sendmail('anne@example.com', ['my-list@example.com'], """\
+        self._must_lmtp_sendmail('anne@example.com', ['my-list@example.com'],
+                                 """\
 From: anne@example.com
 To: my-list@example.com
 Subject: My subject
@@ -367,7 +383,7 @@ Message-ID: <alpha>
         # Non-UTF-8 data sent to the LMTP server crashes it.
         with transaction():
             create_list('ant@example.com')
-        self._lmtp.sendmail('anne@example.com', ['ant@example.com'], b"""\
+        self._must_lmtp_sendmail('anne@example.com', ['ant@example.com'], b"""\
 From: anne@example.com
 To: ant@example.com
 Subject: My subject
@@ -383,7 +399,7 @@ Message-ID: <alpha>
         with transaction():
             create_list('longer_than_15_bytes@example.com')
         recip = 'longer_than_15_bytes-confirm+{}@example.com'.format(40*'x')
-        self._lmtp.sendmail('anne@example.com', [recip], """\
+        self._must_lmtp_sendmail('anne@example.com', [recip], """\
 From: anne@example.com
 To: {}
 Subject: confirm
