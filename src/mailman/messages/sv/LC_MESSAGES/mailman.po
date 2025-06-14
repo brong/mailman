@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-15 19:33-0800\n"
-"PO-Revision-Date: 2025-06-08 08:03+0000\n"
+"PO-Revision-Date: 2025-06-14 08:02+0000\n"
 "Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/gnu-mailman/"
 "mailman/sv/>\n"
@@ -110,7 +110,7 @@ msgstr "${mlist.display_name} prenumerationsmeddelande"
 #: src/mailman/app/notifications.py:173
 #, python-brace-format
 msgid "${member}'s subscription disabled on ${mlist.display_name}"
-msgstr "${member}:s prenumeration avaktiverad på ${mlist.display_name}"
+msgstr "${member}:s prenumeration inaktiverad på ${mlist.display_name}"
 
 #: src/mailman/app/notifications.py:201
 #, python-brace-format
@@ -1487,11 +1487,10 @@ msgstr ""
 "    medlemmar vars leverans är inaktiverad av någon anledning, \"byuser\" "
 "betyder\n"
 "    att medlemmen inaktiverade sin egen leverans, \"bybounces\" betyder att\n"
-"    leveransen avaktiverades av den automatiska bounceprocessorn,\n"
-"    \"byadmin\" betyder att leveransen avaktiverades av listans\n"
-"    administratör eller moderator, och \"unknown\" betyder att leveransen "
-"inaktiverades\n"
-"    av okända (äldre) skäl."
+"    leveransen inaktiverades av den automatiska bounceprocessorn,\n"
+"    \"byadmin\" betyder att leveransen inaktiverades av listans\n"
+"    administratör eller moderator, och \"unknown\" betyder att leveransen\n"
+"    inaktiverades av okända (äldre) skäl."
 
 #: src/mailman/commands/cli_notify.py:40
 msgid "Notify list owners/moderators of pending requests."
