@@ -1,5 +1,9 @@
-# This is core test runner
-.only-default: &only-default
+stages:
+  - code
+  - docs
+  - test
+
+.only-default:
   only:
     - master
     - merge_requests
@@ -20,83 +24,64 @@ variables:
   GIT_CEILING_DIRECTORIES: "/builds"
   HOME: "/builds"
 
-
-qa:
-  <<: *only-default
+code-qa:
+  stage: code
+  needs: []
+  extends: .only-default
   script:
   - tox -e qa
 
-docs:
-  <<: *only-default
-  script:
-  - tox -e docs
-
-sqlite-39:
-  <<: *only-default
-  script:
-    - tox -e py39-nocov
-
-sqlite-310:
-  <<: *only-default
-  script:
-    - tox -e py310-nocov
-
-sqlite-311:
-  <<: *only-default
-  script:
-    - tox -e py311-nocov
-
-sqlite-312:
-  <<: *only-default
-  script:
-    - tox -e py312-nocov
-
-pgsql-310:
-  <<: *only-default
-  services:
-  - postgres:latest
-  script:
-  - MAILMAN_EXTRA_TESTING_CFG=/home/runner/configs/postgres.cfg tox -e py310-nocov-pg
-
-pgsql-311:
-  <<: *only-default
-  services:
-  - postgres:latest
-  script:
-  - MAILMAN_EXTRA_TESTING_CFG=/home/runner/configs/postgres.cfg tox -e py311-nocov-pg
-
-pgsql-39:
-  <<: *only-default
-  services:
-  - postgres:latest
-  script:
-  - MAILMAN_EXTRA_TESTING_CFG=/home/runner/configs/postgres.cfg tox -e py39-nocov-pg
-
-mysql-311:
-  <<: *only-default
-  services:
-  - mysql:5.6
-  script:
-  - MAILMAN_EXTRA_TESTING_CFG=/home/runner/configs/mysql.cfg tox -e py311-nocov-mysql
-
-mysql-310:
-  <<: *only-default
-  services:
-  - mysql:5.6
-  script:
-  - MAILMAN_EXTRA_TESTING_CFG=/home/runner/configs/mysql.cfg tox -e py310-nocov-mysql
-
-mysql-39:
-  <<: *only-default
-  services:
-  - mysql:5.6
-  script:
-  - MAILMAN_EXTRA_TESTING_CFG=/home/runner/configs/mysql.cfg tox -e py39-nocov-mysql
-
-diffcov:
+code-diffcov:
+  stage: code
+  needs: []
   script:
   - git config --global --add safe.directory "/builds/${CI_PROJECT_NAMESPACE}/mailman"
   - git config safe.directory
   - tox -e py311-diffcov
   only:
   - merge_requests
+
+docs:
+  stage: docs
+  needs: []
+  extends: .only-default
+  script:
+  - tox -e docs
+
+test-sqlite:
+  stage: test
+  needs: []
+  extends: .only-default
+  parallel:
+    matrix:
+      - PYTHON_VER: ["39", "310", "311", "312"]
+  script:
+    - tox -e "py$PYTHON_VER-nocov"
+
+test-postgres:
+  stage: test
+  needs: []
+  extends: .only-default
+  variables:
+    MAILMAN_EXTRA_TESTING_CFG: "/home/runner/configs/postgres.cfg"
+  services:
+    - postgres:latest
+  parallel:
+    matrix:
+      - PYTHON_VER: ["39", "310", "311", "312"]
+  script:
+    - tox -e "py$PYTHON_VER-nocov-pg"
+
+test-mysql:
+  stage: test
+  needs: []
+  extends: .only-default
+  variables:
+    MAILMAN_EXTRA_TESTING_CFG: "/home/runner/configs/mysql.cfg"
+  services:
+    - mysql:5.6
+  parallel:
+    matrix:
+      - PYTHON_VER: ["39", "310", "311", "312"]
+  script:
+    - tox -e "py$PYTHON_VER-nocov-mysql"
