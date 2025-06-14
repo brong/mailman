@@ -48,84 +48,40 @@ docs:
   script:
   - tox -e docs
 
-test-sqlite-39:
+test-sqlite:
   stage: test
   needs: []
   extends: .only-default
+  parallel:
+    matrix:
+      - PYTHON_VER: ["39", "310", "311", "312"]
   script:
-    - tox -e py39-nocov
+    - tox -e "py$PYTHON_VER-nocov"
 
-test-sqlite-310:
+test-postgres:
   stage: test
   needs: []
   extends: .only-default
-  script:
-    - tox -e py310-nocov
-
-test-sqlite-311:
-  stage: test
-  needs: []
-  extends: .only-default
-  script:
-    - tox -e py311-nocov
-
-test-sqlite-312:
-  stage: test
-  needs: []
-  extends: .only-default
-  script:
-    - tox -e py312-nocov
-
-test-pgsql-39:
-  stage: test
-  needs: []
-  extends: .only-default
+  variables:
+    MAILMAN_EXTRA_TESTING_CFG: "/home/runner/configs/postgres.cfg"
   services:
-  - postgres:latest
+    - postgres:latest
+  parallel:
+    matrix:
+      - PYTHON_VER: ["39", "310", "311", "312"]
   script:
-  - MAILMAN_EXTRA_TESTING_CFG=/home/runner/configs/postgres.cfg tox -e py39-nocov-pg
+    - tox -e "py$PYTHON_VER-nocov-pg"
 
-test-pgsql-310:
+test-mysql:
   stage: test
   needs: []
   extends: .only-default
+  variables:
+    MAILMAN_EXTRA_TESTING_CFG: "/home/runner/configs/mysql.cfg"
   services:
-  - postgres:latest
+    - mysql:5.6
+  parallel:
+    matrix:
+      - PYTHON_VER: ["39", "310", "311", "312"]
   script:
-  - MAILMAN_EXTRA_TESTING_CFG=/home/runner/configs/postgres.cfg tox -e py310-nocov-pg
-
-test-pgsql-311:
-  stage: test
-  needs: []
-  extends: .only-default
-  services:
-  - postgres:latest
-  script:
-  - MAILMAN_EXTRA_TESTING_CFG=/home/runner/configs/postgres.cfg tox -e py311-nocov-pg
-
-test-mysql-39:
-  stage: test
-  needs: []
-  extends: .only-default
-  services:
-  - mysql:5.6
-  script:
-  - MAILMAN_EXTRA_TESTING_CFG=/home/runner/configs/mysql.cfg tox -e py39-nocov-mysql
-
-test-mysql-310:
-  stage: test
-  needs: []
-  extends: .only-default
-  services:
-  - mysql:5.6
-  script:
-  - MAILMAN_EXTRA_TESTING_CFG=/home/runner/configs/mysql.cfg tox -e py310-nocov-mysql
-
-test-mysql-311:
-  stage: test
-  needs: []
-  extends: .only-default
-  services:
-  - mysql:5.6
-  script:
-  - MAILMAN_EXTRA_TESTING_CFG=/home/runner/configs/mysql.cfg tox -e py311-nocov-mysql
+    - tox -e "py$PYTHON_VER-nocov-mysql"
