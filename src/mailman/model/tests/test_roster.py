@@ -217,6 +217,16 @@ class TestMembershipsRoster(unittest.TestCase):
         self.assertEqual(len(users), 1)
         self.assertEqual(users[0], self._anne)
 
+    def test_get_member_mixed_case(self):
+        # Ensure we can get a mixed case member.
+        evan = getUtility(IUserManager).create_address('Evan@example.com')
+        self._ant.subscribe(evan)
+        member = self._ant.members.get_member('Evan@example.com')
+        self.assertEqual(member.address, evan)
+        memberships = self._ant.members.get_memberships('Evan@example.com')
+        self.assertEqual(len(memberships), 1)
+        self.assertEqual(memberships[0].address, evan)
+
 
 class TestUserRoster(unittest.TestCase):
     """Test aspects of rosters when users are subscribed."""

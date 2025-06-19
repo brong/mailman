@@ -104,14 +104,14 @@ class AbstractRoster:
         members_a = store.query(Member).filter(
             Member.list_id == self._mlist.list_id,
             Member.role == self.role,
-            Address.email == email,
+            Address.email == email.lower(),
             Member.address_id == Address.id)
         # Here's a query that finds all members subscribed with their
         # preferred address.
         members_u = store.query(Member).filter(
             Member.list_id == self._mlist.list_id,
             Member.role == self.role,
-            Address.email == email,
+            Address.email == email.lower(),
             Member.user_id == User.id,
             User._preferred_address_id == Address.id)
         return members_a.union(members_u).all()
