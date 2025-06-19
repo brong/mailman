@@ -35,6 +35,7 @@ Bugs fixed
   attributes.  (Closes #1205)
 * The ``*_these_nonmembers`` lists perform case-insensitive matching.
   (Closes #1207)
+* A potential race when logging an unsubscribe is avoided.  (Closes #1222)
 
 New Features
 ------------

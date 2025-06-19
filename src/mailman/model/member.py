@@ -229,10 +229,10 @@ class Member(Model):
         """See `IMember`."""
         # Yes, this must get triggered before self is deleted.
         notify(UnsubscriptionEvent(self.mailing_list, self))
-        store.delete(self.preferences)
-        store.delete(self)
         slog.info(f'{self.mailing_list.fqdn_listname}: '
                   f'{self.role.name} unsubscribed {self.address.email}')
+        store.delete(self.preferences)
+        store.delete(self)
 
 
 @public
