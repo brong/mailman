@@ -36,6 +36,8 @@ Bugs fixed
 * The ``*_these_nonmembers`` lists perform case-insensitive matching.
   (Closes #1207)
 * A potential race when logging an unsubscribe is avoided.  (Closes #1222)
+* A roster's get_member() and get_memberships() methods are now case
+  insensitive.  (Closes #1223)
 
 New Features
 ------------
