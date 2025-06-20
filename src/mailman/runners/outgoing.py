@@ -110,7 +110,7 @@ Error message: {}
                 self._func, msg.get('message-id', 'n/a')))
             self._func(mlist, msg, msgdata)
             self._logged = False
-        except socket.error:
+        except socket.error as error:
             # There was a problem connecting to the SMTP server.  Log this
             # once, but crank up our sleep time so we don't fill the error
             # log.
@@ -118,8 +118,8 @@ Error message: {}
             if port == 0:
                 port = 'smtp'            # Log this just once.
             if not self._logged:
-                log.error('Cannot connect to SMTP server %s on port %s',
-                          config.mta.smtp_host, port)
+                log.error('Cannot connect to SMTP server %s on port %s: %s',
+                          config.mta.smtp_host, port, str(error))
                 self._logged = True
             return True
         except SomeRecipientsFailed as error:

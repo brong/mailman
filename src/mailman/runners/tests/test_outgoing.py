@@ -210,7 +210,7 @@ Message-Id: <first>
 
 
 def raise_socket_error(mlist, msg, msgdata):
-    raise socket.error
+    raise socket.error('text')
 
 
 class TestSocketError(unittest.TestCase):
@@ -254,12 +254,12 @@ Message-Id: <first>
         # The log line will contain a variable timestamp, the PID, and a
         # trailing newline.  Ignore these.
         self.assertEqual(
-            line[-53:-1],
-            'Cannot connect to SMTP server localhost on port smtp')
+            line[-59:-1],
+            'Cannot connect to SMTP server localhost on port smtp: text')
 
     def test_error_with_numeric_port(self):
         # Test the code path where a socket.error is raised in the delivery
-        # function, and the MTA port is set to zero.  The only real effect of
+        # function, and the MTA port is set non-zero.  The only real effect of
         # that is a log message.  Start by opening the error log and reading
         # the current file position.
         mark = LogFileMark('mailman.error')
@@ -270,8 +270,8 @@ Message-Id: <first>
         # The log line will contain a variable timestamp, the PID, and a
         # trailing newline.  Ignore these.
         self.assertEqual(
-            line[-53:-1],
-            'Cannot connect to SMTP server localhost on port 2112')
+            line[-59:-1],
+            'Cannot connect to SMTP server localhost on port 2112: text')
 
 
 temporary_failures = []

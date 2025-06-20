@@ -38,6 +38,8 @@ Bugs fixed
 * A potential race when logging an unsubscribe is avoided.  (Closes #1222)
 * A roster's get_member() and get_memberships() methods are now case
   insensitive.  (Closes #1223)
+* Logging from a socket.error in outgoing runner now includes the error
+  message.  (Closes #514)
 
 New Features
 ------------
