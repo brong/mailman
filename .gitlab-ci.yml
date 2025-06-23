@@ -13,40 +13,33 @@ stages:
 image: ghcr.io/maxking/mailman-ci-runner:latest
 
 variables:
-  POSTGRES_DB: "mailman_test"
-  POSTGRES_USER: "runner"
-  POSTGRES_PASSWORD: "runner"
-  MYSQL_ROOT_PASSWORD: "runner"
-  MYSQL_USER: "runner"
-  MYSQL_USER_PASSWORD: "runner"
-  MYSQL_DATABASE: "test_mailman"
   LC_ALL: "C.UTF-8"
-  GIT_CEILING_DIRECTORIES: "/builds"
   HOME: "/builds"
+  GIT_CEILING_DIRECTORIES: "/builds"
 
 code-qa:
   stage: code
   needs: []
   extends: .only-default
   script:
-  - tox -e qa
+    - tox -e qa
 
 code-diffcov:
   stage: code
   needs: []
   script:
-  - git config --global --add safe.directory "/builds/${CI_PROJECT_NAMESPACE}/mailman"
-  - git config safe.directory
-  - tox -e py311-diffcov
+    - git config --global --add safe.directory "/builds/${CI_PROJECT_NAMESPACE}/mailman"
+    - git config safe.directory
+    - tox -e py311-diffcov
   only:
-  - merge_requests
+    - merge_requests
 
 docs:
   stage: docs
   needs: []
   extends: .only-default
   script:
-  - tox -e docs
+    - tox -e docs
 
 test-sqlite:
   stage: test
@@ -64,6 +57,9 @@ test-postgres:
   extends: .only-default
   variables:
     MAILMAN_EXTRA_TESTING_CFG: "/home/runner/configs/postgres.cfg"
+    POSTGRES_DB: "mailman_test"
+    POSTGRES_USER: "runner"
+    POSTGRES_PASSWORD: "runner"
   services:
     - postgres:latest
   parallel:
@@ -78,6 +74,10 @@ test-mysql:
   extends: .only-default
   variables:
     MAILMAN_EXTRA_TESTING_CFG: "/home/runner/configs/mysql.cfg"
+    MYSQL_DATABASE: "test_mailman"
+    MYSQL_ROOT_PASSWORD: "runner"
+    MYSQL_USER: "runner"
+    MYSQL_USER_PASSWORD: "runner"
   services:
     - mysql:5.6
   parallel:
