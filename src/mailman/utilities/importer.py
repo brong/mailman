@@ -616,10 +616,19 @@ def import_config_pck(mlist, config_dict):
             list_prop = getattr(mlist, prop_name)
             for addr in config_dict.get(prop_name, []):
                 if addr.startswith('^'):
-                    list_prop.append(addr)
+                    pass
                 elif addr.startswith('@') and action_name == 'defer':
                     # This needs to be a fqdn-listname.
-                    list_prop.append(f'{addr}@{mlist.mail_host}')
+                    addr = f'{addr}@{mlist.mail_host}'
+                else:
+                    continue
+                if addr in list_prop:
+                    log.warning(
+                        'Skipping duplicate entry in %s: %r',
+                        prop_name, addr
+                    )
+                    continue
+                list_prop.append(addr)
     finally:
         mlist.send_welcome_message = send_welcome_message
         mlist.admin_notify_mchanges = admin_notify_mchanges
