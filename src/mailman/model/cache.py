@@ -27,7 +27,7 @@ from mailman.database.model import Model
 from mailman.database.transaction import dbconnection
 from mailman.database.types import SAUnicode
 from mailman.interfaces.cache import ICacheManager
-from mailman.utilities.datetime import now
+from mailman.utilities.datetime import now, ZERO
 from mailman.utilities.filesystem import safe_remove
 from public import public
 from sqlalchemy import Boolean, Column, DateTime, Integer
@@ -104,6 +104,8 @@ class CacheManager:
         """See `ICacheManager`."""
         if lifetime is None:
             lifetime = as_timedelta(config.mailman.cache_life)
+        if lifetime == ZERO:
+            return None
         is_bytes = isinstance(contents, bytes)
         file_id = self._key_to_file_id(key)
         # Is there already an unexpired entry under this id in the database?

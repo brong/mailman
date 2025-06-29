@@ -54,6 +54,8 @@ New Features
 * A new ``admin_notify_held_with_attachment`` parameter allows disabling
   sending held messages as attachments when notifying moderators. (Closes #670)
 * A list's ``max_days_to_hold`` setting is now implemented.  (Closes #1215)
+* Setting ``cache_life`` in the ``mailman`` section of mailman.cfg to ``0d``
+  will disable template caching.  (closes #1230)
 
 Other
 -----
