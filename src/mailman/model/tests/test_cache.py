@@ -156,7 +156,7 @@ class TestCache(unittest.TestCase):
         factory.fast_forward(days=1)
         self._cachemgr.clear()
         self.assertIsNone(self._cachemgr.get('abc'))
-        self.assertIsNone(self._cachemgr.get('xyz'))
+        self.assertIsNone(self._cachemgr.get('def'))
 
     def test_clear_missing(self):
         # Clearing the cache works even if file is missing.
@@ -164,4 +164,11 @@ class TestCache(unittest.TestCase):
         self.assertEqual(self._cachemgr.get('abc'), 'xyz')
         os.remove(self._cachemgr._id_to_path(file_id)[0])
         self._cachemgr.clear()
+        self.assertIsNone(self._cachemgr.get('abc'))
+
+    @configuration('mailman', cache_life='0d')
+    def test_cache_life_zero_disables_cache(self):
+        # Setting cache_life to zero disables cache.
+        file_id = self._cachemgr.add('abc', 'xyz')
+        self.assertIsNone(file_id)
         self.assertIsNone(self._cachemgr.get('abc'))
