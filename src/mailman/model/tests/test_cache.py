@@ -172,3 +172,14 @@ class TestCache(unittest.TestCase):
         file_id = self._cachemgr.add('abc', 'xyz')
         self.assertIsNone(file_id)
         self.assertIsNone(self._cachemgr.get('abc'))
+
+    @configuration('mailman', cache_life='1d')
+    def test_dont_get_expired(self):
+        # We dont return expired entries.
+        self._cachemgr.add('abc', 'xyz', lifetime=timedelta(hours=3))
+        self._cachemgr.add('def', 'uvw', lifetime=timedelta(days=3))
+        self.assertEqual(self._cachemgr.get('abc'), 'xyz')
+        self.assertEqual(self._cachemgr.get('def'), 'uvw')
+        factory.fast_forward(days=1)
+        self.assertIsNone(self._cachemgr.get('abc'))
+        self.assertEqual(self._cachemgr.get('def'), 'uvw')

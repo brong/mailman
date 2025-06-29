@@ -126,7 +126,7 @@ class CacheManager:
         """See `ICacheManager`."""
         entry = store.query(CacheEntry).filter(
             CacheEntry.key == key).one_or_none()
-        if entry is None:
+        if entry is None or entry.expires_on <= now():
             return None
         file_path, dir_path = self._id_to_path(entry.file_id)
         with ExitStack() as resources:
