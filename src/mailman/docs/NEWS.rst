@@ -42,6 +42,7 @@ Bugs fixed
   message.  (Closes #514)
 * The ``mailman import21`` command does not add duplicate entry to
   the ``*_these_nonmembers`` lists. (Closes #1213)
+* Cache manager no longer returns expired cache entries.  (Closes #1231)
 
 New Features
 ------------
@@ -55,7 +56,7 @@ New Features
   sending held messages as attachments when notifying moderators. (Closes #670)
 * A list's ``max_days_to_hold`` setting is now implemented.  (Closes #1215)
 * Setting ``cache_life`` in the ``mailman`` section of mailman.cfg to ``0d``
-  will disable template caching.  (closes #1230)
+  will disable template caching.  (Closes #1230)
 
 Other
 -----
