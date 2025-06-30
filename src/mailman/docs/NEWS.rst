@@ -57,6 +57,7 @@ New Features
 * A list's ``max_days_to_hold`` setting is now implemented.  (Closes #1215)
 * Setting ``cache_life`` in the ``mailman`` section of mailman.cfg to ``0d``
   will disable template caching.  (Closes #1230)
+* Template manager no longer caches the content of file: URIs.  (Closes #1233)
 
 Other
 -----

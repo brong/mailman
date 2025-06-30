@@ -122,8 +122,8 @@ class TemplateManager:
                     actual_uri, auth.get('auth', '<no authorization>')))
                 return ''
             # We don't need to cache mailman: contents since those are already
-            # on the file system.
-            if urlparse(actual_uri).scheme != 'mailman':
+            # on the file system.  Likewise file:.
+            if urlparse(actual_uri).scheme not in ('mailman', 'file'):
                 cache_mgr.add(actual_uri, contents)
         return contents
 
