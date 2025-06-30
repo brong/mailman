@@ -31,7 +31,7 @@ import logging
 from email.header import decode_header, Header
 from email.mime.message import MIMEMessage
 from email.mime.text import MIMEText
-from email.utils import formataddr, getaddresses, make_msgid
+from email.utils import formataddr, make_msgid
 from mailman.core.i18n import _
 from mailman.interfaces.handler import IHandler
 from mailman.interfaces.mailinglist import DMARCMitigateAction, ReplyToMunging
@@ -83,11 +83,12 @@ def munged_headers(mlist, msg, msgdata):
     # and sometimes in Cc:, and even so, this goal won't be achieved in
     # all cases with all MUAs.  In cases of conflict, the above ordering of
     # goals is priority order.
-    #
-    # Be as robust as possible here.
-    all_froms = getaddresses(msg.get_all('from', []))
     # Strip the nulls and bad emails.
-    froms = [email for email in all_froms if '@' in email[1]]
+    froms = [
+        email
+        for email in msg.get_addresses('from', [])
+        if '@' in email[1]
+    ]
     if len(froms) == 1:
         realname, email = original_from = froms[0]
     else:
@@ -138,7 +139,7 @@ def munged_headers(mlist, msg, msgdata):
         # Add original from to Cc:
         add_to = 'Cc'
         other = ('Reply-To', msg.get('reply-to'))
-    original = getaddresses(msg.get_all(add_to, []))
+    original = msg.get_addresses(add_to, [])
     if original_from[1] not in [x[1] for x in original]:
         original.append(original_from)
     value.append((add_to, COMMASPACE.join(formataddr(x) for x in original)))

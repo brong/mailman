@@ -42,6 +42,8 @@ Bugs fixed
   message.  (Closes #514)
 * The ``mailman import21`` command does not add duplicate entry to
   the ``*_these_nonmembers`` lists. (Closes #1213)
+* Unfold address containing headers before parsing in implicit_dest.
+  (Closes #1229)
 * Cache manager no longer returns expired cache entries.  (Closes #1231)
 
 New Features

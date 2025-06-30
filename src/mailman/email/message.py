@@ -23,12 +23,11 @@ safe pickle deserialization, even if the email package adds additional Message
 attributes.
 """
 
-import re
 import email
 import email.utils
 import email.message
 
-from email.header import decode_header, Header, make_header
+from email.header import Header
 from email.mime.multipart import MIMEMultipart
 from mailman.config import config
 from mailman.interfaces.address import IEmailValidator
@@ -108,22 +107,15 @@ class Message(email.message.Message):
         envelope_sender = self.get_unixfrom()
         senders = []
         for header in config.mailman.sender_headers.split():
-            header = header.lower()
-            if header == 'from_':
+            if header.lower() == 'from_':
                 senders.append(envelope_sender.lower()
                                if envelope_sender is not None
                                else '')
             else:
-                for field_value in self.get_all(header, []):
-                    # Convert the header to str in case it's a Header instance.
-                    header_value = re.sub(
-                        '[\r\n]',
-                        '',
-                        str(make_header(decode_header(field_value)))
-                        )
-                    for name, address in email.utils.getaddresses(
-                            [header_value]):
-                        senders.append(address.lower())
+                senders += [
+                    address.lower()
+                    for name, address in self.get_addresses(header, [])
+                ]
         # Filter out invalid addresses, None and the empty string, and convert
         # to unicode.
         clean_senders = []
@@ -137,6 +129,23 @@ class Message(email.message.Message):
                 continue
             clean_senders.append(sender)
         return clean_senders
+
+    def get_addresses(self, name, failobj=None, *, strict=True):
+        values = self.get_all(name)
+        if values is None:
+            return failobj
+        return email.utils.getaddresses(
+            [
+                # The pre 3.3 email package does not do any header unfolding.
+                # https://github.com/python/cpython/issues/55259
+                # https://gitlab.com/mailman/mailman/-/issues/725
+                # https://gitlab.com/mailman/mailman/-/issues/903
+                # https://gitlab.com/mailman/mailman/-/issues/1229
+                str(value).replace('\r', '').replace('\n', '')
+                for value in values
+            ],
+            strict=strict
+        )
 
 
 @public

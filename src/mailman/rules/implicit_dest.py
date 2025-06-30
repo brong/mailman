@@ -20,7 +20,6 @@
 import re
 
 from contextlib import suppress
-from email.utils import getaddresses
 from mailman.core.i18n import _
 from mailman.interfaces.mailinglist import IAcceptableAliasSet
 from mailman.interfaces.rules import IRule
@@ -66,9 +65,7 @@ class ImplicitDestination:
         # against the alias patterns later.
         recipients = set()
         for header in ('to', 'cc', 'resent-to', 'resent-cc'):
-            for fullname, address in getaddresses(msg.get_all(header, [])):
-                if isinstance(address, bytes):
-                    address = address.decode('ascii')
+            for fullname, address in msg.get_addresses(header, []):
                 address = address.lower()
                 if address in aliases:
                     return False

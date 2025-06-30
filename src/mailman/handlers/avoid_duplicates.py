@@ -23,9 +23,7 @@ has already received a copy, we either drop the message, add a duplicate
 warning header, or pass it through, depending on the user's preferences.
 """
 
-import re
-
-from email.utils import formataddr, getaddresses
+from email.utils import formataddr
 from mailman.core.i18n import _
 from mailman.interfaces.handler import IHandler
 from public import public
@@ -57,21 +55,12 @@ class AvoidDuplicates:
         explicit_recips = listaddrs.copy()
         # Figure out the set of explicit recipients.
         cc_addresses = {}
-        # We've seen messages with Cc: headers folded inside a quoted string.
-        # I.e., a message composed with several Cc addresses of the form
-        # 'real name (dept) <user@example.com>', the MUA quotes
-        # "real name (dept)" and then folds the header between 'name' and
-        # '(dept)' resulting in a header including the entry
-        # '"real name\r\n (dept)" <user@example.com>' which parses incorrectly,
-        # so we "unfold" headers here.
         for header in ('to', 'cc', 'resent-to', 'resent-cc'):
-            # The value can contain a Header instance so stringify it.
-            hdrs_unfolded = [re.sub('[\r\n]', '', str(value)) for value in
-                             msg.get_all(header, [])]
-            addrs = getaddresses(hdrs_unfolded)
-            header_addresses = dict((addr, formataddr((name, addr)))
-                                    for name, addr in addrs
-                                    if addr)
+            header_addresses = {
+                addr: formataddr((name, addr))
+                for name, addr in msg.get_addresses(header, [])
+                if addr
+            }
             if header == 'cc':
                 # Yes, it's possible that an address is mentioned in multiple
                 # CC headers using different names.  In that case, the last
