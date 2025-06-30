@@ -136,14 +136,6 @@ Test content
         # Make sure the senders property does not fail
         self.assertEqual(msg.senders, ['test@example.com'])
 
-    def test_senders_long_header(self):
-        msg = Message()
-        msg['From'] = (
-            '"User, A. Very Long Name W. (CNTR-DEPT)[An Employer,\r\n'
-            ' Inc.]" <a.user-1@example.org>'
-            )
-        self.assertEqual(msg.senders, ['a.user-1@example.org'])
-
     def test_senders_multiple_addresses(self):
         msg = Message()
         msg['From'] = 'Anne <anne@example.com>'
@@ -152,6 +144,38 @@ Test content
                          ['anne@example.com',
                           'bart@example.com',
                           'cate@example.com'])
+
+    def test_get_addresses_quoted_comma_and_multiline_display_name(self):
+        msg = Message()
+        msg['From'] = (
+            '"last, first" <comma-in-display-name@example.com>'
+        )
+        msg['To'] = (
+            '"last\r\n first" <cr-lf-in-display-name@example.net>'
+        )
+        msg['Cc'] = (
+            '"last, first" <comma-in-display-name@example.org>, '
+            '"last\r\n first" <cr-lf-in-display-name@example.org>'
+        )
+        self.assertEqual(
+            msg.get_addresses('from'),
+            [
+                ('last, first', 'comma-in-display-name@example.com'),
+            ]
+        )
+        self.assertEqual(
+            msg.get_addresses('to'),
+            [
+                ('last first', 'cr-lf-in-display-name@example.net'),
+            ]
+        )
+        self.assertEqual(
+            msg.get_addresses('cc'),
+            [
+                ('last, first', 'comma-in-display-name@example.org'),
+                ('last first', 'cr-lf-in-display-name@example.org'),
+            ]
+        )
 
     def test_user_notification_bad_charset(self):
         msg = UserNotification(

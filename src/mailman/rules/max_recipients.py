@@ -17,7 +17,6 @@
 
 """The maximum number of recipients rule."""
 
-from email.utils import getaddresses
 from mailman.core.i18n import _
 from mailman.interfaces.rules import IRule
 from public import public
@@ -39,9 +38,9 @@ class MaximumRecipients:
         if mlist.max_num_recipients == 0:
             return False
         # Figure out how many recipients there are
-        recipients = getaddresses(msg.get_all('to', []) +
-                                  msg.get_all('cc', []))
-        if len(recipients) >= mlist.max_num_recipients:
+        num_recipients = len(msg.get_addresses('to', []))
+        num_recipients += len(msg.get_addresses('cc', []))
+        if num_recipients >= mlist.max_num_recipients:
             msgdata['moderation_sender'] = msg.sender
             with _.defer_translation():
                 # This will be translated at the point of use.

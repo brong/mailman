@@ -20,7 +20,7 @@
 import logging
 
 from email.header import Header
-from email.utils import formataddr, getaddresses, parseaddr
+from email.utils import formataddr, parseaddr
 from mailman.core.i18n import _
 from mailman.interfaces.handler import IHandler
 from mailman.interfaces.mailinglist import Personalization, ReplyToMunging
@@ -115,8 +115,7 @@ def process(mlist, msg, msgdata):
         # cases we'll zap the existing field because RFC 2822 says max one is
         # allowed.
         if not mlist.first_strip_reply_to:
-            orig = msg.get_all('reply-to', [])
-            for pair in getaddresses(orig):
+            for pair in msg.get_addresses('reply-to', []):
                 add(pair)
         # Set Reply-To: header to point back to this list.  Add this last
         # because some folks think that some MUAs make it easier to delete
@@ -148,7 +147,7 @@ def process(mlist, msg, msgdata):
             # that RFC 2822 says only zero or one Cc header is allowed.
             new = []
             d = {}
-            for pair in getaddresses(msg.get_all('cc', [])):
+            for pair in msg.get_addresses('cc', []):
                 add(pair)
             if (mlist.reply_goes_to_list is not
                     ReplyToMunging.explicit_header_only):
