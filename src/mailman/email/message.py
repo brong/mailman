@@ -144,7 +144,7 @@ class Message(email.message.Message):
                 str(value).replace('\r', '').replace('\n', '')
                 for value in values
             ],
-            strict=strict
+            # strict=strict (not supported in all python 3.9+ versions)
         )
 
 
