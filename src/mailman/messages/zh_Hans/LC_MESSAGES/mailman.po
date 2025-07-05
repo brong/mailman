@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-15 19:33-0800\n"
+"POT-Creation-Date: 2025-07-05 07:50-0700\n"
 "PO-Revision-Date: 2024-09-16 23:09+0000\n"
 "Last-Translator: LS-Shandong <LS-Shandong@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/projects/gnu-mailman/mailman/zh_Hans/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 5.8-dev\n"
 
-#: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:84
+#: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:83
 #: src/mailman/chains/hold.py:166 src/mailman/handlers/acknowledge.py:56
 #: src/mailman/handlers/subject_prefix.py:46
 #: src/mailman/handlers/subject_prefix.py:91 src/mailman/runners/digest.py:88
@@ -44,7 +44,7 @@ msgstr ""
 msgid "${mlist.display_name} unsubscription notification"
 msgstr "${mlist.display_name} 取消订阅通知"
 
-#: src/mailman/app/moderator.py:96
+#: src/mailman/app/moderator.py:95
 msgid ""
 "The content of this message was lost. It was probably cross-posted to\n"
 "multiple lists and previously handled on another list.\n"
@@ -52,34 +52,34 @@ msgstr ""
 "此消息的内容已丢失。它可能是交叉发布在多个列表上，\n"
 "并在之前被另外一个列表处理掉了。\n"
 
-#: src/mailman/app/moderator.py:132
+#: src/mailman/app/moderator.py:131
 #, python-brace-format
 msgid "Posting of your message titled \"${subject}\""
 msgstr "以“${subject}“为标题发布你的消息"
 
-#: src/mailman/app/moderator.py:133 src/mailman/app/moderator.py:277
+#: src/mailman/app/moderator.py:132 src/mailman/app/moderator.py:278
 #: src/mailman/rest/sub_moderation.py:119
 msgid "[No reason given]"
 msgstr "[没有给出原因]"
 
-#: src/mailman/app/moderator.py:184
+#: src/mailman/app/moderator.py:185
 msgid "Forward of moderated message"
 msgstr "转发审核消息"
 
-#: src/mailman/app/moderator.py:243
+#: src/mailman/app/moderator.py:244
 #, python-brace-format
 msgid "New unsubscription request from ${mlist.display_name} by ${email}"
 msgstr "新的来自 ${email} 对 ${mlist.display_name} 的退订请求"
 
-#: src/mailman/app/moderator.py:276
+#: src/mailman/app/moderator.py:277
 msgid "Unsubscription request"
 msgstr "退订请求"
 
-#: src/mailman/app/moderator.py:318
+#: src/mailman/app/moderator.py:319
 msgid "Original Message"
 msgstr "原始消息"
 
-#: src/mailman/app/moderator.py:321
+#: src/mailman/app/moderator.py:322
 #, python-brace-format
 msgid "Request to mailing list \"${display_name}\" rejected"
 msgstr "对邮件列表“${display_name}”的请求已被拒绝"
@@ -148,7 +148,7 @@ msgstr "你需要确认离开 ${event.mlist.fqdn_listname} 邮件列表。"
 msgid "Your confirmation is needed to join the ${event.mlist.fqdn_listname} mailing list."
 msgstr "你需要确认加入 ${event.mlist.fqdn_listname} 邮件列表。"
 
-#: src/mailman/bin/mailman.py:102 src/mailman/bin/master.py:593
+#: src/mailman/bin/mailman.py:102 src/mailman/bin/master.py:594
 #: src/mailman/bin/runner.py:96
 msgid ""
 "    Configuration file to use.  If not given, the environment variable\n"
@@ -171,13 +171,13 @@ msgstr ""
 msgid "    If you are sure you want to run as root, specify --run-as-root."
 msgstr "    如果你确定要以 root 身份运行，请指定 --run-as-root。"
 
-#: src/mailman/bin/master.py:190
+#: src/mailman/bin/master.py:191
 msgid ""
 "The master lock could not be acquired because it appears as though another\n"
 "master is already running."
 msgstr "无法获取主程序锁因为另外一个主程序已经在运行。"
 
-#: src/mailman/bin/master.py:196
+#: src/mailman/bin/master.py:197
 #, python-brace-format
 msgid ""
 "The master lock could not be acquired.  It appears as though there is a stale\n"
@@ -186,7 +186,7 @@ msgstr ""
 "无法获取主程序锁。似乎有一个过时的主程序锁。\n"
 "可以尝试用 --force 选项重新运行 ${program}。"
 
-#: src/mailman/bin/master.py:202
+#: src/mailman/bin/master.py:203
 #, python-brace-format
 msgid ""
 "The master lock could not be acquired, because it appears as if some process\n"
@@ -207,7 +207,7 @@ msgstr ""
 "\n"
 "正在退出。"
 
-#: src/mailman/bin/master.py:215
+#: src/mailman/bin/master.py:216
 #, python-brace-format
 msgid ""
 "For unknown reasons, the master lock could not be acquired.\n"
@@ -224,7 +224,7 @@ msgstr ""
 "\n"
 "正在退出。"
 
-#: src/mailman/bin/master.py:569
+#: src/mailman/bin/master.py:570
 msgid ""
 "    Master subprocess watcher.\n"
 "\n"
@@ -260,7 +260,7 @@ msgstr ""
 "    运行器。注意主程序在收到 SIGHUP 后将关闭并重新打开它自己的日志文件。主程序也\n"
 "    会按照配置文件指定的文件留下它自己的进程 ID，但你通常不需要直接使用这个 PID。"
 
-#: src/mailman/bin/master.py:600
+#: src/mailman/bin/master.py:601
 msgid ""
 "    Don't restart the runners when they exit because of an error or a SIGUSR1.\n"
 "    Use this only for debugging."
@@ -268,7 +268,7 @@ msgstr ""
 "    当运行器由于错误或 SIGUSR1 而退出时，不重新启动它们。\n"
 "    仅将此用于调试。"
 
-#: src/mailman/bin/master.py:606
+#: src/mailman/bin/master.py:607
 msgid ""
 "    If the master watcher finds an existing master lock, it will normally exit\n"
 "    with an error message.  With this option,the master will perform an extra\n"
@@ -283,7 +283,7 @@ msgstr ""
 "    主程序仍将退出，并需要你手动清理锁定。但如果未发现符合的进程，主程序就将\n"
 "    移除明显过时的锁定，然后再次尝试声明主程序锁。"
 
-#: src/mailman/bin/master.py:619
+#: src/mailman/bin/master.py:620
 msgid ""
 "    Override the default set of runners that the master will invoke, which is\n"
 "    typically defined in the configuration file.  Multiple -r options may be\n"
@@ -292,7 +292,7 @@ msgstr ""
 "    覆盖主服务器将调用的默认运行器集，即通常在配置文件中定义的。可以给定多个\n"
 "     -r 选项。 -r 的值直接传递到 bin/runner。"
 
-#: src/mailman/bin/master.py:626 src/mailman/bin/runner.py:133
+#: src/mailman/bin/master.py:627 src/mailman/bin/runner.py:133
 msgid "Display more debugging information to the log file."
 msgstr "在日志文件中显示更多调试信息。"
 
@@ -463,7 +463,7 @@ msgid "Reject/bounce a message and stop processing."
 msgstr "拒绝/退回消息并停止处理。"
 
 #: src/mailman/commands/cli_addmembers.py:73
-#: src/mailman/commands/cli_syncmembers.py:121
+#: src/mailman/commands/cli_syncmembers.py:118
 #, python-brace-format
 msgid "Cannot parse as valid email address (skipping): ${line}"
 msgstr "无法解析为有效的电子邮件地址（跳过）：${line}"
@@ -474,13 +474,13 @@ msgid "Already subscribed (skipping): ${email}"
 msgstr "已经订阅（跳过）：${email}"
 
 #: src/mailman/commands/cli_addmembers.py:107
-#: src/mailman/commands/cli_syncmembers.py:87
+#: src/mailman/commands/cli_syncmembers.py:85
 #, python-brace-format
 msgid "Membership is banned (skipping): ${email}"
 msgstr "成员资格被封禁（跳过）：${email}"
 
 #: src/mailman/commands/cli_addmembers.py:110
-#: src/mailman/commands/cli_syncmembers.py:90
+#: src/mailman/commands/cli_syncmembers.py:88
 #, python-brace-format
 msgid "Subscription already pending (skipping): ${email}"
 msgstr "订阅已经在等待处理（跳过）：${email}"
@@ -522,8 +522,8 @@ msgstr "    覆盖列表设置的 send_welcome_message。"
 #: src/mailman/commands/cli_addmembers.py:146 src/mailman/commands/cli_admins.py:97
 #: src/mailman/commands/cli_import.py:68 src/mailman/commands/cli_inject.py:75
 #: src/mailman/commands/cli_members.py:211
-#: src/mailman/commands/cli_syncmembers.py:204
-#: src/mailman/commands/cli_withlist.py:291 src/mailman/commands/cli_withlist.py:298
+#: src/mailman/commands/cli_syncmembers.py:201
+#: src/mailman/commands/cli_withlist.py:290 src/mailman/commands/cli_withlist.py:297
 #, python-brace-format
 msgid "No such list: ${listspec}"
 msgstr "没有这种列表：${listspec}"
@@ -823,14 +823,14 @@ msgstr ""
 "    "
 
 #: src/mailman/commands/cli_delmembers.py:93
-#: src/mailman/commands/cli_syncmembers.py:182
+#: src/mailman/commands/cli_syncmembers.py:179
 msgid ""
 "    Override the list's setting for send_goodbye_message to\n"
 "    deleted members."
 msgstr "    覆盖列表发送给删除成员的 send_goodbye_message 设置。"
 
 #: src/mailman/commands/cli_delmembers.py:98
-#: src/mailman/commands/cli_syncmembers.py:187
+#: src/mailman/commands/cli_syncmembers.py:184
 msgid "    Override the list's setting for admin_notify_mchanges."
 msgstr "    覆盖列表的 admin_notify_mchanges 设置。"
 
@@ -1413,21 +1413,21 @@ msgstr "GNU Mailman 已停止（旧 pid：${pid}）"
 msgid "GNU Mailman is in an unexpected state (${hostname} != ${fqdn_name})"
 msgstr "GNU Mailman 处于意外状态（${hostname} != ${fqdn_name}）"
 
-#: src/mailman/commands/cli_syncmembers.py:136
+#: src/mailman/commands/cli_syncmembers.py:133
 #, python-format
 msgid "[ADD] %s"
 msgstr "[添加] %s"
 
-#: src/mailman/commands/cli_syncmembers.py:146
+#: src/mailman/commands/cli_syncmembers.py:143
 #, python-format
 msgid "[DEL] %s"
 msgstr "[删除] %s"
 
-#: src/mailman/commands/cli_syncmembers.py:155
+#: src/mailman/commands/cli_syncmembers.py:152
 msgid "Nothing to do"
 msgstr "无操作"
 
-#: src/mailman/commands/cli_syncmembers.py:160
+#: src/mailman/commands/cli_syncmembers.py:157
 msgid ""
 "    Add and delete members as necessary to syncronize a list's membership\n"
 "    with an input file.  FILENAME is the file containing the new membership,\n"
@@ -1444,7 +1444,7 @@ msgstr ""
 "    成员将从列表中移除。文件为“-”表示标准输出。\n"
 "    "
 
-#: src/mailman/commands/cli_syncmembers.py:172
+#: src/mailman/commands/cli_syncmembers.py:169
 msgid ""
 "    Set the added members delivery mode to 'regular', 'mime', 'plain',\n"
 "    'summary' or 'disabled'.  I.e., one of regular, three modes of digest\n"
@@ -1454,11 +1454,11 @@ msgstr ""
 "    “disabled”。即一种常规模式，三种摘要模式或者不寄送。如果未给定，\n"
 "    默认为常规模式。"
 
-#: src/mailman/commands/cli_syncmembers.py:178
+#: src/mailman/commands/cli_syncmembers.py:175
 msgid "    Override the list's setting for send_welcome_message to added members."
 msgstr "    覆盖列表发送给已添加成员的 send_welcome_message 设置。"
 
-#: src/mailman/commands/cli_syncmembers.py:192
+#: src/mailman/commands/cli_syncmembers.py:189
 msgid ""
 "    Don't actually make the changes.  Instead, print out what would be\n"
 "    done to the list."
@@ -1495,17 +1495,17 @@ msgstr "ipython 不可用，use_ipython 已设为 no"
 msgid "readline not available"
 msgstr "readline 不可用"
 
-#: src/mailman/commands/cli_withlist.py:132
+#: src/mailman/commands/cli_withlist.py:131
 msgid "Invalid value for [shell]use_python: {}"
 msgstr "[shell]use_python 的值无效：{}"
 
-#: src/mailman/commands/cli_withlist.py:148
+#: src/mailman/commands/cli_withlist.py:147
 msgid ""
 "This script provides you with a general framework for interacting with a\n"
 "mailing list."
 msgstr "此脚本提供了你与邮件列表进行交互的通用框架。"
 
-#: src/mailman/commands/cli_withlist.py:152
+#: src/mailman/commands/cli_withlist.py:151
 msgid ""
 "There are two ways to use this script: interactively or programmatically.\n"
 "Using it interactively allows you to play with, examine and modify a mailing\n"
@@ -1517,7 +1517,7 @@ msgstr ""
 "的交互式解释器中浏览、测试和修改邮件列表。当以交互方式运行时，变量“m”将在\n"
 "全局命名空间中可用。它将引用邮件列表对象。"
 
-#: src/mailman/commands/cli_withlist.py:159
+#: src/mailman/commands/cli_withlist.py:158
 msgid ""
 "Programmatically, you can write a function to operate on a mailing list, and\n"
 "this script will take care of the housekeeping (see below for examples).  In\n"
@@ -1536,7 +1536,7 @@ msgstr ""
 "其中“listspec”为邮件列表的邮寄地址（例如 ant@example.com），或者\n"
 "为 List-ID（例如 ant@example.com）。"
 
-#: src/mailman/commands/cli_withlist.py:169
+#: src/mailman/commands/cli_withlist.py:168
 msgid ""
 "Here's an example of how to use the --run option.  Say you have a file in the\n"
 "Mailman installation directory called 'listaddr.py', with the following two\n"
@@ -1568,7 +1568,7 @@ msgstr ""
 "\n"
 "如果未给定 -l，那么你可以无需参数运行函数。\n"
 
-#: src/mailman/commands/cli_withlist.py:187
+#: src/mailman/commands/cli_withlist.py:186
 msgid ""
 "You can print the list's posting address by running the following from the\n"
 "command line:\n"
@@ -1585,7 +1585,7 @@ msgstr ""
 "正在运行 listaddr.listaddr()……\n"
 "ant@example.com"
 
-#: src/mailman/commands/cli_withlist.py:196
+#: src/mailman/commands/cli_withlist.py:195
 msgid ""
 "And you can print the list's request address by running:\n"
 "\n"
@@ -1601,7 +1601,7 @@ msgstr ""
 "正在运行 listaddr.requestaddr()……\n"
 "ant-request@example.com"
 
-#: src/mailman/commands/cli_withlist.py:204
+#: src/mailman/commands/cli_withlist.py:203
 msgid ""
 "As another example, say you wanted to change the display name for a particular\n"
 "mailing list.  You could put the following function in a file called\n"
@@ -1630,7 +1630,7 @@ msgstr ""
 "注意你不须要明确提交任何数据库事务，因为 Mailman 会帮你做这件事\n"
 "（假设没有发生错误的话）。"
 
-#: src/mailman/commands/cli_withlist.py:223
+#: src/mailman/commands/cli_withlist.py:222
 msgid ""
 "    Operate on a mailing list.\n"
 "\n"
@@ -1642,7 +1642,7 @@ msgstr ""
 "    有关详细帮助，请参见 --details\n"
 "    "
 
-#: src/mailman/commands/cli_withlist.py:231
+#: src/mailman/commands/cli_withlist.py:230
 msgid ""
 "    Leaves you at an interactive prompt after all other processing is complete.\n"
 "    This is the default unless the --run option is given."
@@ -1650,7 +1650,7 @@ msgstr ""
 "    其他所有处理完成后，让你留在交互式提示中。\n"
 "    除非指定了 --run 选项，否则这是默认设置。"
 
-#: src/mailman/commands/cli_withlist.py:236
+#: src/mailman/commands/cli_withlist.py:235
 msgid ""
 "\n"
 "    Run a script.  The argument is the module path to a callable.  This\n"
@@ -1673,11 +1673,11 @@ msgstr ""
 "    如果未给定 --listspec/-l 参数，脚本函数将以无参数形式调用。\n"
 "    "
 
-#: src/mailman/commands/cli_withlist.py:252
+#: src/mailman/commands/cli_withlist.py:251
 msgid "Print detailed instructions and exit."
 msgstr "打印详细说明并退出。"
 
-#: src/mailman/commands/cli_withlist.py:256
+#: src/mailman/commands/cli_withlist.py:255
 msgid ""
 "    A specification of the mailing list to operate on.  This may be the posting\n"
 "    address of the list, or its List-ID.  The argument can also be a Python\n"
@@ -1691,11 +1691,11 @@ msgstr ""
 "     进行匹配。要使用正则表达式，列表规范必须以一个 ^ 开头（并且匹配通过 \n"
 "     re.match() 完成）。除非给定 --run，否则列表规范不能为正则表达式。"
 
-#: src/mailman/commands/cli_withlist.py:272
+#: src/mailman/commands/cli_withlist.py:271
 msgid "Regular expression requires --run"
 msgstr "正则表达式需要 --run"
 
-#: src/mailman/commands/cli_withlist.py:299
+#: src/mailman/commands/cli_withlist.py:298
 #, python-brace-format
 msgid "The variable 'm' is the ${listspec} mailing list"
 msgstr "变量“ m”是 ${listspec} 邮件列表"
@@ -1902,9 +1902,13 @@ msgstr "在成功发帖后进行一些记帐任务。"
 msgid "Perform ARC auth checks and attach resulting headers"
 msgstr "执行 ARC 认证检查，并附上产生的首部"
 
-#: src/mailman/handlers/avoid_duplicates.py:44
+#: src/mailman/handlers/avoid_duplicates.py:42
 msgid "Suppress some duplicates of the same message."
 msgstr "阻止一些重复的相同消息。"
+
+#: src/mailman/handlers/check_dmarc.py:43
+msgid "Check whether to Apply DMARC mitigations."
+msgstr ""
 
 #: src/mailman/handlers/cleanse_dkim.py:42
 msgid "Remove DomainKeys headers."
@@ -1914,7 +1918,7 @@ msgstr "移除 DomainKeys 首部。"
 msgid "Cleanse certain headers from all messages."
 msgstr "从所有邮件中清理某些页眉。"
 
-#: src/mailman/handlers/cook_headers.py:169
+#: src/mailman/handlers/cook_headers.py:168
 msgid "Modify message headers."
 msgstr "修改消息首部。"
 
@@ -1922,12 +1926,12 @@ msgstr "修改消息首部。"
 msgid "Decorate a message with headers and footers."
 msgstr "用页眉和页脚来装饰消息。"
 
-#: src/mailman/handlers/dmarc.py:128
+#: src/mailman/handlers/dmarc.py:129
 #, python-brace-format
 msgid "${realname} via ${mlist.display_name}"
 msgstr "${realname} 通过 ${mlist.display_name}"
 
-#: src/mailman/handlers/dmarc.py:229
+#: src/mailman/handlers/dmarc.py:230
 msgid "Apply DMARC mitigations."
 msgstr "应用 DMARC 缓解措施。"
 
@@ -2099,7 +2103,7 @@ msgstr "[没有给出理由]"
 msgid "The built-in owner pipeline."
 msgstr "内置的所有者管道。"
 
-#: src/mailman/pipelines/builtin.py:44
+#: src/mailman/pipelines/builtin.py:46
 msgid "The built-in posting pipeline."
 msgstr "内置的发帖管道。"
 
@@ -2173,11 +2177,11 @@ msgstr ""
 msgid "Emergency moderation is in effect for this list"
 msgstr "该列表处于紧急审核状态"
 
-#: src/mailman/rules/implicit_dest.py:37
+#: src/mailman/rules/implicit_dest.py:36
 msgid "Catch messages with implicit destination."
 msgstr "捕捉有隐式目的地的消息。"
 
-#: src/mailman/rules/implicit_dest.py:95
+#: src/mailman/rules/implicit_dest.py:92
 msgid "Message has implicit destination"
 msgstr "消息含有隐式目的地"
 
@@ -2189,11 +2193,11 @@ msgstr "查找发帖循环。"
 msgid "Message has already been posted to this list"
 msgstr "消息已经发表到该列表中"
 
-#: src/mailman/rules/max_recipients.py:33
+#: src/mailman/rules/max_recipients.py:32
 msgid "Catch messages with too many explicit recipients."
 msgstr "捕捉有太多明确收件人的消息。"
 
-#: src/mailman/rules/max_recipients.py:49
+#: src/mailman/rules/max_recipients.py:48
 msgid "Message has more than {} recipients"
 msgstr "消息有超过 {} 个收件人"
 
@@ -2225,7 +2229,7 @@ msgstr "匹配非会员发送的消息。"
 msgid "No sender was found in the message."
 msgstr "消息中没有发现发件人。"
 
-#: src/mailman/rules/moderation.py:200
+#: src/mailman/rules/moderation.py:205
 msgid "The sender is in the nonmember {} list"
 msgstr "发件人在非成员的 {} 列表中"
 
