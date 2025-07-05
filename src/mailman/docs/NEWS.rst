@@ -61,6 +61,8 @@ New Features
 * Setting ``cache_life`` in the ``mailman`` section of mailman.cfg to ``0d``
   will disable template caching.  (Closes #1230)
 * Template manager no longer caches the content of file: URIs.  (Closes #1233)
+* DMARC mitigations are now applied to mail to the -owner address.
+  (Closes #1234)
 
 Other
 -----
