@@ -67,6 +67,22 @@ class TestBans(unittest.TestCase):
         self.assertEqual(cm.exception.reason,
                          'Email is not banned: banned@example.com')
 
+    def test_slash_in_banned_address(self):
+        manager = IBanManager(self._mlist)
+        with transaction():
+            manager.ban('banned/ext@example.com')
+        url = ('http://localhost:9001/3.0/lists/ant.example.com'
+               '/bans/banned%2Fext@example.com')
+        json, response = call_api(url)
+        self.assertEqual(json['email'], 'banned/ext@example.com')
+        json, response = call_api(url, method='DELETE')
+        self.assertEqual(response.status_code, 204)
+        with self.assertRaises(HTTPError) as cm:
+            call_api(url)
+        self.assertEqual(cm.exception.code, 404)
+        self.assertEqual(cm.exception.reason,
+                         'Email is not banned: banned/ext@example.com')
+
     def test_not_found_after_unbanning_global(self):
         manager = IBanManager(None)
         with transaction():
@@ -81,6 +97,21 @@ class TestBans(unittest.TestCase):
         self.assertEqual(cm.exception.code, 404)
         self.assertEqual(cm.exception.reason,
                          'Email is not banned: banned@example.com')
+
+    def test_slash_in_banned_address_global(self):
+        manager = IBanManager(None)
+        with transaction():
+            manager.ban('banned/ext@example.com')
+        url = ('http://localhost:9001/3.0/bans/banned%2Fext@example.com')
+        json, response = call_api(url)
+        self.assertEqual(json['email'], 'banned/ext@example.com')
+        json, response = call_api(url, method='DELETE')
+        self.assertEqual(response.status_code, 204)
+        with self.assertRaises(HTTPError) as cm:
+            call_api(url)
+        self.assertEqual(cm.exception.code, 404)
+        self.assertEqual(cm.exception.reason,
+                         'Email is not banned: banned/ext@example.com')
 
     def test_ban_missing_mailing_list(self):
         with self.assertRaises(HTTPError) as cm:
@@ -120,4 +151,4 @@ class TestBans(unittest.TestCase):
             '/bans/^[^@]+')
         self.assertEqual(json['self_link'],
                          'http://localhost:9001/3.0/lists/ant.example.com'
-                         '/bans/%5E%5B%5E%40%5D%2B')
+                         '/bans/%5E%5B%5E@%5D%2B')

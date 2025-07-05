@@ -69,16 +69,36 @@ from zope.component import getUtility
 def member_matcher(segments):
     """A matcher of member URLs inside mailing lists.
 
-    e.g. /<role>/aperson@example.org
+    e.g. /<role>/<email>
     """
-    if len(segments) != 2:
+    if len(segments) < 2:
         return None
     try:
         role = MemberRole[segments[0]]
     except KeyError:
         # Not a valid role.
         return None
-    return (), dict(role=role, email=segments[1]), ()
+    # HACK: Support email addresses with slash (`/`) in its local part.
+    # WSGI does NOT allow `%2F` (URI-encoded `/`) in path components.
+    # https://falcon.readthedocs.io/en/stable/user/faq.html#why-is-my-url-with-percent-encoded-forward-slashes-2f-routed-incorrectly
+    # /<role>/foo%2Fbar@example.jp (Web browser)
+    #   |
+    #   v
+    # /<role>/foo/bar@example.jp (WSGI)
+    #   |
+    #   v
+    # ["<role>", "foo", "bar@example.jp"] (segments)
+    for i, chunk in enumerate(segments[1:], 1):
+        if "@" in chunk:
+            i += 1
+            # email = "foo/bar@example.jp"
+            email = "/".join(segments[1:i])
+            if len(segments[i:]) > 0:
+                return None
+            break
+        else:
+            email = segments[1]
+    return (), dict(role=role, email=email), ()
 
 
 def roster_matcher(segments):

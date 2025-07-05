@@ -201,12 +201,31 @@ class TopLevel:
     def addresses(self, context, segments):
         """/<api>/addresses
            /<api>/addresses/<email>
+           /<api>/addresses/<email>/<action>
         """
         if len(segments) == 0:
             return AllAddresses()
+        # HACK: Support email addresses with slash (`/`) in its local part.
+        # WSGI does NOT allow `%2F` (URI-encoded `/`) in path components.
+        # https://falcon.readthedocs.io/en/stable/user/faq.html#why-is-my-url-with-percent-encoded-forward-slashes-2f-routed-incorrectly
+        # /<api>/addresses/foo%2Fbar@example.jp/manage (Web browser)
+        #   |
+        #   v
+        # /<api>/addresses/foo/bar@example.jp/manage (WSGI)
+        #   |
+        #   v
+        # ["foo", "bar@example.jp", "manage"] (segments)
+        for i, chunk in enumerate(segments):
+            if "@" in chunk:
+                i += 1
+                # email = "foo/bar@example.jp"
+                email = "/".join(segments[0:i])
+                # segments = ["manage"]
+                segments = segments[i:]
+                break
         else:
             email = segments.pop(0)
-            return AnAddress(email), segments
+        return AnAddress(email), segments
 
     @child()
     def domains(self, context, segments):
@@ -352,8 +371,11 @@ class TopLevel:
         if len(segments) == 0:
             return BannedEmails(None)
         else:
-            email = segments.pop(0)
-            return BannedEmail(None, email), segments
+            # HACK: Support email addresses with slash (`/`) in its local part.
+            # WSGI does NOT allow `%2F` (URI-encoded `/`) in path components.
+            # https://falcon.readthedocs.io/en/stable/user/faq.html#why-is-my-url-with-percent-encoded-forward-slashes-2f-routed-incorrectly
+            email = "/".join(segments)
+            return BannedEmail(None, email), []
 
     @child()
     def reserved(self, context, segments):

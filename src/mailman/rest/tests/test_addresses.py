@@ -49,6 +49,13 @@ class TestAddresses(unittest.TestCase):
             call_api('http://localhost:9001/3.0/addresses/nobody@example.com')
         self.assertEqual(cm.exception.code, 404)
 
+    def test_slash_in_address(self):
+        with transaction():
+            getUtility(IUserManager).create_address('anne/ext@example.com')
+        json, content = call_api(
+            'http://localhost:9001/3.0/addresses/anne%2Fext@example.com')
+        self.assertEqual(json['email'], 'anne/ext@example.com')
+
     def test_membership_of_missing_address(self):
         # Try to get the memberships of a missing address.
         with self.assertRaises(HTTPError) as cm:

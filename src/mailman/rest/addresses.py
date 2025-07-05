@@ -42,6 +42,7 @@ from mailman.rest.validator import email_validator, Validator
 from mailman.utilities.datetime import now
 from operator import attrgetter
 from public import public
+from urllib.parse import quote
 from zope.component import getUtility
 
 
@@ -57,8 +58,10 @@ class _AddressBase(CollectionMixin):
             email=address.email,
             original_email=address.original_email,
             registered_on=address.registered_on,
-            self_link=self.api.path_to('addresses/{}'.format(address.email)),
-            )
+            self_link=self.api.path_to(
+                f"addresses/{quote(address.email, '@')}",
+            ),
+        )
         # Add optional attributes.  These can be None or the empty string.
         if address.display_name:
             representation['display_name'] = address.display_name
@@ -210,7 +213,8 @@ class AnAddress(_AddressBase):
             return NotFound(), []
         child = Preferences(
             self._address.preferences,
-            'addresses/{}'.format(self._address.email))
+            f"addresses/{quote(self._address.email, '@')}",
+        )
         return child, []
 
     @child()
@@ -291,7 +295,8 @@ class UserAddresses(_AddressBase):
             if address.user is None:
                 address.user = self._user
                 location = self.api.path_to(
-                    'addresses/{}'.format(address.email))
+                    f"addresses/{quote(address.email, '@')}",
+                )
                 created(response, location)
                 return
             elif not absorb_existing:
@@ -304,7 +309,9 @@ class UserAddresses(_AddressBase):
         else:
             # Link the address to the current user and return it.
             address.user = self._user
-        location = self.api.path_to('addresses/{}'.format(address.email))
+        location = self.api.path_to(
+            f"addresses/{quote(address.email, '@')}",
+        )
         created(response, location)
 
 
