@@ -131,7 +131,8 @@ def munged_headers(mlist, msg, msgdata):
     display_name = str(Header(via, mlist.preferred_language.charset))
     value = [('From', formataddr((display_name, mlist.posting_address)))]
     # We've made the munged From:.  Now put the original in Reply-To: or Cc:
-    if mlist.reply_goes_to_list is ReplyToMunging.no_munging:
+    if (mlist.reply_goes_to_list is ReplyToMunging.no_munging or
+            msgdata.get('to_owner')):
         # Add original from to Reply-To:
         add_to = 'Reply-To'
         other = ('Cc', msg.get('cc'))
