@@ -115,7 +115,7 @@ class ConfigLayer(MockAndMonkeyLayer):
             print(dedent("""
             [postfix]
             postmap_command: true
-            transport_file_type: hash
+            transport_file_type: default
             """), file=fp)
         test_config = dedent("""
         [mailman]

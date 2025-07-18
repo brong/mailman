@@ -149,11 +149,13 @@ By default, Mailman works well with Postfix transport maps as a way to deliver
 incoming messages to Mailman's LMTP server.  Mailman will automatically write
 the correct transport map when its ``mailman aliases`` command is run, or
 whenever a mailing list is created or removed via other commands. Mailman
-supports two type of transport map tables for Postfix, namely ``hash`` and
-``regexp``. Tables using hash are processed by ``postmap`` command. To use this
-format, you should have ``postmap`` command available on the host running
-Mailman. It is also the default one of the two. To connect Postfix to
-Mailman's LMTP server, add the following to Postfix's ``main.cf`` file::
+supports two type of transport map tables for Postfix, namely ``default`` and
+``regexp``.
+
+Tables using `default` are processed by ``postmap`` command to generate database
+files. To use this format, you should have ``postmap`` command available on the
+host running Mailman. To connect Postfix to Mailman's LMTP server, add the
+following to Postfix's ``main.cf`` file::
 
     transport_maps =
         hash:/path-to-mailman/var/data/postfix_lmtp
@@ -163,14 +165,19 @@ Mailman's LMTP server, add the following to Postfix's ``main.cf`` file::
         hash:/path-to-mailman/var/data/postfix_domains
 
 where ``path-to-mailman`` is replaced with the actual path that you're running
-Mailman from.
+Mailman from. In the above case, Postfix uses database type ``hash`` by default.
+To check which database type Postfix uses, see the ``default_database_type``
+setting in Postfix's ``main.cf`` file (or run ``postconf default_database_type``
+command to see it).
 
 Note that in the above and also below, if your current ``main.cf`` contains
 settings for these items, including the default setting for
 ``local_recipient_maps``, you should add the Mailman setting to the existing
 setting rather than replacing it.  For example::
 
-    local_recipient_maps = proxy:unix:passwd.byname $alias_maps
+    local_recipient_maps =
+        proxy:unix:passwd.byname
+        $alias_maps
         hash:/path-to-mailman/var/data/postfix_lmtp
 
 Setting ``local_recipient_maps`` as well as ``transport_maps``
@@ -217,7 +224,7 @@ Also you will have to create another configuration file called as
 above. The ``postfix-mailman.cfg`` would look like this::
 
     [postfix]
-    transport_file_type: regex
+    transport_file_type: regexp
 
 
 Postfix + Dovecot

@@ -63,6 +63,8 @@ New Features
 * Template manager no longer caches the content of file: URIs.  (Closes #1233)
 * DMARC mitigations are now applied to mail to the -owner address.
   (Closes #1234)
+* The ``transport_file_type`` setting in ``postfix.cfg`` file can take a
+  Postfix database type name (e.g., ``lmdb``).  (Closes #1235)
 
 Other
 -----

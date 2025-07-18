@@ -100,8 +100,10 @@ class LMTP:
         # Locate and read the Postfix specific configuration file.
         mta_config = external_configuration(config.mta.configuration)
         self.transport_file_type = mta_config.get(
-            'postfix', 'transport_file_type')
-        if self.transport_file_type == 'hash':
+            'postfix', 'transport_file_type'
+        )
+        # 'regex' for backward compatibility with Mailman Core 3.3.10.
+        if self.transport_file_type not in ('regexp', 'regex'):
             self.postmap_command = mta_config.get('postfix', 'postmap_command')
 
     def create(self, mlist):
@@ -134,13 +136,18 @@ class LMTP:
             # If the transport_file_type is 'hash' then run the postmap command
             # on newly generated file to convert them in to hash table like
             # Postfix wants.
-            if self.transport_file_type == 'hash':
+            if self.postmap_command:
                 errors = []
                 files = [lmtp_path, domains_path]
                 if vmap:
                     files.append(vmap_path)
                 for path in files:
-                    command = self.postmap_command + ' ' + path
+                    command = self.postmap_command
+                    if self.transport_file_type == 'default':
+                        # Follow the `default_database_type` setting in Postfix
+                        command += f' {path}'
+                    else:
+                        command += f' {self.transport_file_type}:{path}'
                     status = (os.system(command) >> 8) & 0xff
                     if status:
                         msg = 'command failure: %s, %s, %s'
@@ -188,13 +195,14 @@ class LMTP:
                 print(file=fp)
 
     def _decorate(self, name):
-        # Postfix regex tables need regex matching listname or domains. This
+        # Postfix regexp tables need regexp matching listname or domains. This
         # method just decorates the name to be printed in the transport map
         # file or relay domains file.
         # We have to do a bit more with the -bounces and -confirm names as
         # they can have + extra information and that results in no match in
         # regexp tables.
-        if self.transport_file_type == 'regex':
+        # 'regex' for backward compatibility with Mailman Core 3.3.10.
+        if self.transport_file_type in ('regexp', 'regex'):
             local, at, domain = name.partition('@')
             if local.endswith('-bounces') or local.endswith('-confirm'):
                 local = local.replace('.', '\\.')
