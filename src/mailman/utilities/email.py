@@ -1,4 +1,4 @@
-# Copyright (C) 2009-2023 by the Free Software Foundation, Inc.
+# Copyright (C) 2009-2025 by the Free Software Foundation, Inc.
 #
 # This file is part of GNU Mailman.
 #
@@ -59,7 +59,7 @@ def add_message_hash(msg):
     if isinstance(message_id, bytes):
         message_id = message_id.decode('ascii')
     # The angle brackets are not part of the Message-ID.  See RFC 2822
-    # and http://wiki.list.org/display/DEV/Stable+URLs
+    # and https://wiki.list.org/DEV/Stable%20URLs
     if message_id.startswith('<') and message_id.endswith('>'):
         message_id = message_id[1:-1]
     else:

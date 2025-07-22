@@ -1,4 +1,4 @@
-# Copyright (C) 2009-2023 by the Free Software Foundation, Inc.
+# Copyright (C) 2009-2025 by the Free Software Foundation, Inc.
 #
 # This file is part of GNU Mailman.
 #
@@ -121,8 +121,7 @@ def main(ctx, config_file, run_as_root):
     # XXX https://github.com/pallets/click/issues/303
     """\
     The GNU Mailman mailing list management system
-    Copyright 1998-2018 by the Free Software Foundation, Inc.
-    http://www.list.org
+    https://www.list.org
     """
     # Only run as root if allowed.
     if os.geteuid() == 0 and not run_as_root:

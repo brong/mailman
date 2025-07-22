@@ -3,7 +3,7 @@
 =========
 
 .. seealso:: See an `example Mailman plugin
-             <https://gitlab.com/mailman/example-mailman-plugin/-/tree/master>`_
+             <https://gitlab.com/mailman/example-mailman-plugin>`_
              as a starting point for writing a new plugin.
 
 Mailman defines a plugin as a Python package on ``sys.path`` that provides

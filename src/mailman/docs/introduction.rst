@@ -34,7 +34,7 @@ But we really like Postorius and HyperKitty and hope you will too!
 Copyright
 =========
 
-Copyright 1998-2019 by the Free Software Foundation, Inc.
+Copyright (C) 1998-2025 by the Free Software Foundation, Inc.
 
 This file is part of GNU Mailman.
 
@@ -79,10 +79,10 @@ and Florian Fuchs lead development of Postorius and HyperKitty.
 Project details
 ===============
 
-* Project home page: http://www.list.org
+* Project home page: https://www.list.org
 * Documentation: https: https://mailman.readthedocs.io
 * The community driven wiki (including the FAQ_): https://wiki.list.org
-* Additional help resources: http://www.list.org/help.html
+* Additional help resources: https://www.list.org/help.html
 * Report Core bugs at: https://gitlab.com/mailman/mailman/issues
 * Mailman 3 suite on GitLab: https://gitlab.com/groups/mailman
 
@@ -100,12 +100,11 @@ and the Mailman 3 users list:
 For now, please leave the older mailman-users mailing list for Mailman 2.
 
 
-.. _`GNU Mailman`: http://www.list.org
-.. _`GNU General Public License`: https://www.gnu.org/licenses/gpl.txt
+.. _`GNU Mailman`: https://www.list.org/
+.. _`GNU General Public License`: https://www.gnu.org/licenses/licenses.html#GPL
 .. _Python: https://www.python.org
-.. _FAQ: http://wiki.list.org/display/DOC/Frequently+Asked+Questions
-.. _`Python 3.4`: https://www.python.org/downloads/release/python-342/
+.. _FAQ: https://wiki.list.org/DOC/Frequently%20Asked%20Questions
 .. _`ACKNOWLEDGMENTS`: ACKNOWLEDGMENTS.html
 .. _`Django`: https://www.djangoproject.com/
-.. _`suite of programs`: http://docs.mailman3.org/en/latest/
+.. _`suite of programs`: https://docs.mailman3.org/en/latest/
 .. _Launchpad: https://launchpad.net/mailman

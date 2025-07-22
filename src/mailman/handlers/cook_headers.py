@@ -1,4 +1,4 @@
-# Copyright (C) 1998-2023 by the Free Software Foundation, Inc.
+# Copyright (C) 1998-2025 by the Free Software Foundation, Inc.
 #
 # This file is part of GNU Mailman.
 #
@@ -73,7 +73,7 @@ def process(mlist, msg, msgdata):
     # Good places to look are:
     #
     # https://people.dsv.su.se/~jpalme/ietf/jp-ietf-home.html
-    # http://www.faqs.org/rfcs/rfc2076.html
+    # https://datatracker.ietf.org/doc/html/rfc2076
     #
     # None of these headers are added if they already exist.  BAW: some
     # consider the advertising of this a security breach.  I.e. if there are

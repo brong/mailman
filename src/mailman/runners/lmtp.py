@@ -1,4 +1,4 @@
-# Copyright (C) 2006-2023 by the Free Software Foundation, Inc.
+# Copyright (C) 2006-2025 by the Free Software Foundation, Inc.
 #
 # This file is part of GNU Mailman.
 #
@@ -31,7 +31,7 @@ are destined for a bogus sub-address, they are rejected right away, hopefully
 so that the peer mail server can provide better diagnostics.
 
 [1] RFC 2033 Local Mail Transport Protocol
-    http://www.faqs.org/rfcs/rfc2033.html
+    https://datatracker.ietf.org/doc/html/rfc2033
 """
 
 import re

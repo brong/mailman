@@ -12,9 +12,9 @@ of configuration settings, and that's that.  If you have trouble,
 check out the `details`__, and then call `Ghostbusters`_ (us).
 
 __ #ssl-and-tls-and-submissions-oh-my
-.. _`RFC 5321`: https://tools.ietf.org/html/rfc5321
+.. _`RFC 5321`: https://datatracker.ietf.org/doc/html/rfc5321
 .. _Ghostbusters: mailto:mailman-users@mailman3.org
-.. _smtplib: https://docs.python.org/3.7/library/smtplib.html
+.. _smtplib: https://docs.python.org/3/library/smtplib.html
 
 With the exception of the parameters specified here, this class uses
 the defaults provided by your version of the Python 'ssl' module.
@@ -324,8 +324,8 @@ specifications such as X.509 for authentication.  `RFC 5246`__
 contains the TLS specification (not directly relevant to Mailman
 development).
 
-__ https://tools.ietf.org/html/rfc5246
-.. _ssl: https://docs.python.org/3.7/library/ssl.html
+__ https://datatracker.ietf.org/doc/html/rfc5246
+.. _ssl: https://docs.python.org/3/library/ssl.html
 
 Connections come in three flavors, informally described as "SMTP",
 denoted by INSECURE, "SMTPS" or "secure submission", denoted by SMTPS
@@ -334,9 +334,9 @@ STARTTLS (specified in `RFC 3207`_).  The situation is extremely
 confused, and I will describe here the current recommended approach
 according to `RFC 8314`_, which also contains a *long* bibliography.
 
-.. _`RFC 6409`: https://tools.ietf.org/html/rfc6409
-.. _`RFC 3207`: https://tools.ietf.org/html/rfc3207
-.. _`RFC 8314`: https://tools.ietf.org/html/rfc8314
+.. _`RFC 6409`: https://datatracker.ietf.org/doc/html/rfc6409
+.. _`RFC 3207`: https://datatracker.ietf.org/doc/html/rfc3207
+.. _`RFC 8314`: https://datatracker.ietf.org/doc/html/rfc8314
 
 The SMTP flavor doesn't use TLS at all, and any agent with access to
 the connection can read the contents of the messages flowing through,

@@ -182,7 +182,7 @@ Almost the entire system is documented in these pages, but it may be a bit
 of a spelunking effort to find it.  Improvements are welcome!
 
 
-.. _`Architecture of Open Source Applications`: http://www.aosabook.org/en/mailman.html
+.. _`Architecture of Open Source Applications`: https://aosabook.org/en/v2/mailman.html
 .. _`Python pickles`: https://docs.python.org/3/library/pickle.html
 .. _`more efficient internal representation`: https://docs.python.org/3/library/email.html
 .. _`Zope Component Architecture`: https://pypi.python.org/pypi/zope.component

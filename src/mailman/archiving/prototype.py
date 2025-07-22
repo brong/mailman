@@ -1,4 +1,4 @@
-# Copyright (C) 2008-2023 by the Free Software Foundation, Inc.
+# Copyright (C) 2008-2025 by the Free Software Foundation, Inc.
 #
 # This file is part of GNU Mailman.
 #
@@ -39,7 +39,7 @@ class Prototype:
     """A prototype of a third party archiver.
 
     Mailman proposes a draft specification for interoperability between list
-    servers and archivers: <http://wiki.list.org/display/DEV/Stable+URLs>.
+    servers and archivers: <https://wiki.list.org/DEV/Stable%20URLs>.
     """
 
     name = 'prototype'

@@ -166,4 +166,4 @@ This defines all the attributes of a MailingList.
 
 .. autointerface:: mailman.interfaces.mailinglist.IMailingList
 
-.. _`RFC 2369`: http://www.faqs.org/rfcs/rfc2369.html
+.. _`RFC 2369`: https://datatracker.ietf.org/doc/html/rfc2369

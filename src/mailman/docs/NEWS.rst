@@ -2,7 +2,7 @@
  GNU Mailman 3 changes
 =======================
 
-Copyright (C) 1998-2022 by the Free Software Foundation, Inc.
+Copyright (C) 1998-2025 by the Free Software Foundation, Inc.
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 
 Here is a history of user visible changes to Mailman.
@@ -2057,12 +2057,12 @@ REST
 * The IMailingList attribute ``host_name`` has been renamed to ``mail_host``
   for consistency.  This changes the REST API for mailing list
   resources. (LP: #787599)
-* New REST resource http://.../members/find can be POSTed to in order to find
+* New REST resource https://.../members/find can be POSTed to in order to find
   member records.  Optional arguments are `subscriber` (email address to
   search for), `fqdn_listname`, and `role` (i.e. MemberRole).  (LP: #799612)
 * You can now query or change a member's `delivery_mode` attribute through
   the REST API (LP: #833132).  Given by Stephen A. Goss.
-* New REST resource http://.../<domain>/lists can be GETed in order to find
+* New REST resource https://.../<domain>/lists can be GETed in order to find
   all the mailing lists in a specific domain (LP: #829765).  Given by
   Stephen A. Goss.
 * Fixed /lists/<fqdn_listname>/<role>/<email> (LP: #825570)
@@ -2497,14 +2497,14 @@ Architecture
   see:
 
   https://wsgi.readthedocs.io/en/latest/
-  https://www.python.org/dev/peps/pep-0333/
+  https://peps.python.org/pep-0333/
 
   Mailman can still be run as a traditional CGI program of course.
 * Mailman now provides an LMTP server for more efficient integration with
   supporting mail servers (e.g. Postfix, Sendmail).  The Local Mail Transport
   Protocol is defined in RFC 2033:
 
-  http://www.faqs.org/rfcs/rfc2033.html
+  https://datatracker.ietf.org/doc/html/rfc2033
 * Virtual domains are now fully supported in that mailing lists of the same
   name can exist in more than one domain.  This is accomplished by renaming
   the lists/ and archives/ subdirectories after the list's posting address.

@@ -284,13 +284,13 @@ and the documentation for the `relay_domains`_, `mydestination`_ and
 `virtual alias domain`_ settings.
 
 .. _`The official Postfix documentation`:
-   http://www.postfix.org/documentation.html
+   https://www.postfix.org/documentation.html
 .. _`The reference page for all Postfix configuration parameters`:
-   http://www.postfix.org/postconf.5.html
-.. _`relay_domains`: http://www.postfix.org/postconf.5.html#relay_domains
-.. _`mydestination`: http://www.postfix.org/postconf.5.html#mydestination
-.. _`virtual alias domain`: http://www.postfix.org/ADDRESS_CLASS_README.html#virtual_alias_class
-.. _`virtual mailbox domain`: http://www.postfix.org/ADDRESS_CLASS_README.html#virtual_mailbox_class
+   https://www.postfix.org/postconf.5.html
+.. _`relay_domains`: https://www.postfix.org/postconf.5.html#relay_domains
+.. _`mydestination`: https://www.postfix.org/postconf.5.html#mydestination
+.. _`virtual alias domain`: https://www.postfix.org/ADDRESS_CLASS_README.html#virtual_alias_class
+.. _`virtual mailbox domain`: https://www.postfix.org/ADDRESS_CLASS_README.html#virtual_mailbox_class
 
 
 Exim
@@ -446,12 +446,12 @@ router`_ and the `LMTP transport`_.  Unless you are already familiar
 with Exim configuration, you probably want to start with the chapter on
 `how Exim receives and delivers mail`_.
 
-.. _`Exim 4`: http://www.exim.org/
+.. _`Exim 4`: https://www.exim.org/
 .. _`University of Cambridge`: https://www.cam.ac.uk/
-.. _`copious documentation for Exim`: http://www.exim.org/docs.html
-.. _`accept router`: http://www.exim.org/exim-html-current/doc/html/spec_html/ch-the_accept_router.html
-.. _`LMTP transport`: http://www.exim.org/exim-html-current/doc/html/spec_html/ch-the_lmtp_transport.html
-.. _`how Exim receives and delivers mail`: http://www.exim.org/exim-html-current/doc/html/spec_html/ch-how_exim_receives_and_delivers_mail.html
+.. _`copious documentation for Exim`: https://www.exim.org/docs.html
+.. _`accept router`: https://www.exim.org/exim-html-current/doc/html/spec_html/ch-the_accept_router.html
+.. _`LMTP transport`: https://www.exim.org/exim-html-current/doc/html/spec_html/ch-the_lmtp_transport.html
+.. _`how Exim receives and delivers mail`: https://www.exim.org/exim-html-current/doc/html/spec_html/ch-how_exim_receives_and_delivers_mail.html
 
 
 qmail
@@ -521,12 +521,12 @@ contribution on GitHub_ and another in comments at this issue_.
 .. _`mailing list or on IRC`: START.html#contact-us
 .. _`Local Mail Transfer Protocol`:
    https://en.wikipedia.org/wiki/Local_Mail_Transfer_Protocol
-.. _LMTP: http://www.faqs.org/rfcs/rfc2033.html
+.. _LMTP: https://datatracker.ietf.org/doc/html/rfc2033
 .. _`Simple Mail Transfer Protocol`:
    https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol
-.. _SMTP: http://www.faqs.org/rfcs/rfc5321.html
-.. _Postfix: http://www.postfix.org
+.. _SMTP: https://datatracker.ietf.org/doc/html/rfc5321
+.. _Postfix: https://www.postfix.org
 .. _`Variable Envelope Return Path`:
    https://en.wikipedia.org/wiki/Variable_envelope_return_path
-.. _postconf: http://www.postfix.org/postconf.1.html
+.. _postconf: https://www.postfix.org/postconf.1.html
 .. _domains: ../model/docs/domains.html

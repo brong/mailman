@@ -1,4 +1,4 @@
-# Copyright (C) 2011-2023 by the Free Software Foundation, Inc.
+# Copyright (C) 2011-2025 by the Free Software Foundation, Inc.
 #
 # This file is part of GNU Mailman.
 #
@@ -13,7 +13,7 @@
 # more details.
 #
 # You should have received a copy of the GNU General Public License along with
-# GNU Mailman.  If not, see <http://www.gnu.org/licenses/>.
+# GNU Mailman.  If not, see <https://www.gnu.org/licenses/>.
 
 """Test the outgoing runner."""
 
@@ -129,7 +129,7 @@ i=1; s=dummy; t=12345"""
 
     # I *believe* that this test from Gene Shuman's PR is incorrect.  As I
     # read the currect draft
-    # https://tools.ietf.org/html/draft-ietf-dmarc-arc-protocol-23#section-5.2
+    # https://datatracker.ietf.org/doc/html/rfc8617#section-5.2
     # the ARC Validator SHOULD have added an arc=none clause to the field,
     # but its absence doesn't invalidate the Authentication-Results field.
     # As far as I can see the draft says nothing about a missing arc method

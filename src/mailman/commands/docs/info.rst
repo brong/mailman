@@ -71,4 +71,4 @@ definition.
         VAR_DIR         = /var/lib/mailman
 
 
-.. _`Filesystem Hierarchy Standard`: http://www.pathname.com/fhs/
+.. _`Filesystem Hierarchy Standard`: https://www.pathname.com/fhs/

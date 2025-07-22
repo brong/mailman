@@ -1,4 +1,4 @@
-# Copyright (C) 2006-2023 by the Free Software Foundation, Inc.
+# Copyright (C) 2006-2025 by the Free Software Foundation, Inc.
 #
 # This file is part of GNU Mailman.
 #
@@ -234,7 +234,7 @@ class XMLDumper(object):
     def dump(self, listnames):
         print >> self._fp, '<?xml version="1.0" encoding="UTF-8"?>'
         self._push_element('mailman', **{
-            'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance',
+            'xmlns:xsi': 'https://www.w3.org/2001/XMLSchema-instance',
             'xsi:noNamespaceSchemaLocation': 'ssi-1.0.xsd',
             })
         for listname in sorted(listnames):
