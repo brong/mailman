@@ -37,6 +37,14 @@ from zope.component import getUtility
 log = logging.getLogger('mailman.error')
 
 
+def _format_email_address(email, display_name):
+    """Format email address for a body text, not for a header."""
+    if display_name:
+        return f"{display_name} <{email}>"
+    else:
+        return email
+
+
 def _get_dsn(message_id):
     # Get the DSN from the message store. Don't delete it as it may still be
     # needed.
@@ -148,9 +156,9 @@ def send_admin_subscription_notice(mlist, address, display_name):
         subject = _('${mlist.display_name} subscription notification')
     text = expand(
         getUtility(ITemplateLoader).get('list:admin:notice:subscribe', mlist),
-        mlist, dict(
-            member=formataddr((display_name, address)),
-            ))
+        mlist,
+        {'member': _format_email_address(address, display_name)},
+    )
     msg = OwnerNotification(mlist, subject, text, roster=mlist.administrators)
     msg.send(mlist)
 
@@ -166,14 +174,15 @@ def send_admin_disable_notice(mlist, event, display_name):
     :param display_name: The name of the subscriber
     :type display_name: string
     """
-    member = formataddr((display_name, event.email))
-    data = {'member': member}
+    member = formataddr((display_name, event.email))  # noqa: F841
     with _.using(mlist.preferred_language.code):
         subject = _(
             '${member}\'s subscription disabled on ${mlist.display_name}')
     text = expand(
         getUtility(ITemplateLoader).get('list:admin:notice:disable', mlist),
-        mlist, data)
+        mlist,
+        {'member': _format_email_address(event.email, display_name)},
+    )
     msg = OwnerNotification(mlist, subject, text, roster=mlist.administrators)
     dsn = _get_dsn(event.message_id)
     if dsn:
@@ -194,14 +203,15 @@ def send_admin_increment_notice(mlist, event, display_name):
     :param display_name: The name of the subscriber
     :type display_name: string
     """
-    member = formataddr((display_name, event.email))
-    data = {'member': member}
+    member = formataddr((display_name, event.email))  # noqa: F841
     with _.using(mlist.preferred_language.code):
         subject = _(
             '${member}\'s bounce score incremented on ${mlist.display_name}')
     text = expand(
         getUtility(ITemplateLoader).get('list:admin:notice:increment', mlist),
-        mlist, data)
+        mlist,
+        {'member': _format_email_address(event.email, display_name)},
+    )
     msg = OwnerNotification(mlist, subject, text, roster=mlist.administrators)
     dsn = _get_dsn(event.message_id)
     if dsn:
@@ -221,14 +231,18 @@ def send_admin_removal_notice(mlist, address, display_name):
     :param display_name: The name of the subscriber
     :type display_name: string
     """
-    member = formataddr((display_name, address))
-    data = {'member': member, 'mlist': mlist.display_name}
+    member = formataddr((display_name, address))  # noqa: F841
     with _.using(mlist.preferred_language.code):
         subject = _('${member} unsubscribed from ${mlist.display_name} '
                     'mailing list due to bounces')
     text = expand(
         getUtility(ITemplateLoader).get('list:admin:notice:removal', mlist),
-        mlist, data)
+        mlist,
+        {
+            'member': _format_email_address(address, display_name),
+            'mlist': mlist.display_name,
+        },
+    )
     msg = OwnerNotification(mlist, subject, text, roster=mlist.administrators)
     msg.send(mlist)
 
