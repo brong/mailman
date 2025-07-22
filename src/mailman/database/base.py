@@ -1,4 +1,4 @@
-# Copyright (C) 2006-2023 by the Free Software Foundation, Inc.
+# Copyright (C) 2006-2025 by the Free Software Foundation, Inc.
 #
 # This file is part of GNU Mailman.
 #
@@ -99,9 +99,7 @@ class SABaseDatabase:
         url = expand(config.database.url, None, config.paths)
         self._prepare(url)
         log.debug('Database url: %s', url)
-        # XXX By design of SQLite, database file creation does not honor
-        # umask.  See their ticket #1193:
-        # http://www.sqlite.org/cvstrac/tktview?tn=1193,31
+        # XXX By design of SQLite, database file creation does not honor umask.
         #
         # This sucks for us because the mailman.db file /must/ be group
         # writable, however even though we guarantee our umask is 002 here, it

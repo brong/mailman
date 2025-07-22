@@ -180,6 +180,6 @@ If the mailing list isn't being archived, neither the `List-Archive` nor
 `Archived-At` headers will be added.
 
 
-.. _`RFC 2919`: http://www.faqs.org/rfcs/rfc2919.html
-.. _`RFC 2369`: http://www.faqs.org/rfcs/rfc2369.html
-.. _`RFC 5064`: http://www.faqs.org/rfcs/rfc5064.html
+.. _`RFC 2919`: https://datatracker.ietf.org/doc/html/rfc2919
+.. _`RFC 2369`: https://datatracker.ietf.org/doc/html/rfc2369
+.. _`RFC 5064`: https://datatracker.ietf.org/doc/html/rfc5064

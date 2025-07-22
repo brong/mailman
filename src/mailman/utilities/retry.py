@@ -1,4 +1,4 @@
-# Copyright (C) 2019-2023 by the Free Software Foundation, Inc.
+# Copyright (C) 2019-2025 by the Free Software Foundation, Inc.
 #
 # This file is part of GNU Mailman.
 #
@@ -24,7 +24,7 @@ def retry(ExceptionToCheck, tries=1):
     """Retry calling the decorated function.
 
     Original from
-    http://www.saltycrane.com/blog/2009/11/trying-out-retry-decorator-python/
+    https://www.saltycrane.com/blog/2009/11/trying-out-retry-decorator-python/
 
     :param ExceptionToCheck: the exception to check. may be a tuple of
         exceptions to check

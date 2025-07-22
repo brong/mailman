@@ -2,7 +2,7 @@
  GNU Mailman Coding Style Guide
 ================================
 
-Copyright (C) 2002-2022 Barry A. Warsaw
+Copyright (C) 2002-2025 by the Free Software Foundation, Inc.
 
 
 Python coding style guide for GNU Mailman Core
@@ -105,7 +105,7 @@ Much of the style guide is enforced by the command ``tox -e qa``.
   than ``klass``.
 
 
-.. _`PEP 8`: https://www.python.org/peps/pep-0008.html
+.. _`PEP 8`: https://peps.python.org/pep-0008/
 .. _`GNU Mailman Python template`: https://gitlab.com/mailman/mailman/blob/master/template.py
 .. _public: https://public.readthedocs.io/en/latest/
-.. _`PEP 257`: https://www.python.org/peps/pep-0257.html
+.. _`PEP 257`: https://peps.python.org/pep-0257/

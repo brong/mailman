@@ -10,10 +10,8 @@ example of this.
 
 Configuration is handled in the [ARC] section of ``mailman.cfg``, and is mostly
 a question of cryptographic key management.  A public/private key pair should
-be generated, and the various options configured. See
-http://www.gettingemaildelivered.com/dkim-explained-how-to-set-up-and-use-domainkeys-identified-mail-effectively
-for reference, as well as the additional documentation about ARC configuration
-in general in schema.cfg.
+be generated, and the various options configured. See the additional
+documentation about ARC configuration in general in schema.cfg.
 
 .. note::
 

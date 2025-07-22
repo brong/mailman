@@ -9,7 +9,7 @@ subscribing or unsubscribing.
 
 To set up Postorius, please see `the Postorius documentation`_.
 
-.. _`Postorius`: https://gitlab.com/mailman/postorius/
+.. _`Postorius`: https://gitlab.com/mailman/postorius
 .. _`Django`: https://www.djangoproject.com/
 .. _`the Postorius documentation`: https://postorius.readthedocs.io
 

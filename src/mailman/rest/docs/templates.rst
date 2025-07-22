@@ -660,5 +660,5 @@ below.  Here are all the supported template names:
     * ``user_email`` - the email address of the new member
 
 
-.. _requests: http://docs.python-requests.org/en/master/
+.. _requests: https://docs.python-requests.org/en/latest/
 .. _`Mailman's internal use`: https://gitlab.com/mailman/mailman/blob/master/src/mailman/utilities/i18n.py#L45

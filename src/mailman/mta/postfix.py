@@ -1,4 +1,4 @@
-# Copyright (C) 2001-2023 by the Free Software Foundation, Inc.
+# Copyright (C) 2001-2025 by the Free Software Foundation, Inc.
 #
 # This file is part of GNU Mailman.
 #
@@ -152,7 +152,7 @@ class LMTP:
 
     def _generate_lmtp_file(self, fp):
         # The format for Postfix's LMTP transport map is defined here:
-        # http://www.postfix.org/transport.5.html
+        # https://www.postfix.org/transport.5.html
         #
         # Sort all existing mailing list names first by domain, then by
         # local part.  For Postfix we need a dummy entry for the domain.

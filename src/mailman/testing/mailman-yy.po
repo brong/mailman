@@ -1,6 +1,6 @@
 
 # Test catalog for Ylandia (yy)
-# Copyright (C) 2011-2023 by the Free Software Foundation, Inc.
+# Copyright (C) 2011-2025 by the Free Software Foundation, Inc.
 msgid ""
 msgstr ""
 "Project-Id-Version: mailman\n"

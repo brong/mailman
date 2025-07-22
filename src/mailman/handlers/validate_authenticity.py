@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2023 by the Free Software Foundation, Inc.
+# Copyright (C) 2017-2025 by the Free Software Foundation, Inc.
 #
 # This file is part of GNU Mailman.
 #
@@ -13,7 +13,7 @@
 # more details.
 #
 # You should have received a copy of the GNU General Public License along with
-# GNU Mailman.  If not, see <http://www.gnu.org/licenses/>.
+# GNU Mailman.  If not, see <https://www.gnu.org/licenses/>.
 
 """Perform origination & content authentication checks and add
 an Authentication-Results header to the outgoing message"""

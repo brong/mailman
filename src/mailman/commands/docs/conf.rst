@@ -80,4 +80,4 @@ If you specify both a section and a key, you will get the corresponding value.
     noreply@example.com
 
 
-.. _`Postfix command postconf(1)`: http://www.postfix.org/postconf.1.html
+.. _`Postfix command postconf(1)`: https://www.postfix.org/postconf.1.html

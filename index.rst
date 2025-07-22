@@ -14,7 +14,7 @@ Mailman - The GNU Mailing List Management System
 .. image:: https://img.shields.io/pypi/dm/mailman.svg
     :target: https://pypi.org/project/mailman/
 
-Copyright (C) 1998-2022 by the Free Software Foundation, Inc.
+Copyright (C) 1998-2025 by the Free Software Foundation, Inc.
 
 This is GNU Mailman, a mailing list management system distributed under the
 terms of the GNU General Public License (GPL) version 3 or later.  The name of
@@ -22,7 +22,7 @@ this software is spelled "Mailman" with a leading capital 'M' but with a lower
 case second 'm'.  Any other spelling is incorrect.
 
 Technically speaking, you are reading the documentation for Mailman Core.  The
-full `Mailman 3 suite <http://docs.mailman3.org>`_ includes a web user
+full `Mailman 3 suite <https://docs.mailman3.org>`_ includes a web user
 interface called Postorius, a web archiver called HyperKitty, and a few other
 components.  If you're looking for instructions on installing the full suite,
 read that documentation.
@@ -35,11 +35,11 @@ interact with Mailman just fine.
 
 The Mailman home page is:
 
-    http://www.list.org
+    https://www.list.org
 
 and there is a community driven wiki at
 
-    http://wiki.list.org
+    https://wiki.list.org
 
 For more information on Mailman, see the above web sites, or the
 :ref:`documentation provided with this software <start-here>`.

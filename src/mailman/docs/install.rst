@@ -2,7 +2,7 @@
  Installing and running Mailman 3
 ==================================
 
-Copyright (C) 2008-2022 by the Free Software Foundation, Inc.
+Copyright (C) 2008-2025 by the Free Software Foundation, Inc.
 
 
 Requirements

@@ -139,6 +139,6 @@ IPython must be installed and available on your system
 When using IPython, the ``[shell]history_file`` is not used.
 
 
-.. _IPython: http://ipython.org/
+.. _IPython: https://ipython.org/
 .. _REPL: https://en.wikipedia.org/wiki/REPL
 .. _`GNU readline`: https://docs.python.org/3/library/readline.html

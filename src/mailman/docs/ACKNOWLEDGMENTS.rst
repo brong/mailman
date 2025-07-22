@@ -4,7 +4,7 @@
 GNU Mailman Acknowledgments
 ===========================
 
-Copyright (C) 1998-2022 by the Free Software Foundation, Inc.
+Copyright (C) 1998-2025 by the Free Software Foundation, Inc.
 
 
 Governance

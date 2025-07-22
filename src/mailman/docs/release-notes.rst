@@ -23,4 +23,4 @@ Hyperkitty, and mailman.client are described and developed elsewhere.
 
 More release notes are maintained on the `Mailman wiki`_.
 
-.. _`Mailman wiki`: http://wiki.list.org/Mailman3
+.. _`Mailman wiki`: https://wiki.list.org/Mailman3
