@@ -136,7 +136,7 @@ class LMTP:
             # If the transport_file_type is 'hash' then run the postmap command
             # on newly generated file to convert them in to hash table like
             # Postfix wants.
-            if self.postmap_command:
+            if getattr(self, 'postmap_command', False):
                 errors = []
                 files = [lmtp_path, domains_path]
                 if vmap:
