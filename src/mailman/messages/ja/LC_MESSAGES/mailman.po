@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-05 07:50-0700\n"
-"PO-Revision-Date: 2025-02-16 21:02+0000\n"
+"PO-Revision-Date: 2025-08-13 01:01+0000\n"
 "Last-Translator: SATOH Fumiyasu <fumiyas@osstech.co.jp>\n"
-"Language-Team: Japanese <https://hosted.weblate.org/projects/gnu-mailman/mailman/ja/>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/gnu-mailman/"
+"mailman/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.10\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:83
 #: src/mailman/chains/hold.py:166 src/mailman/handlers/acknowledge.py:56
@@ -2017,7 +2018,7 @@ msgstr "同じメッセージの一部の重複を抑制します。"
 
 #: src/mailman/handlers/check_dmarc.py:43
 msgid "Check whether to Apply DMARC mitigations."
-msgstr ""
+msgstr "DMARC 対策を適用するかの判定。"
 
 #: src/mailman/handlers/cleanse_dkim.py:42
 msgid "Remove DomainKeys headers."
