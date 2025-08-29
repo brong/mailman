@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-05 07:50-0700\n"
-"PO-Revision-Date: 2025-03-18 17:55+0000\n"
-"Last-Translator: Leandro Navarro <leandro@pangea.org>\n"
-"Language-Team: Catalan <https://hosted.weblate.org/projects/gnu-mailman/mailman/ca/>\n"
+"PO-Revision-Date: 2025-08-29 13:01+0000\n"
+"Last-Translator: Ecron <ecron_89@hotmail.com>\n"
+"Language-Team: Catalan <https://hosted.weblate.org/projects/gnu-mailman/"
+"mailman/ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11-dev\n"
+"X-Generator: Weblate 5.13.1-dev\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:83
 #: src/mailman/chains/hold.py:166 src/mailman/handlers/acknowledge.py:56
@@ -2021,7 +2022,7 @@ msgstr "Suprimiu alguns duplicats del mateix missatge."
 
 #: src/mailman/handlers/check_dmarc.py:43
 msgid "Check whether to Apply DMARC mitigations."
-msgstr ""
+msgstr "Comprova si cal aplicar les mitigacions DMARC."
 
 #: src/mailman/handlers/cleanse_dkim.py:42
 msgid "Remove DomainKeys headers."
