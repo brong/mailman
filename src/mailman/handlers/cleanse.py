@@ -91,6 +91,14 @@ class Cleanse:
             # And something sets these
             del msg['x-mailfrom']
             del msg['x-envelope-from']
+            # Also various DKIM, ARC and Authenitcation-Results headers can
+            # reveal the sending domain and in some cases, even the sender.
+            del msg['domainkey-signature']
+            del msg['dkim-signature']
+            del msg['authentication-results']
+            for hdr in msg.keys():
+                if hdr.lower().startswith('arc-'):
+                    del msg[hdr]
             # And now remove all but the keepers.
             self.remove_nonkeepers(msg)
             i18ndesc = str(uheader(mlist, mlist.description, 'From'))

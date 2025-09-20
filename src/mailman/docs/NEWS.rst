@@ -47,7 +47,9 @@ Bugs fixed
 * Cache manager no longer returns expired cache entries.  (Closes #1231)
 * Support email addresses with ``/`` in its local part. (Closes #774)
 * In admin notification messages, do not use MIME header encoding for
-  message body text.  (Close #1239)
+  message body text.  (Closes #1239)
+* Anonymous lists now remove DKIM, Authentication and ARC headers.
+  (Closes #1241)
 
 New Features
 ------------

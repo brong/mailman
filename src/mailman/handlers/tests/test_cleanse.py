@@ -53,6 +53,10 @@ X-MailFrom: <anne@example.com>
 X-Envelope-From: <anne@example.com>
 X-Unknown: some value
 Return-Receipt-To: <anne@example.com>
+Authentication-Results: example.com; dkim=pass
+ARC-Authentication-Results: i=1; example.com
+ARC-Message-Signature:  i=1; d=example.com
+DKIM-Signature: d=example.com
 
 body
 """)
@@ -72,7 +76,9 @@ body
         removals = set(('Approved', 'Urgent', 'Return-Receipt-To', 'Received',
                         'Sender', 'Organization', 'Return-Path',
                         'X-Originating-Email', 'X-MailFrom', 'X-Envelope-From',
-                        'X-Unknown'))
+                        'X-Unknown', 'Authentication-Results',
+                        'ARC-Authentication-Results', 'ARC-Message-Signature',
+                        'DKIM-Signature'))
         self.assertEqual(set(self._msg.keys()), self._headers - removals)
         self.assertNotEqual('<1234@example.com>', self._msg['message-id'])
         self.assertEqual('ant@example.com', self._msg['reply-to'])
@@ -93,7 +99,9 @@ body
         removals = set(('Approved', 'Urgent', 'Return-Receipt-To', 'Received',
                         'Sender', 'Organization', 'Return-Path',
                         'X-Originating-Email', 'X-MailFrom',
-                        'X-Envelope-From'))
+                        'X-Envelope-From', 'Authentication-Results',
+                        'ARC-Authentication-Results', 'ARC-Message-Signature',
+                        'DKIM-Signature'))
         self.assertEqual(set(self._msg.keys()), self._headers - removals)
 
     def test_anonymous_bad_regexp(self):
@@ -109,7 +117,9 @@ body
         removals = set(('Approved', 'Urgent', 'Return-Receipt-To', 'Received',
                         'Sender', 'Organization', 'Return-Path',
                         'X-Originating-Email', 'X-MailFrom', 'X-Envelope-From',
-                        'X-Unknown'))
+                        'X-Unknown', 'Authentication-Results',
+                        'ARC-Authentication-Results', 'ARC-Message-Signature',
+                        'DKIM-Signature'))
         self.assertEqual(set(self._msg.keys()), self._headers - removals)
         self.assertIn('Ignored bad anonymous_list_keep_headers regexp ?.: '
                       'nothing to repeat at position 0', mark.read())
