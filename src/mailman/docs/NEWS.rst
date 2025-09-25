@@ -17,65 +17,65 @@ Here is a history of user visible changes to Mailman.
 Bugs fixed
 ----------
 * Incoming messages rejected with defects now include the defects list in the
-  status and the rejection and defects list is logged.  (Closes #351)
+  status and the rejection and defects list is logged.  (:issue:`351`)
 * The ``mailman members`` command no longer throws AttributeError when listing
-  nonmembers with no display name and no user record.  (Closes #1187)
+  nonmembers with no display name and no user record.  (:issue:`1187`)
 * OwnerNotification uses the site owner address as the envelope sender.
-  (Closes #1191)
+  (:issue:`1191`)
 * Remove a race condition in makedirs() utility function that causes a
-  FileExistsError exception.  (Closes #1192)
+  FileExistsError exception.  (:issue:`1192`)
 * Multipart messages with an emtpy part and a non-text part are now properly
-  recast during content filtering.  (Closes #1196)
+  recast during content filtering.  (:issue:`1196`)
 * The REST API now can create/edit domains with an empty ``base_url`` parameter
-  (Closes #1201)
+  (:issue:`1201`)
 * The REST API now does more validation of parameters when creating/editing
-  domains.  (Closes #1202)
+  domains.  (:issue:`1202`)
 * Creating a list with ``private-default`` style now explicitly sets the
   ``first_strip_reply_to``, ``reply_goes_to_list`` and ``reply_to_address``
-  attributes.  (Closes #1205)
+  attributes.  (:issue:`1205`)
 * The ``*_these_nonmembers`` lists perform case-insensitive matching.
-  (Closes #1207)
-* A potential race when logging an unsubscribe is avoided.  (Closes #1222)
+  (:issue:`1207`)
+* A potential race when logging an unsubscribe is avoided.  (:issue:`1222`)
 * A roster's get_member() and get_memberships() methods are now case
-  insensitive.  (Closes #1223)
+  insensitive.  (:issue:`1223`)
 * Logging from a socket.error in outgoing runner now includes the error
-  message.  (Closes #514)
+  message.  (:issue:`514`)
 * The ``mailman import21`` command does not add duplicate entry to
-  the ``*_these_nonmembers`` lists. (Closes #1213)
+  the ``*_these_nonmembers`` lists. (:issue:`1213`)
 * Unfold address containing headers before parsing in implicit_dest.
-  (Closes #1229)
-* Cache manager no longer returns expired cache entries.  (Closes #1231)
-* Support email addresses with ``/`` in its local part. (Closes #774)
+  (:issue:`1229`)
+* Cache manager no longer returns expired cache entries.  (:issue:`1231`)
+* Support email addresses with ``/`` in its local part. (:issue:`774`)
 * In admin notification messages, do not use MIME header encoding for
-  message body text.  (Closes #1239)
+  message body text.  (:issue:`1239`)
 * Anonymous lists now remove DKIM, Authentication and ARC headers.
-  (Closes #1241)
+  (:issue:`1241`)
 
 New Features
 ------------
-* A member's delivery_status is now available via REST.  (Closes #1184)
-* Subscribe and unsubscribe events are now logged.  (Closes #1143)
+* A member's delivery_status is now available via REST.  (:issue:`1184`)
+* Subscribe and unsubscribe events are now logged.  (:issue:`1143`)
 * There is a new ``probe_add_dsn`` setting in the ``mta`` section of
   mailman.cfg. This defaults to ``yes`` to keep current behavior but can be set
   to ``no`` to prevent adding the triggering DSN to bounce probes when probes
-  are enabled.  (Closes #1195)
+  are enabled.  (:issue:`1195`)
 * A new ``admin_notify_held_with_attachment`` parameter allows disabling
-  sending held messages as attachments when notifying moderators. (Closes #670)
-* A list's ``max_days_to_hold`` setting is now implemented.  (Closes #1215)
+  sending held messages as attachments when notifying moderators. (:issue:`670`)
+* A list's ``max_days_to_hold`` setting is now implemented.  (:issue:`1215`)
 * Setting ``cache_life`` in the ``mailman`` section of mailman.cfg to ``0d``
-  will disable template caching.  (Closes #1230)
-* Template manager no longer caches the content of file: URIs.  (Closes #1233)
+  will disable template caching.  (:issue:`1230`)
+* Template manager no longer caches the content of file: URIs.  (:issue:`1233`)
 * DMARC mitigations are now applied to mail to the -owner address.
-  (Closes #1234)
+  (:issue:`1234`)
 * The ``transport_file_type`` setting in ``postfix.cfg`` file can take a
-  Postfix database type name (e.g., ``lmdb``).  (Closes #1235)
+  Postfix database type name (e.g., ``lmdb``).  (:issue:`1235`)
 
 Other
 -----
 * The subject of uncaught bounce notifications include a list's display name.
-  (Closes #1194)
+  (:issue:`1194`)
 * Documented that the ``mailman remove`` command doesn't remove archives.
-  (See #1198)
+  (:issue:`1198`)
 
 .. _news-3.3.10:
 
@@ -94,61 +94,61 @@ Configuration
 Bugs fixed
 ----------
 * The ``mailman members`` command will now fall back to the member's user
-  record display_name if the address record has none.  (Closes #1107)
+  record display_name if the address record has none.  (:issue:`1107`)
 * The user_name_or_email substitution in regular header/footer templates now
-  works (Closes #1108)
+  works (:issue:`1108`)
 * The output from the ``mailman lists`` command no longer has trailing blanks
   and the command with the ``-d`` option doesn't fail with very long list ids.
-  (Closes #1117 and #1118)
-* The text of the AlreadySubscribedError is now translatable.  (Closes #1121)
+  (:issue:`1117` :issue:`1118`)
+* The text of the AlreadySubscribedError is now translatable.  (:issue:`1121`)
 * The ``mailman import21`` command adjust spaces in ``subject_prefix`` for
-  Mailman 2.1 compatibility.  (Closes #1135)
+  Mailman 2.1 compatibility.  (:issue:`1135`)
 * An exception in the lmtp runner is caught and a retryable status returned.
-  (Closes #1148)
+  (:issue:`1148`)
 * Catch more generic requests exceptions on downloading suffix list
-  to avoid shunting messages.  (Closes #1140)
+  to avoid shunting messages.  (:issue:`1140`)
 * Reordered retrievals in the Task runner to avoid premature deletions due to
-  a race condition.  (Closes #1151)
+  a race condition.  (:issue:`1151`)
 * The ``nttplib`` slated to be removed in Python 3.13. Getting from PyPI.
-  (Closes #1144)
-* The web URL replacements now work in all templates.  (Closes #1142)
+  (:issue:`1144`)
+* The web URL replacements now work in all templates.  (:issue:`1142`)
 * Emergency moderation is now applied following mail loop detection, banned
   address detection and header matching so those actions are applied before
-  an emergency hold.  (Closes #173)
-* The performance of ``mailman findmember`` has been improved.  (Closes #1095)
+  an emergency hold.  (:issue:`173`)
+* The performance of ``mailman findmember`` has been improved.  (:issue:`1095`)
 * Moderation reasons in admin notices of held messages are now always in the
-  list's preferred language.  (Closes #1159)
+  list's preferred language.  (:issue:`1159`)
 * The ``mailman import21`` command drops invalid regexps from the imported
-  ``ban_list``.  (Closes #1166)
+  ``ban_list``.  (:issue:`1166`)
 * The default setting for ``bounce_matching_headers`` is shortened.
-  (Closes #1172)
+  (:issue:`1172`)
 * The ``--force`` option for ``mailman start`` will now remove a stale lock if
-  the ``pid`` that set it exists but is not a Mailman process.  (Closes #1174)
+  the ``pid`` that set it exists but is not a Mailman process.  (:issue:`1174`)
 
 New Features
 ------------
 * One can now add entries like ``@list@example.com`` to the
   ``accept_these_nonmembers`` attribute of a list to accept nonmember posts
-  from members of another list.  (Closes #794)
+  from members of another list.  (:issue:`794`)
 * REST API now allows forwarding the held message to a new address when handling
-  the message. (Fixes #174)
+  the message. (:issue:`174`)
 * Add the ability to set web URLs by setting domain's ``base_url`` parameter
   which allows using parameters like ``$held_message_url`` in
-  the templates. (See #981)
+  the templates. (:issue:`981`)
 * The ``mailman create`` command now has a ``--style-name NAME`` option.
-  (Closes #1136)
+  (:issue:`1136`)
 * The task runner will now delete message files that have no entry in the
-  message store.  (Closes #1145)
-* Set process title if setproctitle module is available.  (Closes #1134)
+  message store.  (:issue:`1145`)
+* Set process title if setproctitle module is available.  (:issue:`1134`)
 * Strip whitespaces from Message-ID header value in log not to separate
-  into multiple lines (Closes #1139)
+  into multiple lines (:issue:`1139`)
 * The lifetime of saved DSNs in the message store is now configurable with a
-  default of 1 day.  (Closes #1145)
+  default of 1 day.  (:issue:`1145`)
 * Task runner now uses the configured dsn_lifetime when deleting bounce events.
 * Setting ``digest_size_threshold`` to zero now means ``unlimited``, i.e., a
-  digest will never be sent based on size.  (Closes #1158)
+  digest will never be sent based on size.  (:issue:`1158`)
 * There is a new ``mailman admins`` command to add/delete owners or moderators
-  of a list.  (Closes #1160)
+  of a list.  (:issue:`1160`)
 
 Other
 -----
@@ -177,57 +177,57 @@ Configuration
   parts, ``logging.http`` is for the Mailman internal code and
   ``logging.gunicorn`` is for Gunicorn specifically since they have
   different logging formats. This should fix suprious errors with
-  ``KeyError: t`` that was often confusing for users. (Fixes #1049)
+  ``KeyError: t`` that was often confusing for users. (:issue:`1049`)
 
 * Python 3.9 is now the minimum supported version of Python.
 
 Bugs fixed
 ----------
 * ``config.mta.remove_dkim_headers`` now applies to messages to -owner.
-  (Closes #1053)
+  (:issue:`1053`)
 * The master process now robustly detects when runner processes
-  terminate and restarts them (Closes #898).
+  terminate and restarts them (:issue:`898`).
 * Setting Postfix transport_file_type: regex without setting something for
-  postmap_command: no longer throws an exception.  (Closes #1058)
+  postmap_command: no longer throws an exception.  (:issue:`1058`)
 * When bounce processing disables delivery for a user, the user's score is
-  reset so it will be zero if delivery is enabled.  (Closes #1061)
+  reset so it will be zero if delivery is enabled.  (:issue:`1061`)
 * The ``mailman shell`` command now works and displays the banner with
-  ``use_ipython: yes``.  (Closes #1062)
+  ``use_ipython: yes``.  (:issue:`1062`)
 * Bogus Message-ID headers that have been observed in the wild are now fixed.
-  (Closes #1065)
+  (:issue:`1065`)
 * Raising StopIteration in a workflow process no longer creates a mailman.error
-  log entry.  (Closes #1059)
-* The task runner now evicts old, processed bounce events.  (Closes #1067)
-* We now require authheaders>=0.15.2.  (Closes #1064)
-* Digests no longer contain a bogus Archived-At header.  (Closes #1069)
+  log entry.  (:issue:`1059`)
+* The task runner now evicts old, processed bounce events.  (:issue:`1067`)
+* We now require authheaders>=0.15.2.  (:issue:`1064`)
+* Digests no longer contain a bogus Archived-At header.  (:issue:`1069`)
 * Content filtering will no longer add its report to a non-mixed multipart
   message but will wrap the message and add the report to the wrapper.
-  (Closes #1071)
+  (:issue:`1071`)
 * The administrivia rule will now decode encoded message bodies.
-  (Closes #1072)
+  (:issue:`1072`)
 * Email address validation now accepts quoted local parts and @ in local part.
-  (Closes #1077)
+  (:issue:`1077`)
 * The default for max_recipients has been reduced to 10 to avoid possible lost
   mail when a large number of invalid recipients causes the MTA to disconnect.
-  (Closes #1083)
+  (:issue:`1083`)
 * Messages preserved or forwarded by content filtering are now the original
-  message rather than the content filtered one.  (Closes #1089)
+  message rather than the content filtered one.  (:issue:`1089`)
 * List welcome and goodbye messages to users with English preferred_language
-  now have their Subject: RFC 2047 encoded as needed.  (Closes #1098)
+  now have their Subject: RFC 2047 encoded as needed.  (:issue:`1098`)
 * Bounce processing notifications due to a DSN for multiple users now have the
-  DSN attached to each notice.  (Closes #1101)
+  DSN attached to each notice.  (:issue:`1101`)
 
 New Features
 ------------
 * There is a new ``dmarc_addresses`` list attribute which is a list of email
   addresses and patterns matching email addresses.  If a post is From: an
   address matching one of these, dmarc mitigations will be applied regardless
-  of the From: domain's dmarc policy.  (Closes #1084)
+  of the From: domain's dmarc policy.  (:issue:`1084`)
 
 Other
 -----
 * Typo corrected under "Building the documentation" section of
-  ``contribute.rst``.  (Fixes #1075)
+  ``contribute.rst``.  (:issue:`1075`)
 
 .. _news-3.3.8:
 
@@ -240,32 +240,32 @@ Bugs fixed
 ----------
 * The deprecated SQLAlchemy query.values() method is replaced by
   query.with_entities().  This fixes an issue with MariaDB that truncated
-  the generated postfix_lmtp file.  (Closes #1044)
+  the generated postfix_lmtp file.  (:issue:`1044`)
 * An uncaught passlib.exc.UnknownHashError in utilities/passwords.py is now
-  caught and handled appropriately.  (Closes #1046)
+  caught and handled appropriately.  (:issue:`1046`)
 * Rejection notices for a message with an RFC 2047 encoded Subject: now display
-  the decoded subject.  (Closes #672)
+  the decoded subject.  (:issue:`672`)
 * Don't RFC 2047 encode display names in UserNotifications. Allow sending
-  utf-8 encoded notifications.  (Closes #673)
-* Don't replace non-ascii in subjects in notifications.  (Closes #673)
+  utf-8 encoded notifications.  (:issue:`673`)
+* Don't replace non-ascii in subjects in notifications.  (:issue:`673`)
 
 
 Command line
 ------------
 * The ``mailman members`` command no longer RFC 2047 encodes non-ascii display
-  names.  (Closes #1048)
+  names.  (:issue:`1048`)
 
 
 Performance
 -----------
 * Improve the performance of Held message handling by reducing the total
-  number of database calls required. (Fixes #1026 and #1045)
+  number of database calls required. (:issue:`1026`,  :issue:`1045`)
 
 
 Python Support
 --------------
-* Add support for Python 3.10. (Closes #936)
-* Add support for Python 3.11 (See !1076)
+* Add support for Python 3.10. (:issue:`936`)
+* Add support for Python 3.11 (:mr:`1076`)
 
 
 
@@ -288,20 +288,20 @@ also accepted. This is an example config::
 
 Dependencies
 ------------
-* Add support for SQLAlchemy 1.4+ (Closes #964)
+* Add support for SQLAlchemy 1.4+ (:issue:`964`)
 
 
 Python Support
 --------------
 
 * Drop support for Python 3.6 since SQLAlchemy 2.0 will drop
-  support for it and it is EOL by now. (See !1035)
+  support for it and it is EOL by now. (:mr:`1035`)
 
 
 Bugs fixed
 ----------
-* The fix for #994 in 3.3.6 blocked too many subscription attempts.  This is
-  now corrected and another test added.
+* The fix for :issue:`994` in 3.3.6 blocked too many subscription attempts.
+  This is now corrected and another test added.
 
 
 .. _news-3.3.6:
@@ -315,70 +315,70 @@ Bugs fixed
 ----------
 * The ``mailman members`` command reports incompatible options that would
   otherwise throw exceptions.
-* Require authheaders >=0.14.0 and adjust tests accordingly.  (Closes #954)
+* Require authheaders >=0.14.0 and adjust tests accordingly.  (:issue:`954`)
 * Handling a held message will not remove it from the message store if there
-  are other requests for it.  (Closes #955)
+  are other requests for it.  (:issue:`955`)
 * ARC signing now signs after the message has been personalized and decorated.
-  (Closes #896)
+  (:issue:`896`)
 * The prior fix for expanding replacements in the ``list:user:notice:goodbye``
-  template was incomplete.  This is fixed.  (Closes #922)
+  template was incomplete.  This is fixed.  (:issue:`922`)
 * Decoration of an html message containing non-ascii resulted in a message
   that couldn't by flattened as_bytes and whose as_string representation
-  contained non-ascii.  This is fixed.  (Closes #965 and #967)
+  contained non-ascii.  This is fixed.  (:issue:`965` :issue:`967`)
 * The REST API will now accept JSON encoded data with boolean values for
-  boolean attributes.  (Closes #970)
+  boolean attributes.  (:issue:`970`)
 * Fix a bug where loading a plugin which raises an exception in ``pre_hook``
-  can cause Mailman to crash trying to disable that plugin. (Closes #724)
+  can cause Mailman to crash trying to disable that plugin. (:issue:`724`)
 * Fix a bug where the ``PIDWatcher()`` iterates over internal dict while
-  it can be updated during that time. (Closes #724)
+  it can be updated during that time. (:issue:`724`)
 * The ``mailman import21`` now always imports owners/moderators with
-  ``DeliveryStatus.enabled``.  (Closes #977)
+  ``DeliveryStatus.enabled``.  (:issue:`977`)
 * A specific nonmember moderation action will be checked for and applied before
-  testing the legacy ``*_these_nonmembers`` settings.  (Closes #978)
+  testing the legacy ``*_these_nonmembers`` settings.  (:issue:`978`)
 * Invalid regexps in ``*_these_nonmembers`` are properly logged and can't be
-  set via REST.  (Closes #974)
+  set via REST.  (:issue:`974`)
 * Override the as_bytes() method in the mailman.email.message.Message class to
-  workaround https://bugs.python.org/issue41307.  (Closes #979 and #980)
+  workaround https://bugs.python.org/issue41307.  (:issue:`979` :issue:`980`)
 * The nonmember moderation rule now checks all senders, not just the first.
-  (Closes #986)
+  (:issue:`986`)
 * The i18n gettext replacements now all use curly brace notation to avoid
   issues whith translations that might follow them immediately with a period.
-  The various mailman.po files have been updated accordingly.  (Closes #987)
+  The various mailman.po files have been updated accordingly.  (:issue:`987`)
 * The ``mailman import21`` command no longer creates unnecessary entries in the
-  ``template`` table.  (Closes #988)
+  ``template`` table.  (:issue:`988`)
 * DMARC munge from mitigation will now find a nonmember poster's display name.
-  (Closes #989)
+  (:issue:`989`)
 * Subscription workflow will now find an existing User when subscription is
-  for an Address and vice versa.  (Closes #994)
-* The subject of Welcome and Goodbye messages is now translated.  (Closes #993)
+  for an Address and vice versa.  (:issue:`994`)
+* The subject of Welcome and Goodbye messages is now translated.  (:issue:`993`)
 * Emails to a list's ``-join``, ``-leave`` or ``-confirm`` address that result
-  in some errors will now produce a response.  (Closes #991)
+  in some errors will now produce a response.  (:issue:`991`)
 * RFC2047 encoded Subject: and From: headers reported in email command replies
-  are now decoded.  (Closes #999)
+  are now decoded.  (:issue:`999`)
 * The ``mailman import21`` command now converts more template replacements and
-  reports to stderr any remaining unconverted replacements.  (See #870)
+  reports to stderr any remaining unconverted replacements.  (:issue:`870`)
 * The postfix generated virtual mappings now have correct spacing with
-  alias_domains.  (Closes #1001 and #1013)
+  alias_domains.  (:issue:`1001` :issue:`1013`)
 * Updated outgoing runner's fake DSN to use list addresses rather than
-  mailman@example.com in From: and To:.  (Closes #1018)
+  mailman@example.com in From: and To:.  (:issue:`1018`)
 * Subject prefixing on lists with non-ascii preferred language no longer drops
-  parts of folded subject headers.  (Closes #1021)
+  parts of folded subject headers.  (:issue:`1021`)
 * The ``verp_confirmations`` setting has now been implemented with default
-  of ``yes``.  (Closes #1023)
+  of ``yes``.  (:issue:`1023`)
 * The ``anonymous_list_keep_headers`` setting now only applies to X-* headers
-  and will not cause non X-* headers to be removed.  (Closes #1031)
+  and will not cause non X-* headers to be removed.  (:issue:`1031`)
 * The ``mailman.mta.connection.sendmail()`` method now accepts a string, bytes
   or a Message object and ``BaseDelivery`` now passes a Message object.
-  (See #1022)
+  (:issue:`1022`)
 * The ``mailman.app.inject.inject_text()`` function now creates the Message
-  object from bytes.  (Closes #1024)
+  object from bytes.  (:issue:`1024`)
 * The ``mailman import21`` command now adds ``^listname@`` to the list's
   ``acceptable_aliases`` for compatiblity with Mailman 2.1's behavior.
-  (Closes #1032)
+  (:issue:`1032`)
 * An ``AttributeError`` thrown in the task runner, possibly due to a race
-  condition, is now avoided.  (Closes #1028)
+  condition, is now avoided.  (:issue:`1028`)
 * Email confirmation of a subscription request for a member is no longer
-  shunted.  (Closes #1035)
+  shunted.  (:issue:`1035`)
 
 REST
 ----
@@ -387,12 +387,12 @@ REST
 Command line
 ------------
 * The ``mailman members`` command now has a ``--count-only`` option.
-  (Closes #1030)
+  (:issue:`1030`)
 
 New Features
 ------------
 * The LMTP service now only accept ``RCPT TO`` commands if the given
-  recipient address is acceptable (See !1043).
+  recipient address is acceptable (:mr:`1043`).
 
 .. _news-3.3.5:
 
@@ -403,113 +403,113 @@ New Features
 
 Bugs fixed
 ----------
-* Bounce runner now properly commits database transactions.  (Closes #850)
+* Bounce runner now properly commits database transactions.  (:issue:`850`)
 * Pending subscriptions now have a lifetime equal to the configured
-  ``pending_request_life`` rather than 3650 days.  (Closes #729)
+  ``pending_request_life`` rather than 3650 days.  (:issue:`729`)
 * Held messages which are handled are now removed from the message store and
-  the pending db.  (Closes #257)
+  the pending db.  (:issue:`257`)
 * Admin notices sent when a list member's delivery is disabled by bounce or
   when a member's bounce score is incremented, now contain a copy of the
-  triggering DSN.  (Closes #737)
+  triggering DSN.  (:issue:`737`)
 * Handling a held message now also removes the poster's pending
-  ``held message`` from the pending db.  (Closes #257)
+  ``held message`` from the pending db.  (:issue:`257`)
 * Deleting a pending request now also deletes any associated workflow.
-  (See #853)
+  (:issue:`853`)
 * A new runner which is not a queue runner and which doesn't override its
-  ``run`` or ``_one_itiration`` methods can now be implemented.  (Closes #866)
+  ``run`` or ``_one_itiration`` methods can now be implemented.  (:issue:`866`)
 * The ``FileNotFound`` exception thrown in CacheManager on attempt to delete
-  an entry for a missing file is now caught.  (Closes #867)
-* Pending probe bounce tokens now have a lifetime of 10 days.  (Closes #869)
+  an entry for a missing file is now caught.  (:issue:`867`)
+* Pending probe bounce tokens now have a lifetime of 10 days.  (:issue:`869`)
 * Improve the performance of ``/users`` API when paginating by doing the
-  pagination in database layer. (Closes #876)
+  pagination in database layer. (:issue:`876`)
 * Attempts to get a message from the message store with a missing file are
-  now handled.  (Closes #877)
-* The task runner no longer prematurely deletes saved DSNs.  (Closes #878)
-* Bounce probe messages now contain the DSN as advertised.  (Closes #880)
+  now handled.  (:issue:`877`)
+* The task runner no longer prematurely deletes saved DSNs.  (:issue:`878`)
+* Bounce probe messages now contain the DSN as advertised.  (:issue:`880`)
 * The avoid_duplicates handler properly handles headers that are returned as
-  email.header.Header instances rather than strings.  (Closeds #881)
+  email.header.Header instances rather than strings.  (:issue:`881`)
 * The mta.deliver module properly handles headers that are returned as
-  email.header.Header instances rather than strings.  (Closeds #882)
+  email.header.Header instances rather than strings.  (:issue:`882`)
 * Places where  ``to_list`` in the message metadata were increctly referenced
-  as ``tolist`` have been corrected.  (Closes #883)
+  as ``tolist`` have been corrected.  (:issue:`883`)
 * It is now possible to confirm held messages by email as the admin notice
-  says.  (Closes #169)
+  says.  (:issue:`169`)
 * Some exceptions in ARC signing of some posts from HyperKitty and some from
-  prod.outlook.com are now handled without shunting the message.  (Closes #885)
+  prod.outlook.com are now handled without shunting the message.  (:issue:`885`)
 * Command runner now will decode the message body before processing it.
-  (Closes #859)
+  (:issue:`859`)
 * The ``mailinglist`` table ``info``, ``autoresponse_owner_text``,
   ``autoresponse_postings_text`` and ``autoresponse_request_text`` columns are
-  changed to Text.  (Closes #840, #886 and #925)
+  changed to Text.  (:issue:`840` :issue:`886` :issue:`925`)
 * The mailing list administrators roster ``get_member()`` method now returns
-  the owner if the target is both an owner and moderator.  (Closes #888)
+  the owner if the target is both an owner and moderator.  (:issue:`888`)
 * Command runner now handles RFC 2047 encoded command with non-ascii prefix.
-  (Closes #858)
+  (:issue:`858`)
 * Improve performance of the bounce runner by decreasing the number of
   database queries executed.
-* The master watcher will now restart a process that exits.  (See #887)
+* The master watcher will now restart a process that exits.  (:issue:`887`)
 * When using MySQL, most database columns that expect user input will now
   accept emojis and other 4-byte unicode characters by using the utf8mb4
-  character set instead of 3-byte. (Closes #891)
-* LMTP runner now sets unixfrom in incoming messages.  (Closes #904)
+  character set instead of 3-byte. (:issue:`891`)
+* LMTP runner now sets unixfrom in incoming messages.  (:issue:`904`)
 * The ``Message`` ``senders()`` method now RFC2047-decodes and unfolds headers.
-  (Closes #903)
+  (:issue:`903`)
 * The ``Message`` ``senders()`` method now gets all the addresses from the
-  configured headers.  (Closes #905)
+  configured headers.  (:issue:`905`)
 * Require flufl.bounce >=3.0.2, which improves parsing of bounce messages.
-  (Closes #892)
+  (:issue:`892`)
 * DMARC policy discovery ignores domains with multiple DMARC records per
-  RFC 7849.  (Closes #907)
+  RFC 7849.  (:issue:`907`)
 * Held messages missing from the message store can now be accepted and/or
-  forwarded.  (closes #914)
-* Dispose SQLAlchemy connections after a new worker process is forked. (Closes
-  #854)
+  forwarded.  (:issue:`914`)
+* Dispose SQLAlchemy connections after a new worker process is forked.
+  (:issue:`854`)
 * Exceptions in bounce processing member removal don't roll back successful
-  removals.  (Closes #909)
+  removals.  (:issue:`909`)
 * Only remove or send warnings to list members when processing bounces.
-  (Closes #910)
+  (:issue:`910`)
 * Replacements are now expanded in the ``list:user:notice:goodbye`` template.
-  (Closes #922)
-* The nntp runner no longer folds long headers in newsgroup posts.  (Closes
-  #919)
+  (:issue:`922`)
+* The nntp runner no longer folds long headers in newsgroup posts.
+  (:issue:`919`)
 * RFC 2047 encoded subject headers will now be recoded in the character set of
-  the list's preferred_language during subject prefixing if possible.  (Closes
-  #923)
+  the list's preferred_language during subject prefixing if possible.
+  (:issue:`923`)
 * DMARC mitigation wrap message now ensures existing cc and reply-to headers
-  are included in the wrapper.  (Closes #926)
-* The tagger handler now stringifies any Header instances.  (Closes #928)
+  are included in the wrapper.  (:issue:`926`)
+* The tagger handler now stringifies any Header instances.  (:issue:`928`)
 * Invitation and (un)subscription confirmation subjects are now translated
-  to the list's preferred language.  (Closes #930)
+  to the list's preferred language.  (:issue:`930`)
 * The ``mailman syncmembers`` command now catches and reports a
-  ``SubscriptionPendingError``.  (Closes #929)
+  ``SubscriptionPendingError``.  (:issue:`929`)
 * Trailing spaces are no longer removed from header and footer templates.
-  (Closes #932)
+  (:issue:`932`)
 * The email ``join`` command now handles RFC2047 encoded display names with
-  embedded commas.  (Closes #933)
+  embedded commas.  (:issue:`933`)
 * The ``gatenews`` command now parses messages with email.message_from_bytes
-  without specifying policy.  (Closes #934)
-* Improve error message from REST API for invalid email address (Fixes #872)
-* Nonmember posts gated from usenet bypass nonmember moderation.  (Closes #937)
+  without specifying policy.  (:issue:`934`)
+* Improve error message from REST API for invalid email address (:issue:`872`)
+* Nonmember posts gated from usenet bypass nonmember moderation.  (:issue:`937`)
 * VERPed vacation responses and similar are no longer scored as bounces.
-  (Closes #939)
+  (:issue:`939`)
 * If a message is held by a ``HeaderMatchRule``, the header name is now included
-  in the reason for hold.  (Closes #785)
+  in the reason for hold.  (:issue:`785`)
 
 Command line
 ------------
 * The ``notify`` subcommand is now more tolerant of certain database anomalies.
-  (Closes #861)
+  (:issue:`861`)
 * The ``notify`` subcommand now handles unicode errors in decoding RFC 2047
-  encoded subject headers.  (Closes #915)
+  encoded subject headers.  (:issue:`915`)
 * The ``mailman`` command will refuse to run as root unless the new
-  ``--run-as-root`` option is specified.  (Closes #776 and #920)
+  ``--run-as-root`` option is specified.  (:issue:`776` :issue:`920`)
 
 REST
 ----
 * Fixed an exception on retreiving held messages if the held request exists,
-  but the message is missing.  (Closes #856)
+  but the message is missing.  (:issue:`856`)
 * Add a new ``/users/find`` endpoint to allow searching for users by matching
-  display_name and user's email address. (Closes #874)
+  display_name and user's email address. (:issue:`874`)
 
 New Features
 ------------
@@ -524,10 +524,10 @@ New Features
   implementation evicts expired pendings and cache entries and removes
   orphaned workflows and orphaned message store messages.  It does these tasks
   at intervals defined by the new ``run_tasks_every`` setting in the
-  ``[mailman]`` section of mailman.cfg. Default is 1 hour.  (Closes #467 and
-  #853)
+  ``[mailman]`` section of mailman.cfg. Default is 1 hour.
+  (:issue:`467` :issue:`853`)
 * There is a new ``list:admin:notice:pending`` template for the notice from
-  the ``mailman notify`` command.  (Closes #890)
+  the ``mailman notify`` command.  (:issue:`890`)
 * The ``nntp`` runner will now run the ``gatenews`` subcommand at intervals
   defined by a new ``gatenews_every`` setting in the ``[nntp]`` section of
   mailman.cfg. Default is 5 every minutes.
@@ -535,7 +535,7 @@ New Features
 Security
 --------
 * Check the REST API password in a way that is resistant to timing attacks.
-  (CVE-2021-34337, Closes #911)
+  (CVE-2021-34337, :issue:`911`)
 
 .. _news-3.3.4:
 
@@ -547,38 +547,38 @@ Security
 Bugs
 ----
 * Require aiosmtpd >= 1.4.1 to allow address local parts longer than 64 bytes
-  in the lmtp runner.  (Closes #836)
+  in the lmtp runner.  (:issue:`836`)
 * The email join command now honors the digest=<no|mime|plain> option.
-  (Closes #19)
+  (:issue:`19`)
 * Folded ``Message-ID`` headers no longer cause folded smtp.log messages.
-  (Closes #844)
+  (:issue:`844`)
 * Removal of headers from posts to anonymous lists that can reveal the poster
-  or the poster's domain has been improved.  (Closes #848)
+  or the poster's domain has been improved.  (:issue:`848`)
 
 Command line
 ------------
 * The ``notify`` subcommand will now decode an RFC 2047 encoded Subject: for
-  the report of held messages.  (Closes #831)
+  the report of held messages.  (:issue:`831`)
 * The deprecated options ``--add``, ``--del`` and ``--sync`` are now disabled
   on the ``mailman members`` command.
 
 REST
 ----
-* Improve the speed of Members lookup via REST API. (Related to #700)
+* Improve the speed of Members lookup via REST API. (Related to :issue:`700`)
 * Allow specifying ``delivery_mode`` and ``delivery_status`` when creating a
-  new Member. (Closes #828)
+  new Member. (:issue:`828`)
 * Allow filtering members in ``/members/find`` API using ``delivery_status``,
-  ``delivery_mode`` and ``moderation_action``. (See #827)
+  ``delivery_mode`` and ``moderation_action``. (:issue:`827`)
 
 New Features
 ------------
 * There is a new setting ``filter_report`` in the ``[mailman]`` section of
   mailman.cfg.  If this is set to ``yes``, a report of changes by content
-  filtering will be added to the outgoing message.  (Closes #833)
+  filtering will be added to the outgoing message.  (:issue:`833`)
 * There is a new setting ``check_max_size_on_filtered_message`` in the
   ``[mailman]`` section of mailman.cfg.  If this is set to ``yes`` and the
   list does content filtering, the ``max_message_size`` hold will be based
-  on the size of the content filtered message.  (Closes #377)
+  on the size of the content filtered message.  (:issue:`377`)
 * There is a new setting ``anonymous_list_keep_headers`` in the ``[mailman]``
   section of mailman.cfg.  This is part of improved removal of headers from
   posts to anonymous lists.  This setting is a space separated list of regexp
@@ -590,8 +590,9 @@ New Features
 
 Other
 -----
-* Add better error message for preferred email edit when not verified. (Closes #706)
-* Reduce the number of database calls in UserManager. (Closes #700)
+* Add better error message for preferred email edit when not verified.
+  (:issue:`706`)
+* Reduce the number of database calls in UserManager. (:issue:`700`)
 
 .. _news-3.3.3:
 
@@ -602,33 +603,33 @@ Other
 
 Bugs
 ----
-* Handle some UnicodeEncodeErrors in creating digests.  (Closes #560)
+* Handle some UnicodeEncodeErrors in creating digests.  (:issue:`560`)
 * Increased the size of the data column in the workflowstate table.
-  (Closes #793)
-* Implemented a ``scrubber`` for plain text digests.  (Closes #473)
+  (:issue:`793`)
+* Implemented a ``scrubber`` for plain text digests.  (:issue:`473`)
 * The ``mailman gatenews`` command now adds ``original_size`` as a message
-  attribute.  (Extends fix for #762)
+  attribute.  (Extends fix for :issue:`762`)
 * Handle FileNotFoundError when creating digest.mmdf file without a
-  parent directory present.  (Closes #699)
+  parent directory present.  (:issue:`699`)
 * Fixed an issue where content filtering can throw UnicodeEncodeError when
-  converting HTML to plain text.  (Closes #798)
-* A bounce for a non-existent list is now handled.  (Closes #799)
+  converting HTML to plain text.  (:issue:`798`)
+* A bounce for a non-existent list is now handled.  (:issue:`799`)
 * RFC 2047 From: headers in emailed ``join`` commands are now decoded.
-  (Closes #802)
+  (:issue:`802`)
 * The ``mailman addmembers`` command now catches and reports a
-  ``SubscriptionPendingError``.  (Closes #805)
+  ``SubscriptionPendingError``.  (:issue:`805`)
 * RFC 2369 ``List-Owner`` header is now added when these headers are included.
-  (Closes #809)
+  (:issue:`809`)
 * Header filters will now properly match RFC 2047 encoded headers.
-  (Closes #815)
+  (:issue:`815`)
 * Mailman's ``vette`` log discard messages now include the reasons.
-  (Closes #816)
+  (:issue:`816`)
 * Increase the default REST API (gunicorn) timeout to 360 seconds from 30 as
-  several API endpoinds can be very slow. (Closes #770)
+  several API endpoinds can be very slow. (:issue:`770`)
 * Header filter rules are now properly processed after deletions and/or
-  reordering.  (Closes #818)
+  reordering.  (:issue:`818`)
 * Folded ``To: list-confirm+token@...`` headers are now parsed correctly.
-  (Closes: #819)
+  (:issue:`819`)
 
 Command line
 ------------
@@ -646,12 +647,12 @@ New Features
 REST
 ----
 * List configuration option ``send_goodbye_message`` is now exposed through
-  the REST API. (See !737)
-* Allow updating an Addresses' display_name attribute. (Closes #786)
-* Allow specifying a reason when rejecting a subscription request. (Closes
-  #767)
+  the REST API. (:mr:`737`)
+* Allow updating an Addresses' display_name attribute. (:issue:`786`)
+* Allow specifying a reason when rejecting a subscription request.
+  (:issue:`767`)
 * REST API now exposes unsubscription requests that can be handled by
-  Moderator. (Closes #768)
+  Moderator. (:issue:`768`)
 
 3.3.2
 =====
@@ -661,86 +662,86 @@ REST
 Bugs
 ----
 * When importing 2.1 lists, ignore CR characters added by browsers in headers
-  and footers.  (Closes #701)
-* RFC 2369 headers are now added to notification messages.  (Closes #710)
-* Bounce probes are now encoded in the correct charset.  (Closes #712)
+  and footers.  (:issue:`701`)
+* RFC 2369 headers are now added to notification messages.  (:issue:`710`)
+* Bounce probes are now encoded in the correct charset.  (:issue:`712`)
 * We now unfold address containing headers before parsing in avoid_duplicates.
-  (Closes #725)
+  (:issue:`725`)
 * The ``dmarc`` rule no longer misses if DNS returns a name containing upper
-  case.  (Closes #726)
+  case.  (:issue:`726`)
 * Fixed ``mailman.email.message.Message.as_string`` to not return unicode
-  surrogates.  (Closes #732)
+  surrogates.  (:issue:`732`)
 * Bounce probes can now be sent to a member subscribed as a User.
-  (Closes #739)
-* A member subscribed as a User can now be unsubscribed.  (Closes #734)
+  (:issue:`739`)
+* A member subscribed as a User can now be unsubscribed.  (:issue:`734`)
 * When a handler rejects or discards a message, it won't be delivered or
-  archived anyway.  (Closes #752)
+  archived anyway.  (:issue:`752`)
 * Messages forwarded when content filtering removes the entire message and
   ``filter_action`` is forward now go to owners as well as moderators.
-  (Closes #753)
+  (:issue:`753`)
 * Handle TOCTOU conditions when there are two simultaneous subscription
-  requests for the same email address. (Closes #748)
+  requests for the same email address. (:issue:`748`)
 * Removed unnecessary call to ``Lock().disown()`` from ``bin/master.py``.
-  (Closes #754)
-* Fixed an invalid logging call in bin/master.py.  (Closes #756)
+  (:issue:`754`)
+* Fixed an invalid logging call in bin/master.py.  (:issue:`756`)
 * VERPed list welcome messages now have a correct envelope sender.
-  (Closes #757)
-* Messages in digests now contain a ``Message: N`` header.  (Closes #764)
+  (:issue:`757`)
+* Messages in digests now contain a ``Message: N`` header.  (:issue:`764`)
 * The LMTP runner will now add a ``Message-ID:`` header if missing.
-  (Closes #448 and #490)
+  (:issue:`448` :issue:`490`)
 * The ``mailman gatenews`` command now adds ``original_size`` to the msgdata.
-  (Closes #762)
+  (:issue:`762`)
 
 Command line
 ------------
 * New ``addmembers``, ``delmembers`` and ``syncmembers`` ``mailman``
   subcommands have been added.  These provide more options and controls than
   the corresponding ``mailman members`` modes which are now deprecated.
-  (Closes #686)
+  (:issue:`686`)
 * The ``mailman conf`` command without a ``-s/--section`` argument will now
   show sections defined only in mailman.cfg in addition to those from
-  schema.cfg.  (Closes #736)
-* Added a ``charset`` option to the ``import21`` subcommand.  (Closes #769)
+  schema.cfg.  (:issue:`736`)
+* Added a ``charset`` option to the ``import21`` subcommand.  (:issue:`769`)
 * The ``import21`` subcommand will now truncate long SAUnicode values if the
-  database is MySQL.  (Closes #772)
+  database is MySQL.  (:issue:`772`)
 * The ``import21`` subcommand no longer adds the entire legacy
   ``*_these_nonmembers`` list and then removes the non-regexps.  It now just
-  adds the regexps.  (Closes #773)
+  adds the regexps.  (:issue:`773`)
 
 REST
 ----
 * Add a new endpoint ``/lists/<listid>/requests/count`` which returns total
-  number of pending requests. (Closes #713)
+  number of pending requests. (:issue:`713`)
 * Subscription requests API now allows filtering requests with ``token_owner``
-  parameter. (Closes #714)
+  parameter. (:issue:`714`)
 * Add ``subscription_mode`` to ``Member`` resource so API clients can
   differentiate between subscription via address and via primary address of a
-  user. (Closes #707)
+  user. (:issue:`707`)
 * Add ``/list/<listid>/held/count`` to get a count of total held
-  messages. (Closes #713)
+  messages. (:issue:`713`)
 * Add ``fields`` as an optional parameter in all the Member's APIs to customize
-  which fields are included in the resource. (Closes #716)
-* Expose ``emergency`` field of MailingList via REST API. (Closes #719)
+  which fields are included in the resource. (:issue:`716`)
+* Expose ``emergency`` field of MailingList via REST API. (:issue:`719`)
 
 Localization
 ------------
 * Italian translations of the templates have been added.
-* The default charset for many languages is changed to utf-8.  (Closes #747)
+* The default charset for many languages is changed to utf-8.  (:issue:`747`)
 
 Others
 ------
 * Add a new ``archive_rendering_mode`` attribute to ``MailingList`` to
   configure what kind of rendering should Archivers use to render
-  Emails. (Closes #720)
+  Emails. (:issue:`720`)
 * An ``address=`` option has been added to the email ``join`` command to allow
-  requesting subscription of other than the sender of the email.  (Closes #721)
-* Added the ability to invite members to a list.  (Closes #510 and #730)
+  requesting subscription of other than the sender of the email.  (:issue:`721`)
+* Added the ability to invite members to a list.  (:issue:`510` :issue:`730`)
 * Made (un)subscription confirmation email subjects user friendly and
-  translatable.  (Closes #541)
+  translatable.  (:issue:`541`)
 * Implemented a new email ``who`` command to obtain list membership.
-* Add support  for dnspython>=2.0. (Closes #743)
+* Add support  for dnspython>=2.0. (:issue:`743`)
 * Added information about ``pass_types``, ``filter_extensions`` and
-  ``pass_extensions`` to the content filtering doc.  (Closes #775)
+  ``pass_extensions`` to the content filtering doc.  (:issue:`775`)
 
 3.3.1
 =====
@@ -749,70 +750,72 @@ Others
 
 Bugs
 ----
-* Allow ``action`` for header matches to be None in REST interface. (Closes #671)
+* Allow ``action`` for header matches to be None in REST interface.
+  (:issue:`671`)
 * It is now possible to add the list posting address with nonmember role, e.g.
-  to give it a moderaction of discard.  (Closes #633)
+  to give it a moderaction of discard.  (:issue:`633`)
 * The issue of posting a message without a To: header to a fully personalized
-  list throwing a KeyError has been fixed.  (Closes #639)
+  list throwing a KeyError has been fixed.  (:issue:`639`)
 * Confirmation or moderator approval of a subscription from an address banned
-  subsequent to subscribing will no longer succeed.  (Closes #642)
-* Fixed an issue caused by the fix for #642 where email confirmation of a
-  banned subscription address would cause a shunted message.  (Closes #643)
+  subsequent to subscribing will no longer succeed.  (:issue:`642`)
+* Fixed an issue caused by the fix for :issue:`642` where email confirmation of
+  a banned subscription address would cause a shunted message.  (:issue:`643`)
 * Fixed a bug where the ``postfix_vmap`` file would merge two columns for long
-  domain names. (Closes #651)
-* Fix failing test cases due to changed API in a new version of dkimpy. (Closes
-  #655)
+  domain names. (:issue:`651`)
+* Fix failing test cases due to changed API in a new version of dkimpy.
+  (:issue:`655`)
 * Mailman now auto-geneartes alias maps when it starts for the first
-  time. (Closes #469)
-* Sending a bounce probe now resets ``bounce_score``.  (Closes #660)
-* Bounce probes which bounce are now properly recognized.  (Closes #661)
-* Residual bounces are logged but are not processed further.  (Closes #662)
+  time. (:issue:`469`)
+* Sending a bounce probe now resets ``bounce_score``.  (:issue:`660`)
+* Bounce probes which bounce are now properly recognized.  (:issue:`661`)
+* Residual bounces are logged but are not processed further.  (:issue:`662`)
 * Disabling delivery by bounce properly initializes some bounce info so
-  warnings can be sent and the member eventually removed.  (Closes #663)
+  warnings can be sent and the member eventually removed.  (:issue:`663`)
 * Bouncing member is not removed until
   ``bounce_you_are_disabled_warnings_interval`` after the last warning was
-  sent.  (Closes #664)
+  sent.  (:issue:`664`)
 * Fixed recipient address in delivery disabled by bounce notice to the user.
-  (Closes #665)
-* Residial bounces are now marked as processed.  (Closes #669)
-* Find members API now searches for the Member's display name too. (Closes #667)
+  (:issue:`665`)
+* Residial bounces are now marked as processed.  (:issue:`669`)
+* Find members API now searches for the Member's display name too.
+  (:issue:`667`)
 * Content filtering ``convert_html_to_plaintext`` no longer creates messages
-  that can't be flattened as_bytes.  (Closes #677)
+  that can't be flattened as_bytes.  (:issue:`677`)
 * Removed an incorrect failing assertion when confirming a confirm_then_moderate
-  unsubscription.  (Closes #553)
+  unsubscription.  (:issue:`553`)
 * Fix a bug due to incompatible API of a new version of ``importlib_resources``
-  library which causes Templates loading to fail. (Closes #691)
+  library which causes Templates loading to fail. (:issue:`691`)
 * Fix a bug due to incompatible API of a new version of ``zope.intefaces``.
-  (See !606)
-* Import21 no longer tries to import banned addresses.  (Closes #688)
+  (:mr:`606`)
+* Import21 no longer tries to import banned addresses.  (:issue:`688`)
 
 Command line
 ------------
 * A new ``mailman members --sync`` command has been added to help you
   synchronize subscribed mailing list members against a text list of
-  subscription addresses. (see !545)
+  subscription addresses. (:mr:`545`)
 
 REST
 ----
 * Expose ``max_days_to_hold``, ``accept_these_nonmembers``,
   ``reject_these_nonmembers``, ``discard_these_nonmembers``,
   ``hold_these_nonmembers``, ``personalize``, and ``unsubscription_policy``
-  attributes of a MailingList through API. (See !570)
+  attributes of a MailingList through API. (:mr:`570`)
 * Add a new ``send_welcome_message`` flag when subscribing users to override
-  MailingList's default setting. (Closes #362)
-* Expose content filtering settings for MailingList. (Closes #694)
+  MailingList's default setting. (:issue:`362`)
+* Expose content filtering settings for MailingList. (:issue:`694`)
 * Add ``advertised`` attribute to ``MailingList`` object so Postorius doesn't
-  have to make multiple calls for Index Page. (See !608)
-* Expose ``filter_action`` attribute of MailingList through API. (See !609)
+  have to make multiple calls for Index Page. (:mr:`608`)
+* Expose ``filter_action`` attribute of MailingList through API. (:mr:`609`)
 * Unsubscribing a user by calling ``DELETE`` on a Member resources now honors
   Lists's ``unsubscription_policy`` and also sends out notifications to user
-  and admins if list is configured to do so. (Closes #759)
+  and admins if list is configured to do so. (:issue:`759`)
 
 Features
 --------
 * Add support for processing of email bounce events. Thanks to Aaryan Bhagat for
   working on this as a part of his GSoC project and Thanks to Google for
-  sponsoring the project as a part of GSoC.(See !584)
+  sponsoring the project as a part of GSoC.(:mr:`584`)
 
 
 3.3.0 -- "Tom Sawyer"
@@ -823,78 +826,79 @@ Bugs
 ----
 * A list member with ``receive_list_copy`` set to ``False`` who is addressed in
   ``CC`` will now be removed from ``CC`` even if this results in no ``CC``.
-  (Closes #575)
-* ``X-Mailman-Approved-At`` header now has correct timezone.  (Closes #584)
+  (:issue:`575`)
+* ``X-Mailman-Approved-At`` header now has correct timezone.  (:issue:`584`)
 * A spurious ``invalid FilterAction: discard. Treating as discard`` log
-  message is eliminated.  (Closes #592)
+  message is eliminated.  (:issue:`592`)
 * A post from a nonmember matching the legacy ``accept_these_nonmembers`` is
   now subject to subsequent rules rather than accepted immediately.
-  (Closes #587)
+  (:issue:`587`)
 * Email attempts to subscribe a user who is banned or has a subscription
-  already pending are now handled properly.  (Closes #577 and #583)
+  already pending are now handled properly.  (:issue:`577` :issue:`583`)
 * It is no longer possible to add the list's posting address with any role to
-  a list.  (Closes #599)
+  a list.  (:issue:`599`)
 * Fixed the nntp runner which was calling the ``nntplib.NNTP.post()`` method
-  with a string object instead of bytes.  (Closes #613)
+  with a string object instead of bytes.  (:issue:`613`)
 * A post with a Reply-To: the list address will no longer be shunted.
-  (Closes #614)
+  (:issue:`614`)
 * Encoded (base64 or quoted-printable) HTML message bodies are now decoded for
-  ``html_to_plaintext``.  (Closes #616)
+  ``html_to_plaintext``.  (:issue:`616`)
 * Non-VERPed temporary failure DSNs are no longer reported as unrecognized
-  bounces.  (Closes #622)
+  bounces.  (:issue:`622`)
 * Fix ``mailman import21`` command to work in Python 3.7.4 and Python 3.8b4
-  (Closes #625)
+  (:issue:`625`)
 
 Command line
 ------------
 * The ``mailman import21`` command now leaves only regexps in the legacy
-  ``*_these_nonmembers`` list attributes.  (Closes #588)
+  ``*_these_nonmembers`` list attributes.  (:issue:`588`)
 * The ``mailman import21`` command now imports nonmember accept actions as
-  ``Action.defer`` rather than ``Action.accept``.  (Closes #579)
+  ``Action.defer`` rather than ``Action.accept``.  (:issue:`579`)
 * The ``mailman import21`` command now correctly imports ``*_these_nonmembers``
-  actions for nonmembers following a member in the list.  (Closes #580)
+  actions for nonmembers following a member in the list.  (:issue:`580`)
 * The progress meter while ``mailman import21`` is importing rosters has been
-  shortened so it no longer wraps and scrolls.  (Closes #589)
+  shortened so it no longer wraps and scrolls.  (:issue:`589`)
 * The ``mailman import21`` command no longer sends an email to existing owners
-  for each imported member.  (Closes #605)
+  for each imported member.  (:issue:`605`)
 * A ``mailman notify`` command has been implemented to be run by cron to send
   periodic notices of held requests to list owners and moderators.
-  (Closes #258)
+  (:issue:`258`)
 * The ``mailman import21`` command now imports ``private_roster``.
-  (Closes #607)
+  (:issue:`607`)
 * A ``mailman gatenews`` command has been implemented to be run by cron to gate
   messages from usenet to those lists which have the gateway configured.
 * The ``mailman members --add`` command no longer prints a stack trace if an
-  invalid email address is given.  (See !544)
+  invalid email address is given.  (:mr:`544`)
 * A new ``mailman members --remove`` command has been added to help you
   mass-unsubscribe subscribers from a mailing list.
 
 REST
 ----
-* Expose a user's preferred address using REST API. (Closes #240)
-* Expose `header_matches/find` API to find a list of ``HeaderMatches`` belonging
-  to a MailingList. (See !497)
-* Allow adding a comment when rejecting held messages. (Closes #594)
-* Fix a 500 error when creating a user with invalid email address. (Closes #263)
+* Expose a user's preferred address using REST API. (:issue:`240`)
+* Expose `header_matches/find` API to find a list of ``HeaderMatches``
+  belonging to a MailingList. (:mr:`497`)
+* Allow adding a comment when rejecting held messages. (:issue:`594`)
+* Fix a 500 error when creating a user with invalid email address.
+  (:issue:`263`)
 
 Localization
 ------------
-* Add French translations for mail templates. (See !522)
+* Add French translations for mail templates. (:mr:`522`)
 
 Other
 -----
 * Add a new attribute ``tag`` to ``HeaderMatch`` to find and manage a set of
-  rules. (See !497)
-* Expired cached entries will be deleted efficiently. (Closes #462)
+  rules. (:mr:`497`)
+* Expired cached entries will be deleted efficiently. (:issue:`462`)
 * REST Runner now uses Gunicorn to run WSGI server instead of the standard
   library wsgiref for better performance.
-* Add support for SMPTS/STARTTLS for connections to MTA. (See !508)
+* Add support for SMPTS/STARTTLS for connections to MTA. (:mr:`508`)
 * The last remnants of the mailing list attribute ``nntp_host`` have been
-  removed.  (Closes #611)
+  removed.  (:issue:`611`)
 * Email confirmation requests now include an ``Auto-Submitted`` header to
-  prevent robotic replies per ``RFC 3834``.  (Closes #23)
+  prevent robotic replies per ``RFC 3834``.  (:issue:`23`)
 * The mail->news gateway no longer munges Message-ID headers unless the
-  original Message-ID is rejected by the ``nntp_host``.  (Closes #24)
+  original Message-ID is rejected by the ``nntp_host``.  (:issue:`24`)
 
 3.2.2
 =====
@@ -907,18 +911,18 @@ REST
 * Expose ``preferred_language`` for MailingList through REST API.
 * Self-link of banned emails will be url-encoded when the email is actually
   a regex, mainly to prevent misplaced `?` in the link.
-* REST API now accepts inputs in JSON format. (See !451)
-* REST API errors are now always formatted as JSON. (See !451)
+* REST API now accepts inputs in JSON format. (:mr:`451`)
+* REST API errors are now always formatted as JSON. (:mr:`451`)
 * Failed request validations now return more verbose errors, like ``Enum`` types
-  return all acceptable values. (See !451)
-* REST API accepts request with content type None (See !479)
+  return all acceptable values. (:mr:`451`)
+* REST API accepts request with content type None (:mr:`479`)
 
 
 Command line
 ------------
-* The ``mailman import21`` command now displays import progress.  (Closes #561)
+* The ``mailman import21`` command now displays import progress.  (:issue:`561`)
 * An issue with ``mailman subcommand --help`` hanging has been worked around.
-  (Closes #520)
+  (:issue:`520`)
 
 
 3.2.1
@@ -928,49 +932,49 @@ Command line
 Command line
 ------------
 * The ``mailman import21`` command properly converts all acceptable_aliases
-  to regexps.  (Closes #496)
+  to regexps.  (:issue:`496`)
 * The ``mailman import21`` command correctly converts autorespond_* settings.
-  (Closes #505)
+  (:issue:`505`)
 * The various ``mailman`` commands now issue a help hint in case of error.
-  Tests have been updated to recognize this.  (Closes #519)
+  Tests have been updated to recognize this.  (:issue:`519`)
 
 Bugs
 ----
 * Open non-regular log files (e.g. fifos) in write mode instead of append mode.
-  (See !407)
+  (:mr:`407`)
 * Autoresponses to posts and -owner and -request messages now work.
-  (Closes #504)
+  (:issue:`504`)
 * Message parts are now properly decoded when trying to remove an Approved:
-  header.  (Closes #518)
+  header.  (:issue:`518`)
 * Outgoing SMTP connections are now closed following message delivery
-  regardless of the max_sessions_per_connection setting.  (Closes #529)
-* Messages with Subject: Re: only are now processed correctly.  (Closes #545)
+  regardless of the max_sessions_per_connection setting.  (:issue:`529`)
+* Messages with Subject: Re: only are now processed correctly.  (:issue:`545`)
 
 LOCALIZATION
 ------------
 * Added German translations for mail templates. Thanks to the "Institut für
-  Gebrauchsgrafik" for providing them. (Closes #534)
+  Gebrauchsgrafik" for providing them. (:issue:`534`)
 
 REST
 ----
-* Allow setting ``max_num_recipients`` for a mailing list.  (Closes #508)
-* Add a per-list visibility option for Members. (Closes #108)
+* Allow setting ``max_num_recipients`` for a mailing list.  (:issue:`508`)
+* Add a per-list visibility option for Members. (:issue:`108`)
 
 Other
 -----
-* Email commands are now case insensitive.  (Closes #353)
+* Email commands are now case insensitive.  (:issue:`353`)
 * Implicit commands sent to -join, -leave and -confirm addresses no longer
-  generate a Results email.  (Closes #516)
+  generate a Results email.  (:issue:`516`)
 * An ``explicit_header_only`` option has been added to Reply-To: munging to
-  avoid putting the list address in Cc:.  (Closes #531)
-* The default list welcome message has been cleaned up a bit.  (Closes #530)
+  avoid putting the list address in Cc:.  (:issue:`531`)
+* The default list welcome message has been cleaned up a bit.  (:issue:`530`)
 * A substitution variable ``user_name_or_email`` has been added to
   ``list:member:regular:header`` and ``list:member:regular:footer`` templates
-  when personalized deliveries are enabled.  (Closes #533)
+  when personalized deliveries are enabled.  (:issue:`533`)
 * The template search algorithm was fixed to look for in-tree templates for
-  each language in the search list. (Closes #535)
+  each language in the search list. (:issue:`535`)
 * Set default subscription policy to "confirm then moderate" for private
-  mailing list style. (Closes #536)
+  mailing list style. (:issue:`536`)
 
 
 3.2.0 -- "La Villa Strangiato"
@@ -980,75 +984,75 @@ Other
 Bugs
 ----
 * A missing html_to_plain_text_command is now properly detected and logged.
-  (Closes #345)
-* Syntactically invalid sender addresses are now ignored.  (Closes #229)
+  (:issue:`345`)
+* Syntactically invalid sender addresses are now ignored.  (:issue:`229`)
 * An AttributeError: 'str' object has no attribute 'decode' exception in
-  subject prefixing is fixed.  (Closes #359)
+  subject prefixing is fixed.  (:issue:`359`)
 * Messages with no syntactically valid senders are now automatically
-  discarded.  (Closes #369)
+  discarded.  (:issue:`369`)
 * Various message holds and rejects that gave 'N/A' as a reason now give an
-  appropriate reason.  (Closes #368)
+  appropriate reason.  (:issue:`368`)
 * Bounce messages are now composed for proper translations.
 * Messages with badly encoded ``Subject`` headers no longer crash the message
-  moderation REST API.  (Closes #383)
+  moderation REST API.  (:issue:`383`)
 * Generated ``regexp`` tables for Postfix now account for possible ``+extra``
-  additions to the ``-bounces`` and ``-confirm`` addresses.  (Closes #401)
+  additions to the ``-bounces`` and ``-confirm`` addresses.  (:issue:`401`)
 * Address confirmation notices are now properly encoded in the character set
-  of the list's preferred_language.  (Closes #395 and #413)
+  of the list's preferred_language.  (:issue:`395` :issue:`413`)
 * Thanks to Jim Popovitch, certain failures in DNS lookups of DMARC policy
-  will now result in mitigations being applied.  (Closes #415)
+  will now result in mitigations being applied.  (:issue:`415`)
 * Messages without a sender can no longer bypass the ``nonmember-moderation``
-  rule.  (Closes #414)
+  rule.  (:issue:`414`)
 * Invalid regexps in header_matches rules are properly logged and can't be set
-  via REST.  (Closes #418)
+  via REST.  (:issue:`418`)
 * A list whose name is one of the ``admin``, ``bounces``, ``confirm``, etc.
-  subaddresses can now be posted to.  (Closes #433)
+  subaddresses can now be posted to.  (:issue:`433`)
 * The ``admin`` subaddress, a synonym for ``bounces`` and deprecated since
-  Mailman 2.1, has been removed.  (Closes #435)
-* Better support for changing the ``list_name`` property.  (Closes #428)
+  Mailman 2.1, has been removed.  (:issue:`435`)
+* Better support for changing the ``list_name`` property.  (:issue:`428`)
 * Raw Message text is now coerced to pure ascii before sending, and
   https://bugs.python.org/issue27321 is now defended against by overriding
-  Message.as_string() to cover more cases than before.  (Closes #406)
+  Message.as_string() to cover more cases than before.  (:issue:`406`)
 * The override of Message.as_string() has been extended to catch another
-  observed exception.  (Closes #441)
+  observed exception.  (:issue:`441`)
 * The email.message.UserNotification() constructor will now not fail if given
   a ``text`` argument containing a character not in the charset of the
-  ``lang`` argument.  (Closes #437)
+  ``lang`` argument.  (:issue:`437`)
 * A new SQLAlchemy column type ``SAUnicodeXL`` has been implemented to support
   large columns in MySQL and is used for the ``value`` column of the
-  ``pendedkeyvalue`` table.  (Closes #385)
+  ``pendedkeyvalue`` table.  (:issue:`385`)
 * Messages with ``Subject`` headers encoded in an unknown character set no
-  longer throw ``LookupError`` in subject prefixing.  (Closes #445)
-* A list's ``last_post_at`` is now properly updated.  (Closes #453)
+  longer throw ``LookupError`` in subject prefixing.  (:issue:`445`)
+* A list's ``last_post_at`` is now properly updated.  (:issue:`453`)
 * Fixed an AttributeError in mailman/handlers/decorate.py when
   member.subscriber is an ``IUser`` instance rather than an ``IAddress``
-  instance.  (Closes #449)
+  instance.  (:issue:`449`)
 * Message decoration has been removed from the posting pipeline and added to
   bulk delivery to avoid duplicate decoration of personalized and VERPed
-  messages.  (Closes #450)
+  messages.  (:issue:`450`)
 * The ``mailman inject`` command now reads standard input as documented if
-  there is no ``-f`` or ``--filename`` option.  (Closes #459)
-* Mailman doesn't chmod existing configuration directories on startup (Closes
-  #439)
+  there is no ``-f`` or ``--filename`` option.  (:issue:`459`)
+* Mailman doesn't chmod existing configuration directories on startup.
+  (:issue:`439`)
 * Calling ``set`` on a template evicts the local cache if the template was
-  cached before. (Closes #463)
+  cached before. (:issue:`463`)
 * The override of Message.as_string() has been extended to catch yet another
-  observed exception.  (Closes #470)
-* Fixed a typo in the help for ``mailman digests --periodic``.  (Closes #472)
+  observed exception.  (:issue:`470`)
+* Fixed a typo in the help for ``mailman digests --periodic``.  (:issue:`472`)
 * Character encoding errors in adding headers and footers to multipart messages
-  are detected and ``replaced``.  (Closes #409)
+  are detected and ``replaced``.  (:issue:`409`)
 * The help for ``mailman qfile`` has been fixed to reference ``mailman qfile``
-  rather than the non-existent ``bin/dumpdb``.  (Closes #475)
+  rather than the non-existent ``bin/dumpdb``.  (:issue:`475`)
 * The dmarc rule has been fixed to not throw a TypeError when msg.get('from')
-  returns a header instance.  (Closes #477)
+  returns a header instance.  (:issue:`477`)
 * ``mailman`` command without any sub-command now invokes ``mailman help`` by
-  default. (Closes #479)
+  default. (:issue:`479`)
 * The ``alias_domain`` attribute can become a null string.  ``mta/postfix.py``
-  has been fixed to generate proper mappings in this case.  (Closes #485)
+  has been fixed to generate proper mappings in this case.  (:issue:`485`)
 * Fix a bug where duplicate address records can be created when a user adds an
-  existing address with a different case. (Closes #476)
+  existing address with a different case. (:issue:`476`)
 * Several additional templates can now be set in the ``var/templates``
-  hierarchy.  (Closes #486)
+  hierarchy.  (:issue:`486`)
 
 Command line
 ------------
@@ -1056,17 +1060,17 @@ Command line
   command line more consistent and pluggable.  Also, many CLIs that accepted a
   "fqdn list name" (i.e. the posting address of a mailing list), now also
   accept a ``List-ID``.  Every attempt has been made to keep the CLI backward
-  compatible, but there may be subtle differences.  (Closes #346)
+  compatible, but there may be subtle differences.  (:issue:`346`)
 * If no listname is given, running ``mailman withlist -r`` must name a
   function taking no arguments.  This can be used to introspect Mailman
   outside of the context of a mailing list.
-* Fix ``mailman withlist`` command parsing.  (Closes #319)
+* Fix ``mailman withlist`` command parsing.  (:issue:`319`)
 * Add a new option ``--periodic`` to ``mailman digests`` command. It sends out
   digests for only those Mailing Lists that have ``digest_send_periodic`` option
-  set to ``True``. (Closes #384)
+  set to ``True``. (:issue:`384`)
 * The ``mailman import21`` command now imports DMARC mitigations.
 * The ``mailman import21`` command no longer creates templates with
-  non-standard names,  (Closes #482)
+  non-standard names,  (:issue:`482`)
 
 Configuration
 -------------
@@ -1081,7 +1085,7 @@ Configuration
 
 Database
 --------
-* The fix for #313 which ported an upstream SQLAlchemy fix to Mailman
+* The fix for :issue:`313` which ported an upstream SQLAlchemy fix to Mailman
   has been refactored now that SQLAlchemy 1.2 has been released.
 
 Interfaces
@@ -1093,14 +1097,14 @@ Interfaces
 * A new template ``list:user:notice:rejected`` has been added for customizing
   the bounce message rejection notice.
 * The ``acceptable_alias`` and ``require_explicit_destination`` attributes
-  have been added to the ``IMailingList`` definition.  (Closes #483)
+  have been added to the ``IMailingList`` definition.  (:issue:`483`)
 
 Other
 -----
 * Add a new plugin architecture, which allows third parties to add
   initialization hooks, REST endpoints, and additional components.  Given by
   Jan Jancar.
-* Drop support for Python 3.4.  (Closes #373)
+* Drop support for Python 3.4.  (:issue:`373`)
 * Bump minimum requirements for aiosmtpd (>= 1.1) and flufl.lock (>= 3.1).
 * Add '.pc' (patch directory) to list of ignored patterns when building the
   documentation with Sphinx.
@@ -1117,21 +1121,22 @@ REST
 ----
 * Allow a mailing list's acceptable aliases to be cleared by calling
   ``DELETE`` on the list's ``config/acceptable_aliases`` resource.
-  (Closes #394)
-* Allow setting ``max_message_size`` for a mailing list. (Closes #417)
+  (:issue:`394`)
+* Allow setting ``max_message_size`` for a mailing list. (:issue:`417`)
 * Added new attribute in ``lists/styles`` resource ``styles`` that contains the
   list of all the styles in Core along with their description. ``style_names``
   attribute is now deprecated and will be removed in future versions.
-* Add ``display_name`` for ``member`` in order to expose ``member.display_name``.
-  (Closes #398)
-* Expose ``MailingList.respond_to_post_request`` through REST API. (Closes #420)
+* Add ``display_name`` for ``member`` in order to expose
+  ``member.display_name``. (:issue:`398`)
+* Expose ``MailingList.respond_to_post_request`` through REST API.
+  (:issue:`420`)
 * Add a new API ``lists/find`` which returns all the lists related to a
-  subscriber. It optionally allows filtering based on a role. (See !388)
+  subscriber. It optionally allows filtering based on a role. (:mr:`388`)
 * ``IAcceptableAliasSet`` resource now interprets an empty string ('') as an
   empty list ([]). This can be used to clear the list of acceptable aliases of a
   MailingList in a PATCH or PUT request, without having to use a DELETE request.
 * Expose ``MailingList.require_explicit_destination`` through REST API.
-  (Closes #484)
+  (:issue:`484`)
 
 
 3.1.0 -- "Between The Wheels"
@@ -1141,104 +1146,104 @@ REST
 Bugs
 ----
 * When the mailing list's ``admin_notify_mchanges`` is True, the list owners
-  now get the subscription notification.  (Closes: #1)
+  now get the subscription notification.  (:issue:`1`)
 * Fix the traceback that occurred when trying to convert a ``text/html``
   subpart to plaintext via the ``mimedel`` handler.  Now, a configuration
   variable ``[mailman]html_to_plain_text_command`` in the ``mailman.cfg`` file
-  defines the command to use.  It defaults to ``lynx``.  (Closes: #109)
-* Confirmation messages should not be ``Precedence: bulk``.  (Closes #75)
+  defines the command to use.  It defaults to ``lynx``.  (:issue:`109`)
+* Confirmation messages should not be ``Precedence: bulk``.  (:issue:`75`)
 * Fix constraint violations on mailing list deletes affecting PostgreSQL.
-  Given by Abhilash Raj.  (Closes #115)
+  Given by Abhilash Raj.  (:issue:`115`)
 * ``mailman`` command with no subcommand now prints the help text.  Given by
-  Abhilash Raj.  (Closes #137)
+  Abhilash Raj.  (:issue:`137`)
 * The MHonArc archiver must set stdin=PIPE when calling the subprocess.
   Given by Walter Doekes.
 * For now, treat ``DeliveryMode.summary_digests`` the same as
   ``.mime_digests``.
-  (Closes #141).  Also, don't enqueue a particular digest if there are no
+  (:issue:`141`).  Also, don't enqueue a particular digest if there are no
   recipients for that digest.
 * For Python versions earlier than 3.5, use a compatibility layer for a
-  backported smtpd module which can accept non-UTF-8 data.  (Closes #140)
+  backported smtpd module which can accept non-UTF-8 data.  (:issue:`140`)
 * Bulk emails are now decorated with headers and footers.  Given by Aurélien
-  Bompard.  (Closes #145)
-* Core no longer depends on the standalone ``mock`` module.  (Closes: #146)
+  Bompard.  (:issue:`145`)
+* Core no longer depends on the standalone ``mock`` module.  (:issue:`146`)
 * The logging of moderation reasons has been fixed.  Given by Aurélien
   Bompard.
 * Collapse multiple ``Re:`` in Subject headers.  Given by Mark Sapiro.
-  (Closes: #147)
-* Added Trove classifiers to setup.py.  (Closes: #152)
+  (:issue:`147`)
+* Added Trove classifiers to setup.py.  (:issue:`152`)
 * Fix the processing of subscription confirmation messages when the mailing
-  list is set to confirm-then-moderate.  (Closes #114)
+  list is set to confirm-then-moderate.  (:issue:`114`)
 * Fix ``UnicodeEncodeError`` in the hold chain when sending the authorization
-  email to the mailing list moderators.  (Closes: #144)
+  email to the mailing list moderators.  (:issue:`144`)
 * Fix traceback in approved handler when the moderator password is None.
   Given by Aurélien Bompard.
 * Fix IntegrityErrors raised under PostreSQL when deleting users and
   addresses.  Given by Aurélien Bompard.
 * Allow mailing lists to have localhost names with a suffix matching the
-  subcommand extensions.  Given by Aurélien Bompard.  (Closes: #168)
+  subcommand extensions.  Given by Aurélien Bompard.  (:issue:`168`)
 * Don't traceback if a nonexistent message-id is deleted from the message
-  store.  Given by Aurélien Bompard, tweaked by Barry Warsaw.  (Closes: #167)
+  store.  Given by Aurélien Bompard, tweaked by Barry Warsaw.  (:issue:`167`)
 * Fix a bug in ``SubscriptionService.find_members()`` when searching for a
   subscribed address that is not linked to a user.  Given by Aurélien Bompard.
 * Fix a REST server crash when trying to subscribe a user without a preferred
-  address.  (Closes #185)
+  address.  (:issue:`185`)
 * Fix membership query when multiple users are subscribed to a mailing list.
-  Reported by Darrell Kresge.  (Closes: #190)
-* Prevent moderation of messages held for a different list.  (Closes: #161)
+  Reported by Darrell Kresge.  (:issue:`190`)
+* Prevent moderation of messages held for a different list.  (:issue:`161`)
 * When approving a subscription request via the REST API, for a user who is
   already a member, return an HTTP 409 Conflict code instead of the previous
-  server traceback (and resulting HTTP 500 code).  (Closes: #193)
+  server traceback (and resulting HTTP 500 code).  (:issue:`193`)
 * In decoration URIs (e.g. ``IMailingList.header_uri`` and ``.footer_uri``)
   you should now use the mailing list's List-ID instead of the
-  fqdn-listname.  The latter is deprecated.  (Closes #196)
+  fqdn-listname.  The latter is deprecated.  (:issue:`196`)
 * Trying to subscribe an address as a list owner (or moderator or nonmember)
   which is already subscribed with that role produces a server error.
-  Originally given by Anirudh Dahiya.  (Closes #198)
-* Cross-posting messages held on both lists no longer fails.  (Closes #176)
+  Originally given by Anirudh Dahiya.  (:issue:`198`)
+* Cross-posting messages held on both lists no longer fails.  (:issue:`176`)
 * Don't let unknown charsets crash the "approved" rule.  Given by Aurélien
-  Bompard.  (Closes #203)
+  Bompard.  (:issue:`203`)
 * Don't let crashes in IArchiver plugins break handlers or runners.
-  (Closes #208)
+  (:issue:`208`)
 * Fix "None" as display name in welcome message.  Given by Aditya Divekar.
-  (Closes #194)
-* Fix ``mailman shell`` processing of ``$PYTHONSTARTUP``.  (Closes #224)
+  (:issue:`194`)
+* Fix ``mailman shell`` processing of ``$PYTHONSTARTUP``.  (:issue:`224`)
 * Fix query bug for ``SubscriptionService.find_members()`` leading to the
   incorrect number of members being returned.  Given by Aurélien Bompard.
-  (Closes #227)
+  (:issue:`227`)
 * Fix header match rule suffix inflation.  Given by Aurélien Bompard.
-  (Closes #226)
+  (:issue:`226`)
 * MIME digests now put the individual message/rfc822 messages inside a
-  multipart/digest subpart.  (Closes #234)
+  multipart/digest subpart.  (:issue:`234`)
 * Nonmember subscriptions are removed when one of the addresses controlled by
-  a user is subscribed as a member.  Given by Aditya Divekar.  (Closes #237)
-* Email address validation is now more compliant with RFC 5321.  (Closes #266)
+  a user is subscribed as a member.  Given by Aditya Divekar.  (:issue:`237`)
+* Email address validation is now more compliant with RFC 5321.  (:issue:`266`)
 * A mailing list's ``description`` must not contain newlines.  Given by
-  Aurélien Bompard.  (Closes: #273)
+  Aurélien Bompard.  (:issue:`273`)
 * Allow MailingList.info to be set using the REST API.  Given by Aurélien
   Bompard.
-* Extend header filters to also check sub-part headers.  (Closes #280)
+* Extend header filters to also check sub-part headers.  (:issue:`280`)
 * Allow REST API to PUT and PATCH domain attributes.  Allows Postorius domain
-  edit to work.  (Closes: #290)
+  edit to work.  (:issue:`290`)
 * Prevent posting from banned addresses.  Given by Aurélien Bompard.
-  (Closes: #283)
+  (:issue:`283`)
 * Remove the digest mbox files after the digests are sent.  Given by Aurélien
-  Bompard.  (Closes: #259)
+  Bompard.  (:issue:`259`)
 * Transmit the moderation reason and expose it in the REST API as the
   ``reason`` attribute.  Given by Aurélien Bompard.
 * Don't return a 500 error from the REST API when trying to handle a held
-  message with defective content.  Given by Abhilash Raj.  (Closes: #256)
+  message with defective content.  Given by Abhilash Raj.  (:issue:`256`)
 * Delete subscription requests when a mailing list is deleted.  Given by
-  Abhilash Raj.  (Closes: #214)
+  Abhilash Raj.  (:issue:`214`)
 * Messages were shunted when non-ASCII characters appeared in a mailing
-  list's description.  Given by Mark Sapiro.  (Closes: #215)
-* Fix confirmation of unsubscription requests.  (Closes: #294)
+  list's description.  Given by Mark Sapiro.  (:issue:`215`)
+* Fix confirmation of unsubscription requests.  (:issue:`294`)
 * Fix ``mailman stop`` not stopping some runners due to PEP 475 interaction.
-  (Closes: #255)
-* Update documentation links for ``config.cfg`` settings.  (Closes: #306)
-* Disallow problematic characters in listnames.  (Closes: #311)
+  (:issue:`255`)
+* Update documentation links for ``config.cfg`` settings.  (:issue:`306`)
+* Disallow problematic characters in listnames.  (:issue:`311`)
 * Forward port several content filtering fixes from the 2.1 branch.
-  (Closes: #330, #331, #332 and #334)
+  (:issue:`330` :issue:`331` :issue:`332` :issue:`334`)
 
 Configuration
 -------------
@@ -1258,20 +1263,20 @@ Command line
   by default.  The ``-d``/``--domain`` option is kept for backward
   compatibility, but now there is a ``-D``/``--no-domain`` option to prevent
   missing domains from being create, forcing an error in those cases.
-  Given by Gurkirpal Singh.  (Closes #39)
+  Given by Gurkirpal Singh.  (:issue:`39`)
 * ``mailman`` subcommands now properly commit any outstanding transactions.
-  (Closes #223)
+  (:issue:`223`)
 * ``mailman digests`` has grown ``--verbose`` and ``-dry-run`` options.
 * ``mailman shell`` now supports readline history if you set the
   ``[shell]history_file`` variable in mailman.cfg.  Also, many useful names
-  are pre-populated in the namespace of the shell.  (Closes: #228)
+  are pre-populated in the namespace of the shell.  (:issue:`228`)
 
 Database
 --------
 * MySQL is now an officially supported database.  Given by Abhilash Raj.
 * Fix a problem with tracebacks when a PostgreSQL database is power cycled
   while Mailman is still running.  This ports an upstream SQLAlchemy fix to
-  Mailman in lieu of a future SQLAlchemy 1.2 release.  (Closes: #313)
+  Mailman in lieu of a future SQLAlchemy 1.2 release.  (:issue:`313`)
 
 Interfaces
 ----------
@@ -1282,7 +1287,7 @@ Interfaces
 * Messages now include a ``Message-ID-Hash`` as the replacement for
   ``X-Message-ID-Hash`` although the latter is still included for backward
   compatibility.  Also be sure that all places which add the header use the
-  same algorithm.  (Closes #118)
+  same algorithm.  (:issue:`118`)
 * ``IMessageStore.delete_message()`` no longer raises a ``LookupError`` when
   you attempt to delete a nonexistent message from the message store.
 * ``ISubscriptionService.find_members()`` accepts asterisks as wildcards in
@@ -1292,7 +1297,7 @@ Interfaces
 
 Message handling
 ----------------
-* New DMARC mitigations have been added.  Given by Mark Sapiro.  (Closes #247)
+* New DMARC mitigations have been added.  Given by Mark Sapiro.  (:issue:`247`)
 * New placeholders have been added for message headers and footers.  You can
   use a placeholder of the format ``$<archiver-name>_url`` to insert the
   permalink to the message in the named archiver, for any archiver enabled
@@ -1301,16 +1306,16 @@ Message handling
   and nonmember-moderation rule are processed before "hold" rules are
   processed.  This allows for better anti-spam defenses and rejecting
   non-member posts instead of always holding them for moderator review.
-  Given by Aurélien Bompard.  (Closes #163)
+  Given by Aurélien Bompard.  (:issue:`163`)
 * Bounces can now contain rejection messages.  Given by Aurélien Bompard.
 * The ``moderation_action`` for members and nonmember can now be ``None``
   which signals falling back to the appropriate list default action,
   e.g. ``default_member_action`` and ``default_nonmember_action``.  Given by
-  Aurélien Bompard.  (Closes #189)
+  Aurélien Bompard.  (:issue:`189`)
 * Ensure that postings from alternative emails aren't held for moderator
   approval.  For example, if a user is subscribed with one email but posts
   with a second email that they control, the message should be processed as
-  a posting from a member.  Given by Aditya Divekar.  (Closes #222)
+  a posting from a member.  Given by Aditya Divekar.  (:issue:`222`)
 * The default message footer has been improved to include a way to
   unsubscribe via the ``-leave`` address.  Given by Francesco Ariis.
 
@@ -1319,33 +1324,33 @@ REST
 * REST API version 3.1 introduced.  Mostly backward compatible with version
   3.0 except that UUIDs are represented as hex strings instead of 128-bit
   integers, since the latter are not compatible with all versions of
-  JavaScript.  (Closes #121)
-* REST clients must minimally support HTTP/1.1. (Closes #288)
+  JavaScript.  (:issue:`121`)
+* REST clients must minimally support HTTP/1.1. (:issue:`288`)
 * Experimental Gunicorn support.  See ``contrib/gunicorn.py`` docstring for
-  details.  With assistance from Eric Searcy.  (Closes #287)
+  details.  With assistance from Eric Searcy.  (:issue:`287`)
 * The new template system is introduced for API 3.1.  See
-  ``src/mailman/rest/docs/templates.rst`` for details.  (Closes #249)
+  ``src/mailman/rest/docs/templates.rst`` for details.  (:issue:`249`)
 * When creating a user via REST using an address that already exists, but
   isn't linked, the address is linked to the new user.  Given by Aurélien
   Bompard.
 * The REST API incorrectly parsed ``is_server_owner`` values when given
-  explicitly in the POST that creates a user.  (Closes #136)
+  explicitly in the POST that creates a user.  (:issue:`136`)
 * A new top-level resource ``<api>/owners`` can be used to get the list of
-  server owners as ``IUser`` s.  (Closes #135)
+  server owners as ``IUser`` s.  (:issue:`135`)
 * By POSTing to a user resource with an existing unlinked address, you can
   link the address to the user.  Given by Abhilash Raj.
 * Fix pagination values ``start`` and ``total_size`` in the REST API.  Given
-  by Aurélien Bompard.  (Closes: #154)
+  by Aurélien Bompard.  (:issue:`154`)
 * JSON representations for held message now include a ``self_link``.
 * When ``[devmode]enabled`` is set, the JSON output is sorted.  Given by
   Aurélien Bompard.
 * A member's moderation action can be changed via the REST API.  Given by
   Aurélien Bompard.
 * Fixed a number of corner cases for the return codes when PUTing or PATCHing
-  list configuration variables.  (Closes: #182)
+  list configuration variables.  (:issue:`182`)
 * Expose ``digest_send_periodic``, ``digest_volume_frequency``, and
   ``digests_enabled`` (renamed from ``digestable``) to the REST API.
-  (Closes: #159)
+  (:issue:`159`)
 * Expose the "bump digest" and "send digest" functionality though the REST
   API via the ``<api>/lists/<list-id>/digest`` end-point.  GETting this
   resource returns the ``next_digest_number`` and ``volume`` as the same
@@ -1357,28 +1362,28 @@ REST
 * ``<api>/members/find`` accepts GET query parameters in addition to POST
   arguments.  Given by Aurélien Bompard.
 * Header match rules for individual mailing lists are now exposed in the REST
-  API.  Given by Aurélien Bompard.  (Closes: #192)
+  API.  Given by Aurélien Bompard.  (:issue:`192`)
 * Expose ``goodbye_message_uri`` in the REST API.  Given by Harshit Bansal.
 * New subscription requests are rejected if there is already one pending.
-  With thanks to Anirudh Dahiya.  (Closes #199)
+  With thanks to Anirudh Dahiya.  (:issue:`199`)
 * Expose the system pipelines and chains via ``<api>/system/pipelines`` and
-  ``<api>/system/chains`` respectively.  Given by Simon Hanna.  (Closes #66)
+  ``<api>/system/chains`` respectively.  Given by Simon Hanna.  (:issue:`66`)
 * Support mass unsubscription of members via ``DELETE`` on the
   ``<api>/lists/<list-id>/roster/member`` resource.  Given by Harshit
-  Bansal.  (Closes #171)
+  Bansal.  (:issue:`171`)
 * It is now possible to merge users when creating them via REST.  When you
   POST to ``<api>/users/<address>/addresses`` and the address given in the
   ``email`` parameter already exists, instead of getting a 400 error, if you
   set ``absorb_existing=True`` in the POST data, the existing user will be
   merged into the newly created on.  Given by Aurélien Bompard.
-* Port to Falcon 1.0 (Closes #20)
+* Port to Falcon 1.0 (:issue:`20`)
 * A member's ``moderation_action`` can be reset, allowing fallback to the
   list's ``default_member_action`` by setting the attribute to the empty
   string in the REST API.  Given by Aurélien Bompard.
 * A list's ``moderator_password`` can be set via the REST API.  Given by
-  Andrew Breksa.  (Closes #207)
+  Andrew Breksa.  (:issue:`207`)
 * The ban manager now returns a pageable, sorted sequence.  Given by Amit and
-  Aurélien Bompard.  (Closes #284)
+  Aurélien Bompard.  (:issue:`284`)
 * Query parameters now allow you to filter mailing lists by the
   ``advertised`` boolean parameter.  Given by Aurélien Bompard.
 * Only the system-enabled archivers are returned in the REST API.  Given by
@@ -1386,11 +1391,11 @@ REST
 * **Backward incompatibility: mild** Held message resources now have an
   ``original_subject`` key which is the raw value of the ``Subject:`` header
   (i.e. without any RFC 2047 decoding).  The ``subject`` key is RFC 2047
-  decoded.  Given by Simon Hanna.  (Closes #219)
+  decoded.  Given by Simon Hanna.  (:issue:`219`)
 
 Other
 -----
-* Add official support for Python 3.5 and 3.6. (Closes #295)
+* Add official support for Python 3.5 and 3.6. (:issue:`295`)
 * A handful of unused legacy exceptions have been removed.  The redundant
   ``MailmanException`` has been removed; use ``MailmanError`` everywhere.
 * Drop the use of the ``lazr.smtptest`` library, which is based on the
@@ -1410,7 +1415,7 @@ Other
 * The ``mailman members`` command can now be used to display members based on
   subscription roles.  Also, the positional "list" argument can now accept
   list names or list-ids.
-* Unsubscriptions can now be confirmed and/or moderated.  (Closes #213)
+* Unsubscriptions can now be confirmed and/or moderated.  (:issue:`213`)
 
 
 3.0.0 -- "Show Don't Tell"
@@ -1423,36 +1428,37 @@ Architecture
   the single ``contact_address`` they used to have.  ``IUser`` objects now
   also have a ``is_server_owner`` flag (defaulting to False) to indicate
   whether they have superuser privileges.  Give by Abhliash Raj, with fixes
-  and refinements by Barry Warsaw.  (LP: #1423756)
+  and refinements by Barry Warsaw.  (:lp-issue:`1423756`)
 * Mailing list subscription policy work flow has been completely rewritten.
   It now properly supports email verification and subscription confirmation
   by the user, and approval by the moderator using unique tokens.
   ``IMailingList`` objects now have a ``subscription_policy`` attribute.
-  (LP: #1095552)
-* Port the REST machinery to Falcon 0.3. (LP: #1446881)
+  (:lp-issue:`1095552`)
+* Port the REST machinery to Falcon 0.3. (:lp-issue:`1446881`)
 
 Bugs
 ----
 * Fix calculation of default configuration file to use when the ``$var_dir``
-  is created by ``mailman start``.  (LP: #1411435)
+  is created by ``mailman start``.  (:lp-issue:`1411435`)
 * When creating a user with an email address, do not create the user record
   if the email address already exists.  Given by Andrew Stuart.
-  (LP: #1418280)
+  (:lp-issue:`1418280`)
 * When deleting a user via REST, make sure all linked addresses are deleted.
-  Found by Andrew Stuart.  (LP: #1419519)
+  Found by Andrew Stuart.  (:lp-issue:`1419519`)
 * When trying to subscribe an address to a mailing list through the REST API
   where a case-differing version of the address is already subscribed, return
-  a 409 error instead of a 500 error.  Found by Ankush Sharma.  (LP: #1425359)
+  a 409 error instead of a 500 error.  Found by Ankush Sharma.
+  (:lp-issue:`1425359`)
 * ``mailman lists --domain`` was not properly handling its arguments.  Given
-  by Manish Gill.  (LP: #1166911)
+  by Manish Gill.  (:lp-issue:`1166911`)
 * When deleting a user object, make sure their preferences are also deleted.
-  Given by Abhishek.  (LP: #1418276)
+  Given by Abhishek.  (:lp-issue:`1418276`)
 * Be sure a mailing list's acceptable aliases are deleted when the mailing
-  list itself is deleted.  (LP: #1432239)
+  list itself is deleted.  (:lp-issue:`1432239`)
 * The built-in example ``IArchiver`` implementations now explicitly return
-  None.  (LP: #1203359)
+  None.  (:lp-issue:`1203359`)
 * The test suite now runs successfully again with PostgreSQL.  Given by
-  Aurélien Bompard.  (LP: #1435941)
+  Aurélien Bompard.  (:lp-issue:`1435941`)
 
 Configuration
 -------------
@@ -1484,12 +1490,12 @@ REST
   allowing a client to cull all orphaned UIDs via ``DELETE`` on
   ``<api>/reserved/uids/orphans``.  Note that *no guarantees* of API
   stability will ever be made for resources under ``reserved``.
-  (LP: #1420083)
+  (:lp-issue:`1420083`)
 * Domains can now optionally be created with owners; domain owners can be
   added after the fact; domain owners can be deleted.  Also, users now have
   an ``is_server_owner`` flag as part of their representation, which defaults
   to False, and can be PUT and PATCH'd.  Given by Abhilash Raj, with fixes
-  and refinements by Barry Warsaw.  (LP: #1423756)
+  and refinements by Barry Warsaw.  (:lp-issue:`1423756`)
 
 
 3.0 beta 5 -- "Carve Away The Stone"
@@ -1499,16 +1505,16 @@ REST
 Bugs
 ----
 * Fixed Unicode errors in the digest runner and when sending messages to the
-  site owner as a fallback.  Given by Aurélien Bompard.  (LP: #1130957).
+  site owner as a fallback.  Given by Aurélien Bompard.  (:lp-issue:`1130957`).
 * Fixed Unicode errors when a message being added to the digest has non-ascii
   characters in its payload, but no Content-Type header defining a charset.
-  Given by Aurélien Bompard.  (LP: #1170347)
+  Given by Aurélien Bompard.  (:lp-issue:`1170347`)
 * Fixed messages without a `text/plain` part crashing the `Approved` rule.
-  Given by Aurélien Bompard.  (LP: #1158721)
+  Given by Aurélien Bompard.  (:lp-issue:`1158721`)
 * Fixed getting non-ASCII filenames from RFC 2231 i18n'd messages.  Given by
-  Aurélien Bompard.  (LP: #1060951)
+  Aurélien Bompard.  (:lp-issue:`1060951`)
 * Fixed `AttributeError` on MIME digest messages.  Given by Aurélien Bompard.
-  (LP: #1130696)
+  (:lp-issue:`1130696`)
 
 Commands
 --------
@@ -1557,7 +1563,7 @@ REST
   be used to GET the address's linked user if there is one.  This
   sub-resource also supports POST to link an unlinked address (with an
   optional 'auto_create' flag), and PUT to link the address to a different
-  user.  It also supports DELETE to unlink the address.  (LP: #1312884)
+  user.  It also supports DELETE to unlink the address.  (:lp-issue:`1312884`)
   Given by Aurélien Bompard based on work by Nicolas Karageuzian.
 * The ``/3.0/system`` path is deprecated; use ``/3.0/system/versions`` to get
   the system version information.
@@ -1587,13 +1593,13 @@ Development
 REST
 ----
 * Add ``reply_to_address`` and ``first_strip_reply_to`` as writable
-  attributes of a mailing list's configuration.  (LP: #1157881)
+  attributes of a mailing list's configuration.  (:lp-issue:`1157881`)
 * Support pagination of some large collections (lists, users, members).
-  [Florian Fuchs]  (LP: #1156529)
+  [Florian Fuchs]  (:lp-issue:`1156529`)
 * Expose ``hide_address`` to the ``.../preferences`` REST API.
-  [Sneha Priscilla.]  (LP: #1203519)
+  [Sneha Priscilla.]  (:lp-issue:`1203519`)
 * Mailing lists can now individually enable or disable any archiver available
-  site-wide.  [Joanna Skrzeszewska]  (LP: #1158040)
+  site-wide.  [Joanna Skrzeszewska]  (:lp-issue:`1158040`)
 * Addresses can be added to existing users, including display names, via the
   REST API.  [Florian Fuchs]
 * Fixed a crash in the REST server when searching for nonmembers via
@@ -1606,9 +1612,9 @@ REST
 Commands
 --------
 * `mailman conf` now has a `-t/--sort` flag which sorts the output by section
-  and then key.  [Karl-Aksel Puulmann and David Soto] (LP: 1162492)
+  and then key.  [Karl-Aksel Puulmann and David Soto] (:lp-issue:`1162492`)
 * Greatly improve the fidelity of the Mailman 2.1 list importer functionality
-  (i.e. ``mailman import21``).  [Aurélien Bompard].
+  (i.e. ``mailman import21``).  [Aurélien Bompard]
 
 Configuration
 -------------
@@ -1617,7 +1623,7 @@ Configuration
   ``bin/mailman info``, add an ``var/etc/mailman.cfg`` file if one does not
   already exist.  Also, when initializing the system, look for that file as
   the configuration file, just after ``./mailman.cfg`` and before
-  ``~/.mailman.cfg``.  (LP: #1157861)
+  ``~/.mailman.cfg``.  (:lp-issue:`1157861`)
 
 Database
 --------
@@ -1628,22 +1634,22 @@ Database
 Bugs
 ----
 * Non-queue runners should not create ``var/queue`` subdirectories.
-  [Sandesh Kumar Agrawal] (LP: #1095422)
+  [Sandesh Kumar Agrawal] (:lp-issue:`1095422`)
 * Creation of lists with upper case names should be coerced to lower case.
-  (LP: #1117176)
+  (:lp-issue:`1117176`)
 * Fix REST server crash on `mailman reopen` due to no interception of
-  signals.  (LP: #1184376)
+  signals.  (:lp-issue:`1184376`)
 * Add `subject_prefix` to the `IMailingList` interface, and clarify the
-  docstring for `display_name`.  (LP: #1181498)
+  docstring for `display_name`.  (:lp-issue:`1181498`)
 * Fix importation from MM2.1 to MM3 of the archive policy.
-  [Aurélien Bompard] (LP: #1227658)
+  [Aurélien Bompard] (:lp-issue:`1227658`)
 * Fix non-member moderation rule to prefer a member sender if both members
   and non-members are in the message's sender list.  [Aurélien Bompard]
-  (LP: #1291452)
+  (:lp-issue:`1291452`)
 * Fix IntegrityError (against PostgreSQL) when deleting a list with content
-  filters.  [Aurélien Bompard]  (LP: #1117174)
+  filters.  [Aurélien Bompard]  (:lp-issue:`1117174`)
 * Fix test isolation bug in ``languages.rst``.
-  [Piotr Kasprzyk] (LP: #1308769)
+  [Piotr Kasprzyk] (:lp-issue:`1308769`)
 
 
 3.0 beta 3 -- "Here Again"
@@ -1654,7 +1660,7 @@ Compatibility
 -------------
 * Python 2.7 is now required.  Python 2.6 is no longer officially supported.
   The code base is now also `python2.7 -3` clean, although there are still
-  some warnings in 3rd party dependencies.  (LP: #1073506)
+  some warnings in 3rd party dependencies.  (:lp-issue:`1073506`)
 
 REST
 ----
@@ -1673,11 +1679,11 @@ REST
 
 * List styles are supported through the REST API.  Get the list of available
   styles (by name) via `.../lists/styles`.  Create a list in a specific style
-  by using POST data `style_name=<style>`.  (LP: #975692)
+  by using POST data `style_name=<style>`.  (:lp-issue:`975692`)
 * Allow the getting/setting of IMailingList.subject_prefix via the REST API
-  (given by Terri Oda).  (LP: #1062893)
+  (given by Terri Oda).  (:lp-issue:`1062893`)
 * Expose a REST API for membership change (subscriptions and unsubscriptions)
-  moderation.  (LP: #1090753)
+  moderation.  (:lp-issue:`1090753`)
 * Add list_id to JSON representation for a mailing list (given by Jimmy
   Bergman).
 * The canonical resource for a mailing list (and thus its self_link) is now
@@ -1691,13 +1697,13 @@ REST
   POST to .../addresses/<email>/verify and .../addresses/<email>/unverify
   respectively.  The POST data is ignored.  It is not an error to verify or
   unverify an address more than once, but verifying an already verified
-  address does not change its `.verified_on` date.  (LP: #1054730)
+  address does not change its `.verified_on` date.  (:lp-issue:`1054730`)
 * Deleting a user through the REST API also deletes all the user's linked
-  addresses and memberships.  (LP: #1074374)
+  addresses and memberships.  (:lp-issue:`1074374`)
 * A user's password can be verified by POSTing to .../user/<id>/login.  The
   data must contain a single parameter `cleartext_password` and if this
   matches, a 204 (No Content) will be returned, otherwise a 403 (Forbidden)
-  is returned.  (LP: #1065447)
+  is returned.  (:lp-issue:`1065447`)
 
 Configuration
 -------------
@@ -1736,7 +1742,7 @@ Commands
   arguments, and adds a `--directory` argument.  This is necessary to support
   the Postfix `relay_domains` support.
 * `bin/mailman start` was passing the wrong relative path to its runner
-  subprocesses when -C was given.  (LP: #982551)
+  subprocesses when -C was given.  (:lp-issue:`982551`)
 * `bin/runner` command has been simplified and its command line options
   reduced.  Now, only one `-r/--runner` option may be provided and the
   round-robin feature has been removed.
@@ -1744,18 +1750,18 @@ Commands
 Other
 -----
 * Added support for Postfix `relay_domains` setting for better virtual domain
-  support.  [Jimmy Bergman].
+  support.  [Jimmy Bergman]
 * Two new events are triggered on membership changes: `SubscriptionEvent`
   when a new member joins a mailing list, and an `UnsubscriptionEvent` when a
-  member leaves a mailing list.  (LP: #1047286)
+  member leaves a mailing list.  (:lp-issue:`1047286`)
 * Improve the --help text for the `start`, `stop`, `restart`, and `reopen`
-  subcommands.  (LP: #1035033)
+  subcommands.  (:lp-issue:`1035033`)
 
 Bugs
 ----
-* Fixed `send_goodbye_message()`.  (LP: #1091321)
+* Fixed `send_goodbye_message()`.  (:lp-issue:`1091321`)
 * Fixed REST server crash on `reopen` command.  Identification and test
-  provided by Aurélien Bompard.  (LP: #1184376)
+  provided by Aurélien Bompard.  (:lp-issue:`1184376`)
 
 
 3.0 beta 2 -- "Freeze"
@@ -1768,7 +1774,7 @@ Architecture
   now via the RFC 2369 `list_id` instead of the fqdn listname (i.e. posting
   address).  This is because while the posting address can change if the
   mailing list is moved to a new server, the list id is fixed.
-  (LP: #1024509)
+  (:lp-issue:`1024509`)
 
   - IListManager.get_by_list_id() added.
   - IListManager.list_ids added.
@@ -1779,9 +1785,9 @@ Architecture
     retrieves and returns the IMailingList.
 
 * `passlib`_ is now used for all password hashing instead of flufl.password.
-  The default hash is `sha512_crypt`.  (LP: #1015758)
+  The default hash is `sha512_crypt`.  (:lp-issue:`1015758`)
 * Internally, all datetimes are kept in the UTC timezone, however because of
-  LP: #280708, they are stored in the database in naive format.
+  :lp-issue:`280708`, they are stored in the database in naive format.
 * `received_time` is now added to the message metadata by the LMTP runner
   instead of by `Switchboard.enqueue()`.  This latter no longer depends on
   `received_time` in the metadata.
@@ -1789,14 +1795,14 @@ Architecture
   individual archiver implementations, since not all of them need a lock.  If
   they do, the implementations must acquire said lock themselves.
 * The `news` runner and queue has been renamed to the more accurate `nntp`.
-  The runner has also been ported to Mailman 3 (LP: #967409).  Beta testers
-  can safely remove `$var_dir/queue/news`.
+  The runner has also been ported to Mailman 3 (:lp-issue:`967409`).
+  Beta testers can safely remove `$var_dir/queue/news`.
 * A mailing list's *moderator password* is no longer stored in the clear; it
   is hashed with the currently selected scheme.
 * An `AddressVerificationEvent` is triggered when an `IAddress` is verified
-  or unverified.  (LP: #975698)
+  or unverified.  (:lp-issue:`975698`)
 * A `PasswordChangeEvent` is triggered when an `IUser`'s password changes.
-  (LP: #975700)
+  (:lp-issue:`975700`)
 * When a queue runner gets an exception in its _dispose() method, a
   `RunnerCrashEvent` is triggered, which contains references to the queue
   runner, mailing list, message, metadata, and exception.  Interested parties
@@ -1819,11 +1825,11 @@ Architecture
   configuration stack is pushed or popped.
 * The policy for archiving has now been collapsed into a single enum, called
   ArchivePolicy.  This describes the three states of never archive, archive
-  privately, and archive_publicly. (LP: #967238)
+  privately, and archive_publicly. (:lp-issue:`967238`)
 
 Database
 --------
-* Schema migrations (LP: #971013)
+* Schema migrations (:lp-issue:`971013`)
 
   - mailinglist.include_list_post_header -> allow_list_posts
   - mailinglist.news_prefix_subject_too  -> nntp_prefix_subject_too
@@ -1831,9 +1837,9 @@ Database
   - mailinglist.archive and mailinglist.archive_private have been collapsed
     into archive_policy.
   - mailinglist.nntp_host has been removed.
-  - mailinglist.generic_nonmember_action has been removed (LP: #975696)
+  - mailinglist.generic_nonmember_action has been removed (:lp-issue:`975696`)
 
-* Schema migrations (LP: #1024509)
+* Schema migrations (:lp-issue:`1024509`)
 
   - member.mailing_list -> list_id
 
@@ -1844,14 +1850,14 @@ Database
 REST
 ----
 * Expose `archive_policy` in the REST API.  Contributed by Alexander
-  Sulfrian.  (LP: #1039129)
+  Sulfrian.  (:lp-issue:`1039129`)
 
 Configuration
 -------------
 * New configuration variables `clobber_date` and `clobber_skew` supported in
   every `[archiver.<name>]` section.  These are used to determine under what
   circumstances a message destined for a specific archiver should have its
-  `Date:` header clobbered.  (LP: #963612)
+  `Date:` header clobbered.  (:lp-issue:`963612`)
 * With the switch to `passlib`_, `[passwords]password_scheme` has been
   removed.  Instead use `[passwords]path` to specify where to find the
   `passlib.cfg` file.  See the comments in `schema.cfg` for details.
@@ -1873,16 +1879,16 @@ Documentation
 
 Bug fixes
 ---------
-* Fixed the RFC 1153 digest footer to be compliant.  (LP: #887610)
+* Fixed the RFC 1153 digest footer to be compliant.  (:lp-issue:`887610`)
 * Fixed a UnicodeError with non-ascii message bodies in the `approved` rule,
-  given by Mark Sapiro. (LP: #949924)
+  given by Mark Sapiro. (:lp-issue:`949924`)
 * Fixed a typo when returning the configuration file's header match checks.
-  (LP: #953497)
-* List-Post should be NO when posting is not allowed. (LP: #987563)
-* Non-unicode values in msgdata broke pending requests. (LP: #1031391)
-* Show devmode in `bin/mailman info` output. (LP: #1035028)
+  (:lp-issue:`953497`)
+* List-Post should be NO when posting is not allowed. (:lp-issue:`987563`)
+* Non-unicode values in msgdata broke pending requests. (:lp-issue:`1031391`)
+* Show devmode in `bin/mailman info` output. (:lp-issue:`1035028`)
 * Fix residual references to the old `IMailingList` archive variables.
-  (LP: #1031393)
+  (:lp-issue:`1031393`)
 
 .. _`passlib`: https://passlib.readthedocs.io/en/stable/index.html
 
@@ -1896,13 +1902,13 @@ Architecture
 * Schema migrations have been implemented.
 * Implement the style manager as a utility instead of an attribute hanging
   off the `mailman.config.config` object.
-* PostgreSQL support contributed by Stephen A. Goss. (LP: #860159)
+* PostgreSQL support contributed by Stephen A. Goss. (:lp-issue:`860159`)
 * Separate out the RFC 2369 header adding handler.
 * Dynamically calculate the `List-Id` header instead of storing it in the
   database.  This means it cannot be changed.
-* Major redesign of the template search system, fixing LP: #788309.  $var_dir
-  is now used when search for all template overrides, site, domain, or
-  mailing list.  The in-tree English templates are used only as a last
+* Major redesign of the template search system, fixing :lp-issue:`788309`.
+  $var_dir is now used when search for all template overrides, site, domain,
+  or mailing list.  The in-tree English templates are used only as a last
   fallback.
 * Support downloading templates by URI, including mailman:// URIs.  This is
   used in welcome and goodbye messages, as well as regular and digest headers
@@ -1929,7 +1935,7 @@ Architecture
   `$var_dir/archives/prototype`, given by Toshio Kuratomi.
 * Improved "8 mile high" document distilled by Stephen J Turnbull from the
   Pycon 2012 Mailman 3 sprint.  Also improvements to the Sphinx build given
-  by Andrea Crotti (LP: #954718).
+  by Andrea Crotti (:lp-issue:`954718`).
 * Pipermail has been eradicated.
 * Configuration variable `[mailman]filtered_messages_are_preservable`
   controls whether messages which have their top-level `Content-Type`
@@ -1993,12 +1999,12 @@ Interfaces
 Commands
 --------
 * IPython support in `bin/mailman shell` contributed by Andrea Crotti.
-  (LP: #949926).
+  (:lp-issue:`949926`).
 * The `mailman.cfg` configuration file will now automatically be detected if
   it exists in an `etc` directory which is a sibling of argv0.
 * `bin/mailman shell` is an alias for `withlist`.
 * The `confirm` email command now properly handles `Re:`-like prefixes, even
-  if they contain non-ASCII characters.  (LP: #685261)
+  if they contain non-ASCII characters.  (:lp-issue:`685261`)
 * The `join` email command no longer accepts an `address=` argument.  Its
   `digest=` argument now accepts the following values: `no` (for regular
   delivery), `mime`, or `plain`.
@@ -2006,18 +2012,18 @@ Commands
 * A welcome message is sent when the user confirms their subscription via
   email.
 * Global ``-C`` option now accepts an absolute path to the configuration
-  file.  Given by Andrea Crotti.  (LP: #953707)
+  file.  Given by Andrea Crotti.  (:lp-issue:`953707`)
 
 Bug fixes
 ---------
 * Subscription disabled probe warning notification messages are now sent
-  without a `Precedence:` header.  Given by Mark Sapiro. (LP: #808821)
+  without a `Precedence:` header.  Given by Mark Sapiro. (:lp-issue:`808821`)
 * Fixed KeyError in retry runner, contributed by Stephen A. Goss.
-  (LP: #872391)
+  (:lp-issue:`872391`)
 * Fixed bogus use of `bounce_processing` attribute (should have been
-  `process_bounces`, with thanks to Vincent Fretin.  (LP: #876774)
+  `process_bounces`, with thanks to Vincent Fretin.  (:lp-issue:`876774`)
 * Fix `test_moderation` for timezones east of UTC+0000, given by blacktav.
-  (LP: #890675)
+  (:lp-issue:`890675`)
 
 
 3.0 alpha 8 -- "Where's My Thing?"
@@ -2048,8 +2054,8 @@ Architecture
   - DomainDeletedEvent  - sent after the domain is deleted
 
 * Using the above events, when a domain is deleted, associated mailing lists
-  are deleted.  (LP: #837526)
-* IDomain.email_host -> .mail_host (LP: #831660)
+  are deleted.  (:lp-issue:`837526`)
+* IDomain.email_host -> .mail_host (:lp-issue:`831660`)
 * User and Member ids are now proper UUIDs.
 * Improved the way enums are stored in the database, so that they are more
   explicitly expressed in the code, and more database efficient.
@@ -2059,43 +2065,44 @@ REST
 * Preferences for addresses, users, and members can be accessed, changed, and
   deleted through the REST interface.  Hierarchical, combined preferences for
   members, and system preferences can be read through the REST interface.
-  (LP: #821438)
+  (:lp-issue:`821438`)
 * The IMailingList attribute ``host_name`` has been renamed to ``mail_host``
   for consistency.  This changes the REST API for mailing list
-  resources. (LP: #787599)
+  resources. (:lp-issue:`787599`)
 * New REST resource https://.../members/find can be POSTed to in order to find
   member records.  Optional arguments are `subscriber` (email address to
-  search for), `fqdn_listname`, and `role` (i.e. MemberRole).  (LP: #799612)
+  search for), `fqdn_listname`, and `role` (i.e. MemberRole).
+  (:lp-issue:`799612`)
 * You can now query or change a member's `delivery_mode` attribute through
-  the REST API (LP: #833132).  Given by Stephen A. Goss.
+  the REST API (:lp-issue:`833132`).  Given by Stephen A. Goss.
 * New REST resource https://.../<domain>/lists can be GETed in order to find
-  all the mailing lists in a specific domain (LP: #829765).  Given by
+  all the mailing lists in a specific domain (:lp-issue:`829765`).  Given by
   Stephen A. Goss.
-* Fixed /lists/<fqdn_listname>/<role>/<email> (LP: #825570)
+* Fixed /lists/<fqdn_listname>/<role>/<email> (:lp-issue:`825570`)
 * Remove role plurals from /lists/<fqdn_listname/rosters/<role>
-* Fixed incorrect error code for /members/<bogus> (LP: #821020).  Given by
-  Stephen A. Goss.
-* DELETE users via the REST API.  (LP: #820660)
-* Moderators and owners can be added via REST (LP: #834130).  Given by
+* Fixed incorrect error code for /members/<bogus> (:lp-issue:`821020`).
+  Given by Stephen A. Goss.
+* DELETE users via the REST API.  (:lp-issue:`820660`)
+* Moderators and owners can be added via REST (:lp-issue:`834130`).  Given by
   Stephen A. Goss.
 * Getting the roster or configuration of a nonexistent list did not give a
-  404 error (LP: #837676).  Given by Stephen A. Goss.
+  404 error (:lp-issue:`837676`).  Given by Stephen A. Goss.
 * PATCHing an invalid attribute on a member did not give a 400 error
-  (LP: #833376).  Given by Stephen A. Goss.
+  (:lp-issue:`833376`).  Given by Stephen A. Goss.
 * Getting the memberships for a non-existent address did not give a 404 error
-  (LP: #848103).  Given by Stephen A. Goss.
+  (:lp-issue:`848103`).  Given by Stephen A. Goss.
 
 Commands
 --------
 * `bin/qrunner` is renamed to `bin/runner`.
 * `bin/mailman aliases` gains `-f` and `-s` options.
 * `bin/mailman create` no longer allows a list to be created with bogus owner
-  addresses.  (LP: #778687)
-* `bin/mailman start --force` option is fixed.  (LP: #869317)
+  addresses.  (:lp-issue:`778687`)
+* `bin/mailman start --force` option is fixed.  (:lp-issue:`869317`)
 
 Documentation
 -------------
-* Update the COPYING file to contain the GPLv3.  (LP: #790994)
+* Update the COPYING file to contain the GPLv3.  (:lp-issue:`790994`)
 * Major terminology change: ban the terms "queue runners" and "qrunners" since
   not all runners manage queue directories.  Just call them "runners".  Also,
   the master is now just called "the master runner".
@@ -2105,18 +2112,21 @@ Testing
 * New configuration variable in [devmode] section, called `wait` which sets
   the timeout value used in the test suite for starting up subprocesses.
 * Handle SIGTERM in the REST server so that the test suite always shuts down
-  correctly.  (LP: #770328)
+  correctly.  (:lp-issue:`770328`)
 
 Other bugs and changes
 ----------------------
-* Moderating a message with Action.accept now sends the message. (LP: #827697)
+* Moderating a message with Action.accept now sends the message.
+  (:lp-issue:`827697`)
 * Fix AttributeError triggered by i18n call in autorespond_to_sender()
-  (LP: #827060)
-* Local timezone in X-Mailman-Approved-At caused test failure. (LP: #832404)
+  (:lp-issue:`827060`)
+* Local timezone in X-Mailman-Approved-At caused test failure.
+  (:lp-issue:`832404`)
 * InvalidEmailAddressError no longer repr()'s its value.
-* Rewrote a test for compatibility between Python 2.6 and 2.7. (LP: #833208)
+* Rewrote a test for compatibility between Python 2.6 and 2.7.
+  (:lp-issue:`833208`)
 * Fixed Postfix alias file generation when more than one mailing list
-  exists.  (LP: #874929).  Given by Vincent Fretin.
+  exists.  (:lp-issue:`874929`).  Given by Vincent Fretin.
 
 
 3.0 alpha 7 -- "Mission"
@@ -2129,7 +2139,7 @@ Architecture
   with a preferred address, and changes to that will be immediately reflected
   in mailing list subscriptions.  Users who subscribe with an explicit
   address can easily change to a different address, as long as that address
-  is verified.  (LP: #643949)
+  is verified.  (:lp-issue:`643949`)
 * IUsers and IMembers are now assigned a unique, random, immutable id.
 * IUsers now have created_on and .preferred_address properties.
 * IMembers now have a .user attribute for easy access to the subscribed user.
@@ -2151,7 +2161,7 @@ Architecture
   always have an IAddress that they can subscribe to the list (as
   MemberRole.nonmember).
 * Support for SMTP AUTH added via smtp_user and smtp_pass configuration
-  variables in the [mta] section.  (LP: #490044)
+  variables in the [mta] section.  (:lp-issue:`490044`)
 * IEmailValidator interface for pluggable validation of email addresses.
 * .subscribe() is moved from the IAddress to the IMailingList
 * IAddresses get their registered_on attribute set when the object is created.
@@ -2193,16 +2203,16 @@ REST
 
 Build
 -----
-* Support Python 2.7. (LP: #667472)
-* Disable site-packages in buildout.cfg because of LP: #659231.
-* Don't include eggs/ or parts/ in the source tarball. (LP: #656946)
+* Support Python 2.7. (:lp-issue:`667472`)
+* Disable site-packages in buildout.cfg because of :lp-issue:`659231`.
+* Don't include eggs/ or parts/ in the source tarball. (:lp-issue:`656946`)
 * flufl.lock is now required instead of locknix.
 
 Bugs fixed
 ----------
-* Typo in scan_message(). (LP: #645897)
-* Typo in add_member().  (LP: #710182) (Florian Fuchs)
-* Re-enable bounce detectors. (LP: #756943)
+* Typo in scan_message(). (:lp-issue:`645897`)
+* Typo in add_member().  (:lp-issue:`710182`) (Florian Fuchs)
+* Re-enable bounce detectors. (:lp-issue:`756943`)
 * Clean up many pyflakes problems; ditching pylint.
 
 
@@ -2223,7 +2233,8 @@ Configuration
   data files, etc. via the configuration file.  Define a file system 'layout'
   and then select that layout in the [mailman] section.  Default layouts
   include 'local' for putting everything in /var/tmp/mailman, 'dev' for local
-  development, and 'fhs' for Filesystem Hierarchy Standard 2.3 (LP #490144).
+  development, and 'fhs' for Filesystem Hierarchy Standard 2.3.
+  (:lp-issue:`490144`)
 * Queue file directories now live in $var_dir/queues.
 
 REST
@@ -2238,8 +2249,8 @@ REST
   partially update a mailing list's configuration.  Individual options can be
   set and retrieved by using subpaths.
 * Subscribing an already subscribed member via REST now returns a 409 HTTP
-  error.  LP: #552917
-* Fixed a bug when deleting a list via the REST API.  LP: #601899
+  error.  (:lp-issue:`552917`)
+* Fixed a bug when deleting a list via the REST API.  (:lp-issue:`601899`)
 
 Architecture
 ------------
@@ -2255,9 +2266,9 @@ Architecture
 Miscellaneous
 -------------
 * Allow X-Approved and X-Approve headers, equivalent to Approved and
-  Approve. LP: #557750
-* Various test failure fixes.  LP: #543618, LP: #544477
-* List-Post header is retained in MIME digest messages.  LP: #526143
+  Approve.  (:lp-issue:`557750`)
+* Various test failure fixes.  (:lp-issue:`543618` :lp-issue:`544477`)
+* List-Post header is retained in MIME digest messages.  (:lp-issue:`526143`)
 * Importing from a Mailman 2.1.x list is partially supported.
 
 
@@ -2385,10 +2396,10 @@ Bug fixes
 ---------
 
 * Changed bin/arch to attempt to open the mbox before wiping the old
-  archive. Launchpad bug #280418.
+  archive.  (:lp-issue:`280418`)
 
 * Added digest.mbox and pending.pck to the 'list' files checked by
-  check_perms. Launchpad bug #284802.
+  check_perms.  (:lp-issue:`284802`)
 
 Architecture
 ------------

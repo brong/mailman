@@ -31,6 +31,7 @@ sys.path.append(os.path.abspath('_ext'))
 extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.viewcode',
               'sphinx.ext.graphviz',
+              'sphinx.ext.extlinks',
               'sphinxcontrib.zopeext.autointerface',
               # This is custom plugin in the `_ext/` directory in the top level
               # directory of Mailman Core. This is primarily used to render the
@@ -102,6 +103,21 @@ pygments_style = 'sphinx'
 # A list of ignored prefixes for module index sorting.
 #modindex_common_prefix = []
 
+# sphinx.ext.extlinks
+extlinks = {
+    'issue': (
+        'https://gitlab.com/mailman/mailman/-/issues/%s',
+        'GL:#%s'
+    ),
+    'mr': (
+        'https://gitlab.com/mailman/mailman/-/merge_requests/%s',
+        'GL:!%s'
+    ),
+    'lp-issue': (
+        'https://bugs.launchpad.net/mailman/+bug/%s',
+        'LP:#%s'
+    ),
+}
 
 # -- Options for HTML output ---------------------------------------------------
 
