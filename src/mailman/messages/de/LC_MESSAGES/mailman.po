@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: mm 3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-05 07:50-0700\n"
-"PO-Revision-Date: 2025-09-30 21:02+0000\n"
+"PO-Revision-Date: 2025-10-07 21:02+0000\n"
 "Last-Translator: Thomas Zell <t.zell@gmx.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/gnu-mailman/"
 "mailman/de/>\n"
@@ -39,6 +39,7 @@ msgstr "Mailinglisten-Testnachricht für ${mlist.display_name}"
 #, python-brace-format
 msgid "${mlist.display_name} uncaught bounce notification"
 msgstr ""
+"Nicht abgefangene Unzustellbarkeitsbenachrichtigung für ${mlist.display_name}"
 
 #: src/mailman/app/membership.py:147
 #, python-brace-format
@@ -164,7 +165,11 @@ msgstr ""
 msgid ""
 "    Running mailman commands as root is not recommended and mailman will\n"
 "    refuse to run as root unless this option is specified."
-msgstr "    Mailman Befehle als root zu benutzen ist nicht empfohlen und mailman wird sich weigern als root zu laufen solange diese Option nicht aktiviert ist."
+msgstr ""
+"    Mailman Befehle als root zu benutzen ist nicht empfohlen und mailman "
+"wird\n"
+"    sich weigern als root zu laufen, solange diese Option nicht aktiviert "
+"ist."
 
 #: src/mailman/bin/mailman.py:129
 msgid "    If you are sure you want to run as root, specify --run-as-root."
@@ -552,12 +557,12 @@ msgstr "Keine solche Liste: ${listspec}"
 #: src/mailman/commands/cli_admins.py:51
 #, python-brace-format
 msgid "${email} is already a ${role.name} of ${mlist.fqdn_listname}"
-msgstr ""
+msgstr "${email} ist bereits ein(e) ${role.name} von ${mlist.fqdn_listname}"
 
 #: src/mailman/commands/cli_admins.py:59
 #, python-brace-format
 msgid "${email} is not a ${role.name} of ${mlist.fqdn_listname}"
-msgstr ""
+msgstr "${email} ist kein(e) ${role.name} von ${mlist.fqdn_listname}"
 
 #: src/mailman/commands/cli_admins.py:67
 msgid ""
@@ -590,12 +595,12 @@ msgstr ""
 
 #: src/mailman/commands/cli_admins.py:99
 msgid "Nothing to add or delete."
-msgstr ""
+msgstr "Nichts zu löschen oder hinzuzufügen."
 
 #: src/mailman/commands/cli_admins.py:103 src/mailman/commands/cli_admins.py:106
 #, python-brace-format
 msgid "Invalid email address: ${email}"
-msgstr ""
+msgstr "Ungültige E-Mail-Adresse: ${email}"
 
 #: src/mailman/commands/cli_aliases.py:33
 msgid "Regenerate the aliases appropriate for your MTA."
