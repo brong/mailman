@@ -24,6 +24,7 @@ methods in your compositional derived class.
 
 
 from datetime import timedelta
+from mailman.core.constants import system_preferences
 from mailman.core.i18n import _
 from mailman.interfaces.action import Action, FilterAction
 from mailman.interfaces.archiver import ArchivePolicy
@@ -55,7 +56,7 @@ class Identity:
         mlist.post_id = 1
         mlist.description = ''
         mlist.info = ''
-        mlist.preferred_language = 'en'
+        mlist.preferred_language = system_preferences.preferred_language
         mlist.subject_prefix = _('[${mlist.display_name}] ')
         mlist.encode_ascii_prefixes = (
             mlist.preferred_language.charset != 'us-ascii')

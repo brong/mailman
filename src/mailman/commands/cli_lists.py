@@ -21,7 +21,6 @@ import sys
 import click
 
 from mailman.app.lifecycle import create_list, remove_list
-from mailman.core.constants import system_preferences
 from mailman.core.i18n import _
 from mailman.database.transaction import transaction
 from mailman.email.message import UserNotification
@@ -170,11 +169,10 @@ class Lists:
 @click.pass_context
 def create(ctx, language, owners, style_name, notify, quiet, create_domain,
            fqdn_listname):
-    language_code = (language if language is not None
-                     else system_preferences.preferred_language.code)
-    # Make sure that the selected language code is known.
-    if language_code not in getUtility(ILanguageManager).codes:
-        ctx.fail(_('Invalid language code: ${language_code}'))
+    if language:
+        # Make sure that the selected language code is known.
+        if language not in getUtility(ILanguageManager).codes:
+            ctx.fail(_('Invalid language code: ${language}'))
     # Check to see if the domain exists or not.
     listname, at, domain = fqdn_listname.partition('@')
     domain_manager = getUtility(IDomainManager)
@@ -202,11 +200,9 @@ def create(ctx, language, owners, style_name, notify, quiet, create_domain,
         ctx.fail(_('List already exists: ${fqdn_listname}'))
     except BadDomainSpecificationError as domain:              # noqa: F841
         ctx.fail(_('Undefined domain: ${domain}'))
-    # Find the language associated with the code, then set the mailing list's
-    # preferred language to that.
-    language_manager = getUtility(ILanguageManager)
-    with transaction():
-        mlist.preferred_language = language_manager[language_code]
+    if language:
+        with transaction():
+            mlist.preferred_language = language
     # Do the notification.
     if not quiet:
         print(_('Created mailing list: ${mlist.fqdn_listname}'))

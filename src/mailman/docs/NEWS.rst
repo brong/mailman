@@ -50,6 +50,8 @@ Bugs fixed
   message body text.  (:issue:`1239`)
 * Anonymous lists now remove DKIM, Authentication and ARC headers.
   (:issue:`1241`)
+* Use config.mailman.default_language instead of `en` for a new list
+  preferred_language. (:issue:`997`)
 
 New Features
 ------------
