@@ -82,8 +82,10 @@ class SubscriptionEvent(MembershipChangeEvent):
 
     def __init__(self, *args, **kw):
         send_welcome_message = kw.pop('send_welcome_message', None)
+        admin_notify_mchanges = kw.pop('admin_notify_mchanges', None)
         super().__init__(*args, **kw)
         self.send_welcome_message = send_welcome_message
+        self.admin_notify_mchanges = admin_notify_mchanges
 
     def __str__(self):
         return '{0} joined {1}'.format(self.member.address, self.mlist.list_id)

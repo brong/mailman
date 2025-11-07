@@ -50,6 +50,10 @@ class TestMembership(unittest.TestCase):
     def setUp(self):
         with transaction():
             self._mlist = create_list('test@example.com')
+            # Default to no messages.
+            self._mlist.send_welcome_message = False
+            self._mlist.send_goodbye_message = False
+            self._mlist.admin_notify_mchanges = False
         self._usermanager = getUtility(IUserManager)
 
     def test_try_to_join_missing_list(self):
@@ -92,12 +96,11 @@ class TestMembership(unittest.TestCase):
         self.assertEqual(cm.exception.code, 404)
 
     def test_leave_mlist_sends_notice_to_user(self):
+        self._mlist.send_goodbye_message = True
         with transaction():
             anne = self._usermanager.create_user('anne@example.com')
             set_preferred(anne)
             self._mlist.subscribe(anne)
-        # Empty the virgin queue.
-        get_queue_messages('virgin', expected_count=1)
         url = 'http://localhost:9001/3.0/members/1'
         # Calling the DELETE api should send user a notice.
         json, response = call_api(url, method='DELETE')
@@ -115,8 +118,6 @@ class TestMembership(unittest.TestCase):
             anne = self._usermanager.create_user('anne@example.com')
             set_preferred(anne)
             self._mlist.subscribe(anne)
-        # Empty the virgin queue.
-        get_queue_messages('virgin', expected_count=1)
         url = 'http://localhost:9001/3.0/members/1'
         # Try unsubscribing the user.
         with transaction():
@@ -147,8 +148,6 @@ class TestMembership(unittest.TestCase):
             anne = self._usermanager.create_user('anne@example.com')
             set_preferred(anne)
             self._mlist.subscribe(anne)
-        # Empty the virgin queue.
-        get_queue_messages('virgin', expected_count=1)
         url = 'http://localhost:9001/3.0/members/1'
         # The default policy is to confirm, so an un-confirmed request would be
         # held for user confirmation.
@@ -612,7 +611,7 @@ class TestMembership(unittest.TestCase):
         self.assertIsNotNone(member)
         get_queue_messages('virgin', expected_count=0)
 
-    def test_send_welcome_message(self):
+    def test_subscribe_send_welcome_message(self):
         # Test that the send_welcome_message flag sends welcome message, even
         # when the mlist isn't configured to do so.
         self._mlist.send_welcome_message = False
@@ -631,6 +630,45 @@ class TestMembership(unittest.TestCase):
         self.assertEqual(str(items[0].msg['to']), 'anne@example.com')
         self.assertEqual(
             str(items[0].msg['subject']), 'Welcome to the "Test" mailing list')
+
+    def test_subscribe_supress_admin_notify_mchanges(self):
+        # Test subscription of a new member is able to supress admin notify,
+        # even if Mailinglist is configured to do so.
+        self._mlist.admin_notify_mchanges = True
+        content, response = call_api('http://localhost:9001/3.0/members', {
+            'list_id': 'test.example.com',
+            'subscriber': 'ANNE@example.com',
+            'pre_verified': True,
+            'pre_confirmed': True,
+            'pre_approved': True,
+            'admin_notify_mchanges': False,
+            })
+        self.assertEqual(response.status_code, 201)
+        member = self._mlist.members.get_member('anne@example.com')
+        self.assertIsNotNone(member)
+        get_queue_messages('virgin', expected_count=0)
+
+    def test_subscribe_admin_notify_mchanges(self):
+        # Test that the send_welcome_message flag sends admin notify, even
+        # when the mlist isn't configured to do so.
+        self._mlist.admin_notify_mchanges = False
+        content, response = call_api('http://localhost:9001/3.0/members', {
+            'list_id': 'test.example.com',
+            'subscriber': 'ANNE@example.com',
+            'pre_verified': True,
+            'pre_confirmed': True,
+            'pre_approved': True,
+            'admin_notify_mchanges': True,
+            })
+        self.assertEqual(response.status_code, 201)
+        member = self._mlist.members.get_member('anne@example.com')
+        self.assertIsNotNone(member)
+        items = get_queue_messages('virgin', expected_count=1)
+        self.assertEqual(str(items[0].msg['to']), self._mlist.owner_address)
+        self.assertEqual(
+            str(items[0].msg['subject']),
+            'Test subscription notification'
+        )
 
     def test_subscribe_with_digests_nomail(self):
         content, response = call_api('http://localhost:9001/3.1/members', {

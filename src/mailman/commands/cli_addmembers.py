@@ -55,7 +55,7 @@ def get_addr(display_name, email, user_manager):
 
 
 @transactional
-def add_members(mlist, in_fp, delivery, invite, welcome_msg):
+def add_members(mlist, in_fp, delivery, invite, welcome_msg, admin_notify):
     """Add members to a mailing list."""
     user_manager = getUtility(IUserManager)
     registrar = ISubscriptionManager(mlist)
@@ -94,7 +94,9 @@ def add_members(mlist, in_fp, delivery, invite, welcome_msg):
                 pre_approved=True,
                 pre_confirmed=True,
                 invitation=invite,
-                send_welcome_message=welcome_msg)[2]
+                send_welcome_message=welcome_msg,
+                admin_notify_mchanges=admin_notify,
+            )[2]
             if member is not None:
                 member.preferences.delivery_status = delivery_status
                 member.preferences.delivery_mode = delivery_mode
@@ -136,15 +138,20 @@ def add_members(mlist, in_fp, delivery, invite, welcome_msg):
     '--welcome-msg/--no-welcome-msg', '-w/-W', 'welcome_msg', default=None,
     help=_("""\
     Override the list's setting for send_welcome_message."""))
+@click.option(
+    '--admin-notify/--no-admin-notify', '-n/-N', 'admin_notify', default=None,
+    help=_("""\
+    Override the list's setting for admin_notify_mchanges."""))
 @click.argument('in_fp', metavar='FILENAME', type=click.File(encoding='utf-8'))
 @click.argument('listspec')
 @click.pass_context
-def addmembers(ctx, in_fp, delivery, invite, welcome_msg, listspec):
+def addmembers(ctx, in_fp, delivery, invite, welcome_msg, admin_notify,
+               listspec):
     """Add members to a mailing list."""
     mlist = getUtility(IListManager).get(listspec)
     if mlist is None:
         ctx.fail(_('No such list: ${listspec}'))
-    add_members(mlist, in_fp, delivery, invite, welcome_msg)
+    add_members(mlist, in_fp, delivery, invite, welcome_msg, admin_notify)
 
 
 @public

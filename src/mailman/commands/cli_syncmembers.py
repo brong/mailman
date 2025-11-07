@@ -55,7 +55,7 @@ def get_addr(display_name, email):
 
 
 @transactional
-def add_members(mlist, member, delivery, welcome_msg):
+def add_members(mlist, member, delivery, welcome_msg, admin_notify):
     """Add members to a mailing list."""
     display_name, email = parseaddr(member)
     subscriber = get_addr(display_name, email)
@@ -78,7 +78,9 @@ def add_members(mlist, member, delivery, welcome_msg):
             pre_verified=True,
             pre_approved=True,
             pre_confirmed=True,
-            send_welcome_message=welcome_msg)[2]
+            send_welcome_message=welcome_msg,
+            admin_notify_mchanges=admin_notify,
+        )[2]
         member.preferences.delivery_status = delivery_status
         member.preferences.delivery_mode = delivery_mode
     except MembershipIsBannedError:
@@ -133,7 +135,7 @@ def sync_members(mlist, in_fp, delivery, welcome_msg, goodbye_msg,
         print(_("[ADD] %s") % formatted_addresses[email])
         if not no_change:
             add_members(mlist, formatted_addresses[email], delivery,
-                        welcome_msg)
+                        welcome_msg, admin_notify)
         # Indicate that we done something to the mailing list.
         ml_changed = True
         continue

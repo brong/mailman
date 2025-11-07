@@ -972,9 +972,13 @@ delivery.
 By pre-verifying her subscription, we don't require Elly to verify that her
 email address is valid. By pre-confirming her subscription too, no confirmation
 email will be sent. Pre-approval means that the list moderator won't have to
-approve her subscription request. ``send_welcome_message`` controls whether a
-welcome message will be sent to the user. This option overrides the
-Mailinglist's ``send_welcome_message`` setting.
+approve her subscription request.
+
+``send_welcome_message`` controls whether a welcome message will be sent to
+the user. This option overrides the Mailinglist's ``send_welcome_message``
+setting. ``admin_notify_mchanges`` controls whether a notice message will be
+sent to the owners of the mailing list. This option overrides the
+Mailinglist's ``admin_notify_mchanges`` setting.
 
 Additionally, a user can set their ``delivery_mode``, for example to
 ``plaintext_digests`` to susbcribe to email digests. Also, they can disable
@@ -988,6 +992,7 @@ delivery on the subscription by setting ``delivery_status`` to ``by_user``.
     ...           'pre_confirmed': True,
     ...           'pre_approved': True,
     ...           'send_welcome_message': True,
+    ...           'admin_notify_mchanges': False,
     ...           'delivery_mode': 'plaintext_digests',
     ...           'delivery_status': 'by_user',
     ...           })

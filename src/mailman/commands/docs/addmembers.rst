@@ -37,6 +37,10 @@ Here is the complete usage for the command.
                                       Override the list's setting for
                                       send_welcome_message.
     <BLANKLINE>
+      -n, --admin-notify / -N, --no-admin-notify
+                                      Override the list's setting for
+                                      admin_notify_mchanges.
+    <BLANKLINE>
       --help                          Show this message and exit.
 
 Examples
