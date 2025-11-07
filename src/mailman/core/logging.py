@@ -113,14 +113,20 @@ def _init_logger(propagate, sub_name, log, logger_config):
                      if propagate is None else propagate)
     # Set the logger's level.
     log.setLevel(as_log_level(logger_config.level))
-    # Create a formatter for this logger, then a handler, and link the
-    # formatter to the handler.
-    formatter = logging.Formatter(fmt=log_format, datefmt=log_datefmt)
-    path_str = logger_config.path
-    path_abs = os.path.normpath(os.path.join(config.LOG_DIR, path_str))
-    handler = ReopenableFileHandler(sub_name, path_abs)
-    _handlers[sub_name] = handler
-    handler.setFormatter(formatter)
+    # There are two alternative approaches to registering handlers described
+    # in https://gitlab.com/mailman/mailman/-/issues/931#note_1411199556.
+    # Both are more or less incompatible with the get_handler() utility
+    # defined below.
+    handler = _handlers.get(sub_name)
+    if handler is None:
+        # Create a formatter for this logger, then a handler, and link the
+        # formatter to the handler.
+        formatter = logging.Formatter(fmt=log_format, datefmt=log_datefmt)
+        path_str = logger_config.path
+        path_abs = os.path.normpath(os.path.join(config.LOG_DIR, path_str))
+        handler = ReopenableFileHandler(sub_name, path_abs)
+        handler.setFormatter(formatter)
+        _handlers[sub_name] = handler
     log.addHandler(handler)
 
 
