@@ -52,6 +52,7 @@ Bugs fixed
   (:issue:`1241`)
 * Use config.mailman.default_language instead of `en` for a new list
   preferred_language. (:issue:`997`)
+* Reuse existing Handler when configuring a Logger. (:issue:`931`)
 
 New Features
 ------------
