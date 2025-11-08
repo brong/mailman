@@ -35,6 +35,7 @@ to change them, edit your ``mailman.cfg`` file::
     outgoing: mailman.mta.deliver.deliver
     lmtp_host: 127.0.0.1
     lmtp_port: 8024
+    lmtp_max_size: 33554432
     smtp_host: localhost
     smtp_port: 25
     configuration: python:mailman.config.postfix
@@ -67,7 +68,14 @@ host" case is special; some MTAs (including Postfix) do not recognize
 ``lmtp_host`` should be set to the domain name or IP address of the Mailman
 host.  ``lmtp_port`` is fairly arbitrary (there is no standard port for LMTP).
 Use any port convenient for your site.  "8024" is as good as any, unless
-another service is using it.
+another service is using it.  ``lmtp_max_size`` constrains the size of
+messages accepted, and is advertised to clients in the SIZE response to the
+LHLO command.  The maximum size of message accepted is the minimum of this
+parameter and the maximum size parameters of any MTAs traversed, and must be
+coordinated manually.  Note that the list-specific maximum size is after
+removing prohibited attachments, so setting ``lmtp_max_size`` to a level near
+your largest list-specific maximum is likely to cause rejection of messages
+that you wanted to accept.
 
 ``smtp_host`` and ``smtp_port`` are parameters used to identify the MTA to
 Mailman.  If the MTA and Mailman are on separate hosts, ``smtp_host`` should

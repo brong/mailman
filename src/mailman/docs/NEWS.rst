@@ -53,6 +53,8 @@ Bugs fixed
 * Use config.mailman.default_language instead of `en` for a new list
   preferred_language. (:issue:`997`)
 * Reuse existing Handler when configuring a Logger. (:issue:`931`)
+* Allow configuration of LMTP message size limit via the variable
+  ``lmtp_max_size`` in config section ``mta``.
 
 New Features
 ------------
