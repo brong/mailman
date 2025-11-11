@@ -184,6 +184,7 @@ class SubscriptionWorkflow(_SubscriptionWorkflowCommon):
         'user_key',
         'token_owner_key',
         'send_welcome_message',
+        'admin_notify_mchanges',
         'delivery_mode',
         'delivery_status',
         )
@@ -191,6 +192,7 @@ class SubscriptionWorkflow(_SubscriptionWorkflowCommon):
     def __init__(self, mlist, subscriber=None, *,
                  pre_verified=False, pre_confirmed=False, pre_approved=False,
                  invitation=False, send_welcome_message=None,
+                 admin_notify_mchanges=None,
                  delivery_mode=None, delivery_status=None):
         super().__init__(mlist, subscriber)
         # An invitation is already supposed to be "pre_approved" and by
@@ -202,6 +204,7 @@ class SubscriptionWorkflow(_SubscriptionWorkflowCommon):
         self.pre_approved = invitation or pre_approved
         self.invitation = invitation
         self.send_welcome_message = send_welcome_message
+        self.admin_notify_mchanges = admin_notify_mchanges
         # For enum types, we use the string values here instead of the enum
         # objects because they are easier to serialize when the workflow is
         # saved in the database. When setting the values, we restore back to
@@ -360,7 +363,10 @@ class SubscriptionWorkflow(_SubscriptionWorkflowCommon):
     def _step_do_subscription(self):
         # We can immediately subscribe the user to the mailing list.
         self.member = self.mlist.subscribe(
-            self.subscriber, send_welcome_message=self.send_welcome_message)
+            self.subscriber,
+            send_welcome_message=self.send_welcome_message,
+            admin_notify_mchanges=self.admin_notify_mchanges,
+        )
         # Set member attributes.
         if self.delivery_mode:
             self.member.preferences.delivery_mode = DeliveryMode[
@@ -571,6 +577,7 @@ class SubscriptionManager:
     def register(self, subscriber=None, *,
                  pre_verified=False, pre_confirmed=False, pre_approved=False,
                  invitation=False, send_welcome_message=None,
+                 admin_notify_mchanges=None,
                  delivery_mode=None, delivery_status=None):
         """See `ISubscriptionManager`."""
         workflow = SubscriptionWorkflow(
@@ -580,6 +587,7 @@ class SubscriptionManager:
             pre_approved=pre_approved,
             invitation=invitation,
             send_welcome_message=send_welcome_message,
+            admin_notify_mchanges=admin_notify_mchanges,
             delivery_mode=delivery_mode,
             delivery_status=delivery_status,
             )

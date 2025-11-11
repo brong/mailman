@@ -497,48 +497,61 @@ class TestCLISyncMembers(unittest.TestCase):
         subscribe(self._mlist, 'Anne')
         self._mlist.admin_notify_mchanges = False
         with NamedTemporaryFile('w', buffering=1, encoding='utf-8') as infp:
-            print('', file=infp)
+            print('Bart Person <bperson@example.com>', file=infp)
             result = self._command.invoke(syncmembers, (
                 '-a', infp.name, 'ant.example.com'))
         self.assertEqual(result.output,
+                         '[ADD] Bart Person <bperson@example.com>\n'
                          '[DEL] Anne Person <aperson@example.com>\n')
         self.assertEqual(result.exit_code, 0)
         members = list(self._mlist.members.members)
-        self.assertEqual(len(members), 0)
-        items = get_queue_messages('virgin', expected_count=1)
-        self.assertIn('Ant unsubscription notification',
+        self.assertEqual(len(members), 1)
+        items = get_queue_messages('virgin', expected_count=2)
+        self.assertIn('Ant subscription notification',
                       str(items[0].msg['subject']))
-        self.assertIn('Anne Person <aperson@example.com> has been removed',
+        self.assertIn('Bart Person <bperson@example.com> has been successfully'
+                      ' subscribed to',
                       str(items[0].msg))
+        self.assertIn('Ant unsubscription notification',
+                      str(items[1].msg['subject']))
+        self.assertIn('Anne Person <aperson@example.com> has been removed',
+                      str(items[1].msg))
 
     def test_override_yes_admin_notify(self):
         subscribe(self._mlist, 'Anne')
         self._mlist.admin_notify_mchanges = True
         with NamedTemporaryFile('w', buffering=1, encoding='utf-8') as infp:
-            print('', file=infp)
+            print('Bart Person <bperson@example.com>', file=infp)
             result = self._command.invoke(syncmembers, (
                 '-A', infp.name, 'ant.example.com'))
         self.assertEqual(result.output,
+                         '[ADD] Bart Person <bperson@example.com>\n'
                          '[DEL] Anne Person <aperson@example.com>\n')
         self.assertEqual(result.exit_code, 0)
         members = list(self._mlist.members.members)
-        self.assertEqual(len(members), 0)
+        self.assertEqual(len(members), 1)
         get_queue_messages('virgin', expected_count=0)
 
     def test_no_override_admin_notify(self):
         subscribe(self._mlist, 'Anne')
         self._mlist.admin_notify_mchanges = True
         with NamedTemporaryFile('w', buffering=1, encoding='utf-8') as infp:
-            print('', file=infp)
+            print('Bart Person <bperson@example.com>', file=infp)
             result = self._command.invoke(syncmembers, (
                 infp.name, 'ant.example.com'))
         self.assertEqual(result.output,
+                         '[ADD] Bart Person <bperson@example.com>\n'
                          '[DEL] Anne Person <aperson@example.com>\n')
         self.assertEqual(result.exit_code, 0)
         members = list(self._mlist.members.members)
-        self.assertEqual(len(members), 0)
-        items = get_queue_messages('virgin', expected_count=1)
-        self.assertIn('Ant unsubscription notification',
+        self.assertEqual(len(members), 1)
+        items = get_queue_messages('virgin', expected_count=2)
+        self.assertIn('Ant subscription notification',
                       str(items[0].msg['subject']))
-        self.assertIn('Anne Person <aperson@example.com> has been removed',
+        self.assertIn('Bart Person <bperson@example.com> has been successfully'
+                      ' subscribed to',
                       str(items[0].msg))
+        self.assertIn('Ant unsubscription notification',
+                      str(items[1].msg['subject']))
+        self.assertIn('Anne Person <aperson@example.com> has been removed',
+                      str(items[1].msg))

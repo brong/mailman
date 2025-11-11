@@ -331,10 +331,11 @@ class AllMembers(_MemberBase):
                 pre_approved=as_boolean,
                 invitation=as_boolean,
                 send_welcome_message=as_boolean,
+                admin_notify_mchanges=as_boolean,
                 _optional=('delivery_mode', 'display_name', 'role',
                            'pre_verified', 'pre_confirmed', 'pre_approved',
                            'invitation', 'send_welcome_message',
-                           'delivery_status'))
+                           'admin_notify_mchanges', 'delivery_status'))
             arguments = validator(request)
         except ValueError as error:
             bad_request(response, str(error))
@@ -378,6 +379,8 @@ class AllMembers(_MemberBase):
             pre_approved = arguments.pop('pre_approved', False)
             invitation = arguments.pop('invitation', False)
             send_welcome_message = arguments.pop('send_welcome_message', None)
+            admin_notify_mchanges = arguments.pop('admin_notify_mchanges',
+                                                  None)
             delivery_status = arguments.pop('delivery_status', None)
             delivery_mode = arguments.pop('delivery_mode', None)
             # Now we can run the registration process until either the
@@ -392,6 +395,7 @@ class AllMembers(_MemberBase):
                     pre_approved=pre_approved,
                     invitation=invitation,
                     send_welcome_message=send_welcome_message,
+                    admin_notify_mchanges=admin_notify_mchanges,
                     delivery_mode=delivery_mode,
                     delivery_status=delivery_status)
             except AlreadySubscribedError:

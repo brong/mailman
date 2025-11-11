@@ -165,8 +165,10 @@ def handle_SubscriptionEvent(event):
     if member.role is not MemberRole.member:
         return
     mlist = member.mailing_list
-    # Maybe send the list administrators a notification.
-    if mlist.admin_notify_mchanges:
+    # Maybe send the list administrators a notification. The event's flag
+    # overrides the mailinglist's configuration, iff it is non-None.
+    if ((event.admin_notify_mchanges is None and mlist.admin_notify_mchanges)
+            or event.admin_notify_mchanges):
         subscriber = member.subscriber
         if IAddress.providedBy(subscriber):
             address = subscriber.email

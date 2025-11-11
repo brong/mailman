@@ -589,49 +589,42 @@ def import_config_pck(mlist, config_dict):
     regulars_set = set(config_dict.get('members', {}))
     digesters_set = set(config_dict.get('digest_members', {}))
     members = regulars_set.union(digesters_set)
-    # Don't send welcome messages or notify admins when we import the rosters.
-    send_welcome_message = mlist.send_welcome_message
-    admin_notify_mchanges = mlist.admin_notify_mchanges
-    try:
-        mlist.send_welcome_message = False
-        mlist.admin_notify_mchanges = False
-        import_roster(mlist, config_dict, members, MemberRole.member)
-        import_roster(mlist, config_dict, config_dict.get('owner', []),
-                      MemberRole.owner)
-        import_roster(mlist, config_dict, config_dict.get('moderator', []),
-                      MemberRole.moderator)
-        # Now import the '*_these_nonmembers' properties, filtering out the
-        # regexps and '@list' entries which will remain in the property.
-        for action_name in ('accept', 'hold', 'reject', 'discard'):
-            prop_name = '{}_these_nonmembers'.format(action_name)
-            emails = [addr
-                      for addr in config_dict.get(prop_name, [])
-                      if not addr[0] in ('^', '@')]
-            # MM 2.1 accept maps to MM 3 defer
-            if action_name == 'accept':
-                action_name = 'defer'
-            import_roster(mlist, config_dict, emails, MemberRole.nonmember,
-                          Action[action_name])
-            # Now add the regexes and @lists in the legacy list property.
-            list_prop = getattr(mlist, prop_name)
-            for addr in config_dict.get(prop_name, []):
-                if addr.startswith('^'):
-                    pass
-                elif addr.startswith('@') and action_name == 'defer':
-                    # This needs to be a fqdn-listname.
-                    addr = f'{addr}@{mlist.mail_host}'
-                else:
-                    continue
-                if addr in list_prop:
-                    log.warning(
-                        'Skipping duplicate entry in %s: %r',
-                        prop_name, addr
-                    )
-                    continue
-                list_prop.append(addr)
-    finally:
-        mlist.send_welcome_message = send_welcome_message
-        mlist.admin_notify_mchanges = admin_notify_mchanges
+    import_roster(mlist, config_dict, members, MemberRole.member)
+    import_roster(mlist, config_dict, config_dict.get('owner', []),
+                  MemberRole.owner)
+    import_roster(mlist, config_dict, config_dict.get('moderator', []),
+                  MemberRole.moderator)
+    # Now import the '*_these_nonmembers' properties, filtering out the
+    # regexps and '@list' entries which will remain in the property.
+    for action_name in ('accept', 'hold', 'reject', 'discard'):
+        prop_name = '{}_these_nonmembers'.format(action_name)
+        emails = [
+            addr
+            for addr in config_dict.get(prop_name, [])
+            if not addr[0] in ('^', '@')
+        ]
+        # MM 2.1 accept maps to MM 3 defer
+        if action_name == 'accept':
+            action_name = 'defer'
+        import_roster(mlist, config_dict, emails, MemberRole.nonmember,
+                      Action[action_name])
+        # Now add the regexes and @lists in the legacy list property.
+        list_prop = getattr(mlist, prop_name)
+        for addr in config_dict.get(prop_name, []):
+            if addr.startswith('^'):
+                pass
+            elif addr.startswith('@') and action_name == 'defer':
+                # This needs to be a fqdn-listname.
+                addr = f'{addr}@{mlist.mail_host}'
+            else:
+                continue
+            if addr in list_prop:
+                log.warning(
+                    'Skipping duplicate entry in %s: %r',
+                    prop_name, addr
+                )
+                continue
+            list_prop.append(addr)
 
 
 def import_roster(mlist, config_dict, members, role, action=None):
@@ -700,7 +693,11 @@ def _import_roster(mlist, config_dict, members, role, action=None):
                 address = usermanager.create_address(original_email)
                 address.verified_on = datetime.datetime.now()
             user.link(address)
-        member = mlist.subscribe(address, role)
+        member = mlist.subscribe(
+            address, role,
+            send_welcome_message=False,
+            admin_notify_mchanges=False,
+        )
         assert member is not None
         prefs = config_dict.get('user_options', {}).get(email)
         if email in config_dict.get('members', {}):

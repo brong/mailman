@@ -349,8 +349,7 @@ class TestHandleSubscriptionEvent(unittest.TestCase):
             anne = self._user_manager.create_address('anne@example.com')
             member = self._mlist.subscribe(anne)
 
-            self._handler(SubscriptionEvent(
-                self._mlist, member, send_welcome_message=None))
+            self._handler(SubscriptionEvent(self._mlist, member))
 
             self.assertTrue(mocked_send_user.called)
             mocked_send_user.assert_called_with(
@@ -381,15 +380,32 @@ class TestHandleSubscriptionEvent(unittest.TestCase):
         with ExitStack() as stack:
             mocked_send_admin = stack.enter_context(
                 patch('mailman.app.membership.send_admin_subscription_notice'))
-            stack.enter_context(
+            mocked_send_user = stack.enter_context(
                 patch('mailman.app.membership.send_welcome_message'))
 
             anne = self._user_manager.create_address('anne@example.com')
             member = self._mlist.subscribe(anne)
 
-            self._handler(SubscriptionEvent(
-                self._mlist, member, send_welcome_message=None))
+            self._handler(SubscriptionEvent(self._mlist, member))
 
             self.assertTrue(mocked_send_admin.called)
             mocked_send_admin.assert_called_with(
                 self._mlist, anne.email, anne.display_name)
+            self.assertFalse(mocked_send_user.called)
+
+            # Now, let's disable sending of the message.
+            mocked_send_admin.reset_mock()
+
+            self._handler(SubscriptionEvent(
+                self._mlist, member, admin_notify_mchanges=False))
+
+            self.assertFalse(mocked_send_admin.called)
+
+            # Now, if mlist is configured not to but event says yes.
+            mocked_send_admin.reset_mock()
+            self._mlist.admin_notify_mchanges = False
+
+            self._handler(SubscriptionEvent(
+                self._mlist, member, admin_notify_mchanges=True))
+
+            self.assertTrue(mocked_send_admin.called)

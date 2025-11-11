@@ -523,7 +523,8 @@ class MailingList(Model):
 
     @dbconnection
     def subscribe(self, store, subscriber, role=MemberRole.member,
-                  send_welcome_message=None):
+                  send_welcome_message=None,
+                  admin_notify_mchanges=None):
         """See `IMailingList`."""
         member, email = self._get_subscriber(store, subscriber, role)
         test_email = email or subscriber.lower()
@@ -542,7 +543,10 @@ class MailingList(Model):
         store.add(member)
         slog.info(f'{self.fqdn_listname}: {role.name} subscribed {test_email}')
         notify(SubscriptionEvent(
-            self, member, send_welcome_message=send_welcome_message))
+            self, member,
+            send_welcome_message=send_welcome_message,
+            admin_notify_mchanges=admin_notify_mchanges,
+        ))
         return member
 
 

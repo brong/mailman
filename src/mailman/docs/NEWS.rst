@@ -74,6 +74,12 @@ New Features
   (:issue:`1234`)
 * The ``transport_file_type`` setting in ``postfix.cfg`` file can take a
   Postfix database type name (e.g., ``lmdb``).  (:issue:`1235`)
+* The ``mailman syncmembers --admin-notify`` and ``... --no-admin-notify``
+  command works for adds. (:issue:`731`)
+* The ``mailman addmembers`` command has a ``--admin-notify/--no-admin-notify``
+  option. (:issue:`1249`)
+* REST: Add a new ``admin_notify_mchanges`` flag when subscribing users to
+  override MailingList's default setting. (:issue:`1250`)
 
 Other
 -----

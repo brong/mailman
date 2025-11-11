@@ -39,6 +39,10 @@ class TestCLIAddMembers(unittest.TestCase):
 
     def setUp(self):
         self._mlist = create_list('ant@example.com')
+        # Default to no messages.
+        self._mlist.send_welcome_message = False
+        self._mlist.send_goodbye_message = False
+        self._mlist.admin_notify_mchanges = False
         self._command = CliRunner()
 
     def test_no_such_list(self):
@@ -343,3 +347,52 @@ ant-owner@example.com.""".format(token),
         items = get_queue_messages('virgin', expected_count=1)
         self.assertIn('Welcome', str(items[0].msg['subject']))
         self.assertIn('aperson@example.com', str(items[0].msg['to']))
+
+    def test_override_no_admin_notify(self):
+        self._mlist.admin_notify_mchanges = False
+        with NamedTemporaryFile('w', buffering=1, encoding='utf-8') as infp:
+            print('Anne Person <aperson@example.com>', file=infp)
+            result = self._command.invoke(addmembers, (
+                '-n', infp.name, 'ant.example.com'))
+        self.assertEqual(result.output, '')
+        self.assertEqual(result.exit_code, 0)
+        members = list(self._mlist.members.members)
+        self.assertEqual(len(members), 1)
+        self.assertEqual(members[0].address.email, 'aperson@example.com')
+        items = get_queue_messages('virgin', expected_count=1)
+        self.assertIn('Ant subscription notification',
+                      str(items[0].msg['subject']))
+        self.assertIn('Anne Person <aperson@example.com> has been successfully'
+                      ' subscribed to',
+                      str(items[0].msg))
+
+    def test_override_yes_admin_notify(self):
+        self._mlist.admin_notify_mchanges = True
+        with NamedTemporaryFile('w', buffering=1, encoding='utf-8') as infp:
+            print('Anne Person <aperson@example.com>', file=infp)
+            result = self._command.invoke(addmembers, (
+                '-N', infp.name, 'ant.example.com'))
+        self.assertEqual(result.output, '')
+        self.assertEqual(result.exit_code, 0)
+        members = list(self._mlist.members.members)
+        self.assertEqual(len(members), 1)
+        self.assertEqual(members[0].address.email, 'aperson@example.com')
+        get_queue_messages('virgin', expected_count=0)
+
+    def test_no_override_admin_notify(self):
+        self._mlist.admin_notify_mchanges = True
+        with NamedTemporaryFile('w', buffering=1, encoding='utf-8') as infp:
+            print('Anne Person <aperson@example.com>', file=infp)
+            result = self._command.invoke(addmembers, (
+                infp.name, 'ant.example.com'))
+        self.assertEqual(result.output, '')
+        self.assertEqual(result.exit_code, 0)
+        members = list(self._mlist.members.members)
+        self.assertEqual(len(members), 1)
+        self.assertEqual(members[0].address.email, 'aperson@example.com')
+        items = get_queue_messages('virgin', expected_count=1)
+        self.assertIn('Ant subscription notification',
+                      str(items[0].msg['subject']))
+        self.assertIn('Anne Person <aperson@example.com> has been successfully'
+                      ' subscribed to',
+                      str(items[0].msg))

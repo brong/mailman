@@ -235,6 +235,7 @@ class ISubscriptionManager(Interface):
     def register(subscriber=None, *,
                  pre_verified=False, pre_confirmed=False, pre_approved=False,
                  invitation=False, send_welcome_message=None,
+                 admin_notify_mchanges=None,
                  delivery_mode=None, delivery_status=None):
         """Subscribe an address or user according to subscription policies.
 
@@ -286,6 +287,10 @@ class ISubscriptionManager(Interface):
             should receive a welcome message. This overrides the list's
             configuration of send_welcome_message if it is specified.
         :type send_welcome_message: bool
+        :param admin_notify_mchanges: A flag indicating whether the owners of
+            the list should receive a subscription notice. This overrides the
+            list's configuration of admin_notify_mchanges if it is specified.
+        :type admin_notify_mchanges: bool
         :param delivery_mode: A ``DeliveryMode`` enum which if specified sets
             delivery_mode for the subscription.
         :type delivery_mode: ``DeliveryMode`` enum or None:
