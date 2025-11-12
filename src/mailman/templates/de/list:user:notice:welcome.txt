@@ -11,6 +11,6 @@ Sie können Einstellungen vornehmen, indem Sie eine E-Mail senden an:
 mit dem Wort 'help' (ohne Anführungszeichen) im Betreff oder im Inhalt. Sie
 erhalten dann eine automatisierte Antwort mit weiteren Instruktionen. Sie werden
 Ihr Passwort benötigen, um Änderungen an Ihren Einstellungen vorzunehmen,
-aber aus Sicherheitsgründen wird dieses hiernicht angegeben. Sollten Sie Ihr
+aber aus Sicherheitsgründen wird dieses hier nicht angegeben. Sollten Sie Ihr
 Passwort vergessen haben, nutzen Sie bitte die 'Passwort vergessen'-Funktion
 auf der Login-Seite.
