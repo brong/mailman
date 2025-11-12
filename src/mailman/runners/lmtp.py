@@ -284,9 +284,11 @@ class LMTPHandler:
 
 class LMTPController(Controller):
     def factory(self):
-        server = LMTP(self.handler,
-                      data_size_limit=int(config.mta.lmtp_max_size))
-        server.__ident__ = 'GNU Mailman LMTP runner 2.0'
+        server = LMTP(
+            self.handler,
+            ident='GNU Mailman LMTP runner 2.0',
+            data_size_limit=int(config.mta.lmtp_max_size),
+        )
         return server
 
 
