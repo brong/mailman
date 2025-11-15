@@ -1,0 +1,13 @@
+Solicitarea dvs. către lista de discuții $listname
+
+    $request
+
+a fost respinsă de moderatorul listei. Moderatorul a dat următorul motiv
+pentru respingerea solicitării dvs.:
+
+„$reason”
+
+Orice întrebări sau comentarii trebuie adresate administratorului listei la
+următoarea adresă:
+
+    $owner_email

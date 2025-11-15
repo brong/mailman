@@ -1,0 +1,9 @@
+Abonamentul dvs. a fost dezactivat pe lista de discuții $listname deoarece a
+primit o serie de mesaje returnate, indicând că ar putea exista o problemă cu
+livrarea mesajelor către $sender_email. Pentru mai multe informații, vă rugăm
+să contactați administratorul de poștă electronică.
+
+Dacă aveți întrebări sau probleme, puteți contacta proprietarul listei de
+discuții la adresa:
+
+    $owner_email

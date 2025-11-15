@@ -1,0 +1,6 @@
+Mesajul dvs. către lista de discuții $listname a fost respins din următoarele
+motive:
+
+$reasons
+
+Mesajul original primit de Mailman este atașat.

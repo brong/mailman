@@ -1,0 +1,15 @@
+Acesta este un mesaj de probă. Puteți ignora acest mesaj.
+
+Lista de discuții $listname a primit mai multe mesaje returnate de la dvs.,
+ceea ce indică faptul că ar putea exista o problemă cu livrarea mesajelor
+către $sender_email. Mai jos găsiți un exemplu. Vă rugăm să examinați acest
+mesaj pentru a vă asigura că nu există probleme cu adresa dvs. electronică.
+Pentru mai multe informații, vă recomandăm să contactați administratorul de
+poștă electronică.
+
+Nu trebuie să faceți nimic pentru a rămâne membru activ al listei de discuții.
+
+Dacă aveți întrebări sau probleme, puteți contacta proprietarul listei de
+discuții la adresa:
+
+    $owner_email

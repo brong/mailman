@@ -1,0 +1,16 @@
+Bine ați venit la lista de discuții „$display_name”!
+
+Pentru a publica pe această listă, trimiteți mesajul dvs. la:
+
+  $listname
+
+Vă puteți dezabona sau modifica opțiunile prin poșta electronică,
+trimițând un mesaj la:
+
+  $request_email
+
+cu cuvântul „help” în subiect sau în corp (nu includeți ghilimelele) și
+veți primi un mesaj cu instrucțiuni. Veți avea nevoie de parola dvs. pentru
+a modifica opțiunile, dar din motive de securitate, această parolă nu este
+inclusă aici. Dacă ați uitat parola, va trebui să o restabiliți prin
+intermediul interfeței web.
