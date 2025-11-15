@@ -8,21 +8,23 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-05 07:50-0700\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2025-11-15 10:35+0000\n"
+"Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
+"Language-Team: Romanian <https://hosted.weblate.org/projects/gnu-mailman/"
+"mailman/ro/>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : "
 "(n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
+"X-Generator: Weblate 5.15-dev\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:83 src/mailman/chains/hold.py:166
 #: src/mailman/handlers/acknowledge.py:56 src/mailman/handlers/subject_prefix.py:46
 #: src/mailman/handlers/subject_prefix.py:91 src/mailman/runners/digest.py:88
 msgid "(no subject)"
-msgstr ""
+msgstr "(fără subiect)"
 
 #: src/mailman/app/bounces.py:78
 msgid "[No bounce details are available]"
@@ -618,7 +620,7 @@ msgstr ""
 #: src/mailman/commands/cli_control.py:158
 #, python-brace-format
 msgid "No child with pid: ${pid}"
-msgstr ""
+msgstr "Niciun proces-copil cu pid-ul: ${pid}"
 
 #: src/mailman/commands/cli_control.py:160
 msgid "Stale pid file removed."
@@ -651,11 +653,11 @@ msgstr ""
 #: src/mailman/commands/cli_delmembers.py:48
 #, python-brace-format
 msgid "Member not subscribed (skipping): ${email}"
-msgstr ""
+msgstr "Membru neabonat (se omite): ${email}"
 
 #: src/mailman/commands/cli_delmembers.py:54
 msgid "    Delete members from a mailing list."
-msgstr ""
+msgstr "    Șterge membrii dintr-o listă de discuții."
 
 #: src/mailman/commands/cli_delmembers.py:58
 msgid ""
@@ -707,7 +709,7 @@ msgstr ""
 #: src/mailman/commands/cli_delmembers.py:123
 #, python-brace-format
 msgid "No such list: ${_list}"
-msgstr ""
+msgstr "Nu există o astfel de listă: ${_list}"
 
 #: src/mailman/commands/cli_digests.py:38
 msgid "Operate on digests."
@@ -790,15 +792,15 @@ msgstr ""
 
 #: src/mailman/commands/cli_findmember.py:115
 msgid "Email: {}"
-msgstr ""
+msgstr "Adresa de poștă electronică: {}"
 
 #: src/mailman/commands/cli_findmember.py:119
 msgid "List: {}"
-msgstr ""
+msgstr "Listă: {}"
 
 #: src/mailman/commands/cli_findmember.py:122
 msgid "{}"
-msgstr ""
+msgstr "{}"
 
 #: src/mailman/commands/cli_gatenews.py:170
 msgid "Poll the NNTP server for messages to be gatewayed to mailing lists."
@@ -1121,7 +1123,7 @@ msgstr ""
 
 #: src/mailman/commands/cli_notify.py:113 src/mailman/commands/cli_notify.py:117
 msgid "User: {}\n"
-msgstr ""
+msgstr "Utilizator: {}\n"
 
 #: src/mailman/commands/cli_notify.py:115
 msgid ""
@@ -1137,11 +1139,11 @@ msgstr ""
 
 #: src/mailman/commands/cli_notify.py:126
 msgid "Sender: {}\n"
-msgstr ""
+msgstr "Expeditor: {}\n"
 
 #: src/mailman/commands/cli_notify.py:128 src/mailman/commands/cli_notify.py:131
 msgid "Subject: {}\n"
-msgstr ""
+msgstr "Subiect: {}\n"
 
 #: src/mailman/commands/cli_notify.py:132
 msgid ""
@@ -1226,7 +1228,7 @@ msgstr ""
 
 #: src/mailman/commands/cli_syncmembers.py:152
 msgid "Nothing to do"
-msgstr ""
+msgstr "Nimic de făcut"
 
 #: src/mailman/commands/cli_syncmembers.py:157
 msgid ""
@@ -1968,68 +1970,77 @@ msgstr ""
 
 #: src/mailman/rules/truth.py:32
 msgid "A rule which always matches."
-msgstr ""
+msgstr "O regulă care se potrivește întotdeauna."
 
 #: src/mailman/runners/command.py:103
 msgid "Ignoring non-text/plain MIME parts"
-msgstr ""
+msgstr "Se ignoră părțile MIME care nu sunt text/text-simplu"
 
 #: src/mailman/runners/command.py:144
 msgid "The results of your email command are provided below.\n"
 msgstr ""
+"Rezultatele comenzii dvs. de poștă electronică sunt prezentate mai jos.\n"
 
 #: src/mailman/runners/command.py:188
 msgid "- Original message details:"
-msgstr ""
+msgstr "- Detalii mesaj original:"
 
 #: src/mailman/runners/command.py:194
 #, python-brace-format
 msgid "    From: ${from_}"
-msgstr ""
+msgstr "    De la: ${from_}"
 
 #: src/mailman/runners/command.py:195
 #, python-brace-format
 msgid "    Subject: ${subject}"
-msgstr ""
+msgstr "    Subiect: ${subject}"
 
 #: src/mailman/runners/command.py:196
 #, python-brace-format
 msgid "    Date: ${date}"
-msgstr ""
+msgstr "    Data: ${date}"
 
 #: src/mailman/runners/command.py:197
 #, python-brace-format
 msgid "    Message-ID: ${message_id}"
-msgstr ""
+msgstr "    ID mesaj: ${message_id}"
 
 #: src/mailman/runners/command.py:198
 msgid ""
 "\n"
 "- Results:"
 msgstr ""
+"\n"
+"- Rezultate:"
 
 #: src/mailman/runners/command.py:212
 #, python-brace-format
 msgid "No such command: ${command_name}"
-msgstr ""
+msgstr "Nu există o astfel de comandă: ${command_name}"
 
 #: src/mailman/runners/command.py:226
 msgid ""
 "\n"
 "- Unprocessed:"
 msgstr ""
+"\n"
+"- Neprocesat:"
 
 #: src/mailman/runners/command.py:231
 msgid ""
 "\n"
 "- Ignored:"
 msgstr ""
+"\n"
+"- Ignorat:"
 
 #: src/mailman/runners/command.py:234
 msgid ""
 "\n"
 "- Done."
 msgstr ""
+"\n"
+"- Făcut."
 
 #: src/mailman/runners/command.py:240
 msgid "The results of your email commands"
@@ -2064,7 +2075,7 @@ msgstr ""
 #: src/mailman/styles/base.py:59
 #, python-brace-format
 msgid "[${mlist.display_name}] "
-msgstr ""
+msgstr "[${mlist.display_name}] "
 
 #: src/mailman/styles/default.py:44
 msgid "Ordinary discussion mailing list style."
