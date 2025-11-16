@@ -70,8 +70,9 @@ New Features
 * Setting ``cache_life`` in the ``mailman`` section of mailman.cfg to ``0d``
   will disable template caching.  (:issue:`1230`)
 * Template manager no longer caches the content of file: URIs.  (:issue:`1233`)
-* DMARC mitigations are now applied to mail to the -owner address.
-  (:issue:`1234`)
+* DMARC mitigations are now optionally applied to mail to the -owner address
+  based on a new ``mitigate_owner_mail`` setting in the ``mailman`` section of
+  mailman.cfg which defaults to ``no``.  (:issue:`1234` :issue:`1251`)
 * The ``transport_file_type`` setting in ``postfix.cfg`` file can take a
   Postfix database type name (e.g., ``lmdb``).  (:issue:`1235`)
 * The ``mailman syncmembers --admin-notify`` and ``... --no-admin-notify``

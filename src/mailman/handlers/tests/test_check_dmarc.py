@@ -17,7 +17,7 @@
 
 """Test the check_dmarc handler.
 
-We only need one test to ensure the handler invokes the rule.  The rule is
+We only need tests to ensure the handler invokes the rule.  The rule is
 thoroughly tested elsewhere."""
 
 import unittest
@@ -25,7 +25,10 @@ import unittest
 from mailman.app.lifecycle import create_list
 from mailman.handlers.check_dmarc import checkDMARC
 from mailman.interfaces.mailinglist import DMARCMitigateAction
-from mailman.testing.helpers import specialized_message_from_string as mfs
+from mailman.testing.helpers import (
+    configuration,
+    specialized_message_from_string as mfs,
+)
 from mailman.testing.layers import ConfigLayer
 
 
@@ -50,5 +53,11 @@ Message-ID: <ant>
         self._mlist.dmarc_addresses = [r'^.*@gmail\.com']
 
     def test_dmarc(self):
-        self._handler.process(self._mlist, self._msg, self._msgdata)
+        with configuration('mailman', mitigate_owner_mail='yes'):
+            self._handler.process(self._mlist, self._msg, self._msgdata)
         self.assertTrue(self._msgdata['dmarc'])
+
+    def test_no_dmarc(self):
+        with configuration('mailman', mitigate_owner_mail='no'):
+            self._handler.process(self._mlist, self._msg, self._msgdata)
+        self.assertFalse(hasattr(self._msgdata, 'dmarc'))

@@ -21,6 +21,8 @@ This handler is somewhat of a kludge. It is only for the owner pipeline,
 and it's purpose is only to check the dmarc rule for messages to the -owner
 address so dmarc mitigations can be applied to them."""
 
+from lazr.config import as_boolean
+from mailman.config import config
 from mailman.core.i18n import _
 from mailman.interfaces.handler import IHandler
 from mailman.rules.dmarc import DMARCMitigation
@@ -30,8 +32,9 @@ from zope.interface import implementer
 
 def process(mlist, msg, msgdata):
     # All that's needed is running the check to set msgdata['dmarc'] = True
-    # if required.
-    DMARCMitigation().check(mlist, msg, msgdata)
+    # if required, but only do it if configured.
+    if as_boolean(config.mailman.mitigate_owner_mail):
+        DMARCMitigation().check(mlist, msg, msgdata)
 
 
 @public
