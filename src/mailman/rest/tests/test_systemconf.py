@@ -52,6 +52,7 @@ class TestSystemConfiguration(unittest.TestCase):
             layout='testing',
             listname_chars='[-_.0-9a-z]',
             masthead_threshold='4',
+            mitigate_owner_mail='no',
             moderator_request_life='180d',
             noreply_address='noreply',
             pending_request_life='3d',
