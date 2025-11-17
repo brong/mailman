@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-05 07:50-0700\n"
-"PO-Revision-Date: 2025-11-15 19:07+0000\n"
+"PO-Revision-Date: 2025-11-17 00:52+0000\n"
 "Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/gnu-mailman/"
 "mailman/ro/>\n"
@@ -28,123 +28,139 @@ msgstr "(fără subiect)"
 
 #: src/mailman/app/bounces.py:78
 msgid "[No bounce details are available]"
-msgstr ""
+msgstr "[Nu sunt disponibile detalii privind respingerea]"
 
 #: src/mailman/app/bounces.py:230
 #, python-brace-format
 msgid "${mlist.display_name} mailing list probe message"
-msgstr ""
+msgstr "Mesaj de testare a listei de discuții ${mlist.display_name}"
 
 #: src/mailman/app/bounces.py:266
 #, python-brace-format
 msgid "${mlist.display_name} uncaught bounce notification"
-msgstr ""
+msgstr "Notificare de respingere neinterceptată ${mlist.display_name}"
 
 #: src/mailman/app/membership.py:147
 #, python-brace-format
 msgid "${mlist.display_name} unsubscription notification"
-msgstr ""
+msgstr "Notificare de dezabonare ${mlist.display_name}"
 
 #: src/mailman/app/moderator.py:95
 msgid ""
 "The content of this message was lost. It was probably cross-posted to\n"
 "multiple lists and previously handled on another list.\n"
 msgstr ""
+"Conținutul acestui mesaj s-a pierdut. Probabil a fost publicat simultan pe\n"
+"mai multe liste și a fost tratat anterior pe o altă listă.\n"
 
 #: src/mailman/app/moderator.py:131
 #, python-brace-format
 msgid "Posting of your message titled \"${subject}\""
-msgstr ""
+msgstr "Publicarea mesajului dvs. intitulat „${subject}”"
 
 #: src/mailman/app/moderator.py:132 src/mailman/app/moderator.py:278 src/mailman/rest/sub_moderation.py:119
 msgid "[No reason given]"
-msgstr ""
+msgstr "[Fără motiv specificat]"
 
 #: src/mailman/app/moderator.py:185
 msgid "Forward of moderated message"
-msgstr ""
+msgstr "Redirecționare a mesajului moderat"
 
 #: src/mailman/app/moderator.py:244
 #, python-brace-format
 msgid "New unsubscription request from ${mlist.display_name} by ${email}"
-msgstr ""
+msgstr "Nouă cerere de dezabonare de la ${mlist.display_name} de către ${email}"
 
 #: src/mailman/app/moderator.py:277
 msgid "Unsubscription request"
-msgstr ""
+msgstr "Cerere de dezabonare"
 
 #: src/mailman/app/moderator.py:319
 msgid "Original Message"
-msgstr ""
+msgstr "Mesajul original"
 
 #: src/mailman/app/moderator.py:322
 #, python-brace-format
 msgid "Request to mailing list \"${display_name}\" rejected"
-msgstr ""
+msgstr "Cererea către lista de discuții „${display_name}” a fost respinsă"
 
 #: src/mailman/app/notifications.py:93
 msgid " (Digest mode)"
-msgstr ""
+msgstr " (Modul rezumat)"
 
 #: src/mailman/app/notifications.py:97
 #, python-brace-format
 msgid "Welcome to the \"${mlist.display_name}\" mailing list${digmode}"
-msgstr ""
+msgstr "Bine ați venit la lista de discuții „${mlist.display_name}”${digmode}"
 
 #: src/mailman/app/notifications.py:130
 #, python-brace-format
 msgid "You have been unsubscribed from the ${mlist.display_name} mailing list"
-msgstr ""
+msgstr "Ați fost dezabonat de la lista de discuții ${mlist.display_name}"
 
 #: src/mailman/app/notifications.py:148
 #, python-brace-format
 msgid "${mlist.display_name} subscription notification"
-msgstr ""
+msgstr "Notificare privind abonamentul la ${mlist.display_name}"
 
 #: src/mailman/app/notifications.py:173
 #, python-brace-format
 msgid "${member}'s subscription disabled on ${mlist.display_name}"
-msgstr ""
+msgstr "Abonamentul lui ${member} a fost dezactivat pe ${mlist.display_name}"
 
 #: src/mailman/app/notifications.py:201
 #, python-brace-format
 msgid "${member}'s bounce score incremented on ${mlist.display_name}"
 msgstr ""
+"Punctajul de respingere al lui ${member} a crescut pe ${mlist.display_name}"
 
 #: src/mailman/app/notifications.py:227
 #, python-brace-format
 msgid "${member} unsubscribed from ${mlist.display_name} mailing list due to bounces"
 msgstr ""
+"${member} s-a dezabonat de la lista de distribuție ${mlist.display_name} din "
+"cauza mesajelor respinse"
 
 #: src/mailman/app/notifications.py:254
 #, python-brace-format
 msgid "Your subscription for ${mlist.display_name} mailing list has been disabled"
 msgstr ""
+"Abonamentul dvs. la lista de discuții ${mlist.display_name} a fost dezactivat"
 
 #: src/mailman/app/subscriptions.py:328
 #, python-brace-format
 msgid "New subscription request to ${self.mlist.display_name} from ${self.address.email}"
 msgstr ""
+"Cerere de abonare nouă la ${self.mlist.display_name} din partea lui "
+"${self.address.email}"
 
 #: src/mailman/app/subscriptions.py:499
 #, python-brace-format
 msgid "New unsubscription request to ${self.mlist.display_name} from ${self.address.email}"
 msgstr ""
+"Cerere de dezabonare nouă la ${self.mlist.display_name} din partea lui "
+"${self.address.email}"
 
 #: src/mailman/app/subscriptions.py:631
 #, python-brace-format
 msgid "You have been invited to join the ${event.mlist.fqdn_listname} mailing list."
 msgstr ""
+"Ați fost invitat să vă alăturați listei de discuții "
+"${event.mlist.fqdn_listname}."
 
 #: src/mailman/app/subscriptions.py:634
 #, python-brace-format
 msgid "Your confirmation is needed to leave the ${event.mlist.fqdn_listname} mailing list."
 msgstr ""
+"Este necesară confirmarea dvs. pentru a vă dezabona de la lista de discuții "
+"${event.mlist.fqdn_listname}."
 
 #: src/mailman/app/subscriptions.py:638
 #, python-brace-format
 msgid "Your confirmation is needed to join the ${event.mlist.fqdn_listname} mailing list."
 msgstr ""
+"Este necesară confirmarea dvs. pentru a vă înscrie pe lista de discuții "
+"${event.mlist.fqdn_listname}."
 
 #: src/mailman/bin/mailman.py:102 src/mailman/bin/master.py:594 src/mailman/bin/runner.py:96
 msgid ""
@@ -152,22 +168,35 @@ msgid ""
 "    MAILMAN_CONFIG_FILE is consulted and used if set.  If neither are given, a\n"
 "    default configuration file is loaded."
 msgstr ""
+"    Fișierul de configurare care trebuie utilizat. Dacă nu este specificat,\n"
+"    se consultă variabila de mediu MAILMAN_CONFIG_FILE și se utilizează "
+"dacă\n"
+"    este definită. Dacă niciuna dintre acestea nu este specificată, se "
+"încarcă\n"
+"    un fișier de configurare implicit."
 
 #: src/mailman/bin/mailman.py:110
 msgid ""
 "    Running mailman commands as root is not recommended and mailman will\n"
 "    refuse to run as root unless this option is specified."
 msgstr ""
+"    Nu este recomandat să rulați comenzile mailman ca root, iar mailman\n"
+"    va refuza să ruleze ca root dacă nu este specificată această opțiune."
 
 #: src/mailman/bin/mailman.py:129
 msgid "    If you are sure you want to run as root, specify --run-as-root."
 msgstr ""
+"    Dacă sunteți sigur că doriți să rulați ca root, specificați opțiunea "
+"„--run-as-root”."
 
 #: src/mailman/bin/master.py:191
 msgid ""
 "The master lock could not be acquired because it appears as though another\n"
 "master is already running."
 msgstr ""
+"Nu s-a putut obține blocarea procesului principal deoarece se pare că un "
+"alt\n"
+"proces-principal este deja în funcțiune."
 
 #: src/mailman/bin/master.py:197
 #, python-brace-format
@@ -228,6 +257,9 @@ msgid ""
 "    Don't restart the runners when they exit because of an error or a SIGUSR1.\n"
 "    Use this only for debugging."
 msgstr ""
+"    Nu repornește programele atunci când acestea ies din cauza unei erori "
+"sau a unui semnal SIGUSR1.\n"
+"    Utilizează această opțiune numai pentru depanare."
 
 #: src/mailman/bin/master.py:607
 msgid ""
@@ -249,12 +281,12 @@ msgstr ""
 
 #: src/mailman/bin/master.py:627 src/mailman/bin/runner.py:133
 msgid "Display more debugging information to the log file."
-msgstr ""
+msgstr "Afișează mai multe informații de depanare în fișierul jurnal."
 
 #: src/mailman/bin/runner.py:50
 #, python-brace-format
 msgid "Undefined runner name: ${name}"
-msgstr ""
+msgstr "Nume de executant nedefinit: ${name}"
 
 #: src/mailman/bin/runner.py:58
 #, python-brace-format
@@ -320,49 +352,50 @@ msgstr ""
 
 #: src/mailman/chains/accept.py:39
 msgid "Accept a message."
-msgstr ""
+msgstr "Acceptă un mesaj."
 
 #: src/mailman/chains/builtin.py:38
 msgid "The built-in moderation chain."
-msgstr ""
+msgstr "Lanțul de moderare încorporat."
 
 #: src/mailman/chains/discard.py:37
 msgid "Discard a message and stop processing."
-msgstr ""
+msgstr "Elimină un mesaj și oprește procesarea."
 
 #: src/mailman/chains/dmarc.py:30
 msgid "Process DMARC reject or discard mitigations"
-msgstr ""
+msgstr "Procesare a atenuărilor de respingere sau eliminare DMARC"
 
 #: src/mailman/chains/headers.py:121
 msgid "Header \"{}\" matched a header rule"
-msgstr ""
+msgstr "Antetul „{}” corespunde unei reguli de antet"
 
 #: src/mailman/chains/headers.py:136
 msgid "The built-in header matching chain"
-msgstr ""
+msgstr "Lanțul de potrivire a anteturilor încorporat"
 
 #: src/mailman/chains/hold.py:59
 msgid "N/A"
-msgstr ""
+msgstr "nedisponibil"
 
 #: src/mailman/chains/hold.py:118
 msgid "Last autoresponse notification for today"
-msgstr ""
+msgstr "Ultima notificare de răspuns automat pentru astăzi"
 
 #: src/mailman/chains/hold.py:133
 msgid "Hold a message and stop processing."
-msgstr ""
+msgstr "Păstrează mesajul și oprește procesarea."
 
 #: src/mailman/chains/hold.py:205
 #, python-brace-format
 msgid "Your message to ${mlist.fqdn_listname} awaits moderator approval"
 msgstr ""
+"Mesajul dvs. către ${mlist.fqdn_listname} așteaptă aprobarea moderatorului"
 
 #: src/mailman/chains/hold.py:234
 #, python-brace-format
 msgid "${mlist.fqdn_listname} post from ${msg.sender} requires approval"
-msgstr ""
+msgstr "Mesajul ${mlist.fqdn_listname} de la ${msg.sender} necesită aprobare"
 
 #: src/mailman/chains/hold.py:249
 msgid ""
@@ -375,7 +408,7 @@ msgstr ""
 
 #: src/mailman/chains/moderation.py:51
 msgid "Moderation chain"
-msgstr ""
+msgstr "Lanțul de moderare"
 
 #: src/mailman/chains/owner.py:38
 msgid "The built-in -owner posting chain."
