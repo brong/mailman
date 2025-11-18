@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-05 07:50-0700\n"
-"PO-Revision-Date: 2025-11-18 11:51+0000\n"
+"PO-Revision-Date: 2025-11-18 23:45+0000\n"
 "Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/gnu-mailman/"
 "mailman/ro/>\n"
@@ -771,6 +771,13 @@ msgid ""
 "    standard input.  Blank lines and lines that start with a '#' are ignored.\n"
 "    "
 msgstr ""
+"    Șterge membrii listei ale căror adrese se află în NUME_FIȘIER, în plus "
+"față\n"
+"    de cei specificați cu „-m”/„--member”, dacă există. NUME_FIȘIER poate fi "
+"„-”\n"
+"    pentru a indica intrarea standard. Liniile goale și liniile care încep\n"
+"    cu „#” sunt ignorate.\n"
+"    "
 
 #: src/mailman/commands/cli_delmembers.py:71
 msgid ""
@@ -779,6 +786,10 @@ msgid ""
 "    multiple addresses.\n"
 "    "
 msgstr ""
+"    Șterge membrul listei a cărui adresă este ADRESA, în plus față de cele\n"
+"    specificate cu „-f”/„--file”, dacă există. Această opțiune poate fi\n"
+"    repetată pentru mai multe adrese.\n"
+"    "
 
 #: src/mailman/commands/cli_delmembers.py:79
 msgid ""
@@ -849,6 +860,11 @@ msgid ""
 "    given with --send, the volume number is incremented before any current\n"
 "    digests are sent."
 msgstr ""
+"    Incrementează numărul volumului rezumatului și readuce numărul "
+"rezumatului\n"
+"    la unu. Dacă este specificată împreună cu „--send”, numărul volumului "
+"este\n"
+"    incrementat înainte de trimiterea oricăror rezumate curente."
 
 #: src/mailman/commands/cli_digests.py:61 src/mailman/commands/cli_notify.py:50
 msgid ""
@@ -1206,7 +1222,7 @@ msgid ""
 "    [MODE] Add all member addresses in FILENAME.  This option is removed.\n"
 "    Use 'mailman addmembers' instead."
 msgstr ""
-"    [MOD] Adaugă toate adresele membrilor din FILENAME. Această opțiune a "
+"    [MOD] Adaugă toate adresele membrilor din NUME_FIȘIER. Această opțiune a "
 "fost eliminată.\n"
 "    Utilizați în schimb „mailman addmembers”."
 
@@ -1215,7 +1231,7 @@ msgid ""
 "    [MODE] Delete all member addresses found in FILENAME.\n"
 "    This option is removed. Use 'mailman delmembers' instead."
 msgstr ""
-"    [MOD] Șterge toate adresele membrilor găsite în FILENAME.\n"
+"    [MOD] Șterge toate adresele membrilor găsite în NUME_FIȘIER.\n"
 "    Această opțiune a fost eliminată. Utilizați în schimb „mailman "
 "delmembers”."
 
@@ -1227,7 +1243,7 @@ msgid ""
 msgstr ""
 "    [MOD] Sincronizează toate adresele membrilor listei de distribuție "
 "specificate\n"
-"    cu adresele membrilor găsite în FILENAME.\n"
+"    cu adresele membrilor găsite în NUME_FIȘIER.\n"
 "    Această opțiune a fost eliminată. Utilizați în schimb „mailman "
 "syncmembers”."
 
@@ -1236,7 +1252,8 @@ msgid ""
 "    Display output to FILENAME instead of stdout.  FILENAME\n"
 "    can be '-' to indicate standard output."
 msgstr ""
-"    Afișează ieșirea în FILENAME în loc de la ieșirea standard. FILENAME\n"
+"    Afișează ieșirea în NUME_FIȘIER în loc de la ieșirea standard. "
+"NUME_FIȘIER\n"
 "    poate fi „-” pentru a indica ieșirea standard."
 
 #: src/mailman/commands/cli_members.py:156
@@ -1813,64 +1830,67 @@ msgid ""
 "Members of the {} mailing list:\n"
 "{}"
 msgstr ""
+"Membrii listei de discuții {}:\n"
+"{}"
 
 #: src/mailman/handlers/acknowledge.py:40
 msgid "Send an acknowledgment of a posting."
-msgstr ""
+msgstr "Trimite o confirmare a publicării."
 
 #: src/mailman/handlers/acknowledge.py:75
 #, python-brace-format
 msgid "${display_name} post acknowledgment"
-msgstr ""
+msgstr "Confirmare de recepție a publicării ${display_name}"
 
 #: src/mailman/handlers/after_delivery.py:33
 msgid "Perform some bookkeeping after a successful post."
-msgstr ""
+msgstr "Efectuează câteva operații contabile după o publicare reușită."
 
 #: src/mailman/handlers/arc_sign.py:66
 msgid "Perform ARC auth checks and attach resulting headers"
 msgstr ""
+"Efectuează verificări de autentificare ARC și atașează antetele rezultate"
 
 #: src/mailman/handlers/avoid_duplicates.py:42
 msgid "Suppress some duplicates of the same message."
-msgstr ""
+msgstr "Suprimă unele duplicate ale aceluiași mesaj."
 
 #: src/mailman/handlers/check_dmarc.py:43
 msgid "Check whether to Apply DMARC mitigations."
-msgstr ""
+msgstr "Verifică dacă trebuie aplicate măsuri de atenuare DMARC."
 
 #: src/mailman/handlers/cleanse_dkim.py:42
 msgid "Remove DomainKeys headers."
-msgstr ""
+msgstr "Elimină antetele DomainKeys."
 
 #: src/mailman/handlers/cleanse.py:42
 msgid "Cleanse certain headers from all messages."
-msgstr ""
+msgstr "Șterge anumite antete din toate mesajele."
 
 #: src/mailman/handlers/cook_headers.py:168
 msgid "Modify message headers."
-msgstr ""
+msgstr "Modifică antetele mesajelor."
 
 #: src/mailman/handlers/decorate.py:250
 msgid "Decorate a message with headers and footers."
-msgstr ""
+msgstr "Decorează un mesaj cu antete și subsoluri."
 
 #: src/mailman/handlers/dmarc.py:129
 #, python-brace-format
 msgid "${realname} via ${mlist.display_name}"
-msgstr ""
+msgstr "${realname} via ${mlist.display_name}"
 
 #: src/mailman/handlers/dmarc.py:230
 msgid "Apply DMARC mitigations."
-msgstr ""
+msgstr "Aplică măsuri de atenuare DMARC."
 
 #: src/mailman/handlers/file_recipients.py:35
 msgid "Get the normal delivery recipients from an include file."
-msgstr ""
+msgstr "Obține destinatarii livrării normale dintr-un fișier inclus."
 
 #: src/mailman/handlers/member_recipients.py:42
 msgid "Calculate the regular recipients of the message."
-msgstr ""
+msgstr "Calculează destinatarii obișnuiți ai mesajului."
 
 #: src/mailman/handlers/member_recipients.py:77
 #, python-brace-format
@@ -1892,7 +1912,7 @@ msgstr ""
 
 #: src/mailman/handlers/mime_delete.py:70
 msgid "Content filter message notification"
-msgstr ""
+msgstr "Notificare privind filtrarea conținutului mesajelor"
 
 #: src/mailman/handlers/mime_delete.py:98
 msgid ""
@@ -1904,176 +1924,188 @@ msgstr ""
 
 #: src/mailman/handlers/mime_delete.py:111
 msgid "The message's content type was explicitly disallowed"
-msgstr ""
+msgstr "Tipul de conținut al mesajului a fost explicit interzis"
 
 #: src/mailman/handlers/mime_delete.py:116
 msgid "The message's content type was not explicitly allowed"
-msgstr ""
+msgstr "Tipul de conținut al mesajului nu a fost permis în mod explicit"
 
 #: src/mailman/handlers/mime_delete.py:125
 msgid "The message's file extension was explicitly disallowed"
-msgstr ""
+msgstr "Extensia fișierului mesajului a fost interzisă în mod explicit"
 
 #: src/mailman/handlers/mime_delete.py:129
 msgid "The message's file extension was not explicitly allowed"
-msgstr ""
+msgstr "Extensia fișierului mesajului nu a fost permisă în mod explicit"
 
 #: src/mailman/handlers/mime_delete.py:142
 msgid "After content filtering, the message was empty"
-msgstr ""
+msgstr "După filtrarea conținutului, mesajul era gol"
 
 #: src/mailman/handlers/mime_delete.py:154 src/mailman/handlers/mime_delete.py:321
 msgid ""
 "\n"
 "Replaced multipart/alternative part with first alternative.\n"
 msgstr ""
+"\n"
+"S-a înlocuit partea „multipart/alternativă” cu prima alternativă.\n"
 
 #: src/mailman/handlers/mime_delete.py:269 src/mailman/handlers/mime_delete.py:276
 #: src/mailman/handlers/mime_delete.py:285 src/mailman/handlers/mime_delete.py:291
 #, python-brace-format
 msgid "Name: ${fname}\n"
-msgstr ""
+msgstr "Nume: ${fname}\n"
 
 #: src/mailman/handlers/mime_delete.py:404
 msgid "Filter the MIME content of messages."
-msgstr ""
+msgstr "Filtrează conținutul MIME al mesajelor."
 
 #: src/mailman/handlers/owner_recipients.py:34
 msgid "Calculate the owner and moderator recipients."
-msgstr ""
+msgstr "Calculează destinatarii proprietar și moderator."
 
 #: src/mailman/handlers/replybot.py:48
 msgid "Send automatic responses."
-msgstr ""
+msgstr "Trimite răspunsuri automate."
 
 #: src/mailman/handlers/replybot.py:101
 #, python-brace-format
 msgid "Auto-response for your message to the \"${display_name}\" mailing list"
 msgstr ""
+"Răspuns automat pentru mesajul dvs. către lista de discuții „${display_name}”"
 
 #: src/mailman/handlers/replybot.py:114
 msgid "The Mailman Replybot"
-msgstr ""
+msgstr "Robotul de răspuns al Mailman"
 
 #: src/mailman/handlers/rfc_2369.py:131
 msgid "Add the RFC 2369 List-* headers."
-msgstr ""
+msgstr "Adaugă antetele RFC 2369 List-*."
 
 #: src/mailman/handlers/subject_prefix.py:158
 msgid "Add a list-specific prefix to the Subject header value."
-msgstr ""
+msgstr "Adaugă un prefix specific listei la valoarea antetului Subiect."
 
 #: src/mailman/handlers/tagger.py:173
 msgid "Tag messages with topic matches."
-msgstr ""
+msgstr "Etichetează mesajele cu potriviri de subiect."
 
 #: src/mailman/handlers/to_archive.py:34
 msgid "Add the message to the archives."
-msgstr ""
+msgstr "Adaugă mesajul la arhive."
 
 #: src/mailman/handlers/to_digest.py:36
 msgid "Add the message to the digest, possibly sending it."
-msgstr ""
+msgstr "Adaugă mesajul la rezumat, eventual trimițându-l."
 
 #: src/mailman/handlers/to_outgoing.py:38
 msgid "Send the message to the outgoing queue."
-msgstr ""
+msgstr "Trimite mesajul către coada de ieșire (trimetere)."
 
 #: src/mailman/handlers/to_usenet.py:39
 msgid "Move the message to the outgoing news queue."
-msgstr ""
+msgstr "Mută mesajul în coada de mesaje trimise."
 
 #: src/mailman/handlers/validate_authenticity.py:120
 msgid "Perform auth checks and attach Authentication-Results header."
 msgstr ""
+"Efectuează verificări de autentificare și atașează antetul „Authentication-"
+"Results”."
 
 #: src/mailman/interfaces/member.py:122
 #, python-brace-format
 msgid "${self.email} is already a member of mailing list ${self.fqdn_listname}"
 msgstr ""
+"${self.email} este deja membru al listei de discuții ${self.fqdn_listname}"
 
 #: src/mailman/interfaces/member.py:125
 #, python-brace-format
 msgid "${self.email} is already an owner of mailing list ${self.fqdn_listname}"
 msgstr ""
+"${self.email} este deja proprietarul listei de discuții ${self.fqdn_listname}"
 
 #: src/mailman/interfaces/member.py:128
 #, python-brace-format
 msgid "${self.email} is already a moderator of mailing list ${self.fqdn_listname}"
 msgstr ""
+"${self.email} este deja moderator al listei de discuții ${self.fqdn_listname}"
 
 #: src/mailman/interfaces/member.py:131
 #, python-brace-format
 msgid "${self.email} is already a non-member of mailing list ${self.fqdn_listname}"
 msgstr ""
+"${self.email} deja nu mai este membru al listei de distribuție "
+"${self.fqdn_listname}"
 
 #: src/mailman/interfaces/pipeline.py:53
 msgid "[No details are available]"
-msgstr ""
+msgstr "[Nu sunt disponibile detalii]"
 
 #: src/mailman/interfaces/pipeline.py:54
 msgid "[No reasons given]"
-msgstr ""
+msgstr "[Nu s-au dat motive]"
 
 #: src/mailman/pipelines/builtin.py:30
 msgid "The built-in owner pipeline."
-msgstr ""
+msgstr "Linia de procesare integrată a proprietarului."
 
 #: src/mailman/pipelines/builtin.py:46
 msgid "The built-in posting pipeline."
-msgstr ""
+msgstr "Linia de procesare integrată de publicare."
 
 #: src/mailman/pipelines/virgin.py:32
 msgid "The virgin queue pipeline."
-msgstr ""
+msgstr "Linia de procesare a cozii virgine."
 
 #: src/mailman/rest/sub_moderation.py:121
 msgid "Subscription request"
-msgstr ""
+msgstr "Cerere de abonament"
 
 #: src/mailman/rules/administrivia.py:53
 msgid "Catch mis-addressed email commands."
-msgstr ""
+msgstr "Capturează comenzile de poștă electronică adresate greșit."
 
 #: src/mailman/rules/administrivia.py:99
 msgid "Message contains administrivia"
-msgstr ""
+msgstr "Mesajul conține informații administrative"
 
 #: src/mailman/rules/any.py:32
 msgid "Look for any previous rule hit."
-msgstr ""
+msgstr "Caută orice regulă anterioară care s-a aplicat."
 
 #: src/mailman/rules/approved.py:45
 msgid "The message has a matching Approve or Approved header."
 msgstr ""
+"Mesajul are un antet Approve (Aprobare) sau Approved (Aprobat) care se "
+"potrivește."
 
 #: src/mailman/rules/banned_address.py:33
 msgid "Match messages sent by banned addresses."
-msgstr ""
+msgstr "Potrivește mesajele trimise de adresele interzise."
 
 #: src/mailman/rules/banned_address.py:45
 msgid "Message sender {} is banned from this list"
-msgstr ""
+msgstr "Expeditorul mesajului {} este interzis pe această listă"
 
 #: src/mailman/rules/digests.py:43
 msgid "Catch messages with digest Subject or boilerplate quote."
-msgstr ""
+msgstr "Capturează mesajele cu subiectul rezumatului sau citatul standard."
 
 #: src/mailman/rules/digests.py:58
 msgid "Message has a digest subject"
-msgstr ""
+msgstr "Mesajul are un subiect rezumat"
 
 #: src/mailman/rules/digests.py:89
 msgid "Message quotes digest boilerplate"
-msgstr ""
+msgstr "Mesajul citează rezumatul standard"
 
 #: src/mailman/rules/dmarc.py:315
 msgid "Find DMARC policy of From: domain."
-msgstr ""
+msgstr "Găsește politica DMARC pentru domeniul From:."
 
 #: src/mailman/rules/dmarc.py:335
 msgid "DMARC moderation"
-msgstr ""
+msgstr "Moderarea DMARC"
 
 #: src/mailman/rules/dmarc.py:341
 #, python-brace-format
@@ -2082,6 +2114,11 @@ msgid ""
 "quarantine, and your message has been automatically rejected.  If you think that your messages are being "
 "rejected in error, contact the mailing list owner at ${listowner}."
 msgstr ""
+"Nu aveți permisiunea să publicați pe această listă de discuții de la un "
+"domeniu care publică o politică DMARC de respingere sau carantină, iar "
+"mesajul dvs. a fost respins automat.  Dacă considerați că mesajele dvs. sunt "
+"respinse din greșeală, contactați proprietarul listei de discuții la "
+"${listowner}."
 
 #: src/mailman/rules/emergency.py:34
 msgid ""
@@ -2089,66 +2126,69 @@ msgid ""
 "        pre-approved by the list administrator.\n"
 "        "
 msgstr ""
+"Lista de discuții este în reținere de urgență și acest mesaj\n"
+"        nu a fost aprobat în prealabil de administratorul listei.\n"
+"        "
 
 #: src/mailman/rules/emergency.py:47
 msgid "Emergency moderation is in effect for this list"
-msgstr ""
+msgstr "Moderarea de urgență este activă pentru această listă"
 
 #: src/mailman/rules/implicit_dest.py:36
 msgid "Catch messages with implicit destination."
-msgstr ""
+msgstr "Capturează mesajele cu destinație implicită."
 
 #: src/mailman/rules/implicit_dest.py:92
 msgid "Message has implicit destination"
-msgstr ""
+msgstr "Mesajul are o destinație implicită"
 
 #: src/mailman/rules/loop.py:32
 msgid "Look for a posting loop."
-msgstr ""
+msgstr "Caută o buclă de publicare."
 
 #: src/mailman/rules/loop.py:45
 msgid "Message has already been posted to this list"
-msgstr ""
+msgstr "Mesajul a fost deja publicat pe această listă"
 
 #: src/mailman/rules/max_recipients.py:32
 msgid "Catch messages with too many explicit recipients."
-msgstr ""
+msgstr "Capturează mesajele cu prea mulți destinatari expliciți."
 
 #: src/mailman/rules/max_recipients.py:48
 msgid "Message has more than {} recipients"
-msgstr ""
+msgstr "Mesajul are mai mult de {} destinatari"
 
 #: src/mailman/rules/max_size.py:37
 msgid "Catch messages that are bigger than a specified maximum."
-msgstr ""
+msgstr "Capturează mesajele care depășesc o dimensiune maximă specificată."
 
 #: src/mailman/rules/max_size.py:68
 msgid "The message is larger than the {} KB maximum size"
-msgstr ""
+msgstr "Mesajul depășește dimensiunea maximă de {} Ko"
 
 #: src/mailman/rules/moderation.py:69
 msgid "Match messages sent by moderated members."
-msgstr ""
+msgstr "Potrivește mesajele trimise de membrii moderați."
 
 #: src/mailman/rules/moderation.py:97
 msgid "The message comes from a moderated member"
-msgstr ""
+msgstr "Mesajul provine de la un membru moderat"
 
 #: src/mailman/rules/moderation.py:112
 msgid "The message is not from a list member"
-msgstr ""
+msgstr "Mesajul nu provine de la un membru al listei"
 
 #: src/mailman/rules/moderation.py:129
 msgid "Match messages sent by nonmembers."
-msgstr ""
+msgstr "Potrivește mesajele trimise de persoane care nu sunt membre."
 
 #: src/mailman/rules/moderation.py:144
 msgid "No sender was found in the message."
-msgstr ""
+msgstr "Nu s-a găsit niciun expeditor în mesaj."
 
 #: src/mailman/rules/moderation.py:205
 msgid "The sender is in the nonmember {} list"
-msgstr ""
+msgstr "Expeditorul se află în lista celor care nu sunt membri {}"
 
 #: src/mailman/rules/news_moderation.py:34
 msgid ""
@@ -2156,34 +2196,37 @@ msgid ""
 "        moderated newsgroup.\n"
 "        "
 msgstr ""
+"Potrivește toate mesajele publicate pe o listă de discuții \n"
+"        care conduce către un grup de știri moderat.\n"
+"        "
 
 #: src/mailman/rules/news_moderation.py:46
 msgid "Post to a moderated newsgroup gateway"
-msgstr ""
+msgstr "Publicați pe o pasarelă către un grup de știri moderat"
 
 #: src/mailman/rules/no_senders.py:32
 msgid "Match messages with no valid senders."
-msgstr ""
+msgstr "Potrivește mesajele fără expeditori valizi."
 
 #: src/mailman/rules/no_senders.py:44
 msgid "The message has no valid senders"
-msgstr ""
+msgstr "Mesajul nu are expeditori valizi"
 
 #: src/mailman/rules/no_subject.py:32
 msgid "Catch messages with no, or empty, Subject headers."
-msgstr ""
+msgstr "Capturează mesajele fără antete Subiect sau cu antete Subiect goale."
 
 #: src/mailman/rules/no_subject.py:45
 msgid "Message has no subject"
-msgstr ""
+msgstr "Mesajul nu are subiect"
 
 #: src/mailman/rules/suspicious.py:38
 msgid "Catch messages with suspicious headers."
-msgstr ""
+msgstr "Capturează mesajele cu antete suspecte."
 
 #: src/mailman/rules/suspicious.py:97
 msgid "Header \"{}\" matched a bounce_matching_header line"
-msgstr ""
+msgstr "Antetul „{}” s-a potrivit cu o linie bounce_matching_header"
 
 #: src/mailman/rules/truth.py:32
 msgid "A rule which always matches."
@@ -2261,33 +2304,33 @@ msgstr ""
 
 #: src/mailman/runners/command.py:240
 msgid "The results of your email commands"
-msgstr ""
+msgstr "Rezultatele comenzilor dvs. de poștă electronică"
 
 #: src/mailman/runners/digest.py:55
 #, python-brace-format
 msgid "${mlist.display_name} Digest, Vol ${volume}, Issue ${digest_number}"
-msgstr ""
+msgstr "${mlist.display_name} Rezumat, vol. ${volume}, numărul ${digest_number}"
 
 #: src/mailman/runners/digest.py:84
 msgid "Today's Topics:\n"
-msgstr ""
+msgstr "Subiectele zilei:\n"
 
 #: src/mailman/runners/digest.py:153
 msgid "Digest Header"
-msgstr ""
+msgstr "Antet rezumat"
 
 #: src/mailman/runners/digest.py:173
 #, python-brace-format
 msgid "Today's Topics (${count} messages)"
-msgstr ""
+msgstr "Subiectele zilei (${count} mesaje)"
 
 #: src/mailman/runners/digest.py:195 src/mailman/runners/digest.py:270
 msgid "Digest Footer"
-msgstr ""
+msgstr "Picior de pagină rezumat"
 
 #: src/mailman/runners/digest.py:202 src/mailman/runners/digest.py:277
 msgid "End of "
-msgstr ""
+msgstr "Sfârșit de "
 
 #: src/mailman/styles/base.py:59
 #, python-brace-format
@@ -2296,29 +2339,29 @@ msgstr "[${mlist.display_name}] "
 
 #: src/mailman/styles/default.py:44
 msgid "Ordinary discussion mailing list style."
-msgstr ""
+msgstr "Stilul obișnuit al listei de discuții prin poștă electronică."
 
 #: src/mailman/styles/default.py:64
 msgid "Announce only mailing list style."
-msgstr ""
+msgstr "Anunță numai stilul listei de discuții."
 
 #: src/mailman/styles/default.py:84
 msgid "Discussion mailing list style with private archives."
-msgstr ""
+msgstr "Stilul listei de discuții cu arhive private."
 
 #: src/mailman/utilities/options.py:47
 #, python-brace-format
 msgid "slice and range must be integers: ${value}"
-msgstr ""
+msgstr "secțiunea și intervalul trebuie să fie numere întregi: ${value}"
 
 #: src/mailman/utilities/options.py:50
 #, python-brace-format
 msgid "Bad runner spec: ${value}"
-msgstr ""
+msgstr "Specificație greșită a executantului: ${value}"
 
 #: src/mailman/utilities/scrubber.py:48 src/mailman/utilities/scrubber.py:49
 msgid "not available"
-msgstr ""
+msgstr "nu este disponibil"
 
 #: src/mailman/utilities/scrubber.py:50
 #, python-brace-format
@@ -2329,10 +2372,16 @@ msgid ""
 "Size: ${size} bytes\n"
 "Desc: ${desc}\n"
 msgstr ""
+"O parte a mesajului incompatibilă cu rezumatele în format text simplu a fost "
+"eliminată ...\n"
+"Nume: ${filename}\n"
+"Tip: ${ctype}\n"
+"Dimensiune.: ${size} octeți\n"
+"Descriere: ${desc}\n"
 
 #: src/mailman/utilities/scrubber.py:58
 msgid "-------------- next part --------------\n"
-msgstr ""
+msgstr "-------------- partea următoare --------------\n"
 
 msgid "domain:admin:notice:new-list.txt"
 msgstr ""
