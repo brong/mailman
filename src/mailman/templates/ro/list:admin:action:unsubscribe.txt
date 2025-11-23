@@ -1,0 +1,5 @@
+Este necesară autorizarea dvs. pentru aprobarea cererii de dezabonare de
+la lista de discuții:
+
+    Pentru:  $member
+    Lista: $listname

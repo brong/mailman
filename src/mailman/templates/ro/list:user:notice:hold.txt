@@ -1,0 +1,12 @@
+Mesajul dvs. către „$listname” cu subiectul
+
+    $subject
+
+este reținut până când moderatorul listei îl poate verifica pentru aprobare.
+
+Mesajul este reținut din următoarele motive:
+
+$reasons
+
+Mesajul va fi publicat pe listă sau veți primi o notificare cu privire la
+decizia moderatorului.

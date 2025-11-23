@@ -1,0 +1,25 @@
+Confirmarea înregistrării adresei de poștă electronică
+
+Bună ziua, aici este serverul GNU Mailman de la $domain.
+
+Am primit o cerere de înregistrare pentru adresa de poștă electronică
+
+    $user_email
+
+Înainte de a putea începe să utilizați GNU Mailman pe acest sit, trebuie mai
+întâi să confirmați că aceasta este adresa dvs. de poștă electronică. Puteți
+face acest lucru răspunzând la acest mesaj.
+
+Sau ar trebui să includeți următoarea linie - și numai următoarea linie -
+într-un mesaj către $request_email:
+
+    confirm $token
+
+Rețineți că simpla trimitere a unui „răspuns” la acest mesaj ar trebui să
+funcționeze din majoritatea programelor client de poștă electronică.
+
+Dacă nu doriți să înregistrați această adresă de poștă electronică,
+pur și simplu ignorați acest mesaj. Dacă credeți că ați fost înscris în
+mod rău intenționat pe listă sau aveți alte întrebări, puteți contacta
+
+    $owner_email

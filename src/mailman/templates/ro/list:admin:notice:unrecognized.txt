@@ -1,0 +1,4 @@
+Mesajul atașat a fost primit ca respingere, dar fie formatul respingerii nu
+a fost recunoscut, fie nu s-au putut extrage adresele membrilor din acesta.
+Această listă de discuții a fost configurată pentru a trimite toate mesajele
+respinse nerecunoscute către administratorul (administratorii) listei.

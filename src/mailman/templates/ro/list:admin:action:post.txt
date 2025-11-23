@@ -1,0 +1,13 @@
+În calitate de administrator al listei, se solicită autorizarea
+dumneavoastră pentru următoarea publicare pe lista de discuții:
+
+    Lista:    $listname
+    De la:    $sender_email
+    Subiect: $subject
+
+Mesajul este reținut deoarece:
+
+$reasons
+
+Când doriți, accesați panoul de control pentru a aproba sau
+respinge solicitarea.

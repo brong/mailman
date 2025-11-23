@@ -1,0 +1,4 @@
+Abonamentul membrului $member a fost dezactivat pe $listname deoarece punctajul
+său de respingere a depășit pragul bounce_score_threshold al listei de discuții.
+
+DSN-ul declanșator, dacă este disponibil, este atașat.

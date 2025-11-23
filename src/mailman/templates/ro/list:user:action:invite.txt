@@ -1,0 +1,16 @@
+Adresa dvs. „$user_email” a fost invitată să se alăture listei de discuții
+$short_listname de la $domain de către proprietarul listei de discuții
+$short_listname.
+Puteți accepta invitația răspunzând pur și simplu la acest mesaj.
+
+Sau ar trebui să includeți următoarea linie - și numai următoarea linie -
+într-un mesaj către $request_email:
+
+    confirm $token
+
+Rețineți că trimiterea unui simplu „răspuns” la acest mesaj ar trebui să
+funcționeze din majoritatea programelor client de poștă electronică.
+
+Dacă doriți să refuzați această invitație, vă rugăm să ignorați pur și
+simplu acest mesaj. Dacă aveți întrebări, vă rugăm să le trimiteți la
+$owner_email.

@@ -1,0 +1,25 @@
+Confirmarea dezabonării adresei de poștă electronică
+
+Bună ziua, aici este serverul GNU Mailman de la $domain.
+
+Am primit o cerere de dezabonare pentru adresa de poștă electronică
+
+    $user_email
+
+Înainte ca GNU Mailman să vă poată dezabona, trebuie mai întâi să confirmați
+cererea.
+Puteți face acest lucru răspunzând pur și simplu la acest mesaj.
+
+Sau ar trebui să includeți următoarea linie - și numai următoarea linie -
+într-un mesaj către $request_email:
+
+    confirm $token
+
+Rețineți că trimiterea unui simplu „răspuns” la acest mesaj ar trebui să
+funcționeze din majoritatea programelor de poștă electronică.
+
+Dacă nu doriți să vă dezabonați de la această adresă de poștă electronică,
+pur și simplu ignorați acest mesaj. Dacă credeți că ați fost dezabonat în
+mod rău intenționat de la listă sau aveți alte întrebări, puteți contacta
+
+    $owner_email

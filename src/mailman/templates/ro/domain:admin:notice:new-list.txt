@@ -1,0 +1,10 @@
+Lista de discuții „$listname” tocmai a fost creată pentru dvs. Mai jos găsiți
+câteva informații de bază despre lista dvs. de discuții.
+
+Există o interfață bazată pe poșta electronică pentru utilizatorii (nu
+administratorii) listei dvs.; puteți obține informații despre utilizarea
+acesteia trimițând un mesaj cu cuvântul „help” ca subiect sau în corp, la:
+
+    $request_email
+
+Vă rugăm să adresați toate întrebările la $site_email.

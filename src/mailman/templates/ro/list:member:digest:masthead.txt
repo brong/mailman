@@ -1,0 +1,13 @@
+Trimiteți mesajele către lista de discuții $display_name la adresa
+    $listname
+
+Pentru a vă abona sau dezabona prin poșta electronică, trimiteți un mesaj cu
+cuvântul „help” în subiectul sau corpul acestuia la adresa
+    $request_email
+
+Puteți contacta persoana care administrează lista la adresa
+    $owner_email
+
+Când răspundeți, vă rugăm să modificați subiectul mesajului astfel încât să
+fie mai specific decât
+„Re: Conținutul rezumatului $display_name...”

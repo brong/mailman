@@ -1,0 +1,4 @@
+Lista $listname are $count cereri de moderare în așteptare.
+
+$data
+Vă rugăm să vă ocupați de acest lucru cât mai curând posibil.

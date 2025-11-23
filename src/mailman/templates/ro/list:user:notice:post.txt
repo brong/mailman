@@ -1,0 +1,5 @@
+Mesajul dvs. intitulat
+
+    $subject
+
+a fost primit cu succes de lista de discuții $display_name.

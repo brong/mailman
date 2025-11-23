@@ -1,0 +1,1 @@
+$member a fost dezabonat de la $listname din cauza numărului excesiv de respingeri.

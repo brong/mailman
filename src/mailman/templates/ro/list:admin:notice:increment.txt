@@ -1,0 +1,3 @@
+Punctajul de respingere al membrului $member pe $listname a fost incrementat.
+
+DSN-ul declanșator, dacă este disponibil, este atașat.

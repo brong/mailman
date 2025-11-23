@@ -1,0 +1,22 @@
+Ajutor pentru lista de distribuție $listname
+
+Aceasta este comanda de poștă electronică „help” pentru versiunea $version a
+gestionarului de liste GNU Mailman la $domain. În continuare sunt descrise
+comenzile pe care le puteți trimite pentru a obține informații despre și pentru
+a controla abonamentul dvs. la listele Mailman de pe acest sit.
+O comandă poate fi introdusă în linia Subiect sau în corpul mesajului.
+
+Comenzile trebuie trimise la adresa ${listname}-request@${domain}.
+
+Despre descrieri - cuvintele între „<>” indică elemente OBLIGATORII, iar
+cuvintele între „[]” indică elemente OPȚIONALE. Nu includeți „<>” sau „[]”
+când utilizați comenzile.
+
+Următoarele comenzi sunt valide:
+
+    $commands
+
+Întrebările și preocupările care necesită atenția unei persoane trebuie
+trimise la:
+
+    $administrator

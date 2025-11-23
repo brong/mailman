@@ -1,0 +1,9 @@
+Am primit un mesaj de la adresa dvs. <$sender_email> solicitând un răspuns
+automat din partea listei de discuții $listname.
+
+Numărul pe care l-am înregistrat astăzi: $count. Pentru a evita probleme
+precum buclele de mesaje între roboții de poștă electronică, nu vă vom mai
+trimite alte răspunsuri astăzi. Vă rugăm să încercați din nou mâine.
+
+Dacă considerați că acest mesaj este eronat sau dacă aveți întrebări, vă rugăm
+să contactați proprietarul listei la adresa $owner_email.

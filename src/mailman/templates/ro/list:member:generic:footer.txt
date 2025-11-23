@@ -1,0 +1,3 @@
+_______________________________________________
+Lista de discuții $display_name -- $listname
+Pentru a vă dezabona, trimiteți un mesaj la ${short_listname}-leave@${domain}
