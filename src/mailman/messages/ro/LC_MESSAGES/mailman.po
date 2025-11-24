@@ -2884,7 +2884,7 @@ msgid "list:admin:notice:unsubscribe.txt"
 msgstr "$member a fost eliminat din $display_name."
 
 msgid "list:member:digest:header.txt"
-msgstr " "
+msgstr ""
 
 msgid "list:member:digest:masthead.txt"
 msgstr ""
@@ -2910,7 +2910,7 @@ msgstr ""
 "Pentru a vă dezabona, trimiteți un mesaj la ${short_listname}-leave@${domain}"
 
 msgid "list:member:regular:header.txt"
-msgstr " "
+msgstr ""
 
 msgid "list:user:action:invite.txt"
 msgstr ""
@@ -2991,7 +2991,7 @@ msgstr ""
 "    $owner_email"
 
 msgid "list:user:notice:goodbye.txt"
-msgstr " "
+msgstr ""
 
 msgid "list:user:notice:hold.txt"
 msgstr ""
