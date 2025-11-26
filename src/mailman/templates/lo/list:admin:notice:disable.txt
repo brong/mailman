@@ -1,0 +1,4 @@
+ການສະໝັກສະມາຊິກຂອງ $member ໄດ້ຖືກປິດການໃຊ້ງານໃນ $listname ເນື່ອງຈາກ bounce score
+ຂອງພວກເຂົາເກີນ bounce_score_threshold ຂອງ mailing list.
+
+DSN ທີ່ກະຕຸ້ນຖ້າມີແມ່ນໄດ້ແນບມາ.

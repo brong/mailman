@@ -1,0 +1,1 @@
+$member ໄດ້ຖືກລຶບອອກຈາກ $display_name ແລ້ວ.

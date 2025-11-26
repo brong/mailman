@@ -1,0 +1,3 @@
+_______________________________________________
+$display_name mailing list -- $listname
+ເພື່ອຍົກເລີກການສະໝັກສົ່ງອີເມວໄປທີ່ ${short_listname}-leave@${domain}
