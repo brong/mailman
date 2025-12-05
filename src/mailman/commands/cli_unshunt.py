@@ -35,21 +35,34 @@ from zope.interface import implementer
     '--discard', '-d',
     is_flag=True, default=False,
     help=_("""\
-    Discard all shunted messages instead of moving them back to their original
+    Discard shunted messages instead of moving them back to their original
     queue."""))
-def unshunt(discard):
+@click.option(
+    '--verbose', '-v',
+    is_flag=True, default=False,
+    help=_('Print some additional status.'))
+@click.argument('filebases', nargs=-1)
+def unshunt(discard, verbose, filebases):
     shunt_queue = config.switchboards['shunt']
-    shunt_queue.recover_backup_files()
-    for filebase in shunt_queue.files:
+    if len(filebases) > 0:
+        filebases = (filebase.removesuffix('.pck') for filebase in filebases)
+    else:
+        shunt_queue.recover_backup_files()
+        filebases = shunt_queue.files
+    for filebase in filebases:
         try:
             msg, msgdata = shunt_queue.dequeue(filebase)
             which_queue = msgdata.get('whichq', 'in')
             if not discard:
+                if verbose:
+                    print(f'Unshunting to {which_queue} queue: {filebase}')
                 config.switchboards[which_queue].enqueue(msg, msgdata)
-        except Exception as error:                             # noqa: F841
-            print(_('Cannot unshunt message ${filebase}, skipping:\n${error}'),
+        except Exception as error:  # noqa: F841
+            print(_('Cannot unshunt message ${filebase}, skipping: ${error}'),
                   file=sys.stderr)
         else:
+            if verbose and discard:
+                print(f'Discarding: {filebase}')
             # Unlink the .bak file left by dequeue()
             shunt_queue.finish(filebase)
 

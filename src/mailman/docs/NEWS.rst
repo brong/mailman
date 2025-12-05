@@ -81,6 +81,8 @@ New Features
   option. (:issue:`1249`)
 * REST: Add a new ``admin_notify_mchanges`` flag when subscribing users to
   override MailingList's default setting. (:issue:`1250`)
+* The ``mailman unshunt`` can take filebase names (queue IDs) from arguments
+  to unshunt or discard. (:issue:`1254`)
 
 Other
 -----
