@@ -137,7 +137,7 @@ class Switchboard:
             fp.write(msgsave)
             pickle.dump(data, fp, protocol)
             fp.flush()
-            os.fsync(fp.fileno())
+            os.fdatasync(fp.fileno())
         os.rename(tmpfile, filename)
         return filebase
 
@@ -246,7 +246,7 @@ class Switchboard:
                     pickle.dump(data, fp, protocol)
                     fp.truncate()
                     fp.flush()
-                    os.fsync(fp.fileno())
+                    os.fdatasync(fp.fileno())
                     if data['_bak_count'] >= MAX_BAK_COUNT:
                         elog.error('.bak file max count, preserving file: %s',
                                    filebase)
