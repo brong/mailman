@@ -266,6 +266,7 @@ class TestListCreation(unittest.TestCase):
         self.assertEqual(mlist.list_id, 'my-list.example.com')
 
     def test_cannot_create_a_list_twice(self):
+        self._manager.create('ant@example.com')
         with self.assertRaises(ListAlreadyExistsError) as cm:
             self._manager.create('ant@example.com')
         self.assertEqual(cm.exception.email, 'ant@example.com')
