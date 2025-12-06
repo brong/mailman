@@ -30,6 +30,12 @@ class ListAlreadyExistsError(MailmanError):
     name.
     """
 
+    def __init__(self, fqdn_listname):
+        self.fqdn_listname = fqdn_listname
+
+    def __str__(self):
+        return 'Mailing list already exists: {0.fqdn_listname}'.format(self)
+
 
 @public
 class NoSuchListError(MailmanError):
