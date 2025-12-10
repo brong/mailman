@@ -88,6 +88,9 @@ Other
   (:issue:`1194`)
 * Documented that the ``mailman remove`` command doesn't remove archives.
   (:issue:`1198`)
+* The error message displayed when attempting to create a mailing list with a
+  name that already exists now includes the list's name.
+  (:issue:`1123`)
 
 .. _news-3.3.10:
 
