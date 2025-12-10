@@ -34,7 +34,7 @@ class ListAlreadyExistsError(MailmanError):
         self.fqdn_listname = fqdn_listname
 
     def __str__(self):
-        return 'Mailing list already exists: {0.fqdn_listname}'.format(self)
+        return f'Mailing list already exists: {self.fqdn_listname}'
 
 
 @public
