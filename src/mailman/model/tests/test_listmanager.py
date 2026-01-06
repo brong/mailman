@@ -267,8 +267,11 @@ class TestListCreation(unittest.TestCase):
 
     def test_cannot_create_a_list_twice(self):
         self._manager.create('ant@example.com')
-        self.assertRaises(ListAlreadyExistsError,
-                          self._manager.create, 'ant@example.com')
+        with self.assertRaises(ListAlreadyExistsError) as cm:
+            self._manager.create('ant@example.com')
+        self.assertEqual(
+            str(cm.exception), 'Mailing list already exists: ant@example.com'
+        )
 
     def test_list_name_must_be_fully_qualified(self):
         with self.assertRaises(InvalidEmailAddressError) as cm:
