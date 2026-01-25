@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-05 07:50-0700\n"
-"PO-Revision-Date: 2025-09-18 18:01+0000\n"
+"PO-Revision-Date: 2026-01-25 17:42+0000\n"
 "Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/gnu-mailman/"
 "mailman/sv/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.16-dev\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:83
 #: src/mailman/chains/hold.py:166 src/mailman/handlers/acknowledge.py:56
@@ -1136,7 +1136,7 @@ msgstr ""
 
 #: src/mailman/commands/cli_lists.py:92
 msgid "No matching mailing lists found"
-msgstr "Inga matchande mailinglistor hittades"
+msgstr "Inga matchande sändlistor hittades"
 
 #: src/mailman/commands/cli_lists.py:96
 #, python-brace-format
@@ -2285,7 +2285,7 @@ msgid ""
 "        pre-approved by the list administrator.\n"
 "        "
 msgstr ""
-"Mailinglistan är i nödläge och detta meddelande har inte\n"
+"Sändlistan är i nödläge och detta meddelande har inte\n"
 "        förhandsgodkänt av listadministratören.\n"
 "        "
 
@@ -2505,7 +2505,7 @@ msgstr "Meddela endast sändlista stil."
 
 #: src/mailman/styles/default.py:84
 msgid "Discussion mailing list style with private archives."
-msgstr "Mailinglista för diskussioner med privata arkiv."
+msgstr "Sändlista för diskussioner med privata arkiv."
 
 #: src/mailman/utilities/options.py:47
 #, python-brace-format
