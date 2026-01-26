@@ -1,4 +1,4 @@
-Confirmación de Registro de Dirección de Email
+Confirmación de Registro de Dirección de Correo-e
 
 Hola, este es el servidor de listas de correo GNU Mailman en ${domain}.
 
@@ -7,7 +7,7 @@ Hemos recibido una solicitud de registro para la dirección
     ${user_email}
 
 De manera previa a poder usar GNU Mailman en este sitio, debe confirmar que esa
-es su dirección de email. Puede hacerlo fácilmente respondiendo a este mensaje.
+es su dirección de correo-e. Puede hacerlo fácilmente respondiendo a este mensaje.
 
 O puede incluir la siguiente línea -- y solo la siguiente línea --
 en un mensaje a ${request_email}:
@@ -17,7 +17,7 @@ en un mensaje a ${request_email}:
 Tome nota de que sencillamente respondiendo a este mensaje debería funcionar 
 en la mayoría de clientes de correo.
 
-Si no quiere registrar esta dirección de email, descarte este mensaje.
+Si no quiere registrar esta dirección de correo-e, descarte este mensaje.
 Si cree que alguien le ha suscrito inapropiadamente a la lista, o tiene
 alguna otra duda, contacte con
 
