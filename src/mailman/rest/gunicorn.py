@@ -48,7 +48,7 @@ def _post_worker_init(worker):
     """Post worker initialize event handler for Gunicorn."""
     # Dispose engine connections whenever a new process is forked and
     # initialized so they don't step on each other's connections.
-    # https://docs.gunicorn.org/en/latest/settings.html#post-worker-init
+    # https://gunicorn.org/reference/settings/#post_worker_init
     config.db.engine.dispose()
 
 
