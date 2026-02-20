@@ -142,6 +142,10 @@ Other
   name that already exists now includes the list's name.
   (:issue:`1123`)
 
+Python Support
+--------------
+* Drop support for Python 3.9 (EOL).
+
 .. _news-3.3.10:
 
 3.3.10

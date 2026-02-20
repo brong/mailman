@@ -8,9 +8,11 @@ Copyright (C) 2008-2025 by the Free Software Foundation, Inc.
 Requirements
 ============
 
-For the Core, Python 3.7 or newer is required.  It can either be the default
-'python3' on your ``$PATH`` or it can be accessible via the ``python3.6`` or
-``python3.7`` binary.  If your operating system does not include Python 3, see
+For the Core, Python 3.10 or newer is required.  It may be the default
+'python3' on your ``$PATH`` or it may be accessible via the ``python3.10`` or
+other recent binary with the version in the name.  (Note that at the time of
+writing, some essential dependencies do not support Python 3.14 or later.)  If
+your operating system does not include Python 3, see
 https://www.python.org for information about downloading installers (where
 available) and installing it from source (when necessary or preferred).
 Python 2 is not supported by the Core.
