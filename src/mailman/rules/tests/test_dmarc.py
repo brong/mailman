@@ -26,6 +26,7 @@ from dns.exception import DNSException
 from dns.rdatatype import CNAME, TXT
 from dns.resolver import NoAnswer, NoNameservers, NXDOMAIN
 from email import message_from_bytes
+from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from importlib.resources import as_file, files
 from lazr.config import as_timedelta
@@ -529,16 +530,6 @@ To: ant@example.com
         self.assertTrue(self.cache['jp.kobe.city'])
         # The file had *.kobe.jp so there's no exception.
         self.assertFalse(self.cache['jp.kobe.*'])
-
-
-# New in Python 3.5.
-try:
-    from http import HTTPStatus
-except ImportError:
-    class HTTPStatus:
-        FORBIDDEN = 403
-        NOT_FOUND = 404
-        OK = 200
 
 
 # We need a web server to vend non-mailman: urls.

@@ -272,21 +272,14 @@ class TestControl(unittest.TestCase):
 
     def test_generate_aliases_file_on_start(self):
         # Test that 'aliases' command is called when 'start' is called.
-        with ExitStack() as resources:
-            # To be able to get the output from aliases command, we need to
-            # capture the output from parent command, which invokes the aliases
-            # command.
-            resources.enter_context(patch(
-                'mailman.commands.cli_control.os.fork',
-                # Pretend to be the parent.
-                return_value=1))
-            mock_regenerate = resources.enter_context(
-                patch('{}.regenerate'.format(config.mta.incoming)))
+        with (
+            # Pretend to be the parent.
+            patch('mailman.commands.cli_control.os.fork', return_value=1),
+            patch(f'{config.mta.incoming}.regenerate') as mock
+        ):
             result = self._command.invoke(start)
-            self.assertTrue('Generating MTA alias maps' in result.output)
-            # At some point, this should be moved to assert_called_once() when
-            # we drop support for Python 3.5.
-            self.assertTrue(mock_regenerate.called)
+        self.assertTrue('Generating MTA alias maps' in result.output)
+        mock.asssert_called_once_with()
 
 
 class TestControlSimple(unittest.TestCase):

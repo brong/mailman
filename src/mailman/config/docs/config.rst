@@ -35,9 +35,8 @@ Mailman itself will tell you which configuration file is being used when you
 run the ``mailman info`` command::
 
     $ mailman info
-    GNU Mailman 3.1.0b4 (Between The Wheels)
-    Python 3.5.3 (default, Jan 19 2017, 14:11:04)
-    [GCC 6.3.0 20170118]
+    GNU Mailman 3.3.11 (Tom Sawyer)
+    Python 3.13.12 (main, Feb  4 2026, 15:06:39) [GCC 15.2.0]
     config file: /home/mailman/var/etc/mailman.cfg
     db url: sqlite:////home/mailman/var/data/mailman.db
     devmode: DISABLED
