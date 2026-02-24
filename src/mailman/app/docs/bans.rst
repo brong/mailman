@@ -71,18 +71,18 @@ because of his global ban.
 
 Dave is of course banned globally.
 
-    >>> global_bans.is_banned('dave@example.com')
+    >>> global_bans.is_banned_globally('dave@example.com')
     True
 
 Cris however is not banned globally.
 
-    >>> global_bans.is_banned('cris@example.com')
+    >>> global_bans.is_banned_globally('cris@example.com')
     False
 
 Even though Cris is not banned globally, we can add a global ban for her.
 
     >>> global_bans.ban('cris@example.com')
-    >>> global_bans.is_banned('cris@example.com')
+    >>> global_bans.is_banned_globally('cris@example.com')
     True
 
 Cris is now banned from all mailing lists.
@@ -96,7 +96,7 @@ We can remove the global ban to once again just ban her address from just the
 test list.
 
     >>> global_bans.unban('cris@example.com')
-    >>> global_bans.is_banned('cris@example.com')
+    >>> global_bans.is_banned_globally('cris@example.com')
     False
     >>> test_bans.is_banned('cris@example.com')
     True

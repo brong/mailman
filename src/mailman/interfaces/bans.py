@@ -96,6 +96,20 @@ class IBanManager(Interface):
         :rtype: bool
         """
 
+    def is_banned_globally(email):
+        """Check whether an email address is banned at the global level.
+
+        `email` must be a text email address; it cannot be a pattern.
+        This method checks only global bans and global pattern bans
+        (not list-specific bans),
+
+        :param email: The text email address being checked.
+        :type email: str
+        :return: A flag indicating whether the given email address is banned
+            at the global level.
+        :rtype: bool
+        """
+
     def __iter__():
         """An iterator over all the banned email addresses.
 

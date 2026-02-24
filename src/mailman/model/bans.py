@@ -110,6 +110,20 @@ class BanManager:
                     return True
         return False
 
+    @dbconnection
+    def is_banned_globally(self, store, email):
+        # Try global bans.
+        bans = store.query(Ban).filter_by(email=email, list_id=None)
+        if bans.count() > 0:
+            return True
+        # And now try global pattern bans.
+        bans = store.query(Ban).filter_by(list_id=None)
+        for ban in bans:
+            if (ban.email.startswith('^') and
+                    re.match(ban.email, email, re.IGNORECASE) is not None):
+                return True
+        return False
+
     @property
     @dbconnection
     def bans(self, store):
