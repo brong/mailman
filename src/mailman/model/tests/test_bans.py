@@ -63,3 +63,15 @@ class TestMailingListBans(unittest.TestCase):
         self.assertEqual(
             [self._manager.bans[i].email for i in range(count)],
             ['ant@example.com', 'bee@example.com', 'cat@example.com'])
+
+    def test_is_banned_globally_with_pattern(self):
+        global_manager = IBanManager(None)
+        global_manager.ban('^.*@spam\\.example\\.org$')
+        # Should match emails from spam.example.org
+        self.assertTrue(
+            global_manager.is_banned_globally('cat@spam.example.org'))
+        self.assertTrue(
+            self._manager.is_banned_globally('dog@spam.example.org'))
+        # Should not match other domains
+        self.assertFalse(
+            global_manager.is_banned_globally('meow@good.example.org'))

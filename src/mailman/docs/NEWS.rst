@@ -53,6 +53,9 @@ Bugs fixed
 * Use config.mailman.default_language instead of `en` for a new list
   preferred_language. (:issue:`997`)
 * Reuse existing Handler when configuring a Logger. (:issue:`931`)
+* Ban error messages now distinguish between list-level and global bans,
+  providing clearer feedback when an address is already banned globally
+  versus at the list level. (:issue:`705`)
 * Allow configuration of LMTP message size limit via the variable
   ``lmtp_max_size`` in config section ``mta``.
 

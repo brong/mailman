@@ -112,7 +112,9 @@ class BannedEmails(_BannedBase, CollectionMixin):
             bad_request(response, str(error))
             return
 
-        if self.ban_manager.is_banned(email):
+        if self.ban_manager.is_banned_globally(email):
+            bad_request(response, b'Address is already banned globally')
+        elif self.ban_manager.is_banned(email):
             bad_request(response, b'Address is already banned')
         else:
             self.ban_manager.ban(email)
