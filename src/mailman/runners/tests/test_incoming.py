@@ -93,6 +93,7 @@ To: test@example.com
         items = get_queue_messages('out', expected_count=1)
         self.assertEqual(items[0].msgdata.get('marker'), 'posting')
         items = get_queue_messages('virgin', expected_count=1)
+        self.assertEqual(items[0].msg['from'], 'test-owner@example.com')
         self.assertEqual(items[0].msg.get_payload(), 'Autoresponse')
 
     def test_respond_and_discard_post(self):
@@ -104,6 +105,7 @@ To: test@example.com
         self._in.run()
         items = get_queue_messages('out', expected_count=0)
         items = get_queue_messages('virgin', expected_count=1)
+        self.assertEqual(items[0].msg['from'], 'test-owner@example.com')
         self.assertEqual(items[0].msg.get_payload(), 'Autoresponse')
 
     def test_owner(self):
@@ -125,6 +127,7 @@ To: test@example.com
         items = get_queue_messages('out', expected_count=1)
         self.assertEqual(items[0].msgdata.get('marker'), 'owner')
         items = get_queue_messages('virgin', expected_count=1)
+        self.assertEqual(items[0].msg['from'], 'test-owner@example.com')
         self.assertEqual(items[0].msg.get_payload(), 'Autoresponse')
 
     def test_respond_and_discard_owner(self):
@@ -136,4 +139,5 @@ To: test@example.com
         self._in.run()
         items = get_queue_messages('out', expected_count=0)
         items = get_queue_messages('virgin', expected_count=1)
+        self.assertEqual(items[0].msg['from'], 'test-owner@example.com')
         self.assertEqual(items[0].msg.get_payload(), 'Autoresponse')

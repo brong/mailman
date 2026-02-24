@@ -116,7 +116,7 @@ And there is one message in the *virgin* queue - the rejection notice.
     MIME-Version: 1.0
     ...
     Subject: Request to mailing list "A Test List" rejected
-    From: ant-bounces@example.com
+    From: ant-owner@example.com
     To: bart@example.org
     ...
     <BLANKLINE>
@@ -202,7 +202,7 @@ The forwarded message is in the virgin queue, destined for the moderator.
     1
     >>> print(messages[0].msg.as_string())
     Subject: Forward of moderated message
-    From: ant-bounces@example.com
+    From: ant-owner@example.com
     To: zack@example.com
     ...
 
@@ -271,7 +271,7 @@ Fred gets a rejection notice.
     MIME-Version: 1.0
     ...
     Subject: Request to mailing list "A Test List" rejected
-    From: ant-bounces@example.com
+    From: ant-owner@example.com
     To: fred@example.com
     ...
     Your request to the ant@example.com mailing list
@@ -460,6 +460,6 @@ goodbye message.
     MIME-Version: 1.0
     ...
     Subject: You have been unsubscribed from the A Test List mailing list
-    From: ant-bounces@example.com
+    From: ant-owner@example.com
     To: herb@example.com
     ...

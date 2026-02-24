@@ -128,7 +128,7 @@ The receipt will include the original message's subject in the response body,
     MIME-Version: 1.0
     ...
     Subject: Test post acknowledgment
-    From: test-bounces@example.com
+    From: test-owner@example.com
     To: aperson@example.com
     ...
     Precedence: bulk
@@ -160,7 +160,7 @@ If there is no subject, then the receipt will use a generic message.
     MIME-Version: 1.0
     ...
     Subject: Test post acknowledgment
-    From: test-bounces@example.com
+    From: test-owner@example.com
     To: aperson@example.com
     ...
     Precedence: bulk

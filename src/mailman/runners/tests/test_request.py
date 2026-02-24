@@ -57,6 +57,7 @@ Subject: help
                                          to_request=True))
         self._runner.run()
         items = get_queue_messages('virgin', expected_count=2)
+        self.assertEqual(items[0].msg['from'], 'test-owner@example.com')
         self.assertEqual(items[0].msg.get_payload(), 'Autoresponse')
         self.assertIn('results of your email command',
                       items[1].msg.get_payload())
@@ -74,4 +75,5 @@ Subject: help
                                          to_request=True))
         self._runner.run()
         items = get_queue_messages('virgin', expected_count=1)
+        self.assertEqual(items[0].msg['from'], 'test-owner@example.com')
         self.assertEqual(items[0].msg.get_payload(), 'Autoresponse')
