@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-05 07:50-0700\n"
-"PO-Revision-Date: 2024-09-16 23:09+0000\n"
-"Last-Translator: LS-Shandong <LS-Shandong@users.noreply.hosted.weblate.org>\n"
-"Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/projects/gnu-mailman/mailman/zh_Hans/>\n"
+"PO-Revision-Date: 2026-02-12 18:47+0000\n"
+"Last-Translator: peterxy <peterxy99@outlook.com>\n"
+"Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
+"projects/gnu-mailman/mailman/zh_Hans/>\n"
 "Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.16-dev\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:83
 #: src/mailman/chains/hold.py:166 src/mailman/handlers/acknowledge.py:56
@@ -35,9 +36,9 @@ msgid "${mlist.display_name} mailing list probe message"
 msgstr "${mlist.display_name} 邮件列表探测消息"
 
 #: src/mailman/app/bounces.py:266
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "${mlist.display_name} uncaught bounce notification"
-msgstr ""
+msgstr "${mlist.display_name} 未捕获的退信通知"
 
 #: src/mailman/app/membership.py:147
 #, python-brace-format
@@ -531,12 +532,12 @@ msgstr "没有这种列表：${listspec}"
 #: src/mailman/commands/cli_admins.py:51
 #, python-brace-format
 msgid "${email} is already a ${role.name} of ${mlist.fqdn_listname}"
-msgstr ""
+msgstr "${email}已是${mlist.fqdn_listname}的${role.name}"
 
 #: src/mailman/commands/cli_admins.py:59
 #, python-brace-format
 msgid "${email} is not a ${role.name} of ${mlist.fqdn_listname}"
-msgstr ""
+msgstr "${email}并非${mlist.fqdn_listname}的${role.name}"
 
 #: src/mailman/commands/cli_admins.py:67
 msgid ""
