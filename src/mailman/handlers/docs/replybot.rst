@@ -65,7 +65,7 @@ response.
     Content-Type: text/plain; charset="us-ascii"
     Content-Transfer-Encoding: 7bit
     Subject: Auto-response for your message to the "XTest" mailing list
-    From: _xtest-bounces@example.com
+    From: _xtest-owner@example.com
     To: aperson@example.com
     X-Mailer: The Mailman Replybot
     X-Ack: No
@@ -157,7 +157,7 @@ Unless the ``X-Ack:`` header has a value of ``yes``, in which case, the
     Content-Type: text/plain; charset="us-ascii"
     Content-Transfer-Encoding: 7bit
     Subject: Auto-response for your message to the "XTest" mailing list
-    From: _xtest-bounces@example.com
+    From: _xtest-owner@example.com
     To: asystem@example.com
     X-Mailer: The Mailman Replybot
     X-Ack: No
@@ -196,7 +196,7 @@ will get auto-responses: those sent to the ``-request`` address...
     Content-Type: text/plain; charset="us-ascii"
     Content-Transfer-Encoding: 7bit
     Subject: Auto-response for your message to the "XTest" mailing list
-    From: _xtest-bounces@example.com
+    From: _xtest-owner@example.com
     To: aperson@example.com
     X-Mailer: The Mailman Replybot
     X-Ack: No
@@ -229,7 +229,7 @@ will get auto-responses: those sent to the ``-request`` address...
     Content-Type: text/plain; charset="us-ascii"
     Content-Transfer-Encoding: 7bit
     Subject: Auto-response for your message to the "XTest" mailing list
-    From: _xtest-bounces@example.com
+    From: _xtest-owner@example.com
     To: aperson@example.com
     X-Mailer: The Mailman Replybot
     X-Ack: No

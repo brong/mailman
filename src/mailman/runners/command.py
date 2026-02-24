@@ -236,7 +236,7 @@ class CommandRunner(Runner):
         # compromise because the original message is often helpful in tracking
         # down problems, but it's also a vector for backscatter spam.
         language = getUtility(ILanguageManager)[msgdata['lang']]
-        reply = UserNotification(msg.sender, mlist.bounces_address,
+        reply = UserNotification(msg.sender, mlist.owner_address,
                                  _('The results of your email commands'),
                                  lang=language)
         cte = msg.get('content-transfer-encoding')

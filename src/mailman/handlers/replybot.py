@@ -109,7 +109,7 @@ class Replybot:
             )
         # Interpolation and Wrap the response text.
         text = wrap(expand(response_text, mlist, d))
-        outmsg = UserNotification(msg.sender, mlist.bounces_address,
+        outmsg = UserNotification(msg.sender, mlist.owner_address,
                                   subject, text, mlist.preferred_language)
         outmsg['X-Mailer'] = _('The Mailman Replybot')
         # prevent recursions and mail loops!

@@ -73,6 +73,6 @@ class Acknowledge:
         # necessary for general delivery.  Then enqueue it to the outgoing
         # queue.
         subject = _('${display_name} post acknowledgment')
-        usermsg = UserNotification(sender, mlist.bounces_address,
+        usermsg = UserNotification(sender, mlist.owner_address,
                                    subject, text, language)
         usermsg.send(mlist)

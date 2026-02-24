@@ -44,6 +44,9 @@ Bugs fixed
   the ``*_these_nonmembers`` lists. (:issue:`1213`)
 * Unfold address containing headers before parsing in implicit_dest.
   (:issue:`1229`)
+* User-facing ``UserNotification`` messages now use the list owner address in
+  the visible ``From`` header.
+  (:issue:`1260`)
 * Cache manager no longer returns expired cache entries.  (:issue:`1231`)
 * Support email addresses with ``/`` in its local part. (:issue:`774`)
 * In admin notification messages, do not use MIME header encoding for

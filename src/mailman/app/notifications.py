@@ -134,7 +134,7 @@ def send_goodbye_message(mlist, address, language):
         )))
     with _.using(language.code):
         msg = UserNotification(
-            address, mlist.bounces_address,
+            address, mlist.owner_address,
             _('You have been unsubscribed from the ${mlist.display_name} '
               'mailing list'),
             goodbye_message, language)
@@ -264,7 +264,7 @@ def send_user_disable_warning(mlist, address, language):
     warning_message_text = expand(
         warning_message, mlist, dict(sender_email=address))
     msg = UserNotification(
-        address, mlist.bounces_address,
+        address, mlist.owner_address,
         _('Your subscription for ${mlist.display_name} mailing list'
           ' has been disabled'),
         warning_message_text, language)

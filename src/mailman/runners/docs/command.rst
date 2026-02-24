@@ -46,7 +46,7 @@ And now the response is in the ``virgin`` queue.
 
     >>> print(messages[0].msg.as_string())
     Subject: The results of your email commands
-    From: test-bounces@example.com
+    From: test-owner@example.com
     To: aperson@example.com
     ...
     <BLANKLINE>
@@ -97,7 +97,7 @@ message is plain text.
 
     >>> print(messages[0].msg.as_string())
     Subject: The results of your email commands
-    From: test-bounces@example.com
+    From: test-owner@example.com
     To: bperson@example.com
     ...
     Precedence: bulk
@@ -184,7 +184,7 @@ Similarly, to leave a mailing list, the user need only email the ``-leave`` or
     MIME-Version: 1.0
     ...
     Subject: You have been unsubscribed from the Test mailing list
-    From: test-bounces@example.com
+    From: test-owner@example.com
     To: dperson@example.com
     ...
 

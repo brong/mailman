@@ -181,7 +181,7 @@ def handle_message(mlist, id, action, comment=None, forward=None):
                 language = member.preferred_language
         with _.using(language.code):
             fmsg = UserNotification(
-                addresses, mlist.bounces_address,
+                addresses, mlist.owner_address,
                 _('Forward of moderated message'),
                 lang=language)
         fmsg.set_type('message/rfc822')
@@ -320,7 +320,7 @@ def send_rejection(mlist, request, recip, comment, origmsg=None, lang=None):
                  str(origmsg)
                  ])
         subject = _('Request to mailing list "${display_name}" rejected')
-    msg = UserNotification(recip, mlist.bounces_address, subject, text, lang)
+    msg = UserNotification(recip, mlist.owner_address, subject, text, lang)
     msg.send(mlist)
 
 
