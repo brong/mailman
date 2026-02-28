@@ -48,6 +48,18 @@ class Middleware:
     object, and it verifies that the proper authentication has been
     performed.
     """
+    def process_request(self, request, response):
+        """Parse form data into request params for compatibility.
+
+        This replaces the deprecated auto_parse_form_urlencoded option.
+        """
+        if (request.content_type is not None and
+                request.content_type.startswith(
+                    'application/x-www-form-urlencoded')):
+            media = request.get_media()
+            if media:
+                request.params.update(media)
+
     def process_resource(self, request, response, resource, params):
         # Check the authorization credentials.
         authorized = False
@@ -180,9 +192,6 @@ class RootedAPI(App):
             middleware=Middleware(),
             router=ObjectRouter(root),
             **kws)
-        # Let Falcon parse the form data into the request object's
-        # .params attribute.
-        self.req_options.auto_parse_form_urlencoded = True
         # Don't ignore empty query parameters, e.g. preserve empty string
         # values, which some resources will interpret as a DELETE.
         self.req_options.keep_blank_qs_values = True
