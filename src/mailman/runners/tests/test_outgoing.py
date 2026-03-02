@@ -145,6 +145,21 @@ Message-Id: <first>
         self._runner.run()
         self.assertEqual(captured_msgdata['verp'], marker)
 
+    def test_owner_notifications_verp_yes_by_default(self):
+        """Test VERP deliveries to the owners by default."""
+        msgdata = dict(to_owner=True)
+        self._outq.enqueue(self._msg, msgdata, listid='test.example.com')
+        self._runner.run()
+        self.assertTrue(captured_msgdata['verp'])
+
+    def test_owner_notifications_verp_no(self):
+        """Test disabling VERP deliveries to the owners."""
+        msgdata = dict(to_owner=True)
+        self._outq.enqueue(self._msg, msgdata, listid='test.example.com')
+        with configuration('mta', verp_owner_notifications='no'):
+            self._runner.run()
+        self.assertFalse(captured_msgdata['verp'])
+
     def test_personalized_individual_deliveries_verp(self):
         # When deliveries are personalized, and the configuration setting
         # indicates, messages will be VERP'd.

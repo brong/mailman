@@ -88,6 +88,10 @@ Error message: {}
         if 'verp' in msgdata:
             # Honor existing settings.
             pass
+        elif msgdata.get('to_owner') and as_boolean(
+            config.mta.verp_owner_notifications
+        ):
+            msgdata['verp'] = True
         # If personalization is enabled for this list and we've configured
         # Mailman to always VERP personalized deliveries, then yes we VERP it.
         # Also, if personalization is /not/ enabled, but
