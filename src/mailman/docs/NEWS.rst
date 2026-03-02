@@ -89,6 +89,8 @@ New Features
   override MailingList's default setting. (:issue:`1250`)
 * The ``mailman unshunt`` can take filebase names (queue IDs) from arguments
   to unshunt or discard. (:issue:`1254`)
+* The ``config.mta.verp_owner_notifications`` setting can disable VERP delivery
+  for owner notifications.  (:issue:`1261`)
 
 Other
 -----
