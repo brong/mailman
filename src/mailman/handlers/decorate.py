@@ -214,7 +214,15 @@ def process(mlist, msg, msgdata):
                         continue
             except (LookupError, UnicodeError):
                 pass
-        # For any other CTE (base64, etc.), or if the above paths failed,
+        elif cte == 'base64':
+            # Base64 encoding cannot be concatenated with the header/footer
+            # without re-encoding the entire body, which would change every
+            # line (and destroy non-standard line lengths the sender used).
+            # Fall through to MIME wrapping, which preserves the original
+            # base64 body byte-for-byte as an inner part of a
+            # multipart/mixed structure.
+            pass
+        # For any other CTE, or if the above paths failed,
         # fall through to MIME wrapping below (wrap remains True).
     elif msg.get_content_type() == 'multipart/mixed':
         # The next easiest thing to do is just prepend the header and append
