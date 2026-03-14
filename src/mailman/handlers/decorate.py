@@ -20,7 +20,9 @@
 import re
 import copy
 import logging
+import quopri
 
+from io import BytesIO
 from email.mime.text import MIMEText
 from email.utils import formataddr
 from mailman.archiving.mailarchive import MailArchive
@@ -160,8 +162,60 @@ def process(mlist, msg, msgdata):
                     break
             except (LookupError, UnicodeError):
                 pass
-        # For any other CTE (quoted-printable, base64, etc.), or if the
-        # above path failed, fall through to MIME wrapping below.
+        elif cte == 'quoted-printable':
+            # Preserve original QP encoding of the body by concatenating
+            # at the raw (QP-encoded) level.  Only the header/footer text
+            # is freshly QP-encoded; the original body lines remain
+            # byte-identical.  This preserves the original sender's QP
+            # choices, including unnecessarily-quoted characters (e.g.
+            # =48 for 'H') and non-standard soft line break positions.
+            try:
+                # Normalize to \n — the generator will convert to
+                # \r\n on output.  This ensures consistent line endings
+                # when concatenating with quopri.encode() output.
+                raw_qp = msg.get_payload().replace('\r\n', '\n')
+                oldpayload = msg.get_payload(decode=True).decode(mcset)
+                frontsep = endsep = ''
+                if len(header) > 0 and not header.endswith('\n'):
+                    frontsep = '\n'
+                if len(footer) > 0 and not oldpayload.endswith('\n'):
+                    endsep = '\n'
+                for cset in (lcset, mcset, 'utf-8'):
+                    try:
+                        parts = []
+                        header_text = header + frontsep
+                        if header_text:
+                            hdr_bytes = header_text.encode(cset)
+                            inp, out = BytesIO(hdr_bytes), BytesIO()
+                            quopri.encode(inp, out, quotetabs=False)
+                            parts.append(out.getvalue().decode('ascii'))
+                        parts.append(raw_qp)
+                        footer_text = endsep + footer
+                        if footer_text:
+                            # Ensure a newline before the footer
+                            if parts[-1] and not parts[-1].endswith('\n'):
+                                parts.append('\n')
+                            ftr_bytes = footer_text.encode(cset)
+                            inp, out = BytesIO(ftr_bytes), BytesIO()
+                            quopri.encode(inp, out, quotetabs=False)
+                            parts.append(out.getvalue().decode('ascii'))
+                        new_payload = ''.join(parts)
+                        del msg['content-transfer-encoding']
+                        msg.set_payload(new_payload)
+                        msg['Content-Transfer-Encoding'] = 'quoted-printable'
+                        msg.set_param('charset', cset)
+                        if format_param:
+                            msg.set_param('format', format_param)
+                        if delsp:
+                            msg.set_param('delsp', delsp)
+                        wrap = False
+                        break
+                    except (UnicodeError, LookupError):
+                        continue
+            except (LookupError, UnicodeError):
+                pass
+        # For any other CTE (base64, etc.), or if the above paths failed,
+        # fall through to MIME wrapping below (wrap remains True).
     elif msg.get_content_type() == 'multipart/mixed':
         # The next easiest thing to do is just prepend the header and append
         # the footer as additional subparts

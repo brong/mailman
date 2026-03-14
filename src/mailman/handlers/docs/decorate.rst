@@ -188,8 +188,10 @@ Decorating mixed-charset messages
 
 When a message has no explicit character set, it is assumed to be ASCII.
 However, if the mailing list's preferred language has a different character
-set, Mailman will still try to concatenate the header and footer, but it will
-convert the text to utf-8 and base-64 encode the message payload.
+set, Mailman will still try to concatenate the header and footer.  When the
+message is quoted-printable encoded, Mailman preserves the original QP
+encoding and QP-encodes only the added header and footer text, using the
+list's preferred charset.
 ::
 
     # 'ja' = Japanese; charset = 'euc-jp'
@@ -213,10 +215,14 @@ convert the text to utf-8 and base-64 encode the message payload.
     >>> process(mlist, msg, {})
     >>> print(msg.as_string())
     MIME-Version: 1.0
-    Content-Type: text/plain; charset="utf-8"
-    Content-Transfer-Encoding: base64
+    Content-Transfer-Encoding: quoted-printable
+    Content-Type: text/plain; charset="euc-jp"
     <BLANKLINE>
-    5pel5pys6KqeIGhlYWRlcgpGcmFuw6dhaXNlCuaXpeacrOiqniBmb290ZXIK
+    =C6=FC=CB=DC=B8=EC header
+    Fran=E7aise
+    <BLANKLINE>
+    =C6=FC=CB=DC=B8=EC footer
+    <BLANKLINE>
 
 Sometimes the message even has an unknown character set.  In this case,
 Mailman has no choice but to decorate the original message with MIME
