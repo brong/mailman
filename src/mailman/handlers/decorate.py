@@ -119,38 +119,49 @@ def process(mlist, msg, msgdata):
         format_param = msg.get_param('format')
         delsp = msg.get_param('delsp')
         # Save 'Content-Transfer-Encoding' header in case decoration fails.
-        cte = msg.get('content-transfer-encoding')
-        # header/footer is now in unicode.
-        try:
-            oldpayload = msg.get_payload(decode=True).decode(mcset)
-            del msg['content-transfer-encoding']
-            frontsep = endsep = ''
-            if len(header) > 0 and not header.endswith('\n'):
-                frontsep = '\n'
-            if len(footer) > 0 and not oldpayload.endswith('\n'):
-                endsep = '\n'
-            payload = header + frontsep + oldpayload + endsep + footer
-            # When setting the payload for the message, try various charset
-            # encodings until one does not produce a UnicodeError.  We'll try
-            # charsets in this order: the list's charset, the message's
-            # charset, then utf-8.  It's okay if some of these are duplicates.
-            for cset in (lcset, mcset, 'utf-8'):
-                try:
-                    msg.set_payload(payload.encode(cset), cset)
-                except UnicodeError:
-                    pass
-                else:
+        cte_header = msg.get('content-transfer-encoding')
+        cte = (cte_header or '7bit').strip().lower()
+        if cte in ('7bit', '8bit'):
+            # Direct concatenation preserving CTE.  The old code called
+            # msg.set_payload(bytes, charset) which lets Python's email
+            # library choose the CTE — it picks base64 for utf-8 and
+            # quoted-printable for iso-8859-1.  This silently re-encodes
+            # the entire body, changing every line.  Instead, we encode
+            # the concatenated text ourselves and set the payload as a
+            # string, preserving the original CTE.
+            try:
+                oldpayload = msg.get_payload(decode=True).decode(mcset)
+                frontsep = endsep = ''
+                if len(header) > 0 and not header.endswith('\n'):
+                    frontsep = '\n'
+                if len(footer) > 0 and not oldpayload.endswith('\n'):
+                    endsep = '\n'
+                payload = header + frontsep + oldpayload + endsep + footer
+                for cset in (lcset, mcset, 'utf-8'):
+                    try:
+                        payload_bytes = payload.encode(cset)
+                    except (UnicodeError, LookupError):
+                        continue
+                    # For 7bit, verify all bytes are ASCII; if not, use 8bit.
+                    has_high = any(b > 127 for b in payload_bytes)
+                    actual_cte = '8bit' if (cte == '7bit' and has_high) else cte
+                    # Store as string using surrogateescape so
+                    # BytesGenerator reproduces the original bytes.
+                    del msg['content-transfer-encoding']
+                    msg.set_payload(
+                        payload_bytes.decode('ascii', 'surrogateescape'))
+                    msg['Content-Transfer-Encoding'] = actual_cte
+                    msg.set_param('charset', cset)
                     if format_param:
                         msg.set_param('format', format_param)
                     if delsp:
                         msg.set_param('delsp', delsp)
                     wrap = False
                     break
-        except (LookupError, UnicodeError):
-            if cte:
-                # Restore the original c-t-e.
-                del msg['content-transfer-encoding']
-                msg['Content-Transfer-Encoding'] = cte
+            except (LookupError, UnicodeError):
+                pass
+        # For any other CTE (quoted-printable, base64, etc.), or if the
+        # above path failed, fall through to MIME wrapping below.
     elif msg.get_content_type() == 'multipart/mixed':
         # The next easiest thing to do is just prepend the header and append
         # the footer as additional subparts
