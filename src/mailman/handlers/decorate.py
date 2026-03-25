@@ -17,6 +17,7 @@
 
 """Decorate a message by sticking the header and footer around it."""
 
+import base64
 import re
 import copy
 import logging
@@ -215,13 +216,53 @@ def process(mlist, msg, msgdata):
             except (LookupError, UnicodeError):
                 pass
         elif cte == 'base64':
-            # Base64 encoding cannot be concatenated with the header/footer
-            # without re-encoding the entire body, which would change every
-            # line (and destroy non-standard line lengths the sender used).
-            # Fall through to MIME wrapping, which preserves the original
-            # base64 body byte-for-byte as an inner part of a
-            # multipart/mixed structure.
-            pass
+            # Re-encode the concatenated text as base64 using the same
+            # line width as the original.  Base64 is deterministic, so
+            # all complete lines before the original's last line will be
+            # byte-identical.  Only the last original line changes
+            # (its padding disappears) and new lines appear for the
+            # footer.  This produces a compact MI recipe: one range
+            # for the matching lines plus one literal for the original
+            # last line.
+            #
+            # Falls through to MIME wrapping if re-encoding fails.
+            try:
+                raw_b64 = msg.get_payload().replace('\r\n', '\n')
+                # Detect original line width from first complete line.
+                first_nl = raw_b64.find('\n')
+                if first_nl > 0:
+                    line_width = first_nl
+                else:
+                    line_width = 76
+                oldpayload = msg.get_payload(decode=True).decode(mcset)
+                frontsep = endsep = ''
+                if len(header) > 0 and not header.endswith('\n'):
+                    frontsep = '\n'
+                if len(footer) > 0 and not oldpayload.endswith('\n'):
+                    endsep = '\n'
+                payload = header + frontsep + oldpayload + endsep + footer
+                for cset in (lcset, mcset, 'utf-8'):
+                    try:
+                        payload_bytes = payload.encode(cset)
+                    except (UnicodeError, LookupError):
+                        continue
+                    b64_flat = base64.b64encode(payload_bytes).decode('ascii')
+                    b64_wrapped = '\n'.join(
+                        b64_flat[i:i+line_width]
+                        for i in range(0, len(b64_flat), line_width))
+                    b64_wrapped += '\n'
+                    del msg['content-transfer-encoding']
+                    msg.set_payload(b64_wrapped)
+                    msg['Content-Transfer-Encoding'] = 'base64'
+                    msg.set_param('charset', cset)
+                    if format_param:
+                        msg.set_param('format', format_param)
+                    if delsp:
+                        msg.set_param('delsp', delsp)
+                    wrap = False
+                    break
+            except (LookupError, UnicodeError):
+                pass
         # For any other CTE, or if the above paths failed,
         # fall through to MIME wrapping below (wrap remains True).
     elif msg.get_content_type() == 'multipart/mixed':
