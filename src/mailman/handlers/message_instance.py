@@ -234,6 +234,13 @@ def compute_body_recipe(current_lines, previous_lines):
     """
     if current_lines == previous_lines:
         return None
+    # Fast path: pure append — previous body is a prefix of the current body.
+    # Count the original lines and emit a single copy instruction.
+    n = len(previous_lines)
+    if n == 0:
+        return []
+    if len(current_lines) > n and current_lines[:n] == previous_lines:
+        return [{'c': [1, n]}]
     sm = SequenceMatcher(None, current_lines, previous_lines, autojunk=False)
     recipe = []
     pending_data = []

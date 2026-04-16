@@ -193,6 +193,19 @@ class TestBodyRecipe(unittest.TestCase):
         lines = ['Hello', 'World']
         self.assertIsNone(compute_body_recipe(lines, lines))
 
+    def test_pure_append(self):
+        # Fast path: appended lines only — recipe is a single copy of the
+        # original N lines, no diff required.
+        recipe = compute_body_recipe(
+            ['Hello', 'World', 'Footer appended by list'],
+            ['Hello', 'World'])
+        self.assertEqual(recipe, [{'c': [1, 2]}])
+
+    def test_append_to_empty_original(self):
+        # Previous body was empty; recipe is empty (discard all appended lines).
+        recipe = compute_body_recipe(['Footer added by list'], [])
+        self.assertEqual(recipe, [])
+
     def test_prepend_and_append(self):
         recipe = compute_body_recipe(
             ['Header', 'Hello', 'World', 'Footer'],
