@@ -45,9 +45,9 @@ from zope.interface import implementer
 log = logging.getLogger('mailman.dkim2')
 
 # DKIM2 implementation metadata — update DKIM2_DATE on each change.
-DKIM2_DRAFT = 'ietf-dkim-dkim2-spec-00'
+DKIM2_DRAFT = 'ietf-dkim-dkim2-spec-01'
 DKIM2_REPO = 'github.com/brong/mailman'
-DKIM2_DATE = '2026-03-25'
+DKIM2_DATE = '2026-04-20'
 DKIM2_SOFTWARE = 'mailman'
 
 
