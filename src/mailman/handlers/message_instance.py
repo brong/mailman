@@ -686,20 +686,14 @@ class MessageInstanceIngress:
         # Force serialization so that auto-generated parameters (e.g.
         # multipart boundaries) are resolved before hashing.
         _serialize_msg(msg)
-        # Verify the top MI matches current message content (defence-in-depth;
-        # the edge milter already verified the full chain).
         existing_version = get_max_mi_version(msg)
         if existing_version > 0:
-            ver, err = verify_message_instance(msg)
-            if err:
-                log.warning(
-                    'Incoming MI v=%d fails verification: %s — '
-                    'resetting to fresh MI v=1', existing_version, err)
-                for key in list(msg.keys()):
-                    if key.lower() == 'message-instance':
-                        del msg[key]
-        current_version = get_max_mi_version(msg)
-        if current_version == 0:
+            # Existing MI present (added by the inbound milter).  Accept it as
+            # authoritative — never strip a MI header.
+            _prepend_header(msg, 'X-DKIM2-Info',
+                            _dkim2_info('found-mi={}'.format(existing_version)))
+            log.debug('Accepted existing Message-Instance v=%d', existing_version)
+        else:
             # No MI headers present — add v=1 documenting the current state.
             h_hash = compute_header_hash(msg)
             b_hash = compute_body_hash(msg)
