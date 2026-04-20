@@ -564,6 +564,30 @@ This is a test.
         # Snapshot should still be created.
         self.assertIn('mi_snapshot', msgdata)
 
+    def test_ingress_strips_corrupted_mi_and_adds_fresh_v1(self):
+        """A corrupt incoming MI must be stripped; a fresh v=1 replaces it."""
+        msg = self._make_7bit_msg()
+        # Build a well-formed MI v=1 but corrupt the hashes.
+        h_hash = compute_header_hash(msg)
+        b_hash = compute_body_hash(msg)
+        good_mi = build_mi_header_value(1, h_hash, b_hash)
+        # Inject deliberately wrong hashes by replacing the real ones.
+        corrupt_mi = good_mi.replace(_b64(h_hash), 'AAAA', 1).replace(
+            _b64(b_hash), 'BBBB', 1)
+        msg['Message-Instance'] = corrupt_mi
+        msgdata = {}
+        self._ingress.process(self._mlist, msg, msgdata)
+        # The corrupted MI should have been stripped and replaced.
+        mi_values = msg.get_all('message-instance')
+        self.assertEqual(len(mi_values), 1,
+                         'Expected exactly one MI header after reset')
+        # The replacement MI v=1 must verify.
+        version, error = verify_message_instance(msg)
+        self.assertEqual(version, 1, error)
+        self.assertIsNone(error)
+        # Snapshot must still be present.
+        self.assertIn('mi_snapshot', msgdata)
+
     def test_ingress_skips_digest(self):
         msg = self._make_7bit_msg()
         msgdata = {'isdigest': True}
