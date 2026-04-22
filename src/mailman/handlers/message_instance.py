@@ -51,12 +51,20 @@ DKIM2_DATE = '2026-04-20'
 DKIM2_SOFTWARE = 'mailman'
 
 
-def _dkim2_info(action):
-    """Build an X-DKIM2-Info header value."""
-    return ('draft={d};\r\n\trepo={r};\r\n\t'
-            'date={dt}; sw={sw};\r\n\taction={a}').format(
+def _dkim2_info(action, **extras):
+    """Build an X-DKIM2-Info header value.
+
+    Extra keyword arguments are appended as additional tag=value pairs.
+    None values are silently omitted.
+    """
+    val = ('draft={d};\r\n\trepo={r};\r\n\t'
+           'date={dt}; sw={sw};\r\n\taction={a}').format(
         d=DKIM2_DRAFT, r=DKIM2_REPO, dt=DKIM2_DATE,
         sw=DKIM2_SOFTWARE, a=action)
+    for k in sorted(extras):
+        if extras[k] is not None:
+            val += '; {}={}'.format(k, extras[k])
+    return val
 
 
 # ---------------------------------------------------------------------------
@@ -80,6 +88,20 @@ def _should_exclude_header(name):
         if name_lower.startswith(prefix):
             return True
     return False
+
+
+def _get_hashed_headers(msg):
+    """Return (count, names_str) of headers that will be included in h_digest.
+
+    The names are in the same order as they are fed to the SHA-256 hash:
+    reversed (bottom-up) then stable-sorted by name, matching compute_header_hash.
+    """
+    pairs = [(name.lower(), value) for name, value in msg.items()
+             if not _should_exclude_header(name)]
+    pairs.reverse()
+    pairs.sort(key=lambda x: x[0])
+    names = [name for name, _ in pairs]
+    return len(names), ','.join(names)
 
 
 # ---------------------------------------------------------------------------
@@ -417,6 +439,7 @@ def build_mi_header_value(version, header_hash, body_hash,
         r['b'] = body_recipe
     if r:
         value += '; r={}'.format(_b64json(r))
+    value += ';'
     return _fold_mi_value(value)
 
 
@@ -695,12 +718,23 @@ class MessageInstanceIngress:
             log.debug('Accepted existing Message-Instance v=%d', existing_version)
         else:
             # No MI headers present — add v=1 documenting the current state.
+            hcount, hnames = _get_hashed_headers(msg)
             h_hash = compute_header_hash(msg)
             b_hash = compute_body_hash(msg)
             value = build_mi_header_value(1, h_hash, b_hash)
             _prepend_header(msg, 'Message-Instance', value)
-            _prepend_header(msg, 'X-DKIM2-Info', _dkim2_info('mi-m1'))
+            mi_file = save_mi_original(msg)
+            _prepend_header(msg, 'X-DKIM2-Info', _dkim2_info(
+                'mi-m1', hc=hcount, hn=hnames,
+                snaps=os.path.basename(mi_file)))
             log.debug('Added Message-Instance v=1')
+            msgdata['mi_snapshot'] = {
+                'mi_file': mi_file,
+                'version': get_max_mi_version(msg),
+                'header_hash': compute_header_hash(msg),
+                'body_hash': compute_body_hash(msg),
+            }
+            return
         # Save the original message to a cache file for egress recipe
         # computation.  Only the file path and hashes are stored in
         # msgdata — the body content lives on disk once, not in the
@@ -734,12 +768,13 @@ class MessageInstanceEgress:
             # add MI v=1 so the message enters the DKIM2 ecosystem.
             if get_max_mi_version(msg) == 0:
                 _serialize_msg(msg)
+                hcount, hnames = _get_hashed_headers(msg)
                 h_hash = compute_header_hash(msg)
                 b_hash = compute_body_hash(msg)
                 value = build_mi_header_value(1, h_hash, b_hash)
                 _prepend_header(msg, 'Message-Instance', value)
                 _prepend_header(msg, 'X-DKIM2-Info',
-                                _dkim2_info('mi-m1'))
+                                _dkim2_info('mi-m1', hc=hcount, hn=hnames))
                 log.debug('Added originator Message-Instance v=1')
             return
         # Force serialization so that auto-generated parameters (e.g.
@@ -771,11 +806,14 @@ class MessageInstanceEgress:
             current_headers = _collect_headers(msg)
             header_recipe = compute_header_recipe(
                 current_headers, prev_headers)
+        hcount, hnames = _get_hashed_headers(msg)
         version = get_max_mi_version(msg) + 1
         value = build_mi_header_value(
             version, h_hash, b_hash, header_recipe, body_recipe)
         _prepend_header(msg, 'Message-Instance', value)
-        _prepend_header(msg, 'X-DKIM2-Info',
-                        _dkim2_info('mi-m{}'.format(version)))
+        _prepend_header(msg, 'X-DKIM2-Info', _dkim2_info(
+            'mi-m{}'.format(version),
+            hc=hcount, hn=hnames,
+            snapf=os.path.basename(mi_file)))
         log.debug('Added Message-Instance v=%d', version)
         _cleanup_mi_original(mi_file)
