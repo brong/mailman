@@ -18,7 +18,7 @@
 """Message-Instance header support for DKIM2.
 
 Implements Message-Instance header computation as defined in
-draft-ietf-dkim-dkim2-spec-01.  A Message-Instance header records cryptographic
+draft-ietf-dkim-dkim2-spec-02.  A Message-Instance header records cryptographic
 hashes of the message headers and body at a point in the delivery chain, along
 with optional diff recipes that allow undoing changes made at each hop.
 """
@@ -45,9 +45,9 @@ from zope.interface import implementer
 log = logging.getLogger('mailman.dkim2')
 
 # DKIM2 implementation metadata — update DKIM2_DATE on each change.
-DKIM2_DRAFT = 'ietf-dkim-dkim2-spec-01'
+DKIM2_DRAFT = 'ietf-dkim-dkim2-spec-02'
 DKIM2_REPO = 'github.com/brong/mailman'
-DKIM2_DATE = '2026-04-20'
+DKIM2_DATE = '2026-05-17'
 DKIM2_SOFTWARE = 'mailman'
 
 
