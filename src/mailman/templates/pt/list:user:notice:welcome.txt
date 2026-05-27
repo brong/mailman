@@ -1,0 +1,16 @@
+Seja bem-vindo à lista de discussão "${display_name}"!
+
+Para postar nesta lista, envie o seu e-mail para:
+
+  ${listname}
+
+Pode cancelar a sua inscrição ou fazer ajustes nas suas opções por
+e-mail a enviar uma mensagem para:
+
+  ${request_email}
+
+com a palavra "help" no assunto ou corpo (não inclua as aspas) e 
+receberá uma mensagem com instruções. Precisará da sua palavra-passe para
+alterar as suas opções, mas, por motivos de segurança, esta palavra-passe não
+está incluída aqui. Se se esqueceu da sua palavra-passe,  precisará
+redefini-la por meio da interface web.

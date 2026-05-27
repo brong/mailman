@@ -1,0 +1,3 @@
+A pontuação de devolução do $member em $listname foi aumentada.
+
+O DSN de acionamento, caso esteja disponível, foi anexado.

@@ -1,0 +1,3 @@
+A inscrição de ${member} foi desativada em ${listname} devido à sua
+pontuação de devoluções a exceder o valor de bounce_score_threshold
+da lista de discussão.
