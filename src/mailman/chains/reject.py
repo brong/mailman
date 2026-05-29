@@ -21,7 +21,7 @@ import logging
 
 from mailman.app.bounces import bounce_message
 from mailman.chains.base import TerminalChainBase
-from mailman.core.i18n import _
+from mailman.core.i18n import _, format_reasons
 from mailman.interfaces.chain import RejectEvent
 from mailman.interfaces.pipeline import RejectMessage
 from mailman.interfaces.template import ITemplateLoader
@@ -30,10 +30,9 @@ from zope.component import getUtility
 from zope.event import notify
 
 
-log = logging.getLogger('mailman.vette')
-
-NEWLINE = '\n'
 SEMISPACE = '; '
+
+log = logging.getLogger('mailman.vette')
 
 
 @public
@@ -63,5 +62,15 @@ class RejectChain(TerminalChainBase):
             error = RejectMessage(
                 template, reasons, dict(listname=mlist.display_name))
         bounce_message(mlist, msg, error)
-        log.info('REJECT: %s', msg.get('message-id', 'n/a').strip())
+        with _.using('en'):
+            reasons = format_reasons(
+                msgdata.get('moderation_reasons', ['N/A'])
+            )
+            log.info(
+                '%s: REJECT: %s: post from %s: %s',
+                mlist.fqdn_listname,
+                msg.get('message-id', 'n/a').strip(),
+                msg.sender,
+                SEMISPACE.join(reasons),
+            )
         notify(RejectEvent(mlist, msg, msgdata, self))

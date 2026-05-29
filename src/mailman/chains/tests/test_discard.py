@@ -60,4 +60,4 @@ Message-Id: <mid@example.com>
         process_chain(self._mlist, self._msg, msgdata, start_chain='discard')
         log_entry = log_file.read()
         self.assertIn('DISCARD: <mid@example.com>', log_entry)
-        self.assertIn('[n/a]', log_entry)
+        self.assertIn('N/A', log_entry)

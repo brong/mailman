@@ -113,6 +113,8 @@ New Features
   including details about the shunt and bad queues. (:issue:`813`)
 * The ``config.mta.verp_owner_notifications`` setting can disable VERP delivery
   for owner notifications.  (:issue:`1261`)
+* Reject log messages include the listname, the sender and the reasons.
+  Discard/Hold log messages include the listname and the sender. (:issue:`1282`)
 
 Other
 -----
