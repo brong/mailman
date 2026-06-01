@@ -81,6 +81,9 @@ Bugs fixed
   a list is set to mitigate DMARC unconditionally. (:issue:`1277`)
 * Reject notices with non-ASCII text on ``us-ascii`` lists now fall back to
   UTF-8 instead of causing messages to be shunted.  (:issue:`1268`)
+* Switchboard queue processing on macOS no longer crashes with an 
+  ``AttributeError`` it now correctly falls back to ``os.fsync`` 
+  when ``os.fdatasync`` is unavailable. (:issue:`1281`)
 
 New Features
 ------------
