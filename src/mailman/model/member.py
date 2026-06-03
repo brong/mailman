@@ -176,14 +176,14 @@ class Member(Model):
             return ''
 
     def _lookup(self, preference, default=None):
-        pref = getattr(self.preferences, preference)
+        pref = getattr(self.preferences, preference, default)
         if pref is not None:
             return pref
-        pref = getattr(self.address.preferences, preference)
+        pref = getattr(self.address.preferences, preference, default)
         if pref is not None:
             return pref
         if self.address.user:
-            pref = getattr(self.address.user.preferences, preference)
+            pref = getattr(self.address.user.preferences, preference, default)
             if pref is not None:
                 return pref
         if default is None:

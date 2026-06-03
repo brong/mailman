@@ -22,6 +22,8 @@ Configuration
 
 Bugs fixed
 ----------
+* Fix ``AttributeError`` in ``Member._lookup()`` when member preferences
+  is ``None``.  (:issue:`1284`)
 * Fixed: mailman restart --help now documents that dead runner processes will
   not be restarted, and that 'mailman stop; mailman start' can be used to
   restart them.  (:issue:`1082`)
