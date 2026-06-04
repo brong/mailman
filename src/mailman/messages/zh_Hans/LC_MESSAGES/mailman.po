@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-05 07:50-0700\n"
-"PO-Revision-Date: 2026-02-12 18:47+0000\n"
+"PO-Revision-Date: 2026-06-04 13:01+0000\n"
 "Last-Translator: peterxy <peterxy99@outlook.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/gnu-mailman/mailman/zh_Hans/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 2026.6\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:83
 #: src/mailman/chains/hold.py:166 src/mailman/handlers/acknowledge.py:56
@@ -555,6 +555,12 @@ msgid ""
 "    to add multiple users.\n"
 "    "
 msgstr ""
+"    要添加的用户及其角色。此处可以是一个电子邮件地址，或者，如果\n"
+"    使用引号括起，则可以是任何可由\n"
+"    email.utils.parseaddr 解析的显示名称和电子邮件地址。例如：‘Jane Doe "
+"<jane@example.com>’。可以重复\n"
+"    该格式以添加多个用户。\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:80
 msgid ""
@@ -562,6 +568,9 @@ msgid ""
 "    May be repeated to delete multiple users.\n"
 "    "
 msgstr ""
+"    要从指定角色中移除的用户的电子邮件地址。\n"
+"    可重复输入以删除多个用户。\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:87
 msgid ""
@@ -569,6 +578,9 @@ msgid ""
 "    If not given, then 'owner' role is assumed.\n"
 "    "
 msgstr ""
+"    要添加/删除的角色。此处可以是“所有者”或“管理员”。\n"
+"    如果未指定，则默认使用“所有者”角色。\n"
+"    "
 
 #: src/mailman/commands/cli_admins.py:99
 msgid "Nothing to add or delete."
@@ -916,6 +928,11 @@ msgid ""
 "    string works best.\n"
 "    "
 msgstr ""
+"    显示地址与某个\n"
+"    模式匹配的一个或多个用户的全部会员资格。由于该过程的一部分涉及将该模式\n"
+"    转换为包含通配符的 SQL 查询，因此该模式应保持简单。使用简单的\n"
+"    字符串效果最佳。\n"
+"    "
 
 #: src/mailman/commands/cli_findmember.py:91
 msgid ""
@@ -1166,7 +1183,7 @@ msgstr "你的新邮件列表：${fqdn_listname}"
 
 #: src/mailman/commands/cli_lists.py:241
 msgid "Remove a mailing list (does not remove archives)."
-msgstr ""
+msgstr "删除邮件列表（不移除存档）。"
 
 #: src/mailman/commands/cli_lists.py:245
 msgid "Suppress status messages"
@@ -1909,7 +1926,7 @@ msgstr "阻止一些重复的相同消息。"
 
 #: src/mailman/handlers/check_dmarc.py:43
 msgid "Check whether to Apply DMARC mitigations."
-msgstr ""
+msgstr "请勾选是否应用 DMARC 缓解措施。"
 
 #: src/mailman/handlers/cleanse_dkim.py:42
 msgid "Remove DomainKeys headers."
@@ -2541,7 +2558,7 @@ msgstr ""
 "要取消订阅，请发送电子邮件至 ${short_listname}-leave@${domain}"
 
 msgid "list:member:regular:header.txt"
-msgstr ""
+msgstr " "
 
 msgid "list:user:action:invite.txt"
 msgstr ""
@@ -2610,7 +2627,7 @@ msgstr ""
 "    ${owner_email}"
 
 msgid "list:user:notice:goodbye.txt"
-msgstr ""
+msgstr " "
 
 msgid "list:user:notice:hold.txt"
 msgstr ""
