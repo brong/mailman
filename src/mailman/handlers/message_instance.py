@@ -24,6 +24,7 @@ with optional diff recipes that allow undoing changes made at each hop.
 """
 
 import base64
+import copy
 import email
 import hashlib
 import json
@@ -618,6 +619,25 @@ def undo_message_instance(msg):
 # Snapshot helpers — file-based original message cache
 # ---------------------------------------------------------------------------
 
+# Mailman's message store stamps Message-ID-Hash onto the in-flight message
+# *after* an upstream signer / the inbound milter computed m=1, so the baseline
+# that external MI describes does not include it. We only ever treat it as
+# Mailman-stamped when removing it actually restores the external MI's hash, so
+# a Message-ID-Hash that arrived as part of a (possibly signed) m=1 is left
+# untouched. (X-Message-ID-Hash is already X- excluded from the hash, so it is
+# deliberately not considered here.)
+_MAILMAN_STAMPED = ('message-id-hash',)
+
+
+def _strip_stamped(msg):
+    """Return a deep copy of msg with the Mailman-stamped header(s) removed."""
+    clean = copy.deepcopy(msg)
+    for name in list(clean.keys()):
+        if name.lower() in _MAILMAN_STAMPED:
+            del clean[name]
+    return clean
+
+
 def _collect_headers(msg):
     """Collect non-excluded headers as a list of (name, value) tuples."""
     headers = []
@@ -711,35 +731,54 @@ class MessageInstanceIngress:
         _serialize_msg(msg)
         existing_version = get_max_mi_version(msg)
         if existing_version > 0:
-            # Existing MI present (added by the inbound milter).  Accept it as
-            # authoritative — never strip a MI header.
-            _prepend_header(msg, 'X-DKIM2-Info',
-                            _dkim2_info('found-mi={}'.format(existing_version)))
+            # An MI is already present (inbound milter, or a signing sender).
+            # NEVER modify it — it may be signed.  But Mailman's message store
+            # stamps Message-ID-Hash onto the message *after* that MI was
+            # computed, so the snapshot we diff the egress recipe against must
+            # be the state the MI actually describes, not the stamped state.
+            #
+            # Use verify as the oracle: if the MI already matches the current
+            # message, snapshot as-is.  Otherwise, if removing the Mailman-
+            # stamped header restores the MI's hash, snapshot that baseline so
+            # the egress recipe documents the stamp as a reversible Mailman
+            # change.  A Message-ID-Hash that arrived as part of the signed MI
+            # therefore stays (removing it would NOT restore the hash).
+            matched, why = verify_message_instance(msg)
+            snap_src = msg
+            note = 'found-mi={}'.format(existing_version)
+            if matched != existing_version:
+                baseline = _strip_stamped(msg)
+                b_matched, _ = verify_message_instance(baseline)
+                if b_matched == existing_version:
+                    snap_src = baseline
+                    note = 'found-mi={};baseline=unstamped'.format(
+                        existing_version)
+                else:
+                    note = 'found-mi={}-stale'.format(existing_version)
+                    log.warning('Existing Message-Instance v=%d does not match '
+                                'content (%s); chain may not undo cleanly',
+                                existing_version, why)
+            _prepend_header(msg, 'X-DKIM2-Info', _dkim2_info(note))
             log.debug('Accepted existing Message-Instance v=%d', existing_version)
-        else:
-            # No MI headers present — add v=1 documenting the current state.
-            hcount, hnames = _get_hashed_headers(msg)
-            h_hash = compute_header_hash(msg)
-            b_hash = compute_body_hash(msg)
-            value = build_mi_header_value(1, h_hash, b_hash)
-            _prepend_header(msg, 'Message-Instance', value)
-            mi_file = save_mi_original(msg)
-            _prepend_header(msg, 'X-DKIM2-Info', _dkim2_info(
-                'mi-m1', hc=hcount, hn=hnames,
-                snaps=os.path.basename(mi_file)))
-            log.debug('Added Message-Instance v=1')
+            mi_file = save_mi_original(snap_src)
             msgdata['mi_snapshot'] = {
                 'mi_file': mi_file,
-                'version': get_max_mi_version(msg),
-                'header_hash': compute_header_hash(msg),
-                'body_hash': compute_body_hash(msg),
+                'version': existing_version,
+                'header_hash': compute_header_hash(snap_src),
+                'body_hash': compute_body_hash(snap_src),
             }
             return
-        # Save the original message to a cache file for egress recipe
-        # computation.  Only the file path and hashes are stored in
-        # msgdata — the body content lives on disk once, not in the
-        # pickled queue metadata.
+        # No MI headers present — add v=1 documenting the current state.
+        hcount, hnames = _get_hashed_headers(msg)
+        h_hash = compute_header_hash(msg)
+        b_hash = compute_body_hash(msg)
+        value = build_mi_header_value(1, h_hash, b_hash)
+        _prepend_header(msg, 'Message-Instance', value)
         mi_file = save_mi_original(msg)
+        _prepend_header(msg, 'X-DKIM2-Info', _dkim2_info(
+            'mi-m1', hc=hcount, hn=hnames,
+            snaps=os.path.basename(mi_file)))
+        log.debug('Added Message-Instance v=1')
         msgdata['mi_snapshot'] = {
             'mi_file': mi_file,
             'version': get_max_mi_version(msg),
