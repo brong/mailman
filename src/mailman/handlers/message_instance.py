@@ -68,11 +68,11 @@ def _dkim2_info(action, **extras):
 
 
 # ---------------------------------------------------------------------------
-# Headers excluded from the header hash per DKIM2 spec Section 5.2
+# Headers excluded from the header hash per DKIM2 spec Section 4
 # ---------------------------------------------------------------------------
 
 _EXCLUDED_NAMES = frozenset({
-    'received', 'return-path', 'message-instance',
+    'received', 'return-path', 'delivered-to', 'message-instance',
     'dkim2-signature', 'dkim-signature', 'authentication-results',
 })
 
