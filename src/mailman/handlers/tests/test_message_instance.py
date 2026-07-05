@@ -293,6 +293,14 @@ class TestGetMaxMIVersion(unittest.TestCase):
         self.assertEqual(get_max_mi_version(msg), 3)
 
 
+class TestDraftVersion(unittest.TestCase):
+
+    def test_draft_version_is_04(self):
+        from mailman.handlers.message_instance import DKIM2_DRAFT, DKIM2_DATE
+        self.assertEqual(DKIM2_DRAFT, 'ietf-dkim-dkim2-spec-04')
+        self.assertEqual(DKIM2_DATE, '2026-07-05')
+
+
 # =====================================================================
 # Integration tests for CTE preservation + MI (need ConfigLayer)
 # =====================================================================

@@ -7,7 +7,7 @@
 # Software Foundation, either version 3 of the License, or (at your option)
 # any later version.
 
-"""draft-03 §5.1: the DKIM2 handler must never emit a null header recipe.
+"""draft-04 §5.1: the DKIM2 handler must never emit a null header recipe.
 
 These are pure-function tests over compute_header_recipe and therefore do not
 need the Mailman config/database layer.
