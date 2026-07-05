@@ -76,8 +76,8 @@ class TestHeaderExclusion(unittest.TestCase):
     """Test that the correct headers are excluded from hashing."""
 
     def test_excluded_headers(self):
-        for name in ('Received', 'Return-Path', 'Message-Instance',
-                     'DKIM2-Signature', 'DKIM-Signature',
+        for name in ('Received', 'Return-Path', 'Delivered-To',
+                     'Message-Instance', 'DKIM2-Signature', 'DKIM-Signature',
                      'Authentication-Results'):
             self.assertTrue(_should_exclude_header(name), name)
 
