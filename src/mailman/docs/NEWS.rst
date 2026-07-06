@@ -86,6 +86,7 @@ Bugs fixed
 * Switchboard queue processing on macOS no longer crashes with an 
   ``AttributeError`` it now correctly falls back to ``os.fsync`` 
   when ``os.fdatasync`` is unavailable. (:issue:`1281`)
+* Subject is now translated in delivery disabled notice to user (:issue:`1287`)
 
 New Features
 ------------

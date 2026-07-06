@@ -15,3 +15,15 @@ msgstr ""
 #: src/mailman/app/bounces.py:227
 msgid "${mlist.display_name} mailing list probe message"
 msgstr "ailing-may ist-lay ${mlist.display_name} obe-pray essage-may"
+
+#: src/mailman/app/notifications.py:105
+msgid "Welcome to the \"${mlist.display_name}\" mailing list${digmode}"
+msgstr "elcome-Way \"${mlist.display_name}\" ailing-may ist-lay${digmode}"
+
+#: src/mailman/app/notifications.py:138
+msgid "You have been unsubscribed from the ${mlist.display_name} mailing list"
+msgstr "ou-Yay unsubscribed from the ${mlist.display_name} mailing list"
+
+#: src/mailman/app/notifications.py:268
+msgid "Your subscription for ${mlist.display_name} mailing list has been disabled"
+msgstr "our-Yay subscription for ${mlist.display_name} mailing list has been disabled"

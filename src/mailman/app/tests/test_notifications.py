@@ -24,7 +24,10 @@ import unittest
 
 from contextlib import ExitStack
 from mailman.app.lifecycle import create_list
-from mailman.app.notifications import send_goodbye_message
+from mailman.app.notifications import (
+    send_goodbye_message,
+    send_user_disable_warning,
+)
 from mailman.config import config
 from mailman.interfaces.languages import ILanguageManager
 from mailman.interfaces.member import MemberRole
@@ -133,7 +136,7 @@ Welcome to the Test List mailing list.
         items = get_queue_messages('virgin', expected_count=1)
         message = items[0].msg
         self.assertEqual(str(message['subject']),
-                         'Welcome to the "Test List" mailing list')
+                         'elcome-Way "Test List" ailing-may ist-lay')
         self.assertMultiLineEqual(
             message.get_payload(),
             'You just joined the Test List mailing list!')
@@ -260,6 +263,45 @@ have any other questions, you may contact
         self.assertMultiLineEqual(
             message.get_payload(),
             'anne@example.com just left the Test List mailing list!')
+
+    def test_goodbye_message_subject_nonenglish(self):
+        member = subscribe(self._mlist, 'Anne', email='anne@example.com')
+        # Now there's one message in the virgin queue; get it and clear it.
+        items = get_queue_messages('virgin', expected_count=1)
+        # get xx language.
+        manager = getUtility(ILanguageManager)
+        manager.add('xx', 'us-ascii', 'Xlandia')
+        # Send anne an unsubscribe message in xx language.
+        language = manager.get('xx')
+        member.preferences.preferred_language = 'xx'
+        send_goodbye_message(self._mlist, member.address.email, language)
+        # There's a new message in the virgin queue.
+        items = get_queue_messages('virgin', expected_count=1)
+        message = items[0].msg
+        self.assertEqual(str(message['subject']),
+                         'ou-Yay unsubscribed from the Test List '
+                         'mailing list')
+        self.assertMultiLineEqual(
+            message.get_payload(),
+            'anne@example.com just left the Test List mailing list!')
+
+    def test_disablede_message_subject_nonenglish(self):
+        member = subscribe(self._mlist, 'Anne', email='anne@example.com')
+        # Now there's one message in the virgin queue; get it and clear it.
+        items = get_queue_messages('virgin', expected_count=1)
+        # get xx language.
+        manager = getUtility(ILanguageManager)
+        manager.add('xx', 'us-ascii', 'Xlandia')
+        # Send anne a disabled message in xx language.
+        language = manager.get('xx')
+        member.preferences.preferred_language = 'xx'
+        send_user_disable_warning(self._mlist, member.address.email, language)
+        # There's a new message in the virgin queue.
+        items = get_queue_messages('virgin', expected_count=1)
+        message = items[0].msg
+        self.assertEqual(str(message['subject']),
+                         'our-Yay subscription for Test List mailing list has '
+                         'been disabled')
 
     def test_no_welcome_message_to_owners(self):
         # Welcome messages go only to mailing list members, not to owners.

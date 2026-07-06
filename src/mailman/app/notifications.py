@@ -263,9 +263,10 @@ def send_user_disable_warning(mlist, address, language):
         'list:user:notice:warning', mlist, language=language.code))
     warning_message_text = expand(
         warning_message, mlist, dict(sender_email=address))
-    msg = UserNotification(
-        address, mlist.owner_address,
-        _('Your subscription for ${mlist.display_name} mailing list'
-          ' has been disabled'),
-        warning_message_text, language)
+    with _.using(language.code):
+        msg = UserNotification(
+            address, mlist.owner_address,
+            _('Your subscription for ${mlist.display_name} mailing list'
+              ' has been disabled'),
+            warning_message_text, language)
     msg.send(mlist, verp=as_boolean(config.mta.verp_personalized_deliveries))
