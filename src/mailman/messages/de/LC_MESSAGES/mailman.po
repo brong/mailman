@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: mm 3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-05 07:50-0700\n"
-"PO-Revision-Date: 2025-10-07 21:02+0000\n"
-"Last-Translator: Thomas Zell <t.zell@gmx.de>\n"
+"PO-Revision-Date: 2026-07-08 10:01+0000\n"
+"Last-Translator: Flo <debianflo@gmx.at>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/gnu-mailman/"
 "mailman/de/>\n"
 "Language: de\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 2026.7.1.dev0\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:83
 #: src/mailman/chains/hold.py:166 src/mailman/handlers/acknowledge.py:56
@@ -123,7 +123,9 @@ msgstr "${member} wurde von ${mlist.display_name} abgemeldet wegen Unzustellbark
 #: src/mailman/app/notifications.py:254
 #, python-brace-format
 msgid "Your subscription for ${mlist.display_name} mailing list has been disabled"
-msgstr "Sie wurden von der Mailingliste ${mlist.display_name} abgemeldet"
+msgstr ""
+"Ihre Mitgliedschaft in der Mailingliste ${mlist.display_name} wurde "
+"deaktiviert"
 
 #: src/mailman/app/subscriptions.py:328
 #, python-brace-format
