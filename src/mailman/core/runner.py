@@ -296,7 +296,7 @@ class Runner:
 
     def _sleep(self, timeout=None):
         if timeout is None:
-            timeout = self.sleep_float
+            timeout = self.sleep_float             # pragma: nocover
         elif timeout == 0:
             # Wait for a signal forever.
             timeout = None
