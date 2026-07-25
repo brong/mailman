@@ -469,8 +469,12 @@ def _parse_mi(mi_value):
     r= tag format: base64-encoded JSON
     """
     val = str(mi_value)
-    # Unfold continuation lines
-    val = re.sub(r'\r?\n[ \t]', '', val)
+    # Unfold continuation lines.  RFC 5322 FWS is CRLF followed by one *or
+    # more* WSP, and draft-ietf-dkim-dkim2-spec-04 §2.12 says folding
+    # whitespace inside a tag value MUST be ignored when the value is used, so
+    # drop the whole WSP run -- leaving even one behind would truncate the h=
+    # match below at the fold.
+    val = re.sub(r'\r?\n[ \t]+', '', val)
     version = _get_mi_version(val)
     hashes = None
     recipe = None

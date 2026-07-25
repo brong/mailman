@@ -274,6 +274,48 @@ class TestMIHeaderValue(unittest.TestCase):
         self.assertEqual(recipe['b'], [[2, 5]])
 
 
+class TestParseMIFolding(unittest.TestCase):
+    """Folded Message-Instance values must parse (spec-04 §2.12).
+
+    RFC 5322 FWS is CRLF followed by one *or more* WSP.  Unfolding only a
+    single WSP used to leave one behind, which truncated the h= match at the
+    fold and reported "could not parse h= tag".
+    """
+
+    UNFOLDED = ('m=1; h=sha256:' + 'A' * 43 + '=:' + 'B' * 43 + '=;')
+
+    def _fold_h(self, fws):
+        # Insert the fold six characters into the header hash.
+        prefix, rest = self.UNFOLDED.split('h=sha256:', 1)
+        return prefix + 'h=sha256:' + rest[:6] + fws + rest[6:]
+
+    def test_unfolded_baseline(self):
+        version, hashes, recipe = _parse_mi(self.UNFOLDED)
+        self.assertEqual(version, 1)
+        self.assertEqual(hashes['h'][1], 'A' * 43 + '=')
+        self.assertEqual(hashes['b'][1], 'B' * 43 + '=')
+        self.assertIsNone(recipe)
+
+    def test_every_legal_fws_run_parses(self):
+        for fws in ('\r\n\t', '\r\n ', '\r\n\t\t', '\r\n  ', '\r\n \t ',
+                    '\n\t', '\n  '):
+            with self.subTest(fws=repr(fws)):
+                version, hashes, _ = _parse_mi(self._fold_h(fws))
+                self.assertEqual(version, 1)
+                self.assertIsNotNone(
+                    hashes, 'h= tag did not parse across the fold')
+                self.assertEqual(hashes['h'][1], 'A' * 43 + '=')
+                self.assertEqual(hashes['b'][1], 'B' * 43 + '=')
+
+    def test_folded_recipe_parses(self):
+        value = build_mi_header_value(
+            2, b'\x00' * 32, b'\x01' * 32, header_recipe={'subject': []})
+        r_start = value.index('r=') + 2
+        folded = value[:r_start + 8] + '\r\n  ' + value[r_start + 8:]
+        _, _, recipe = _parse_mi(folded)
+        self.assertEqual(recipe['h'], {'subject': []})
+
+
 class TestGetMaxMIVersion(unittest.TestCase):
 
     def test_no_mi(self):
