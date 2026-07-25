@@ -52,20 +52,71 @@ DKIM2_DATE = '2026-07-05'
 DKIM2_SOFTWARE = 'mailman'
 
 
+_INFO_HEADER_NAME_LEN = len('X-DKIM2-Info: ')
+_INFO_TAB_WIDTH = 8
+_INFO_MAX_LINE = 78
+
+
 def _dkim2_info(action, **extras):
     """Build an X-DKIM2-Info header value.
 
     Extra keyword arguments are appended as additional tag=value pairs.
     None values are silently omitted.
+
+    The value is folded at '; ' tag boundaries (and, for an over-long single
+    tag, after a ',') so no line exceeds the RFC 5322 recommendation of 78
+    characters -- the hn= list of hashed header names on its own can run well
+    past that.  X-DKIM2-Info is excluded from the header hash by the X-*
+    prefix rule, so how it is folded never affects a signature.
     """
-    val = ('draft={d};\r\n\trepo={r};\r\n\t'
-           'date={dt}; sw={sw};\r\n\taction={a}').format(
-        d=DKIM2_DRAFT, r=DKIM2_REPO, dt=DKIM2_DATE,
-        sw=DKIM2_SOFTWARE, a=action)
+    segments = [
+        'draft={}'.format(DKIM2_DRAFT),
+        'repo={}'.format(DKIM2_REPO),
+        'date={}'.format(DKIM2_DATE),
+        'sw={}'.format(DKIM2_SOFTWARE),
+        'action={}'.format(action),
+    ]
     for k in sorted(extras):
         if extras[k] is not None:
-            val += '; {}={}'.format(k, extras[k])
-    return val
+            segments.append('{}={}'.format(k, extras[k]))
+
+    # Terminate every segment but the last with ';', then split any piece that
+    # cannot fit a line of its own at commas.
+    pieces = []
+    for i, seg in enumerate(segments):
+        piece = seg if i == len(segments) - 1 else seg + ';'
+        budget = _INFO_MAX_LINE - _INFO_TAB_WIDTH
+        if len(piece) <= budget or ',' not in piece:
+            pieces.append(piece)
+            continue
+        chunk = ''
+        for part in piece.split(','):
+            candidate = part if not chunk else chunk + ',' + part
+            if chunk and len(candidate) > budget:
+                pieces.append(chunk + ',')
+                chunk = part
+            else:
+                chunk = candidate
+        if chunk:
+            pieces.append(chunk)
+
+    # Greedily pack pieces into lines.  The first line is shorter by the field
+    # name; continuation lines carry a leading tab, which renders ~8 columns.
+    lines = []
+    current = ''
+    budget = _INFO_MAX_LINE - _INFO_HEADER_NAME_LEN
+    for piece in pieces:
+        if not current:
+            current = piece
+        elif len(current) + 1 + len(piece) <= budget:
+            current += ' ' + piece
+        else:
+            lines.append(current)
+            current = piece
+            budget = _INFO_MAX_LINE - _INFO_TAB_WIDTH
+    if current:
+        lines.append(current)
+    return '\r\n\t'.join(lines)
 
 
 # ---------------------------------------------------------------------------

@@ -68,6 +68,27 @@ def _decode_mi_recipe(mi_value):
     return recipe
 
 
+def _recipe_at(msg, version):
+    """Return the decoded recipe of the Message-Instance with this m= value.
+
+    Returns None when no instance carries that version.
+    """
+    for val in msg.get_all('message-instance', []):
+        if re.search(r'm\s*=\s*{}\b'.format(version), str(val)):
+            return _decode_mi_recipe(val)
+    return None
+
+
+def _copy_steps(steps):
+    """The {"c": [start, end]} copy steps of a recipe (spec-04 §5)."""
+    return [s for s in steps if isinstance(s, dict) and 'c' in s]
+
+
+def _data_steps(steps):
+    """The {"d": [...]} literal-data steps of a recipe (spec-04 §5)."""
+    return [s for s in steps if isinstance(s, dict) and 'd' in s]
+
+
 # =====================================================================
 # Unit tests for hash computation (no ConfigLayer needed)
 # =====================================================================
@@ -114,22 +135,20 @@ class TestHashComputation(unittest.TestCase):
         self.assertEqual(b1, b2)
 
     def test_interop_hashes(self):
-        # Test vector from the DKIM2 interop suite (simple-ed25519.eml).
-        # The MI v=1 hashes were computed by the reference Python signer.
+        # Test vector from the DKIM2 interop suite (simple.eml signed as
+        # simple-ed25519.eml).  The m=1 hashes below are the reference
+        # signer's, hard-coded so this test locks Mailman's hash computation
+        # to the other implementations rather than to itself.
         raw = (
-            b'DKIM2-Signature: i=1; v=1; t=1740000000; '
-            b'd=test1.dkim2.com; '
-            b'm=eyJtZiI6InNlbmRlckB0ZXN0MS5ka2ltMi5jb20iLCJydCI6'
-            b'WyJyZWNpcGllbnRAZXhhbXBsZS5jb20iXX0=; '
-            b's=W1siZWQyNTUxOSIsImVkMjU1MTkiLCJZT0V0Q1l0d2U4NUl6'
-            b'UXlscENhYm9abDdnamN3aUlFUjE2cHhZdWx2TlpIYTBMemFD'
-            b'dmMwZ0lJTlZTbFdDeDcxTUNTVURaTnlmTnJOUVlxV2Fyd29B'
-            b'QT09Il1d\r\n'
-            b'Message-Instance: v=1; '
-            b'h=eyJoIjpbInNoYTI1NiIsIlNMdHprNkxPNjhDQ2FYNGVkcko2'
-            b'eWZwV2JwM2h3Z3ZJOElkTUJSTERrK1k9Il0sImIiOlsic2hh'
-            b'MjU2IiwiU2dHNWZOR0VnMXgyNE13SXRDVVlHREhRa1dLbmcw'
-            b'NlcxL0l2VEdCZHd6VT0iXX0=\r\n'
+            b'DKIM2-Signature: i=1; m=1; t=1740000000; d=test1.dkim2.com; '
+            b'mf=PHNlbmRlckB0ZXN0MS5ka2ltMi5jb20+; '
+            b'rt=PHJlY2lwaWVudEBleGFtcGxlLmNvbT4=; '
+            b's=ed25519:ed25519-sha256:'
+            b'RgE/0zAwiTp1c+QYjOCgmMT9ybXqyqgBMSUhsU//WWDESskkw3Penu0DX4At'
+            b'+lrGKrU2hPB8/axUhYhE+c0VBg==;\r\n'
+            b'Message-Instance: m=1; '
+            b'h=sha256:SLtzk6LO68CCaX4edrJ6yfpWbp3hwgvI8IdMBRLDk+Y=:'
+            b'SgG5fNGEg1x24MwItCUYGDHQkWKng06W1/IvTGBdwzU=;\r\n'
             b'From: sender@test1.dkim2.com\r\n'
             b'To: recipient@example.com\r\n'
             b'Subject: Simple test message\r\n'
@@ -142,6 +161,10 @@ class TestHashComputation(unittest.TestCase):
         mi_values = msg.get_all('message-instance', [])
         self.assertTrue(len(mi_values) > 0, 'No MI header in test message')
         stored_h, stored_b = _decode_mi_hashes(mi_values[0])
+        self.assertEqual(
+            stored_h, 'SLtzk6LO68CCaX4edrJ6yfpWbp3hwgvI8IdMBRLDk+Y=')
+        self.assertEqual(
+            stored_b, 'SgG5fNGEg1x24MwItCUYGDHQkWKng06W1/IvTGBdwzU=')
         computed_h = _b64(compute_header_hash(msg))
         computed_b = _b64(compute_body_hash(msg))
         self.assertEqual(stored_h, computed_h)
@@ -210,19 +233,20 @@ class TestBodyRecipe(unittest.TestCase):
         recipe = compute_body_recipe(
             ['Header', 'Hello', 'World', 'Footer'],
             ['Hello', 'World'])
-        self.assertEqual(recipe, [[2, 3]])
+        self.assertEqual(recipe, [{'c': [2, 3]}])
 
     def test_body_completely_different(self):
         recipe = compute_body_recipe(
             ['New line 1', 'New line 2'],
             ['Old line 1', 'Old line 2'])
-        self.assertEqual(recipe, ['Old line 1', 'Old line 2'])
+        self.assertEqual(recipe, [{'d': ['Old line 1', 'Old line 2']}])
 
     def test_interleaved_changes(self):
         recipe = compute_body_recipe(
             ['A', 'X', 'B', 'Y', 'C'],
             ['A', 'B', 'C'])
-        self.assertEqual(recipe, [[1, 1], [3, 3], [5, 5]])
+        self.assertEqual(
+            recipe, [{'c': [1, 1]}, {'c': [3, 3]}, {'c': [5, 5]}])
 
 
 class TestHeaderRecipe(unittest.TestCase):
@@ -241,13 +265,13 @@ class TestHeaderRecipe(unittest.TestCase):
         recipe = compute_header_recipe(
             [('From', 'a@b.com')],
             [('From', 'a@b.com'), ('Reply-To', 'list@example.com')])
-        self.assertEqual(recipe['reply-to'], ['list@example.com'])
+        self.assertEqual(recipe['reply-to'], [{'d': ['list@example.com']}])
 
     def test_modified_header(self):
         recipe = compute_header_recipe(
             [('Subject', '[List] Hello')],
             [('Subject', 'Hello')])
-        self.assertEqual(recipe['subject'], ['Hello'])
+        self.assertEqual(recipe['subject'], [{'d': ['Hello']}])
 
     def test_excluded_headers_ignored(self):
         self.assertIsNone(compute_header_recipe(
@@ -259,7 +283,7 @@ class TestMIHeaderValue(unittest.TestCase):
 
     def test_v1_no_recipe(self):
         value = build_mi_header_value(1, b'\x00' * 32, b'\x01' * 32)
-        self.assertTrue(value.startswith('v=1;'))
+        self.assertTrue(value.startswith('m=1;'))
         self.assertIn('h=', value)
         self.assertNotIn('r=', value)
 
@@ -324,14 +348,14 @@ class TestGetMaxMIVersion(unittest.TestCase):
 
     def test_single_mi(self):
         msg = _msg_from_bytes(b'From: a@b.com\r\n\r\nbody\r\n')
-        msg['Message-Instance'] = 'v=1; h=abc'
+        msg['Message-Instance'] = 'm=1; h=abc'
         self.assertEqual(get_max_mi_version(msg), 1)
 
     def test_multiple_mi(self):
         msg = _msg_from_bytes(b'From: a@b.com\r\n\r\nbody\r\n')
-        msg['Message-Instance'] = 'v=1; h=abc'
-        msg['Message-Instance'] = 'v=3; h=def'
-        msg['Message-Instance'] = 'v=2; h=ghi'
+        msg['Message-Instance'] = 'm=1; h=abc'
+        msg['Message-Instance'] = 'm=3; h=def'
+        msg['Message-Instance'] = 'm=2; h=ghi'
         self.assertEqual(get_max_mi_version(msg), 3)
 
 
@@ -614,27 +638,38 @@ This is a test.
         # Snapshot should still be created.
         self.assertIn('mi_snapshot', msgdata)
 
-    def test_ingress_strips_corrupted_mi_and_adds_fresh_v1(self):
-        """A corrupt incoming MI must be stripped; a fresh v=1 replaces it."""
+    def test_ingress_keeps_corrupted_mi_and_flags_it_stale(self):
+        """A stale incoming MI is preserved, not replaced.
+
+        An arriving Message-Instance may be covered by a DKIM2-Signature, so
+        ingress must never rewrite or drop it -- doing so would destroy the
+        evidence that the chain is broken and let Mailman silently pose as the
+        originator.  Instead the mismatch is recorded in X-DKIM2-Info so the
+        break is visible, and no second instance is invented.
+        """
         msg = self._make_7bit_msg()
-        # Build a well-formed MI v=1 but corrupt the hashes.
+        # Build a well-formed MI m=1 but corrupt the hashes.
         h_hash = compute_header_hash(msg)
         b_hash = compute_body_hash(msg)
         good_mi = build_mi_header_value(1, h_hash, b_hash)
-        # Inject deliberately wrong hashes by replacing the real ones.
         corrupt_mi = good_mi.replace(_b64(h_hash), 'AAAA', 1).replace(
             _b64(b_hash), 'BBBB', 1)
         msg['Message-Instance'] = corrupt_mi
         msgdata = {}
         self._ingress.process(self._mlist, msg, msgdata)
-        # The corrupted MI should have been stripped and replaced.
+        # The corrupt instance is still there, untouched, and alone.
         mi_values = msg.get_all('message-instance')
         self.assertEqual(len(mi_values), 1,
-                         'Expected exactly one MI header after reset')
-        # The replacement MI v=1 must verify.
+                         'ingress must not add a second instance')
+        self.assertEqual(str(mi_values[0]), corrupt_mi,
+                         'ingress must not rewrite an incoming instance')
+        # It still does not verify -- that is the point.
         version, error = verify_message_instance(msg)
-        self.assertEqual(version, 1, error)
-        self.assertIsNone(error)
+        self.assertEqual(version, 0)
+        self.assertIsNotNone(error)
+        # The staleness is flagged for anything downstream.
+        info = ' '.join(str(v) for v in msg.get_all('x-dkim2-info', []))
+        self.assertIn('found-mi=1-stale', info)
         # Snapshot must still be present.
         self.assertIn('mi_snapshot', msgdata)
 
@@ -895,15 +930,13 @@ This is a test.
         self._ingress.process(self._mlist, msg, msgdata)
         decorate.process(self._mlist, msg, msgdata)
         self._egress.process(self._mlist, msg, msgdata)
-        for val in msg.get_all('message-instance', []):
-            if re.search(r'v\s*=\s*2', str(val)):
-                recipe = _decode_mi_recipe(val)
-                break
-        else:
-            self.fail('MI v=2 not found')
+        recipe = _recipe_at(msg, 2)
+        self.assertIsNotNone(recipe, 'MI m=2 not found')
         body_recipe = recipe.get('b', [])
+        # A footer append reverses with a single copy step over the original
+        # lines -- no literal data needed.
         self.assertEqual(len(body_recipe), 1)
-        self.assertIsInstance(body_recipe[0], list)
+        self.assertEqual(len(_copy_steps(body_recipe)), 1)
 
     def test_qp_recipe_has_no_literals(self):
         raw = (
@@ -921,12 +954,10 @@ This is a test.
         self._ingress.process(self._mlist, msg, msgdata)
         decorate.process(self._mlist, msg, msgdata)
         self._egress.process(self._mlist, msg, msgdata)
-        for val in msg.get_all('message-instance', []):
-            if re.search(r'v\s*=\s*2', str(val)):
-                recipe = _decode_mi_recipe(val)
-                break
+        recipe = _recipe_at(msg, 2)
+        self.assertIsNotNone(recipe, 'MI m=2 not found')
         body_recipe = recipe.get('b', [])
-        literals = [r for r in body_recipe if isinstance(r, str)]
+        literals = _data_steps(body_recipe)
         self.assertEqual(len(literals), 0,
                          f'Recipe should have no literals: {literals}')
 
@@ -953,13 +984,11 @@ This is a test.
         self._ingress.process(self._mlist, msg, msgdata)
         decorate.process(self._mlist, msg, msgdata)
         self._egress.process(self._mlist, msg, msgdata)
-        for val in msg.get_all('message-instance', []):
-            if re.search(r'v\s*=\s*2', str(val)):
-                recipe = _decode_mi_recipe(val)
-                break
+        recipe = _recipe_at(msg, 2)
+        self.assertIsNotNone(recipe, 'MI m=2 not found')
         body_recipe = recipe.get('b', [])
-        ranges = [r for r in body_recipe if isinstance(r, list)]
-        literals = [r for r in body_recipe if isinstance(r, str)]
+        ranges = _copy_steps(body_recipe)
+        literals = _data_steps(body_recipe)
         self.assertGreater(len(ranges), 0,
                            'Recipe should have range references')
         self.assertLessEqual(len(literals), 1,
@@ -1008,7 +1037,7 @@ This is a test.
     def test_egress_originator_skips_if_mi_exists(self):
         """Egress originator path does not duplicate existing MI."""
         msg = self._make_7bit_msg()
-        msg['Message-Instance'] = 'v=1; h=existing'
+        msg['Message-Instance'] = 'm=1; h=existing'
         msgdata = {}
         self._egress.process(self._mlist, msg, msgdata)
         # Should not have added another MI header.
@@ -1016,18 +1045,39 @@ This is a test.
         self.assertEqual(len(mi_values), 1)
 
     def test_mi_header_is_prepended(self):
-        """MI headers should appear at the top, not the bottom."""
+        """MI headers should appear at the top, not the bottom.
+
+        X-DKIM2-Info is prepended after the instance it describes, so it ends
+        up above it.  That is fine -- it is our own diagnostic header and is
+        excluded from the header hash.  What matters is that the newest
+        Message-Instance precedes every header of the original message.
+        """
+        def first_mi_index(msg):
+            keys = msg.keys()
+            for i, name in enumerate(keys):
+                if name.lower() == 'message-instance':
+                    return i, keys
+            self.fail('no Message-Instance header found')
+
         msg = self._make_7bit_msg()
         msgdata = {}
         self._ingress.process(self._mlist, msg, msgdata)
-        # MI v=1 should be the first header.
-        first_header = msg.keys()[0]
-        self.assertEqual(first_header, 'Message-Instance')
-        # After egress with modifications, MI v=2 should also be first.
+        idx, keys = first_mi_index(msg)
+        # Only X-DKIM2-Info may sit above it.
+        self.assertTrue(
+            all(k.lower() == 'x-dkim2-info' for k in keys[:idx]),
+            f'unexpected headers above Message-Instance: {keys[:idx]}')
+        # And it must precede the original message's own headers.
+        self.assertNotIn('From', keys[:idx])
+
+        # After egress with modifications, the new instance is also on top.
         decorate.process(self._mlist, msg, msgdata)
         self._egress.process(self._mlist, msg, msgdata)
-        first_header = msg.keys()[0]
-        self.assertEqual(first_header, 'Message-Instance')
+        idx, keys = first_mi_index(msg)
+        self.assertTrue(
+            all(k.lower() == 'x-dkim2-info' for k in keys[:idx]),
+            f'unexpected headers above Message-Instance: {keys[:idx]}')
+        self.assertNotIn('From', keys[:idx])
 
     def test_mi_header_line_lengths(self):
         """All MI header lines should be under 78 characters."""
