@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-05 07:50-0700\n"
-"PO-Revision-Date: 2026-04-18 02:09+0000\n"
+"PO-Revision-Date: 2026-08-06 10:01+0000\n"
 "Last-Translator: BoneNI <bounkirdni@gmail.com>\n"
 "Language-Team: Lao <https://hosted.weblate.org/projects/gnu-mailman/mailman/"
 "lo/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.17.1-dev\n"
+"X-Generator: Weblate 2026.8.1.dev0\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:83 src/mailman/chains/hold.py:166
 #: src/mailman/handlers/acknowledge.py:56 src/mailman/handlers/subject_prefix.py:46
@@ -2652,7 +2652,7 @@ msgid "list:admin:notice:unsubscribe.txt"
 msgstr "$member ໄດ້ຖືກລຶບອອກຈາກ $display_name ແລ້ວ."
 
 msgid "list:member:digest:header.txt"
-msgstr ""
+msgstr " "
 
 msgid "list:member:digest:masthead.txt"
 msgstr ""
@@ -2676,7 +2676,7 @@ msgstr ""
 "ເພື່ອຍົກເລີກການສະໝັກສົ່ງອີເມວໄປທີ່ ${short_listname}-leave@${domain}"
 
 msgid "list:member:regular:header.txt"
-msgstr ""
+msgstr " "
 
 msgid "list:user:action:invite.txt"
 msgstr ""
@@ -2751,7 +2751,7 @@ msgstr ""
 "    $owner_email"
 
 msgid "list:user:notice:goodbye.txt"
-msgstr ""
+msgstr " "
 
 msgid "list:user:notice:hold.txt"
 msgstr ""
