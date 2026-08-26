@@ -123,12 +123,18 @@ def _dkim2_info(action, **extras):
 # Headers excluded from the header hash per DKIM2 spec Section 4
 # ---------------------------------------------------------------------------
 
+# Unsigned header fields per DKIM2 spec-05 §4, §4.1. spec-05 narrowed the old
+# 'arc-' prefix to the three RFC 8617 field names and added a 'received-'
+# prefix rule. x400-received / x400-trace match neither prefix.
 _EXCLUDED_NAMES = frozenset({
-    'received', 'return-path', 'delivered-to', 'message-instance',
-    'dkim2-signature', 'dkim-signature', 'authentication-results',
+    'apparently-to', 'arc-authentication-results', 'arc-message-signature',
+    'arc-seal', 'authentication-results', 'auto-submitted', 'delivered-to',
+    'dkim-signature', 'dkim2-signature', 'dl-expansion-history',
+    'message-instance', 'original-recipient', 'received', 'return-path',
+    'sio-label-history', 'vbr-info', 'x400-received', 'x400-trace',
 })
 
-_EXCLUDED_PREFIXES = ('x-', 'arc-')
+_EXCLUDED_PREFIXES = ('x-', 'received-')
 
 
 def _should_exclude_header(name):
@@ -210,8 +216,8 @@ def _canonicalize_header_field(name, value):
 def compute_header_hash(msg):
     """Compute SHA-256 header hash per DKIM2 spec Section 5.2.
 
-    Excludes headers listed in the spec (Received, Return-Path,
-    Message-Instance, DKIM*-Signature, ARC-*, X-*, Authentication-Results).
+    Excludes headers listed in the spec
+    (see _EXCLUDED_NAMES / _EXCLUDED_PREFIXES — spec-05 §4).
     Returns raw SHA-256 digest bytes.
     """
     canon_headers = []

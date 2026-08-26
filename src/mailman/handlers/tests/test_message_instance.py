@@ -112,6 +112,25 @@ class TestHeaderExclusion(unittest.TestCase):
                      'List-Id', 'Reply-To'):
             self.assertFalse(_should_exclude_header(name), name)
 
+    def test_spec05_excluded_names(self):
+        # spec-05 §4: names added by the HDRMAINT survey
+        for name in ('Apparently-To', 'Auto-Submitted', 'DL-Expansion-History',
+                     'Original-Recipient', 'SIO-Label-History', 'VBR-Info',
+                     'X400-Received', 'X400-Trace'):
+            self.assertTrue(_should_exclude_header(name), name)
+
+    def test_spec05_received_prefix(self):
+        # spec-05 §4: any Received-* field is a trace field
+        self.assertTrue(_should_exclude_header('Received-SPF'))
+        self.assertTrue(_should_exclude_header('Received-Anything'))
+
+    def test_spec05_arc_narrowed(self):
+        # spec-05 §4: the ARC- prefix narrowed to the three RFC 8617 names
+        self.assertTrue(_should_exclude_header('ARC-Seal'))
+        self.assertTrue(_should_exclude_header('ARC-Message-Signature'))
+        self.assertTrue(_should_exclude_header('ARC-Authentication-Results'))
+        self.assertFalse(_should_exclude_header('ARC-Something-Else'))
+
 
 class TestHashComputation(unittest.TestCase):
     """Test MI header and body hash computation against known values."""
