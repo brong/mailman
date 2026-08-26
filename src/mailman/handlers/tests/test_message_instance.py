@@ -380,10 +380,10 @@ class TestGetMaxMIVersion(unittest.TestCase):
 
 class TestDraftVersion(unittest.TestCase):
 
-    def test_draft_version_is_04(self):
+    def test_draft_version_is_05(self):
         from mailman.handlers.message_instance import DKIM2_DRAFT, DKIM2_DATE
-        self.assertEqual(DKIM2_DRAFT, 'ietf-dkim-dkim2-spec-04')
-        self.assertEqual(DKIM2_DATE, '2026-07-05')
+        self.assertEqual(DKIM2_DRAFT, 'ietf-dkim-dkim2-spec-05')
+        self.assertEqual(DKIM2_DATE, '2026-08-25')
 
 
 # =====================================================================
