@@ -18,7 +18,7 @@
 """Message-Instance header support for DKIM2.
 
 Implements Message-Instance header computation as defined in
-draft-ietf-dkim-dkim2-spec-04.  A Message-Instance header records cryptographic
+draft-ietf-dkim-dkim2-spec-05.  A Message-Instance header records cryptographic
 hashes of the message headers and body at a point in the delivery chain, along
 with optional diff recipes that allow undoing changes made at each hop.
 """
@@ -277,7 +277,7 @@ def compute_body_hash(msg):
 
 
 # ---------------------------------------------------------------------------
-# Body line extraction (for recipe computation)
+# Body line extraction (for Recipe computation)
 # ---------------------------------------------------------------------------
 
 def _get_body_lines(msg):
@@ -382,7 +382,7 @@ def compute_header_recipe(current_headers, previous_headers):
         for idx, cv in enumerate(cur_canon_rev):
             if cv not in known:
                 known[cv] = idx + 1
-        # Build recipe for this header name using {"c":...}/{"d":...}
+        # Build Recipe for this header name using {"c":...}/{"d":...}
         hrecipe = []
         pending_data = []
         for pval, pcanon in zip(prev_vals_rev, prev_canon_rev):
@@ -489,7 +489,7 @@ def build_mi_header_value(version, header_hash, body_hash,
     """
     value = 'm={}; h=sha256:{}:{}'.format(version, _b64(header_hash),
                                          _b64(body_hash))
-    # Build recipe if there are any changes
+    # Build Recipe if there are any changes
     r = {}
     if header_recipe is not None:
         r['h'] = header_recipe
@@ -527,7 +527,7 @@ def _parse_mi(mi_value):
     """
     val = str(mi_value)
     # Unfold continuation lines.  RFC 5322 FWS is CRLF followed by one *or
-    # more* WSP, and draft-ietf-dkim-dkim2-spec-04 §2.12 says folding
+    # more* WSP, and draft-ietf-dkim-dkim2-spec-05 §2.12 says folding
     # whitespace inside a tag value MUST be ignored when the value is used, so
     # drop the whole WSP run -- leaving even one behind would truncate the h=
     # match below at the fold.
@@ -621,7 +621,7 @@ def undo_message_instance(msg):
     for val in all_mi:
         if _get_mi_version(val) != max_v:
             msg['Message-Instance'] = val
-    # Apply body recipe.
+    # Apply body Recipe.
     if recipe and 'b' in recipe and isinstance(recipe['b'], list):
         body_lines = _get_body_lines(msg)
         new_lines = []
@@ -647,12 +647,12 @@ def undo_message_instance(msg):
             msg.set_payload(
                 new_body.decode('utf-8', errors='surrogateescape')
                 if isinstance(new_body, bytes) else new_body)
-    # Apply header recipes.
+    # Apply header Recipes.
     if recipe and 'h' in recipe and isinstance(recipe['h'], dict):
         for hname, hrecipe in recipe['h'].items():
             # Get current values for this header (bottom-up = reversed).
             cur_vals = list(reversed(msg.get_all(hname, [])))
-            # Build new values from recipe.
+            # Build new values from Recipe.
             new_vals = []
             for cmd in hrecipe:
                 if isinstance(cmd, dict) and 'c' in cmd:
@@ -795,13 +795,13 @@ class MessageInstanceIngress:
             # An MI is already present (inbound milter, or a signing sender).
             # NEVER modify it — it may be signed.  But Mailman's message store
             # stamps Message-ID-Hash onto the message *after* that MI was
-            # computed, so the snapshot we diff the egress recipe against must
+            # computed, so the snapshot we diff the egress Recipe against must
             # be the state the MI actually describes, not the stamped state.
             #
             # Use verify as the oracle: if the MI already matches the current
             # message, snapshot as-is.  Otherwise, if removing the Mailman-
             # stamped header restores the MI's hash, snapshot that baseline so
-            # the egress recipe documents the stamp as a reversible Mailman
+            # the egress Recipe documents the stamp as a reversible Mailman
             # change.  A Message-ID-Hash that arrived as part of the signed MI
             # therefore stays (removing it would NOT restore the hash).
             matched, why = verify_message_instance(msg)
@@ -896,7 +896,7 @@ class MessageInstanceEgress:
                         mi_file)
             return
         prev_body_lines, prev_headers = original
-        # Compute recipes.
+        # Compute Recipes.
         body_recipe = None
         header_recipe = None
         if b_hash != snapshot['body_hash']:

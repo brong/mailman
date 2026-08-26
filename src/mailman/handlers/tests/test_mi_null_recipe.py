@@ -7,7 +7,7 @@
 # Software Foundation, either version 3 of the License, or (at your option)
 # any later version.
 
-"""draft-04 §5.1: the DKIM2 handler must never emit a null header recipe.
+"""draft-05 §5.1: the DKIM2 handler must never emit a null header recipe.
 
 These are pure-function tests over compute_header_recipe and therefore do not
 need the Mailman config/database layer.
@@ -20,7 +20,7 @@ from mailman.handlers.message_instance import compute_header_recipe
 
 class TestNoNullHeaderRecipe(unittest.TestCase):
     def test_body_only_change_yields_no_header_recipe(self):
-        # Identical header sets → no header recipe at all (None), never a
+        # Identical header sets → no header Recipe at all (None), never a
         # null "h" value.
         headers = [('From', 'a@example.com'), ('Subject', 'hi')]
         self.assertIsNone(compute_header_recipe(headers, headers))

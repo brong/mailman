@@ -80,12 +80,12 @@ def _recipe_at(msg, version):
 
 
 def _copy_steps(steps):
-    """The {"c": [start, end]} copy steps of a recipe (spec-04 §5)."""
+    """The {"c": [start, end]} copy steps of a recipe (spec-05 §5)."""
     return [s for s in steps if isinstance(s, dict) and 'c' in s]
 
 
 def _data_steps(steps):
-    """The {"d": [...]} literal-data steps of a recipe (spec-04 §5)."""
+    """The {"d": [...]} literal-data steps of a recipe (spec-05 §5)."""
     return [s for s in steps if isinstance(s, dict) and 'd' in s]
 
 
@@ -226,7 +226,7 @@ class TestBodyLines(unittest.TestCase):
 
 
 # =====================================================================
-# Unit tests for recipe computation
+# Unit tests for Recipe computation
 # =====================================================================
 
 class TestBodyRecipe(unittest.TestCase):
@@ -236,7 +236,7 @@ class TestBodyRecipe(unittest.TestCase):
         self.assertIsNone(compute_body_recipe(lines, lines))
 
     def test_pure_append(self):
-        # Fast path: appended lines only — recipe is a single copy of the
+        # Fast path: appended lines only — Recipe is a single copy of the
         # original N lines, no diff required.
         recipe = compute_body_recipe(
             ['Hello', 'World', 'Footer appended by list'],
@@ -244,7 +244,7 @@ class TestBodyRecipe(unittest.TestCase):
         self.assertEqual(recipe, [{'c': [1, 2]}])
 
     def test_append_to_empty_original(self):
-        # Previous body was empty; recipe is empty (discard all appended lines).
+        # Previous body was empty; Recipe is empty (discard all appended lines).
         recipe = compute_body_recipe(['Footer added by list'], [])
         self.assertEqual(recipe, [])
 
@@ -318,7 +318,7 @@ class TestMIHeaderValue(unittest.TestCase):
 
 
 class TestParseMIFolding(unittest.TestCase):
-    """Folded Message-Instance values must parse (spec-04 §2.12).
+    """Folded Message-Instance values must parse (spec-05 §2.12).
 
     RFC 5322 FWS is CRLF followed by one *or more* WSP.  Unfolding only a
     single WSP used to leave one behind, which truncated the h= match at the
@@ -983,7 +983,7 @@ This is a test.
     def test_base64_recipe_has_one_literal_for_last_line(self):
         # Base64 re-encoding at the original line width produces
         # matching lines for all complete blocks, but the last line
-        # changes (original had padding, new doesn't).  The recipe
+        # changes (original had padding, new doesn't).  The Recipe
         # should be a range + one literal for the original last line.
         content = b'Base64 content for recipe test.'
         b64 = base64.b64encode(content).decode('ascii')
