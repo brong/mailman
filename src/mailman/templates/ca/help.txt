@@ -17,4 +17,4 @@ Les ordres següents són vàlides:
 
 Les preguntes i inquietuds per a l'atenció d'una persona s'han d'enviar a:
 
-     $administrador
+     $administrator

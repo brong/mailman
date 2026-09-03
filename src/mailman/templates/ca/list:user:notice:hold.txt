@@ -1,12 +1,12 @@
 El vostre correu a '$listname' amb l'assumpte
 
-     $subjecte
+     $subject
 
-Es manté fins que el moderador de la llista el pugui revisar per aprovar-la.
+Es reté fins que el moderador de la llista el pugui revisar per aprovar-lo.
 
 El missatge es reté perquè:
 
-$raons
+$reasons
 
-O el missatge es publicarà a la llista o el rebràs
-notificació de la decisió del moderador.
+O bé el missatge es publicarà a la llista, o bé rebreu
+una notificació de la decisió del moderador.
