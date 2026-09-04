@@ -1,3 +1,10 @@
+default:
+  retry:
+    max: 2
+    when:
+      - no_updates_running
+      - server_timeout_running
+
 stages:
   - code
   - docs
