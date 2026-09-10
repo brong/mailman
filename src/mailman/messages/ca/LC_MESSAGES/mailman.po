@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-05 07:50-0700\n"
-"PO-Revision-Date: 2026-08-31 11:45+0000\n"
+"PO-Revision-Date: 2026-09-10 01:23+0000\n"
 "Last-Translator: Ecron <ecron_89@hotmail.com>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/gnu-mailman/"
 "mailman/ca/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.9.dev0\n"
+"X-Generator: Weblate 2026.9.1\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:83
 #: src/mailman/chains/hold.py:166 src/mailman/handlers/acknowledge.py:56
@@ -56,7 +56,7 @@ msgstr ""
 #: src/mailman/app/moderator.py:131
 #, python-brace-format
 msgid "Posting of your message titled \"${subject}\""
-msgstr "Publicació del vostre missatge titulat \"${subject}\""
+msgstr "Publicació del vostre missatge titulat «${subject}»"
 
 #: src/mailman/app/moderator.py:132 src/mailman/app/moderator.py:278
 #: src/mailman/rest/sub_moderation.py:119
@@ -83,7 +83,7 @@ msgstr "Missatge original"
 #: src/mailman/app/moderator.py:322
 #, python-brace-format
 msgid "Request to mailing list \"${display_name}\" rejected"
-msgstr "S'ha rebutjat la sol·licitud a la llista de correu \"${display_name}\""
+msgstr "S’ha rebutjat la sol·licitud a la llista de correu «${display_name}»"
 
 #: src/mailman/app/notifications.py:93
 msgid " (Digest mode)"
@@ -92,7 +92,9 @@ msgstr " (Mode resum)"
 #: src/mailman/app/notifications.py:97
 #, python-brace-format
 msgid "Welcome to the \"${mlist.display_name}\" mailing list${digmode}"
-msgstr "Benvingut a la llista de correu \"${mlist.display_name}\" ${digmode}"
+msgstr ""
+"Us donem la benvinguda a la llista de correu «${mlist.display_name}»$"
+"{digmode}"
 
 #: src/mailman/app/notifications.py:130
 #, python-brace-format
@@ -107,7 +109,7 @@ msgstr "Notificació de subscripció a ${mlist.display_name}"
 #: src/mailman/app/notifications.py:173
 #, python-brace-format
 msgid "${member}'s subscription disabled on ${mlist.display_name}"
-msgstr "La subscripció de ${member} s'ha desactivat a ${mlist.display_name}"
+msgstr "La subscripció de ${member} s’ha desactivat a ${mlist.display_name}"
 
 #: src/mailman/app/notifications.py:201
 #, python-brace-format
@@ -117,7 +119,9 @@ msgstr "La puntuació de rebot de ${member} ha augmentat a ${mlist.display_name}
 #: src/mailman/app/notifications.py:227
 #, python-brace-format
 msgid "${member} unsubscribed from ${mlist.display_name} mailing list due to bounces"
-msgstr "S'ha donat de baixa a ${member} de la llista de correu ${mlist.display_name} a causa dels rebots"
+msgstr ""
+"S’ha donat de baixa a ${member} de la llista de correu ${mlist.display_name} "
+"a causa dels rebots"
 
 #: src/mailman/app/notifications.py:254
 #, python-brace-format
@@ -157,16 +161,19 @@ msgid ""
 "    default configuration file is loaded."
 msgstr ""
 "    Fitxer de configuració a utilitzar.  Si no es proporciona, es consulta\n"
-"    la variable d'entorn MAILMAN_CONFIG_FILE i es fa servir si està definida.\n"
-"    Si no es proporciona, es carrega el fitxer de configuració per defecte."
+"    la variable d’entorn MAILMAN_CONFIG_FILE i es fa servir si està "
+"definida.\n"
+"    Si no se'n proporciona cap, es carrega el fitxer de configuració per "
+"defecte."
 
 #: src/mailman/bin/mailman.py:110
 msgid ""
 "    Running mailman commands as root is not recommended and mailman will\n"
 "    refuse to run as root unless this option is specified."
 msgstr ""
-"    No es recomana executar ordres del mailman com a administrador, i el mailman\n"
-"     refusarà executar-s'hi a no ser que s'especifiqui aquesta opció."
+"    No es recomana executar ordres del mailman com a administrador, i el "
+"mailman\n"
+"     refusarà executar-s’hi a no ser que s’especifiqui aquesta opció."
 
 #: src/mailman/bin/mailman.py:129
 msgid "    If you are sure you want to run as root, specify --run-as-root."
@@ -177,8 +184,8 @@ msgid ""
 "The master lock could not be acquired because it appears as though another\n"
 "master is already running."
 msgstr ""
-"El blocatge principal no s'ha pogut adquirir perquè sembla que un altre\n"
-"principal ja s'està executant."
+"El blocatge principal no s’ha pogut adquirir perquè sembla que un altre\n"
+"principal ja s’està executant."
 
 #: src/mailman/bin/master.py:197
 #, python-brace-format
@@ -186,8 +193,9 @@ msgid ""
 "The master lock could not be acquired.  It appears as though there is a stale\n"
 "master lock.  Try re-running ${program} with the --force flag."
 msgstr ""
-"No s'ha pogut adquirir el blocatge principal. Sembla com si hi hagués un\n"
-"blocatge principal obsolet. Proveu de tornar a executar ${program} amb l'opció --force."
+"No s’ha pogut adquirir el blocatge principal. Sembla com si hi hagués un\n"
+"blocatge principal obsolet. Proveu de tornar a executar ${program} amb "
+"l’opció --force."
 
 #: src/mailman/bin/master.py:203
 #, python-brace-format
