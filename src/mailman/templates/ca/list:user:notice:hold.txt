@@ -1,8 +1,8 @@
-El vostre correu a '$listname' amb l'assumpte
+El vostre correu a «$listname» amb l’assumpte
 
      $subject
 
-Es reté fins que el moderador de la llista el pugui revisar per aprovar-lo.
+Es reté fins que el moderador de la llista el pugui revisar per a aprovar-lo.
 
 El missatge es reté perquè:
 

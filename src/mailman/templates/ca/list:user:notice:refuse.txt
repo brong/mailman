@@ -2,12 +2,12 @@ La vostra sol·licitud a la llista de correu $listname
 
      $request
 
-ha estat rebutjat pel moderador de la llista. El moderador va donar el
-motiu següent per rebutjar la seva sol·licitud:
+ha estat rebutjada pel moderador de la llista. El moderador va donar el
+motiu següent per a rebutjar la vostra sol·licitud:
 
 "$reason"
 
-Qualsevol pregunta o comentari s'ha de dirigir a l'administrador de la llista
+Qualsevol pregunta o comentari s’ha de dirigir a l’administrador de la llista
 a:
 
      $owner_email

@@ -1,4 +1,4 @@
-La vostra subscripció s'ha desactivat a la llista de correu $listname perquè s'han
+La vostra subscripció s’ha desactivat a la llista de correu $listname perquè s’han
 rebut una sèrie de rebots que indiquen que pot haver-hi un problema en el lliurament
 de missatges a $sender_email. És possible que vulgueu consultar amb el vostre administrador de correu
 per a més ajuda.

@@ -1,5 +1,5 @@
 Cal la vostra autorització per a una sol·licitud de subscripció a una llista de correu
-per l'aprovació:
+per l’aprovació:
 
     Per a:  $member
     Llista: $listname

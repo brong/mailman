@@ -1,5 +1,5 @@
-Com a administrador de la llista, es demana la vostra autorització per la
-següent publicació a la llista de correu:
+Com a administrador de la llista, cal la vostra autorització per a la
+publicació següent en una  llista de correu:
 
      Llista: $listname
      De:        $sender_email
@@ -9,5 +9,5 @@ El missatge es reté perquè:
 
 $reasons
 
-Quan us vagi bé, visiteu el vostre tauler per aprovar o denegar
-petició.
+Quan us vagi bé, visiteu el vostre tauler per a aprovar o denegar
+la petició.

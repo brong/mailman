@@ -1,5 +1,5 @@
-El teu missatge titulat
+El vostre missatge titulat
 
      $subject
 
-va ser rebut correctament per la llista de correu $display_name.
+s’ha rebut correctament en la llista de correu $display_name.

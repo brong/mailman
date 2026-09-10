@@ -1,15 +1,15 @@
-La teva adreça "$user_email" ha estat convidada a unir-te a $short_listname
-llista de correu a $domain pel propietari de la llista de correu $short_listname.
+El propietari de la llista de correu $short_listname ha convidat
+la vostra adreça «$user_email» a unir-se a $short_listname en $domain.
 Podeu acceptar la invitació simplement responent a aquest missatge.
 
-O hauríeu d'incloure la línia següent, i només la següent
-línia -- en un missatge a $request_email:
+O hauríeu d'incloure la línia següent, i només la línia
+següent, en un missatge a $request_email:
 
     confirm $token
 
-Tingueu en compte que simplement enviar una "resposta" a aquest missatge hauria de funcionar des de
-la majoria de lectors de correu.
+Tingueu en compte que només enviar una «resposta» a aquest missatge hauria de funcionar des de
+la majoria dels lectors de correu.
 
-Si voleu rebutjar aquesta invitació, simplement ignoreu-la
-missatge.  Si teniu alguna pregunta, envieu-les a
+Si voleu rebutjar aquesta invitació, simplement ignoreu-la.
+Si teniu alguna pregunta, envieu-la a
 $owner_email.

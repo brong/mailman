@@ -1,1 +1,1 @@
-$member s'ha donat de baixa a $listname a causa de rebots excessius.
+$member s’ha donat de baixa a $listname a causa de rebots excessius.

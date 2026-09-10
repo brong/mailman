@@ -1,16 +1,16 @@
-Benvingut a la llista de correu "$display_name"!
+Us donem la benvinguda a la llista de correu «$display_name»!
 
-Per publicar a aquesta llista, envieu el vostre missatge a:
+Per a publicar en aquesta llista, envieu el vostre missatge a:
 
     $listname
 
-Podeu donar-vos de baixa o fer ajustos a les vostres opcions per correu electrònic enviant
+Podeu donar-vos de baixa o ajustar les vostres opcions per correu electrònic enviant
 un missatge a:
 
     $request_email
 
-amb la paraula 'help' a l'assumpte o al cos (no incloure les cometes), i
-rebreu un missatge ampb instruccions. Necessitaràs la teva contrasenya per
-canvieu les vostres opcions, però per motius de seguretat, aquesta contrasenya no està inclosa
-aquí.  Si heu oblidat la vostra contrasenya, haureu de restablir-la a través de
-interfície d'usuari web.
+amb la paraula «help» a l’assumpte o al cos (no inclogueu les cometes), i
+rebreu un missatge amb instruccions. Necessitareu la contrasenya per a
+canviar les opcions, però per motius de seguretat, aquesta contrasenya no s’inclou
+aquí.  Si l'heu oblidada, haureu de restablir-la a través de la
+interfície d’usuari web.

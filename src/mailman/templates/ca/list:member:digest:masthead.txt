@@ -1,12 +1,12 @@
-Envieu enviaments de la llista de correu $display_name a
+Feu enviaments de la llista de correu $display_name a
 	$listname
 
-Per subscriure's o donar-te de baixa per correu electrònic, envia un missatge amb l'assumpte o el cos
-'help' a
+Per a subscriure-us o donar-vos de baixa per correu electrònic, envieu un missatge amb l’assumpte o el cos
+«help» a
 	$request_email
 
 Podeu contactar amb la persona que gestiona la llista a
 	$owner_email
 
-Quan respongueu, editeu la vostra línia d'assumpte perquè sigui més específica que
+Quan respongueu, editeu la vostra línia d’assumpte perquè sigui més específica que
 "Re: Contingut del resum $display_name ..."

@@ -1,10 +1,9 @@
-La llista de correu '$listname' s'acaba de crear per a vostè.  
-A continuació hi ha informació bàsica sobre la vostra llista de correu.
+Acabeu de crear la llista de correu «$listname». A continuació hi ha informació bàsica sobre ella.
 
 Hi ha una interfície basada en correu electrònic per als usuaris (no administradors) de la vostra llista;
-podeu obtenir informació sobre com utilitzar-la enviant un missatge amb només la paraula 'help'
-com a l'Assumpte o en el cos, a:
+podeu obtenir informació sobre com utilitzar-la enviant un missatge amb només la paraula «help»
+com a l’assumpte o en el cos, a:
 
      $request_email
 
-Si us plau, adreça totes les preguntes a $site_email.
+Adreceu totes les preguntes a $site_email.

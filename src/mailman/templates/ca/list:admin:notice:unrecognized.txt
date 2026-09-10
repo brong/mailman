@@ -1,4 +1,4 @@
-El missatge adjunt s'ha rebut com a rebot, però o bé el format de rebot
-no es va reconèixer o no se'n van poder extreure cap adreça de membre.  Aquesta
-llista de correu s'ha configurat per enviar tots els missatges de rebot no reconeguts
+El missatge adjunt s’ha rebut com a rebot, però o bé el format de rebot
+no s’ha reconegut o no se n’ha pogut extreure cap adreça de membre.  Aquesta
+llista de correu s’ha configurat per a enviar tots els missatges de rebot no reconeguts
 al(s) administrador(s) de la llista.
