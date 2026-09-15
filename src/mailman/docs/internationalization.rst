@@ -144,7 +144,7 @@ This is the documentation for adding a new language or updating existing
           translating, please see the :ref:`localization`: for instructions on
           how to translate.
 
-This is a great `gettext tutorial`_ refresh memory on how GNU gettext works.
+This is a `gettext introduction`_ explaining how GNU gettext works.
 
 We use xgettext_ tool to generate ``mailman.pot``::
 
@@ -172,5 +172,5 @@ and generate a compiled ``.mo`` which is used at runtime. This should not be
 checked in the source control.
 
 
-.. _gettext tutorial: https://www.labri.fr/perso/fleury/posts/programming/a-quick-gettext-tutorial.html
+.. _gettext introduction: https://phrase.com/blog/posts/learn-gettext-tools-internationalization/
 .. _xgettext: https://www.gnu.org/software/gettext/manual/html_node/xgettext-Invocation.html
