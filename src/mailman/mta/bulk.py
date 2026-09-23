@@ -20,6 +20,7 @@
 from mailman.mta.arc_signing import ARCSigningMixin
 from mailman.mta.base import BaseDelivery
 from mailman.mta.decorating import DecoratingMixin
+from mailman.mta.message_instance import MessageInstanceMixin
 from public import public
 
 
@@ -37,7 +38,8 @@ CHUNKMAP = dict(
 
 
 @public
-class BulkDelivery(BaseDelivery, DecoratingMixin, ARCSigningMixin):
+class BulkDelivery(BaseDelivery, DecoratingMixin, ARCSigningMixin,
+                   MessageInstanceMixin):
     """Deliver messages to the MSA in as few sessions as possible."""
 
     def __init__(self, max_recipients=None):
@@ -100,6 +102,7 @@ class BulkDelivery(BaseDelivery, DecoratingMixin, ARCSigningMixin):
         # Message needs to be decorated and arc signed.
         self.decorate(mlist, msg, msgdata)
         self.arc_sign(mlist, msg, msgdata)
+        self.message_instance_egress(mlist, msg, msgdata)
         refused = {}
         for recipients in self.chunkify(msgdata.get('recipients', set())):
             chunk_refused = self._deliver_to_recipients(
