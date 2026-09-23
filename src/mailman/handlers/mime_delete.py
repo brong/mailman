@@ -149,6 +149,7 @@ following MIME parts from this message.
         if ctype == 'multipart/alternative':
             firstalt = msg.get_payload(0)
             reset_payload(msg, firstalt)
+            msgdata['body-modified'] = True
             report += _("""
 Replaced multipart/alternative part with first alternative.
 """)
@@ -179,7 +180,9 @@ Replaced multipart/alternative part with first alternative.
             changedp = 1
     if changedp:
         msg['X-Content-Filtered-By'] = 'Mailman/MimeDel {}'.format(VERSION)
+        msgdata['body-modified'] = True
     if attach_report and as_boolean(config.mailman.filter_report):
+        msgdata['body-modified'] = True
         if msg.is_multipart():
             msg.attach(MIMEText(report))
         else:

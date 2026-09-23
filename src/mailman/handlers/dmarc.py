@@ -190,6 +190,8 @@ def wrap_message(mlist, msg, msgdata):
         msg['Content-Type'] = 'message/rfc822'
         msg['Content-Disposition'] = 'inline'
         msg.set_payload([original_msg])
+    # The body is Mailman's now; MI egress emits a null body Recipe.
+    msgdata['body-modified'] = True
     return
 
 
