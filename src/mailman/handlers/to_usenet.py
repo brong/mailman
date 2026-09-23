@@ -21,6 +21,7 @@ import logging
 
 from mailman.config import config
 from mailman.core.i18n import _
+from mailman.handlers.message_instance import without_received_bytes
 from mailman.interfaces.handler import IHandler
 from public import public
 from zope.interface import implementer
@@ -54,5 +55,8 @@ class ToUsenet:
             log.error('NNTP gateway improperly configured: %s',
                       COMMASPACE.join(error))
             return
-        # Put the message in the news runner's queue.
-        config.switchboards['nntp'].enqueue(msg, msgdata, listid=mlist.list_id)
+        # Put the message in the news runner's queue, without the octets
+        # kept for DKIM2 Message-Instance egress: it never gets there.
+        with without_received_bytes(msg):
+            config.switchboards['nntp'].enqueue(
+                msg, msgdata, listid=mlist.list_id)
