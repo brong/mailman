@@ -80,6 +80,7 @@ RESOURCE = dict(
        'aperson@example.com',
        ],
     display_name='Fnords',
+    dkim2_message_instance=True,
     dmarc_mitigate_action='munge_from',
     dmarc_mitigate_unconditionally=False,
     dmarc_addresses='',

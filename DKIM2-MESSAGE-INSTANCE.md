@@ -122,6 +122,11 @@ message_instance: yes
 
 The default is `no`.  When disabled, neither handler does any work.
 
+Each list also has a `dkim2_message_instance` attribute (default
+`True`, exposed through the REST list configuration resource) so
+individual lists can opt out.  Lists created before the migration that
+adds the column are treated as enabled.
+
 ## Files
 
 ### New
@@ -131,6 +136,8 @@ The default is `no`.  When disabled, neither handler does any work.
   cache, and the ingress and egress handlers.
 - `src/mailman/mta/message_instance.py`: the delivery mixin, following
   the `ARCSigningMixin` pattern.
+- `src/mailman/database/alembic/versions/a1b2c3d4e5f6_dkim2_message_instance.py`:
+  adds the per-list column.
 - `src/mailman/handlers/tests/test_message_instance.py`: hashing against
   interop vectors, Recipe shapes, folding and unfolding, decoration
   encoding preservation, and full ingress/decorate/egress/undo round
@@ -147,6 +154,9 @@ The default is `no`.  When disabled, neither handler does any work.
 - `src/mailman/config/schema.cfg`: the `[mta] message_instance` option.
 - `src/mailman/pipelines/builtin.py`: register the ingress handler.
 - `src/mailman/mta/deliver.py`, `src/mailman/mta/bulk.py`: call egress.
+- `src/mailman/interfaces/mailinglist.py`, `src/mailman/model/mailinglist.py`,
+  `src/mailman/styles/base.py`, `src/mailman/rest/listconf.py`: the
+  per-list flag.
 
 ## Encoding-preserving decoration
 

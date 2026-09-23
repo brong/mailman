@@ -162,6 +162,8 @@ class MailingList(Model):
     forward_unrecognized_bounces_to = Column(
         Enum(UnrecognizedBounceDisposition))
     process_bounces = Column(Boolean)
+    # DKIM2
+    dkim2_message_instance = Column(Boolean)
     # DMARC
     dmarc_mitigate_action = Column(Enum(DMARCMitigateAction))
     dmarc_mitigate_unconditionally = Column(Boolean)
