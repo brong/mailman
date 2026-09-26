@@ -41,7 +41,7 @@ dependencies = [
     'standard-nntplib; python_version>="3.13"',
     "passlib",
     "requests",
-    "sqlalchemy>=1.4.0",
+    "sqlalchemy>=1.4.0,<2.1",
     "zope.component",
     "zope.configuration",
     "zope.event",
