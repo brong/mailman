@@ -467,10 +467,15 @@ class UnSubscriptionWorkflow(_SubscriptionWorkflowCommon):
         if self.mlist.unsubscription_policy is SubscriptionPolicy.moderate:
             self.push('moderation_checks')
             return
-        # If the request is pre-confirmed, then the user can unsubscribe right
-        # now.
+        # Skip user confirmation, but still require moderator approval if the
+        # unsubscription policy calls for it.
         if self.pre_confirmed:
-            self.push('do_unsubscription')
+            next_step = (
+                'moderation_checks'
+                if self.mlist.unsubscription_policy is
+                    SubscriptionPolicy.confirm_then_moderate   # noqa: E131
+                else 'do_unsubscription')
+            self.push(next_step)
             return
         # The user must confirm their un-subsbcription.
         self.push('send_confirmation')

@@ -87,6 +87,9 @@ Bugs fixed
   ``AttributeError`` it now correctly falls back to ``os.fsync`` 
   when ``os.fdatasync`` is unavailable. (:issue:`1281`)
 * Subject is now translated in delivery disabled notice to user (:issue:`1287`)
+* Pre-confirmed unsubscription requests now require moderator approval when the
+  unsubscription policy is ``confirm_then_moderate``, instead of immediately
+  unsubscribing the member.  (:issue:`1294`)
 
 New Features
 ------------

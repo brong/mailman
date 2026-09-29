@@ -155,7 +155,7 @@ class TestUnSubscriptionWorkflow(unittest.TestCase):
         workflow = UnSubscriptionWorkflow(
             self._mlist, self.anne, pre_confirmed=True)
         workflow.run_thru('confirmation_checks')
-        with patch.object(workflow, '_step_do_unsubscription') as step:
+        with patch.object(workflow, '_step_moderation_checks') as step:
             next(workflow)
         step.assert_called_once_with()
 
@@ -244,10 +244,18 @@ class TestUnSubscriptionWorkflow(unittest.TestCase):
         self.assertEqual(workflow.token_owner, TokenOwner.no_one)
 
     def test_moderator_approves(self):
+        self._test_moderator_approves(SubscriptionPolicy.moderate)
+
+    def test_moderator_approves_pre_confirmed_confirm_then_moderate(self):
+        self._test_moderator_approves(
+            SubscriptionPolicy.confirm_then_moderate
+        )
+
+    def _test_moderator_approves(self, policy):
         # The workflow runs until moderator approval is required, at which
         # point the workflow is saved.  Once the moderator approves, the
         # workflow resumes and the user is unsubscribed.
-        self._mlist.unsubscription_policy = SubscriptionPolicy.moderate
+        self._mlist.unsubscription_policy = policy
         workflow = UnSubscriptionWorkflow(
             self._mlist, self.anne, pre_confirmed=True)
         # Run the entire workflow.
