@@ -113,8 +113,26 @@ class TestMembership(unittest.TestCase):
             'You have been unsubscribed from the Test mailing list')
 
     def test_leave_mlist_moderate_policy(self):
+        self._test_leave_mlist_moderated_policy(
+            SubscriptionPolicy.moderate,
+            dict(pre_confirmed=True)
+        )
+
+    def test_leave_mlist_confirm_then_moderate_pre_confirmed(self):
+        self._test_leave_mlist_moderated_policy(
+            SubscriptionPolicy.confirm_then_moderate,
+            dict(pre_confirmed=True, pre_approved=False)
+        )
+
+    def test_leave_mlist_confirm_then_moderate_default_confirmation(self):
+        self._test_leave_mlist_moderated_policy(
+            SubscriptionPolicy.confirm_then_moderate,
+            None
+        )
+
+    def _test_leave_mlist_moderated_policy(self, policy, data):
         with transaction():
-            self._mlist.unsubscription_policy = SubscriptionPolicy.moderate
+            self._mlist.unsubscription_policy = policy
             anne = self._usermanager.create_user('anne@example.com')
             set_preferred(anne)
             self._mlist.subscribe(anne)
@@ -123,7 +141,7 @@ class TestMembership(unittest.TestCase):
         with transaction():
             json, resp = call_api(
                 url,
-                data=dict(pre_confirmed=True),
+                data=data,
                 method='DELETE')
         self.assertEqual(resp.status_code, 202)
         self.assertEqual(json.get('token_owner'), 'moderator')
