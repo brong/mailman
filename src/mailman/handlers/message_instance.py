@@ -48,7 +48,7 @@ log = logging.getLogger('mailman.dkim2')
 # DKIM2 implementation metadata — update DKIM2_DATE on each change.
 DKIM2_DRAFT = 'ietf-dkim-dkim2-spec-06'
 DKIM2_REPO = 'github.com/brong/mailman'
-DKIM2_DATE = '2026-09-18'
+DKIM2_DATE = '2026-09-30'
 DKIM2_SOFTWARE = 'mailman'
 
 
@@ -63,11 +63,16 @@ def _dkim2_info(action, **extras):
     Extra keyword arguments are appended as additional tag=value pairs.
     None values are silently omitted.
 
-    The value is folded at '; ' tag boundaries (and, for an over-long single
-    tag, after a ',') so no line exceeds the RFC 5322 recommendation of 78
+    Per draft-gondwana-dkim2-debug-header-01 the value is a tag-list in the
+    DKIM2 syntax: every tag, the last included, is followed by ';'.  A ';'
+    ends a tag and has no escape, so one inside a value becomes ','.
+
+    The value is folded only after a ';' (or, for an over-long single tag,
+    after a ',') so no line exceeds the RFC 5322 recommendation of 78
     characters -- the hn= list of hashed header names on its own can run well
-    past that.  X-DKIM2-Info is excluded from the header hash by the X-*
-    prefix rule, so how it is folded never affects a signature.
+    past that -- and never inside a token.  X-DKIM2-Info is excluded from the
+    header hash by the X-* prefix rule, so how it is folded never affects a
+    signature.
     """
     segments = [
         'draft={}'.format(DKIM2_DRAFT),
@@ -80,11 +85,11 @@ def _dkim2_info(action, **extras):
         if extras[k] is not None:
             segments.append('{}={}'.format(k, extras[k]))
 
-    # Terminate every segment but the last with ';', then split any piece that
-    # cannot fit a line of its own at commas.
+    # Terminate every segment with ';', then split any piece that cannot fit
+    # a line of its own at commas.
     pieces = []
-    for i, seg in enumerate(segments):
-        piece = seg if i == len(segments) - 1 else seg + ';'
+    for seg in segments:
+        piece = seg.replace(';', ',') + ';'
         budget = _INFO_MAX_LINE - _INFO_TAB_WIDTH
         if len(piece) <= budget or ',' not in piece:
             pieces.append(piece)
@@ -843,7 +848,7 @@ class MessageInstanceIngress:
         _prepend_header(msg, 'Message-Instance', value)
         mi_file = save_mi_original(msg)
         _prepend_header(msg, 'X-DKIM2-Info', _dkim2_info(
-            'mi-m1', hc=hcount, hn=hnames,
+            'mi-m=1', hc=hcount, hn=hnames,
             snaps=os.path.basename(mi_file)))
         log.debug('Added Message-Instance m=1')
         msgdata['mi_snapshot'] = {
@@ -880,7 +885,7 @@ class MessageInstanceEgress:
                 value = build_mi_header_value(1, h_hash, b_hash)
                 _prepend_header(msg, 'Message-Instance', value)
                 _prepend_header(msg, 'X-DKIM2-Info',
-                                _dkim2_info('mi-m1', hc=hcount, hn=hnames))
+                                _dkim2_info('mi-m=1', hc=hcount, hn=hnames))
                 log.debug('Added originator Message-Instance m=1')
             return
         # Force serialization so that auto-generated parameters (e.g.
@@ -918,7 +923,7 @@ class MessageInstanceEgress:
             version, h_hash, b_hash, header_recipe, body_recipe)
         _prepend_header(msg, 'Message-Instance', value)
         _prepend_header(msg, 'X-DKIM2-Info', _dkim2_info(
-            'mi-m{}'.format(version),
+            'mi-m={}'.format(version),
             hc=hcount, hn=hnames,
             snapf=os.path.basename(mi_file)))
         log.debug('Added Message-Instance m=%d', version)

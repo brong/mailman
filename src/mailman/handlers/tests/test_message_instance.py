@@ -384,7 +384,7 @@ class TestDraftVersion(unittest.TestCase):
     def test_draft_version_is_06(self):
         from mailman.handlers.message_instance import DKIM2_DRAFT, DKIM2_DATE
         self.assertEqual(DKIM2_DRAFT, 'ietf-dkim-dkim2-spec-06')
-        self.assertEqual(DKIM2_DATE, '2026-09-18')
+        self.assertEqual(DKIM2_DATE, '2026-09-30')
 
 
 # =====================================================================
@@ -633,6 +633,21 @@ This is a test.
         self._ingress.process(self._mlist, msg, msgdata)
         self.assertEqual(get_max_mi_version(msg), 1)
         self.assertIn('mi_snapshot', msgdata)
+
+    def test_ingress_info_is_debug_header_01_form(self):
+        # draft-gondwana-dkim2-debug-header-01: a tag-list in the DKIM2
+        # syntax, every tag followed by ';', and the action is mi-m=<N>.
+        msg = self._make_7bit_msg()
+        self._ingress.process(self._mlist, msg, {})
+        # Unfold, then drop the whitespace a consumer ignores next to ';'
+        # and ','.
+        info = re.sub(r'([;,])\s+', r'\1', msg['x-dkim2-info']
+                      .replace('\r\n\t', ' '))
+        info = info.replace(';', '; ').rstrip()
+        self.assertTrue(info.endswith(';'), info)
+        self.assertRegex(info, r'^draft=\S+; repo=\S+; date=\d{4}-\d\d-\d\d; '
+                               r'sw=mailman; action=mi-m=1; hc=\d+; hn=\S+; '
+                               r'snaps=\S+;$')
 
     def test_ingress_v1_verifies(self):
         msg = self._make_7bit_msg()

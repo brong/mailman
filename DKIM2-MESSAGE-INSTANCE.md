@@ -106,10 +106,12 @@ message has no instance at all.
 Every `Message-Instance` Mailman adds is accompanied by an
 `X-DKIM2-Info` header recording the draft implemented, the repository,
 the date of the implementation, the software name, the action
-(`mi-m1`, `mi-m2`, ...), the count and ordered names of the headers that
-went into the hash, and the snapshot file used.  It exists so interop
-problems can be diagnosed from the message alone.  It is excluded from
-the hash by the `X-` rule and is folded to 78 characters.
+(`mi-m=1`, `mi-m=2`, ...), the count and ordered names of the headers
+that went into the hash, and the snapshot file used.  It exists so
+interop problems can be diagnosed from the message alone.  The format is
+draft-gondwana-dkim2-debug-header-01: a DKIM2 tag-list with every tag
+followed by `;`.  It is excluded from the hash by the `X-` rule and is
+folded to 78 characters, only after a `;` or a `,`.
 
 ## Configuration
 
