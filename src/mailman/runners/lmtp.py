@@ -188,6 +188,14 @@ class LMTPHandler:
             # message, reject it right away; it's probably spam.
             msg = email.message_from_bytes(envelope.content, Message)
             msg.set_unixfrom(envelope.mail_from)
+            # Keep the octets the message arrived as.  Re-serializing the
+            # parsed message is not byte-faithful -- a part header loses a
+            # trailing space or is refolded, a final boundary without a line
+            # ending gains one -- and anything that has to speak about the
+            # message as it was received, a DKIM2 Message-Instance Recipe
+            # for one, needs the original.  Pickled with the message, so it
+            # follows it through the queues; original_size is its length.
+            msg.original_bytes = envelope.content
         except Exception:
             elog.exception('LMTP message parsing')
             config.db.abort()

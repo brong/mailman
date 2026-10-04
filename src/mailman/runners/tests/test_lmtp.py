@@ -90,6 +90,30 @@ Message-ID: <[bogus@example.com]>
         items = get_queue_messages('in', expected_count=1)
         self.assertEqual('<bogus@example.com>', items[0].msg.get('message-id'))
 
+    def test_original_bytes_are_kept(self):
+        # The octets as received, not a re-serialization: the trailing
+        # space on the Subject and the unterminated last line survive.
+        text = (
+            'From: anne@example.com\r\n'
+            'To: test@example.com\r\n'
+            'Message-ID: <ant>\r\n'
+            'Subject: kept as it came \r\n'
+            'Content-Type: multipart/mixed; boundary="b"\r\n'
+            '\r\n'
+            '--b\r\n'
+            'Content-Type: text/plain; charset="us-ascii" \r\n'
+            '\r\n'
+            'hello\r\n'
+            '--b--')
+        self._lmtp.sendmail('anne@example.com', ['test@example.com'], text)
+        items = get_queue_messages('in', expected_count=1)
+        original = items[0].msg.original_bytes
+        self.assertIsInstance(original, bytes)
+        # smtplib terminates the data; everything before that is verbatim.
+        self.assertTrue(original.startswith(text.encode('ascii')), original)
+        self.assertNotEqual(original, items[0].msg.as_bytes())
+        self.assertEqual(items[0].msg.original_size, len(original))
+
     def test_message_id_hash_is_added(self):
         self._lmtp.sendmail('anne@example.com', ['test@example.com'], """\
 From: anne@example.com
