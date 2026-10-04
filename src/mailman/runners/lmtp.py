@@ -42,6 +42,7 @@ from aiosmtpd.controller import Controller
 from aiosmtpd.lmtp import LMTP
 from contextlib import suppress
 from email.utils import parseaddr
+from lazr.config import as_boolean
 from mailman.config import config
 from mailman.core.runner import Runner
 from mailman.database.transaction import transactional
@@ -188,6 +189,16 @@ class LMTPHandler:
             # message, reject it right away; it's probably spam.
             msg = email.message_from_bytes(envelope.content, Message)
             msg.set_unixfrom(envelope.mail_from)
+            # With DKIM2 Message-Instance support on, keep the octets the
+            # message arrived as.  Re-serializing the parsed message is not
+            # byte-faithful -- a part header loses a trailing space or is
+            # refolded, a final boundary without a line ending gains one --
+            # and a Message-Instance Recipe has to rebuild the original.
+            # Pickled with the message, so it follows it through the queues
+            # (doubling their size, hence only when needed); original_size
+            # is its length.
+            if as_boolean(config.mta.message_instance):
+                msg.original_bytes = envelope.content
         except Exception:
             elog.exception('LMTP message parsing')
             config.db.abort()
