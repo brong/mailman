@@ -21,13 +21,15 @@ import os
 import smtplib
 import unittest
 
+from aiosmtpd.smtp import Envelope
 from datetime import datetime
 from mailman.app.lifecycle import create_list
 from mailman.config import config
 from mailman.database.transaction import transaction
 from mailman.interfaces.domain import IDomainManager
+from mailman.runners.lmtp import LMTPHandler
 from mailman.testing.helpers import get_lmtp_client, get_queue_messages
-from mailman.testing.layers import LMTPLayer
+from mailman.testing.layers import ConfigLayer, LMTPLayer
 from zope.component import getUtility
 
 
@@ -65,6 +67,20 @@ Subject: This has no Message-ID header
 """)
         items = get_queue_messages('in', expected_count=1)
         self.assertIsNotNone(items[0].msg.get('message-id'))
+
+    def test_original_bytes_not_kept_by_default(self):
+        # Only Message-Instance support needs the received octets; without
+        # it, the queue pickles do not carry a second copy of the message.
+        self._lmtp.sendmail('anne@example.com', ['test@example.com'], """\
+From: anne@example.com
+To: test@example.com
+Message-ID: <ant>
+Subject: not kept
+
+hello
+""")
+        items = get_queue_messages('in', expected_count=1)
+        self.assertFalse(hasattr(items[0].msg, 'original_bytes'))
 
     def test_message_id_hash_is_added(self):
         self._lmtp.sendmail('anne@example.com', ['test@example.com'], """\
@@ -345,3 +361,48 @@ Message-ID: <alpha>
         items = get_queue_messages('command', expected_count=1)
         self.assertEqual(items[0].msgdata['listid'],
                          'longer_than_15_bytes.example.com')
+
+
+class TestOriginalBytes(unittest.TestCase):
+    """The received octets are kept when Message-Instance is enabled."""
+
+    layer = ConfigLayer
+
+    def setUp(self):
+        with transaction():
+            create_list('test@example.com')
+
+    def _deliver(self, content):
+        # The handler in-process, so the test's configuration applies.
+        envelope = Envelope()
+        envelope.mail_from = 'anne@example.com'
+        envelope.rcpt_tos = ['test@example.com']
+        envelope.content = content
+        LMTPHandler()._handle_DATA(None, None, envelope)
+        return get_queue_messages('in', expected_count=1)[0].msg
+
+    # The octets as received, not a re-serialization: the trailing space on
+    # the Subject and the unterminated last line survive.
+    TEXT = (b'From: anne@example.com\r\n'
+            b'To: test@example.com\r\n'
+            b'Message-ID: <ant>\r\n'
+            b'Subject: kept as it came \r\n'
+            b'Content-Type: multipart/mixed; boundary="b"\r\n'
+            b'\r\n'
+            b'--b\r\n'
+            b'Content-Type: text/plain; charset="us-ascii" \r\n'
+            b'\r\n'
+            b'hello\r\n'
+            b'--b--')
+
+    def test_original_bytes_are_kept(self):
+        config.push('mi_on', '[mta]\nmessage_instance: yes')
+        self.addCleanup(config.pop, 'mi_on')
+        msg = self._deliver(self.TEXT)
+        self.assertEqual(msg.original_bytes, self.TEXT)
+        self.assertNotEqual(msg.original_bytes, msg.as_bytes())
+        self.assertEqual(msg.original_size, len(self.TEXT))
+
+    def test_original_bytes_not_kept_when_off(self):
+        msg = self._deliver(self.TEXT)
+        self.assertFalse(hasattr(msg, 'original_bytes'))
