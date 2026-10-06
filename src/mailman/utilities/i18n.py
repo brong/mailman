@@ -29,6 +29,9 @@ from mailman.interfaces.errors import MailmanError
 from public import public
 
 
+templates_dir = str(files('mailman').joinpath('templates'))
+
+
 @public
 class TemplateNotFoundError(MailmanError):
     """The named template was not found."""
@@ -114,7 +117,6 @@ def search(resources, template_file, mlist=None, language=None):
         languages.append(language)
     languages.reverse()
     # The non-language qualified $template_dir paths in search order.
-    templates_dir = str(files('mailman').joinpath('templates'))
     paths = [templates_dir, os.path.join(config.TEMPLATE_DIR, 'site')]
     if mlist is not None:
         # Don't forget these are in REVERSE search order!
@@ -162,6 +164,14 @@ def find(template_file, mlist=None, language=None, _trace=False):
                 if _trace:
                     print(' MISSING', file=sys.stderr)   # pragma: nocover
             else:
+                if (fp.read(1) == '' and search_path !=
+                        os.path.join(templates_dir, 'en', template_file)):
+                    fp.close()
+                    if _trace:
+                        print(' EMPTY', file=sys.stderr)   # pragma: nocover
+                    continue
+
+                fp.seek(0)
                 if _trace:
                     print(' FOUND:', search_path, file=sys.stderr)  # noqa: E501, pragma: nocover
                 return search_path, fp
