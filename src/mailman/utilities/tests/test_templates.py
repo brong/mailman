@@ -235,3 +235,16 @@ class TestFind(unittest.TestCase):
         with self.assertRaises(TemplateNotFoundError) as cm:
             find('missing.txt', self.mlist)
         self.assertEqual(cm.exception.template_file, 'missing.txt')
+
+    def test_empty_template_falls_back(self):
+        with open(self.xxsite, 'w') as fp:
+            fp.write('')
+        ensite = os.path.join(
+            self.var_dir, 'templates', 'site', 'en', 'site.txt')
+        os.makedirs(os.path.dirname(ensite))
+        with open(ensite, 'w') as fp:
+            fp.write('English site template')
+
+        filename, self.fp = find('site.txt', self.mlist)
+        self.assertEqual(filename, ensite)
+        self.assertEqual(self.fp.read(), 'English site template')
