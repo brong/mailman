@@ -42,7 +42,7 @@ class FileRecipients:
         try:
             with open(filename) as fp:
                 addrs = set(line.strip() for line in fp)
-        except IOError as error:
+        except OSError as error:
             if error.errno != errno.ENOENT:
                 raise
             msgdata['recipients'] = set()

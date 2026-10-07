@@ -19,7 +19,6 @@
 
 import ssl
 import enum
-import socket
 import logging
 import smtplib
 
@@ -181,13 +180,13 @@ class Connection:
                 if self.secure_mode == SecureMode.STARTTLS:
                     log.debug('Starttls')
                     self._connection.starttls(context=self._tls_context)
-        except (socket.error, IOError, smtplib.SMTPException):
+        except (OSError, smtplib.SMTPException):
             self.quit()
             raise
         except Exception as error:
             # This exception is kept here intentionally to make sure we log
-            # only when an exception other than 3 caught above happens and
-            # can't be handled.
+            # only when an exception other than the connection errors caught
+            # above happens and can't be handled.
             # If ANYTHING fails here, after ensuring
             # connection is closed, we'll let the exception bubble up so a
             # message in process will be shunted.

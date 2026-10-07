@@ -17,7 +17,6 @@
 
 """Outgoing runner."""
 
-import socket
 import logging
 
 from datetime import datetime
@@ -57,7 +56,7 @@ class OutgoingRunner(Runner):
         self._func = find_name(config.mta.outgoing)
         # This prevents smtp server connection problems from filling up the
         # error log.  It gets reset if the message was successfully sent, and
-        # set if there was a socket.error.
+        # set if there was an OSError.
         self._logged = False
         self._retryq = config.switchboards['retry']
 
@@ -114,7 +113,7 @@ Error message: {}
                 self._func, msg.get('message-id', 'n/a')))
             self._func(mlist, msg, msgdata)
             self._logged = False
-        except socket.error as error:
+        except OSError as error:
             # There was a problem connecting to the SMTP server.  Log this
             # once, but crank up our sleep time so we don't fill the error
             # log.

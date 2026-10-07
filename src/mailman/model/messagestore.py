@@ -85,7 +85,7 @@ class MessageStore:
                     # -1 says to use the highest protocol available.
                     pickle.dump(message, fp, -1)
                     break
-            except IOError as error:
+            except OSError as error:
                 if error.errno != errno.ENOENT:
                     raise
             makedirs(os.path.dirname(path))

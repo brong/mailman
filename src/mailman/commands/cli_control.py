@@ -144,7 +144,7 @@ def kill_watcher(sig):
     try:
         with open(config.PID_FILE) as fp:
             pid = int(fp.read().strip())
-    except (IOError, ValueError) as error:        # pragma: nocover
+    except (OSError, ValueError) as error:        # pragma: nocover
         # For i18n convenience
         print(_('PID unreadable in: ${config.PID_FILE}'), file=sys.stderr)
         print(error, file=sys.stderr)

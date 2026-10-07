@@ -181,7 +181,7 @@ class Switchboard:
                 os.rename(bakfile, psvfile)
             else:
                 os.unlink(bakfile)
-        except EnvironmentError:
+        except OSError:
             elog.exception(
                 'Failed to unlink/preserve backup file: %s', bakfile)
 

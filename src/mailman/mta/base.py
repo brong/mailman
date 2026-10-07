@@ -18,7 +18,6 @@
 """Base delivery class."""
 
 import copy
-import socket
 import logging
 import smtplib
 
@@ -81,7 +80,7 @@ class BaseDelivery:
                 # recipient -> (code, error)
                 (recipient, (error.smtp_code, error.smtp_error))
                 for recipient in recipients)
-        except (socket.error, IOError, smtplib.SMTPException) as error:
+        except (OSError, smtplib.SMTPException) as error:
             # MTA not responding, or other socket problems, or any other
             # kind of SMTPException.  In that case, nothing got delivered,
             # so treat this as a temporary failure.  We use error code 444

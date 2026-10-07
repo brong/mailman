@@ -17,7 +17,6 @@
 
 """Test the NNTP runner and related utilities."""
 
-import socket
 import nntplib
 import unittest
 
@@ -338,7 +337,7 @@ Testing
         self._runner.run()
         self.assertIn('NNTP error for test@example.com', mark.read())
 
-    @mock.patch('nntplib.NNTP', side_effect=socket.error)
+    @mock.patch('nntplib.NNTP', side_effect=OSError)
     def test_connect_with_socket_failure(self, class_mock):
         self._nntpq.enqueue(self._msg, {}, listid='test.example.com')
         mark = LogFileMark('mailman.error')
