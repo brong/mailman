@@ -30,7 +30,7 @@ import logging
 import mailman.core.logging
 import mailman.config.config
 
-from importlib.resources import read_text
+from importlib.resources import files
 from mailman.interfaces.database import IDatabaseFactory
 from public import public
 from zope.component import getUtility
@@ -101,7 +101,8 @@ def initialize_1(config_path=None):
     :param config_path: The path to the configuration file.
     :type config_path: string
     """
-    xmlconfig.string(read_text('mailman.config', 'configure.zcml'))
+    xmlconfig.string((files('mailman.config') / 'configure.zcml').read_text(
+        encoding='utf-8'))
     # By default, set the umask so that only owner and group can read and
     # write our files.  Specifically we must have g+rw and we probably want
     # o-rwx although I think in most cases it doesn't hurt if other can read

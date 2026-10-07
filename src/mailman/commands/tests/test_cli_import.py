@@ -21,7 +21,7 @@ import unittest
 
 from click.testing import CliRunner
 from contextlib import ExitStack
-from importlib.resources import path
+from importlib.resources import as_file, files
 from mailman.app.lifecycle import create_list
 from mailman.commands.cli_import import import21
 from mailman.testing.layers import ConfigLayer
@@ -44,7 +44,9 @@ class TestImport(unittest.TestCase):
         # _BounceInfo instances.  We throw these away when importing to
         # Mailman 3, but we have to fake the instance's classes, otherwise
         # unpickling the dictionaries will fail.
-        with path('mailman.testing', 'config-with-instances.pck') as pckpath:
+        with as_file(
+                files('mailman.testing') / 'config-with-instances.pck'
+                ) as pckpath:
             pckfile = str(pckpath)
             try:
                 self._command.invoke(import21, ('ant.example.com', pckfile))
@@ -72,7 +74,7 @@ class TestImport(unittest.TestCase):
     def test_pickle_with_bad_language(self):
         with ExitStack() as resources:
             pckfile = str(resources.enter_context(
-                path('mailman.testing', 'config.pck')))
+                as_file(files('mailman.testing') / 'config.pck')))
             resources.enter_context(
                 patch('mailman.utilities.importer.check_language_code',
                       side_effect=Import21Error('Fake bad language code')))
@@ -81,7 +83,7 @@ class TestImport(unittest.TestCase):
             self.assertIn('Fake bad language code', result.output)
 
     def test_pickle_with_non_utf8_string(self):
-        with path('mailman.testing', 'config-greek.pck') as pckpath:
+        with as_file(files('mailman.testing') / 'config-greek.pck') as pckpath:
             pckfile = str(pckpath)
             self._command.invoke(
                 import21, ('--charset=iso-8859-7', 'ant.example.com', pckfile))

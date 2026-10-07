@@ -21,7 +21,7 @@ import unittest
 
 from click.testing import CliRunner
 from datetime import timedelta
-from importlib.resources import path
+from importlib.resources import as_file, files
 from mailman.app.lifecycle import create_list
 from mailman.bin.mailman import main
 from mailman.config import config
@@ -44,7 +44,7 @@ class TestMailmanCommand(unittest.TestCase):
         self._command = CliRunner()
 
     def test_mailman_command_config(self):
-        with path('mailman.testing', 'testing.cfg') as config_path:
+        with as_file(files('mailman.testing') / 'testing.cfg') as config_path:
             with patch('mailman.bin.mailman.initialize') as init:
                 self._command.invoke(main, ('-C', str(config_path), 'info'))
             init.assert_called_once_with(str(config_path))

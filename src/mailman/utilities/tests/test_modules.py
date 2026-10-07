@@ -23,17 +23,20 @@ import unittest
 
 from contextlib import contextmanager, ExitStack
 from importlib.resources import files
+from mailman.config.config import load_external
 from mailman.interfaces.rules import IRule
 from mailman.interfaces.styles import IStyle
 from mailman.testing.helpers import configuration
 from mailman.testing.layers import ConfigLayer
 from mailman.utilities.modules import (
+    expand_path,
     find_components,
     find_pluggable_components,
     hacked_sys_modules,
 )
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from zipfile import ZipFile
 
 
 @contextmanager
@@ -56,6 +59,44 @@ def clean_mypackage():
 
 class TestModuleImports(unittest.TestCase):
     layer = ConfigLayer
+
+    def test_resources_in_zip_package(self):
+        contents = '[example]\ndescription: caf\u00e9\n'
+        with ExitStack() as resources:
+            directory = resources.enter_context(TemporaryDirectory())
+            archive = Path(directory) / 'package.zip'
+            with ZipFile(archive, 'w') as package:
+                package.writestr('mypackage/__init__.py', '')
+                package.writestr('mypackage/example.cfg', contents)
+                package.writestr('mypackage/styles.py', """\
+from mailman.interfaces.styles import IStyle
+from public import public
+from zope.interface import implementer
+
+@public
+@implementer(IStyle)
+class ZipStyle:
+    name = 'zip-style'
+""")
+            resources.enter_context(hack_syspath(0, str(archive)))
+            resources.callback(clean_mypackage)
+            self.assertEqual(
+                [component.name for component
+                 in find_components('mypackage', IStyle)],
+                ['zip-style'])
+            self.assertEqual(
+                load_external('python:mypackage.example'), contents)
+            with ExitStack() as extracted:
+                filename = Path(expand_path(
+                    extracted, 'python:mypackage.example'))
+                self.assertEqual(
+                    filename.read_text(encoding='utf-8'), contents)
+            self.assertFalse(filename.exists())
+
+    def test_expand_path_leaves_file_paths_unchanged(self):
+        filename = '/tmp/python:example.cfg'
+        with ExitStack() as resources:
+            self.assertEqual(expand_path(resources, filename), filename)
 
     def test_find_modules_with_dotfiles(self):
         # Emacs creates lock files when a single file is opened by more than

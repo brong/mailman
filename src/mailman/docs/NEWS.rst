@@ -129,6 +129,8 @@ Other
 -----
 * Use ``OSError`` for obsolete Python 2 exception aliases, preserving SMTP and
   NNTP failure handling.
+* Modernize package resource access with ``importlib.resources.files()`` and
+  ``as_file()``, retaining support for resources in ZIP packages.
 * Updated Python version references in contributing documentation from
   py39/py311 to py313/py312.  (:issue:`1076`)
 * The subject of uncaught bounce notifications include a list's display name.

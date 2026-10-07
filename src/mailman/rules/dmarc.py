@@ -24,7 +24,7 @@ import dns.resolver
 
 from dns.exception import DNSException
 from email.utils import parseaddr
-from importlib.resources import read_binary
+from importlib.resources import files
 from lazr.config import as_timedelta
 from mailman.config import config
 from mailman.core.i18n import _
@@ -85,7 +85,8 @@ def ensure_current_suffix_list():
             else:
                 # We couldn't access the URL and didn't even have an out of
                 # date suffix list cached.  Use the shipped version.
-                content = read_binary('mailman.rules.data', LOCAL_FILE_NAME)
+                content = (
+                    files('mailman.rules.data') / LOCAL_FILE_NAME).read_bytes()
         if content is not None:
             # Content is either a string or UTF-8 encoded bytes.
             if isinstance(content, bytes):

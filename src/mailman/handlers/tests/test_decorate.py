@@ -22,7 +22,7 @@ import re
 import email
 import unittest
 
-from importlib.resources import open_binary as resource_open
+from importlib.resources import files
 from mailman.app.lifecycle import create_list
 from mailman.config import config
 from mailman.email.message import Message
@@ -114,9 +114,8 @@ This is a test message.
 --aaaaaa--
 """)
         # We need to get this message the way lmtp runner gets it.
-        with resource_open(
-                'mailman.handlers.tests.data',
-                'html_non_ascii.eml') as fp:
+        with files('mailman.handlers.tests.data').joinpath(
+                'html_non_ascii.eml').open('rb') as fp:
             self._htmlna = email.message_from_binary_file(fp, Message)
         temporary_dir = TemporaryDirectory()
         self.addCleanup(temporary_dir.cleanup)

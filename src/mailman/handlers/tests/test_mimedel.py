@@ -25,7 +25,7 @@ import tempfile
 import unittest
 
 from contextlib import contextmanager, ExitStack
-from importlib.resources import open_binary as resource_open, read_text
+from importlib.resources import files
 from io import StringIO
 from mailman.app.lifecycle import create_list
 from mailman.config import config
@@ -402,9 +402,8 @@ MIME-Version: 1.0
     def test_html_part_with_non_ascii(self):
         # Ensure we can convert HTML to plain text in an HTML sub-part which
         # contains non-ascii.
-        with resource_open(
-                'mailman.handlers.tests.data',
-                'html_to_plain.eml') as fp:
+        with (files('mailman.handlers.tests.data') / 'html_to_plain.eml').open(
+                'rb') as fp:
             msg = email.message_from_binary_file(fp)
         process = config.handlers['mime-delete'].process
         with dummy_script():
@@ -429,9 +428,8 @@ class TestMiscellaneous(unittest.TestCase):
         self._mlist.filter_extensions = ['xlsx']
 
     def test_collapse_alternatives(self):
-        with resource_open(
-                'mailman.handlers.tests.data',
-                'collapse_alternatives.eml') as fp:
+        with (files('mailman.handlers.tests.data') /
+                'collapse_alternatives.eml').open('rb') as fp:
             msg = email.message_from_binary_file(fp)
         process = config.handlers['mime-delete'].process
         process(self._mlist, msg, {})
@@ -448,9 +446,8 @@ multipart/signed
     def test_collapse_alternatives_non_ascii(self):
         # Ensure we can flatten as bytes a message whose non-ascii payload
         # has been reset.
-        with resource_open(
-                'mailman.handlers.tests.data',
-                'c_a_non_ascii.eml') as fp:
+        with (files('mailman.handlers.tests.data') / 'c_a_non_ascii.eml').open(
+                'rb') as fp:
             msg = email.message_from_binary_file(fp)
         process = config.handlers['mime-delete'].process
         process(self._mlist, msg, {})
@@ -542,9 +539,8 @@ Part 4
         self.assertEqual(msg.get_payload(1).get_payload(), 'Part 2\n')
 
     def test_recast_empty_part_plus_nontext_part(self):
-        with resource_open(
-                'mailman.handlers.tests.data',
-                'empty_plus_nontext.eml') as fp:
+        with (files('mailman.handlers.tests.data') /
+                'empty_plus_nontext.eml').open('rb') as fp:
             msg = email.message_from_binary_file(fp)
         process = config.handlers['mime-delete'].process
         process(self._mlist, msg, {})
@@ -562,15 +558,15 @@ ZW5kc3RyZWFtCmVuZG9iago=
         self.assertEqual(msg.get_payload(), expected)
 
     def test_msg_rfc822(self):
-        with resource_open(
-                'mailman.handlers.tests.data', 'msg_rfc822.eml') as fp:
+        with (files('mailman.handlers.tests.data') / 'msg_rfc822.eml').open(
+                'rb') as fp:
             msg = email.message_from_binary_file(fp)
         process = config.handlers['mime-delete'].process
         # Mock this so that the X-Content-Filtered-By header isn't sensitive to
         # Mailman version bumps.
         with patch('mailman.handlers.mime_delete.VERSION', '123'):
-            expected_msg = read_text(
-                'mailman.handlers.tests.data', 'msg_rfc822_out.eml')
+            expected_msg = (files('mailman.handlers.tests.data') /
+                            'msg_rfc822_out.eml').read_text(encoding='utf-8')
             process(self._mlist, msg, {})
             self.assertEqual(msg.as_string(), expected_msg)
 

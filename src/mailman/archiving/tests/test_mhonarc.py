@@ -23,7 +23,7 @@ import shutil
 import tempfile
 import unittest
 
-from importlib.resources import path
+from importlib.resources import as_file, files
 from mailman.app.lifecycle import create_list
 from mailman.archiving.mhonarc import MHonArc
 from mailman.database.transaction import transaction
@@ -56,7 +56,8 @@ but the water deserves to be swum.
         tempdir = tempfile.mkdtemp()
         self.addCleanup(shutil.rmtree, tempdir)
         # Here's the command to execute our fake MHonArc process.
-        with path('mailman.archiving.tests', 'fake_mhonarc.py') as source:
+        source_resource = files('mailman.archiving.tests') / 'fake_mhonarc.py'
+        with as_file(source_resource) as source:
             shutil.copy(str(source), tempdir)
         self._output_file = os.path.join(tempdir, 'output.txt')
         command = '{} {} {}'.format(

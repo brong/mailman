@@ -24,7 +24,7 @@ import mailman.templates
 from configparser import ConfigParser
 from contextlib import ExitStack
 from flufl.lock import Lock
-from importlib.resources import path, read_text
+from importlib.resources import as_file, files
 from lazr.config import as_boolean, ConfigSchema
 from mailman import version
 from mailman.interfaces.configuration import (
@@ -130,12 +130,12 @@ class Configuration:
 
     def load(self, filename=None):
         """Load the configuration from the schema and config files."""
-        with path('mailman.config', 'schema.cfg') as schema_file:
+        with as_file(files('mailman.config') / 'schema.cfg') as schema_file:
             schema = ConfigSchema(str(schema_file))
         # If a configuration file was given, load it now too.  First, load
         # the absolute minimum default configuration, then if a
         # configuration filename was given by the user, push it.
-        with path('mailman.config', 'mailman.cfg') as config_path:
+        with as_file(files('mailman.config') / 'mailman.cfg') as config_path:
             self._config = schema.load(str(config_path))
         if filename is None:
             self._post_process()
@@ -386,7 +386,8 @@ def load_external(path):
     if path.startswith('python:'):
         resource_path = path[7:]
         package, dot, resource = resource_path.rpartition('.')
-        return read_text(package, resource + '.cfg')
+        return (files(package) / (resource + '.cfg')).read_text(
+            encoding='utf-8')
     with open(path, 'r', encoding='utf-8') as fp:
         return fp.read()
 
