@@ -164,12 +164,19 @@ def find(template_file, mlist=None, language=None, _trace=False):
                 if _trace:
                     print(' MISSING', file=sys.stderr)   # pragma: nocover
             else:
-                if (fp.read(1) == '' and search_path !=
-                        os.path.join(templates_dir, 'en', template_file)):
-                    fp.close()
-                    if _trace:
-                        print(' EMPTY', file=sys.stderr)   # pragma: nocover
-                    continue
+                if (fp.read(1) == '' and search_path.startswith(
+                    templates_dir + os.sep
+                )):
+                    template_language = os.path.relpath(
+                        search_path, templates_dir
+                    ).split(os.sep, 1)[0]
+                    if template_language != 'en':
+                        fp.close()
+                        if _trace:
+                            print(
+                                ' EMPTY', file=sys.stderr
+                            )  # pragma: nocover
+                        continue
 
                 fp.seek(0)
                 if _trace:

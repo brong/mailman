@@ -236,15 +236,52 @@ class TestFind(unittest.TestCase):
             find('missing.txt', self.mlist)
         self.assertEqual(cm.exception.template_file, 'missing.txt')
 
-    def test_empty_template_falls_back(self):
+    def test_empty_site_template(self):
         with open(self.xxsite, 'w') as fp:
             fp.write('')
-        ensite = os.path.join(
-            self.var_dir, 'templates', 'site', 'en', 'site.txt')
+
+        filename, self.fp = find('site.txt', self.mlist)
+        self.assertEqual(filename, self.xxsite)
+        self.assertEqual(self.fp.read(), '')
+
+    def test_empty_source_english_template(self):
+        source_templates = os.path.join(
+            self.var_dir, 'source_templates')
+        ensite = os.path.join(source_templates, 'en', 'site.txt')
         os.makedirs(os.path.dirname(ensite))
+
+        with open(ensite, 'w') as fp:
+            fp.write('')
+
+        with unittest.mock.patch(
+            'mailman.utilities.i18n.templates_dir', source_templates
+        ):
+            filename, self.fp = find('site.txt', language='en')
+
+        self.assertEqual(filename, ensite)
+        self.assertEqual(self.fp.read(), '')
+
+    def test_empty_source_template_falls_back_to_english(self):
+        template_file = 'source-only.txt'
+        source_templates = os.path.join(
+            self.var_dir, 'source_templates')
+        xxsite = os.path.join(
+            source_templates, 'xx', template_file)
+        ensite = os.path.join(
+            source_templates, 'en', template_file)
+
+        os.makedirs(os.path.dirname(xxsite))
+        os.makedirs(os.path.dirname(ensite))
+
+        with open(xxsite, 'w') as fp:
+            fp.write('')
         with open(ensite, 'w') as fp:
             fp.write('English site template')
 
-        filename, self.fp = find('site.txt', self.mlist)
+        with unittest.mock.patch(
+            'mailman.utilities.i18n.templates_dir', source_templates
+        ):
+            filename, self.fp = find(template_file, language='xx')
+
         self.assertEqual(filename, ensite)
         self.assertEqual(self.fp.read(), 'English site template')
