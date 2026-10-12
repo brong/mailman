@@ -115,7 +115,7 @@ class TestHoldChain(unittest.TestCase):
 From: anne@example.com
 To: test@example.com
 Subject: A message
-Message-ID: <ant>
+Message-Id: <mid@example.com>
 MIME-Version: 1.0
 
 A message body.
@@ -144,6 +144,7 @@ A message body.
         self.assertIn('    TEST-REASON-2', payloads['sender'])
         self.assertIn('    TEST-FORMAT-REASON-3', payloads['sender'])
         logged = logfile.read()
+        self.assertIn('HOLD: <mid@example.com>', logged)
         self.assertIn('TEST-REASON-1', logged)
         self.assertIn('TEST-REASON-2', logged)
         self.assertIn('TEST-FORMAT-REASON-3', logged)

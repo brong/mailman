@@ -26,6 +26,7 @@ from mailman.interfaces.languages import ILanguageManager
 from mailman.interfaces.pipeline import RejectMessage
 from mailman.testing.helpers import (
     get_queue_messages,
+    LogFileMark,
     specialized_message_from_string as mfs,
 )
 from mailman.testing.layers import ConfigLayer
@@ -43,6 +44,7 @@ class TestReject(unittest.TestCase):
 From: anne@example.com
 To: test@example.com
 Subject: Ignore
+Message-Id: <mid@example.com>
 
 """)
 
@@ -53,12 +55,18 @@ Subject: Ignore
             'TEST-REASON-2',
             ('TEST-{}-REASON-{}', 'FORMAT', 3),
             ])
+        logfile = LogFileMark('mailman.vette')
         process_chain(self._mlist, self._msg, msgdata, start_chain='reject')
         bounces = get_queue_messages('virgin', expected_count=1)
         payload = bounces[0].msg.get_payload(0).as_string()
         self.assertIn('TEST-REASON-1', payload)
         self.assertIn('TEST-REASON-2', payload)
         self.assertIn('TEST-FORMAT-REASON-3', payload)
+        logged = logfile.read()
+        self.assertIn('REJECT: <mid@example.com>', logged)
+        self.assertIn('TEST-REASON-1', logged)
+        self.assertIn('TEST-REASON-2', logged)
+        self.assertIn('TEST-FORMAT-REASON-3', logged)
 
     def test_bounce_message_bad_charset(self):
         # Force the list to use us-ascii charset to trigger UnicodeError

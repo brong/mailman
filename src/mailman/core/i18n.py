@@ -58,10 +58,9 @@ def format_reasons(reasons):
         replacements and one or more replacement values.
     :returns: A list of the translated and formatted strings.
     """
-    new_reasons = []
-    for reason in reasons:
-        if isinstance(reason, tuple):
-            new_reasons.append(_(reason[0]).format(*reason[1:]))
-        else:
-            new_reasons.append(_(reason))
-    return new_reasons
+    return [
+        _(reason[0]).format(*reason[1:])
+        if isinstance(reason, tuple)
+        else _(reason)
+        for reason in reasons
+    ]

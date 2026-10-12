@@ -20,11 +20,13 @@
 import logging
 
 from mailman.chains.base import TerminalChainBase
-from mailman.core.i18n import _
+from mailman.core.i18n import _, format_reasons
 from mailman.interfaces.chain import DiscardEvent
 from public import public
 from zope.event import notify
 
+
+SEMISPACE = '; '
 
 log = logging.getLogger('mailman.vette')
 
@@ -42,7 +44,16 @@ class DiscardChain(TerminalChainBase):
         This writes a log message, fires a Zope event and then throws the
         message away.
         """
-        log.info('DISCARD: %s; %s', msg.get('message-id', 'n/a').strip(),
-                 msgdata.get('moderation_reasons', '[n/a]'))
+        with _.using('en'):
+            reasons = format_reasons(
+                msgdata.get('moderation_reasons', ['N/A'])
+            )
+            log.info(
+                '%s: DISCARD: %s: post from %s: %s',
+                mlist.fqdn_listname,
+                msg.get('message-id', 'n/a').strip(),
+                msg.sender,
+                SEMISPACE.join(reasons),
+            )
         notify(DiscardEvent(mlist, msg, msgdata, self))
         # Nothing more needs to happen.
