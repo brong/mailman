@@ -54,7 +54,7 @@ test-sqlite:
   extends: .only-default
   parallel:
     matrix:
-      - PYTHON_VER: ["39", "310", "311", "312", "313"]
+      - PYTHON_VER: ["310", "311", "312", "313"]
   script:
     - tox -e "py$PYTHON_VER-nocov"
 
@@ -71,7 +71,7 @@ test-postgres:
     - postgres:latest
   parallel:
     matrix:
-      - PYTHON_VER: ["39", "310", "311", "312", "313"]
+      - PYTHON_VER: ["310", "311", "312", "313"]
   script:
     - tox -e "py$PYTHON_VER-nocov-pg"
 
@@ -89,6 +89,6 @@ test-mysql:
     - mysql:5.6
   parallel:
     matrix:
-      - PYTHON_VER: ["39", "310", "311", "312", "313"]
+      - PYTHON_VER: ["310", "311", "312", "313"]
   script:
     - tox -e "py$PYTHON_VER-nocov-mysql"

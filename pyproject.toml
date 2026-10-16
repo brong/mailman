@@ -19,7 +19,6 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.9",
     "Topic :: Communications :: Email :: Mailing List Servers",
     "Topic :: Communications :: Usenet News",
     "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
@@ -48,7 +47,7 @@ dependencies = [
     "zope.interface>=5.0",
 ]
 license = {text = "GPLv3"}
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 
 [project.optional-dependencies]
 setproctitle = ["setproctitle"]
