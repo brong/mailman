@@ -17,7 +17,6 @@
 
 """Package and module utilities."""
 
-import os
 import sys
 
 from contextlib import contextmanager
@@ -75,10 +74,10 @@ def expand_path(resources, url):
     """Expand a python: path, returning the absolute file system path."""
     # Is the context coming from a file system or Python path?
     if url.startswith('python:'):
-        resource_path = url[7:]
+        resource_path = url.removeprefix('python:')
         package, dot, resource = resource_path.rpartition('.')
         cfg_path = resources.enter_context(
-            as_file(files(package) / (resource + '.cfg')))
+            as_file(files(package) / f'{resource}.cfg'))
         return str(cfg_path)
     else:
         return url
@@ -145,10 +144,9 @@ def find_components(package, interface):
     """
     for resource in files(package).iterdir():
         filename = resource.name
-        basename, extension = os.path.splitext(filename)
-        if extension != '.py' or basename.startswith('.'):
+        if not filename.endswith('.py') or filename.startswith('.'):
             continue
-        module_name = '{}.{}'.format(package, basename)
+        module_name = f'{package}.{filename.removesuffix(".py")}'
         module = import_module(module_name)
         if not hasattr(module, '__all__'):
             continue
@@ -189,7 +187,7 @@ def find_pluggable_components(subpackage, interface):
         # It's possible that the plugin doesn't include the directory for this
         # subpackage.  That's fine.
         if (files(package) / subpackage).is_dir():
-            plugin_package = '{}.{}'.format(package, subpackage)
+            plugin_package = f'{package}.{subpackage}'
             yield from find_components(plugin_package, interface)
 
 

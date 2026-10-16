@@ -16,7 +16,6 @@
 # GNU Mailman.  If not, see <https://www.gnu.org/licenses/>.
 
 """Fake MTA for testing purposes."""
-from __future__ import generator_stop
 
 import smtplib
 

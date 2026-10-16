@@ -197,11 +197,11 @@ class Configuration:
             )
         # Directories.
         for name in DIR_NAMES:
-            key = '{}_dir'.format(name)
+            key = f'{name}_dir'
             substitutions[key] = getattr(category, key)
         # Files.
         for name in ('lock', 'pid'):
-            key = '{}_file'.format(name)
+            key = f'{name}_file'
             substitutions[key] = getattr(category, key)
         # Add the path to the .cfg file, if one was given on the command line.
         if self.filename is not None:
@@ -224,7 +224,7 @@ class Configuration:
                 break
             if len(expandables) == last_dollar_count:
                 print('Path expansion infloop detected:\n',
-                      SPACERS.join('\t{}: {}'.format(key, value)
+                      SPACERS.join(f'\t{key}: {value}'
                                    for key, value in sorted(expandables)),
                       file=sys.stderr)
                 sys.exit(1)
@@ -384,10 +384,9 @@ def load_external(path):
     """
     # Is the context coming from a file system or Python path?
     if path.startswith('python:'):
-        resource_path = path[7:]
+        resource_path = path.removeprefix('python:')
         package, dot, resource = resource_path.rpartition('.')
-        return (files(package) / (resource + '.cfg')).read_text(
-            encoding='utf-8')
+        return (files(package) / f'{resource}.cfg').read_text(encoding='utf-8')
     with open(path, 'r', encoding='utf-8') as fp:
         return fp.read()
 

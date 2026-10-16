@@ -128,7 +128,7 @@ Test content
             filename = attachment.get_filename()
         except TypeError as error:
             self.fail(error)
-        self.assertEqual(filename, u'd\xe9jeuner.txt')
+        self.assertEqual(filename, 'd\xe9jeuner.txt')
 
     def test_senders_header_instances(self):
         msg = Message()

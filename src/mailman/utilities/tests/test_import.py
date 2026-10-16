@@ -1078,7 +1078,7 @@ class TestConvertToURI(unittest.TestCase):
         import_config_pck(self._mlist, self._pckdict)
         for oldvar, newvar in self._conf_mapping.items():
             text = decorate(newvar, self._mlist)
-            expected = u'Ol\ufffd!'
+            expected = 'Ol\ufffd!'
             self.assertEqual(
                 text, expected,
                 '{} -> {} did not get converted'.format(oldvar, newvar))
