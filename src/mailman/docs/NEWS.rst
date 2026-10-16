@@ -128,6 +128,7 @@ Other
 * The error message displayed when attempting to create a mailing list with a
   name that already exists now includes the list's name.
   (:issue:`1123`)
+* Add documentation for Sendmail MTA configuration. (:mr:`1496`)
 
 .. _news-3.3.10:
 
