@@ -64,7 +64,7 @@ def dump_msgdata(msgdata, *additional_skips):
 
 
 def dump_list(list_of_things, key=str):
-    """Print items in a string to get rid of stupid u'' prefixes."""
+    """Print each item in an iterable on its own line."""
     # List of things may be a generator.
     list_of_things = list(list_of_things)
     if len(list_of_things) == 0:

@@ -27,7 +27,7 @@ from dns.rdatatype import CNAME, TXT
 from dns.resolver import NoAnswer, NoNameservers, NXDOMAIN
 from email import message_from_bytes
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from importlib.resources import path
+from importlib.resources import as_file, files
 from lazr.config import as_timedelta
 from mailman.app.lifecycle import create_list
 from mailman.config import config
@@ -205,7 +205,7 @@ def get_dns_resolver(
 def use_test_organizational_data(resources):
     # Point the organizational URL to our test data.
     filename = str(resources.enter_context(
-        path('mailman.rules.tests.data', 'org_domain.txt')))
+        as_file(files('mailman.rules.tests.data') / 'org_domain.txt')))
     url = 'file:///{}'.format(filename)
     return resources.enter_context(
         configuration('dmarc', org_domain_data_url=url))
@@ -520,7 +520,7 @@ To: ant@example.com
 
     def test_parser(self):
         data_file = str(self.resources.enter_context(
-            path('mailman.rules.tests.data', 'org_domain.txt')))
+            as_file(files('mailman.rules.tests.data') / 'org_domain.txt')))
         dmarc.parse_suffix_list(data_file)
         # There is no entry for example.biz because that line starts with
         # whitespace.

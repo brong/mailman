@@ -19,7 +19,6 @@
 
 import os
 import click
-import socket
 import logging
 import nntplib
 import datetime
@@ -54,7 +53,7 @@ def open_newsgroup(mlist):
                                 readermode=True,
                                 user=config.nntp.user,
                                 password=config.nntp.password)
-        except (socket.error, nntplib.NNTPError, IOError) as e:
+        except (OSError, nntplib.NNTPError) as e:
             log.error('error opening connection to nntp_host: %s\n%s',
                       nntp_host, e)
             raise
@@ -134,7 +133,7 @@ def process_lists(glock):
         # Open the newsgroup, but let most exceptions percolate up.
         try:
             conn, first, last = open_newsgroup(mlist)
-        except (socket.error, nntplib.NNTPError, IOError) as e:
+        except (OSError, nntplib.NNTPError) as e:
             log.error('NNTP error for list %s:\n%s', listname, e)
             break
         log.info('%s: [%d..%d]', listname, first, last)

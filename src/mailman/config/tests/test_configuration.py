@@ -22,7 +22,7 @@ import tempfile
 import unittest
 
 from contextlib import ExitStack
-from importlib.resources import path
+from importlib.resources import as_file, files
 from mailman.config.config import (
     Configuration,
     external_configuration,
@@ -82,7 +82,7 @@ class TestExternal(unittest.TestCase):
     """Test external configuration file loading APIs."""
 
     def test_load_external_by_filename(self):
-        with path('mailman.config', 'postfix.cfg') as filename:
+        with as_file(files('mailman.config') / 'postfix.cfg') as filename:
             contents = load_external(str(filename))
         self.assertEqual(contents[:9], '[postfix]')
 
@@ -91,7 +91,7 @@ class TestExternal(unittest.TestCase):
         self.assertEqual(contents[:9], '[postfix]')
 
     def test_external_configuration_by_filename(self):
-        with path('mailman.config', 'postfix.cfg') as filename:
+        with as_file(files('mailman.config') / 'postfix.cfg') as filename:
             parser = external_configuration(str(filename))
         self.assertEqual(parser.get('postfix', 'postmap_command'),
                          '/usr/sbin/postmap')

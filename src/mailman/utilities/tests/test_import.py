@@ -23,7 +23,7 @@ import unittest
 from contextlib import ExitStack, redirect_stderr
 from datetime import datetime, timedelta
 from enum import Enum
-from importlib.resources import open_binary
+from importlib.resources import files
 from io import StringIO
 from mailman.app.lifecycle import create_list
 from mailman.config import config
@@ -81,7 +81,8 @@ class TestBasicImport(unittest.TestCase):
 
     def setUp(self):
         self._mlist = create_list('blank@example.com')
-        self._pckdict = load(open_binary('mailman.testing', 'config.pck'))
+        with (files('mailman.testing') / 'config.pck').open('rb') as fp:
+            self._pckdict = load(fp)
 
     def _import(self):
         import_config_pck(self._mlist, self._pckdict)
@@ -1077,7 +1078,7 @@ class TestConvertToURI(unittest.TestCase):
         import_config_pck(self._mlist, self._pckdict)
         for oldvar, newvar in self._conf_mapping.items():
             text = decorate(newvar, self._mlist)
-            expected = u'Ol\ufffd!'
+            expected = 'Ol\ufffd!'
             self.assertEqual(
                 text, expected,
                 '{} -> {} did not get converted'.format(oldvar, newvar))

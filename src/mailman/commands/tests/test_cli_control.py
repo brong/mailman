@@ -29,7 +29,7 @@ from click.testing import CliRunner
 from contextlib import ExitStack, suppress
 from datetime import datetime, timedelta
 from flufl.lock import SEP
-from importlib.resources import path
+from importlib.resources import as_file, files
 from mailman.bin.master import WatcherState
 from mailman.commands.cli_control import reopen, restart, start
 from mailman.config import config
@@ -44,7 +44,7 @@ from unittest.mock import patch
 @public
 def make_config(resources):
     cfg_path = resources.enter_context(
-        path('mailman.commands.tests.data', 'no-runners.cfg'))
+        as_file(files('mailman.commands.tests.data') / 'no-runners.cfg'))
     # We have to patch the global config's filename attribute.  The problem
     # here is that click does not support setting the -C option on the
     # parent command (i.e. `master`).

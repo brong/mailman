@@ -18,7 +18,6 @@
 """Test the outgoing runner."""
 
 import os
-import socket
 import logging
 import unittest
 
@@ -224,12 +223,12 @@ Message-Id: <first>
         self.assertFalse(captured_msgdata['verp'])
 
 
-def raise_socket_error(mlist, msg, msgdata):
-    raise socket.error('text')
+def raise_os_error(mlist, msg, msgdata):
+    raise OSError('text')
 
 
-class TestSocketError(unittest.TestCase):
-    """Test socket.error occurring in the delivery function."""
+class TestOSError(unittest.TestCase):
+    """Test OSError occurring in the delivery function."""
 
     layer = ConfigLayer
 
@@ -239,7 +238,7 @@ class TestSocketError(unittest.TestCase):
         # setting of the 'verp' key in the metadata.
         config.push('fake outgoing', """
         [mta]
-        outgoing: mailman.runners.tests.test_outgoing.raise_socket_error
+        outgoing: mailman.runners.tests.test_outgoing.raise_os_error
         """)
         self.addCleanup(config.pop, 'fake outgoing')
         self._mlist = create_list('test@example.com')
@@ -253,7 +252,7 @@ Message-Id: <first>
 """)
 
     def test_error_with_port_0(self):
-        # Test the code path where a socket.error is raised in the delivery
+        # Test the code path where an OSError is raised in the delivery
         # function, and the MTA port is set to zero.  The only real effect of
         # that is a log message.  Start by opening the error log and reading
         # the current file position.
@@ -273,7 +272,7 @@ Message-Id: <first>
             'Cannot connect to SMTP server localhost on port smtp: text')
 
     def test_error_with_numeric_port(self):
-        # Test the code path where a socket.error is raised in the delivery
+        # Test the code path where an OSError is raised in the delivery
         # function, and the MTA port is set non-zero.  The only real effect of
         # that is a log message.  Start by opening the error log and reading
         # the current file position.
@@ -298,7 +297,7 @@ def raise_SomeRecipientsFailed(mlist, msg, msgdata):
 
 
 class TestSomeRecipientsFailed(unittest.TestCase):
-    """Test socket.error occurring in the delivery function."""
+    """Test SomeRecipientsFailed occurring in the delivery function."""
 
     layer = ConfigLayer
 

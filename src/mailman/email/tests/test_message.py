@@ -24,7 +24,7 @@ from email import message_from_binary_file
 from email.header import Header
 from email.parser import FeedParser
 from email.utils import _has_surrogates
-from importlib.resources import path
+from importlib.resources import files
 from mailman.app.lifecycle import create_list
 from mailman.config import config
 from mailman.email.message import Message, OwnerNotification, UserNotification
@@ -128,7 +128,7 @@ Test content
             filename = attachment.get_filename()
         except TypeError as error:
             self.fail(error)
-        self.assertEqual(filename, u'd\xe9jeuner.txt')
+        self.assertEqual(filename, 'd\xe9jeuner.txt')
 
     def test_senders_header_instances(self):
         msg = Message()
@@ -198,11 +198,11 @@ Test content
 
     def test_as_string_python_bug_27321(self):
         # Bug 27321 is fixed in Python 3.8.7rc1, 3.9.1rc1 and later.
-        with path('mailman.email.tests.data', 'bad_email.eml') as email_path:
-            with open(str(email_path), 'rb') as fp:
-                msg = message_from_binary_file(fp, Message)
-                fp.seek(0)
-                text = fp.read().decode('ascii', 'replace')
+        with (files('mailman.email.tests.data') / 'bad_email.eml').open(
+                'rb') as fp:
+            msg = message_from_binary_file(fp, Message)
+            fp.seek(0)
+            text = fp.read().decode('ascii', 'replace')
         if (sys.version_info.minor == 8 and sys.hexversion >= 0x030807C1 or
                 sys.hexversion >= 0x030901C1):
             self.assertEqual(msg.as_string(), """\
@@ -220,17 +220,17 @@ IM3F1M/EwSDQz8nTy8Egy8zJxc7Uz9c/Cg==
             self.assertEqual(msg.as_string(), text)
 
     def test_as_string_python_bug_32330(self):
-        with path('mailman.email.tests.data', 'bad_email_2.eml') as email_path:
-            with open(str(email_path), 'rb') as fp:
-                msg = message_from_binary_file(fp, Message)
-                fp.seek(0)
-                text = fp.read().decode('ascii', 'replace')
+        with (files('mailman.email.tests.data') / 'bad_email_2.eml').open(
+                'rb') as fp:
+            msg = message_from_binary_file(fp, Message)
+            fp.seek(0)
+            text = fp.read().decode('ascii', 'replace')
         self.assertEqual(msg.as_string(), text)
 
     def test_as_string_unicode_surrogates(self):
-        with path('mailman.email.tests.data', 'bad_email_4.eml') as email_path:
-            with open(str(email_path), 'rb') as fp:
-                msg = message_from_binary_file(fp, Message)
+        with (files('mailman.email.tests.data') / 'bad_email_4.eml').open(
+                'rb') as fp:
+            msg = message_from_binary_file(fp, Message)
         self.assertFalse(_has_surrogates(msg.as_string()))
 
     def test_as_bytes_python_bug_41307(self):
@@ -247,9 +247,9 @@ Message with \u201cNon-ascii\u201d.
         self.assertEqual(msg.as_bytes(), msgstr.encode('utf-8'))
 
     def test_bogus_content_charset(self):
-        with path('mailman.email.tests.data', 'bad_email_3.eml') as email_path:
-            with open(str(email_path), 'rb') as fp:
-                msg = message_from_binary_file(fp, Message)
-                fp.seek(0)
-                text = fp.read().decode('ascii', 'replace')
+        with (files('mailman.email.tests.data') / 'bad_email_3.eml').open(
+                'rb') as fp:
+            msg = message_from_binary_file(fp, Message)
+            fp.seek(0)
+            text = fp.read().decode('ascii', 'replace')
         self.assertEqual(msg.as_string(), text)

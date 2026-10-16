@@ -19,7 +19,7 @@
 
 import unittest
 
-from importlib.resources import open_text
+from importlib.resources import files
 from mailman.testing.helpers import specialized_message_from_string as mfs
 from mailman.utilities import scrubber
 
@@ -48,7 +48,8 @@ This is the text
         self.assertEqual(scrubber.scrub(msg), 'This is the text\n')
 
     def test_complex_message(self):
-        with open_text('mailman.utilities.tests.data', 'scrub_test.eml') as fp:
+        with (files('mailman.utilities.tests.data') / 'scrub_test.eml').open(
+                encoding='utf-8') as fp:
             msg = mfs(fp.read())
         self.assertEqual(scrubber.scrub(msg), """\
 This is the first text/plain part

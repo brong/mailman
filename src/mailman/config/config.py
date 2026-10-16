@@ -24,7 +24,7 @@ import mailman.templates
 from configparser import ConfigParser
 from contextlib import ExitStack
 from flufl.lock import Lock
-from importlib.resources import path, read_text
+from importlib.resources import as_file, files
 from lazr.config import as_boolean, ConfigSchema
 from mailman import version
 from mailman.interfaces.configuration import (
@@ -130,12 +130,12 @@ class Configuration:
 
     def load(self, filename=None):
         """Load the configuration from the schema and config files."""
-        with path('mailman.config', 'schema.cfg') as schema_file:
+        with as_file(files('mailman.config') / 'schema.cfg') as schema_file:
             schema = ConfigSchema(str(schema_file))
         # If a configuration file was given, load it now too.  First, load
         # the absolute minimum default configuration, then if a
         # configuration filename was given by the user, push it.
-        with path('mailman.config', 'mailman.cfg') as config_path:
+        with as_file(files('mailman.config') / 'mailman.cfg') as config_path:
             self._config = schema.load(str(config_path))
         if filename is None:
             self._post_process()
@@ -197,11 +197,11 @@ class Configuration:
             )
         # Directories.
         for name in DIR_NAMES:
-            key = '{}_dir'.format(name)
+            key = f'{name}_dir'
             substitutions[key] = getattr(category, key)
         # Files.
         for name in ('lock', 'pid'):
-            key = '{}_file'.format(name)
+            key = f'{name}_file'
             substitutions[key] = getattr(category, key)
         # Add the path to the .cfg file, if one was given on the command line.
         if self.filename is not None:
@@ -224,7 +224,7 @@ class Configuration:
                 break
             if len(expandables) == last_dollar_count:
                 print('Path expansion infloop detected:\n',
-                      SPACERS.join('\t{}: {}'.format(key, value)
+                      SPACERS.join(f'\t{key}: {value}'
                                    for key, value in sorted(expandables)),
                       file=sys.stderr)
                 sys.exit(1)
@@ -384,9 +384,9 @@ def load_external(path):
     """
     # Is the context coming from a file system or Python path?
     if path.startswith('python:'):
-        resource_path = path[7:]
+        resource_path = path.removeprefix('python:')
         package, dot, resource = resource_path.rpartition('.')
-        return read_text(package, resource + '.cfg')
+        return (files(package) / f'{resource}.cfg').read_text(encoding='utf-8')
     with open(path, 'r', encoding='utf-8') as fp:
         return fp.read()
 

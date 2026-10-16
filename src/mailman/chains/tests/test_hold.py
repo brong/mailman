@@ -21,7 +21,7 @@ import unittest
 
 from email import message_from_bytes as mfb
 from email.iterators import typed_subpart_iterator
-from importlib.resources import read_binary
+from importlib.resources import files
 from mailman.app.lifecycle import create_list
 from mailman.chains.builtin import BuiltInChain
 from mailman.chains.hold import autorespond_to_sender, HoldChain
@@ -221,7 +221,8 @@ A message body.
         bart = self._user_manager.create_user('bart@example.com', 'Bart User')
         address = set_preferred(bart)
         self._mlist.subscribe(address, MemberRole.moderator)
-        msg = mfb(read_binary('mailman.chains.tests', 'issue144.eml'))
+        msg = mfb(
+            (files('mailman.chains.tests') / 'issue144.eml').read_bytes())
         msg.sender = 'anne@example.com'
         process_chain(self._mlist, msg, {}, start_chain='hold')
         # The postauth.txt message is now in the virgin queue awaiting
@@ -247,7 +248,8 @@ A message body.
         # Issue # 673 use UTF-8 rather than replace in user notice.
         self._mlist.admin_immed_notify = False
         self._mlist.respond_to_post_requests = True
-        msg = mfb(read_binary('mailman.chains.tests', 'issue144.eml'))
+        msg = mfb(
+            (files('mailman.chains.tests') / 'issue144.eml').read_bytes())
         msg.sender = 'anne@example.com'
         process_chain(self._mlist, msg, {}, start_chain='hold')
         # The user notice message is now in the virgin queue awaiting
@@ -336,7 +338,8 @@ A message body.
         bart = self._user_manager.create_user('bart@example.com', 'Bart User')
         address = set_preferred(bart)
         self._mlist.subscribe(address, MemberRole.moderator)
-        msg = mfb(read_binary('mailman.chains.tests', 'issue144.eml'))
+        msg = mfb(
+            (files('mailman.chains.tests') / 'issue144.eml').read_bytes())
         msg.sender = 'anne@example.com'
         process_chain(self._mlist, msg, {}, start_chain='hold')
         items = get_queue_messages('virgin', expected_count=1)

@@ -28,7 +28,7 @@ from click.testing import CliRunner
 from contextlib import ExitStack, suppress
 from datetime import timedelta
 from flufl.lock import Lock, TimeOutError
-from importlib.resources import path
+from importlib.resources import as_file, files
 from io import StringIO
 from mailman.bin import master
 from mailman.config import config
@@ -225,7 +225,7 @@ Exiting.
         fake_lock = FakeLock()
         with ExitStack() as resources:
             config_file = str(resources.enter_context(
-                path('mailman.testing', 'testing.cfg')))
+                as_file(files('mailman.testing') / 'testing.cfg')))
             init_mock = resources.enter_context(patch(
                 'mailman.bin.master.initialize'))
             lock_mock = resources.enter_context(patch(

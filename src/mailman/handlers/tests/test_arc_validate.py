@@ -333,7 +333,7 @@ This is a test!
 
 
 class TestTimeout(unittest.TestCase):
-    """Test socket.error occurring in the delivery function."""
+    """Test DNS lookup timeouts during ARC validation."""
 
     layer = ConfigLayer
 

@@ -19,7 +19,7 @@
 
 from flufl.i18n import registry
 from gettext import GNUTranslations, NullTranslations
-from importlib.resources import open_binary
+from importlib.resources import files
 from public import public
 
 
@@ -33,7 +33,7 @@ class TestingStrategy:
         if language_code in ('en', None):
             return NullTranslations()
         mo_file = 'mailman-%s.mo' % language_code
-        with open_binary('mailman.testing', mo_file) as fp:
+        with (files('mailman.testing') / mo_file).open('rb') as fp:
             return GNUTranslations(fp)
 
 

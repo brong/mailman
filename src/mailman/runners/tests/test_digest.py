@@ -24,7 +24,7 @@ import unittest
 from email import message_from_binary_file, message_from_bytes
 from email.iterators import _structure as structure
 from email.mime.text import MIMEText
-from importlib.resources import open_binary
+from importlib.resources import files
 from io import StringIO
 from mailman.app.lifecycle import create_list
 from mailman.config import config
@@ -124,8 +124,8 @@ class TestDigest(unittest.TestCase):
         anne.preferences.delivery_mode = DeliveryMode.mime_digests
         bart = subscribe(self._mlist, 'Bart')
         bart.preferences.delivery_mode = DeliveryMode.plaintext_digests
-        with open_binary('mailman.runners.tests.data',
-                         'ascii_in_utf7.eml') as fp:
+        with (files('mailman.runners.tests.data') / 'ascii_in_utf7.eml').open(
+                'rb') as fp:
             msg = message_from_binary_file(fp, Message)
         # Use any error logs as the error message if the test fails.
         error_log = LogFileMark('mailman.error')

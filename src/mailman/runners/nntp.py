@@ -21,7 +21,6 @@ import os
 import re
 import sys
 import email
-import socket
 import logging
 import nntplib
 import subprocess
@@ -113,7 +112,7 @@ class NNTPRunner(Runner):
                 msg['Message-ID'] = email.utils.make_msgid(mlist.list_name,
                                                            mlist.mail_host)
                 return True
-        except socket.error:
+        except OSError:
             log.exception('{} NNTP socket error for {}'.format(
                 msg.get('message-id', 'n/a').strip(), mlist.fqdn_listname))
         except Exception:

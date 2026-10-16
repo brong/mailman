@@ -32,7 +32,7 @@ import logging
 import datetime
 import tempfile
 
-from importlib.resources import files, read_text
+from importlib.resources import files
 from lazr.config import as_boolean
 from mailman.config import config
 from mailman.core import initialize
@@ -128,7 +128,9 @@ class ConfigLayer(MockAndMonkeyLayer):
         configuration: {}
         """.format(cls.var_dir, postfix_cfg))
         # Read the testing config and push it.
-        test_config += read_text('mailman.testing', 'testing.cfg')
+        test_config += (
+            files('mailman.testing') / 'testing.cfg').read_text(
+                encoding='utf-8')
         config.create_paths = True
         config.push('test config', test_config)
         # Initialize everything else.
