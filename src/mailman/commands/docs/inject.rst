@@ -1,3 +1,5 @@
+.. _command-line-message-injection:
+
 ==============================
 Command line message injection
 ==============================

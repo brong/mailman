@@ -22,9 +22,7 @@ Transfer Protocol`_ (SMTP_).
 Cooperation between Mailman and the MTA requires some configuration of
 both.  MTA configuration differs for each of the available MTAs, and
 there is a section for each one.  Instructions for Postfix and Exim (v4)
-are given below.  We would really appreciate a contribution of a
-configuration for Sendmail, and welcome information about other popular
-open source mail servers.
+are given below.
 
 Configuring Mailman to communicate with the MTA is straightforward, and
 basically the same for all MTAs.  Here are the default settings; if you need
@@ -240,11 +238,11 @@ Postfix + Dovecot
 
 In case of using Postfix with Dovecot LMTP, ``main.cf`` should look like
 
-    virtual_mailbox_maps = 
+    virtual_mailbox_maps =
         hash:/opt/mailman/data/postfix_lmtp ${dovecot}
-    local_recipient_maps = 
+    local_recipient_maps =
         hash:/opt/mailman/data/postfix_lmtp ${dovecot}
-    transport_maps = 
+    transport_maps =
         hash:/opt/mailman/data/postfix_lmtp
 
 
@@ -526,10 +524,130 @@ Long story short, as user mailman:
 Sendmail
 ========
 
-The core Mailman developers generally do not use Sendmail, so experience is
-limited.  Any and all contributions are welcome!  There is one such
-contribution on GitHub_ and another in comments at this issue_.
+Sendmail_ is a MTA originally written by `Eric Allman`_.
 
+Mailman settings
+----------------
+
+There is not an explicit configuration for Sendmail but the one for exim4
+is close enough. In your ``mailman.cfg`` file, add the following section::
+
+    [mta]
+    configuration: python:mailman.config.exim4
+    incoming: mailman.mta.exim4.LMTP
+    outgoing: mailman.mta.deliver.deliver
+    smtp_host: 127.0.0.1
+    smtp_port: 25
+
+Sendmail configuration
+----------------------
+
+The LMTP protocol is normally used to inject mail messages into
+Mailman. While Sendmail can deal with LMTP, it can be tricky to get it
+to work alongside normal local mail delivery.
+
+Here are two different ways to configure Sendmail. The first uses the
+:ref:`mailertable file<sendmail-mailertable-configuration>`. The second
+uses an
+:ref:`aliases file pipe<sendmail-aliases-file-pipe-configuration>`
+to the mailman script (and so bypasses LMTP):
+
+
+.. _sendmail-mailertable-configuration:
+
+
+Sendmail mailertable configuration
+----------------------------------
+
+Enable the ``mailertable`` feature by adding this line to
+``sendmail.mc``::
+
+    FEATURE(`mailertable')dnl
+
+Create a LMTP mailer that is used to direct mail received by Sendmail
+to Mailman's LMTP runner; add this to the end of ``sendmail.mc``::
+
+    MAILER_DEFINITIONS
+    Mmm3lmtp,       P=[IPC], F=PSXmnz9, S=EnvFromSMTP/HdrFromSMTP,
+		    E=\r\n, L=1024, A=TCP $h 8024
+
+Important: Replace 2 or more blanks with tabs.
+
+Add these lines to the ``mta`` section::
+
+    [mta]
+    lmtp_host: 127.0.0.1
+    lmtp_port: 8024
+
+Add list aliases to the ``virtusertable`` file::
+
+    test@example.com                test@example.com.private
+    test-request@example.com        test-request@example.com.private
+    test-owner@example.com          test-owner@example.com.private
+    test-join@example.com           test-join@example.com.private
+    test-leave@example.com          test-leave@example.com.private
+    test-bounces@example.com        test-bounces@example.com.private
+
+Add a line to ``/etc/hosts`` for the list pseudo domain::
+
+    127.0.0.25    example.com.private
+
+Otherwise Sendmail will fail to resolve the hostname and the message
+will get stuck in the Sendmail mail queue.
+
+Finally, use the Postorius web GUI to add the pseudo domain as an Alias
+Domain::
+
+    Domains → Edit → Alias Domain
+
+.. _sendmail-aliases-file-pipe-configuration:
+
+Sendmail aliases file pipe configuration
+----------------------------------------
+
+Here is a Sendmail configuration that leverages
+:ref:`Command line message injection<command-line-message-injection>`.
+With this method, LMTP is not used at all.
+
+Add a section to disable the LMTP runner::
+
+    [runner.lmtp]
+    start: no
+
+Add list aliases to the ``virtusertable`` file::
+
+    test@example.com                example-test
+    test-request@example.com        example-test
+    test-owner@example.com          example-test
+    test-join@example.com           example-test
+    test-leave@example.com          example-test
+    test-bounces@example.com        example-test
+
+
+Add command pipe alias to the ``aliases`` file::
+
+    example-test:                   "|mailman inject test.example.com"
+
+To be able to pipe to the mailman script Sendmail requires you to
+add a symlink in the smrsh (restricted shell for sendmail) directory,
+usually named ``sm.bin``. Under FreeBSD it is ``/usr/libexec/sm.bin``
+or ``/usr/local/libexec/sm.bin`` depending on if you are using Sendmail
+from the base or ports system::
+
+    ln -s /usr/local/bin/mailman /usr/local/libexec/sm.bin
+
+Consult the smrsh(8) man page for more details.
+
+Finally, Sendmail needs to be able to write in Mailman directories and
+write to Mailman files. To do this add group mailnull to user mailman::
+
+    mailman:*:91:mailnull
+
+Getting the permissions right can be tricky. Here the log files are
+your friends.
+
+.. _sendmail: https://www.sendmail.org/
+.. _`Eric Allman`: https://en.wikipedia.org/wiki/Eric_Allman
 
 .. _GitHub: https://gist.github.com/Maeglin73/72eb5b1e4ee66a383c2aa454726be9a5
 .. _issue: https://gitlab.com/mailman/mailman/-/issues/307#note_632495542
