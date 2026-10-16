@@ -25,10 +25,10 @@ GNU Mailman 3 consists of a `suite of programs`_ that work together:
 Only the Core is required.  You can write or integrate your own web user
 interface or archiver that speaks to the Core over its REST API.  The REST API
 is a pure HTTP-based API so you don't *have* to use Python, or even our
-official bindings.  And you can deploy whatever components you want using
-whatever mechanisms you want.
+official bindings.  It can be deployed using any components and mechanisms of your
+preference.
 
-But we really like Postorius and HyperKitty and hope you will too!
+But, we really like Postorius and HyperKitty and hope you will too!
 
 
 Copyright
@@ -54,26 +54,26 @@ GNU Mailman.  If not, see <https://www.gnu.org/licenses/>.
 Spelling
 ========
 
-The name of this software is spelled `Mailman` with a leading capital `M`
-but with a lower case second `m`.  Any other spelling is incorrect.  Its full
-name is `GNU Mailman` but is often referred colloquially as `Mailman`.
+The name of this software is spelled `Mailman`_ with a leading capital `M`_
+but with a lower case second `m`_.  Any other spelling is incorrect.  Its full
+name is `GNU Mailman`_ but is often referred colloquially as `Mailman`_.
 
 
 History
 =======
 
 Mailman was originally developed by John Viega in the mid-1990s.  Subsequent
-development (through version 1.0b3) was by Ken Manheimer.  Further work
+development (through version 1.0b3) was done by Ken Manheimer.  Further work
 towards the 1.0 final release was a group effort, with the core contributors
 being: Barry Warsaw, Ken Manheimer, Scott Cotton, Harald Meland, and John
-Viega.  Since version 1.0 the project has been led by Barry Warsaw with
-contributions from many; see the `ACKNOWLEDGMENTS`_ file for details.  Jeremy
+Viega.  Since version 1.0, the project has been led by Barry Warsaw with
+contributions from many; see the `ACKNOWLEDGEMENTS`_ file for details.  Jeremy
 Hylton helped considerably with the Pipermail code in Mailman 2.0.  Mailman
 2.1 is primarily maintained by Mark Sapiro, with previous help by Tokio
 Kikuchi (RIP).  Mark also contributes to Mailman 3.  Barry Warsaw recently
 (2019) retired as the lead developer on Mailman 3.  Abhilash Raj is now the
 lead developer and also maintains the CI infrastructure.  Aurélien Bompard
-and Florian Fuchs lead development of Postorius and HyperKitty.
+and Florian Fuchs lead the development of Postorius and HyperKitty.
 
 
 Project details
