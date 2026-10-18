@@ -21,6 +21,7 @@ import unittest
 import threading
 
 from contextlib import ExitStack
+from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from mailman.app.lifecycle import create_list
 from mailman.config import config
@@ -34,16 +35,6 @@ from tempfile import TemporaryDirectory
 from unittest import mock
 from urllib.error import URLError
 from zope.component import getUtility
-
-
-# New in Python 3.5.
-try:
-    from http import HTTPStatus
-except ImportError:
-    class HTTPStatus:
-        FORBIDDEN = 403
-        NOT_FOUND = 404
-        OK = 200
 
 
 # We need a web server to vend non-mailman: urls.
