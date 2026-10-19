@@ -33,6 +33,9 @@ from email.mime.message import MIMEMessage
 from email.mime.text import MIMEText
 from email.utils import formataddr, getaddresses, make_msgid
 from mailman.core.i18n import _
+from mailman.handlers.decorate import decorate
+from mailman.handlers.message_instance import (
+    _mi_enabled, _SEND_MESSAGE_DROPS, compute_header_hash)
 from mailman.interfaces.handler import IHandler
 from mailman.interfaces.mailinglist import DMARCMitigateAction, ReplyToMunging
 from mailman.utilities.string import wrap
@@ -195,7 +198,50 @@ def wrap_message(mlist, msg, msgdata):
     return
 
 
+def _dkim2_rewrites_from(mlist, msg, msgdata):
+    """Whether a DKIM2 list must make From its own address.
+
+    A list that changes a message, or originates it in DKIM2 terms (it
+    arrived with no DKIM2-Signature, so the list's hop is i=1), signs with
+    its own domain, and From must be Authentic for that domain (spec-07
+    §11, §12.4).  A signed message the list passes on unchanged keeps its
+    From: the author's signature still covers it.
+
+    "Changed" is what Message-Instance egress will record: the headers
+    differ from the snapshot ingress took (subject prefix, List-* fields,
+    cook-headers), a handler rewrote the body, smtplib will drop a Bcc, or
+    delivery will add a header or footer.
+    """
+    if not _mi_enabled(mlist) or mlist.anonymous_list:
+        return False
+    if msg.get_all('dkim2-signature') is None:
+        return True
+    snapshot = msgdata.get('mi_snapshot')
+    if snapshot is None or msgdata.get('body-modified'):
+        return True
+    if any(msg.get_all(name) for name in _SEND_MESSAGE_DROPS):
+        return True
+    if compute_header_hash(msg) != snapshot['header_hash']:
+        return True
+    if msgdata.get('isdigest') or msgdata.get('nodecorate'):
+        return False
+    return any(decorate(name, mlist) for name in (
+        'list:member:regular:header', 'list:member:regular:footer'))
+
+
 def process(mlist, msg, msgdata):
+    # On a DKIM2 list, From must be Authentic for the list's domain when
+    # the list changes or originates the message.  The wrap mitigation sets
+    # From itself; anything else gets the munged From.
+    if _dkim2_rewrites_from(mlist, msg, msgdata):
+        if (mlist.dmarc_mitigate_action is DMARCMitigateAction.wrap_message
+                and (msgdata.get('dmarc')
+                     or mlist.dmarc_mitigate_unconditionally)):
+            wrap_message(mlist, msg, msgdata)
+        else:
+            msgdata.setdefault('original_sender', msg.sender)
+            munge_from(mlist, msg, msgdata)
+        return
     # If we're mitigating on policy and we have no hit, return.
     if not msgdata.get('dmarc') and not mlist.dmarc_mitigate_unconditionally:
         return

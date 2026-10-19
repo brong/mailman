@@ -26,6 +26,7 @@ view (_serialize_msg).
 
 import base64
 import logging
+import re
 
 from mailman.handlers.message_instance import (
     MalformedInstance, MalformedRecipe, _b64, _hash_body_bytes,
@@ -34,6 +35,14 @@ from mailman.handlers.message_instance import (
 
 
 log = logging.getLogger('mailman.dkim2')
+
+# A "u" string (spec-07 §5 schema): base64 alphabet and padding, a whole
+# number of quanta, and zero pad bits ("QR==" is not canonical).
+_U_PATTERNS = (
+    re.compile(r'[A-Za-z0-9+/]*={0,2}'),
+    re.compile(r'(?:.{4})*', re.DOTALL),
+    re.compile(r'[^=]*|.*[AQgw]==|.*[AEIMQUYcgkosw048]=', re.DOTALL),
+)
 
 
 def _get_raw_body(msg):
@@ -47,7 +56,7 @@ def _get_raw_body(msg):
 
 
 def compute_body_hash(msg):
-    """Compute SHA-256 body hash per DKIM2 spec-06 §6.1.
+    """Compute SHA-256 body hash per DKIM2 spec-07 §6.1.
 
     Uses simple body canonicalization: strip trailing empty lines,
     ensure body ends with exactly one CRLF.
@@ -85,29 +94,26 @@ def _raw_values(msg, name):
 
 
 # ---------------------------------------------------------------------------
-# Recipe validation and application (spec-06 §5)
+# Recipe validation and application (spec-07 §5)
 # ---------------------------------------------------------------------------
 
 def _compile_steps(steps, where):
     """Check one step list and return it as ('c', start, end) / ('d', [str])
-    tuples, "b" items decoded to the surrogateescape str form that
-    message_instance uses for header values and body lines.  The upper
-    bound of a "c" range is checked by _apply_steps, which knows the item
-    count."""
+    tuples, every literal as its octets in the surrogateescape str form
+    the email parser uses for header values.  Step keys
+    match without regard to case (the parsed JSON has no two keys equal
+    ignoring case).  The upper bound of a "c" range is checked by
+    _apply_steps, which knows the item count."""
     if not isinstance(steps, list):
         raise MalformedRecipe('{}: steps are not an array'.format(where))
     compiled = []
     last_end = 0
     for step in steps:
-        # Pre-spec-06 forms: a bare [start, end] array, a bare string.
-        if isinstance(step, list):
-            step = {'c': step}
-        elif isinstance(step, str):
-            step = {'d': [step]}
         if not isinstance(step, dict) or len(step) != 1:
             raise MalformedRecipe(
                 '{}: step is not an object with one key'.format(where))
         (kind, arg), = step.items()
+        kind = kind.lower()
         if not isinstance(arg, list):
             raise MalformedRecipe(
                 '{}: "{}" is not an array'.format(where, kind))
@@ -127,7 +133,7 @@ def _compile_steps(steps, where):
             last_end = end
             compiled.append(('c', start, end))
             continue
-        if kind not in ('d', 'b'):
+        if kind not in ('d', 'u'):
             raise MalformedRecipe(
                 '{}: unknown step type "{}"'.format(where, kind))
         if not arg:
@@ -139,13 +145,21 @@ def _compile_steps(steps, where):
             if not isinstance(item, str):
                 raise MalformedRecipe(
                     '{}: "{}" item is not a string'.format(where, kind))
-            if kind == 'b':
-                try:
-                    octets = base64.b64decode(item, validate=True)
-                except ValueError:
+            if kind == 'u':
+                if not all(p.fullmatch(item) for p in _U_PATTERNS):
                     raise MalformedRecipe(
-                        '{}: "b" item is not base64'.format(where))
-                item = octets.decode('utf-8', errors='surrogateescape')
+                        '{}: "u" item is not canonical base64'.format(where))
+                octets = base64.b64decode(item, validate=True)
+            elif any(0xd800 <= ord(ch) <= 0xdfff for ch in item):
+                # A JSON \ud800-style escape: not UTF-8 text.
+                raise MalformedRecipe(
+                    '{}: "d" item is not valid UTF-8'.format(where))
+            else:
+                octets = item.encode('utf-8')
+            # The octets as the parser stores 8-bit header octets, which
+            # the generator writes back unchanged (a str with real
+            # non-ASCII characters would be RFC 2047 encoded instead).
+            item = octets.decode('ascii', errors='surrogateescape')
             if '\r' in item or '\n' in item:
                 raise MalformedRecipe(
                     '{}: "{}" item contains CR or LF'.format(where, kind))
@@ -157,20 +171,26 @@ def _compile_steps(steps, where):
 def _compile_recipe(recipe):
     """Check a decoded r= Recipe object and return (header_steps, body_steps).
 
-    header_steps maps each header name under "h" to its compiled steps;
-    body_steps is the compiled "b" list, or None when the body was not
-    changed (no "b") or cannot be recreated ("b": null, spec-06 §4.2).
+    header_steps maps each lower-cased header name under "h" to its
+    compiled steps; body_steps is the compiled "b" list, or None when the
+    body was not changed (no "b") or cannot be recreated ("b": null,
+    spec-07 §5.2).  Keys match without regard to case.
     """
     if recipe is None:
         return {}, None
     if not isinstance(recipe, dict):
         raise MalformedRecipe('Recipe is not an object')
+    recipe = {key.lower(): value for key, value in recipe.items()}
+    if 'h' not in recipe and 'b' not in recipe:
+        raise MalformedRecipe('Recipe has neither "h" nor "b"')
     header_steps = {}
     if 'h' in recipe:
         if not isinstance(recipe['h'], dict):
             raise MalformedRecipe('"h" is not an object')
+        if not recipe['h']:
+            raise MalformedRecipe('"h" has no properties')
         for hname, steps in recipe['h'].items():
-            header_steps[hname] = _compile_steps(steps, 'h ' + hname)
+            header_steps[hname.lower()] = _compile_steps(steps, 'h ' + hname)
     body_steps = None
     if recipe.get('b') is not None:
         body_steps = _compile_steps(recipe['b'], 'b')
@@ -251,7 +271,7 @@ def verify_message_instance(msg):
     if stored_b != computed_b:
         return 0, 'body hash mismatch ({} != {})'.format(
             stored_b, computed_b)
-    # An instance whose Recipe cannot be applied to this message (spec-06
+    # An instance whose Recipe cannot be applied to this message (spec-07
     # §5) does not verify either: nothing downstream could undo it.
     try:
         _plan_undo(msg, recipe)
@@ -266,7 +286,7 @@ def undo_message_instance(msg):
     Removes the highest MI header from the message, applies body and header
     recipes to reconstruct the previous version, and returns the version
     number that was undone.  Returns 0 if there are no MI headers, or if
-    the highest one carries a Recipe that cannot be applied (spec-06 §5,
+    the highest one carries a Recipe that cannot be applied (spec-07 §5,
     see MalformedRecipe) -- the message is then left untouched.
 
     After a successful undo, verify_message_instance(msg) should return

@@ -1,7 +1,7 @@
 # DKIM2 Message-Instance Support
 
 This documents the changes that add DKIM2 Message-Instance header support
-to GNU Mailman, per draft-ietf-dkim-dkim2-spec-06.
+to GNU Mailman, per draft-ietf-dkim-dkim2-spec-07.
 
 ## Overview
 
@@ -29,21 +29,28 @@ Message-Instance: m=2; h=sha256:<header-hash>:<body-hash>; r=<recipe>;
 - `r=` is present when `m>1` and holds the Recipe: base64-encoded JSON
   of the form `{"h": {<header-name>: [steps]}, "b": [steps]}`.  Either
   key is omitted when nothing in that part changed.
-- Each step is either `{"c": [start, end]}`, copying a range from the
-  current instance, or `{"d": [...]}`, supplying literal values from
-  the previous one.  Body ranges are 1-based inclusive line numbers.
-  Header ranges are 1-based bottom-up indexes among the current values
-  of that header name.
+- Each step is `{"c": [start, end]}`, copying a range from the
+  current instance, `{"d": [...]}`, supplying literal values from the
+  previous one, or `{"u": [...]}`, supplying literal values as the
+  base64 of their octets.  A literal goes in `"d"` when it is valid
+  UTF-8 (ASCII included) and in `"u"` otherwise (a Latin-1 or EUC-KR
+  line, say), as spec-07 §5 requires.  Body ranges are 1-based
+  inclusive line numbers.  Header ranges are 1-based bottom-up indexes
+  among the current values of that header name.
+- Mailman writes every JSON key in lower case.  The test-side parser
+  (`mi_support.py`) matches keys without regard to case and treats two
+  keys of one object that are equal ignoring case as invalid JSON, as
+  does the hash check at ingress.
 
 Header values are folded for RFC 5322: lines target 72 characters and
 never exceed 77, breaking at `; ` tag boundaries where possible and
 inside the base64 otherwise.  The parser strips every run of folding
-whitespace before use (spec-06 §2.12 and §2.14), so instances folded by
+whitespace before use (spec-07 §2.12 and §2.14), so instances folded by
 other implementations parse correctly.
 
 ## Hashing
 
-Following spec-06 §4, these headers are excluded from the header hash:
+Following spec-07 §4, these headers are excluded from the header hash:
 Apparently-To, ARC-Authentication-Results, ARC-Message-Signature,
 ARC-Seal, Authentication-Results, Auto-Submitted, Delivered-To,
 DKIM-Signature, DKIM2-Signature, DL-Expansion-History, Message-Instance,
@@ -120,6 +127,12 @@ after decoration, personalisation and ARC signing):
 - A message that already carries an instance newer than the snapshot
   is left alone: a bulk delivery that failed temporarily is retried
   with the copy egress already stamped.
+- Every copy of a message that came through ingress gets
+  `X-DKIM2-Exploded: yes` (once, however often egress runs on it).  The
+  list sends copies to more than one address, so its DKIM2-Signature
+  carries the `exploded` flag (spec-07 §12.5); Mailman does not sign, so
+  this field tells the signing milter, which sets the flag and deletes
+  the field.  It is an `X-` field, so it is not hashed.
 - When Mailman rewrote the body itself (content filtering removed or
   replaced parts, a filter report was attached, or the DMARC mitigation
   wrapped the message), the body Recipe is `"b": null`: the previous
@@ -131,6 +144,28 @@ after decoration, personalisation and ARC signing):
 anything through `VirginPipeline`): these never pass the ingress
 handler, so the egress handler adds an originator `m=1` when the
 message has no instance at all.
+
+### From on a DKIM2 list
+
+From must be Authentic for the domain that signs (spec-07 §11, §12.4).
+A list that changes a message, or that originates it in DKIM2 terms (it
+arrived with no `DKIM2-Signature`, so the list's hop is i=1), signs with
+its own domain.  So on a list with Message-Instance enabled the `dmarc`
+handler rewrites From to the list's posting address, the way the
+`munge_from` DMARC mitigation does (the original goes in Reply-To or
+Cc), whenever:
+
+- the message has no `DKIM2-Signature`, or
+- the headers differ from the ingress snapshot (subject prefix, List-*
+  fields), a handler rewrote the body, smtplib will drop a Bcc, or
+  delivery will add a header or footer.
+
+This happens whatever the list's DMARC settings are; a list whose DMARC
+mitigation wraps the message still wraps it, which sets From the same
+way.  A signed message the list passes on unchanged keeps its From.
+Anonymous lists already replace From with the list's address.  The
+egress header Recipe records the original From, so a verifier can undo
+the rewrite.
 
 ### X-DKIM2-Info
 
@@ -182,7 +217,7 @@ adds the column are treated as enabled.
   the null body Recipe, and full ingress/decorate/egress/undo round
   trips for 7bit, 8bit, quoted-printable, base64 and multipart bodies.
 - `src/mailman/handlers/tests/mi_support.py`: verify and undo of a
-  parsed message (Recipe validation and application, spec-06 §5), as a
+  parsed message (Recipe validation and application, spec-07 §5), as a
   downstream verifier does them, for the tests.
 - `src/mailman/handlers/tests/test_mi_roundtrip.py`: round trips through
   the real list transformations.
@@ -196,6 +231,8 @@ adds the column are treated as enabled.
   queue their copy without `msg.original_bytes`.
 - `src/mailman/handlers/mime_delete.py`, `src/mailman/handlers/dmarc.py`:
   set `msgdata['body-modified']` when they rewrite the body.
+- `src/mailman/handlers/dmarc.py`: the From rewrite on a DKIM2 list
+  (above).
 - `src/mailman/config/schema.cfg`: the `[mta] message_instance` option.
 - `src/mailman/pipelines/builtin.py`: register the ingress handler.
 - `src/mailman/mta/deliver.py`, `src/mailman/mta/bulk.py`: call egress.

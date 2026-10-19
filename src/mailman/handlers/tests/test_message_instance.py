@@ -28,6 +28,7 @@ import re
 import unittest
 
 from email.generator import BytesGenerator
+from email.utils import parseaddr
 from io import BytesIO
 from mailman.app.lifecycle import create_list
 from mailman.config import config
@@ -111,12 +112,12 @@ def _recipe_at(msg, version):
 
 
 def _copy_steps(steps):
-    """The {"c": [start, end]} copy steps of a recipe (spec-06 §5)."""
+    """The {"c": [start, end]} copy steps of a recipe (spec-07 §5)."""
     return [s for s in steps if isinstance(s, dict) and 'c' in s]
 
 
 def _data_steps(steps):
-    """The {"d": [...]} literal-data steps of a recipe (spec-06 §5)."""
+    """The {"d": [...]} literal-data steps of a recipe (spec-07 §5)."""
     return [s for s in steps if isinstance(s, dict) and 'd' in s]
 
 
@@ -241,14 +242,14 @@ class TestHeaderExclusion(unittest.TestCase):
             self.assertFalse(_should_exclude_header(name), name)
 
     def test_spec05_excluded_names(self):
-        # spec-06 §4: names added by the HDRMAINT survey
+        # spec-07 §4: names added by the HDRMAINT survey
         for name in ('Apparently-To', 'Auto-Submitted', 'DL-Expansion-History',
                      'Original-Recipient', 'SIO-Label-History', 'VBR-Info',
                      'X400-Received', 'X400-Trace'):
             self.assertTrue(_should_exclude_header(name), name)
 
     def test_spec05_received_prefix(self):
-        # spec-06 §4: any Received-* field is a trace field
+        # spec-07 §4: any Received-* field is a trace field
         self.assertTrue(_should_exclude_header('Received-SPF'))
         self.assertTrue(_should_exclude_header('Received-Anything'))
 
@@ -451,37 +452,45 @@ class TestBodyRecipe(unittest.TestCase):
             ['x', 'a', 'y', 'b', 'c', 'z'], ['a', 'b', 'c'])
         self.assertEqual(recipe, [{'c': [2, 2]}, {'c': [4, 5]}])
 
-    def test_8bit_literal_is_a_b_step(self):
-        # A restored line with any byte >= 0x80 -- Latin-1 here, which is
-        # not UTF-8 and so not representable as JSON text -- is emitted as
-        # a {"b": [...]} step holding the base64 of its raw octets, never
-        # as a "d" string of lone surrogates.
+    def test_8bit_literal_is_a_u_step(self):
+        # A restored line that is not valid UTF-8 -- Latin-1 here, not
+        # representable as JSON text -- is emitted as a {"u": [...]} step
+        # holding the base64 of its raw octets (spec-07 §5), never as a "d"
+        # string of lone surrogates.
         latin1 = b'caf\xe9 au lait'
         recipe = compute_body_recipe(['New'], ['Old ascii', _octets(latin1)])
         self.assertEqual(recipe, [{'d': ['Old ascii']},
-                                  {'b': [_b64(latin1)]}])
+                                  {'u': [_b64(latin1)]}])
         _assert_no_surrogates_in_json(self, recipe)
-        self.assertEqual(base64.b64decode(recipe[1]['b'][0]), latin1)
+        self.assertEqual(base64.b64decode(recipe[1]['u'][0]), latin1)
 
-    def test_utf8_literal_is_a_b_step_too(self):
-        # Valid UTF-8 above 0x7f is representable as JSON text, but the rule
-        # is by octet: anything >= 0x80 goes in a "b" step.
-        utf8 = 'Hello w\u00f6rld'.encode('utf-8')
+    def test_non_utf8_literal_is_a_u_step(self):
+        # Shared case U2: the octets 63 61 66 E9 ("caf" + Latin-1 e-acute).
+        recipe = compute_body_recipe(['x'], [_octets(b'caf\xe9')])
+        self.assertEqual(recipe, [{'u': ['Y2Fm6Q==']}])
+
+    def test_utf8_literal_is_a_d_step(self):
+        # Valid UTF-8 above 0x7f is JSON text: spec-07 §5 has "u" only for
+        # what "d" cannot carry, so it goes in a "d" step.
+        utf8 = 'caf\u00e9'.encode('utf-8')
         recipe = compute_body_recipe(['New'], [_octets(utf8)])
-        self.assertEqual(recipe, [{'b': [_b64(utf8)]}])
+        self.assertEqual(recipe, [{'d': ['caf\u00e9']}])
+        _assert_no_surrogates_in_json(self, recipe)
 
-    def test_mixed_literals_alternate_d_and_b_steps(self):
+    def test_mixed_literals_alternate_d_and_u_steps(self):
         # Consecutive literals of one kind share a step; a mixed run
-        # alternates, in order.
+        # alternates, in order.  Valid UTF-8 joins the "d" run.
         latin1 = b'caf\xe9'
+        euckr = b'\xc0\xcc\xb8\xe1'
         utf8 = 'w\u00f6rld'.encode('utf-8')
         recipe = compute_body_recipe(
             ['New'],
-            ['one', 'two', _octets(latin1), _octets(utf8), 'three'])
+            ['one', 'two', _octets(latin1), _octets(euckr), _octets(utf8),
+             'three'])
         self.assertEqual(recipe, [
             {'d': ['one', 'two']},
-            {'b': [_b64(latin1), _b64(utf8)]},
-            {'d': ['three']},
+            {'u': [_b64(latin1), _b64(euckr)]},
+            {'d': ['w\u00f6rld', 'three']},
         ])
         _assert_no_surrogates_in_json(self, recipe)
 
@@ -584,19 +593,26 @@ class TestHeaderRecipe(unittest.TestCase):
             [('From', 'a@b.com'), ('Received', 'from mx')],
             [('From', 'a@b.com'), ('Received', 'from mx2')]))
 
-    def test_8bit_literal_is_a_b_step(self):
+    def test_8bit_literal_is_a_u_step(self):
         # A raw EUC-KR Subject (not UTF-8) restored literally goes in a
-        # "b" step as base64 of its octets.
+        # "u" step as base64 of its octets.
         euckr = b'(\xb1\xa4---\xb0\xed) \xc0\xcc\xb8\xe1 500'
         recipe = compute_header_recipe(
             [('Subject', '[Ant] ' + _octets(euckr))],
             [('Subject', _octets(euckr))])
-        self.assertEqual(recipe['subject'], [{'b': [_b64(euckr)]}])
+        self.assertEqual(recipe['subject'], [{'u': [_b64(euckr)]}])
         _assert_no_surrogates_in_json(self, recipe)
-        self.assertEqual(base64.b64decode(recipe['subject'][0]['b'][0]),
+        self.assertEqual(base64.b64decode(recipe['subject'][0]['u'][0]),
                          euckr)
 
-    def test_mixed_literals_alternate_d_and_b_steps(self):
+    def test_utf8_literal_is_a_d_step(self):
+        # Shared case U1: a raw UTF-8 Subject: cafe-acute changed to x.
+        recipe = compute_header_recipe(
+            [('Subject', 'x')],
+            [('Subject', _octets('caf\u00e9'.encode('utf-8')))])
+        self.assertEqual(recipe, {'subject': [{'d': ['caf\u00e9']}]})
+
+    def test_mixed_literals_alternate_d_and_u_steps(self):
         latin1 = b'Caf\xe9'
         recipe = compute_header_recipe(
             [('Comments', 'x')],
@@ -604,14 +620,14 @@ class TestHeaderRecipe(unittest.TestCase):
              ('Comments', 'also plain')])
         # Bottom-up: 'also plain', latin1, 'plain'.
         self.assertEqual(recipe['comments'], [
-            {'d': ['also plain']}, {'b': [_b64(latin1)]}, {'d': ['plain']},
+            {'d': ['also plain']}, {'u': [_b64(latin1)]}, {'d': ['plain']},
         ])
 
     def test_reordered_duplicates_never_descend(self):
         # Two instances swapped.  Bottom-up the current message is
         # 1='two', 2='one'; the previous was 1='one', 2='two'.  'one' is
         # copied from instance 2, after which 'two' at instance 1 cannot
-        # be copied -- spec-06 §5.1 requires "c" starts to ascend past the
+        # be copied -- spec-07 §5.1 requires "c" starts to ascend past the
         # previous end -- so it is restored literally.
         recipe = compute_header_recipe(
             [('Comments', 'one'), ('Comments', 'two')],
@@ -666,7 +682,7 @@ class TestMIHeaderValue(unittest.TestCase):
 
 
 class TestRecipeUndo(unittest.TestCase):
-    """Recipe validation and application by undo / verify (spec-06 §5).
+    """Recipe validation and application by undo / verify (spec-07 §5).
 
     Pure-function tests: the instance under test is built by hand on a
     fixed message, with hashes that match it, so only the Recipe decides
@@ -742,18 +758,24 @@ class TestRecipeUndo(unittest.TestCase):
 
     def test_bad_literals_are_rejected(self):
         cases = {
-            'b not base64': [{'b': ['not base64!']}],
-            'b bad padding': [{'b': ['YQ']}],
-            'b non-ascii': [{'b': ['caf\u00e9']}],
-            'b decodes to CRLF': [{'b': [_b64(b'a\r\nb')]}],
-            'b decodes to LF': [{'b': [_b64(b'a\nb')]}],
-            'b decodes to CR': [{'b': [_b64(b'a\rb')]}],
+            'u not base64': [{'u': ['not base64!']}],
+            'u bad padding': [{'u': ['YQ']}],
+            'u with whitespace': [{'u': ['YW Jj']}],
+            'u non-zero pad bits': [{'u': ['QR==']}],
+            'u non-zero pad bits, one =': [{'u': ['YWJ=']}],
+            'u non-ascii': [{'u': ['caf\u00e9']}],
+            'u decodes to CRLF': [{'u': [_b64(b'a\r\nb')]}],
+            'u decodes to LF': [{'u': [_b64(b'a\nb')]}],
+            'u decodes to CR': [{'u': ['YQ1i']}],
             'd with LF': [{'d': ['a\nb']}],
             'd with CR': [{'d': ['a\rb']}],
+            'd lone surrogate': [{'d': ['caf\udce9']}],
             'd non-string item': [{'d': [1]}],
-            'b non-string item': [{'b': [1]}],
+            'u non-string item': [{'u': [1]}],
             'd empty': [{'d': []}],
-            'b empty': [{'b': []}],
+            'u empty': [{'u': []}],
+            # spec-07 has no "b" step: it is an unknown key now.
+            'old b step': [{'b': ['eA==']}],
         }
         for what, steps in cases.items():
             with self.subTest('body ' + what):
@@ -768,8 +790,12 @@ class TestRecipeUndo(unittest.TestCase):
         cases = {
             'unknown step type': [{'x': [1]}],
             'two keys': [{'c': [1, 1], 'd': ['x']}],
+            'two keys, d and u': [{'d': ['x'], 'u': ['eA==']}],
             'empty object': [{}],
             'number': [7],
+            # Pre-spec-06 bare forms are no longer accepted.
+            'bare range': [[1, 1]],
+            'bare string': ['legacy'],
             'c not an array': [{'c': 1}],
             'd not an array': [{'d': 'x'}],
         }
@@ -784,6 +810,56 @@ class TestRecipeUndo(unittest.TestCase):
             self._assert_rejected(
                 self._with_recipe(header_recipe=['x']), 'array')
 
+    def _with_raw_recipe(self, recipe_json):
+        """The fixed message carrying an m=2 whose hashes match it and whose
+        r= is exactly this JSON text."""
+        msg = _msg_from_bytes(self.RAW)
+        msg._headers.insert(0, ('Message-Instance', 'm=2; h=sha256:{}:{}; '
+                                'r={};'.format(_b64(compute_header_hash(msg)),
+                                               _b64(compute_body_hash(msg)),
+                                               _b64(recipe_json.encode()))))
+        return msg
+
+    def test_bad_recipe_objects_are_rejected(self):
+        # Shared case U5: "h" with no properties, and an object with
+        # neither "h" nor "b".
+        cases = {
+            'empty h': '{"h":{}}',
+            'neither h nor b': '{"x":1}',
+            'empty object': '{}',
+        }
+        for what, text in cases.items():
+            with self.subTest(what):
+                self._assert_rejected(self._with_raw_recipe(text), what)
+
+    def test_mi_support_rejects_case_duplicate_keys(self):
+        # Shared case K2 and decision 2: keys equal ignoring case, in one
+        # object, are a duplicate at every level.
+        cases = {
+            'header names': '{"h":{"Subject":[],"subject":[]}}',
+            'top level': '{"h":{"subject":[]},"H":{"comments":[]}}',
+            'step keys': '{"b":[{"c":[1,1],"C":[2,2]}]}',
+            'exact duplicate': '{"b":[{"c":[1,1]}],"b":[{"c":[1,2]}]}',
+        }
+        for what, text in cases.items():
+            with self.subTest(what):
+                self._assert_rejected(self._with_raw_recipe(text), what)
+
+    def test_keys_match_case_insensitively(self):
+        # Shared case K1: an otherwise valid Recipe with upper-case keys
+        # undoes exactly as the lower-case form does.
+        upper = self._with_raw_recipe(
+            '{"H":{"Subject":[{"C":[1,1]}],"COMMENTS":[{"D":["x"]}]},'
+            '"B":[{"C":[1,2]},{"U":["Y2Fm6Q=="]}]}')
+        lower = self._with_raw_recipe(
+            '{"h":{"subject":[{"c":[1,1]}],"comments":[{"d":["x"]}]},'
+            '"b":[{"c":[1,2]},{"u":["Y2Fm6Q=="]}]}')
+        self.assertEqual(verify_message_instance(upper)[0], 2)
+        self.assertEqual(undo_message_instance(upper), 2)
+        self.assertEqual(undo_message_instance(lower), 2)
+        self.assertEqual(upper.as_bytes(), lower.as_bytes())
+        self.assertEqual(upper.get_all('Comments'), ['x'])
+
     def test_unparseable_r_is_rejected(self):
         msg = _msg_from_bytes(self.RAW)
         not_json = _b64(b'not json')
@@ -793,12 +869,13 @@ class TestRecipeUndo(unittest.TestCase):
                                                not_json)))
         self._assert_rejected(msg, 'r= is not JSON')
 
-    def test_b_steps_undo_to_the_original_octets(self):
+    def test_u_and_d_steps_undo_to_the_original_octets(self):
         latin1 = b'caf\xe9'
         utf8 = 'w\u00f6rld'.encode('utf-8')
         msg = self._with_recipe(
-            header_recipe={'subject': [{'b': [_b64(latin1)]}]},
-            body_recipe=[{'c': [1, 1]}, {'b': [_b64(latin1), _b64(utf8)]}])
+            header_recipe={'subject': [{'u': [_b64(latin1)]}]},
+            body_recipe=[{'c': [1, 1]}, {'u': [_b64(latin1)]},
+                         {'d': ['w\u00f6rld']}])
         self.assertEqual(verify_message_instance(msg)[0], 2)
         self.assertEqual(undo_message_instance(msg), 2)
         self.assertEqual(_get_body_lines(msg),
@@ -820,7 +897,7 @@ class TestRecipeUndo(unittest.TestCase):
         self.assertEqual(msg.get_all('Comments'), ['two', 'one'])
 
     def test_null_body_recipe_leaves_the_body_alone(self):
-        # spec-06 §4.2: "b": null says the body cannot be recreated.
+        # spec-07 §5.2: "b": null says the body cannot be recreated.
         msg = self._with_recipe(header_recipe={'comments': []},
                                 body_recipe=None)
         # build_mi_header_value omits a None body recipe; put the null in
@@ -837,10 +914,45 @@ class TestRecipeUndo(unittest.TestCase):
                          ['line one', 'line two', 'line three'])
         self.assertIsNone(msg.get_all('Comments'))
 
-    def test_8bit_message_round_trips_through_b_steps(self):
+    def test_utf8_d_step_undoes_byte_exactly(self):
+        # Review focus: valid UTF-8 in "d" (a body line and a header value)
+        # undoes to the same octets the "b" step used to carry.
+        original = (
+            b'From: a@example.com\r\n'
+            b'Subject: na\xc3\xafve\r\n'
+            b'Message-ID: <x@example.com>\r\n'
+            b'Content-Type: text/plain; charset=utf-8\r\n'
+            b'Content-Transfer-Encoding: 8bit\r\n'
+            b'\r\n'
+            b'na\xc3\xafve line\r\n'
+            b'ascii line\r\n'
+        )
+        orig = _msg_from_bytes(original)
+        h1, b1 = compute_header_hash(orig), compute_body_hash(orig)
+        msg = _msg_from_bytes(original)
+        msg.replace_header('Subject', 'x')
+        msg.set_payload('x\r\nascii line\r\n')
+        header_recipe = compute_header_recipe(
+            _collect_headers(msg), _collect_headers(orig))
+        body_recipe = compute_body_recipe(
+            _get_body_lines(msg), _get_body_lines(orig))
+        self.assertEqual(header_recipe, {'subject': [{'d': ['na\u00efve']}]})
+        self.assertEqual(body_recipe,
+                         [{'d': ['na\u00efve line']}, {'c': [2, 2]}])
+        msg._headers.insert(0, ('Message-Instance', build_mi_header_value(
+            2, compute_header_hash(msg), compute_body_hash(msg),
+            header_recipe, body_recipe)))
+        self.assertEqual(verify_message_instance(msg), (2, None))
+        self.assertEqual(undo_message_instance(msg), 2)
+        self.assertEqual(_b64(compute_header_hash(msg)), _b64(h1))
+        self.assertEqual(_b64(compute_body_hash(msg)), _b64(b1))
+        self.assertIn(b'\nna\xc3\xafve line\n',
+                      msg.as_bytes().replace(b'\r\n', b'\n'))
+
+    def test_8bit_message_round_trips_through_u_steps(self):
         # End to end on the producer side: a message with a raw EUC-KR body
         # line and swapped Comments is changed the way a list would change
-        # it; the recipe is "b"/"d"/"c" only, encodes without surrogates,
+        # it; the recipe is "u"/"d"/"c" only, encodes without surrogates,
         # and undoing it restores the m=1 hashes exactly.
         original = (
             b'From: a@example.com\r\n'
@@ -867,7 +979,7 @@ class TestRecipeUndo(unittest.TestCase):
         body_recipe = compute_body_recipe(
             _get_body_lines(msg), _get_body_lines(orig))
         self.assertEqual(body_recipe,
-                         [{'b': [_b64(b'\xc0\xcc\xb8\xe1 line')]},
+                         [{'u': [_b64(b'\xc0\xcc\xb8\xe1 line')]},
                           {'c': [2, 2]}])
         self.assertEqual(header_recipe['comments'],
                          [{'c': [2, 2]}, {'d': ['two']}])
@@ -910,18 +1022,10 @@ class TestRecipeUndo(unittest.TestCase):
         self.assertEqual(compute_header_hash(_msg_from_bytes(msg.as_bytes())),
                          before)
 
-    def test_legacy_bare_steps_still_apply(self):
-        # Pre-spec-06 bare [start, end] and bare string steps are accepted,
-        # under the same range rules.
-        msg = self._with_recipe(body_recipe=[[1, 1], 'legacy'])
-        self.assertEqual(undo_message_instance(msg), 2)
-        self.assertEqual(_get_body_lines(msg), ['line one', 'legacy'])
-        self._assert_rejected(
-            self._with_recipe(body_recipe=[[2, 3], [1, 1]]), 'descending')
 
 
 class TestParseMIFolding(unittest.TestCase):
-    """Folded Message-Instance values must parse (spec-06 §2.12, §2.14).
+    """Folded Message-Instance values must parse (spec-07 §2.12, §2.14).
 
     RFC 5322 FWS is CRLF followed by one *or more* WSP.  Unfolding only a
     single WSP used to leave one behind, which truncated the h= match at the
@@ -973,7 +1077,7 @@ class TestParseMIFolding(unittest.TestCase):
 
 
 class TestParseMISyntax(unittest.TestCase):
-    """The whole Message-Instance value is a tag-list (spec-06 §7, §7.3).
+    """The whole Message-Instance value is a tag-list (spec-07 §8, §9.3).
 
     A fragment that is not a tag, a byte outside x-tag-char, a repeated
     tag or a malformed hash-set makes the field a syntax error; it is
@@ -1116,10 +1220,10 @@ class TestFoldMIValue(unittest.TestCase):
 
 class TestDraftVersion(unittest.TestCase):
 
-    def test_draft_version_is_06(self):
+    def test_draft_version_is_07(self):
         from mailman.handlers.message_instance import DKIM2_DRAFT, DKIM2_DATE
-        self.assertEqual(DKIM2_DRAFT, 'ietf-dkim-dkim2-spec-06')
-        self.assertEqual(DKIM2_DATE, '2026-10-07')
+        self.assertEqual(DKIM2_DRAFT, 'ietf-dkim-dkim2-spec-07')
+        self.assertEqual(DKIM2_DATE, '2026-10-18')
 
 
 # =====================================================================
@@ -1168,7 +1272,7 @@ class TestHeaderWireForm(unittest.TestCase):
     def test_collected_header_values_are_unfolded(self):
         # A long encoded-word Subject arrives folded; the parser keeps the
         # fold in the value.  Recipe "d" strings MUST NOT contain CR or LF
-        # (spec-06 §5.1): a literal with a fold inside it verified in two
+        # (spec-07 §5.1): a literal with a fold inside it verified in two
         # implementations and failed in three.
         raw = (
             b'To: ant@example.com\r\n'
@@ -2011,7 +2115,7 @@ class TestNullBodyRecipe(unittest.TestCase):
         recipe = _recipe_at(msg, 2)
         self.assertIn('b', recipe)
         self.assertIsNone(recipe['b'])
-        # Spec-06 §4.2: only "b" may be null; the header Recipe is real.
+        # spec-07 §5.2: only "b" may be null; the header Recipe is real.
         self.assertIn('h', recipe)
         self.assertIsNotNone(recipe['h'])
         v, err = verify_message_instance(msg)
@@ -2398,7 +2502,7 @@ class TestDKIM2Wrap(unittest.TestCase):
         _wrap_round_trip(self, raw, layout=False)
 
     def test_body_with_trailing_empty_lines(self):
-        # Trailing empty lines are not lines (spec-06 §6.1): the copy range
+        # Trailing empty lines are not lines (spec-07 §6.1): the copy range
         # stops before them although the wrap carries them.
         raw = self.HDRS + (b'Content-Type: text/plain\r\n\r\n'
                            b'Hello.\r\n\r\n\r\n')
@@ -2578,3 +2682,130 @@ class TestQueueCopiesWithoutReceivedOctets(unittest.TestCase):
             with self.assertRaises(OSError):
                 config.handlers['to-archive'].process(self._mlist, msg, {})
         self.assertEqual(msg.original_bytes, self.RAW)
+
+
+class TestDKIM2DistributionCopies(unittest.TestCase):
+    """What a DKIM2 list does to every copy it distributes (spec-07 §11,
+    §12.5): each copy carries the exploded hint for the signing milter,
+    and a copy the list changed, or a post that arrived unsigned (the
+    list's hop becomes i=1), leaves From the list's posting address so
+    that From stays Authentic for the list's signing domain."""
+
+    layer = ConfigLayer
+
+    RAW = (b'To: ant@example.com\r\nFrom: Anne <anne@example.com>\r\n'
+           b'Message-ID: <dist>\r\nSubject: hello\r\n'
+           b'MIME-Version: 1.0\r\nContent-Type: text/plain\r\n\r\n'
+           b'Hello.\r\n')
+
+    def setUp(self):
+        self._mlist = create_list('ant@example.com')
+        config.push('test_mi_dist', '[mta]\nmessage_instance: yes')
+        self.addCleanup(config.pop, 'test_mi_dist')
+
+    def _signed(self):
+        """RAW with a matching m=1 under a DKIM2-Signature, as an upstream
+        signer sends it.  (Neither header is hashed; the signature is not
+        checked here.)"""
+        mi1 = build_mi_header_value(1, compute_header_hash_raw(self.RAW),
+                                    compute_body_hash_raw(self.RAW))
+        return (b'DKIM2-Signature: i=1; m=1; t=1; d=example.com; '
+                b'mf=<anne@example.com>; rt=<ant@example.com>; '
+                b's1=sel; b1=AAAA;\r\n'
+                b'Message-Instance: ' + mi1.encode('ascii') + b'\r\n'
+                + self.RAW)
+
+    def _distribute(self, raw):
+        """Post raw through the posting pipeline and deliver its copy:
+        decoration, then Message-Instance egress, as Deliver does."""
+        msg = _msg_from_bytes(raw)
+        msg.original_bytes = raw
+        process_pipeline(self._mlist, msg, {}, 'default-posting-pipeline')
+        item = get_queue_messages('out', expected_count=1)[0]
+        out, outdata = item.msg, item.msgdata
+        decorate.process(self._mlist, out, outdata)
+        config.handlers['message-instance-egress'].process(
+            self._mlist, out, outdata)
+        return out
+
+    def _assert_from_rewritten(self, out):
+        self.assertEqual(parseaddr(out['From'])[1],
+                         self._mlist.posting_address)
+        # The header Recipe holds the From the post arrived with ...
+        recipe = _recipe_at(out, get_max_mi_version(out))
+        self.assertEqual(len(recipe['h']['from']), 1)
+        (literal,), = recipe['h']['from'][0].values()
+        self.assertIn('anne@example.com', literal)
+        # ... and undoing it gives back the instance below.
+        version = get_max_mi_version(out)
+        v, err = verify_message_instance(out)
+        self.assertEqual(v, version, err)
+        self.assertEqual(undo_message_instance(out), version)
+        self.assertEqual(parseaddr(out['From'])[1],
+                         'anne@example.com')
+        v, err = verify_message_instance(out)
+        self.assertEqual(v, version - 1, err)
+
+    def test_distribution_copy_has_exploded_hint(self):
+        out = self._distribute(self.RAW)
+        self.assertEqual(out.get_all('X-DKIM2-Exploded'), ['yes'])
+
+    def test_exploded_hint_once_after_a_retry(self):
+        out = self._distribute(self.RAW)
+        outdata = {'mi_snapshot': {'version': 1, 'header_hash': b'',
+                                   'body_hash': b''}}
+        config.handlers['message-instance-egress'].process(
+            self._mlist, out, outdata)
+        self.assertEqual(out.get_all('X-DKIM2-Exploded'), ['yes'])
+
+    def test_no_exploded_hint_when_the_list_opts_out(self):
+        self._mlist.dkim2_message_instance = False
+        out = self._distribute(self.RAW)
+        self.assertIsNone(out.get_all('X-DKIM2-Exploded'))
+
+    def test_from_rewritten_when_list_modifies_or_originates(self):
+        with self.subTest('signed post, modified (subject prefix)'):
+            out = self._distribute(self._signed())
+            self.assertTrue(str(out['Subject']).startswith('[Ant] '))
+            self._assert_from_rewritten(out)
+        with self.subTest('unsigned post'):
+            out = self._distribute(self.RAW)
+            self._assert_from_rewritten(out)
+
+    def test_from_kept_on_an_unmodified_signed_post(self):
+        # A signed post the list forwards unchanged keeps its From: the
+        # author's signature still covers it.
+        msg = _msg_from_bytes(self._signed())
+        msgdata = {'original_sender': 'anne@example.com', 'nodecorate': True}
+        config.handlers['message-instance-ingress'].process(
+            self._mlist, msg, msgdata)
+        config.handlers['dmarc'].process(self._mlist, msg, msgdata)
+        self.assertEqual(msg['From'], 'Anne <anne@example.com>')
+
+    def test_from_rewritten_on_an_unsigned_post_even_if_unmodified(self):
+        msg = _msg_from_bytes(self.RAW)
+        msgdata = {'original_sender': 'anne@example.com', 'nodecorate': True}
+        config.handlers['message-instance-ingress'].process(
+            self._mlist, msg, msgdata)
+        config.handlers['dmarc'].process(self._mlist, msg, msgdata)
+        self.assertEqual(parseaddr(msg['From'])[1],
+                         self._mlist.posting_address)
+
+    def test_from_rewritten_when_decoration_is_to_come(self):
+        # Nothing changed yet, but delivery will add the footer.
+        msg = _msg_from_bytes(self._signed())
+        msgdata = {'original_sender': 'anne@example.com'}
+        config.handlers['message-instance-ingress'].process(
+            self._mlist, msg, msgdata)
+        with patch('mailman.handlers.dmarc.decorate',
+                   return_value='a footer'):
+            config.handlers['dmarc'].process(self._mlist, msg, msgdata)
+        self.assertEqual(parseaddr(msg['From'])[1],
+                         self._mlist.posting_address)
+
+    def test_from_kept_when_the_list_has_no_dkim2(self):
+        self._mlist.dkim2_message_instance = False
+        msg = _msg_from_bytes(self.RAW)
+        msgdata = {'original_sender': 'anne@example.com'}
+        config.handlers['dmarc'].process(self._mlist, msg, msgdata)
+        self.assertEqual(msg['From'], 'Anne <anne@example.com>')
