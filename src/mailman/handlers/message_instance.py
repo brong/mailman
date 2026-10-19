@@ -1140,10 +1140,10 @@ def without_received_bytes(msg):
 @public
 @implementer(IHandler)
 class MessageInstanceIngress:
-    """Add Message-Instance m=1 at ingress and snapshot message state."""
+    """Snapshot the message as received, for Message-Instance egress."""
 
     name = 'message-instance-ingress'
-    description = _('Add Message-Instance header at ingress.')
+    description = _('Snapshot the message for Message-Instance egress.')
 
     def process(self, mlist, msg, msgdata):
         """See `IHandler`."""
@@ -1171,40 +1171,42 @@ class MessageInstanceIngress:
             _serialize_msg(msg)
             snap_raw = _serialize_msg(_strip_stamped(msg))
         msg.original_bytes = snap_raw
-        existing_version = get_max_mi_version(msg)
-        if existing_version > 0:
-            # An MI is already present (inbound milter, or a signing sender).
-            # NEVER modify it -- it may be signed.
-            #
-            # Nothing is emitted for this: X-DKIM2-Info records actions that
-            # add a header, and accepting an existing instance adds none.
-            matched, why = verify_mi_raw(snap_raw)
-            if matched != existing_version:
-                log.warning('Existing Message-Instance m=%d does not match '
-                            'the message as received (%s); chain may not '
-                            'undo cleanly', existing_version, why)
-            log.debug('Accepted existing Message-Instance m=%d',
-                      existing_version)
+        if msg.get_all('dkim2-signature') is None:
+            # The post enters the DKIM2 ecosystem here: the list's MTA signs
+            # it as i=1.  It leaves with a single Message-Instance, m=1,
+            # added at egress over the message as sent, whose Recipe goes
+            # back to this snapshot (spec-07 §12.1: the first instance MAY
+            # record the changes made as the message enters).  An m=1 over
+            # the author's From here would put that From at state 1, where
+            # it is checked against the list's i=1 (§14.8) and fails.  So
+            # nothing is added now, and any unsigned instance a sender or
+            # inbound milter added is dropped: nothing covers it, and the
+            # Recipe records the message as received anyway.
+            if get_max_mi_version(msg) > 0:
+                log.debug('Dropping unsigned Message-Instance headers')
+                del msg['message-instance']
             msgdata['mi_snapshot'] = {
-                'version': existing_version,
+                'version': 0,
                 'header_hash': compute_header_hash_raw(snap_raw),
                 'body_hash': compute_body_hash_raw(snap_raw),
             }
             return
-        # No MI headers present -- add m=1 documenting the message as
-        # received.
-        hcount, hnames = _hashed_header_names(_raw_header_pairs(snap_raw))
-        h_hash = compute_header_hash_raw(snap_raw)
-        b_hash = compute_body_hash_raw(snap_raw)
-        value = build_mi_header_value(1, h_hash, b_hash)
-        _prepend_header(msg, 'Message-Instance', value)
-        _prepend_header(msg, 'X-DKIM2-Info', _dkim2_info(
-            'mi-m=1', hc=hcount, hn=hnames))
-        log.debug('Added Message-Instance m=1')
+        # A signed post: its instances are covered by a DKIM2-Signature.
+        # NEVER modify them; egress adds m=N+1.
+        existing_version = get_max_mi_version(msg)
+        # Nothing is emitted for this: X-DKIM2-Info records actions that
+        # add a header, and accepting existing instances adds none.
+        matched, why = verify_mi_raw(snap_raw)
+        if matched != existing_version:
+            log.warning('Existing Message-Instance m=%d does not match '
+                        'the message as received (%s); chain may not '
+                        'undo cleanly', existing_version, why)
+        log.debug('Accepted existing Message-Instance m=%d',
+                  existing_version)
         msgdata['mi_snapshot'] = {
-            'version': 1,
-            'header_hash': h_hash,
-            'body_hash': b_hash,
+            'version': existing_version,
+            'header_hash': compute_header_hash_raw(snap_raw),
+            'body_hash': compute_body_hash_raw(snap_raw),
         }
 
 
@@ -1264,8 +1266,10 @@ class MessageInstanceEgress:
         # Compute current hashes.
         h_hash = compute_header_hash(msg)
         b_hash = compute_body_hash_raw(wire)
-        # Check if anything changed.
-        if (h_hash == snapshot['header_hash']
+        # Check if anything changed.  An unsigned post (snapshot version 0)
+        # gets its m=1 regardless.
+        if (snapshot['version'] > 0
+                and h_hash == snapshot['header_hash']
                 and b_hash == snapshot['body_hash']):
             return
         # The snapshot is the bytes the message carries as original_bytes.
