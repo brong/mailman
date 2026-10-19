@@ -74,12 +74,21 @@ the interop result rather than to itself.
 **At ingress** (`message-instance-ingress`, first in `OwnerPipeline`
 and immediately after `validate-authenticity` in `PostingPipeline`):
 
-- If the message has no `Message-Instance` header, Mailman adds `m=1`
-  describing the message as received.
-- If one is already present (added by an inbound milter, or by a
-  signing sender) Mailman never modifies it: it may be covered by a
-  `DKIM2-Signature`, and rewriting or dropping it would destroy the
-  evidence of a broken chain and let Mailman pose as the originator.
+- If the message has no `DKIM2-Signature`, it enters the DKIM2
+  ecosystem at the list: the list's MTA will sign it as i=1.  Ingress
+  adds nothing, and drops any `Message-Instance` a sender or inbound
+  milter added (nothing signs it).  The message leaves with a single
+  instance, `m=1`, which egress adds over the message as sent, with a
+  Recipe back to the message as received (spec-07 §12.1 lets the first
+  instance record the changes made as the message enters).  An `m=1`
+  over the author's message would put the author's From at state 1,
+  where a -07 verifier checks it against the list's i=1 (§14.8) and
+  fails; From on the outgoing message is the list's (see "From on a
+  DKIM2 list"), and the Recipe keeps the author's.
+- If the message is signed, Mailman never modifies its instances: they
+  are covered by the `DKIM2-Signature`, and rewriting or dropping them
+  would destroy the evidence of a broken chain and let Mailman pose as
+  the originator.  Egress adds `m=N+1`.
   The baseline is the message as received, the octets the LMTP runner
   kept, so everything Mailman has done since (the `Message-ID-Hash`
   stamp, a repaired `Message-ID`) goes into the egress Recipe.  If the
@@ -90,16 +99,16 @@ and immediately after `validate-authenticity` in `PostingPipeline`):
   Mailman) the baseline is the parsed message with the
   `Message-ID-Hash` Mailman stamps on it removed, whether or not it
   carries an instance: the stamp is not part of the message as
-  received, so `m=1` leaves it out, as it does for the LMTP runner's
-  octets, and the egress Recipe records it.  An existing instance that
+  received, so the baseline leaves it out, as it does for the LMTP
+  runner's octets, and the egress Recipe records it.  An existing instance that
   does not verify against that baseline is logged as a warning, as
   above.  (A sender that put its own `Message-ID-Hash` under its
   instance and reached Mailman this way gets that warning: Mailman
   replaces the field.)
 - In every case the baseline is kept as `msg.original_bytes` (which the
   queue pickles with the message) for Recipe computation at egress.
-  Only the two hashes and the instance number go into
-  `msgdata['mi_snapshot']`.
+  Only the two hashes and the instance number (0 for an unsigned
+  post) go into `msgdata['mi_snapshot']`.
 - Digests are skipped.  They are not a single authored message.
 - On a list that has opted out of Message-Instance, the received
   octets are dropped so the queues do not carry them.
@@ -108,9 +117,11 @@ and immediately after `validate-authenticity` in `PostingPipeline`):
 after decoration, personalisation and ARC signing):
 
 - Mailman recomputes the hashes.  If nothing changed since the
-  snapshot, no header is added.
+  snapshot of a signed post, no header is added.  An unsigned post
+  always gets its `m=1` (with no Recipe when nothing changed).
 - Otherwise it computes header and body Recipes against the saved
-  baseline (`msg.original_bytes`) and prepends `m=N+1`.  The hashes and
+  baseline (`msg.original_bytes`) and prepends `m=N+1` (`m=1` for an
+  unsigned post).  The hashes and
   Recipes are over the message as smtplib will send it.  After the
   DKIM2 wrap below, decorate records its boundary in
   `msgdata['dkim2-wrap']` and egress finds the original body's octets
