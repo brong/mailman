@@ -135,6 +135,37 @@ def _assert_no_surrogates_in_json(test, recipe):
     test.assertNotIn('\\udc', encoded, encoded)
 
 
+# A DKIM2-Signature for posts that arrive signed.  Neither it nor any
+# Message-Instance is hashed, and Mailman never checks it: its presence is
+# what tells ingress the post's instances are covered and must be kept.
+UPSTREAM_SIGNATURE = ('i=1; m=1; t=1; d=example.com; '
+                      'mf=<aperson@example.com>; rt=<ant@example.com>; '
+                      's1=sel; b1=AAAA;')
+
+
+def _sign_upstream(msg):
+    """Mark msg as arriving signed (see UPSTREAM_SIGNATURE)."""
+    msg._headers.insert(0, ('DKIM2-Signature', UPSTREAM_SIGNATURE))
+    return msg
+
+
+def _assert_undoes_to_snapshot(test, msg, msgdata, version=1):
+    """The top instance (m=version) verifies, and undoing it gives back
+    the message as ingress took it: for an unsigned post, whose only
+    instance is the m=1 egress adds, that is the post as received; for a
+    signed post, the instance below then verifies too."""
+    v, err = verify_message_instance(msg)
+    test.assertEqual(v, version, err)
+    test.assertEqual(undo_message_instance(msg), version)
+    snapshot = msgdata['mi_snapshot']
+    test.assertEqual(_b64(compute_header_hash(msg)),
+                     _b64(snapshot['header_hash']))
+    test.assertEqual(_b64(compute_body_hash(msg)),
+                     _b64(snapshot['body_hash']))
+    v, err = verify_message_instance(msg)
+    test.assertEqual(v, version - 1, err)
+
+
 # A subset of the body diff vectors the DKIM2 implementations share:
 # (name, current lines, previous lines, max_literals, expected), where
 # expected is "identical", "too_big" or the flat recipe: [from, to]
@@ -1391,12 +1422,67 @@ This is a test.
                             .replace(b'\r\r\n', b'\r\n'), self.RECEIVED)
         msgdata = {}
         self._ingress.process(self._mlist, msg, msgdata)
-        _, hashes, _ = _parse_mi(msg['message-instance'])
-        self.assertEqual(hashes['h'][1],
-                         _b64(compute_header_hash_raw(self.RECEIVED)))
-        self.assertEqual(hashes['b'][1],
-                         _b64(compute_body_hash_raw(self.RECEIVED)))
+        snapshot = msgdata['mi_snapshot']
+        self.assertEqual(snapshot['header_hash'],
+                         compute_header_hash_raw(self.RECEIVED))
+        self.assertEqual(snapshot['body_hash'],
+                         compute_body_hash_raw(self.RECEIVED))
         self.assertEqual(msg.original_bytes, self.RECEIVED)
+
+    def test_unsigned_post_leaves_with_a_single_m1(self):
+        # Ruling 17: a post with no DKIM2-Signature enters the DKIM2
+        # ecosystem at the list, whose MTA signs it as i=1.  It leaves with
+        # one Message-Instance, m=1, over the message as sent, whose Recipe
+        # goes back to the post as received (spec-07 §12.1).  An m=1 over
+        # the author's From would be checked against the list's i=1
+        # (§14.8) and fail.
+        msg = self._make_received_msg()
+        msgdata = {}
+        self._ingress.process(self._mlist, msg, msgdata)
+        self.assertEqual(get_max_mi_version(msg), 0)
+        self.assertIsNone(msg.get_all('x-dkim2-info'))
+        self.assertEqual(msgdata['mi_snapshot']['version'], 0)
+        decorate.process(self._mlist, msg, msgdata)
+        self._egress.process(self._mlist, msg, msgdata)
+        mis = msg.get_all('message-instance')
+        self.assertEqual(len(mis), 1)
+        self.assertEqual(_get_mi_version(mis[0]), 1)
+        self.assertEqual(len(msg.get_all('x-dkim2-info')), 1)
+        # Its hashes are the outgoing message's, and its Recipe gives back
+        # the post as received.
+        _, hashes, recipe = _parse_mi(mis[0])
+        self.assertEqual(hashes['h'][1], _b64(compute_header_hash(msg)))
+        self.assertEqual(hashes['b'][1],
+                         _b64(compute_body_hash_raw(_wire_bytes(msg))))
+        self.assertIn('b', recipe)
+        _assert_undoes_to_snapshot(self, msg, msgdata)
+        self.assertEqual(_get_body_lines(msg),
+                         _body_lines_raw(self.RECEIVED))
+
+    def test_unsigned_post_unchanged_still_gets_m1(self):
+        msg = self._make_7bit_msg()
+        msgdata = {}
+        self._ingress.process(self._mlist, msg, msgdata)
+        self._egress.process(self._mlist, msg, msgdata)
+        mis = msg.get_all('message-instance')
+        self.assertEqual(len(mis), 1)
+        self.assertEqual(_get_mi_version(mis[0]), 1)
+        self.assertIsNone(_decode_mi_recipe(mis[0]))
+        self.assertEqual(verify_message_instance(msg), (1, None))
+
+    def test_unsigned_instances_are_dropped(self):
+        # An instance a sender (or inbound milter) added with no signature
+        # over it is dropped: the post still leaves with a single m=1.
+        msg = self._make_7bit_msg()
+        msg['Message-Instance'] = build_mi_header_value(
+            1, compute_header_hash(msg), compute_body_hash(msg))
+        msgdata = {}
+        self._ingress.process(self._mlist, msg, msgdata)
+        self.assertEqual(get_max_mi_version(msg), 0)
+        decorate.process(self._mlist, msg, msgdata)
+        self._egress.process(self._mlist, msg, msgdata)
+        self.assertEqual(len(msg.get_all('message-instance')), 1)
+        _assert_undoes_to_snapshot(self, msg, msgdata)
 
     def test_ingress_sets_original_bytes_without_received_octets(self):
         msg = self._make_7bit_msg()
@@ -1413,7 +1499,7 @@ This is a test.
         self._ingress.process(self._mlist, msg, msgdata)
         decorate.process(self._mlist, msg, msgdata)
         self._egress.process(self._mlist, msg, msgdata)
-        self.assertEqual(get_max_mi_version(msg), 2)
+        self.assertEqual(get_max_mi_version(msg), 1)
         self.assertFalse(
             os.path.exists(os.path.join(config.VAR_DIR, 'mi-cache')))
 
@@ -1424,20 +1510,19 @@ This is a test.
         msg, msgdata = pickle.loads(pickle.dumps((msg, msgdata)))
         decorate.process(self._mlist, msg, msgdata)
         self._egress.process(self._mlist, msg, msgdata)
-        v, err = verify_message_instance(msg)
-        self.assertEqual(v, 2, err)
+        _assert_undoes_to_snapshot(self, msg, msgdata)
 
     def test_recipe_rebuilds_the_received_octets(self):
         msg = self._make_received_msg()
         msgdata = {}
         self._ingress.process(self._mlist, msg, msgdata)
-        _, hashes1, _ = _parse_mi(msg['message-instance'])
+        snapshot = msgdata['mi_snapshot']
+        hashes1 = {'h': [None, _b64(snapshot['header_hash'])],
+                   'b': [None, _b64(snapshot['body_hash'])]}
         decorate.process(self._mlist, msg, msgdata)
         self._egress.process(self._mlist, msg, msgdata)
-        self.assertEqual(get_max_mi_version(msg), 2)
-        m2 = [v for v in msg.get_all('message-instance')
-              if _get_mi_version(v) == 2][0]
-        _, _, recipe = _parse_mi(m2)
+        self.assertEqual(get_max_mi_version(msg), 1)
+        _, _, recipe = _parse_mi(msg['message-instance'])
         body_lines, headers = _plan_undo(msg, recipe)
         # Applied to what Mailman is about to send, the Recipe gives back
         # the octets that arrived, trailing space and bare boundary included.
@@ -1463,7 +1548,7 @@ This is a test.
 
     def test_egress_records_bcc_removal(self):
         # smtplib.send_message drops Bcc; egress removes it first so the
-        # m=2 Recipe says so and undoing it gives back what arrived.
+        # Recipe says so and undoing it gives back what arrived.
         raw = (b'To: ant@example.com\r\n'
                b'From: aperson@example.com\r\n'
                b'Bcc: \r\n'
@@ -1476,21 +1561,17 @@ This is a test.
         msg.original_bytes = raw
         msgdata = {}
         self._ingress.process(self._mlist, msg, msgdata)
-        _, hashes1, _ = _parse_mi(msg['message-instance'])
         self._egress.process(self._mlist, msg, msgdata)
         self.assertIsNone(msg['bcc'])
         self.assertIsNone(msg['resent-bcc'])
-        m2 = [v for v in msg.get_all('message-instance')
-              if _get_mi_version(v) == 2][0]
-        _, hashes2, recipe = _parse_mi(m2)
+        _, hashes2, recipe = _parse_mi(msg['message-instance'])
         self.assertEqual(recipe['h']['bcc'], [{'d': ['']}])
         self.assertEqual(recipe['h']['resent-bcc'],
                          [{'d': ['hidden@example.com']}])
-        # m=2 describes the message as it will be sent ...
+        # m=1 describes the message as it will be sent ...
         self.assertEqual(hashes2['h'][1], _b64(compute_header_hash(msg)))
-        # ... and its Recipe rebuilds m=1.
-        self.assertEqual(undo_message_instance(msg), 2)
-        self.assertEqual(_b64(compute_header_hash(msg)), hashes1['h'][1])
+        # ... and its Recipe rebuilds the post as received.
+        _assert_undoes_to_snapshot(self, msg, msgdata)
 
     def test_egress_after_a_retry_adds_no_second_instance(self):
         # BulkDelivery decorates and runs egress on the queued message
@@ -1501,18 +1582,14 @@ This is a test.
         self._ingress.process(self._mlist, msg, msgdata)
         decorate.process(self._mlist, msg, msgdata)
         self._egress.process(self._mlist, msg, msgdata)
-        self.assertEqual(get_max_mi_version(msg), 2)
+        self.assertEqual(get_max_mi_version(msg), 1)
         msg, msgdata = pickle.loads(pickle.dumps((msg, msgdata)))
         msgdata['nodecorate'] = True
         decorate.process(self._mlist, msg, msgdata)
         self._egress.process(self._mlist, msg, msgdata)
-        self.assertEqual(len(msg.get_all('message-instance')), 2)
-        self.assertEqual(len(msg.get_all('x-dkim2-info')), 2)
-        v, err = verify_message_instance(msg)
-        self.assertEqual(v, 2, err)
-        self.assertEqual(undo_message_instance(msg), 2)
-        v, err = verify_message_instance(msg)
-        self.assertEqual(v, 1, err)
+        self.assertEqual(len(msg.get_all('message-instance')), 1)
+        self.assertEqual(len(msg.get_all('x-dkim2-info')), 1)
+        _assert_undoes_to_snapshot(self, msg, msgdata)
 
     def test_ingress_drops_received_octets_when_the_list_opts_out(self):
         # A list with Message-Instance off on a site with it on must not
@@ -1532,27 +1609,23 @@ This is a test.
         self.assertFalse(hasattr(msg, 'original_bytes'))
         msgdata = {}
         self._ingress.process(self._mlist, msg, msgdata)
-        version, error = verify_message_instance(msg)
-        self.assertEqual((version, error), (1, None))
+        decorate.process(self._mlist, msg, msgdata)
+        self._egress.process(self._mlist, msg, msgdata)
+        _assert_undoes_to_snapshot(self, msg, msgdata)
 
     def test_injected_message_stamp_goes_into_the_recipe(self):
         # `mailman inject` stamps Message-ID-Hash before the pipeline and
         # keeps no received octets.  The snapshot leaves Mailman's stamp out,
-        # as the LMTP runner's octets do, so m=1 describes the post without
-        # it and m=2 records it.
+        # as the LMTP runner's octets do, and the m=1 Recipe records it.
         msg = self._make_7bit_msg()
         add_message_hash(msg)
         msgdata = {}
         self._ingress.process(self._mlist, msg, msgdata)
         decorate.process(self._mlist, msg, msgdata)
         self._egress.process(self._mlist, msg, msgdata)
-        v, err = verify_message_instance(msg)
-        self.assertEqual(v, 2, err)
-        self.assertIn('message-id-hash', _recipe_at(msg, 2)['h'])
-        self.assertEqual(undo_message_instance(msg), 2)
+        self.assertIn('message-id-hash', _recipe_at(msg, 1)['h'])
+        _assert_undoes_to_snapshot(self, msg, msgdata)
         self.assertNotIn('Message-ID-Hash', msg)
-        v, err = verify_message_instance(msg)
-        self.assertEqual(v, 1, err)
 
     def test_injected_message_with_an_instance_records_the_stamp(self):
         # An injected message whose existing instance covers content with no
@@ -1561,6 +1634,7 @@ This is a test.
         msg = self._make_7bit_msg()
         msg['Message-Instance'] = build_mi_header_value(
             1, compute_header_hash(msg), compute_body_hash(msg))
+        _sign_upstream(msg)
         add_message_hash(msg)
         msgdata = {}
         self._ingress.process(self._mlist, msg, msgdata)
@@ -1582,6 +1656,7 @@ This is a test.
         add_message_hash(msg)
         msg['Message-Instance'] = build_mi_header_value(
             1, compute_header_hash(msg), compute_body_hash(msg))
+        _sign_upstream(msg)
         msgdata = {}
         with self.assertLogs('mailman.dkim2', 'WARNING') as logs:
             self._ingress.process(self._mlist, msg, msgdata)
@@ -1592,18 +1667,20 @@ This is a test.
         v, err = verify_message_instance(msg)
         self.assertEqual(v, 2, err)
 
-    def test_ingress_adds_v1(self):
+    def test_ingress_adds_no_instance_to_an_unsigned_post(self):
         msg = self._make_7bit_msg()
         msgdata = {}
         self._ingress.process(self._mlist, msg, msgdata)
-        self.assertEqual(get_max_mi_version(msg), 1)
-        self.assertIn('mi_snapshot', msgdata)
+        self.assertEqual(get_max_mi_version(msg), 0)
+        self.assertEqual(msgdata['mi_snapshot']['version'], 0)
 
-    def test_ingress_info_is_debug_header_01_form(self):
+    def test_info_is_debug_header_01_form(self):
         # draft-gondwana-dkim2-debug-header-01: a tag-list in the DKIM2
         # syntax, every tag followed by ';', and the action is mi-m=<N>.
         msg = self._make_7bit_msg()
-        self._ingress.process(self._mlist, msg, {})
+        msgdata = {}
+        self._ingress.process(self._mlist, msg, msgdata)
+        self._egress.process(self._mlist, msg, msgdata)
         # Unfold, then drop the whitespace a consumer ignores next to ';'
         # and ','.
         info = re.sub(r'([;,])\s+', r'\1', msg['x-dkim2-info']
@@ -1613,14 +1690,6 @@ This is a test.
         self.assertRegex(info, r'^draft=\S+; repo=\S+; date=\d{4}-\d\d-\d\d; '
                                r'sw=mailman; action=mi-m=1; hc=\d+; hn=\S+;$')
 
-    def test_ingress_v1_verifies(self):
-        msg = self._make_7bit_msg()
-        msgdata = {}
-        self._ingress.process(self._mlist, msg, msgdata)
-        version, error = verify_message_instance(msg)
-        self.assertEqual(version, 1)
-        self.assertIsNone(error)
-
     def test_ingress_does_not_add_v1_if_mi_exists(self):
         """A message arriving with an existing MI must not get a second m=1."""
         msg = self._make_7bit_msg()
@@ -1629,6 +1698,7 @@ This is a test.
         b_hash = compute_body_hash(msg)
         existing_mi = build_mi_header_value(1, h_hash, b_hash)
         msg['Message-Instance'] = existing_mi
+        _sign_upstream(msg)
         msgdata = {}
         self._ingress.process(self._mlist, msg, msgdata)
         # Should still be exactly one MI header.
@@ -1657,6 +1727,7 @@ This is a test.
         corrupt_mi = good_mi.replace(_b64(h_hash), 'AAAA', 1).replace(
             _b64(b_hash), 'BBBB', 1)
         msg['Message-Instance'] = corrupt_mi
+        _sign_upstream(msg)
         msgdata = {}
         self._ingress.process(self._mlist, msg, msgdata)
         # The corrupt instance is still there, untouched, and alone.
@@ -1681,20 +1752,23 @@ This is a test.
         self.assertEqual(get_max_mi_version(msg), 0)
 
     def test_ingress_runs_with_nodecorate(self):
-        # MI should still be added even when nodecorate is set (e.g.
-        # owner pipeline messages).  nodecorate controls decoration,
-        # not MI.
+        # The snapshot is still taken when nodecorate is set (e.g. owner
+        # pipeline messages).  nodecorate controls decoration, not MI.
         msg = self._make_7bit_msg()
         msgdata = {'nodecorate': True}
         self._ingress.process(self._mlist, msg, msgdata)
-        self.assertEqual(get_max_mi_version(msg), 1)
+        self.assertIn('mi_snapshot', msgdata)
 
     # -----------------------------------------------------------------
     # Basic egress tests
     # -----------------------------------------------------------------
 
     def test_egress_no_change_no_new_mi(self):
+        # A signed post the list did not change gets no instance of its own.
         msg = self._make_7bit_msg()
+        msg['Message-Instance'] = build_mi_header_value(
+            1, compute_header_hash(msg), compute_body_hash(msg))
+        _sign_upstream(msg)
         msgdata = {}
         self._ingress.process(self._mlist, msg, msgdata)
         self._egress.process(self._mlist, msg, msgdata)
@@ -1706,46 +1780,29 @@ This is a test.
         self._egress.process(self._mlist, msg, {})
         self.assertEqual(get_max_mi_version(msg), 1)
 
-    def test_egress_adds_v2_after_decoration(self):
+    def test_egress_adds_v1_after_decoration(self):
         msg = self._make_7bit_msg()
         msgdata = {}
         self._ingress.process(self._mlist, msg, msgdata)
         decorate.process(self._mlist, msg, msgdata)
         self._egress.process(self._mlist, msg, msgdata)
-        self.assertEqual(get_max_mi_version(msg), 2)
-
-    def test_egress_v2_verifies(self):
-        msg = self._make_7bit_msg()
-        msgdata = {}
-        self._ingress.process(self._mlist, msg, msgdata)
-        decorate.process(self._mlist, msg, msgdata)
-        self._egress.process(self._mlist, msg, msgdata)
-        version, error = verify_message_instance(msg)
-        self.assertEqual(version, 2, error)
-
-    # -----------------------------------------------------------------
-    # Undo tests: undo MI m=2, verify MI m=1
-    # -----------------------------------------------------------------
-
-    def test_undo_7bit_then_v1_verifies(self):
-        """After undoing MI m=2, MI m=1 must verify against the message."""
-        msg = self._make_7bit_msg()
-        msgdata = {}
-        self._ingress.process(self._mlist, msg, msgdata)
-        decorate.process(self._mlist, msg, msgdata)
-        self._egress.process(self._mlist, msg, msgdata)
-        # Sanity: m=2 verifies before undo.
-        v, err = verify_message_instance(msg)
-        self.assertEqual(v, 2, err)
-        # Undo MI m=2.
-        undone = undo_message_instance(msg)
-        self.assertEqual(undone, 2)
         self.assertEqual(get_max_mi_version(msg), 1)
-        # MI m=1 must now verify.
-        v, err = verify_message_instance(msg)
-        self.assertEqual(v, 1, err)
+        version, error = verify_message_instance(msg)
+        self.assertEqual(version, 1, error)
 
-    def test_undo_7bit_with_added_headers_then_v1_verifies(self):
+    # -----------------------------------------------------------------
+    # Undo tests: undo the list's m=1, get the post as received
+    # -----------------------------------------------------------------
+
+    def test_undo_7bit_restores_the_post(self):
+        msg = self._make_7bit_msg()
+        msgdata = {}
+        self._ingress.process(self._mlist, msg, msgdata)
+        decorate.process(self._mlist, msg, msgdata)
+        self._egress.process(self._mlist, msg, msgdata)
+        _assert_undoes_to_snapshot(self, msg, msgdata)
+
+    def test_undo_7bit_with_added_headers_restores_the_post(self):
         msg = self._make_7bit_msg()
         msgdata = {}
         self._ingress.process(self._mlist, msg, msgdata)
@@ -1753,13 +1810,9 @@ This is a test.
         msg['List-Unsubscribe'] = '<mailto:ant-leave@example.com>'
         decorate.process(self._mlist, msg, msgdata)
         self._egress.process(self._mlist, msg, msgdata)
-        v, err = verify_message_instance(msg)
-        self.assertEqual(v, 2, err)
-        undo_message_instance(msg)
-        v, err = verify_message_instance(msg)
-        self.assertEqual(v, 1, err)
+        _assert_undoes_to_snapshot(self, msg, msgdata)
 
-    def test_undo_qp_unnecessarily_quoted_then_v1_verifies(self):
+    def test_undo_qp_unnecessarily_quoted_restores_the_post(self):
         raw = (
             b'To: ant@example.com\r\n'
             b'From: aperson@example.com\r\n'
@@ -1773,18 +1826,11 @@ This is a test.
         msg = _msg_from_bytes(raw)
         msgdata = {}
         self._ingress.process(self._mlist, msg, msgdata)
-        v, err = verify_message_instance(msg)
-        self.assertEqual(v, 1, err)
         decorate.process(self._mlist, msg, msgdata)
         self._egress.process(self._mlist, msg, msgdata)
-        v, err = verify_message_instance(msg)
-        self.assertEqual(v, 2, err)
-        # Undo and verify m=1.
-        undo_message_instance(msg)
-        v, err = verify_message_instance(msg)
-        self.assertEqual(v, 1, err)
+        _assert_undoes_to_snapshot(self, msg, msgdata)
 
-    def test_undo_base64_weird_lines_then_v1_verifies(self):
+    def test_undo_base64_weird_lines_restores_the_post(self):
         content = b'Base64 with 50-char lines for DKIM2 MI undo test.'
         b64 = base64.b64encode(content).decode('ascii')
         b64_50 = '\r\n'.join(
@@ -1801,18 +1847,11 @@ This is a test.
         msg = _msg_from_bytes(raw)
         msgdata = {}
         self._ingress.process(self._mlist, msg, msgdata)
-        v, err = verify_message_instance(msg)
-        self.assertEqual(v, 1, err)
         decorate.process(self._mlist, msg, msgdata)
         self._egress.process(self._mlist, msg, msgdata)
-        v, err = verify_message_instance(msg)
-        self.assertEqual(v, 2, err)
-        # Undo and verify m=1.
-        undo_message_instance(msg)
-        v, err = verify_message_instance(msg)
-        self.assertEqual(v, 1, err)
+        _assert_undoes_to_snapshot(self, msg, msgdata)
 
-    def test_undo_base64_very_short_lines_then_v1_verifies(self):
+    def test_undo_base64_very_short_lines_restores_the_post(self):
         content = b'Short 20-char lines.'
         b64 = base64.b64encode(content).decode('ascii')
         b64_20 = '\r\n'.join(
@@ -1831,14 +1870,10 @@ This is a test.
         self._ingress.process(self._mlist, msg, msgdata)
         decorate.process(self._mlist, msg, msgdata)
         self._egress.process(self._mlist, msg, msgdata)
-        v, err = verify_message_instance(msg)
-        self.assertEqual(v, 2, err)
-        undo_message_instance(msg)
-        v, err = verify_message_instance(msg)
-        self.assertEqual(v, 1, err)
+        _assert_undoes_to_snapshot(self, msg, msgdata)
 
     # -----------------------------------------------------------------
-    # Pre-existing MI: message arrives with MI m=1 from prior hop
+    # Pre-existing MI: a signed message arrives with MI m=1 from a prior hop
     # -----------------------------------------------------------------
 
     def test_existing_mi_preserved_and_v2_added(self):
@@ -1849,6 +1884,7 @@ This is a test.
         b_hash = compute_body_hash(msg)
         external_mi = build_mi_header_value(1, h_hash, b_hash)
         msg['Message-Instance'] = external_mi
+        _sign_upstream(msg)
         msgdata = {}
         self._ingress.process(self._mlist, msg, msgdata)
         # Ingress should NOT add another MI.
@@ -1870,6 +1906,7 @@ This is a test.
         b_hash = compute_body_hash(msg)
         external_mi = build_mi_header_value(1, h_hash, b_hash)
         msg['Message-Instance'] = external_mi
+        _sign_upstream(msg)
         # Verify the external MI m=1 is valid.
         v, err = verify_message_instance(msg)
         self.assertEqual(v, 1, err)
@@ -1892,6 +1929,7 @@ This is a test.
         h_hash = compute_header_hash(msg)
         external_mi = build_mi_header_value(1, h_hash, original_body_hash)
         msg['Message-Instance'] = external_mi
+        _sign_upstream(msg)
         msgdata = {}
         self._ingress.process(self._mlist, msg, msgdata)
         decorate.process(self._mlist, msg, msgdata)
@@ -1910,6 +1948,7 @@ This is a test.
         b_hash = compute_body_hash(msg)
         external_mi = build_mi_header_value(1, original_header_hash, b_hash)
         msg['Message-Instance'] = external_mi
+        _sign_upstream(msg)
         msgdata = {}
         self._ingress.process(self._mlist, msg, msgdata)
         msg['List-Id'] = '<ant.example.com>'
@@ -1946,8 +1985,9 @@ This is a test.
         config.push('mi_off', '[mta]\nmessage_instance: no')
         try:
             self._egress.process(self._mlist, msg, msgdata)
-            # Should still be m=1 only — egress skipped.
-            self.assertEqual(get_max_mi_version(msg), 1)
+            # No instance at all: egress skipped (ingress adds none to an
+            # unsigned post).
+            self.assertEqual(get_max_mi_version(msg), 0)
         finally:
             config.pop('mi_off')
 
@@ -1988,15 +2028,7 @@ This is a test.
         msg = self._make_7bit_msg()
         msgdata = {}
         self._ingress.process(self._mlist, msg, msgdata)
-        idx, keys = first_mi_index(msg)
-        # Only X-DKIM2-Info may sit above it.
-        self.assertTrue(
-            all(k.lower() == 'x-dkim2-info' for k in keys[:idx]),
-            f'unexpected headers above Message-Instance: {keys[:idx]}')
-        # And it must precede the original message's own headers.
-        self.assertNotIn('From', keys[:idx])
-
-        # After egress with modifications, the new instance is also on top.
+        # After egress with modifications, the new instance is on top.
         decorate.process(self._mlist, msg, msgdata)
         self._egress.process(self._mlist, msg, msgdata)
         idx, keys = first_mi_index(msg)
@@ -2112,14 +2144,14 @@ class TestNullBodyRecipe(unittest.TestCase):
 
     def test_egress_emits_null_body_recipe(self):
         msg = self._filtered_and_egressed()
-        recipe = _recipe_at(msg, 2)
+        recipe = _recipe_at(msg, 1)
         self.assertIn('b', recipe)
         self.assertIsNone(recipe['b'])
         # spec-07 §5.2: only "b" may be null; the header Recipe is real.
         self.assertIn('h', recipe)
         self.assertIsNotNone(recipe['h'])
         v, err = verify_message_instance(msg)
-        self.assertEqual(v, 2, err)
+        self.assertEqual(v, 1, err)
         # The kitten is not in the Recipe.
         self.assertNotIn('AAAA', msg['message-instance'])
 
@@ -2131,7 +2163,7 @@ class TestNullBodyRecipe(unittest.TestCase):
 
     def test_undo_null_body_restores_headers_only(self):
         msg = self._filtered_and_egressed()
-        self.assertEqual(undo_message_instance(msg), 2)
+        self.assertEqual(undo_message_instance(msg), 1)
         self.assertIsNone(msg['subject'])
 
 
@@ -2161,7 +2193,7 @@ class TestBodyRecipeLimit(unittest.TestCase):
         msg.set_payload('uno\r\ndos\r\ntres\r\n')
         config.handlers['message-instance-egress'].process(
             self._mlist, msg, msgdata)
-        return _recipe_at(msg, 2)
+        return _recipe_at(msg, 1)
 
     def test_within_the_limit_is_a_recipe(self):
         recipe = self._rewritten_and_egressed(3)
@@ -2186,8 +2218,8 @@ def _smtplib_wire(msg):
 
 
 def _wrap_round_trip(test, raw, layout=True):
-    """Ingress, decorate, egress, then undo m=2: m=1 must verify and the
-    rebuilt body must be the original octets.
+    """Ingress, decorate, egress, then undo the list's m=1: the message
+    must be the post as received, the rebuilt body its original octets.
 
     With layout (the usual case) egress must find the original body where
     the wrap put it, without diffing; either way the body Recipe must be
@@ -2206,17 +2238,13 @@ def _wrap_round_trip(test, raw, layout=True):
         test._egress.process(test._mlist, msg, msgdata)
     wire = _normalize_crlf(msg.as_bytes())
     test.assertEqual(msg.get_content_type(), 'multipart/mixed')
-    v, err = verify_message_instance(msg)
-    test.assertEqual(v, 2, err)
-    recipe = _recipe_at(msg, 2)
+    recipe = _recipe_at(msg, 1)
     test.assertEqual(recipe['b'], compute_body_recipe(
         _body_lines_raw(_wire_bytes(msg)),
         _body_lines_raw(_normalize_crlf(raw))))
     # The original's lines are copied as one range, whatever they are.
     test.assertEqual(len(_copy_steps(recipe['b'])), 1, recipe['b'])
-    test.assertEqual(undo_message_instance(msg), 2)
-    v, err = verify_message_instance(msg)
-    test.assertEqual(v, 1, err)
+    _assert_undoes_to_snapshot(test, msg, msgdata)
     _, body = _split_raw(_normalize_crlf(raw))
     test.assertEqual(_get_raw_body(msg).rstrip(b'\r\n'),
                      body.rstrip(b'\r\n'))
@@ -2346,7 +2374,7 @@ class TestDKIM2Wrap(unittest.TestCase):
 
     def test_smtplib_wire_matches_hashed_body(self):
         # What smtplib.send_message puts on the wire must be what egress
-        # hashed: check m=2's body hash against the CRLF wire body.  The
+        # hashed: check m=1's body hash against the CRLF wire body.  The
         # 8-bit octets survive, and a From_ line in the received part (which
         # _ReceivedPart writes itself) is not mangled.
         body = b'K\xf6ln\r\nFrom here\r\n'
@@ -2362,7 +2390,7 @@ class TestDKIM2Wrap(unittest.TestCase):
         self.assertIn(body, wire)
         self.assertIsNone(re.search(rb'(?<!\r)\n', wire))
         v, err = verify_mi_raw(wire)
-        self.assertEqual(v, 2, err)
+        self.assertEqual(v, 1, err)
 
     def _set_footer(self, text):
         site_dir = os.path.join(config.TEMPLATE_DIR, 'site', 'en')
@@ -2384,12 +2412,15 @@ class TestDKIM2Wrap(unittest.TestCase):
         wire = _smtplib_wire(msg)
         self.assertIn(b'>From the list', wire)
         v, err = verify_mi_raw(wire)
-        self.assertEqual(v, 2, err)
-        # And the Recipe still undoes to m=1.  (m=2 itself is checked on
-        # the wire bytes above: verify_message_instance judges the parsed,
-        # unmangled view.)
-        self.assertEqual(undo_message_instance(msg), 2)
-        self.assertEqual(verify_message_instance(msg)[0], 1)
+        self.assertEqual(v, 1, err)
+        # And the Recipe still undoes to the post as received.  (m=1 itself
+        # is checked on the wire bytes above: verify_message_instance
+        # judges the parsed, unmangled view.)
+        self.assertEqual(undo_message_instance(msg), 1)
+        self.assertEqual(compute_header_hash(msg),
+                         msgdata['mi_snapshot']['header_hash'])
+        self.assertEqual(compute_body_hash(msg),
+                         msgdata['mi_snapshot']['body_hash'])
 
     def test_upstream_decoration_from_line_matches_smtplib_wire(self):
         # The upstream path (body already rewritten: null body Recipe)
@@ -2406,10 +2437,10 @@ class TestDKIM2Wrap(unittest.TestCase):
         wire = _smtplib_wire(msg)
         self.assertIn(b'>From the list', wire)
         v, err = verify_mi_raw(wire)
-        self.assertEqual(v, 2, err)
+        self.assertEqual(v, 1, err)
 
     def test_inbound_from_line_without_received_octets(self):
-        # An inbound m=1 made over the octets as sent, with a body line
+        # A signed inbound m=1 made over the octets as sent, with a body line
         # starting "From ", on a message that came without original_bytes
         # (an older queue entry): ingress must judge it unmangled, the
         # wire must match m=2, and undoing m=2 must give back what m=1
@@ -2418,7 +2449,9 @@ class TestDKIM2Wrap(unittest.TestCase):
                              b'Hello.\r\nFrom x\r\n')
         mi1 = build_mi_header_value(1, compute_header_hash_raw(plain),
                                     compute_body_hash_raw(plain))
-        raw = b'Message-Instance: ' + mi1.encode('ascii') + b'\r\n' + plain
+        raw = (b'DKIM2-Signature: ' + UPSTREAM_SIGNATURE.encode('ascii')
+               + b'\r\nMessage-Instance: ' + mi1.encode('ascii') + b'\r\n'
+               + plain)
         msg = _msg_from_bytes(raw)
         self.assertEqual(verify_mi_raw(raw)[0], 1)
         msgdata = {}
@@ -2543,11 +2576,7 @@ class TestDKIM2Wrap(unittest.TestCase):
                    wraps=compute_body_recipe) as diff:
             self._egress.process(self._mlist, msg, msgdata)
         diff.assert_called_once()
-        v, err = verify_message_instance(msg)
-        self.assertEqual(v, 2, err)
-        self.assertEqual(undo_message_instance(msg), 2)
-        v, err = verify_message_instance(msg)
-        self.assertEqual(v, 1, err)
+        _assert_undoes_to_snapshot(self, msg, msgdata)
 
     def test_upstream_decoration_records_no_wrap(self):
         raw = self.HDRS + b'Content-Type: text/plain\r\n\r\nHello.\r\n'
@@ -2668,11 +2697,7 @@ class TestQueueCopiesWithoutReceivedOctets(unittest.TestCase):
         decorate.process(self._mlist, out, outdata)
         config.handlers['message-instance-egress'].process(
             self._mlist, out, outdata)
-        v, err = verify_message_instance(out)
-        self.assertEqual(v, 2, err)
-        self.assertEqual(undo_message_instance(out), 2)
-        v, err = verify_message_instance(out)
-        self.assertEqual(v, 1, err)
+        _assert_undoes_to_snapshot(self, out, outdata)
 
     def test_received_octets_come_back_after_a_failed_enqueue(self):
         msg = _msg_from_bytes(self.RAW)
@@ -2771,6 +2796,40 @@ class TestDKIM2DistributionCopies(unittest.TestCase):
         with self.subTest('unsigned post'):
             out = self._distribute(self.RAW)
             self._assert_from_rewritten(out)
+
+    def test_unsigned_post_leaves_with_one_m1_over_the_list_from(self):
+        # Ruling 17, end to end.  The list MTA signs this as i=1 with the
+        # list's domain, so state 1 (the message m=1 hashes) must carry the
+        # list's From: a -07 verifier checks it against i=1 (§14.8), and
+        # never checks a "from" key on MI 1.  (No DKIM2 signer here, so the
+        # structure is asserted.)
+        out = self._distribute(self.RAW)
+        mis = out.get_all('message-instance')
+        self.assertEqual(len(mis), 1)
+        self.assertEqual(_get_mi_version(mis[0]), 1)
+        # Its hashes are the outgoing message's, with the list's From ...
+        self.assertEqual(parseaddr(out['From'])[1],
+                         self._mlist.posting_address)
+        _, hashes, recipe = _parse_mi(mis[0])
+        self.assertEqual(hashes['h'][1], _b64(compute_header_hash(out)))
+        self.assertEqual(hashes['b'][1],
+                         _b64(compute_body_hash_raw(_wire_bytes(out))))
+        # ... and its Recipe restores the author's From and the post as
+        # received.
+        (literal,), = recipe['h']['from'][0].values()
+        self.assertEqual(parseaddr(literal)[1], 'anne@example.com')
+        self.assertEqual(undo_message_instance(out), 1)
+        self.assertEqual(parseaddr(out['From'])[1], 'anne@example.com')
+        self.assertEqual(compute_header_hash(out),
+                         compute_header_hash_raw(self.RAW))
+        self.assertEqual(compute_body_hash(out),
+                         compute_body_hash_raw(self.RAW))
+
+    def test_signed_post_keeps_its_chain_and_gets_m2(self):
+        out = self._distribute(self._signed())
+        self.assertEqual(
+            sorted(_get_mi_version(v)
+                   for v in out.get_all('message-instance')), [1, 2])
 
     def test_from_kept_on_an_unmodified_signed_post(self):
         # A signed post the list forwards unchanged keeps its From: the
