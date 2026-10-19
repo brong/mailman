@@ -18,7 +18,7 @@
 """Message-Instance header support for DKIM2.
 
 Implements Message-Instance header computation as defined in
-draft-ietf-dkim-dkim2-spec-06.  A Message-Instance header records cryptographic
+draft-ietf-dkim-dkim2-spec-07.  A Message-Instance header records cryptographic
 hashes of the message headers and body at a point in the delivery chain, along
 with optional diff recipes that allow undoing changes made at each hop.
 """
@@ -44,11 +44,14 @@ from zope.interface import implementer
 log = logging.getLogger('mailman.dkim2')
 
 # DKIM2 implementation metadata — update DKIM2_DATE on each change.
-DKIM2_DRAFT = 'ietf-dkim-dkim2-spec-06'
+DKIM2_DRAFT = 'ietf-dkim-dkim2-spec-07'
 DKIM2_REPO = 'github.com/brong/mailman'
-DKIM2_DATE = '2026-10-07'
+DKIM2_DATE = '2026-10-18'
 DKIM2_SOFTWARE = 'mailman'
 
+
+# The hint egress puts on every distribution copy, for the signing milter.
+EXPLODED_HINT = 'X-DKIM2-Exploded'
 
 _INFO_HEADER_NAME_LEN = len('X-DKIM2-Info: ')
 _INFO_TAB_WIDTH = 8
@@ -126,7 +129,7 @@ def _dkim2_info(action, **extras):
 # Headers excluded from the header hash per DKIM2 spec Section 4
 # ---------------------------------------------------------------------------
 
-# Unsigned header fields per DKIM2 spec-06 §4, §4.1. spec-05 narrowed the old
+# Unsigned header fields per DKIM2 spec-07 §4, §4.1. spec-05 narrowed the old
 # 'arc-' prefix to the three RFC 8617 field names and added a 'received-'
 # prefix rule. x400-received / x400-trace match neither prefix.
 _EXCLUDED_NAMES = frozenset({
@@ -176,11 +179,11 @@ def _b64json(obj):
 
 
 # ---------------------------------------------------------------------------
-# Header canonicalization (spec-06 §6.2)
+# Header canonicalization (spec-07 §6.2)
 # ---------------------------------------------------------------------------
 
 def _canonicalize_header_field(name, value):
-    """Canonicalize a single header field per DKIM2 spec-06 §6.2.
+    """Canonicalize a single header field per DKIM2 spec-07 §6.2.
 
     Takes the header name and value as separate strings.
     Returns canonical form as bytes.
@@ -242,7 +245,7 @@ def _wire_value(msg, name, value):
     colon = text.find(':')
     if colon != -1:
         text = text[colon + 1:]
-    # Unfold (spec-06 §5.1: Recipe strings MUST NOT contain CR or LF; the
+    # Unfold (spec-07 §5.1: Recipe strings MUST NOT contain CR or LF; the
     # hash collapses WSP runs anyway, so a fold is one SP), then as the
     # parser would hand it back: no leading WSP, no line ending.
     text = re.sub(r'\r?\n[ \t]+', ' ', text.rstrip('\r\n'))
@@ -250,7 +253,7 @@ def _wire_value(msg, name, value):
 
 
 def _hash_header_pairs(pairs):
-    """SHA-256 header hash (spec-06 §6.2) over (name, wire value) pairs in
+    """SHA-256 header hash (spec-07 §6.2) over (name, wire value) pairs in
     document order; excluded names (§4) are the caller's business."""
     canon_headers = []
     for name, value in pairs:
@@ -268,11 +271,11 @@ def _hash_header_pairs(pairs):
 
 @public
 def compute_header_hash(msg):
-    """Compute SHA-256 header hash per DKIM2 spec-06 §6.2 of a message as
+    """Compute SHA-256 header hash per DKIM2 spec-07 §6.2 of a message as
     the generator will emit it.
 
     Excludes headers listed in the spec
-    (see _EXCLUDED_NAMES / _EXCLUDED_PREFIXES — spec-06 §4).
+    (see _EXCLUDED_NAMES / _EXCLUDED_PREFIXES — spec-07 §4).
     Returns raw SHA-256 digest bytes.
     """
     return _hash_header_pairs(_collect_headers(msg))
@@ -340,7 +343,7 @@ def _serialize_msg(msg):
 
 
 def _hash_body_bytes(body, start=0):
-    """SHA-256 body hash (spec-06 §6.1) of body[start:]: trailing empty
+    """SHA-256 body hash (spec-07 §6.1) of body[start:]: trailing empty
     lines ignored, one CRLF at the end.  Hashed in place, not sliced: the
     body can be most of a large message."""
     end = _body_end(body, start)
@@ -442,7 +445,7 @@ def compute_body_hash_raw(raw):
 
 def _body_lines_raw(raw):
     """Body lines of the raw octets.  Trailing empty lines are not lines:
-    the spec-06 §6.1 body canonicalization ignores them, so a Recipe must
+    the spec-07 §6.1 body canonicalization ignores them, so a Recipe must
     never number or restore one."""
     body = _split_raw(raw)[1].decode('utf-8', errors='surrogateescape')
     body = body.rstrip('\r\n')
@@ -498,24 +501,24 @@ def verify_mi_raw(raw):
 def _literal_steps(values):
     """Recipe steps that emit these literal header values or body lines.
 
-    Pure-ASCII literals go in a {"d": [...]} step as spec-06 §5 has them.
-    A literal whose octets include a byte >= 0x80 -- the str form here is
-    the surrogateescape decoding of the raw octets -- goes in a {"b": [...]}
-    step: the raw octets base64-encoded inside the JSON string.  JSON text
-    cannot carry Latin-1, EUC-KR or any other non-UTF-8 octets, and the
-    U+DCxx lone surrogates json.dumps would otherwise emit are undecodable
-    by every other implementation.  (Extension to spec-06 §5, proposed to
-    the WG.)
+    A literal that is valid UTF-8 (ASCII included) goes in a {"d": [...]}
+    step as the text it encodes; any other literal goes in a {"u": [...]}
+    step, the base64 of its raw octets (spec-07 §5).  The str form here is
+    the surrogateescape decoding of the raw octets, so the octets are
+    recovered first and the UTF-8 test is on them: JSON text cannot carry
+    Latin-1, EUC-KR or any other non-UTF-8 octets, and the U+DCxx lone
+    surrogates json.dumps would otherwise emit are undecodable by every
+    other implementation.
 
     Consecutive literals of one kind share a step; a mixed run alternates.
     """
     steps = []
     for value in values:
-        if value.isascii():
-            kind, item = 'd', value
-        else:
-            kind = 'b'
-            item = _b64(value.encode('utf-8', errors='surrogateescape'))
+        octets = value.encode('utf-8', errors='surrogateescape')
+        try:
+            kind, item = 'd', octets.decode('utf-8')
+        except UnicodeDecodeError:
+            kind, item = 'u', _b64(octets)
         if steps and kind in steps[-1]:
             steps[-1][kind].append(item)
         else:
@@ -526,7 +529,7 @@ def _literal_steps(values):
 # The body Recipe of an instance whose previous body cannot be rebuilt:
 # Mailman rewrote it (content filtering, DMARC wrap) before decoration, or
 # it differs from the current body by more than the body diff's limits.
-# Emitted as "b": null (spec-06 §4.2).
+# Emitted as "b": null (spec-07 §5.2).
 NULL_BODY_RECIPE = object()
 
 # The body diff's limits, shared by the DKIM2 implementations: a body
@@ -685,12 +688,12 @@ def compute_body_recipe(current_lines, previous_lines,
     """Compute body recipe to undo current body back to previous.
 
     Uses the capped line diff, _body_diff.  Returns a list of Recipe steps
-    (spec-06 §5):
+    (spec-07 §5):
     - {"c": [start, end]}: copy this range of lines from the current body
       (1-based, inclusive)
-    - {"d": [line, ...]}: literal ASCII lines from the previous body
-    - {"b": [base64, ...]}: literal 8-bit lines from the previous body,
-      see _literal_steps
+    - {"d": [line, ...]}: literal UTF-8 lines from the previous body
+    - {"u": [base64, ...]}: literal lines from the previous body that
+      are not UTF-8, see _literal_steps
 
     Returns None if bodies are identical, and NULL_BODY_RECIPE if the
     previous body would take more than max_literals literal lines to
@@ -724,7 +727,7 @@ def _wrapped_body_recipe(wire, snap_raw, boundary):
     The wrap writes the original body, its final line break dropped,
     straight before the line break and delimiter of its boundary.  If the
     first occurrence of the original body's octets (trailing empty lines
-    off, as spec-06 §6.1 has it) in the wire body starts a line and is
+    off, as spec-07 §6.1 has it) in the wire body starts a line and is
     followed by that delimiter, it is the first run of current lines equal
     to the previous lines, and k and n are counts of CRLFs.  (That is a
     valid Recipe, though not always the one compute_body_recipe gives: when
@@ -759,11 +762,11 @@ def compute_header_recipe(current_headers, previous_headers):
 
     Both arguments are lists of (name, value) tuples.
     Returns a dict mapping lowercase header names to Recipe step lists
-    ({"c": [i, j]} copies by bottom-up index, {"d": [...]} / {"b": [...]}
+    ({"c": [i, j]} copies by bottom-up index, {"d": [...]} / {"u": [...]}
     restore literal values -- see _literal_steps),
     or None if no non-excluded headers changed.
 
-    spec-06 §5.1 requires the "c" ranges of one header name to ascend
+    spec-07 §5.1 requires the "c" ranges of one header name to ascend
     without overlapping, so a previous value can only be copied from a
     current instance below every instance already copied; a value whose
     instances were reordered (or one of two identical instances when the
@@ -957,13 +960,27 @@ def _get_mi_version(mi_value):
     return int(match.group(1)) if match else 0
 
 
-# spec-06 §7: a tag is x-tag-name [FWS] "=" [FWS] [x-tag-value], the
-# value x-tag-chars (%x21-3A / %x3C-7E) with FWS only between them.  After
+# spec-07 §8: a tag is tag-name [FWS] "=" [FWS] tag-value, the
+# value tval chars (%x21-3A / %x3C-7E) with FWS only between them.  After
 # unfolding, FWS is a WSP run.
 _MI_TAG = re.compile(r'[ \t]*([A-Za-z][A-Za-z0-9_]*)[ \t]*=[ \t]*'
                      r'([\x21-\x3a\x3c-\x7e \t]*)')
 _MI_BASE64 = re.compile(r'(?:[A-Za-z0-9+/]{4})*'
                         r'(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?')
+
+
+def _unique_keys(pairs):
+    """json object_pairs_hook: keys are matched without regard to case
+    (decision 2 of our -07 contract, after spec-07 §5), so two keys of one
+    object that are equal ignoring case are a duplicate, and invalid JSON.
+    """
+    seen = set()
+    for key, _ in pairs:
+        folded = key.lower()
+        if folded in seen:
+            raise ValueError('duplicate key {!r}'.format(key))
+        seen.add(folded)
+    return dict(pairs)
 
 
 def _parse_mi(mi_value):
@@ -977,9 +994,9 @@ def _parse_mi(mi_value):
     """
     val = str(mi_value)
     # Unfold: FWS is CRLF followed by one *or more* WSP (RFC 5322;
-    # draft-ietf-dkim-dkim2-spec-06 §2.12).  Only the line ending goes; the
+    # draft-ietf-dkim-dkim2-spec-07 §2.12).  Only the line ending goes; the
     # WSP stays, so a fold inside a token (a hash name) is still WSP there
-    # and a syntax error.  spec-06 §2.14: FWS within a base64string is
+    # and a syntax error.  spec-07 §2.14: FWS within a base64string is
     # ignored when the value is used, so the base64 values drop all WSP.
     val = re.sub(r'\r?\n(?=[ \t])', '', val)
     syntax_error = MalformedInstance(
@@ -991,7 +1008,7 @@ def _parse_mi(mi_value):
         match = _MI_TAG.fullmatch(fragment)
         if match is None:
             raise syntax_error
-        # Tag names are case insignificant and appear at most once (§7).
+        # Tag names are case insignificant and appear at most once (§8).
         name = match.group(1).lower()
         if name in tags:
             raise syntax_error
@@ -1001,7 +1018,7 @@ def _parse_mi(mi_value):
         raise syntax_error
     hashes = None
     recipe = None
-    # h= is one or more hash-sets (§7.3): FWS around the hash name and the
+    # h= is one or more hash-sets (§9.3): FWS around the hash name and the
     # colons and inside the base64 digests, never inside the hash name; a
     # set needs both digests, and a hash name appears once.
     seen = set()
@@ -1026,7 +1043,8 @@ def _parse_mi(mi_value):
     if 'r' in tags:
         b64_clean = re.sub(r'[ \t]', '', tags['r'])
         try:
-            recipe = json.loads(base64.b64decode(b64_clean, validate=True))
+            recipe = json.loads(base64.b64decode(b64_clean, validate=True),
+                                object_pairs_hook=_unique_keys)
         except ValueError as error:
             raise MalformedRecipe('r= is not base64 JSON: {}'.format(error))
     return int(version), hashes, recipe
@@ -1034,7 +1052,7 @@ def _parse_mi(mi_value):
 
 @public
 class MalformedInstance(ValueError):
-    """A Message-Instance value that is not a valid tag-list (spec-06 §7).
+    """A Message-Instance value that is not a valid tag-list (spec-07 §8).
 
     _parse_mi raises it; verify_mi_raw reports it as an instance that does
     not verify.
@@ -1043,7 +1061,7 @@ class MalformedInstance(ValueError):
 
 @public
 class MalformedRecipe(ValueError):
-    """A Message-Instance Recipe that cannot be applied (spec-06 §5).
+    """A Message-Instance Recipe that cannot be applied (spec-07 §5).
 
     _parse_mi raises it for an r= that is not base64 JSON; verify_mi_raw
     reports that as an instance that does not verify.
@@ -1210,6 +1228,15 @@ class MessageInstanceEgress:
         for name in _SEND_MESSAGE_DROPS:
             del msg[name]
         snapshot = msgdata.get('mi_snapshot')
+        if snapshot:
+            # A copy of a message the list received, on its way to the
+            # members (or owners): the list sends copies to more than one
+            # address, so its signature carries the "exploded" flag
+            # (spec-07 §12.5).  Mailman does not sign; this tells the
+            # signing milter, which deletes the field.  It is X-, so not
+            # hashed, and is set once however often egress runs.
+            del msg[EXPLODED_HINT]
+            msg[EXPLODED_HINT] = 'yes'
         if snapshot and get_max_mi_version(msg) > snapshot['version']:
             # Mailman already stamped this message: BulkDelivery decorates
             # and runs egress on the queued message itself, and a temporary
