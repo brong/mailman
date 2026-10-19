@@ -19,6 +19,7 @@
 
 from mailman.config import config
 from mailman.core.i18n import _
+from mailman.handlers.message_instance import without_received_bytes
 from mailman.interfaces.archiver import ArchivePolicy
 from mailman.interfaces.handler import IHandler
 from public import public
@@ -44,5 +45,7 @@ class ToArchive:
         # presence.  I'm keeping "X-Archive: no" for backwards compatibility.
         if 'x-no-archive' in msg or msg.get('x-archive', '').lower() == 'no':
             return
-        # Send the message to the archiver queue.
-        config.switchboards['archive'].enqueue(msg, msgdata)
+        # Send the message to the archiver queue.  Archivers never need the
+        # octets kept for DKIM2 Message-Instance egress.
+        with without_received_bytes(msg):
+            config.switchboards['archive'].enqueue(msg, msgdata)

@@ -257,6 +257,16 @@ class IMailingList(Interface):
     def confirm_address(cookie=''):
         """The address used for various forms of email confirmation."""
 
+    # DKIM2 attributes.
+
+    dkim2_message_instance = Attribute(
+        """Should DKIM2 Message-Instance headers be added to messages?
+
+        A per-list flag to enable or disable DKIM2 Message-Instance header
+        processing.  When False, ingress and egress MI handlers skip this
+        list entirely.  Defaults to True.
+        """)
+
     # DMARC attributes.
 
     dmarc_mitigate_action = Attribute(

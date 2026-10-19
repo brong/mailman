@@ -19,11 +19,16 @@
 
 import re
 import copy
+import uuid
 import logging
 
+from email.generator import BytesGenerator
 from email.mime.text import MIMEText
 from email.utils import formataddr
 from mailman.core.i18n import _
+from mailman.email.message import Message
+from mailman.handlers.message_instance import (
+    _body_offset, _mi_enabled, _normalize_crlf, _raw_head)
 from mailman.interfaces.handler import IHandler
 from mailman.interfaces.mailinglist import IListArchiverSet
 from mailman.interfaces.template import ITemplateLoader
@@ -35,6 +40,125 @@ from zope.interface import implementer
 
 log = logging.getLogger('mailman.error')
 alog = logging.getLogger('mailman.archiver')
+
+
+def _new_boundary():
+    return '===============DKIM2{}=='.format(uuid.uuid4().hex)
+
+
+class _ReceivedPart(Message):
+    """A MIME part that is written out as the octets it arrived with.
+
+    It holds a part -- header fields, blank line, body -- as one bytes
+    object, the octets received with CRLF line endings, and writes it
+    through the generator's own header hook, so it comes out verbatim in
+    the generator's line ending: no refolding, no From_ mangling (smtplib's
+    generator mangles), and no decoding of 8-bit octets (which a string
+    payload on the multipart itself would suffer).  One object, not one
+    per line: a line costs a str's overhead, megabytes for a large post.
+    The part has no header fields or payload of its own as far as the
+    email package is concerned.
+    """
+
+    def __init__(self, received):
+        super().__init__()
+        self._received = received
+
+    def __setstate__(self, values):
+        # Earlier builds held the lines, surrogate-escaped, in a list; a
+        # message they wrapped can still be in the retry queue.
+        lines = values.pop('_received_lines', None)
+        if lines is not None:
+            values['_received'] = '\r\n'.join(lines).encode(
+                'ascii', 'surrogateescape')
+        super().__setstate__(values)
+
+    # Generator._write calls getattr(msg, '_write_headers', None) when it
+    # writes a part: a private CPython hook, stable since Python 3.2.
+    def _write_headers(self, generator):
+        data = self._received
+        linesep = generator.policy.linesep
+        if linesep != '\r\n':
+            data = data.replace(b'\r\n', linesep.encode('ascii'))
+        if isinstance(generator, BytesGenerator):
+            # write() would decode-then-encode a str copy of the octets.
+            generator._fp.write(data)
+        else:
+            generator.write(data.decode('ascii', 'surrogateescape'))
+
+
+def _decoration_part(text, charset):
+    # RFC 2046: the line break before a boundary delimiter belongs to the
+    # delimiter, so the text's own final newline would add a blank line.
+    part = MIMEText(text.rstrip('\n').encode(charset, errors='replace'),
+                    'plain', charset)
+    part['Content-Disposition'] = 'inline'
+    return part
+
+
+def _dkim2_wrap(mlist, msg, msgdata, header, footer):
+    """On a DKIM2 list, wrap the body exactly as it arrived.
+
+    The original top-level Content-* fields and body octets become the
+    middle part of a multipart/mixed, so a Message-Instance Recipe for
+    this hop is literal lines, one copy range, literal lines -- whatever
+    the body's encoding or structure.  Returns False when the message must
+    be decorated the usual way: DKIM2 is off for this list, the message
+    did not come through ingress, or Mailman already rewrote the body (it
+    then gets a null body Recipe instead).  The boundary goes in
+    msgdata['dkim2-wrap'], so egress can find the original body in the
+    wrap rather than diff for it.
+    """
+    raw = getattr(msg, 'original_bytes', None)
+    if raw is None or not _mi_enabled(mlist):
+        return False
+    raw = _normalize_crlf(raw)
+    # The Content-* fields as received, folding and whitespace included.
+    pieces = [
+        field + b'\r\n'
+        for field in re.split(rb'\r\n(?![ \t])', _raw_head(raw))
+        if field.split(b':', 1)[0].strip().lower().startswith(b'content-')]
+    pieces.append(b'\r\n')
+    # The generator puts the line break before the next delimiter, so the
+    # body's own final line break goes: the original's last line is then
+    # followed by exactly one, and the Recipe copies its lines as one range.
+    start = _body_offset(raw)
+    end = len(raw)
+    if raw.endswith(b'\r\n', start):
+        end -= 2
+    # The body is the bulk of the part: a view, so it is copied only once,
+    # into the part.
+    pieces.append(memoryview(raw)[start:end])
+    # The boundary must not occur anywhere in the part it delimits; every
+    # octet of that part is in the message as received.
+    while True:
+        boundary = _new_boundary()
+        if boundary.encode('ascii') not in raw:
+            break
+    lcset = mlist.preferred_language.charset
+    payload = [_ReceivedPart(b''.join(pieces))]
+    if len(header) > 0:
+        payload.insert(0, _decoration_part(header, lcset))
+    if len(footer) > 0:
+        payload.append(_decoration_part(footer, lcset))
+    # As upstream's wrap does, only these three leave the outer message;
+    # any other Content-* field stays there as well as in the middle part.
+    del msg['content-type']
+    del msg['content-transfer-encoding']
+    del msg['content-disposition']
+    msg['Content-Type'] = 'multipart/mixed; boundary="{}"'.format(boundary)
+    if msg['MIME-Version'] is None:
+        msg['MIME-Version'] = '1.0'
+    # A multipart original's preamble and epilogue are in the middle part.
+    with _.using(mlist.preferred_language.code):
+        msg.preamble = _(
+            'This message was MIME-wrapped because the list adds DKIM2 '
+            'change\nrecords; a MIME-capable mail reader shows it as the '
+            'sender intended.')
+    msg.epilogue = None
+    msg.set_payload(payload)
+    msgdata['dkim2-wrap'] = boundary
+    return True
 
 
 def process(mlist, msg, msgdata):
@@ -85,6 +209,11 @@ def process(mlist, msg, msgdata):
     footer = decorate('list:member:regular:footer', mlist, d)
     # Escape hatch if both the footer and header are empty or None.
     if len(header) == 0 and len(footer) == 0:
+        return
+    # On a DKIM2 list, wrap the body as it arrived (unless Mailman already
+    # rewrote it, when the Recipe says the body cannot be rebuilt anyway).
+    if not msgdata.get('body-modified') and _dkim2_wrap(
+            mlist, msg, msgdata, header, footer):
         return
     # Be MIME smart here.  We only attach the header and footer by
     # concatenation when the message is a non-multipart of type text/plain.
