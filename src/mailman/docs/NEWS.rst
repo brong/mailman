@@ -124,6 +124,11 @@ New Features
   for owner notifications.  (:issue:`1261`)
 * Reject log messages include the listname, the sender and the reasons.
   Discard/Hold log messages include the listname and the sender. (:issue:`1282`)
+* For integration tests that reset the database, runners using the base
+  signal loop can close their database session on SIGHUP with
+  ``reset_db_session_on_sighup: yes``.  Enable this only in test configurations.
+  The default remains log reopening only; no database records are deleted.
+  (:mr:`1542`)
 
 Other
 -----
