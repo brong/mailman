@@ -318,25 +318,25 @@ class Loop:
 
         SIGHUP tells the runners to close and reopen their log files.
         """
+        self._log.info('Master watcher caught SIGHUP.  Re-opening log files.')
         reopen()
         for pid in self._kids:
             try:
                 os.kill(pid, signal.SIGHUP)
             except ProcessLookupError:                       # pragma: nocover
                 pass
-        self._log.info('Master watcher caught SIGHUP.  Re-opening log files.')
 
     def _sigusr1_handler(self, signum, frame):
         """Handles SIGUSR1.
 
         SIGUSR1 is used by 'mailman restart'.
         """
+        self._log.info('Master watcher caught SIGUSR1.  Restarting.')
         for pid in self._kids:
             try:
                 os.kill(pid, signal.SIGUSR1)
             except ProcessLookupError:                       # pragma: nocover
                 pass
-        self._log.info('Master watcher caught SIGUSR1.  Restarting.')
 
     def _sigterm_handler(self, signum, frame):
         """Handles SIGTERM.
@@ -344,6 +344,7 @@ class Loop:
         SIGTERM is what init will kill this process with when changing
         run levels.  It's also the signal 'mailman stop' uses.
         """
+        self._log.info('Master watcher caught SIGTERM.  Exiting.')
         # Clear the flag so that we won't try to restart the runners.
         self._restartable = False
         for pid in self._kids:
@@ -351,13 +352,13 @@ class Loop:
                 os.kill(pid, signal.SIGTERM)
             except ProcessLookupError:                       # pragma: nocover
                 pass
-        self._log.info('Master watcher caught SIGTERM.  Exiting.')
 
     def _sigint_handler(self, signum, frame):
         """Handles SIGINT.
 
         SIGINT is what control-C gives.
         """
+        self._log.info('Master watcher caught SIGINT.  Exiting.')
         # Clear the flag so that we won't try to restart the runners.
         self._restartable = False
         for pid in self._kids:
@@ -365,7 +366,6 @@ class Loop:
                 os.kill(pid, signal.SIGINT)
             except ProcessLookupError:                       # pragma: nocover
                 pass
-        self._log.info('Master watcher caught SIGINT.  Exiting.')
 
     def _start_runner(self, spec):
         """Start a runner.
