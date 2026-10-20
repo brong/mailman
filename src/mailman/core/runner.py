@@ -79,6 +79,8 @@ class Runner:
                             self.sleep_time.microseconds / 1.0e6)
         self.max_restarts = int(section.max_restarts)
         self.start = as_boolean(section.start)
+        self.reset_db_session_on_sighup = as_boolean(
+            section.reset_db_session_on_sighup)
         self._signal_queue = queue.SimpleQueue()
         self._stop = False
         self.status = 0
@@ -101,6 +103,11 @@ class Runner:
                 self.name, signame
             )
             reopen()
+            if self.reset_db_session_on_sighup:
+                config.db.close_session()
+                rlog.info(
+                    '%s runner database session reset after SIGHUP.',
+                    self.name)
         elif signum in (signal.SIGTERM, signal.SIGINT, signal.SIGUSR1):
             rlog.info('%s runner caught %s.  Stopping.', self.name, signame)
             self.stop()
