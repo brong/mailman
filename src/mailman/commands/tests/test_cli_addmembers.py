@@ -162,6 +162,17 @@ class TestCLIAddMembers(unittest.TestCase):
         self.assertEqual(members[0].delivery_mode, DeliveryMode.regular)
         self.assertEqual(members[0].delivery_status, DeliveryStatus.enabled)
 
+    def test_add_existing_address_without_display_name(self):
+        getUtility(IUserManager).create_address('aperson@example.com')
+        result = self._command.invoke(
+            addmembers, ('-', 'ant.example.com'),
+            input='Anne Person <aperson@example.com>\n')
+        self.assertEqual(result.output, '')
+        self.assertEqual(result.exit_code, 0)
+        members = list(self._mlist.members.members)
+        self.assertEqual(len(members), 1)
+        self.assertEqual(members[0].display_name, 'Anne Person')
+
     def test_add_blanks_and_comments(self):
         with NamedTemporaryFile('w', buffering=1, encoding='utf-8') as infp:
             print('Anne Person <aperson@example.com>', file=infp)

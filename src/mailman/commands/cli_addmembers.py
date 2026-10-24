@@ -47,7 +47,9 @@ def get_addr(display_name, email, user_manager):
     """Return an existing address record if available, otherwise make one."""
     addr = user_manager.get_address(email)
     if addr is not None:
-        # We have an address with this email.  Return that.
+        # Fill in the display name only if it is currently empty.
+        if display_name and not addr.display_name:
+            addr.display_name = display_name
         return addr
     # Unknown email.  Create an address for this.
     # XXX Should we be making a user instead?

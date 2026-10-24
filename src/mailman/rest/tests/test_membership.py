@@ -335,6 +335,45 @@ class TestMembership(unittest.TestCase):
         self.assertEqual(len(members), 1)
         self.assertEqual(members[0].address.email, 'hugh/person@example.com')
 
+    def test_join_existing_address_without_display_name(self):
+        with transaction():
+            self._usermanager.create_address('anne@example.com')
+
+        _, response = call_api(
+            'http://localhost:9001/3.0/members', {
+                'list_id': 'test.example.com',
+                'subscriber': 'anne@example.com',
+                'display_name': 'Anne Person',
+                'pre_verified': True,
+                'pre_confirmed': True,
+                'pre_approved': True,
+            })
+        self.assertEqual(response.status_code, 201)
+
+        config.db.abort()
+        address = self._usermanager.get_address('anne@example.com')
+        self.assertEqual(address.display_name, 'Anne Person')
+
+    def test_join_existing_address_preserves_display_name(self):
+        with transaction():
+            self._usermanager.create_address(
+                'anne@example.com', 'A Person')
+
+        _, response = call_api(
+            'http://localhost:9001/3.0/members', {
+                'list_id': 'test.example.com',
+                'subscriber': 'anne@example.com',
+                'display_name': 'Anne Person',
+                'pre_verified': True,
+                'pre_confirmed': True,
+                'pre_approved': True,
+            })
+        self.assertEqual(response.status_code, 201)
+
+        config.db.abort()
+        address = self._usermanager.get_address('anne@example.com')
+        self.assertEqual(address.display_name, 'A Person')
+
     def test_join_as_user_with_preferred_address(self):
         with transaction():
             anne = self._usermanager.create_user('anne@example.com')
