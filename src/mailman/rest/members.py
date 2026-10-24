@@ -367,6 +367,9 @@ class AllMembers(_MemberBase):
                 # Create a new address, which of course will not be validated.
                 address = user_manager.create_address(
                     subscriber, display_name)
+            elif display_name and not address.display_name:
+                # Fill in the name only if the existing name is empty.
+                address.display_name = display_name
             subscriber = address
         # What role are we subscribing?  Regular members go through the
         # subscription policy workflow while owners, moderators, and

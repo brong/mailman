@@ -22,6 +22,8 @@ Configuration
 
 Bugs fixed
 ----------
+* The ``addmembers`` command and REST API now populate an empty display
+  name for an existing address when a name is supplied. (:issue:`1291`)
 * Fix ``AttributeError`` in ``Member._lookup()`` when member preferences
   is ``None``.  (:issue:`1284`)
 * Fixed: mailman restart --help now documents that dead runner processes will
