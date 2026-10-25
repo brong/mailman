@@ -48,4 +48,4 @@ A message body.
         result = rule.check(self._mlist, msg, msgdata)
         self.assertTrue(result)
         self.assertEqual(msgdata['moderation_reasons'],
-                         ['Message has implicit destination'])
+                         ['List is not explicitly addressed'])

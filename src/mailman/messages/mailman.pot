@@ -1879,7 +1879,7 @@ msgid "Catch messages with implicit destination."
 msgstr ""
 
 #: src/mailman/rules/implicit_dest.py:92
-msgid "Message has implicit destination"
+msgid "List is not explicitly addressed"
 msgstr ""
 
 #: src/mailman/rules/loop.py:32
