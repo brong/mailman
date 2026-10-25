@@ -22,6 +22,8 @@ Configuration
 
 Bugs fixed
 ----------
+* The implicit destination rejection reason now says the list is not
+  explicitly addressed. (:issue:`1286`)
 * The ``addmembers`` command and REST API now populate an empty display
   name for an existing address when a name is supplied. (:issue:`1291`)
 * Fix ``AttributeError`` in ``Member._lookup()`` when member preferences

@@ -89,5 +89,5 @@ class ImplicitDestination:
         with _.defer_translation():
             # This will be translated at the point of use.
             msgdata.setdefault('moderation_reasons', []).append(
-                _('Message has implicit destination'))
+                _('List is not explicitly addressed'))
         return True
