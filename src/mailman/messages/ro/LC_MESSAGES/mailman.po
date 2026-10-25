@@ -7,21 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-05 07:50-0700\n"
+"POT-Creation-Date: 2026-10-25 13:45-0700\n"
 "PO-Revision-Date: 2025-11-24 08:51+0000\n"
 "Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
-"Language-Team: Romanian <https://hosted.weblate.org/projects/gnu-mailman/"
-"mailman/ro/>\n"
+"Language-Team: Romanian <https://hosted.weblate.org/projects/gnu-mailman/mailman/ro/>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : "
-"(n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
 "X-Generator: Weblate 5.15-dev\n"
 
-#: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:83 src/mailman/chains/hold.py:166
-#: src/mailman/handlers/acknowledge.py:56 src/mailman/handlers/subject_prefix.py:46
+#: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:83
+#: src/mailman/chains/hold.py:165 src/mailman/handlers/acknowledge.py:56
+#: src/mailman/handlers/subject_prefix.py:46
 #: src/mailman/handlers/subject_prefix.py:91 src/mailman/runners/digest.py:88
 msgid "(no subject)"
 msgstr "(fără subiect)"
@@ -30,12 +29,12 @@ msgstr "(fără subiect)"
 msgid "[No bounce details are available]"
 msgstr "[Nu sunt disponibile detalii privind respingerea]"
 
-#: src/mailman/app/bounces.py:230
+#: src/mailman/app/bounces.py:233
 #, python-brace-format
 msgid "${mlist.display_name} mailing list probe message"
 msgstr "Mesaj de testare a listei de discuții ${mlist.display_name}"
 
-#: src/mailman/app/bounces.py:266
+#: src/mailman/app/bounces.py:269
 #, python-brace-format
 msgid "${mlist.display_name} uncaught bounce notification"
 msgstr "Notificare de respingere neinterceptată ${mlist.display_name}"
@@ -58,7 +57,8 @@ msgstr ""
 msgid "Posting of your message titled \"${subject}\""
 msgstr "Publicarea mesajului dvs. intitulat „${subject}”"
 
-#: src/mailman/app/moderator.py:132 src/mailman/app/moderator.py:278 src/mailman/rest/sub_moderation.py:119
+#: src/mailman/app/moderator.py:132 src/mailman/app/moderator.py:278
+#: src/mailman/rest/sub_moderation.py:119
 msgid "[No reason given]"
 msgstr "[Fără motiv specificat]"
 
@@ -84,98 +84,83 @@ msgstr "Mesajul original"
 msgid "Request to mailing list \"${display_name}\" rejected"
 msgstr "Cererea către lista de discuții „${display_name}” a fost respinsă"
 
-#: src/mailman/app/notifications.py:93
+#: src/mailman/app/notifications.py:101
 msgid " (Digest mode)"
 msgstr " (Modul rezumat)"
 
-#: src/mailman/app/notifications.py:97
+#: src/mailman/app/notifications.py:105
 #, python-brace-format
 msgid "Welcome to the \"${mlist.display_name}\" mailing list${digmode}"
 msgstr "Bine ați venit la lista de discuții „${mlist.display_name}”${digmode}"
 
-#: src/mailman/app/notifications.py:130
+#: src/mailman/app/notifications.py:138
 #, python-brace-format
 msgid "You have been unsubscribed from the ${mlist.display_name} mailing list"
 msgstr "Ați fost dezabonat de la lista de discuții ${mlist.display_name}"
 
-#: src/mailman/app/notifications.py:148
+#: src/mailman/app/notifications.py:156
 #, python-brace-format
 msgid "${mlist.display_name} subscription notification"
 msgstr "Notificare privind abonamentul la ${mlist.display_name}"
 
-#: src/mailman/app/notifications.py:173
+#: src/mailman/app/notifications.py:180
 #, python-brace-format
 msgid "${member}'s subscription disabled on ${mlist.display_name}"
 msgstr "Abonamentul lui ${member} a fost dezactivat pe ${mlist.display_name}"
 
-#: src/mailman/app/notifications.py:201
+#: src/mailman/app/notifications.py:209
 #, python-brace-format
 msgid "${member}'s bounce score incremented on ${mlist.display_name}"
-msgstr ""
-"Punctajul de respingere al lui ${member} a crescut pe ${mlist.display_name}"
+msgstr "Punctajul de respingere al lui ${member} a crescut pe ${mlist.display_name}"
 
-#: src/mailman/app/notifications.py:227
+#: src/mailman/app/notifications.py:236
 #, python-brace-format
 msgid "${member} unsubscribed from ${mlist.display_name} mailing list due to bounces"
-msgstr ""
-"${member} s-a dezabonat de la lista de distribuție ${mlist.display_name} din "
-"cauza mesajelor respinse"
+msgstr "${member} s-a dezabonat de la lista de distribuție ${mlist.display_name} din cauza mesajelor respinse"
 
-#: src/mailman/app/notifications.py:254
+#: src/mailman/app/notifications.py:269
 #, python-brace-format
 msgid "Your subscription for ${mlist.display_name} mailing list has been disabled"
-msgstr ""
-"Abonamentul dvs. la lista de discuții ${mlist.display_name} a fost dezactivat"
+msgstr "Abonamentul dvs. la lista de discuții ${mlist.display_name} a fost dezactivat"
 
-#: src/mailman/app/subscriptions.py:328
+#: src/mailman/app/subscriptions.py:331
 #, python-brace-format
 msgid "New subscription request to ${self.mlist.display_name} from ${self.address.email}"
-msgstr ""
-"Cerere de abonare nouă la ${self.mlist.display_name} din partea lui "
-"${self.address.email}"
+msgstr "Cerere de abonare nouă la ${self.mlist.display_name} din partea lui ${self.address.email}"
 
-#: src/mailman/app/subscriptions.py:499
+#: src/mailman/app/subscriptions.py:510
 #, python-brace-format
 msgid "New unsubscription request to ${self.mlist.display_name} from ${self.address.email}"
-msgstr ""
-"Cerere de dezabonare nouă la ${self.mlist.display_name} din partea lui "
-"${self.address.email}"
+msgstr "Cerere de dezabonare nouă la ${self.mlist.display_name} din partea lui ${self.address.email}"
 
-#: src/mailman/app/subscriptions.py:631
+#: src/mailman/app/subscriptions.py:644
 #, python-brace-format
 msgid "You have been invited to join the ${event.mlist.fqdn_listname} mailing list."
-msgstr ""
-"Ați fost invitat să vă alăturați listei de discuții "
-"${event.mlist.fqdn_listname}."
+msgstr "Ați fost invitat să vă alăturați listei de discuții ${event.mlist.fqdn_listname}."
 
-#: src/mailman/app/subscriptions.py:634
+#: src/mailman/app/subscriptions.py:647
 #, python-brace-format
 msgid "Your confirmation is needed to leave the ${event.mlist.fqdn_listname} mailing list."
-msgstr ""
-"Este necesară confirmarea dvs. pentru a vă dezabona de la lista de discuții "
-"${event.mlist.fqdn_listname}."
+msgstr "Este necesară confirmarea dvs. pentru a vă dezabona de la lista de discuții ${event.mlist.fqdn_listname}."
 
-#: src/mailman/app/subscriptions.py:638
+#: src/mailman/app/subscriptions.py:651
 #, python-brace-format
 msgid "Your confirmation is needed to join the ${event.mlist.fqdn_listname} mailing list."
-msgstr ""
-"Este necesară confirmarea dvs. pentru a vă înscrie pe lista de discuții "
-"${event.mlist.fqdn_listname}."
+msgstr "Este necesară confirmarea dvs. pentru a vă înscrie pe lista de discuții ${event.mlist.fqdn_listname}."
 
-#: src/mailman/bin/mailman.py:102 src/mailman/bin/master.py:594 src/mailman/bin/runner.py:96
+#: src/mailman/bin/mailman.py:103 src/mailman/bin/master.py:595
+#: src/mailman/bin/runner.py:97
 msgid ""
 "    Configuration file to use.  If not given, the environment variable\n"
 "    MAILMAN_CONFIG_FILE is consulted and used if set.  If neither are given, a\n"
 "    default configuration file is loaded."
 msgstr ""
 "    Fișierul de configurare care trebuie utilizat. Dacă nu este specificat,\n"
-"    se consultă variabila de mediu MAILMAN_CONFIG_FILE și se utilizează "
-"dacă\n"
-"    este definită. Dacă niciuna dintre acestea nu este specificată, se "
-"încarcă\n"
+"    se consultă variabila de mediu MAILMAN_CONFIG_FILE și se utilizează dacă\n"
+"    este definită. Dacă niciuna dintre acestea nu este specificată, se încarcă\n"
 "    un fișier de configurare implicit."
 
-#: src/mailman/bin/mailman.py:110
+#: src/mailman/bin/mailman.py:111
 msgid ""
 "    Running mailman commands as root is not recommended and mailman will\n"
 "    refuse to run as root unless this option is specified."
@@ -183,33 +168,29 @@ msgstr ""
 "    Nu este recomandat să rulați comenzile mailman ca root, iar mailman\n"
 "    va refuza să ruleze ca root dacă nu este specificată această opțiune."
 
-#: src/mailman/bin/mailman.py:129
+#: src/mailman/bin/mailman.py:130
 msgid "    If you are sure you want to run as root, specify --run-as-root."
-msgstr ""
-"    Dacă sunteți sigur că doriți să rulați ca root, specificați opțiunea "
-"„--run-as-root”."
+msgstr "    Dacă sunteți sigur că doriți să rulați ca root, specificați opțiunea „--run-as-root”."
 
-#: src/mailman/bin/master.py:191
+#: src/mailman/bin/master.py:192
 msgid ""
 "The master lock could not be acquired because it appears as though another\n"
 "master is already running."
 msgstr ""
-"Nu s-a putut obține blocarea procesului principal deoarece se pare că un "
-"alt\n"
+"Nu s-a putut obține blocarea procesului principal deoarece se pare că un alt\n"
 "proces-principal este deja în funcțiune."
 
-#: src/mailman/bin/master.py:197
+#: src/mailman/bin/master.py:198
 #, python-brace-format
 msgid ""
 "The master lock could not be acquired.  It appears as though there is a stale\n"
 "master lock.  Try re-running ${program} with the --force flag."
 msgstr ""
-"Nu s-a putut obține blocarea procesului-principal. Se pare că există o "
-"blocare\n"
+"Nu s-a putut obține blocarea procesului-principal. Se pare că există o blocare\n"
 "a procesului-principal expirată. Încercați să rulați din nou ${program} cu\n"
 "opțiunea „--force”."
 
-#: src/mailman/bin/master.py:203
+#: src/mailman/bin/master.py:204
 #, python-brace-format
 msgid ""
 "The master lock could not be acquired, because it appears as if some process\n"
@@ -221,10 +202,8 @@ msgid ""
 "\n"
 "Exiting."
 msgstr ""
-"Blocarea procesului-principal nu a putut fi obținută, deoarece se pare că "
-"un\n"
-"alt proces de pe o altă gazdă ar fi putut să o obțină. Nu putem testa "
-"blocările\n"
+"Blocarea procesului-principal nu a putut fi obținută, deoarece se pare că un\n"
+"alt proces de pe o altă gazdă ar fi putut să o obțină. Nu putem testa blocările\n"
 "expirate între gazde, așa că va trebui să curățați această problemă manual.\n"
 "\n"
 "Fișier de blocare: ${config.LOCK_FILE}\n"
@@ -232,7 +211,7 @@ msgstr ""
 "\n"
 "Se iese."
 
-#: src/mailman/bin/master.py:216
+#: src/mailman/bin/master.py:217
 #, python-brace-format
 msgid ""
 "For unknown reasons, the master lock could not be acquired.\n"
@@ -242,15 +221,14 @@ msgid ""
 "\n"
 "Exiting."
 msgstr ""
-"Din motive necunoscute, nu s-a putut achiziționa blocarea procesului-"
-"principal.\n"
+"Din motive necunoscute, nu s-a putut achiziționa blocarea procesului-principal.\n"
 "\n"
 "Fișier de blocare: ${config.LOCK_FILE}\n"
 "Gazdă de blocare: ${hostname}\n"
 "\n"
 "Se iese."
 
-#: src/mailman/bin/master.py:570
+#: src/mailman/bin/master.py:571
 msgid ""
 "    Master subprocess watcher.\n"
 "\n"
@@ -275,45 +253,33 @@ msgstr ""
 "    Supraveghetorul principal («master») al subproceselor.\n"
 "\n"
 "    Pornește și urmărește executanții configurați, asigurându-se că aceștia\n"
-"    rămân activi și funcționali. Fiecare executant este bifurcat și executat "
-"pe\n"
-"    rând, «master»-rul așteptând ID-urile proceselor acestora. Când "
-"detectează\n"
+"    rămân activi și funcționali. Fiecare executant este bifurcat și executat pe\n"
+"    rând, «master»-rul așteptând ID-urile proceselor acestora. Când detectează\n"
 "    că un copil-executant a ieșit, acesta poate fi repornit.\n"
 "\n"
-"    Executanții răspund la SIGINT, SIGTERM, SIGUSR1 și SIGHUP.  SIGINT, "
-"SIGTERM\n"
-"    și SIGUSR1 determină ieșirea curată a unui executant. «Master»-ul va "
-"reporni\n"
-"    executanții care au ieșit din cauza unui SIGUSR1 sau a unei alte "
-"condiții de\n"
+"    Executanții răspund la SIGINT, SIGTERM, SIGUSR1 și SIGHUP.  SIGINT, SIGTERM\n"
+"    și SIGUSR1 determină ieșirea curată a unui executant. «Master»-ul va reporni\n"
+"    executanții care au ieșit din cauza unui SIGUSR1 sau a unei alte condiții de\n"
 "    ieșire (de exemplu, din cauza unei excepții neinterceptate). SIGHUP\n"
-"    determină «master»-ul și executanții să închidă fișierele jurnal și să "
-"le\n"
+"    determină «master»-ul și executanții să închidă fișierele jurnal și să le\n"
 "    redeschidă la următorul mesaj afișat.\n"
 "\n"
-"    «Master»-ul răspunde, de asemenea, la SIGINT, SIGTERM, SIGUSR1 și SIGHUP,"
-"\n"
-"    pe care le transmite pur și simplu către executanți. Rețineți că "
-"«master»-ul\n"
-"    va închide și redeschide propriile fișiere jurnal la primirea unui "
-"semnal\n"
-"    SIGHUP. «Master»-ul lasă, de asemenea, propriul ID de proces în "
-"fișierul\n"
-"    specificat în fișierul de configurare, dar în mod normal nu este "
-"necesar\n"
+"    «Master»-ul răspunde, de asemenea, la SIGINT, SIGTERM, SIGUSR1 și SIGHUP,\n"
+"    pe care le transmite pur și simplu către executanți. Rețineți că «master»-ul\n"
+"    va închide și redeschide propriile fișiere jurnal la primirea unui semnal\n"
+"    SIGHUP. «Master»-ul lasă, de asemenea, propriul ID de proces în fișierul\n"
+"    specificat în fișierul de configurare, dar în mod normal nu este necesar\n"
 "    să utilizați direct acest PID."
 
-#: src/mailman/bin/master.py:601
+#: src/mailman/bin/master.py:602
 msgid ""
 "    Don't restart the runners when they exit because of an error or a SIGUSR1.\n"
 "    Use this only for debugging."
 msgstr ""
-"    Nu repornește programele atunci când acestea ies din cauza unei erori "
-"sau a unui semnal SIGUSR1.\n"
+"    Nu repornește programele atunci când acestea ies din cauza unei erori sau a unui semnal SIGUSR1.\n"
 "    Utilizează această opțiune numai pentru depanare."
 
-#: src/mailman/bin/master.py:607
+#: src/mailman/bin/master.py:608
 msgid ""
 "    If the master watcher finds an existing master lock, it will normally exit\n"
 "    with an error message.  With this option,the master will perform an extra\n"
@@ -323,49 +289,41 @@ msgid ""
 "    remove the apparently stale lock and make another attempt to claim the\n"
 "    master lock."
 msgstr ""
-"    Dacă supraveghetorul principal(master) găsește un blocaj principal "
-"existent,\n"
-"    acesta va ieși în mod normal cu un mesaj de eroare. Cu această opțiune, "
-"su-\n"
-"    praveghetorul principal va efectua un nivel suplimentar de verificare. "
-"Dacă\n"
-"    un proces care corespunde gazdei/pid-ului descris în fișierul de "
-"blocare\n"
-"    este în curs de execuție, supraveghetorul principal va ieși în "
-"continuare,\n"
-"    solicitându-vă să curățați manual blocajul. Dar dacă nu se găsește "
-"niciun\n"
-"    proces corespunzător, supraveghetorul principal va elimina blocajul "
-"aparent\n"
+"    Dacă supraveghetorul principal(master) găsește un blocaj principal existent,\n"
+"    acesta va ieși în mod normal cu un mesaj de eroare. Cu această opțiune, su-\n"
+"    praveghetorul principal va efectua un nivel suplimentar de verificare. Dacă\n"
+"    un proces care corespunde gazdei/pid-ului descris în fișierul de blocare\n"
+"    este în curs de execuție, supraveghetorul principal va ieși în continuare,\n"
+"    solicitându-vă să curățați manual blocajul. Dar dacă nu se găsește niciun\n"
+"    proces corespunzător, supraveghetorul principal va elimina blocajul aparent\n"
 "    vechi și va face o altă încercare de a revendica blocajul principal."
 
-#: src/mailman/bin/master.py:620
+#: src/mailman/bin/master.py:621
 msgid ""
 "    Override the default set of runners that the master will invoke, which is\n"
 "    typically defined in the configuration file.  Multiple -r options may be\n"
 "    given.  The values for -r are passed straight through to bin/runner."
 msgstr ""
-"    Suprascrie setul implicit de executanți pe care programul-principal îl "
-"va\n"
+"    Suprascrie setul implicit de executanți pe care programul-principal îl va\n"
 "    invoca, care este de obicei definit în fișierul de configurare. Se pot\n"
 "    specifica mai multe opțiuni „-r”. Valorile pentru „-r” sunt transmise\n"
 "    direct către bin/runner."
 
-#: src/mailman/bin/master.py:627 src/mailman/bin/runner.py:133
+#: src/mailman/bin/master.py:628 src/mailman/bin/runner.py:134
 msgid "Display more debugging information to the log file."
 msgstr "Afișează mai multe informații de depanare în fișierul jurnal."
 
-#: src/mailman/bin/runner.py:50
+#: src/mailman/bin/runner.py:51
 #, python-brace-format
 msgid "Undefined runner name: ${name}"
 msgstr "Nume de executant nedefinit: ${name}"
 
-#: src/mailman/bin/runner.py:58
+#: src/mailman/bin/runner.py:59
 #, python-brace-format
 msgid "Cannot import runner module: ${class_path}"
 msgstr "Nu se poate importa modulul executantului: ${class_path}"
 
-#: src/mailman/bin/runner.py:76
+#: src/mailman/bin/runner.py:77
 msgid ""
 "    Start a runner.\n"
 "\n"
@@ -385,47 +343,37 @@ msgid ""
 msgstr ""
 "    Pornește un executant.\n"
 "\n"
-"    Executantul numit în linia de comandă este pornit și poate rula o "
-"singură\n"
-"    dată prin bucla principală "
-"(pentru executanții care acceptă această opțiune)\n"
-"    sau în mod continuu. În acest din urmă caz, executantul principal "
-"pornește\n"
+"    Executantul numit în linia de comandă este pornit și poate rula o singură\n"
+"    dată prin bucla principală (pentru executanții care acceptă această opțiune)\n"
+"    sau în mod continuu. În acest din urmă caz, executantul principal pornește\n"
 "    toate subprocesele sale.\n"
 "\n"
-"    Opțiunea „-r” este obligatorie, cu excepția cazului în care se "
-"specifică\n"
-"    „-l” sau „-h”, iar argumentul său trebuie să fie unul dintre numele "
-"afișate\n"
+"    Opțiunea „-r” este obligatorie, cu excepția cazului în care se specifică\n"
+"    „-l” sau „-h”, iar argumentul său trebuie să fie unul dintre numele afișate\n"
 "    de opțiunea „-l”.\n"
 "\n"
-"    În mod normal, acest script ar trebui pornit din «mailman start». "
-"Rularea\n"
-"    lui separat sau cu opțiunea „-o” este utilă în general doar pentru "
-"depanare.\n"
-"    Când este rulat în acest mod, variabila de mediu $"
-"MAILMAN_UNDER_MASTER_CONTROL\n"
-"    va fi activată, ceea ce modifică ușor comportamentul de gestionare a "
-"erorilor.\n"
+"    În mod normal, acest script ar trebui pornit din «mailman start». Rularea\n"
+"    lui separat sau cu opțiunea „-o” este utilă în general doar pentru depanare.\n"
+"    Când este rulat în acest mod, variabila de mediu $MAILMAN_UNDER_MASTER_CONTROL\n"
+"    va fi activată, ceea ce modifică ușor comportamentul de gestionare a erorilor.\n"
 "    "
 
-#: src/mailman/bin/runner.py:103
+#: src/mailman/bin/runner.py:104
 msgid "List the available runner names and exit."
 msgstr "Afișează numele executanților disponibili și iese."
 
-#: src/mailman/bin/runner.py:107
+#: src/mailman/bin/runner.py:108
 msgid ""
 "    Run the named runner exactly once through its main loop.  Otherwise, the\n"
 "    runner runs indefinitely until the process receives a signal.  This is not\n"
 "    compatible with runners that cannot be run once."
 msgstr ""
-"    Rulează executantul numit exact o singură dată prin bucla sa principală."
-"\n"
+"    Rulează executantul numit exact o singură dată prin bucla sa principală.\n"
 "    În caz contrar, executantul rulează la nesfârșit până când procesul\n"
 "    primește un semnal. Acest lucru nu este compatibil cu executanții care\n"
 "    nu pot fi rulați o singură dată."
 
-#: src/mailman/bin/runner.py:115
+#: src/mailman/bin/runner.py:116
 msgid ""
 "\n"
 "    Start the named runner, which must be one of the strings returned by the -l\n"
@@ -443,32 +391,25 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"    Pornește executantul numit, care trebuie să fie unul dintre șirurile "
-"retur-\n"
+"    Pornește executantul numit, care trebuie să fie unul dintre șirurile retur-\n"
 "    nate de opțiunea „-l”.\n"
 "\n"
 "    Pentru executanții care gestionează un director de cozi, opțiunea\n"
-"    „slice:range”, dacă este specificată, este utilizată pentru a atribui "
-"mai\n"
-"    multe procese de executare acelei cozi. range este numărul total de "
-"execu-\n"
-"    tanți pentru coadă, iar slice este numărul acestui executant din "
-"[0..range).\n"
-"    Pentru executanții care nu gestionează o coadă, slice și range sunt "
-"ignorate.\n"
+"    „slice:range”, dacă este specificată, este utilizată pentru a atribui mai\n"
+"    multe procese de executare acelei cozi. range este numărul total de execu-\n"
+"    tanți pentru coadă, iar slice este numărul acestui executant din [0..range).\n"
+"    Pentru executanții care nu gestionează o coadă, slice și range sunt ignorate.\n"
 "\n"
-"    Când utilizați formatul „slice:range”, trebuie să vă asigurați că "
-"fiecare\n"
-"    executant pentru coadă primește aceeași valoare de interval (range). "
-"Dacă\n"
+"    Când utilizați formatul „slice:range”, trebuie să vă asigurați că fiecare\n"
+"    executant pentru coadă primește aceeași valoare de interval (range). Dacă\n"
 "    „slice:runner” nu este specificat, se utilizează 1:1.\n"
 "    "
 
-#: src/mailman/bin/runner.py:157
+#: src/mailman/bin/runner.py:158
 msgid "No runner name given."
 msgstr "Nu s-a specificat numele executantului."
 
-#: src/mailman/bin/runner.py:189
+#: src/mailman/bin/runner.py:191
 #, python-brace-format
 msgid "${name} runs ${classname}"
 msgstr "${name} rulează ${classname}"
@@ -481,7 +422,7 @@ msgstr "Acceptă un mesaj."
 msgid "The built-in moderation chain."
 msgstr "Lanțul de moderare încorporat."
 
-#: src/mailman/chains/discard.py:37
+#: src/mailman/chains/discard.py:39
 msgid "Discard a message and stop processing."
 msgstr "Elimină un mesaj și oprește procesarea."
 
@@ -497,30 +438,29 @@ msgstr "Antetul „{}” corespunde unei reguli de antet"
 msgid "The built-in header matching chain"
 msgstr "Lanțul de potrivire a anteturilor încorporat"
 
-#: src/mailman/chains/hold.py:59
+#: src/mailman/chains/hold.py:58
 msgid "N/A"
 msgstr "nedisponibil"
 
-#: src/mailman/chains/hold.py:118
+#: src/mailman/chains/hold.py:117
 msgid "Last autoresponse notification for today"
 msgstr "Ultima notificare de răspuns automat pentru astăzi"
 
-#: src/mailman/chains/hold.py:133
+#: src/mailman/chains/hold.py:132
 msgid "Hold a message and stop processing."
 msgstr "Păstrează mesajul și oprește procesarea."
 
-#: src/mailman/chains/hold.py:205
+#: src/mailman/chains/hold.py:204
 #, python-brace-format
 msgid "Your message to ${mlist.fqdn_listname} awaits moderator approval"
-msgstr ""
-"Mesajul dvs. către ${mlist.fqdn_listname} așteaptă aprobarea moderatorului"
+msgstr "Mesajul dvs. către ${mlist.fqdn_listname} așteaptă aprobarea moderatorului"
 
-#: src/mailman/chains/hold.py:234
+#: src/mailman/chains/hold.py:233
 #, python-brace-format
 msgid "${mlist.fqdn_listname} post from ${msg.sender} requires approval"
 msgstr "Mesajul ${mlist.fqdn_listname} de la ${msg.sender} necesită aprobare"
 
-#: src/mailman/chains/hold.py:249
+#: src/mailman/chains/hold.py:248
 msgid ""
 "If you reply to this message, keeping the Subject: header intact, Mailman will\n"
 "discard the held message.  Do this if the message is spam.  If you reply to\n"
@@ -528,14 +468,10 @@ msgid ""
 "message will be approved for posting to the list.  The Approved: header can\n"
 "also appear in the first line of the body of the reply."
 msgstr ""
-"Dacă răspundeți la acest mesaj, păstrând intact antetul Subiect:, Mailman "
-"va\n"
-"șterge mesajul reținut. Faceți acest lucru dacă mesajul este spam.  Dacă "
-"răspun-\n"
-"deți la acest mesaj și includeți un antet Approved: (Aprobat:) cu parola "
-"listei\n"
-"în el, mesajul va fi aprobat pentru publicarea pe listă. Antetul Approved: "
-"poate\n"
+"Dacă răspundeți la acest mesaj, păstrând intact antetul Subiect:, Mailman va\n"
+"șterge mesajul reținut. Faceți acest lucru dacă mesajul este spam.  Dacă răspun-\n"
+"deți la acest mesaj și includeți un antet Approved: (Aprobat:) cu parola listei\n"
+"în el, mesajul va fi aprobat pentru publicarea pe listă. Antetul Approved: poate\n"
 "apărea și în prima linie a corpului răspunsului."
 
 #: src/mailman/chains/moderation.py:51
@@ -546,59 +482,58 @@ msgstr "Lanțul de moderare"
 msgid "The built-in -owner posting chain."
 msgstr "Lanțul de publicare încorporat pentru „-owner”."
 
-#: src/mailman/chains/reject.py:44
+#: src/mailman/chains/reject.py:43
 msgid "Reject/bounce a message and stop processing."
 msgstr "Respinge/refuză un mesaj și oprește procesarea."
 
-#: src/mailman/commands/cli_addmembers.py:73 src/mailman/commands/cli_syncmembers.py:118
+#: src/mailman/commands/cli_addmembers.py:75
+#: src/mailman/commands/cli_syncmembers.py:120
 #, python-brace-format
 msgid "Cannot parse as valid email address (skipping): ${line}"
-msgstr ""
-"Nu se poate analiza ca adresă de poștă electronică validă (se omite): ${line}"
+msgstr "Nu se poate analiza ca adresă de poștă electronică validă (se omite): ${line}"
 
-#: src/mailman/commands/cli_addmembers.py:104
+#: src/mailman/commands/cli_addmembers.py:108
 #, python-brace-format
 msgid "Already subscribed (skipping): ${email}"
 msgstr "Deja abonat (se omite): ${email}"
 
-#: src/mailman/commands/cli_addmembers.py:107 src/mailman/commands/cli_syncmembers.py:85
+#: src/mailman/commands/cli_addmembers.py:111
+#: src/mailman/commands/cli_syncmembers.py:87
 #, python-brace-format
 msgid "Membership is banned (skipping): ${email}"
 msgstr "Calitatea de membru este respinsă (se omite): ${email}"
 
-#: src/mailman/commands/cli_addmembers.py:110 src/mailman/commands/cli_syncmembers.py:88
+#: src/mailman/commands/cli_addmembers.py:114
+#: src/mailman/commands/cli_syncmembers.py:90
 #, python-brace-format
 msgid "Subscription already pending (skipping): ${email}"
 msgstr "Abonament deja în așteptare (se omite): ${email}"
 
-#: src/mailman/commands/cli_addmembers.py:116
+#: src/mailman/commands/cli_addmembers.py:120
 msgid ""
 "    Add all member addresses in FILENAME with delivery mode as specified\n"
 "    with -d/--delivery.  FILENAME can be '-' to indicate standard input.\n"
 "    Blank lines and lines that start with a '#' are ignored.\n"
 "    "
 msgstr ""
-"    Adaugă toate adresele membrilor din NUME_FIȘIER cu modul de livrare "
-"specifi-\n"
-"    cat cu „-d”/„--delivery”. NUME_FIȘIER poate fi „-” pentru a indica "
-"intrarea\n"
+"    Adaugă toate adresele membrilor din NUME_FIȘIER cu modul de livrare specifi-\n"
+"    cat cu „-d”/„--delivery”. NUME_FIȘIER poate fi „-” pentru a indica intrarea\n"
 "    standard. Liniile goale și liniile care încep cu „#” sunt ignorate.\n"
 "    "
 
-#: src/mailman/commands/cli_addmembers.py:124
+#: src/mailman/commands/cli_addmembers.py:128
 msgid ""
 "    Set the added members delivery mode to 'regular', 'mime', 'plain',\n"
 "    'summary' or 'disabled'.  I.e., one of regular, three modes of digest\n"
 "    or no delivery.  If not given, the default is regular.  Ignored for invited\n"
 "    members."
 msgstr ""
-"    Stabilește modul de livrare pentru membrii adăugați la „regular”, „mime”,"
-"\n"
+"    Stabilește modul de livrare pentru membrii adăugați la „regular”, „mime”,\n"
 "    „plain”, „summary” sau „disabled”. Adică, unul dintre modurile obișnuit\n"
 "    (regular), trei moduri de rezumat sau fără livrare. Dacă nu este speci-\n"
 "    ficat, modul implicit este regular. Ignorat pentru membrii invitați."
 
-#: src/mailman/commands/cli_addmembers.py:132
+#: src/mailman/commands/cli_addmembers.py:136
 msgid ""
 "    Send the added members an invitation rather than immediately adding them.\n"
 "    "
@@ -606,13 +541,20 @@ msgstr ""
 "    Trimite invitații membrilor adăugați, în loc să îi adauge imediat.\n"
 "    "
 
-#: src/mailman/commands/cli_addmembers.py:137
+#: src/mailman/commands/cli_addmembers.py:141
 msgid "    Override the list's setting for send_welcome_message."
 msgstr "    Suprascrie configurația listei pentru send_welcome_message."
 
-#: src/mailman/commands/cli_addmembers.py:146 src/mailman/commands/cli_admins.py:97
+#: src/mailman/commands/cli_addmembers.py:145
+#: src/mailman/commands/cli_delmembers.py:98
+#: src/mailman/commands/cli_syncmembers.py:186
+msgid "    Override the list's setting for admin_notify_mchanges."
+msgstr "    Suprascrie configurația listei pentru admin_notify_mchanges."
+
+#: src/mailman/commands/cli_addmembers.py:155 src/mailman/commands/cli_admins.py:97
 #: src/mailman/commands/cli_import.py:68 src/mailman/commands/cli_inject.py:75
-#: src/mailman/commands/cli_members.py:211 src/mailman/commands/cli_syncmembers.py:201
+#: src/mailman/commands/cli_members.py:211
+#: src/mailman/commands/cli_syncmembers.py:203
 #: src/mailman/commands/cli_withlist.py:290 src/mailman/commands/cli_withlist.py:297
 #, python-brace-format
 msgid "No such list: ${listspec}"
@@ -644,13 +586,10 @@ msgid ""
 "    to add multiple users.\n"
 "    "
 msgstr ""
-"    Utilizatorul care trebuie adăugat cu rolul dat. Acesta poate fi o "
-"adresă\n"
+"    Utilizatorul care trebuie adăugat cu rolul dat. Acesta poate fi o adresă\n"
 "    electronică sau, dacă este între ghilimele, orice nume afișat și adresă\n"
-"    electronică care poate fi analizată de email.utils.parseaddr. De exemplu,"
-"\n"
-"    „Jane Doe <jane@example.com>”. Poate fi repetată pentru a adăuga mai "
-"mulți\n"
+"    electronică care poate fi analizată de email.utils.parseaddr. De exemplu,\n"
+"    „Jane Doe <jane@example.com>”. Poate fi repetată pentru a adăuga mai mulți\n"
 "    utilizatori.\n"
 "    "
 
@@ -660,8 +599,7 @@ msgid ""
 "    May be repeated to delete multiple users.\n"
 "    "
 msgstr ""
-"    Adresa de poștă electronică a utilizatorului care urmează să fie "
-"eliminat din rolul dat.\n"
+"    Adresa de poștă electronică a utilizatorului care urmează să fie eliminat din rolul dat.\n"
 "    Poate fi repetată pentru a șterge mai mulți utilizatori.\n"
 "    "
 
@@ -671,8 +609,7 @@ msgid ""
 "    If not given, then 'owner' role is assumed.\n"
 "    "
 msgstr ""
-"    Rolul care trebuie adăugat/șters. Acesta poate fi „proprietar” sau "
-"„moderator”.\n"
+"    Rolul care trebuie adăugat/șters. Acesta poate fi „proprietar” sau „moderator”.\n"
 "    Dacă nu este specificat, se presupune rolul de „proprietar”.\n"
 "    "
 
@@ -699,8 +636,7 @@ msgid ""
 "    new_address.\n"
 "    "
 msgstr ""
-"    Schimbă adresa de poștă electronică a unui utilizator din vechea adresă "
-"în\n"
+"    Schimbă adresa de poștă electronică a unui utilizator din vechea adresă în\n"
 "    noua adresă, păstrând eventual majusculele și minusculele.\n"
 "    "
 
@@ -733,8 +669,7 @@ msgid ""
 "    File to send the output to.  If not given, or if '-' is given, standard\n"
 "    output is used."
 msgstr ""
-"    Fișierul către care se trimite ieșirea. Dacă nu este specificat sau "
-"dacă\n"
+"    Fișierul către care se trimite ieșirea. Dacă nu este specificat sau dacă\n"
 "    este specificat „-”, se utilizează ieșirea standard."
 
 #: src/mailman/commands/cli_conf.py:62
@@ -742,18 +677,15 @@ msgid ""
 "    Section to use for the lookup.  If no key is given, all the key-value pairs\n"
 "    of the given section will be displayed."
 msgstr ""
-"    Secțiunea care va fi utilizată pentru căutare. Dacă nu se specifică "
-"nicio\n"
-"    cheie, vor fi afișate toate perechile cheie-valoare din secțiunea "
-"specificată."
+"    Secțiunea care va fi utilizată pentru căutare. Dacă nu se specifică nicio\n"
+"    cheie, vor fi afișate toate perechile cheie-valoare din secțiunea specificată."
 
 #: src/mailman/commands/cli_conf.py:67
 msgid ""
 "    Key to use for the lookup.  If no section is given, all the key-values pair\n"
 "    from any section matching the given key will be displayed."
 msgstr ""
-"    Cheie utilizată pentru căutare. Dacă nu este specificată nicio secțiune,"
-"\n"
+"    Cheie utilizată pentru căutare. Dacă nu este specificată nicio secțiune,\n"
 "    vor fi afișate toate perechile cheie-valoare din orice secțiune care\n"
 "    corespund cheii specificate."
 
@@ -771,19 +703,13 @@ msgid ""
 "    remove the apparently stale lock and make another attempt to claim the\n"
 "    master lock."
 msgstr ""
-"    Dacă supraveghetorul principal (master) găsește un blocaj principal "
-"existent,\n"
+"    Dacă supraveghetorul principal (master) găsește un blocaj principal existent,\n"
 "    acesta va ieși în mod normal cu un mesaj de eroare. Cu această opțiune,\n"
-"    supraveghetorul principal va efectua un nivel suplimentar de verificare. "
-"Dacă\n"
-"    un proces care corespunde gazdei/pid-ului descris în fișierul de blocare "
-"este\n"
-"    în curs de execuție, supraveghetorul principal va ieși în continuare, "
-"soli-\n"
-"    citându-vă să curățați manual blocajul. Dar dacă nu se găsește niciun "
-"proces\n"
-"    corespunzător, supraveghetorul principal va elimina blocajul aparent "
-"vechi\n"
+"    supraveghetorul principal va efectua un nivel suplimentar de verificare. Dacă\n"
+"    un proces care corespunde gazdei/pid-ului descris în fișierul de blocare este\n"
+"    în curs de execuție, supraveghetorul principal va ieși în continuare, soli-\n"
+"    citându-vă să curățați manual blocajul. Dar dacă nu se găsește niciun proces\n"
+"    corespunzător, supraveghetorul principal va elimina blocajul aparent vechi\n"
 "    și va face o altă încercare de a revendica blocajul principal."
 
 #: src/mailman/commands/cli_control.py:57
@@ -794,16 +720,11 @@ msgid ""
 "    start of mailman3 server. Setting this option to true will make this\n"
 "    script create the files and thus allow the MTA to operate smoothly."
 msgstr ""
-"    Generează fișierele alias MTA la pornire. Unele MTA, precum postfix, nu "
-"pot\n"
-"    livra mesaje dacă fișierele alias menționate în configurația lor nu "
-"sunt\n"
-"    prezente. În anumite situații, acest lucru poate duce la un blocaj la "
-"prima\n"
-"    pornire a serverului mailman3. Stabilirea acestei opțiuni la „true” va "
-"face\n"
-"    ca acest script să creeze fișierele și astfel va permite MTA-ului să "
-"func-\n"
+"    Generează fișierele alias MTA la pornire. Unele MTA, precum postfix, nu pot\n"
+"    livra mesaje dacă fișierele alias menționate în configurația lor nu sunt\n"
+"    prezente. În anumite situații, acest lucru poate duce la un blocaj la prima\n"
+"    pornire a serverului mailman3. Stabilirea acestei opțiuni la „true” va face\n"
+"    ca acest script să creeze fișierele și astfel va permite MTA-ului să func-\n"
 "    ționeze fără probleme."
 
 #: src/mailman/commands/cli_control.py:66
@@ -822,30 +743,22 @@ msgid ""
 "    may have permission problems, such as being unable to delete a list's\n"
 "    archives through the web.  Tough luck!"
 msgstr ""
-"    În mod normal, acest script va refuza să ruleze dacă ID-ul "
-"utilizatorului\n"
-"    și ID-ul grupului nu sunt definite ca utilizator și grup „mailman” (așa "
-"cum\n"
-"    ați configurat Mailman). Dacă este rulat ca root, acest script va "
-"schimba\n"
+"    În mod normal, acest script va refuza să ruleze dacă ID-ul utilizatorului\n"
+"    și ID-ul grupului nu sunt definite ca utilizator și grup „mailman” (așa cum\n"
+"    ați configurat Mailman). Dacă este rulat ca root, acest script va schimba\n"
 "    utilizatorul și grupul înainte de efectuarea verificării.\n"
 "\n"
-"    Acest lucru poate fi incomod în scopuri de testare și depanare, astfel "
-"încât\n"
-"    opțiunea „-u” înseamnă că pasul care stabilește și verifică uid-ul/gid-"
-"ul\n"
-"    este omis, iar programul este rulat ca utilizator și grup curent. "
-"Această\n"
+"    Acest lucru poate fi incomod în scopuri de testare și depanare, astfel încât\n"
+"    opțiunea „-u” înseamnă că pasul care stabilește și verifică uid-ul/gid-ul\n"
+"    este omis, iar programul este rulat ca utilizator și grup curent. Această\n"
 "    opțiune nu este recomandată pentru medii de producție normale.\n"
 "\n"
-"    Rețineți însă că, dacă rulați cu opțiunea „-u” și nu faceți parte din "
-"grupul\n"
-"    mailman, puteți avea probleme de permisiuni, cum ar fi imposibilitatea "
-"de a\n"
+"    Rețineți însă că, dacă rulați cu opțiunea „-u” și nu faceți parte din grupul\n"
+"    mailman, puteți avea probleme de permisiuni, cum ar fi imposibilitatea de a\n"
 "    șterge arhivele unei liste prin intermediul interfeței web.  Ghinion!"
 
 #: src/mailman/commands/cli_control.py:83 src/mailman/commands/cli_control.py:170
-#: src/mailman/commands/cli_control.py:192 src/mailman/commands/cli_control.py:214
+#: src/mailman/commands/cli_control.py:192 src/mailman/commands/cli_control.py:218
 msgid ""
 "    Don't print status messages.  Error messages are still printed to standard\n"
 "    error."
@@ -859,9 +772,7 @@ msgstr "GNU Mailman rulează deja"
 
 #: src/mailman/commands/cli_control.py:97
 msgid "A previous run of GNU Mailman did not exit cleanly ({}).  Try using --force"
-msgstr ""
-"O execuție anterioară a GNU Mailman nu s-a încheiat corect ({}).  Încercați "
-"să utilizați „--force”"
+msgstr "O execuție anterioară a GNU Mailman nu s-a încheiat corect ({}).  Încercați să utilizați „--force”"
 
 #: src/mailman/commands/cli_control.py:105
 msgid "Starting Mailman's master runner"
@@ -906,10 +817,10 @@ msgid "Reopening the Mailman runners"
 msgstr "Se redeschid executanții Mailman"
 
 #: src/mailman/commands/cli_control.py:210
-msgid "Stop and restart the Mailman runner subprocesses."
-msgstr "Oprește și repornește subprocesele executanților Mailman."
+msgid "Stop and restart the Mailman runner subprocesses. Note: runners that have died and are not currently running will not be restarted by this command. To restart dead runners, use mailman stop followed by mailman start."
+msgstr ""
 
-#: src/mailman/commands/cli_control.py:219
+#: src/mailman/commands/cli_control.py:223
 msgid "Restarting the Mailman runners"
 msgstr "Se repornesc executanții Mailman"
 
@@ -927,8 +838,7 @@ msgid ""
 "    The list to operate on.  Required unless --fromall is specified.\n"
 "    "
 msgstr ""
-"    Lista pe care se va opera. Necesară, cu excepția cazului în care se "
-"specifică „--fromall”.\n"
+"    Lista pe care se va opera. Necesară, cu excepția cazului în care se specifică „--fromall”.\n"
 "    "
 
 #: src/mailman/commands/cli_delmembers.py:64
@@ -938,10 +848,8 @@ msgid ""
 "    standard input.  Blank lines and lines that start with a '#' are ignored.\n"
 "    "
 msgstr ""
-"    Șterge membrii listei ale căror adrese se află în NUME_FIȘIER, în plus "
-"față\n"
-"    de cei specificați cu „-m”/„--member”, dacă există. NUME_FIȘIER poate fi "
-"„-”\n"
+"    Șterge membrii listei ale căror adrese se află în NUME_FIȘIER, în plus față\n"
+"    de cei specificați cu „-m”/„--member”, dacă există. NUME_FIȘIER poate fi „-”\n"
 "    pentru a indica intrarea standard. Liniile goale și liniile care încep\n"
 "    cu „#” sunt ignorate.\n"
 "    "
@@ -964,10 +872,8 @@ msgid ""
 "    -m/--member or --fromall may be specified.\n"
 "    "
 msgstr ""
-"    Șterge toți membrii din listă. Dacă este specificată, nu poate fi "
-"specificată\n"
-"    niciuna dintre opțiunile „-f”/„--file”, „-m”/„--member” sau „--fromall”."
-"\n"
+"    Șterge toți membrii din listă. Dacă este specificată, nu poate fi specificată\n"
+"    niciuna dintre opțiunile „-f”/„--file”, „-m”/„--member” sau „--fromall”.\n"
 "    "
 
 #: src/mailman/commands/cli_delmembers.py:86
@@ -977,24 +883,19 @@ msgid ""
 "    -a/--all or -l/--list.\n"
 "    "
 msgstr ""
-"    Șterge membrul (membrii) specificat (specificați) prin „-m”/„--member” ș"
-"i/sau\n"
-"    „-f”/„--file” din toate listele din instalare. Aceasta nu poate fi "
-"specificată\n"
+"    Șterge membrul (membrii) specificat (specificați) prin „-m”/„--member” și/sau\n"
+"    „-f”/„--file” din toate listele din instalare. Aceasta nu poate fi specificată\n"
 "    împreună cu „-a”/„--all” sau „-l”/„--list”.\n"
 "    "
 
-#: src/mailman/commands/cli_delmembers.py:93 src/mailman/commands/cli_syncmembers.py:179
+#: src/mailman/commands/cli_delmembers.py:93
+#: src/mailman/commands/cli_syncmembers.py:181
 msgid ""
 "    Override the list's setting for send_goodbye_message to\n"
 "    deleted members."
 msgstr ""
 "    Suprascrie configurația listei pentru send_goodbye_message către\n"
 "    membrii șterși."
-
-#: src/mailman/commands/cli_delmembers.py:98 src/mailman/commands/cli_syncmembers.py:184
-msgid "    Override the list's setting for admin_notify_mchanges."
-msgstr "    Suprascrie configurația listei pentru admin_notify_mchanges."
 
 #: src/mailman/commands/cli_delmembers.py:123
 #, python-brace-format
@@ -1011,19 +912,16 @@ msgid ""
 "    argument can either be a List-ID or a fully qualified list name.  Without\n"
 "    this option, operate on the digests for all mailing lists."
 msgstr ""
-"    Operează pe această listă de discuții. Se pot specifica mai multe "
-"opțiuni\n"
+"    Operează pe această listă de discuții. Se pot specifica mai multe opțiuni\n"
 "    „--list”. Argumentul poate fi fie un ID de listă, fie un nume de listă.\n"
-"    Fără această opțiune, operează pe rezumatele tuturor listelor de "
-"discuții."
+"    Fără această opțiune, operează pe rezumatele tuturor listelor de discuții."
 
 #: src/mailman/commands/cli_digests.py:48
 msgid ""
 "    Send any collected digests right now, even if the size threshold has not\n"
 "    yet been met."
 msgstr ""
-"    Trimite imediat toate rezumatele colectate, chiar dacă pragul de "
-"dimensiune\n"
+"    Trimite imediat toate rezumatele colectate, chiar dacă pragul de dimensiune\n"
 "    nu a fost încă atins."
 
 #: src/mailman/commands/cli_digests.py:54
@@ -1032,10 +930,8 @@ msgid ""
 "    given with --send, the volume number is incremented before any current\n"
 "    digests are sent."
 msgstr ""
-"    Incrementează numărul volumului rezumatului și readuce numărul "
-"rezumatului\n"
-"    la unu. Dacă este specificată împreună cu „--send”, numărul volumului "
-"este\n"
+"    Incrementează numărul volumului rezumatului și readuce numărul rezumatului\n"
+"    la unu. Dacă este specificată împreună cu „--send”, numărul volumului este\n"
 "    incrementat înainte de trimiterea oricăror rezumate curente."
 
 #: src/mailman/commands/cli_digests.py:61 src/mailman/commands/cli_notify.py:50
@@ -1045,6 +941,7 @@ msgid ""
 msgstr "    Nu face nimic, dar împreună cu „--verbose”, arată ce s-ar întâmpla."
 
 #: src/mailman/commands/cli_digests.py:67 src/mailman/commands/cli_notify.py:56
+#: src/mailman/commands/cli_unshunt.py:43
 msgid "Print some additional status."
 msgstr "Imprimă câteva stări suplimentare."
 
@@ -1068,23 +965,17 @@ msgstr "Nu s-a găsit nicio listă: ${spec}"
 #: src/mailman/commands/cli_digests.py:100
 #, python-brace-format
 msgid "${mlist.list_id} is at volume ${mlist.volume}, number ${mlist.next_digest_number}"
-msgstr ""
-"${mlist.list_id} se află la volumul ${mlist.volume}, numărul "
-"${mlist.next_digest_number}"
+msgstr "${mlist.list_id} se află la volumul ${mlist.volume}, numărul ${mlist.next_digest_number}"
 
 #: src/mailman/commands/cli_digests.py:106
 #, python-brace-format
 msgid "${mlist.list_id} bumped to volume ${mlist.volume}, number ${mlist.next_digest_number}"
-msgstr ""
-"${mlist.list_id} a trecut la volumul ${mlist.volume}, numărul "
-"${mlist.next_digest_number}"
+msgstr "${mlist.list_id} a trecut la volumul ${mlist.volume}, numărul ${mlist.next_digest_number}"
 
 #: src/mailman/commands/cli_digests.py:112 src/mailman/commands/cli_digests.py:122
 #, python-brace-format
 msgid "${mlist.list_id} sent volume ${mlist.volume}, number ${mlist.next_digest_number}"
-msgstr ""
-"${mlist.list_id} a trimis volumul ${mlist.volume}, numărul "
-"${mlist.next_digest_number}"
+msgstr "${mlist.list_id} a trimis volumul ${mlist.volume}, numărul ${mlist.next_digest_number}"
 
 #: src/mailman/commands/cli_findmember.py:81
 msgid ""
@@ -1095,10 +986,8 @@ msgid ""
 "    "
 msgstr ""
 "    Afișează toate abonamentele pentru un utilizator sau utilizatori cu\n"
-"    adresa care corespunde unui model. Deoarece o parte a procesului "
-"implică\n"
-"    convertirea modelului într-o interogare SQL cu caractere generice, "
-"modelul\n"
+"    adresa care corespunde unui model. Deoarece o parte a procesului implică\n"
+"    convertirea modelului într-o interogare SQL cu caractere generice, modelul\n"
 "    trebuie să fie simplu. Un șir simplu funcționează cel mai bine.\n"
 "    "
 
@@ -1122,13 +1011,11 @@ msgstr "Listă: {}"
 msgid "{}"
 msgstr "{}"
 
-#: src/mailman/commands/cli_gatenews.py:170
+#: src/mailman/commands/cli_gatenews.py:169
 msgid "Poll the NNTP server for messages to be gatewayed to mailing lists."
-msgstr ""
-"Interoghează serverul NNTP pentru mesajele care trebuie redirecționate către "
-"listele de discuții."
+msgstr "Interoghează serverul NNTP pentru mesajele care trebuie redirecționate către listele de discuții."
 
-#: src/mailman/commands/cli_gatenews.py:177
+#: src/mailman/commands/cli_gatenews.py:176
 msgid ""
 "    The gatenews command is run periodically by the nntp runner.\n"
 "    If you are running it via cron, you should remove it from the crontab.\n"
@@ -1158,8 +1045,7 @@ msgid ""
 "    thereof. This will normally be the Mailman 2.1 charset of the list's\n"
 "    preferred_language."
 msgstr ""
-"    Specifică codificarea șirurilor de caractere în PICKLE_FILE dacă nu "
-"este\n"
+"    Specifică codificarea șirurilor de caractere în PICKLE_FILE dacă nu este\n"
 "    utf-8 sau un subset al acestuia. În mod normal, acesta va fi setul de\n"
 "    caractere Mailman 2.1 al limbii preferate a listei."
 
@@ -1178,17 +1064,14 @@ msgstr "Informații despre această instanță Mailman."
 
 #: src/mailman/commands/cli_info.py:40
 msgid "    File to send the output to.  If not given, standard output is used."
-msgstr ""
-"    Fișierul către care se trimite ieșirea. Dacă nu este specificat, se "
-"utilizează ieșirea standard."
+msgstr "    Fișierul către care se trimite ieșirea. Dacă nu este specificat, se utilizează ieșirea standard."
 
 #: src/mailman/commands/cli_info.py:45
 msgid ""
 "    A more verbose output including the file system paths that Mailman is\n"
 "    using."
 msgstr ""
-"    O ieșire mai detaliată, incluzând rutele sistemului de fișiere "
-"utilizate\n"
+"    O ieșire mai detaliată, incluzând rutele sistemului de fișiere utilizate\n"
 "    de Mailman."
 
 #: src/mailman/commands/cli_inject.py:45
@@ -1214,10 +1097,8 @@ msgid ""
 "    Name of file containing the message to inject.  If not given, or\n"
 "    '-' (without the quotes) standard input is used."
 msgstr ""
-"    Numele fișierului care conține mesajul de injectat. Dacă nu este "
-"specificat,\n"
-"    sau dacă este specificat „-” (fără ghilimele), se utilizează intrarea "
-"standard."
+"    Numele fișierului care conține mesajul de injectat. Dacă nu este specificat,\n"
+"    sau dacă este specificat „-” (fără ghilimele), se utilizează intrarea standard."
 
 #: src/mailman/commands/cli_inject.py:66
 msgid ""
@@ -1234,48 +1115,47 @@ msgstr ""
 msgid "No such queue: ${queue}"
 msgstr "Nu există o astfel de coadă: ${queue}"
 
-#: src/mailman/commands/cli_lists.py:54
+#: src/mailman/commands/cli_lists.py:53
 msgid "List all mailing lists."
 msgstr "Listează toate listele de discuții."
 
-#: src/mailman/commands/cli_lists.py:58
+#: src/mailman/commands/cli_lists.py:57
 msgid "List only those mailing lists that are publicly advertised"
 msgstr "Listează numai acele liste de distribuție care sunt anunțate public"
 
-#: src/mailman/commands/cli_lists.py:62
+#: src/mailman/commands/cli_lists.py:61
 msgid "Show also the list names"
 msgstr "Afișează de asemenea numele listelor"
 
-#: src/mailman/commands/cli_lists.py:66
+#: src/mailman/commands/cli_lists.py:65
 msgid "Show also the list descriptions"
 msgstr "Afișează de asemenea descrierile listelor"
 
-#: src/mailman/commands/cli_lists.py:70
+#: src/mailman/commands/cli_lists.py:69
 msgid "Less verbosity"
 msgstr "Mai puține detalii"
 
-#: src/mailman/commands/cli_lists.py:74
+#: src/mailman/commands/cli_lists.py:73
 msgid ""
 "    List only those mailing lists hosted on the given domain, which\n"
 "    must be the email host name.  Multiple -d options may be given.\n"
 "    "
 msgstr ""
-"    Listează numai listele de discuții găzduite pe domeniul dat, care "
-"trebuie\n"
+"    Listează numai listele de discuții găzduite pe domeniul dat, care trebuie\n"
 "    să fie numele gazdei de poștă electronică. Se pot specifica mai multe\n"
 "    opțiuni „-d”.\n"
 "    "
 
-#: src/mailman/commands/cli_lists.py:92
+#: src/mailman/commands/cli_lists.py:91
 msgid "No matching mailing lists found"
 msgstr "Nu s- a găsit nicio listă de discuții care să coincidă"
 
-#: src/mailman/commands/cli_lists.py:96
+#: src/mailman/commands/cli_lists.py:95
 #, python-brace-format
 msgid "${count} matching mailing lists found:"
 msgstr "S-au găsit ${count} liste de discuții care corespund:"
 
-#: src/mailman/commands/cli_lists.py:128
+#: src/mailman/commands/cli_lists.py:127
 msgid ""
 "    Create a mailing list.\n"
 "\n"
@@ -1285,24 +1165,20 @@ msgid ""
 msgstr ""
 "    Crearea unei liste de discuții.\n"
 "\n"
-"    Este necesar „numele complet al listei”, adică adresa de publicare a "
-"listei\n"
-"    de discuții. Aceasta trebuie să fie o adresă de poștă electronică validă,"
-"\n"
-"    iar domeniul trebuie să fie înregistrat la Mailman. Numele listelor "
-"trebuie\n"
+"    Este necesar „numele complet al listei”, adică adresa de publicare a listei\n"
+"    de discuții. Aceasta trebuie să fie o adresă de poștă electronică validă,\n"
+"    iar domeniul trebuie să fie înregistrat la Mailman. Numele listelor trebuie\n"
 "    să fie scrise cu litere mici."
 
-#: src/mailman/commands/cli_lists.py:136
+#: src/mailman/commands/cli_lists.py:135
 msgid ""
 "    Set the list's preferred language to CODE, which must be a registered two\n"
 "    letter language code."
 msgstr ""
-"    Stabilește limba preferată a listei la COD, care trebuie să fie un cod "
-"de\n"
+"    Stabilește limba preferată a listei la COD, care trebuie să fie un cod de\n"
 "    limbă format din două litere înregistrat."
 
-#: src/mailman/commands/cli_lists.py:142
+#: src/mailman/commands/cli_lists.py:141
 msgid ""
 "    Specify a list owner email address.  If the address is not currently\n"
 "    registered with Mailman, the address is registered and linked to a user.\n"
@@ -1310,99 +1186,93 @@ msgid ""
 "    send a list creation notice to the address.  More than one owner can be\n"
 "    specified."
 msgstr ""
-"    Specifică adresa de poștă electronică a proprietarului listei. Dacă "
-"adresa\n"
-"    nu este înregistrată în prezent în Mailman, aceasta va fi înregistrată "
-"și\n"
+"    Specifică adresa de poștă electronică a proprietarului listei. Dacă adresa\n"
+"    nu este înregistrată în prezent în Mailman, aceasta va fi înregistrată și\n"
 "    asociată unui utilizator. Mailman va trimite un mesaj de confirmare la\n"
-"    adresa respectivă, dar va trimite și o notificare privind crearea listei "
-"la\n"
+"    adresa respectivă, dar va trimite și o notificare privind crearea listei la\n"
 "    aceeași adresă. Se pot specifica mai mulți proprietari."
 
-#: src/mailman/commands/cli_lists.py:150
+#: src/mailman/commands/cli_lists.py:149
 msgid "    Specify a list style name."
 msgstr "    Specifică un nume de stil pentru listă."
 
-#: src/mailman/commands/cli_lists.py:155
+#: src/mailman/commands/cli_lists.py:154
 msgid ""
 "    Notify the list owner by email that their mailing list has been\n"
 "    created."
 msgstr ""
-"    Notifică proprietarul listei prin poșta electronică că lista sa de "
-"discuții\n"
+"    Notifică proprietarul listei prin poșta electronică că lista sa de discuții\n"
 "    a fost creată."
 
-#: src/mailman/commands/cli_lists.py:161
+#: src/mailman/commands/cli_lists.py:160
 msgid "Print less output."
 msgstr "Afișează mai puține detalii."
 
-#: src/mailman/commands/cli_lists.py:165
+#: src/mailman/commands/cli_lists.py:164
 msgid ""
 "    Register the mailing list's domain if not yet registered.  This is\n"
 "    the default behavior, but these options are provided for backward\n"
 "    compatibility.  With -D do not register the mailing list's domain."
 msgstr ""
-"    Înregistrează domeniul listei de discuții dacă nu este încă înregistrat."
-"\n"
+"    Înregistrează domeniul listei de discuții dacă nu este încă înregistrat.\n"
 "    Acesta este comportamentul implicit, dar aceste opțiuni sunt furnizate\n"
-"    pentru compatibilitate cu versiunile anterioare. Cu „-D” nu "
-"înregistrează\n"
+"    pentru compatibilitate cu versiunile anterioare. Cu „-D” nu înregistrează\n"
 "    domeniul listei de discuții."
 
-#: src/mailman/commands/cli_lists.py:177
+#: src/mailman/commands/cli_lists.py:175
 #, python-brace-format
-msgid "Invalid language code: ${language_code}"
-msgstr "Cod de limbă nevalid: ${language_code}"
+msgid "Invalid language code: ${language}"
+msgstr ""
 
-#: src/mailman/commands/cli_lists.py:193
+#: src/mailman/commands/cli_lists.py:191
 #, python-brace-format
 msgid "Illegal owner addresses: ${invalid}"
 msgstr "Adrese ale proprietarilor nelegale: ${invalid}"
 
-#: src/mailman/commands/cli_lists.py:196
+#: src/mailman/commands/cli_lists.py:194
 #, python-brace-format
 msgid "Unknown list style name: ${style_name}"
 msgstr "Nume de stil de listă necunoscut: ${style_name}"
 
-#: src/mailman/commands/cli_lists.py:200
+#: src/mailman/commands/cli_lists.py:198
 #, python-brace-format
 msgid "Illegal list name: ${fqdn_listname}"
 msgstr "Nume de listă nelegal: ${fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:202
+#: src/mailman/commands/cli_lists.py:200
 #, python-brace-format
 msgid "List already exists: ${fqdn_listname}"
 msgstr "Lista există deja: ${fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:204
+#: src/mailman/commands/cli_lists.py:202
 #, python-brace-format
 msgid "Undefined domain: ${domain}"
 msgstr "Domeniu nedefinit: ${domain}"
 
-#: src/mailman/commands/cli_lists.py:212
+#: src/mailman/commands/cli_lists.py:208
 #, python-brace-format
 msgid "Created mailing list: ${mlist.fqdn_listname}"
 msgstr "Listă de discuții creată: ${mlist.fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:227
+#: src/mailman/commands/cli_lists.py:223
 #, python-brace-format
 msgid "Your new mailing list: ${fqdn_listname}"
 msgstr "Noua dvs. listă de discuții: ${fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:241
+#: src/mailman/commands/cli_lists.py:237
 msgid "Remove a mailing list (does not remove archives)."
 msgstr "Elimină o listă de discuții (nu elimină arhivele)."
 
-#: src/mailman/commands/cli_lists.py:245
+#: src/mailman/commands/cli_lists.py:241
 msgid "Suppress status messages"
 msgstr "Suprimă mesajele de stare"
 
-#: src/mailman/commands/cli_lists.py:251
+#: src/mailman/commands/cli_lists.py:247
 #, python-brace-format
 msgid "No such list matching spec: ${listspec}"
 msgstr "Nu există nicio listă care să corespundă specificației: ${listspec}"
 
-#: src/mailman/commands/cli_lists.py:256
+#: src/mailman/commands/cli_lists.py:252
 #, python-brace-format
 msgid "Removed list: ${listspec}"
 msgstr "Listă eliminată: ${listspec}"
@@ -1422,8 +1292,7 @@ msgid ""
 msgstr ""
 "    Afișează membrii unei liste de discuții.\n"
 "    La afișare se poate filtra după diverse criterii.\n"
-"    Dacă nu se specifică nicio opțiune, modul implicit este afișarea "
-"membrilor\n"
+"    Dacă nu se specifică nicio opțiune, modul implicit este afișarea membrilor\n"
 "    listei de discuții la ieșirea standard.\n"
 "    "
 
@@ -1432,8 +1301,7 @@ msgid ""
 "    [MODE] Add all member addresses in FILENAME.  This option is removed.\n"
 "    Use 'mailman addmembers' instead."
 msgstr ""
-"    [MOD] Adaugă toate adresele membrilor din NUME_FIȘIER. Această opțiune a "
-"fost eliminată.\n"
+"    [MOD] Adaugă toate adresele membrilor din NUME_FIȘIER. Această opțiune a fost eliminată.\n"
 "    Utilizați în schimb „mailman addmembers”."
 
 #: src/mailman/commands/cli_members.py:136
@@ -1442,8 +1310,7 @@ msgid ""
 "    This option is removed. Use 'mailman delmembers' instead."
 msgstr ""
 "    [MOD] Șterge toate adresele membrilor găsite în NUME_FIȘIER.\n"
-"    Această opțiune a fost eliminată. Utilizați în schimb „mailman "
-"delmembers”."
+"    Această opțiune a fost eliminată. Utilizați în schimb „mailman delmembers”."
 
 #: src/mailman/commands/cli_members.py:142
 msgid ""
@@ -1451,19 +1318,16 @@ msgid ""
 "    with the member addresses found in FILENAME.\n"
 "    This option is removed. Use 'mailman syncmembers' instead."
 msgstr ""
-"    [MOD] Sincronizează toate adresele membrilor listei de distribuție "
-"specificate\n"
+"    [MOD] Sincronizează toate adresele membrilor listei de distribuție specificate\n"
 "    cu adresele membrilor găsite în NUME_FIȘIER.\n"
-"    Această opțiune a fost eliminată. Utilizați în schimb „mailman "
-"syncmembers”."
+"    Această opțiune a fost eliminată. Utilizați în schimb „mailman syncmembers”."
 
 #: src/mailman/commands/cli_members.py:149
 msgid ""
 "    Display output to FILENAME instead of stdout.  FILENAME\n"
 "    can be '-' to indicate standard output."
 msgstr ""
-"    Afișează ieșirea în NUME_FIȘIER în loc de la ieșirea standard. "
-"NUME_FIȘIER\n"
+"    Afișează ieșirea în NUME_FIȘIER în loc de la ieșirea standard. NUME_FIȘIER\n"
 "    poate fi „-” pentru a indica ieșirea standard."
 
 #: src/mailman/commands/cli_members.py:156
@@ -1474,8 +1338,7 @@ msgid ""
 "    If not given, then 'member' role is assumed."
 msgstr ""
 "    Afișează numai membrii cu un anumit ROL.\n"
-"    Rolul poate fi „oricine”, „membru”, „nemembru”, „proprietar”, „moderator”"
-"\n"
+"    Rolul poate fi „oricine”, „membru”, „nemembru”, „proprietar”, „moderator”\n"
 "    sau „administrator” (adică proprietari și moderatori).\n"
 "    Dacă nu este specificat, se presupune rolul de „membru”."
 
@@ -1485,9 +1348,7 @@ msgstr "    Afișează numai membrii cu livrare regulată."
 
 #: src/mailman/commands/cli_members.py:181
 msgid "    This option has no effect. It exists for backwards compatibility only."
-msgstr ""
-"    Această opțiune nu are niciun efect. Ea există doar pentru "
-"compatibilitate cu versiunile anterioare."
+msgstr "    Această opțiune nu are niciun efect. Ea există doar pentru compatibilitate cu versiunile anterioare."
 
 #: src/mailman/commands/cli_members.py:187
 msgid ""
@@ -1512,23 +1373,17 @@ msgid ""
 "    for unknown (legacy) reasons."
 msgstr ""
 "    Afișează numai membrii cu un anumit statut de livrare.\n"
-"    „activat” înseamnă toți membrii a căror livrare este activată, „oricare”"
-"\n"
+"    „activat” înseamnă toți membrii a căror livrare este activată, „oricare”\n"
 "    înseamnă membrii a căror livrare este dezactivată din orice motiv,\n"
-"    „de către utilizator” înseamnă că membrul și-a dezactivat propria "
-"livrare,\n"
-"    „de către respingeri” înseamnă că livrarea a fost dezactivată de "
-"procesorul\n"
-"    automat de respingeri, „de către administrator” înseamnă că livrarea a "
-"fost\n"
+"    „de către utilizator” înseamnă că membrul și-a dezactivat propria livrare,\n"
+"    „de către respingeri” înseamnă că livrarea a fost dezactivată de procesorul\n"
+"    automat de respingeri, „de către administrator” înseamnă că livrarea a fost\n"
 "    dezactivată de administratorul sau moderatorul listei, iar „necunoscut”\n"
-"    înseamnă că livrarea a fost dezactivată sau din motive necunoscute "
-"(vechi)."
+"    înseamnă că livrarea a fost dezactivată sau din motive necunoscute (vechi)."
 
 #: src/mailman/commands/cli_notify.py:40
 msgid "Notify list owners/moderators of pending requests."
-msgstr ""
-"Notifică proprietarii/moderatorii listei cu privire la cererile în așteptare."
+msgstr "Notifică proprietarii/moderatorii listei cu privire la cererile în așteptare."
 
 #: src/mailman/commands/cli_notify.py:43
 msgid ""
@@ -1536,11 +1391,9 @@ msgid ""
 "    argument can either be a List-ID or a fully qualified list name.  Without\n"
 "    this option, operate on the requests for all mailing lists."
 msgstr ""
-"    Operează pe această listă de discuții. Se pot specifica mai multe "
-"opțiuni\n"
+"    Operează pe această listă de discuții. Se pot specifica mai multe opțiuni\n"
 "    „--list”. Argumentul poate fi fie un ID de listă, fie un nume de listă\n"
-"    complet calificat. Fără această opțiune, operează pe cererile pentru "
-"toate\n"
+"    complet calificat. Fără această opțiune, operează pe cererile pentru toate\n"
 "    listele de discuții."
 
 #: src/mailman/commands/cli_notify.py:80 src/mailman/commands/cli_notify.py:141
@@ -1610,11 +1463,9 @@ msgid ""
 "    representation.  Useful with 'mailman qfile -i <file>'.  In that case, the\n"
 "    list of unpickled objects will be left in a variable called 'm'."
 msgstr ""
-"    Nu încearcă să afișezi obiectul într-un format elegant. Acest lucru "
-"este\n"
+"    Nu încearcă să afișezi obiectul într-un format elegant. Acest lucru este\n"
 "    util dacă există o problemă cu obiectul și doriți doar să obțineți o\n"
-"    reprezentare neprelucrată. Util cu „mailman qfile -i <fișier>”. În acest "
-"caz,\n"
+"    reprezentare neprelucrată. Util cu „mailman qfile -i <fișier>”. În acest caz,\n"
 "    lista obiectelor neprelucrate va fi lăsată într-o variabilă numită „m”."
 
 #: src/mailman/commands/cli_qfile.py:50
@@ -1664,24 +1515,23 @@ msgstr "GNU Mailman este oprit (pid învechit: ${pid})"
 #: src/mailman/commands/cli_status.py:50
 #, python-brace-format
 msgid "GNU Mailman is in an unexpected state (${hostname} != ${fqdn_name})"
-msgstr ""
-"GNU Mailman se află într-o stare neașteptată (${hostname} != ${fqdn_name})"
+msgstr "GNU Mailman se află într-o stare neașteptată (${hostname} != ${fqdn_name})"
 
-#: src/mailman/commands/cli_syncmembers.py:133
+#: src/mailman/commands/cli_syncmembers.py:135
 #, python-format
 msgid "[ADD] %s"
 msgstr "[ADAUGĂ] %s"
 
-#: src/mailman/commands/cli_syncmembers.py:143
+#: src/mailman/commands/cli_syncmembers.py:145
 #, python-format
 msgid "[DEL] %s"
 msgstr "[ȘTERGE] %s"
 
-#: src/mailman/commands/cli_syncmembers.py:152
+#: src/mailman/commands/cli_syncmembers.py:154
 msgid "Nothing to do"
 msgstr "Nimic de făcut"
 
-#: src/mailman/commands/cli_syncmembers.py:157
+#: src/mailman/commands/cli_syncmembers.py:159
 msgid ""
 "    Add and delete members as necessary to syncronize a list's membership\n"
 "    with an input file.  FILENAME is the file containing the new membership,\n"
@@ -1692,40 +1542,32 @@ msgid ""
 "    be removed from the list.  FILENAME can be '-' to indicate standard input.\n"
 "    "
 msgstr ""
-"    Adaugă și șterge membri după cum este necesar pentru a sincroniza "
-"membrii\n"
-"    unei liste cu un fișier de intrare.  NUME_FIȘIER este fișierul care "
-"conține\n"
-"    noii membri, câte un membru pe linie. Liniile goale și liniile care "
-"încep\n"
-"    cu „#” sunt ignorate. Adresele din NUME_FIȘIER care nu sunt membri "
-"actuali\n"
+"    Adaugă și șterge membri după cum este necesar pentru a sincroniza membrii\n"
+"    unei liste cu un fișier de intrare.  NUME_FIȘIER este fișierul care conține\n"
+"    noii membri, câte un membru pe linie. Liniile goale și liniile care încep\n"
+"    cu „#” sunt ignorate. Adresele din NUME_FIȘIER care nu sunt membri actuali\n"
 "    ai listei vor fi adăugate la listă cu modul de livrare specificat cu\n"
 "    „-d”/„--delivery”. Membrii listei ale căror adrese nu se află în\n"
-"    NUME_FIȘIER vor fi eliminați din listă.  NUME_FIȘIER poate fi „-” "
-"pentru\n"
+"    NUME_FIȘIER vor fi eliminați din listă.  NUME_FIȘIER poate fi „-” pentru\n"
 "    a indica intrarea standard.\n"
 "    "
 
-#: src/mailman/commands/cli_syncmembers.py:169
+#: src/mailman/commands/cli_syncmembers.py:171
 msgid ""
 "    Set the added members delivery mode to 'regular', 'mime', 'plain',\n"
 "    'summary' or 'disabled'.  I.e., one of regular, three modes of digest\n"
 "    or no delivery.  If not given, the default is regular."
 msgstr ""
-"    Stabilește modul de livrare pentru membrii adăugați la „regular”, „mime”,"
-"\n"
+"    Stabilește modul de livrare pentru membrii adăugați la „regular”, „mime”,\n"
 "    „plain”, „summary” sau „disabled”. Adică, unul dintre modurile regular,\n"
 "    trei moduri de rezumat sau fără livrare. Dacă nu este specificat, modul\n"
 "    implicit este „regular”."
 
-#: src/mailman/commands/cli_syncmembers.py:175
+#: src/mailman/commands/cli_syncmembers.py:177
 msgid "    Override the list's setting for send_welcome_message to added members."
-msgstr ""
-"    Suprascrie configurația listei pentru send_welcome_message pentru "
-"membrii adăugați."
+msgstr "    Suprascrie configurația listei pentru send_welcome_message pentru membrii adăugați."
 
-#: src/mailman/commands/cli_syncmembers.py:189
+#: src/mailman/commands/cli_syncmembers.py:191
 msgid ""
 "    Don't actually make the changes.  Instead, print out what would be\n"
 "    done to the list."
@@ -1739,20 +1581,14 @@ msgstr "Elimină starea de deviere a mesajelor."
 
 #: src/mailman/commands/cli_unshunt.py:37
 msgid ""
-"    Discard all shunted messages instead of moving them back to their original\n"
+"    Discard shunted messages instead of moving them back to their original\n"
 "    queue."
 msgstr ""
-"    Elimină toate mesajele deviate în loc să le mute înapoi în coada lor\n"
-"    inițială."
 
-#: src/mailman/commands/cli_unshunt.py:50
+#: src/mailman/commands/cli_unshunt.py:61
 #, python-brace-format
-msgid ""
-"Cannot unshunt message ${filebase}, skipping:\n"
-"${error}"
+msgid "Cannot unshunt message ${filebase}, skipping: ${error}"
 msgstr ""
-"Nu se poate executa «unshunt» asupra mesajului ${filebase}, se omite:\n"
-"${error}"
 
 #: src/mailman/commands/cli_version.py:32
 msgid "Display Mailman's version."
@@ -1786,12 +1622,9 @@ msgid ""
 "variable 'm' will be available in the global namespace.  It will reference the\n"
 "mailing list object."
 msgstr ""
-"Există două moduri de utilizare a acestui script: interactiv sau programatic."
-"\n"
-"Utilizarea interactivă vă permite să experimentați, să examinați și să "
-"modificați\n"
-"o listă de discuții din interpretul interactiv Python. Când rulează "
-"interactiv,\n"
+"Există două moduri de utilizare a acestui script: interactiv sau programatic.\n"
+"Utilizarea interactivă vă permite să experimentați, să examinați și să modificați\n"
+"o listă de discuții din interpretul interactiv Python. Când rulează interactiv,\n"
 "variabila „m” va fi disponibilă în spațiul de nume global. Aceasta va face\n"
 "referire la obiectul listei de discuții."
 
@@ -1807,15 +1640,13 @@ msgid ""
 "(e.g. ant@example.com), or the List-ID (e.g. ant.example.com)."
 msgstr ""
 "Din punct de vedere programatic, puteți scrie o funcție pentru a opera pe o\n"
-"listă de discuții, iar acest script se va ocupa de administrare (vezi mai "
-"jos\n"
+"listă de discuții, iar acest script se va ocupa de administrare (vezi mai jos\n"
 "exemple). În acest caz, sintaxa generală de utilizare este:\n"
 "\n"
 "% mailman withlist [opțiuni] -l listspec [argumente ...]\n"
 "\n"
 "unde „listspec” este fie adresa de publicare a listei de discuții\n"
-"(de exemplu, ant@example.com), fie ID-ul listei (de exemplu, ant.example.com)"
-"."
+"(de exemplu, ant@example.com), fie ID-ul listei (de exemplu, ant.example.com)."
 
 #: src/mailman/commands/cli_withlist.py:168
 msgid ""
@@ -1836,8 +1667,7 @@ msgid ""
 "If -l is not given then you can run a function that takes no arguments.\n"
 msgstr ""
 "Iată un exemplu de utilizare a opțiunii „--run”. Să presupunem că aveți un\n"
-"fișier în directorul de instalare Mailman numit „listaddr.py”, cu "
-"următoarele\n"
+"fișier în directorul de instalare Mailman numit „listaddr.py”, cu următoarele\n"
 "două funcții:\n"
 "\n"
 "def listaddr(mlist):\n"
@@ -1846,14 +1676,11 @@ msgstr ""
 "def requestaddr(mlist):\n"
 "    print(mlist.request_address)\n"
 "\n"
-"Metodele de rulare acceptă cel puțin un argument, obiectul listei de "
-"discuții\n"
-"pe care se operează. Orice argumente suplimentare date pe linia de comandă "
-"sunt\n"
+"Metodele de rulare acceptă cel puțin un argument, obiectul listei de discuții\n"
+"pe care se operează. Orice argumente suplimentare date pe linia de comandă sunt\n"
 "transmise ca argumente poziționale către apelabil.\n"
 "\n"
-"Dacă „-l” nu este dată, atunci puteți rula o funcție care nu acceptă "
-"argumente.\n"
+"Dacă „-l” nu este dată, atunci puteți rula o funcție care nu acceptă argumente.\n"
 
 #: src/mailman/commands/cli_withlist.py:186
 msgid ""
@@ -1905,10 +1732,8 @@ msgid ""
 "Note that you do not have to explicitly commit any database transactions, as\n"
 "Mailman will do this for you (assuming no errors occured)."
 msgstr ""
-"Ca un alt exemplu, să presupunem că doriți să modificați numele afișat "
-"pentru\n"
-"o anumită listă de discuții. Puteți introduce următoarea funcție într-un "
-"fișier\n"
+"Ca un alt exemplu, să presupunem că doriți să modificați numele afișat pentru\n"
+"o anumită listă de discuții. Puteți introduce următoarea funcție într-un fișier\n"
 "numit „change.py”:\n"
 "\n"
 "def change(mlist, display_name):\n"
@@ -1918,10 +1743,8 @@ msgstr ""
 "\n"
 "% mailman withlist -r change -l ant@example.com «My List»\n"
 "\n"
-"Rețineți că nu este necesar să confirmați în mod explicit tranzacțiile din "
-"baza\n"
-"de date, deoarece Mailman va face acest lucru pentru dvs. (presupunând că nu "
-"au\n"
+"Rețineți că nu este necesar să confirmați în mod explicit tranzacțiile din baza\n"
+"de date, deoarece Mailman va face acest lucru pentru dvs. (presupunând că nu au\n"
 "apărut erori)."
 
 #: src/mailman/commands/cli_withlist.py:222
@@ -1941,10 +1764,8 @@ msgid ""
 "    Leaves you at an interactive prompt after all other processing is complete.\n"
 "    This is the default unless the --run option is given."
 msgstr ""
-"    Vă lasă la o solicitare interactivă după ce toate celelalte procesări "
-"sunt finalizate.\n"
-"Aceasta este procedura implicită, cu excepția cazului în care se specifică "
-"opțiunea „--run”."
+"    Vă lasă la o solicitare interactivă după ce toate celelalte procesări sunt finalizate.\n"
+"Aceasta este procedura implicită, cu excepția cazului în care se specifică opțiunea „--run”."
 
 #: src/mailman/commands/cli_withlist.py:235
 msgid ""
@@ -1961,16 +1782,11 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"    Rulează un script. Argumentul este ruta modulului către o funcție "
-"apelabilă.\n"
-"    Această funcție apelabilă va fi importată și apoi, dacă este dată și "
-"opțiunea\n"
-"    „--listspec”/„-l”, va fi apelată cu lista de discuții ca primul argument."
-"\n"
-"    Dacă sunt date argumente suplimentare la sfârșitul liniei de comandă, "
-"acestea\n"
-"    sunt transmise ca argumente poziționale ulterioare către funcția "
-"apelabilă.\n"
+"    Rulează un script. Argumentul este ruta modulului către o funcție apelabilă.\n"
+"    Această funcție apelabilă va fi importată și apoi, dacă este dată și opțiunea\n"
+"    „--listspec”/„-l”, va fi apelată cu lista de discuții ca primul argument.\n"
+"    Dacă sunt date argumente suplimentare la sfârșitul liniei de comandă, acestea\n"
+"    sunt transmise ca argumente poziționale ulterioare către funcția apelabilă.\n"
 "    Pentru ajutor suplimentar, consultați opțiunea „--details”.\n"
 "\n"
 "    Dacă nu este specificat niciun argument pentru „--listspec”/„-l”,\n"
@@ -1990,15 +1806,12 @@ msgid ""
 "    LISTSPEC must start with a ^ (and the matching is done with re.match().\n"
 "    LISTSPEC cannot be a regular expression unless --run is given."
 msgstr ""
-"    O specificație a listei de discuții pe care se va opera. Aceasta poate "
-"fi\n"
+"    O specificație a listei de discuții pe care se va opera. Aceasta poate fi\n"
 "    adresa de publicare a listei sau ID-ul listei. Argumentul poate fi și o\n"
 "    expresie regulată Python, caz în care este comparat atât cu adresa de\n"
-"    publicare, cât și cu ID-ul listei tuturor listelor de discuții. Pentru "
-"a\n"
+"    publicare, cât și cu ID-ul listei tuturor listelor de discuții. Pentru a\n"
 "    utiliza o expresie regulată, LISTSPEC trebuie să înceapă cu un ^ (iar\n"
-"    compararea se face cu re.match(). LISTSPEC nu poate fi o expresie "
-"regulată\n"
+"    compararea se face cu re.match(). LISTSPEC nu poate fi o expresie regulată\n"
 "    decât dacă se specifică opțiunea „--run”."
 
 #: src/mailman/commands/cli_withlist.py:271
@@ -2075,8 +1888,7 @@ msgid ""
 "used.  You can use the 'address' option to request subscription of an address\n"
 "other than the sender of the command.\n"
 msgstr ""
-"Vi se va cere să confirmați cererea de abonare și este posibil să vi se "
-"emită\n"
+"Vi se va cere să confirmați cererea de abonare și este posibil să vi se emită\n"
 "o parolă provizorie.\n"
 "\n"
 "Utilizând opțiunea „digest”, puteți specifica dacă doriți sau nu livrarea\n"
@@ -2103,7 +1915,8 @@ msgstr "${person} are un abonament în așteptare pentru ${listname}"
 msgid "Confirmation email sent to ${person}"
 msgstr "Mesaj de confirmare trimis către ${person}"
 
-#: src/mailman/commands/eml_membership.py:152 src/mailman/commands/eml_membership.py:162
+#: src/mailman/commands/eml_membership.py:152
+#: src/mailman/commands/eml_membership.py:162
 #, python-brace-format
 msgid "bad argument: ${argument}"
 msgstr "argument greșit: ${argument}"
@@ -2129,9 +1942,7 @@ msgstr "Părăsiți această listă de discuții."
 #: src/mailman/commands/eml_membership.py:196
 #, python-brace-format
 msgid "${self.name}: No valid email address found to unsubscribe"
-msgstr ""
-"${self.name}: Nu s-a găsit nicio adresă de poștă electronică validă pentru "
-"dezabonare"
+msgstr "${self.name}: Nu s-a găsit nicio adresă de poștă electronică validă pentru dezabonare"
 
 #: src/mailman/commands/eml_membership.py:202
 #, python-brace-format
@@ -2156,9 +1967,7 @@ msgstr "${person} a părăsit ${mlist.fqdn_listname}"
 #: src/mailman/commands/eml_membership.py:243
 #, python-brace-format
 msgid "Confirmation email sent to ${person} to leave ${mlist.fqdn_listname}"
-msgstr ""
-"Mesaj de confirmare trimis către ${person} pentru a părăsi "
-"${mlist.fqdn_listname}"
+msgstr "Mesaj de confirmare trimis către ${person} pentru a părăsi ${mlist.fqdn_listname}"
 
 #: src/mailman/commands/eml_membership.py:253
 msgid "An alias for 'leave'."
@@ -2176,10 +1985,8 @@ msgstr ""
 "Generează o listă cu numele membrilor și adresele electronice.\n"
 "\n"
 "Argumentele opționale delivery= și mode= pot fi utilizate pentru a limita\n"
-"raportul la membrii cu statutul de livrare și/sau modul de livrare "
-"corespunzător.\n"
-"Dacă delivery= sau mode= sunt specificate de mai multe ori, se utilizează "
-"doar\n"
+"raportul la membrii cu statutul de livrare și/sau modul de livrare corespunzător.\n"
+"Dacă delivery= sau mode= sunt specificate de mai multe ori, se utilizează doar\n"
 "ultima apariție.\n"
 
 #: src/mailman/commands/eml_who.py:50
@@ -2221,39 +2028,38 @@ msgstr "Efectuează câteva operații contabile după o publicare reușită."
 
 #: src/mailman/handlers/arc_sign.py:66
 msgid "Perform ARC auth checks and attach resulting headers"
-msgstr ""
-"Efectuează verificări de autentificare ARC și atașează antetele rezultate"
+msgstr "Efectuează verificări de autentificare ARC și atașează antetele rezultate"
 
 #: src/mailman/handlers/avoid_duplicates.py:42
 msgid "Suppress some duplicates of the same message."
 msgstr "Suprimă unele duplicate ale aceluiași mesaj."
 
-#: src/mailman/handlers/check_dmarc.py:43
+#: src/mailman/handlers/check_dmarc.py:46
 msgid "Check whether to Apply DMARC mitigations."
 msgstr "Verifică dacă trebuie aplicate măsuri de atenuare DMARC."
-
-#: src/mailman/handlers/cleanse_dkim.py:42
-msgid "Remove DomainKeys headers."
-msgstr "Elimină antetele DomainKeys."
 
 #: src/mailman/handlers/cleanse.py:42
 msgid "Cleanse certain headers from all messages."
 msgstr "Șterge anumite antete din toate mesajele."
 
+#: src/mailman/handlers/cleanse_dkim.py:42
+msgid "Remove DomainKeys headers."
+msgstr "Elimină antetele DomainKeys."
+
 #: src/mailman/handlers/cook_headers.py:168
 msgid "Modify message headers."
 msgstr "Modifică antetele mesajelor."
 
-#: src/mailman/handlers/decorate.py:250
+#: src/mailman/handlers/decorate.py:245
 msgid "Decorate a message with headers and footers."
 msgstr "Decorează un mesaj cu antete și subsoluri."
 
-#: src/mailman/handlers/dmarc.py:129
+#: src/mailman/handlers/dmarc.py:131
 #, python-brace-format
 msgid "${realname} via ${mlist.display_name}"
 msgstr "${realname} via ${mlist.display_name}"
 
-#: src/mailman/handlers/dmarc.py:230
+#: src/mailman/handlers/dmarc.py:238
 msgid "Apply DMARC mitigations."
 msgstr "Aplică măsuri de atenuare DMARC."
 
@@ -2273,8 +2079,7 @@ msgid ""
 "attached.\n"
 msgstr ""
 "Mesajul dvs. urgent către lista de discuții ${mlist.display_name} nu a fost\n"
-"autorizat pentru livrare. Mesajul original, așa cum a fost primit de Mailman,"
-"\n"
+"autorizat pentru livrare. Mesajul original, așa cum a fost primit de Mailman,\n"
 "este atașat.\n"
 
 #: src/mailman/handlers/mime_delete.py:63
@@ -2353,13 +2158,12 @@ msgstr "Calculează destinatarii proprietar și moderator."
 msgid "Send automatic responses."
 msgstr "Trimite răspunsuri automate."
 
-#: src/mailman/handlers/replybot.py:101
+#: src/mailman/handlers/replybot.py:105
 #, python-brace-format
 msgid "Auto-response for your message to the \"${display_name}\" mailing list"
-msgstr ""
-"Răspuns automat pentru mesajul dvs. către lista de discuții „${display_name}”"
+msgstr "Răspuns automat pentru mesajul dvs. către lista de discuții „${display_name}”"
 
-#: src/mailman/handlers/replybot.py:114
+#: src/mailman/handlers/replybot.py:118
 msgid "The Mailman Replybot"
 msgstr "Robotul de răspuns al Mailman"
 
@@ -2393,34 +2197,27 @@ msgstr "Mută mesajul în coada de mesaje trimise."
 
 #: src/mailman/handlers/validate_authenticity.py:120
 msgid "Perform auth checks and attach Authentication-Results header."
-msgstr ""
-"Efectuează verificări de autentificare și atașează antetul „Authentication-"
-"Results”."
+msgstr "Efectuează verificări de autentificare și atașează antetul „Authentication-Results”."
 
-#: src/mailman/interfaces/member.py:122
+#: src/mailman/interfaces/member.py:124
 #, python-brace-format
 msgid "${self.email} is already a member of mailing list ${self.fqdn_listname}"
-msgstr ""
-"${self.email} este deja membru al listei de discuții ${self.fqdn_listname}"
+msgstr "${self.email} este deja membru al listei de discuții ${self.fqdn_listname}"
 
-#: src/mailman/interfaces/member.py:125
+#: src/mailman/interfaces/member.py:127
 #, python-brace-format
 msgid "${self.email} is already an owner of mailing list ${self.fqdn_listname}"
-msgstr ""
-"${self.email} este deja proprietarul listei de discuții ${self.fqdn_listname}"
+msgstr "${self.email} este deja proprietarul listei de discuții ${self.fqdn_listname}"
 
-#: src/mailman/interfaces/member.py:128
+#: src/mailman/interfaces/member.py:130
 #, python-brace-format
 msgid "${self.email} is already a moderator of mailing list ${self.fqdn_listname}"
-msgstr ""
-"${self.email} este deja moderator al listei de discuții ${self.fqdn_listname}"
+msgstr "${self.email} este deja moderator al listei de discuții ${self.fqdn_listname}"
 
-#: src/mailman/interfaces/member.py:131
+#: src/mailman/interfaces/member.py:133
 #, python-brace-format
 msgid "${self.email} is already a non-member of mailing list ${self.fqdn_listname}"
-msgstr ""
-"${self.email} deja nu mai este membru al listei de distribuție "
-"${self.fqdn_listname}"
+msgstr "${self.email} deja nu mai este membru al listei de distribuție ${self.fqdn_listname}"
 
 #: src/mailman/interfaces/pipeline.py:53
 msgid "[No details are available]"
@@ -2460,9 +2257,7 @@ msgstr "Caută orice regulă anterioară care s-a aplicat."
 
 #: src/mailman/rules/approved.py:45
 msgid "The message has a matching Approve or Approved header."
-msgstr ""
-"Mesajul are un antet Approve (Aprobare) sau Approved (Aprobat) care se "
-"potrivește."
+msgstr "Mesajul are un antet Approve (Aprobare) sau Approved (Aprobat) care se potrivește."
 
 #: src/mailman/rules/banned_address.py:33
 msgid "Match messages sent by banned addresses."
@@ -2484,26 +2279,18 @@ msgstr "Mesajul are un subiect rezumat"
 msgid "Message quotes digest boilerplate"
 msgstr "Mesajul citează rezumatul standard"
 
-#: src/mailman/rules/dmarc.py:315
+#: src/mailman/rules/dmarc.py:316
 msgid "Find DMARC policy of From: domain."
 msgstr "Găsește politica DMARC pentru domeniul From:."
 
-#: src/mailman/rules/dmarc.py:335
+#: src/mailman/rules/dmarc.py:336
 msgid "DMARC moderation"
 msgstr "Moderarea DMARC"
 
-#: src/mailman/rules/dmarc.py:341
+#: src/mailman/rules/dmarc.py:342
 #, python-brace-format
-msgid ""
-"You are not allowed to post to this mailing list From: a domain which publishes a DMARC policy of reject or "
-"quarantine, and your message has been automatically rejected.  If you think that your messages are being "
-"rejected in error, contact the mailing list owner at ${listowner}."
-msgstr ""
-"Nu aveți permisiunea să publicați pe această listă de discuții de la un "
-"domeniu care publică o politică DMARC de respingere sau carantină, iar "
-"mesajul dvs. a fost respins automat.  Dacă considerați că mesajele dvs. sunt "
-"respinse din greșeală, contactați proprietarul listei de discuții la "
-"${listowner}."
+msgid "You are not allowed to post to this mailing list From: a domain which publishes a DMARC policy of reject or quarantine, and your message has been automatically rejected.  If you think that your messages are being rejected in error, contact the mailing list owner at ${listowner}."
+msgstr "Nu aveți permisiunea să publicați pe această listă de discuții de la un domeniu care publică o politică DMARC de respingere sau carantină, iar mesajul dvs. a fost respins automat.  Dacă considerați că mesajele dvs. sunt respinse din greșeală, contactați proprietarul listei de discuții la ${listowner}."
 
 #: src/mailman/rules/emergency.py:34
 msgid ""
@@ -2524,8 +2311,8 @@ msgid "Catch messages with implicit destination."
 msgstr "Capturează mesajele cu destinație implicită."
 
 #: src/mailman/rules/implicit_dest.py:92
-msgid "Message has implicit destination"
-msgstr "Mesajul are o destinație implicită"
+msgid "List is not explicitly addressed"
+msgstr ""
 
 #: src/mailman/rules/loop.py:32
 msgid "Look for a posting loop."
@@ -2623,8 +2410,7 @@ msgstr "Se ignoră părțile MIME care nu sunt text/text-simplu"
 
 #: src/mailman/runners/command.py:144
 msgid "The results of your email command are provided below.\n"
-msgstr ""
-"Rezultatele comenzii dvs. de poștă electronică sunt prezentate mai jos.\n"
+msgstr "Rezultatele comenzii dvs. de poștă electronică sunt prezentate mai jos.\n"
 
 #: src/mailman/runners/command.py:188
 msgid "- Original message details:"
@@ -2717,7 +2503,7 @@ msgstr "Picior de pagină rezumat"
 msgid "End of "
 msgstr "Sfârșit de "
 
-#: src/mailman/styles/base.py:59
+#: src/mailman/styles/base.py:60
 #, python-brace-format
 msgid "[${mlist.display_name}] "
 msgstr "[${mlist.display_name}] "
@@ -2757,8 +2543,7 @@ msgid ""
 "Size: ${size} bytes\n"
 "Desc: ${desc}\n"
 msgstr ""
-"O parte a mesajului incompatibilă cu rezumatele în format text simplu a fost "
-"eliminată ...\n"
+"O parte a mesajului incompatibilă cu rezumatele în format text simplu a fost eliminată ...\n"
 "Nume: ${filename}\n"
 "Tip: ${ctype}\n"
 "Dimensiune.: ${size} octeți\n"
@@ -2770,8 +2555,7 @@ msgstr "-------------- partea următoare --------------\n"
 
 msgid "domain:admin:notice:new-list.txt"
 msgstr ""
-"Lista de discuții „$listname” tocmai a fost creată pentru dvs. Mai jos "
-"găsiți\n"
+"Lista de discuții „$listname” tocmai a fost creată pentru dvs. Mai jos găsiți\n"
 "câteva informații de bază despre lista dvs. de discuții.\n"
 "\n"
 "Există o interfață bazată pe poșta electronică pentru utilizatorii (nu\n"
@@ -2786,11 +2570,9 @@ msgid "help.txt"
 msgstr ""
 "Ajutor pentru lista de distribuție $listname\n"
 "\n"
-"Aceasta este comanda de poștă electronică „help” pentru versiunea $version "
-"a\n"
+"Aceasta este comanda de poștă electronică „help” pentru versiunea $version a\n"
 "gestionarului de liste GNU Mailman la $domain. În continuare sunt descrise\n"
-"comenzile pe care le puteți trimite pentru a obține informații despre și "
-"pentru\n"
+"comenzile pe care le puteți trimite pentru a obține informații despre și pentru\n"
 "a controla abonamentul dvs. la listele Mailman de pe acest sit.\n"
 "O comandă poate fi introdusă în linia Subiect sau în corpul mesajului.\n"
 "\n"
@@ -2843,17 +2625,14 @@ msgstr ""
 
 msgid "list:admin:notice:disable.txt"
 msgstr ""
-"Abonamentul membrului $member a fost dezactivat pe $listname deoarece "
-"punctajul\n"
-"său de respingere a depășit pragul bounce_score_threshold al listei de "
-"discuții.\n"
+"Abonamentul membrului $member a fost dezactivat pe $listname deoarece punctajul\n"
+"său de respingere a depășit pragul bounce_score_threshold al listei de discuții.\n"
 "\n"
 "DSN-ul declanșator, dacă este disponibil, este atașat."
 
 msgid "list:admin:notice:increment.txt"
 msgstr ""
-"Punctajul de respingere al membrului $member pe $listname a fost incrementat."
-"\n"
+"Punctajul de respingere al membrului $member pe $listname a fost incrementat.\n"
 "\n"
 "DSN-ul declanșator, dacă este disponibil, este atașat."
 
@@ -2865,9 +2644,7 @@ msgstr ""
 "Vă rugăm să vă ocupați de acest lucru cât mai curând posibil."
 
 msgid "list:admin:notice:removal.txt"
-msgstr ""
-"$member a fost dezabonat de la $listname din cauza numărului excesiv de "
-"respingeri."
+msgstr "$member a fost dezabonat de la $listname din cauza numărului excesiv de respingeri."
 
 msgid "list:admin:notice:subscribe.txt"
 msgstr "$member s-a abonat cu succes la $display_name."
@@ -2876,8 +2653,7 @@ msgid "list:admin:notice:unrecognized.txt"
 msgstr ""
 "Mesajul atașat a fost primit ca respingere, dar fie formatul respingerii nu\n"
 "a fost recunoscut, fie nu s-au putut extrage adresele membrilor din acesta.\n"
-"Această listă de discuții a fost configurată pentru a trimite toate "
-"mesajele\n"
+"Această listă de discuții a fost configurată pentru a trimite toate mesajele\n"
 "respinse nerecunoscute către administratorul (administratorii) listei."
 
 msgid "list:admin:notice:unsubscribe.txt"
@@ -2891,8 +2667,7 @@ msgstr ""
 "Trimiteți mesajele către lista de discuții $display_name la adresa\n"
 "    $listname\n"
 "\n"
-"Pentru a vă abona sau dezabona prin poșta electronică, trimiteți un mesaj "
-"cu\n"
+"Pentru a vă abona sau dezabona prin poșta electronică, trimiteți un mesaj cu\n"
 "cuvântul „help” în subiectul sau corpul acestuia la adresa\n"
 "    $request_email\n"
 "\n"
@@ -2941,10 +2716,8 @@ msgstr ""
 "\n"
 "    $user_email\n"
 "\n"
-"Înainte de a putea începe să utilizați GNU Mailman pe acest sit, trebuie "
-"mai\n"
-"întâi să confirmați că aceasta este adresa dvs. de poștă electronică. "
-"Puteți\n"
+"Înainte de a putea începe să utilizați GNU Mailman pe acest sit, trebuie mai\n"
+"întâi să confirmați că aceasta este adresa dvs. de poștă electronică. Puteți\n"
 "face acest lucru răspunzând la acest mesaj.\n"
 "\n"
 "Sau ar trebui să includeți următoarea linie - și numai următoarea linie -\n"
@@ -2971,8 +2744,7 @@ msgstr ""
 "\n"
 "    $user_email\n"
 "\n"
-"Înainte ca GNU Mailman să vă poată dezabona, trebuie mai întâi să "
-"confirmați\n"
+"Înainte ca GNU Mailman să vă poată dezabona, trebuie mai întâi să confirmați\n"
 "cererea.\n"
 "Puteți face acest lucru răspunzând pur și simplu la acest mesaj.\n"
 "\n"
@@ -2999,8 +2771,7 @@ msgstr ""
 "\n"
 "    $subject\n"
 "\n"
-"este reținut până când moderatorul listei îl poate verifica pentru aprobare."
-"\n"
+"este reținut până când moderatorul listei îl poate verifica pentru aprobare.\n"
 "\n"
 "Mesajul este reținut din următoarele motive:\n"
 "\n"
@@ -3018,8 +2789,7 @@ msgstr ""
 "precum buclele de mesaje între roboții de poștă electronică, nu vă vom mai\n"
 "trimite alte răspunsuri astăzi. Vă rugăm să încercați din nou mâine.\n"
 "\n"
-"Dacă considerați că acest mesaj este eronat sau dacă aveți întrebări, vă "
-"rugăm\n"
+"Dacă considerați că acest mesaj este eronat sau dacă aveți întrebări, vă rugăm\n"
 "să contactați proprietarul listei la adresa $owner_email."
 
 msgid "list:user:notice:post.txt"
@@ -3041,8 +2811,7 @@ msgstr ""
 "Pentru mai multe informații, vă recomandăm să contactați administratorul de\n"
 "poștă electronică.\n"
 "\n"
-"Nu trebuie să faceți nimic pentru a rămâne membru activ al listei de "
-"discuții.\n"
+"Nu trebuie să faceți nimic pentru a rămâne membru activ al listei de discuții.\n"
 "\n"
 "Dacă aveți întrebări sau probleme, puteți contacta proprietarul listei de\n"
 "discuții la adresa:\n"
@@ -3067,8 +2836,7 @@ msgstr ""
 
 msgid "list:user:notice:rejected.txt"
 msgstr ""
-"Mesajul dvs. către lista de discuții $listname a fost respins din "
-"următoarele\n"
+"Mesajul dvs. către lista de discuții $listname a fost respins din următoarele\n"
 "motive:\n"
 "\n"
 "$reasons\n"
@@ -3077,12 +2845,9 @@ msgstr ""
 
 msgid "list:user:notice:warning.txt"
 msgstr ""
-"Abonamentul dvs. a fost dezactivat pe lista de discuții $listname deoarece "
-"a\n"
-"primit o serie de mesaje returnate, indicând că ar putea exista o problemă "
-"cu\n"
-"livrarea mesajelor către $sender_email. Pentru mai multe informații, vă "
-"rugăm\n"
+"Abonamentul dvs. a fost dezactivat pe lista de discuții $listname deoarece a\n"
+"primit o serie de mesaje returnate, indicând că ar putea exista o problemă cu\n"
+"livrarea mesajelor către $sender_email. Pentru mai multe informații, vă rugăm\n"
 "să contactați administratorul de poștă electronică.\n"
 "\n"
 "Dacă aveți întrebări sau probleme, puteți contacta proprietarul listei de\n"
@@ -3108,3 +2873,28 @@ msgstr ""
 "a modifica opțiunile, dar din motive de securitate, această parolă nu este\n"
 "inclusă aici. Dacă ați uitat parola, va trebui să o restabiliți prin\n"
 "intermediul interfeței web."
+
+#~ msgid "Stop and restart the Mailman runner subprocesses."
+#~ msgstr "Oprește și repornește subprocesele executanților Mailman."
+
+#, python-brace-format
+#~ msgid "Invalid language code: ${language_code}"
+#~ msgstr "Cod de limbă nevalid: ${language_code}"
+
+#~ msgid ""
+#~ "    Discard all shunted messages instead of moving them back to their original\n"
+#~ "    queue."
+#~ msgstr ""
+#~ "    Elimină toate mesajele deviate în loc să le mute înapoi în coada lor\n"
+#~ "    inițială."
+
+#, python-brace-format
+#~ msgid ""
+#~ "Cannot unshunt message ${filebase}, skipping:\n"
+#~ "${error}"
+#~ msgstr ""
+#~ "Nu se poate executa «unshunt» asupra mesajului ${filebase}, se omite:\n"
+#~ "${error}"
+
+#~ msgid "Message has implicit destination"
+#~ msgstr "Mesajul are o destinație implicită"

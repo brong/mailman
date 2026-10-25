@@ -7,11 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-05 07:50-0700\n"
+"POT-Creation-Date: 2026-10-25 13:45-0700\n"
 "PO-Revision-Date: 2026-09-06 07:10+0000\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
-"Language-Team: Lao <https://hosted.weblate.org/projects/gnu-mailman/mailman/"
-"lo/>\n"
+"Language-Team: Lao <https://hosted.weblate.org/projects/gnu-mailman/mailman/lo/>\n"
 "Language: lo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,8 +18,9 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 2026.9.1.dev0\n"
 
-#: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:83 src/mailman/chains/hold.py:166
-#: src/mailman/handlers/acknowledge.py:56 src/mailman/handlers/subject_prefix.py:46
+#: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:83
+#: src/mailman/chains/hold.py:165 src/mailman/handlers/acknowledge.py:56
+#: src/mailman/handlers/subject_prefix.py:46
 #: src/mailman/handlers/subject_prefix.py:91 src/mailman/runners/digest.py:88
 msgid "(no subject)"
 msgstr "(ບໍ່ມີຫົວຂໍ້)"
@@ -29,12 +29,12 @@ msgstr "(ບໍ່ມີຫົວຂໍ້)"
 msgid "[No bounce details are available]"
 msgstr "[ບໍ່ມີລາຍລະອຽດການຕີກັບ]"
 
-#: src/mailman/app/bounces.py:230
+#: src/mailman/app/bounces.py:233
 #, python-brace-format
 msgid "${mlist.display_name} mailing list probe message"
 msgstr "ຂໍ້ຄວາມທົດສອບລາຍຊື່ເມວ ${mlist.display_name}"
 
-#: src/mailman/app/bounces.py:266
+#: src/mailman/app/bounces.py:269
 #, python-brace-format
 msgid "${mlist.display_name} uncaught bounce notification"
 msgstr "ການແຈ້ງເຕືອນການຕີກັບທີ່ບໍ່ຖືກຈັບຂອງ ${mlist.display_name}"
@@ -57,7 +57,8 @@ msgstr ""
 msgid "Posting of your message titled \"${subject}\""
 msgstr "ການໂພສຂໍ້ຄວາມຂອງທ່ານທີ່ມີຫົວຂໍ້ \"${subject}\""
 
-#: src/mailman/app/moderator.py:132 src/mailman/app/moderator.py:278 src/mailman/rest/sub_moderation.py:119
+#: src/mailman/app/moderator.py:132 src/mailman/app/moderator.py:278
+#: src/mailman/rest/sub_moderation.py:119
 msgid "[No reason given]"
 msgstr "[ບໍ່ໄດ້ລະບຸເຫດຜົນ]"
 
@@ -83,76 +84,72 @@ msgstr "ຂໍ້ຄວາມຕົ້ນສະບັບ"
 msgid "Request to mailing list \"${display_name}\" rejected"
 msgstr "ຄຳຮ້ອງຂໍໄປຍັງລາຍຊື່ເມວ \"${display_name}\" ຖືກປະຕິເສດ"
 
-#: src/mailman/app/notifications.py:93
+#: src/mailman/app/notifications.py:101
 msgid " (Digest mode)"
 msgstr " (ໂໝດສະບັບລວມ)"
 
-#: src/mailman/app/notifications.py:97
+#: src/mailman/app/notifications.py:105
 #, python-brace-format
 msgid "Welcome to the \"${mlist.display_name}\" mailing list${digmode}"
 msgstr "ຍິນດີຕ້ອນຮັບສູ່ລາຍຊື່ເມວ \"${mlist.display_name}\"${digmode}"
 
-#: src/mailman/app/notifications.py:130
+#: src/mailman/app/notifications.py:138
 #, python-brace-format
 msgid "You have been unsubscribed from the ${mlist.display_name} mailing list"
 msgstr "ທ່ານໄດ້ຖືກຍົກເລີກການສະໝັກຈາກລາຍຊື່ເມວ ${mlist.display_name} ແລ້ວ"
 
-#: src/mailman/app/notifications.py:148
+#: src/mailman/app/notifications.py:156
 #, python-brace-format
 msgid "${mlist.display_name} subscription notification"
 msgstr "ການແຈ້ງເຕືອນການສະໝັກສະມາຊິກ ${mlist.display_name}"
 
-#: src/mailman/app/notifications.py:173
+#: src/mailman/app/notifications.py:180
 #, python-brace-format
 msgid "${member}'s subscription disabled on ${mlist.display_name}"
 msgstr "ການສະໝັກຂອງ ${member} ຖືກປິດໃຊ້ງານໃນ ${mlist.display_name}"
 
-#: src/mailman/app/notifications.py:201
+#: src/mailman/app/notifications.py:209
 #, python-brace-format
 msgid "${member}'s bounce score incremented on ${mlist.display_name}"
 msgstr "ຄະແນນການຕີກັບຂອງ ${member} ເພີ່ມຂຶ້ນໃນ ${mlist.display_name}"
 
-#: src/mailman/app/notifications.py:227
+#: src/mailman/app/notifications.py:236
 #, python-brace-format
 msgid "${member} unsubscribed from ${mlist.display_name} mailing list due to bounces"
-msgstr ""
-"${member} ຖືກຍົກເລີກການສະໝັກຈາກລາຍຊື່ເມວ ${mlist.display_name} ເນື່ອງຈາກມີການຕີກັບ"
+msgstr "${member} ຖືກຍົກເລີກການສະໝັກຈາກລາຍຊື່ເມວ ${mlist.display_name} ເນື່ອງຈາກມີການຕີກັບ"
 
-#: src/mailman/app/notifications.py:254
+#: src/mailman/app/notifications.py:269
 #, python-brace-format
 msgid "Your subscription for ${mlist.display_name} mailing list has been disabled"
 msgstr "ການສະໝັກຂອງທ່ານສຳລັບລາຍຊື່ເມວ ${mlist.display_name} ຖືກປິດໃຊ້ງານແລ້ວ"
 
-#: src/mailman/app/subscriptions.py:328
+#: src/mailman/app/subscriptions.py:331
 #, python-brace-format
 msgid "New subscription request to ${self.mlist.display_name} from ${self.address.email}"
-msgstr ""
-"ຄຳຮ້ອງຂໍການສະໝັກໃໝ່ໄປຍັງ ${self.mlist.display_name} ຈາກ ${self.address.email}"
+msgstr "ຄຳຮ້ອງຂໍການສະໝັກໃໝ່ໄປຍັງ ${self.mlist.display_name} ຈາກ ${self.address.email}"
 
-#: src/mailman/app/subscriptions.py:499
+#: src/mailman/app/subscriptions.py:510
 #, python-brace-format
 msgid "New unsubscription request to ${self.mlist.display_name} from ${self.address.email}"
-msgstr ""
-"ຄຳຮ້ອງຂໍຍົກເລີກການສະໝັກໃໝ່ໄປຍັງ ${self.mlist.display_name} ຈາກ ${self.address.email}"
+msgstr "ຄຳຮ້ອງຂໍຍົກເລີກການສະໝັກໃໝ່ໄປຍັງ ${self.mlist.display_name} ຈາກ ${self.address.email}"
 
-#: src/mailman/app/subscriptions.py:631
+#: src/mailman/app/subscriptions.py:644
 #, python-brace-format
 msgid "You have been invited to join the ${event.mlist.fqdn_listname} mailing list."
 msgstr "ທ່ານໄດ້ຖືກເຊີນໃຫ້ເຂົ້າຮ່ວມລາຍຊື່ເມວ ${event.mlist.fqdn_listname}."
 
-#: src/mailman/app/subscriptions.py:634
+#: src/mailman/app/subscriptions.py:647
 #, python-brace-format
 msgid "Your confirmation is needed to leave the ${event.mlist.fqdn_listname} mailing list."
-msgstr ""
-"ຕ້ອງການການຢືນຢັນຈາກທ່ານເພື່ອອອກຈາກລາຍຊື່ເມວ ${event.mlist.fqdn_listname}."
+msgstr "ຕ້ອງການການຢືນຢັນຈາກທ່ານເພື່ອອອກຈາກລາຍຊື່ເມວ ${event.mlist.fqdn_listname}."
 
-#: src/mailman/app/subscriptions.py:638
+#: src/mailman/app/subscriptions.py:651
 #, python-brace-format
 msgid "Your confirmation is needed to join the ${event.mlist.fqdn_listname} mailing list."
-msgstr ""
-"ຕ້ອງການການຢືນຢັນຈາກທ່ານເພື່ອເຂົ້າຮ່ວມລາຍຊື່ເມວ ${event.mlist.fqdn_listname}."
+msgstr "ຕ້ອງການການຢືນຢັນຈາກທ່ານເພື່ອເຂົ້າຮ່ວມລາຍຊື່ເມວ ${event.mlist.fqdn_listname}."
 
-#: src/mailman/bin/mailman.py:102 src/mailman/bin/master.py:594 src/mailman/bin/runner.py:96
+#: src/mailman/bin/mailman.py:103 src/mailman/bin/master.py:595
+#: src/mailman/bin/runner.py:97
 msgid ""
 "    Configuration file to use.  If not given, the environment variable\n"
 "    MAILMAN_CONFIG_FILE is consulted and used if set.  If neither are given, a\n"
@@ -162,7 +159,7 @@ msgstr ""
 "    MAILMAN_CONFIG_FILE ຈະຖືກກວດສອບ ແລະ ນຳໃຊ້ຖ້າມີການຕັ້ງຄ່າ. ຖ້າບໍ່ມີທັງສອງ,\n"
 "    ໄຟລ໌ການຕັ້ງຄ່າເລີ່ມຕົ້ນຈະຖືກໂຫລດ."
 
-#: src/mailman/bin/mailman.py:110
+#: src/mailman/bin/mailman.py:111
 msgid ""
 "    Running mailman commands as root is not recommended and mailman will\n"
 "    refuse to run as root unless this option is specified."
@@ -170,11 +167,11 @@ msgstr ""
 "    ການແລ່ນຄຳສັ່ງ mailman ໃນຖານະ root ແມ່ນບໍ່ແນະນຳ ແລະ mailman ຈະ\n"
 "    ປະຕິເສດທີ່ຈະເຮັດວຽກເປັນ root ເວັ້ນເສຍແຕ່ວ່າຈະມີການລະບຸຕົວເລືອກນີ້."
 
-#: src/mailman/bin/mailman.py:129
+#: src/mailman/bin/mailman.py:130
 msgid "    If you are sure you want to run as root, specify --run-as-root."
 msgstr "    ຖ້າທ່ານແນ່ໃຈວ່າຕ້ອງການແລ່ນໃນຖານະ root, ໃຫ້ລະບຸ --run-as-root."
 
-#: src/mailman/bin/master.py:191
+#: src/mailman/bin/master.py:192
 msgid ""
 "The master lock could not be acquired because it appears as though another\n"
 "master is already running."
@@ -182,7 +179,7 @@ msgstr ""
 "ບໍ່ສາມາດລັອກ master ໄດ້ ເນື່ອງຈາກເບິ່ງຄືວ່າມີ master ອື່ນ\n"
 "ກຳລັງເຮັດວຽກຢູ່ແລ້ວ."
 
-#: src/mailman/bin/master.py:197
+#: src/mailman/bin/master.py:198
 #, python-brace-format
 msgid ""
 "The master lock could not be acquired.  It appears as though there is a stale\n"
@@ -191,7 +188,7 @@ msgstr ""
 "ບໍ່ສາມາດລັອກ master ໄດ້. ເບິ່ງຄືວ່າມີການລັອກ master ທີ່ຄ້າງຢູ່\n"
 ". ລອງແລ່ນ ${program} ໃໝ່ດ້ວຍທຸງ --force."
 
-#: src/mailman/bin/master.py:203
+#: src/mailman/bin/master.py:204
 #, python-brace-format
 msgid ""
 "The master lock could not be acquired, because it appears as if some process\n"
@@ -212,7 +209,7 @@ msgstr ""
 "\n"
 "ກຳລັງອອກ."
 
-#: src/mailman/bin/master.py:216
+#: src/mailman/bin/master.py:217
 #, python-brace-format
 msgid ""
 "For unknown reasons, the master lock could not be acquired.\n"
@@ -229,7 +226,7 @@ msgstr ""
 "\n"
 "ກຳລັງອອກ."
 
-#: src/mailman/bin/master.py:570
+#: src/mailman/bin/master.py:571
 msgid ""
 "    Master subprocess watcher.\n"
 "\n"
@@ -271,7 +268,7 @@ msgstr ""
 "    process id ຂອງຕົນເອງໄວ້ໃນໄຟລ໌ທີ່ລະບຸໃນການຕັ້ງຄ່າ ແຕ່ທ່ານ\n"
 "    ປົກກະຕິບໍ່ຈຳເປັນຕ້ອງໃຊ້ PID ນີ້ໂດຍກົງ."
 
-#: src/mailman/bin/master.py:601
+#: src/mailman/bin/master.py:602
 msgid ""
 "    Don't restart the runners when they exit because of an error or a SIGUSR1.\n"
 "    Use this only for debugging."
@@ -279,7 +276,7 @@ msgstr ""
 "    ຢ່າເລີ່ມຕົ້ນ runners ໃໝ່ເມື່ອພວກມັນອອກໄປເນື່ອງຈາກຂໍ້ຜິດພາດ ຫຼື SIGUSR1.\n"
 "    ໃຊ້ອັນນີ້ສຳລັບການແກ້ໄຂບັນຫາເທົ່ານັ້ນ."
 
-#: src/mailman/bin/master.py:607
+#: src/mailman/bin/master.py:608
 msgid ""
 "    If the master watcher finds an existing master lock, it will normally exit\n"
 "    with an error message.  With this option,the master will perform an extra\n"
@@ -297,7 +294,7 @@ msgstr ""
 "    ລຶບການລັອກທີ່ຄ້າງຢູ່ ແລະ ພະຍາຍາມຄອບຄອງ\n"
 "    ການລັອກ master ອີກຄັ້ງ."
 
-#: src/mailman/bin/master.py:620
+#: src/mailman/bin/master.py:621
 msgid ""
 "    Override the default set of runners that the master will invoke, which is\n"
 "    typically defined in the configuration file.  Multiple -r options may be\n"
@@ -307,21 +304,21 @@ msgstr ""
 "    ໂດຍປົກກະຕິຖືກກຳນົດໃນໄຟລ໌ການຕັ້ງຄ່າ. ສາມາດໃສ່ຕົວເລືອກ -r ໄດ້ຫຼາຍອັນ.\n"
 "    ຄ່າສຳລັບ -r ຈະຖືກສົ່ງໂດຍກົງໄປຍັງ bin/runner."
 
-#: src/mailman/bin/master.py:627 src/mailman/bin/runner.py:133
+#: src/mailman/bin/master.py:628 src/mailman/bin/runner.py:134
 msgid "Display more debugging information to the log file."
 msgstr "ສະແດງຂໍ້ມູນການແກ້ໄຂບັນຫາເພີ່ມເຕີມໃນໄຟລ໌ບັນທຶກ."
 
-#: src/mailman/bin/runner.py:50
+#: src/mailman/bin/runner.py:51
 #, python-brace-format
 msgid "Undefined runner name: ${name}"
 msgstr "ຊື່ runner ທີ່ບໍ່ໄດ້ກຳນົດ: ${name}"
 
-#: src/mailman/bin/runner.py:58
+#: src/mailman/bin/runner.py:59
 #, python-brace-format
 msgid "Cannot import runner module: ${class_path}"
 msgstr "ບໍ່ສາມາດນຳເຂົ້າໂມດູນ runner: ${class_path}"
 
-#: src/mailman/bin/runner.py:76
+#: src/mailman/bin/runner.py:77
 msgid ""
 "    Start a runner.\n"
 "\n"
@@ -355,11 +352,11 @@ msgstr ""
 "    ຕັ້ງຄ່າ ເຊິ່ງຈະປ່ຽນແປງພຶດຕິກຳການຈັດການຂໍ້ຜິດພາດບາງຢ່າງເລັກນ້ອຍ.\n"
 "    "
 
-#: src/mailman/bin/runner.py:103
+#: src/mailman/bin/runner.py:104
 msgid "List the available runner names and exit."
 msgstr "ລາຍຊື່ runner ທີ່ມີຢູ່ ແລະ ອອກ."
 
-#: src/mailman/bin/runner.py:107
+#: src/mailman/bin/runner.py:108
 msgid ""
 "    Run the named runner exactly once through its main loop.  Otherwise, the\n"
 "    runner runs indefinitely until the process receives a signal.  This is not\n"
@@ -369,7 +366,7 @@ msgstr ""
 "    runner ຈະແລ່ນໂດຍບໍ່ມີກຳນົດຈົນກວ່າຂະບວນການຈະໄດ້ຮັບສັນຍານ. ສິ່ງນີ້\n"
 "    ບໍ່ເຂົ້າກັນກັບ runners ທີ່ບໍ່ສາມາດແລ່ນຄັ້ງດຽວໄດ້."
 
-#: src/mailman/bin/runner.py:115
+#: src/mailman/bin/runner.py:116
 msgid ""
 "\n"
 "    Start the named runner, which must be one of the strings returned by the -l\n"
@@ -401,11 +398,11 @@ msgstr ""
 "    1:1 ຈະຖືກນຳໃຊ້.\n"
 "    "
 
-#: src/mailman/bin/runner.py:157
+#: src/mailman/bin/runner.py:158
 msgid "No runner name given."
 msgstr "ບໍ່ໄດ້ລະບຸຊື່ runner."
 
-#: src/mailman/bin/runner.py:189
+#: src/mailman/bin/runner.py:191
 #, python-brace-format
 msgid "${name} runs ${classname}"
 msgstr "${name} ແລ່ນ ${classname}"
@@ -418,7 +415,7 @@ msgstr "ຍອມຮັບຂໍ້ຄວາມ."
 msgid "The built-in moderation chain."
 msgstr "ຕ່ອງໂສ້ການຄວບຄຸມທີ່ມີມາໃຫ້."
 
-#: src/mailman/chains/discard.py:37
+#: src/mailman/chains/discard.py:39
 msgid "Discard a message and stop processing."
 msgstr "ຖິ້ມຂໍ້ຄວາມ ແລະ ຢຸດການປະມວນຜົນ."
 
@@ -434,29 +431,29 @@ msgstr "ສ່ວນຫົວ \"{}\" ກົງກັບກົດລະບຽບ�
 msgid "The built-in header matching chain"
 msgstr "ຕ່ອງໂສ້ການຈັບຄູ່ສ່ວນຫົວທີ່ມີມາໃຫ້"
 
-#: src/mailman/chains/hold.py:59
+#: src/mailman/chains/hold.py:58
 msgid "N/A"
 msgstr "N/A"
 
-#: src/mailman/chains/hold.py:118
+#: src/mailman/chains/hold.py:117
 msgid "Last autoresponse notification for today"
 msgstr "ການແຈ້ງເຕືອນການຕອບກັບອັດຕະໂນມັດຄັ້ງສຸດທ້າຍສຳລັບມື້ນີ້"
 
-#: src/mailman/chains/hold.py:133
+#: src/mailman/chains/hold.py:132
 msgid "Hold a message and stop processing."
 msgstr "ພັກຂໍ້ຄວາມ ແລະ ຢຸດການປະມວນຜົນ."
 
-#: src/mailman/chains/hold.py:205
+#: src/mailman/chains/hold.py:204
 #, python-brace-format
 msgid "Your message to ${mlist.fqdn_listname} awaits moderator approval"
 msgstr "ຂໍ້ຄວາມຂອງທ່ານເຖິງ ${mlist.fqdn_listname} ລໍຖ້າການອະນຸມັດຈາກຜູ້ຄວບຄຸມ"
 
-#: src/mailman/chains/hold.py:234
+#: src/mailman/chains/hold.py:233
 #, python-brace-format
 msgid "${mlist.fqdn_listname} post from ${msg.sender} requires approval"
 msgstr "ໂພສ ${mlist.fqdn_listname} ຈາກ ${msg.sender} ຕ້ອງການການອະນຸມັດ"
 
-#: src/mailman/chains/hold.py:249
+#: src/mailman/chains/hold.py:248
 msgid ""
 "If you reply to this message, keeping the Subject: header intact, Mailman will\n"
 "discard the held message.  Do this if the message is spam.  If you reply to\n"
@@ -478,31 +475,34 @@ msgstr "ຕ່ອງໂສ້ການຄວບຄຸມ"
 msgid "The built-in -owner posting chain."
 msgstr "ຕ່ອງໂສ້ການໂພສ -owner ທີ່ມີມາໃຫ້."
 
-#: src/mailman/chains/reject.py:44
+#: src/mailman/chains/reject.py:43
 msgid "Reject/bounce a message and stop processing."
 msgstr "ປະຕິເສດ/ຕີກັບຂໍ້ຄວາມ ແລະ ຢຸດການປະມວນຜົນ."
 
-#: src/mailman/commands/cli_addmembers.py:73 src/mailman/commands/cli_syncmembers.py:118
+#: src/mailman/commands/cli_addmembers.py:75
+#: src/mailman/commands/cli_syncmembers.py:120
 #, python-brace-format
 msgid "Cannot parse as valid email address (skipping): ${line}"
 msgstr "ບໍ່ສາມາດແຍກວິເຄາະເປັນທີ່ຢູ່ອີເມວທີ່ຖືກຕ້ອງໄດ້ (ຂ້າມ): ${line}"
 
-#: src/mailman/commands/cli_addmembers.py:104
+#: src/mailman/commands/cli_addmembers.py:108
 #, python-brace-format
 msgid "Already subscribed (skipping): ${email}"
 msgstr "ສະໝັກແລ້ວ (ຂ້າມ): ${email}"
 
-#: src/mailman/commands/cli_addmembers.py:107 src/mailman/commands/cli_syncmembers.py:85
+#: src/mailman/commands/cli_addmembers.py:111
+#: src/mailman/commands/cli_syncmembers.py:87
 #, python-brace-format
 msgid "Membership is banned (skipping): ${email}"
 msgstr "ການເປັນສະມາຊິກຖືກແບນ (ຂ້າມ): ${email}"
 
-#: src/mailman/commands/cli_addmembers.py:110 src/mailman/commands/cli_syncmembers.py:88
+#: src/mailman/commands/cli_addmembers.py:114
+#: src/mailman/commands/cli_syncmembers.py:90
 #, python-brace-format
 msgid "Subscription already pending (skipping): ${email}"
 msgstr "ການສະໝັກລໍຖ້າດຳເນີນການຢູ່ (ຂ້າມ): ${email}"
 
-#: src/mailman/commands/cli_addmembers.py:116
+#: src/mailman/commands/cli_addmembers.py:120
 msgid ""
 "    Add all member addresses in FILENAME with delivery mode as specified\n"
 "    with -d/--delivery.  FILENAME can be '-' to indicate standard input.\n"
@@ -514,7 +514,7 @@ msgstr ""
 "    ແຖວເປົ່າ ແລະ ແຖວທີ່ເລີ່ມຕົ້ນດ້ວຍ '#' ຈະຖືກລະເລີຍ.\n"
 "    "
 
-#: src/mailman/commands/cli_addmembers.py:124
+#: src/mailman/commands/cli_addmembers.py:128
 msgid ""
 "    Set the added members delivery mode to 'regular', 'mime', 'plain',\n"
 "    'summary' or 'disabled'.  I.e., one of regular, three modes of digest\n"
@@ -526,7 +526,7 @@ msgstr ""
 "    ຫຼື ບໍ່ມີການຈັດສົ່ງ. ຖ້າບໍ່ໄດ້ລະບຸ, ຄ່າເລີ່ມຕົ້ນແມ່ນ regular. ຖືກລະເລີຍສຳລັບ\n"
 "    ສະມາຊິກທີ່ຖືກເຊີນ."
 
-#: src/mailman/commands/cli_addmembers.py:132
+#: src/mailman/commands/cli_addmembers.py:136
 msgid ""
 "    Send the added members an invitation rather than immediately adding them.\n"
 "    "
@@ -534,13 +534,20 @@ msgstr ""
 "    ສົ່ງຄຳເຊີນໃຫ້ສະມາຊິກທີ່ເພີ່ມແທນທີ່ຈະເພີ່ມພວກເຂົາໃນທັນທີ.\n"
 "    "
 
-#: src/mailman/commands/cli_addmembers.py:137
+#: src/mailman/commands/cli_addmembers.py:141
 msgid "    Override the list's setting for send_welcome_message."
 msgstr "    ທັບການຕັ້ງຄ່າຂອງລາຍຊື່ສຳລັບ send_welcome_message."
 
-#: src/mailman/commands/cli_addmembers.py:146 src/mailman/commands/cli_admins.py:97
+#: src/mailman/commands/cli_addmembers.py:145
+#: src/mailman/commands/cli_delmembers.py:98
+#: src/mailman/commands/cli_syncmembers.py:186
+msgid "    Override the list's setting for admin_notify_mchanges."
+msgstr "    ທັບການຕັ້ງຄ່າຂອງລາຍຊື່ສຳລັບ admin_notify_mchanges."
+
+#: src/mailman/commands/cli_addmembers.py:155 src/mailman/commands/cli_admins.py:97
 #: src/mailman/commands/cli_import.py:68 src/mailman/commands/cli_inject.py:75
-#: src/mailman/commands/cli_members.py:211 src/mailman/commands/cli_syncmembers.py:201
+#: src/mailman/commands/cli_members.py:211
+#: src/mailman/commands/cli_syncmembers.py:203
 #: src/mailman/commands/cli_withlist.py:290 src/mailman/commands/cli_withlist.py:297
 #, python-brace-format
 msgid "No such list: ${listspec}"
@@ -740,7 +747,7 @@ msgstr ""
 "    ຜ່ານເວັບໄດ້. ໂຊກຮ້າຍເດີ!"
 
 #: src/mailman/commands/cli_control.py:83 src/mailman/commands/cli_control.py:170
-#: src/mailman/commands/cli_control.py:192 src/mailman/commands/cli_control.py:214
+#: src/mailman/commands/cli_control.py:192 src/mailman/commands/cli_control.py:218
 msgid ""
 "    Don't print status messages.  Error messages are still printed to standard\n"
 "    error."
@@ -799,10 +806,10 @@ msgid "Reopening the Mailman runners"
 msgstr "ກຳລັງເປີດ Mailman runners ໃໝ່"
 
 #: src/mailman/commands/cli_control.py:210
-msgid "Stop and restart the Mailman runner subprocesses."
-msgstr "ຢຸດ ແລະ ເລີ່ມຕົ້ນຂະບວນການຍ່ອຍ Mailman runner ໃໝ່."
+msgid "Stop and restart the Mailman runner subprocesses. Note: runners that have died and are not currently running will not be restarted by this command. To restart dead runners, use mailman stop followed by mailman start."
+msgstr ""
 
-#: src/mailman/commands/cli_control.py:219
+#: src/mailman/commands/cli_control.py:223
 msgid "Restarting the Mailman runners"
 msgstr "ກຳລັງເລີ່ມຕົ້ນ Mailman runners ໃໝ່"
 
@@ -869,17 +876,14 @@ msgstr ""
 "    -a/--all ຫຼື -l/--list ໄດ້.\n"
 "    "
 
-#: src/mailman/commands/cli_delmembers.py:93 src/mailman/commands/cli_syncmembers.py:179
+#: src/mailman/commands/cli_delmembers.py:93
+#: src/mailman/commands/cli_syncmembers.py:181
 msgid ""
 "    Override the list's setting for send_goodbye_message to\n"
 "    deleted members."
 msgstr ""
 "    ທັບການຕັ້ງຄ່າຂອງລາຍຊື່ສຳລັບ send_goodbye_message ໄປຫາ\n"
 "    ສະມາຊິກທີ່ຖືກລຶບ."
-
-#: src/mailman/commands/cli_delmembers.py:98 src/mailman/commands/cli_syncmembers.py:184
-msgid "    Override the list's setting for admin_notify_mchanges."
-msgstr "    ທັບການຕັ້ງຄ່າຂອງລາຍຊື່ສຳລັບ admin_notify_mchanges."
 
 #: src/mailman/commands/cli_delmembers.py:123
 #, python-brace-format
@@ -927,6 +931,7 @@ msgstr ""
 "    ຈະເກີດຂຶ້ນ."
 
 #: src/mailman/commands/cli_digests.py:67 src/mailman/commands/cli_notify.py:56
+#: src/mailman/commands/cli_unshunt.py:43
 msgid "Print some additional status."
 msgstr "ພິມສະຖານະເພີ່ມເຕີມບາງຢ່າງ."
 
@@ -950,20 +955,17 @@ msgstr "ບໍ່ພົບລາຍຊື່ດັ່ງກ່າວ: ${spec}"
 #: src/mailman/commands/cli_digests.py:100
 #, python-brace-format
 msgid "${mlist.list_id} is at volume ${mlist.volume}, number ${mlist.next_digest_number}"
-msgstr ""
-"${mlist.list_id} ຢູ່ທີ່ເຫຼັ້ມທີ ${mlist.volume}, ສະບັບທີ ${mlist.next_digest_number}"
+msgstr "${mlist.list_id} ຢູ່ທີ່ເຫຼັ້ມທີ ${mlist.volume}, ສະບັບທີ ${mlist.next_digest_number}"
 
 #: src/mailman/commands/cli_digests.py:106
 #, python-brace-format
 msgid "${mlist.list_id} bumped to volume ${mlist.volume}, number ${mlist.next_digest_number}"
-msgstr ""
-"${mlist.list_id} ຂ້າມໄປເຫຼັ້ມທີ ${mlist.volume}, ສະບັບທີ ${mlist.next_digest_number}"
+msgstr "${mlist.list_id} ຂ້າມໄປເຫຼັ້ມທີ ${mlist.volume}, ສະບັບທີ ${mlist.next_digest_number}"
 
 #: src/mailman/commands/cli_digests.py:112 src/mailman/commands/cli_digests.py:122
 #, python-brace-format
 msgid "${mlist.list_id} sent volume ${mlist.volume}, number ${mlist.next_digest_number}"
-msgstr ""
-"${mlist.list_id} ສົ່ງເຫຼັ້ມທີ ${mlist.volume}, ສະບັບທີ ${mlist.next_digest_number}"
+msgstr "${mlist.list_id} ສົ່ງເຫຼັ້ມທີ ${mlist.volume}, ສະບັບທີ ${mlist.next_digest_number}"
 
 #: src/mailman/commands/cli_findmember.py:81
 msgid ""
@@ -999,11 +1001,11 @@ msgstr "ລາຍຊື່: {}"
 msgid "{}"
 msgstr "{}"
 
-#: src/mailman/commands/cli_gatenews.py:170
+#: src/mailman/commands/cli_gatenews.py:169
 msgid "Poll the NNTP server for messages to be gatewayed to mailing lists."
 msgstr "ສຳຫຼວດເຊີບເວີ NNTP ສຳລັບຂໍ້ຄວາມທີ່ຈະຖືກສົ່ງຕໍ່ໄປຍັງລາຍຊື່ເມວ."
 
-#: src/mailman/commands/cli_gatenews.py:177
+#: src/mailman/commands/cli_gatenews.py:176
 msgid ""
 "    The gatenews command is run periodically by the nntp runner.\n"
 "    If you are running it via cron, you should remove it from the crontab.\n"
@@ -1052,8 +1054,7 @@ msgstr "ຂໍ້ມູນກ່ຽວກັບ Mailman instance ນີ້."
 
 #: src/mailman/commands/cli_info.py:40
 msgid "    File to send the output to.  If not given, standard output is used."
-msgstr ""
-"    ໄຟລ໌ທີ່ຈະສົ່ງຜົນໄດ້ຮັບໄປຫາ. ຖ້າບໍ່ໄດ້ລະບຸ, ຜົນໄດ້ຮັບມາດຕະຖານຈະຖືກນຳໃຊ້."
+msgstr "    ໄຟລ໌ທີ່ຈະສົ່ງຜົນໄດ້ຮັບໄປຫາ. ຖ້າບໍ່ໄດ້ລະບຸ, ຜົນໄດ້ຮັບມາດຕະຖານຈະຖືກນຳໃຊ້."
 
 #: src/mailman/commands/cli_info.py:45
 msgid ""
@@ -1104,27 +1105,27 @@ msgstr ""
 msgid "No such queue: ${queue}"
 msgstr "ບໍ່ມີຄິວດັ່ງກ່າວ: ${queue}"
 
-#: src/mailman/commands/cli_lists.py:54
+#: src/mailman/commands/cli_lists.py:53
 msgid "List all mailing lists."
 msgstr "ລາຍຊື່ເມວທັງໝົດ."
 
-#: src/mailman/commands/cli_lists.py:58
+#: src/mailman/commands/cli_lists.py:57
 msgid "List only those mailing lists that are publicly advertised"
 msgstr "ລາຍຊື່ສະເພາະລາຍຊື່ເມວທີ່ຖືກໂຄສະນາຕໍ່ສາທາລະນະເທົ່ານັ້ນ"
 
-#: src/mailman/commands/cli_lists.py:62
+#: src/mailman/commands/cli_lists.py:61
 msgid "Show also the list names"
 msgstr "ສະແດງຊື່ລາຍຊື່ນຳ"
 
-#: src/mailman/commands/cli_lists.py:66
+#: src/mailman/commands/cli_lists.py:65
 msgid "Show also the list descriptions"
 msgstr "ສະແດງລາຍລະອຽດລາຍຊື່ນຳ"
 
-#: src/mailman/commands/cli_lists.py:70
+#: src/mailman/commands/cli_lists.py:69
 msgid "Less verbosity"
 msgstr "ຄວາມລະອຽດໜ້ອຍລົງ"
 
-#: src/mailman/commands/cli_lists.py:74
+#: src/mailman/commands/cli_lists.py:73
 msgid ""
 "    List only those mailing lists hosted on the given domain, which\n"
 "    must be the email host name.  Multiple -d options may be given.\n"
@@ -1134,16 +1135,16 @@ msgstr ""
 "    ຕ້ອງເປັນຊື່ host ອີເມວ. ສາມາດໃສ່ຕົວເລືອກ -d ໄດ້ຫຼາຍອັນ.\n"
 "    "
 
-#: src/mailman/commands/cli_lists.py:92
+#: src/mailman/commands/cli_lists.py:91
 msgid "No matching mailing lists found"
 msgstr "ບໍ່ພົບລາຍຊື່ເມວທີ່ກົງກັນ"
 
-#: src/mailman/commands/cli_lists.py:96
+#: src/mailman/commands/cli_lists.py:95
 #, python-brace-format
 msgid "${count} matching mailing lists found:"
 msgstr "ພົບ ${count} ລາຍຊື່ເມວທີ່ກົງກັນ:"
 
-#: src/mailman/commands/cli_lists.py:128
+#: src/mailman/commands/cli_lists.py:127
 msgid ""
 "    Create a mailing list.\n"
 "\n"
@@ -1157,7 +1158,7 @@ msgstr ""
 "    ເມວແມ່ນຈຳເປັນ. ມັນຕ້ອງເປັນທີ່ຢູ່ອີເມວທີ່ຖືກຕ້ອງ ແລະ ໂດເມນຕ້ອງ\n"
 "    ລົງທະບຽນກັບ Mailman. ຊື່ລາຍຊື່ຖືກບັງຄັບໃຫ້ເປັນຕົວພິມນ້ອຍ."
 
-#: src/mailman/commands/cli_lists.py:136
+#: src/mailman/commands/cli_lists.py:135
 msgid ""
 "    Set the list's preferred language to CODE, which must be a registered two\n"
 "    letter language code."
@@ -1165,7 +1166,7 @@ msgstr ""
 "    ຕັ້ງຄ່າພາສາທີ່ຕ້ອງການຂອງລາຍຊື່ເປັນ CODE, ເຊິ່ງຕ້ອງເປັນລະຫັດພາສາ\n"
 "    ສອງຕົວອັກສອນທີ່ລົງທະບຽນແລ້ວ."
 
-#: src/mailman/commands/cli_lists.py:142
+#: src/mailman/commands/cli_lists.py:141
 msgid ""
 "    Specify a list owner email address.  If the address is not currently\n"
 "    registered with Mailman, the address is registered and linked to a user.\n"
@@ -1179,11 +1180,11 @@ msgstr ""
 "    ສົ່ງແຈ້ງການການສ້າງລາຍຊື່ໄປຍັງທີ່ຢູ່ນັ້ນນຳ. ສາມາດລະບຸ\n"
 "    ເຈົ້າຂອງໄດ້ຫຼາຍກວ່າໜຶ່ງຄົນ."
 
-#: src/mailman/commands/cli_lists.py:150
+#: src/mailman/commands/cli_lists.py:149
 msgid "    Specify a list style name."
 msgstr "    ລະບຸຊື່ຮູບແບບລາຍຊື່."
 
-#: src/mailman/commands/cli_lists.py:155
+#: src/mailman/commands/cli_lists.py:154
 msgid ""
 "    Notify the list owner by email that their mailing list has been\n"
 "    created."
@@ -1191,11 +1192,11 @@ msgstr ""
 "    ແຈ້ງເຕືອນເຈົ້າຂອງລາຍຊື່ທາງອີເມວວ່າລາຍຊື່ເມວຂອງພວກເຂົາໄດ້ຖືກ\n"
 "    ສ້າງຂຶ້ນແລ້ວ."
 
-#: src/mailman/commands/cli_lists.py:161
+#: src/mailman/commands/cli_lists.py:160
 msgid "Print less output."
 msgstr "ພິມຜົນໄດ້ຮັບໜ້ອຍລົງ."
 
-#: src/mailman/commands/cli_lists.py:165
+#: src/mailman/commands/cli_lists.py:164
 msgid ""
 "    Register the mailing list's domain if not yet registered.  This is\n"
 "    the default behavior, but these options are provided for backward\n"
@@ -1205,60 +1206,60 @@ msgstr ""
 "    ພຶດຕິກຳເລີ່ມຕົ້ນ, ແຕ່ຕົວເລືອກເຫຼົ່ານີ້ຖືກສະໜອງໃຫ້ເພື່ອຄວາມເຂົ້າກັນໄດ້\n"
 "    ຍ້ອນຫຼັງ. ດ້ວຍ -D ຢ່າລົງທະບຽນໂດເມນຂອງລາຍຊື່ເມວ."
 
-#: src/mailman/commands/cli_lists.py:177
+#: src/mailman/commands/cli_lists.py:175
 #, python-brace-format
-msgid "Invalid language code: ${language_code}"
-msgstr "ລະຫັດພາສາບໍ່ຖືກຕ້ອງ: ${language_code}"
+msgid "Invalid language code: ${language}"
+msgstr ""
 
-#: src/mailman/commands/cli_lists.py:193
+#: src/mailman/commands/cli_lists.py:191
 #, python-brace-format
 msgid "Illegal owner addresses: ${invalid}"
 msgstr "ທີ່ຢູ່ເຈົ້າຂອງທີ່ຜິດກົດໝາຍ: ${invalid}"
 
-#: src/mailman/commands/cli_lists.py:196
+#: src/mailman/commands/cli_lists.py:194
 #, python-brace-format
 msgid "Unknown list style name: ${style_name}"
 msgstr "ຊື່ຮູບແບບລາຍຊື່ທີ່ບໍ່ຮູ້ຈັກ: ${style_name}"
 
-#: src/mailman/commands/cli_lists.py:200
+#: src/mailman/commands/cli_lists.py:198
 #, python-brace-format
 msgid "Illegal list name: ${fqdn_listname}"
 msgstr "ຊື່ລາຍຊື່ທີ່ຜິດກົດໝາຍ: ${fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:202
+#: src/mailman/commands/cli_lists.py:200
 #, python-brace-format
 msgid "List already exists: ${fqdn_listname}"
 msgstr "ມີລາຍຊື່ຢູ່ແລ້ວ: ${fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:204
+#: src/mailman/commands/cli_lists.py:202
 #, python-brace-format
 msgid "Undefined domain: ${domain}"
 msgstr "ໂດເມນທີ່ບໍ່ໄດ້ກຳນົດ: ${domain}"
 
-#: src/mailman/commands/cli_lists.py:212
+#: src/mailman/commands/cli_lists.py:208
 #, python-brace-format
 msgid "Created mailing list: ${mlist.fqdn_listname}"
 msgstr "ສ້າງລາຍຊື່ເມວແລ້ວ: ${mlist.fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:227
+#: src/mailman/commands/cli_lists.py:223
 #, python-brace-format
 msgid "Your new mailing list: ${fqdn_listname}"
 msgstr "ລາຍຊື່ເມວໃໝ່ຂອງທ່ານ: ${fqdn_listname}"
 
-#: src/mailman/commands/cli_lists.py:241
+#: src/mailman/commands/cli_lists.py:237
 msgid "Remove a mailing list (does not remove archives)."
 msgstr "ລຶບລາຍຊື່ເມວ (ບໍ່ລຶບຄັງເກັບ)."
 
-#: src/mailman/commands/cli_lists.py:245
+#: src/mailman/commands/cli_lists.py:241
 msgid "Suppress status messages"
 msgstr "ລະງັບຂໍ້ຄວາມສະຖານະ"
 
-#: src/mailman/commands/cli_lists.py:251
+#: src/mailman/commands/cli_lists.py:247
 #, python-brace-format
 msgid "No such list matching spec: ${listspec}"
 msgstr "ບໍ່ມີລາຍຊື່ທີ່ກົງກັບສະເປັກ: ${listspec}"
 
-#: src/mailman/commands/cli_lists.py:256
+#: src/mailman/commands/cli_lists.py:252
 #, python-brace-format
 msgid "Removed list: ${listspec}"
 msgstr "ລຶບລາຍຊື່ແລ້ວ: ${listspec}"
@@ -1343,8 +1344,7 @@ msgid ""
 "    type digests, 'mime' means MIME type digests."
 msgstr ""
 "    ສະແດງສະເພາະສະມາຊິກສະບັບລວມຂອງປະເພດ.\n"
-"    'any' ໝາຍເຖິງປະເພດສະບັບລວມໃດໆ, 'plaintext' ໝາຍເຖິງຂໍ້ຄວາມທຳມະດາເທົ່ານັ້ນ "
-"(rfc 1153)\n"
+"    'any' ໝາຍເຖິງປະເພດສະບັບລວມໃດໆ, 'plaintext' ໝາຍເຖິງຂໍ້ຄວາມທຳມະດາເທົ່ານັ້ນ (rfc 1153)\n"
 "    ສະບັບລວມປະເພດ, 'mime' ໝາຍເຖິງສະບັບລວມປະເພດ MIME."
 
 #: src/mailman/commands/cli_members.py:195
@@ -1502,21 +1502,21 @@ msgstr "GNU Mailman ຖືກຢຸດໄວ້ (stale pid: ${pid})"
 msgid "GNU Mailman is in an unexpected state (${hostname} != ${fqdn_name})"
 msgstr "GNU Mailman ຢູ່ໃນສະຖານະທີ່ບໍ່ຄາດຄິດ (${hostname} != ${fqdn_name})"
 
-#: src/mailman/commands/cli_syncmembers.py:133
+#: src/mailman/commands/cli_syncmembers.py:135
 #, python-format
 msgid "[ADD] %s"
 msgstr "[ເພີ່ມ] %s"
 
-#: src/mailman/commands/cli_syncmembers.py:143
+#: src/mailman/commands/cli_syncmembers.py:145
 #, python-format
 msgid "[DEL] %s"
 msgstr "[ລຶບ] %s"
 
-#: src/mailman/commands/cli_syncmembers.py:152
+#: src/mailman/commands/cli_syncmembers.py:154
 msgid "Nothing to do"
 msgstr "ບໍ່ມີຫຍັງຕ້ອງເຮັດ"
 
-#: src/mailman/commands/cli_syncmembers.py:157
+#: src/mailman/commands/cli_syncmembers.py:159
 msgid ""
 "    Add and delete members as necessary to syncronize a list's membership\n"
 "    with an input file.  FILENAME is the file containing the new membership,\n"
@@ -1536,7 +1536,7 @@ msgstr ""
 "    ລຶບອອກຈາກລາຍຊື່. FILENAME ສາມາດເປັນ '-' ເພື່ອລະບຸ standard input.\n"
 "    "
 
-#: src/mailman/commands/cli_syncmembers.py:169
+#: src/mailman/commands/cli_syncmembers.py:171
 msgid ""
 "    Set the added members delivery mode to 'regular', 'mime', 'plain',\n"
 "    'summary' or 'disabled'.  I.e., one of regular, three modes of digest\n"
@@ -1546,12 +1546,11 @@ msgstr ""
 "    'summary' ຫຼື 'disabled'. ເຊັ່ນ: ໜຶ່ງໃນໂໝດ regular, ສາມໂໝດຂອງ digest\n"
 "    ຫຼື ບໍ່ມີການຈັດສົ່ງ. ຖ້າບໍ່ໄດ້ລະບຸ, ຄ່າເລີ່ມຕົ້ນແມ່ນ regular."
 
-#: src/mailman/commands/cli_syncmembers.py:175
+#: src/mailman/commands/cli_syncmembers.py:177
 msgid "    Override the list's setting for send_welcome_message to added members."
-msgstr ""
-"    ທັບຄ່າການຕັ້ງຄ່າຂອງລາຍຊື່ສຳລັບ send_welcome_message ໄປຫາສະມາຊິກທີ່ເພີ່ມເຂົ້າມາ."
+msgstr "    ທັບຄ່າການຕັ້ງຄ່າຂອງລາຍຊື່ສຳລັບ send_welcome_message ໄປຫາສະມາຊິກທີ່ເພີ່ມເຂົ້າມາ."
 
-#: src/mailman/commands/cli_syncmembers.py:189
+#: src/mailman/commands/cli_syncmembers.py:191
 msgid ""
 "    Don't actually make the changes.  Instead, print out what would be\n"
 "    done to the list."
@@ -1565,20 +1564,14 @@ msgstr "Unshunt ຂໍ້ຄວາມ."
 
 #: src/mailman/commands/cli_unshunt.py:37
 msgid ""
-"    Discard all shunted messages instead of moving them back to their original\n"
+"    Discard shunted messages instead of moving them back to their original\n"
 "    queue."
 msgstr ""
-"    ຖິ້ມຂໍ້ຄວາມທີ່ຖືກ unshunt ທັງໝົດ ແທນທີ່ຈະຍ້າຍພວກມັນກັບໄປຄິວເດີມ\n"
-"    ຂອງພວກມັນ."
 
-#: src/mailman/commands/cli_unshunt.py:50
+#: src/mailman/commands/cli_unshunt.py:61
 #, python-brace-format
-msgid ""
-"Cannot unshunt message ${filebase}, skipping:\n"
-"${error}"
+msgid "Cannot unshunt message ${filebase}, skipping: ${error}"
 msgstr ""
-"ບໍ່ສາມາດ unshunt ຂໍ້ຄວາມ ${filebase}, ກຳລັງຂ້າມ:\n"
-"${error}"
 
 #: src/mailman/commands/cli_version.py:32
 msgid "Display Mailman's version."
@@ -1612,8 +1605,7 @@ msgid ""
 "variable 'm' will be available in the global namespace.  It will reference the\n"
 "mailing list object."
 msgstr ""
-"ມີສອງວິທີໃນການໃຊ້ສະຄຣິບນີ້: ແບບໂຕ້ຕອບ (interactively) ຫຼື ແບບໂປຣແກຣມ (programmatically)"
-".\n"
+"ມີສອງວິທີໃນການໃຊ້ສະຄຣິບນີ້: ແບບໂຕ້ຕອບ (interactively) ຫຼື ແບບໂປຣແກຣມ (programmatically).\n"
 "ການໃຊ້ມັນແບບໂຕ້ຕອບຊ່ວຍໃຫ້ເຈົ້າສາມາດຫຼິ້ນ, ກວດສອບ ແລະ ແກ້ໄຂ mailing\n"
 "list ຈາກ interpreter ແບບໂຕ້ຕອບຂອງ Python. ເມື່ອແລ່ນແບບໂຕ້ຕອບ, \n"
 "ໂຕປ່ຽນ 'm' ຈະມີຢູ່ໃນ global namespace. ມັນຈະອ້າງອີງເຖິງ\n"
@@ -1903,7 +1895,8 @@ msgstr "${person} ມີການສະໝັກສະມາຊິກທີ່�
 msgid "Confirmation email sent to ${person}"
 msgstr "ອີເມວຢືນຢັນຖືກສົ່ງໄປຫາ ${person} ແລ້ວ"
 
-#: src/mailman/commands/eml_membership.py:152 src/mailman/commands/eml_membership.py:162
+#: src/mailman/commands/eml_membership.py:152
+#: src/mailman/commands/eml_membership.py:162
 #, python-brace-format
 msgid "bad argument: ${argument}"
 msgstr "argument ບໍ່ດີ: ${argument}"
@@ -2020,32 +2013,32 @@ msgstr "ດຳເນີນການກວດສອບ ARC auth ແລະ ແນ�
 msgid "Suppress some duplicates of the same message."
 msgstr "ລະງັບຂໍ້ຄວາມທີ່ຊ້ຳກັນບາງສ່ວນຂອງຂໍ້ຄວາມດຽວກັນ."
 
-#: src/mailman/handlers/check_dmarc.py:43
+#: src/mailman/handlers/check_dmarc.py:46
 msgid "Check whether to Apply DMARC mitigations."
 msgstr "ກວດສອບວ່າຈະນຳໃຊ້ການບັນເທົາ DMARC ຫຼື ບໍ່."
-
-#: src/mailman/handlers/cleanse_dkim.py:42
-msgid "Remove DomainKeys headers."
-msgstr "ລຶບ headers DomainKeys."
 
 #: src/mailman/handlers/cleanse.py:42
 msgid "Cleanse certain headers from all messages."
 msgstr "ລ້າງ headers ບາງຢ່າງອອກຈາກທຸກຂໍ້ຄວາມ."
 
+#: src/mailman/handlers/cleanse_dkim.py:42
+msgid "Remove DomainKeys headers."
+msgstr "ລຶບ headers DomainKeys."
+
 #: src/mailman/handlers/cook_headers.py:168
 msgid "Modify message headers."
 msgstr "ແກ້ໄຂ headers ຂອງຂໍ້ຄວາມ."
 
-#: src/mailman/handlers/decorate.py:250
+#: src/mailman/handlers/decorate.py:245
 msgid "Decorate a message with headers and footers."
 msgstr "ຕົກແຕ່ງຂໍ້ຄວາມດ້ວຍ headers ແລະ footers."
 
-#: src/mailman/handlers/dmarc.py:129
+#: src/mailman/handlers/dmarc.py:131
 #, python-brace-format
 msgid "${realname} via ${mlist.display_name}"
 msgstr "${realname} ຜ່ານ ${mlist.display_name}"
 
-#: src/mailman/handlers/dmarc.py:230
+#: src/mailman/handlers/dmarc.py:238
 msgid "Apply DMARC mitigations."
 msgstr "ນຳໃຊ້ການບັນເທົາ DMARC."
 
@@ -2144,13 +2137,12 @@ msgstr "ຄິດໄລ່ຜູ້ຮັບທີ່ເປັນເຈົ້າ
 msgid "Send automatic responses."
 msgstr "ສົ່ງການຕອບກັບອັດຕະໂນມັດ."
 
-#: src/mailman/handlers/replybot.py:101
+#: src/mailman/handlers/replybot.py:105
 #, python-brace-format
 msgid "Auto-response for your message to the \"${display_name}\" mailing list"
-msgstr ""
-"ການຕອບກັບອັດຕະໂນມັດສຳລັບຂໍ້ຄວາມຂອງເຈົ້າເຖິງ mailing list \"${display_name}\""
+msgstr "ການຕອບກັບອັດຕະໂນມັດສຳລັບຂໍ້ຄວາມຂອງເຈົ້າເຖິງ mailing list \"${display_name}\""
 
-#: src/mailman/handlers/replybot.py:114
+#: src/mailman/handlers/replybot.py:118
 msgid "The Mailman Replybot"
 msgstr "Mailman Replybot"
 
@@ -2186,26 +2178,25 @@ msgstr "ຍ້າຍຂໍ້ຄວາມໄປຍັງຄິວຂ່າວຂ
 msgid "Perform auth checks and attach Authentication-Results header."
 msgstr "ດຳເນີນການກວດສອບ auth ແລະ ແນບ Authentication-Results header."
 
-#: src/mailman/interfaces/member.py:122
+#: src/mailman/interfaces/member.py:124
 #, python-brace-format
 msgid "${self.email} is already a member of mailing list ${self.fqdn_listname}"
 msgstr "${self.email} ເປັນສະມາຊິກຂອງ mailing list ${self.fqdn_listname} ແລ້ວ"
 
-#: src/mailman/interfaces/member.py:125
+#: src/mailman/interfaces/member.py:127
 #, python-brace-format
 msgid "${self.email} is already an owner of mailing list ${self.fqdn_listname}"
 msgstr "${self.email} ເປັນເຈົ້າຂອງ mailing list ${self.fqdn_listname} ແລ້ວ"
 
-#: src/mailman/interfaces/member.py:128
+#: src/mailman/interfaces/member.py:130
 #, python-brace-format
 msgid "${self.email} is already a moderator of mailing list ${self.fqdn_listname}"
 msgstr "${self.email} ເປັນຜູ້ຄວບຄຸມຂອງ mailing list ${self.fqdn_listname} ແລ້ວ"
 
-#: src/mailman/interfaces/member.py:131
+#: src/mailman/interfaces/member.py:133
 #, python-brace-format
 msgid "${self.email} is already a non-member of mailing list ${self.fqdn_listname}"
-msgstr ""
-"${self.email} ເປັນ non-member ຂອງ mailing list ${self.fqdn_listname} ແລ້ວ"
+msgstr "${self.email} ເປັນ non-member ຂອງ mailing list ${self.fqdn_listname} ແລ້ວ"
 
 #: src/mailman/interfaces/pipeline.py:53
 msgid "[No details are available]"
@@ -2267,20 +2258,17 @@ msgstr "ຂໍ້ຄວາມມີຫົວຂໍ້ແບບ digest"
 msgid "Message quotes digest boilerplate"
 msgstr "ຂໍ້ຄວາມອ້າງອີງ digest boilerplate"
 
-#: src/mailman/rules/dmarc.py:315
+#: src/mailman/rules/dmarc.py:316
 msgid "Find DMARC policy of From: domain."
 msgstr "ຊອກຫານະໂຍບາຍ DMARC ຂອງໂດເມນ From:."
 
-#: src/mailman/rules/dmarc.py:335
+#: src/mailman/rules/dmarc.py:336
 msgid "DMARC moderation"
 msgstr "ການຄວບຄຸມ DMARC"
 
-#: src/mailman/rules/dmarc.py:341
+#: src/mailman/rules/dmarc.py:342
 #, python-brace-format
-msgid ""
-"You are not allowed to post to this mailing list From: a domain which publishes a DMARC policy of reject or "
-"quarantine, and your message has been automatically rejected.  If you think that your messages are being "
-"rejected in error, contact the mailing list owner at ${listowner}."
+msgid "You are not allowed to post to this mailing list From: a domain which publishes a DMARC policy of reject or quarantine, and your message has been automatically rejected.  If you think that your messages are being rejected in error, contact the mailing list owner at ${listowner}."
 msgstr ""
 "ເຈົ້າບໍ່ໄດ້ຮັບອະນຸຍາດໃຫ້ໂພສລົງໃນ mailing list ນີ້ ຈາກ: (From:) ໂດເມນທີ່ເຜີຍແຜ່ນະໂຍບາຍ\n"
 "DMARC ແບບ reject ຫຼື quarantine, ແລະ ຂໍ້ຄວາມຂອງເຈົ້າໄດ້ຖືກປະຕິເສດໂດຍອັດຕະໂນມັດ. ຖ້າເຈົ້າ\n"
@@ -2305,8 +2293,8 @@ msgid "Catch messages with implicit destination."
 msgstr "ຈັບຂໍ້ຄວາມທີ່ມີປາຍທາງ implicit."
 
 #: src/mailman/rules/implicit_dest.py:92
-msgid "Message has implicit destination"
-msgstr "ຂໍ້ຄວາມມີປາຍທາງ implicit"
+msgid "List is not explicitly addressed"
+msgstr ""
 
 #: src/mailman/rules/loop.py:32
 msgid "Look for a posting loop."
@@ -2497,7 +2485,7 @@ msgstr "Digest Footer"
 msgid "End of "
 msgstr "ສິ້ນສຸດຂອງ "
 
-#: src/mailman/styles/base.py:59
+#: src/mailman/styles/base.py:60
 #, python-brace-format
 msgid "[${mlist.display_name}] "
 msgstr "[${mlist.display_name}] "
@@ -2549,8 +2537,7 @@ msgstr "-------------- next part --------------\n"
 
 msgid "domain:admin:notice:new-list.txt"
 msgstr ""
-"Mailing list '$listname' ຫາກໍ່ຖືກສ້າງຂຶ້ນສຳລັບເຈົ້າ. ຕໍ່ໄປນີ້ແມ່ນຂໍ້ມູນພື້ນຖານບາງຢ່າງກ່ຽວກັບ "
-"mailing list ຂອງເຈົ້າ.\n"
+"Mailing list '$listname' ຫາກໍ່ຖືກສ້າງຂຶ້ນສຳລັບເຈົ້າ. ຕໍ່ໄປນີ້ແມ່ນຂໍ້ມູນພື້ນຖານບາງຢ່າງກ່ຽວກັບ mailing list ຂອງເຈົ້າ.\n"
 "\n"
 "ມີອິນເຕີເຟດອີເມວສຳລັບຜູ້ໃຊ້ (ບໍ່ແມ່ນຜູ້ເບິ່ງແຍງລະບົບ) ຂອງລາຍຊື່ຂອງເຈົ້າ;\n"
 "ເຈົ້າສາມາດຂໍຂໍ້ມູນກ່ຽວກັບການໃຊ້ມັນໂດຍການສົ່ງຂໍ້ຄວາມທີ່ມີພຽງຄຳວ່າ 'help'\n"
@@ -2636,8 +2623,7 @@ msgstr ""
 "ກະລຸນາຈັດການສິ່ງນີ້ໃຫ້ໄວທີ່ສຸດເທົ່າທີ່ຈະເປັນໄປໄດ້."
 
 msgid "list:admin:notice:removal.txt"
-msgstr ""
-"$member ໄດ້ຖືກຍົກເລີກການສະໝັກຈາກ $listname ເນື່ອງຈາກ bounces ຫຼາຍເກີນໄປ."
+msgstr "$member ໄດ້ຖືກຍົກເລີກການສະໝັກຈາກ $listname ເນື່ອງຈາກ bounces ຫຼາຍເກີນໄປ."
 
 msgid "list:admin:notice:subscribe.txt"
 msgstr "$member ໄດ້ຖືກສະໝັກສະມາຊິກກັບ $display_name ສຳເລັດແລ້ວ."
@@ -2856,3 +2842,28 @@ msgstr ""
 "ປ່ຽນແປງຕົວເລືອກຕ່າງໆ, ແຕ່ເພື່ອຄວາມປອດໄພ, ລະຫັດຜ່ານດັ່ງກ່າວຈຶ່ງບໍ່ໄດ້ລວມຢູ່\n"
 "ໃນນີ້. ຖ້າຫາກທ່ານລືມລະຫັດຜ່ານ, ທ່ານຈະຕ້ອງຕັ້ງຄ່າລະຫັດຜ່ານຄືນໃໝ່ຜ່ານທາງ\n"
 "ໜ້າເວັບ."
+
+#~ msgid "Stop and restart the Mailman runner subprocesses."
+#~ msgstr "ຢຸດ ແລະ ເລີ່ມຕົ້ນຂະບວນການຍ່ອຍ Mailman runner ໃໝ່."
+
+#, python-brace-format
+#~ msgid "Invalid language code: ${language_code}"
+#~ msgstr "ລະຫັດພາສາບໍ່ຖືກຕ້ອງ: ${language_code}"
+
+#~ msgid ""
+#~ "    Discard all shunted messages instead of moving them back to their original\n"
+#~ "    queue."
+#~ msgstr ""
+#~ "    ຖິ້ມຂໍ້ຄວາມທີ່ຖືກ unshunt ທັງໝົດ ແທນທີ່ຈະຍ້າຍພວກມັນກັບໄປຄິວເດີມ\n"
+#~ "    ຂອງພວກມັນ."
+
+#, python-brace-format
+#~ msgid ""
+#~ "Cannot unshunt message ${filebase}, skipping:\n"
+#~ "${error}"
+#~ msgstr ""
+#~ "ບໍ່ສາມາດ unshunt ຂໍ້ຄວາມ ${filebase}, ກຳລັງຂ້າມ:\n"
+#~ "${error}"
+
+#~ msgid "Message has implicit destination"
+#~ msgstr "ຂໍ້ຄວາມມີປາຍທາງ implicit"
