@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-25 13:45-0700\n"
-"PO-Revision-Date: 2025-10-05 18:02+0000\n"
-"Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/gnu-mailman/mailman/tr/>\n"
+"PO-Revision-Date: 2026-10-26 12:54+0000\n"
+"Last-Translator: Oğuz Ersen <ersen@users.noreply.hosted.weblate.org>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/gnu-mailman/"
+"mailman/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 2026.11.dev0\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:83
 #: src/mailman/chains/hold.py:165 src/mailman/handlers/acknowledge.py:56
@@ -808,6 +809,10 @@ msgstr "Mailman çalıştırıcıları yeniden açılıyor"
 #: src/mailman/commands/cli_control.py:210
 msgid "Stop and restart the Mailman runner subprocesses. Note: runners that have died and are not currently running will not be restarted by this command. To restart dead runners, use mailman stop followed by mailman start."
 msgstr ""
+"Mailman çalıştırıcı alt işlemlerini durdur ve yeniden başlat. Not: Duran ve "
+"o anda çalışmayan çalıştırıcılar bu komutla yeniden başlatılmayacaktır. "
+"Duran çalıştırıcıları yeniden başlatmak için, önce mailman stop komutunu, "
+"ardından mailman start komutunu kullanın."
 
 #: src/mailman/commands/cli_control.py:223
 msgid "Restarting the Mailman runners"
@@ -1206,7 +1211,7 @@ msgstr ""
 #: src/mailman/commands/cli_lists.py:175
 #, python-brace-format
 msgid "Invalid language code: ${language}"
-msgstr ""
+msgstr "Geçersiz dil kodu: ${language}"
 
 #: src/mailman/commands/cli_lists.py:191
 #, python-brace-format
@@ -1564,11 +1569,13 @@ msgid ""
 "    Discard shunted messages instead of moving them back to their original\n"
 "    queue."
 msgstr ""
+"    Yönlendirilen mesajları, orijinal kuyruğa geri taşımak yerine\n"
+"    at."
 
 #: src/mailman/commands/cli_unshunt.py:61
 #, python-brace-format
 msgid "Cannot unshunt message ${filebase}, skipping: ${error}"
-msgstr ""
+msgstr "${filebase} mesajındaki yönlendirme kaldırılamıyor, atlanıyor: ${error}"
 
 #: src/mailman/commands/cli_version.py:32
 msgid "Display Mailman's version."
@@ -2288,7 +2295,7 @@ msgstr "Dolaylı hedefe sahip mesajları yakala."
 
 #: src/mailman/rules/implicit_dest.py:92
 msgid "List is not explicitly addressed"
-msgstr ""
+msgstr "Liste açıkça adreslenmedi"
 
 #: src/mailman/rules/loop.py:32
 msgid "Look for a posting loop."

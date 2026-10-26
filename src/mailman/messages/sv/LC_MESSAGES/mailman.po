@@ -8,15 +8,17 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-25 13:45-0700\n"
-"PO-Revision-Date: 2026-01-25 17:42+0000\n"
-"Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
-"Language-Team: Swedish <https://hosted.weblate.org/projects/gnu-mailman/mailman/sv/>\n"
+"PO-Revision-Date: 2026-10-26 12:54+0000\n"
+"Last-Translator: Daniel Nylander "
+"<yeagersthlm2@users.noreply.hosted.weblate.org>\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/gnu-mailman/"
+"mailman/sv/>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 2026.11.dev0\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:83
 #: src/mailman/chains/hold.py:165 src/mailman/handlers/acknowledge.py:56
@@ -32,12 +34,12 @@ msgstr "[Ingen information om studs finns tillgänglig]"
 #: src/mailman/app/bounces.py:233
 #, python-brace-format
 msgid "${mlist.display_name} mailing list probe message"
-msgstr "${mlist.display_name} sändlista probe meddelande"
+msgstr "Testmeddelande för sändlistan ${mlist.display_name}"
 
 #: src/mailman/app/bounces.py:269
 #, python-brace-format
 msgid "${mlist.display_name} uncaught bounce notification"
-msgstr "${mlist.display_name} obearbetad bounce-meddelande"
+msgstr "Obehandlat returmeddelande för ${mlist.display_name}"
 
 #: src/mailman/app/membership.py:147
 #, python-brace-format
@@ -111,12 +113,14 @@ msgstr "${member}:s prenumeration inaktiverad på ${mlist.display_name}"
 #: src/mailman/app/notifications.py:209
 #, python-brace-format
 msgid "${member}'s bounce score incremented on ${mlist.display_name}"
-msgstr "${member}:s bounce score ökades på ${mlist.display_name}"
+msgstr "Returpoängen för ${member} höjdes på ${mlist.display_name}"
 
 #: src/mailman/app/notifications.py:236
 #, python-brace-format
 msgid "${member} unsubscribed from ${mlist.display_name} mailing list due to bounces"
-msgstr "${member} avregistrerade från ${mlist.display_name} sändlista på grund av studsar"
+msgstr ""
+"${member} avregistrerades från sändlistan ${mlist.display_name} på grund av "
+"returmeddelanden"
 
 #: src/mailman/app/notifications.py:269
 #, python-brace-format
@@ -176,8 +180,8 @@ msgid ""
 "The master lock could not be acquired because it appears as though another\n"
 "master is already running."
 msgstr ""
-"Masterlåset kunde inte förvärvas eftersom det verkar som om en annan\n"
-"mästare redan är igång."
+"Huvudlåset kunde inte erhållas eftersom en annan huvudprocess\n"
+"verkar vara igång."
 
 #: src/mailman/bin/master.py:198
 #, python-brace-format
@@ -200,12 +204,12 @@ msgid ""
 "\n"
 "Exiting."
 msgstr ""
-"Masterlåset kunde inte förvärvas, eftersom det verkar som om någon process\n"
-"på någon annan värd kan ha förvärvat det.  Vi kan inte testa för inaktuella lås över\n"
-"värdgränser, så du måste städa upp detta manuellt.\n"
+"Huvudlåset kunde inte erhållas eftersom en process på en annan värd\n"
+"kan ha tagit det. Det går inte att kontrollera inaktuella lås mellan\n"
+"värdar, så du måste åtgärda detta manuellt.\n"
 "\n"
-"Låsa filen: ${config.LOCK_FILE}\n"
-"Lås värd: ${hostname}\n"
+"Låsfil: ${config.LOCK_FILE}\n"
+"Låsets värd: ${hostname}\n"
 "\n"
 "Avslutar."
 
@@ -509,8 +513,9 @@ msgid ""
 "    Blank lines and lines that start with a '#' are ignored.\n"
 "    "
 msgstr ""
-"    Lägg till alla medlemsadresser i FILENAME med leveranssätt enligt specifikation\n"
-"    med -d/--leverans.  FILENAME kan vara '-' för att ange standardinmatning.\n"
+"    Lägg till alla medlemsadresser i FILENAME med det leveranssätt som "
+"anges\n"
+"    med -d/--delivery. FILENAME kan vara '-' för standardinmatning.\n"
 "    Tomma rader och rader som börjar med '#' ignoreras.\n"
 "    "
 
@@ -808,6 +813,10 @@ msgstr "Återöppnande av Mailman-runner"
 #: src/mailman/commands/cli_control.py:210
 msgid "Stop and restart the Mailman runner subprocesses. Note: runners that have died and are not currently running will not be restarted by this command. To restart dead runners, use mailman stop followed by mailman start."
 msgstr ""
+"Stoppa och starta om Mailmans runner-delprocesser. Observera att runner-"
+"processer som har avslutats och inte längre körs inte startas om med detta "
+"kommando. För att starta om avslutade runner-processer, kör mailman stop "
+"följt av mailman start."
 
 #: src/mailman/commands/cli_control.py:223
 msgid "Restarting the Mailman runners"
@@ -860,8 +869,8 @@ msgid ""
 "    -m/--member or --fromall may be specified.\n"
 "    "
 msgstr ""
-"    Ta bort alla medlemmar i listan.  Om detta anges kan inget av -f/--file,\n"
-"    -m/--medlem eller --fromall får anges.\n"
+"    Ta bort alla medlemmar i listan. Om detta anges får inget av -f/--file,\n"
+"    -m/--member eller --fromall anges.\n"
 "    "
 
 #: src/mailman/commands/cli_delmembers.py:86
@@ -871,9 +880,9 @@ msgid ""
 "    -a/--all or -l/--list.\n"
 "    "
 msgstr ""
-"    Ta bort den eller de medlemmar som anges av -m/--medlem och/eller -f/--fil från alla\n"
-"    listor i installationen.  Detta får inte anges tillsammans med\n"
-"    -a/--all eller -l/--list.\n"
+"    Ta bort den eller de medlemmar som anges med -m/--member och/eller\n"
+"    -f/--file från alla listor i installationen. Detta får inte anges\n"
+"    tillsammans med -a/--all eller -l/--list.\n"
 "    "
 
 #: src/mailman/commands/cli_delmembers.py:93
@@ -945,7 +954,7 @@ msgstr ""
 
 #: src/mailman/commands/cli_digests.py:79
 msgid "--send and --periodic flags cannot be used together"
-msgstr "-flaggorna -send och --periodic kan inte användas tillsammans"
+msgstr "Flaggorna --send och --periodic kan inte användas tillsammans"
 
 #: src/mailman/commands/cli_digests.py:92 src/mailman/commands/cli_notify.py:69
 #, python-brace-format
@@ -1209,7 +1218,7 @@ msgstr ""
 #: src/mailman/commands/cli_lists.py:175
 #, python-brace-format
 msgid "Invalid language code: ${language}"
-msgstr ""
+msgstr "Ogiltig språkkod: ${language}"
 
 #: src/mailman/commands/cli_lists.py:191
 #, python-brace-format
@@ -1527,13 +1536,15 @@ msgid ""
 "    be removed from the list.  FILENAME can be '-' to indicate standard input.\n"
 "    "
 msgstr ""
-"    Lägg till och ta bort medlemmar efter behov för att synkronisera en listas medlemskap\n"
-"    med en inmatningsfil.  FILENAME är filen som innehåller det nya medlemskapet,\n"
-"    en medlem per rad.  Tomma rader och rader som börjar med ett \"#\" ignoreras\n"
-"    ignoreras.  Adresser i FILENAME som inte är aktuella medlemmar i listan\n"
-"    kommer att läggas till i listan med leveranssättet som anges med\n"
-"    -d/--leverans.  Listmedlemmar vars adresser inte finns i FILENAME kommer att\n"
-"    tas bort från listan.  FILENAME kan vara '-' för att indikera standardinmatning.\n"
+"    Lägg till och ta bort medlemmar efter behov för att synkronisera "
+"listans\n"
+"    medlemskap med en inmatningsfil. FILENAME är filen med de nya "
+"medlemmarna,\n"
+"    en per rad. Tomma rader och rader som börjar med '#' ignoreras.\n"
+"    Adresser i FILENAME som inte redan finns på listan läggs till med det\n"
+"    leveranssätt som anges med -d/--delivery. Medlemmar vars adresser inte\n"
+"    finns i FILENAME tas bort från listan. FILENAME kan vara '-' för\n"
+"    standardinmatning.\n"
 "    "
 
 #: src/mailman/commands/cli_syncmembers.py:171
@@ -1567,11 +1578,14 @@ msgid ""
 "    Discard shunted messages instead of moving them back to their original\n"
 "    queue."
 msgstr ""
+"    Kasta meddelanden i undantagskön i stället för att flytta tillbaka dem\n"
+"    till deras ursprungliga kö."
 
 #: src/mailman/commands/cli_unshunt.py:61
 #, python-brace-format
 msgid "Cannot unshunt message ${filebase}, skipping: ${error}"
 msgstr ""
+"Kan inte återföra meddelandet ${filebase} till kön, hoppar över det: ${error}"
 
 #: src/mailman/commands/cli_version.py:32
 msgid "Display Mailman's version."
@@ -1579,7 +1593,7 @@ msgstr "Visa Mailmans version."
 
 #: src/mailman/commands/cli_withlist.py:74
 msgid "ipython is not available, set use_ipython to no"
-msgstr "ipython inte är tillgängligt, ställ in use_ipython till no"
+msgstr "ipython är inte tillgängligt, ställ in use_ipython till no"
 
 #: src/mailman/commands/cli_withlist.py:84
 msgid "readline not available"
@@ -1764,15 +1778,16 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"    Kör ett skript.  Argumentet är modulens sökväg till en anropsbar kod.  Denna\n"
-"    importeras och sedan, om --listspec/-l också anges, anropas den med\n"
-"    sändlistan som första argument.  Om ytterligare\n"
-"    argument anges i slutet av kommandoraden, skickas de som efterföljande\n"
-"    positionella argument till den anropbara funktionen.  För ytterligare hjälp, se\n"
-"    --detaljer.\n"
+"    Kör ett skript. Argumentet är modulsökvägen till ett anropbart objekt.\n"
+"    Objektet importeras och anropas sedan, om --listspec/-l också anges, "
+"med\n"
+"    sändlistan som första argument. Ytterligare argument i slutet av\n"
+"    kommandoraden skickas som efterföljande positionsargument till "
+"objektet.\n"
+"    Mer hjälp finns under --details.\n"
 "\n"
-"    Om inget --listspec/-l-argument anges, anropas skriptfunktionen som \n"
-"    anropas utan några argument.\n"
+"    Om inget --listspec/-l-argument anges anropas skriptfunktionen utan\n"
+"    argument.\n"
 "    "
 
 #: src/mailman/commands/cli_withlist.py:251
@@ -1797,7 +1812,7 @@ msgstr ""
 
 #: src/mailman/commands/cli_withlist.py:271
 msgid "Regular expression requires --run"
-msgstr "Vanliga uttryck kräver --run"
+msgstr "Reguljära uttryck kräver --run"
 
 #: src/mailman/commands/cli_withlist.py:298
 #, python-brace-format
@@ -1822,7 +1837,7 @@ msgstr "Bekräftad"
 
 #: src/mailman/commands/eml_confirm.py:112
 msgid "Invalid Approved: password"
-msgstr "Ogiltig Godkänt: lösenord"
+msgstr "Ogiltigt Approved:-lösenord"
 
 #: src/mailman/commands/eml_confirm.py:115
 #, python-brace-format
@@ -1831,7 +1846,7 @@ msgstr "Meddelande ${message}"
 
 #: src/mailman/commands/eml_echo.py:36
 msgid "Echo back your arguments."
-msgstr "Återkoppla till dina argument."
+msgstr "Skicka tillbaka dina argument."
 
 #: src/mailman/commands/eml_end.py:33
 msgid "Stop processing commands."
@@ -2272,7 +2287,11 @@ msgstr "DMARC-moderering"
 #: src/mailman/rules/dmarc.py:342
 #, python-brace-format
 msgid "You are not allowed to post to this mailing list From: a domain which publishes a DMARC policy of reject or quarantine, and your message has been automatically rejected.  If you think that your messages are being rejected in error, contact the mailing list owner at ${listowner}."
-msgstr "Du får inte posta till den här sändlistan Från: en domän som publicerar en DMARC-policy för avvisande eller karantän, och ditt meddelande har automatiskt avvisats.  Om du tror att dina meddelanden avvisas av misstag, kontakta ägaren till sändlistan på ${listowner}."
+msgstr ""
+"Du får inte skicka till den här sändlistan från en domän vars DMARC-policy "
+"anger avvisning eller karantän. Ditt meddelande har därför avvisats "
+"automatiskt. Om du tror att dina meddelanden avvisas av misstag, kontakta "
+"sändlistans ägare på ${listowner}."
 
 #: src/mailman/rules/emergency.py:34
 msgid ""
@@ -2294,7 +2313,7 @@ msgstr "Fånga upp meddelanden med underförstådd destination."
 
 #: src/mailman/rules/implicit_dest.py:92
 msgid "List is not explicitly addressed"
-msgstr ""
+msgstr "Listan är inte uttryckligen angiven som mottagare"
 
 #: src/mailman/rules/loop.py:32
 msgid "Look for a posting loop."
@@ -2462,7 +2481,9 @@ msgstr "Resultatet av dina e-postkommandon"
 #: src/mailman/runners/digest.py:55
 #, python-brace-format
 msgid "${mlist.display_name} Digest, Vol ${volume}, Issue ${digest_number}"
-msgstr "${mlist.display_name} Digest, Vol ${volume}, Utgåva ${digest_number}"
+msgstr ""
+"Sammanställning för ${mlist.display_name}, volym ${volume}, utgåva $"
+"{digest_number}"
 
 #: src/mailman/runners/digest.py:84
 msgid "Today's Topics:\n"
@@ -2496,7 +2517,7 @@ msgstr "Vanlig diskussion i form av en sändlista."
 
 #: src/mailman/styles/default.py:64
 msgid "Announce only mailing list style."
-msgstr "Meddela endast sändlista stil."
+msgstr "Sändlista endast för utskick."
 
 #: src/mailman/styles/default.py:84
 msgid "Discussion mailing list style with private archives."
@@ -2525,11 +2546,12 @@ msgid ""
 "Size: ${size} bytes\n"
 "Desc: ${desc}\n"
 msgstr ""
-"En meddelandedel som är inkompatibel med sammanställningar i klartext har tagits bort ...\n"
+"En meddelandedel som inte kan visas i sammanställningar i klartext har "
+"tagits bort ...\n"
 "Namn: ${filename}\n"
-"Typ av meddelande: ${ctype}\n"
+"Typ: ${ctype}\n"
 "Storlek: ${size} byte\n"
-"Desc: ${desc}\n"
+"Beskrivning: ${desc}\n"
 
 #: src/mailman/utilities/scrubber.py:58
 msgid "-------------- next part --------------\n"
@@ -2573,8 +2595,8 @@ msgstr ""
 
 msgid "list:admin:action:post.txt"
 msgstr ""
-"Som listadministratör begärs din behörighet för\n"
-"följande inlägg på sändlistan:\n"
+"Som listadministratör behöver du ta ställning till följande\n"
+"inlägg på sändlistan:\n"
 "\n"
 "    Lista: $listname\n"
 "    Från: $sender_email\n"
@@ -2589,30 +2611,32 @@ msgstr ""
 
 msgid "list:admin:action:subscribe.txt"
 msgstr ""
-"Din godkännande krävs för en begäran om prenumeration på sändlista:\n"
+"Ditt godkännande krävs för en begäran om prenumeration på sändlistan:\n"
 "\n"
-"   För: $member\n"
-"   Lista: $listname"
+"    För: $member\n"
+"    Lista: $listname"
 
 msgid "list:admin:action:unsubscribe.txt"
 msgstr ""
-"Din godkännande krävs för att avsluta prenumerationen på en sändlista:\n"
+"Ditt godkännande krävs för en begäran om att avsluta en prenumeration på "
+"sändlistan:\n"
 "\n"
 "    För: $member\n"
 "    Lista: $listname"
 
 msgid "list:admin:notice:disable.txt"
 msgstr ""
-"Prenumerationen för $member har inaktiverats på $listname på grund av att deras\n"
-"studsningspoäng överskrider sändlistans bounce_score_threshold.\n"
+"Prenumerationen för $member på $listname har inaktiverats eftersom "
+"returpoängen\n"
+"har överskridit sändlistans gränsvärde bounce_score_threshold.\n"
 "\n"
-"Den utlösande DSN bifogas, om tillgänglig."
+"Det utlösande DSN-meddelandet bifogas om det finns tillgängligt."
 
 msgid "list:admin:notice:increment.txt"
 msgstr ""
-"Studsningspoängen för $member på $listnamn har ökats.\n"
+"Returpoängen för $member på $listname har ökat.\n"
 "\n"
-"Den utlösande DSN, om tillgänglig, bifogas."
+"Det utlösande DSN-meddelandet bifogas om det finns tillgängligt."
 
 msgid "list:admin:notice:pending.txt"
 msgstr ""
@@ -2622,17 +2646,19 @@ msgstr ""
 "Ta hand om detta så snart som möjligt."
 
 msgid "list:admin:notice:removal.txt"
-msgstr "$member har avprenumererats från $listname på grund av för många studsande meddelanden."
+msgstr ""
+"Prenumerationen för $member på $listname har avslutats på grund av för många "
+"returmeddelanden."
 
 msgid "list:admin:notice:subscribe.txt"
 msgstr "$member har börjat prenumerera på $display_name."
 
 msgid "list:admin:notice:unrecognized.txt"
 msgstr ""
-"Det bifogade meddelandet har returnerats som en studs, men antingen har\n"
-"returformatet inte kunnat identifieras eller så har inga medlemsadresser\n"
-"kunnat extraheras.  Denna sändlista har konfigurerats så att alla okända\n"
-"studsmeddelanden skickas till listadministratören."
+"Det bifogade returmeddelandet har tagits emot, men antingen känns formatet\n"
+"inte igen eller så kunde inga medlemsadresser utläsas ur det. Sändlistan\n"
+"är inställd på att skicka alla returmeddelanden som inte känns igen till\n"
+"listans administratörer."
 
 msgid "list:admin:notice:unsubscribe.txt"
 msgstr "$member har tagits bort från $display_name."
@@ -2666,20 +2692,21 @@ msgstr ""
 
 msgid "list:user:action:invite.txt"
 msgstr ""
-"Din adress ”$user_email” har blivit inbjuden att gå med i sändlistan $short_listname\n"
+"Du har bjudits in med adressen ”$user_email” till sändlistan "
+"$short_listname\n"
 "på $domain av ägaren till sändlistan $short_listname.\n"
-"Du kan acceptera inbjudan genom att helt enkelt svara på detta meddelande.\n"
+"Du kan tacka ja till inbjudan genom att svara på detta meddelande.\n"
 "\n"
-"Eller så kan du inkludera följande rad -- och endast följande\n"
-"rad -- i ett meddelande till $request_email:\n"
+"Eller skicka följande rad, och endast denna rad, i ett meddelande till\n"
+"$request_email:\n"
 "\n"
 "    confirm $token\n"
 "\n"
-"Observera att det räcker att skicka ett ”svar” på detta meddelande från\n"
-"de flesta e-postprogram.\n"
+"Det räcker normalt att svara på detta meddelande\n"
+"från ditt e-postprogram.\n"
 "\n"
-"Om du vill avböja inbjudan kan du helt enkelt ignorera detta\n"
-"meddelande. Om du har några frågor, skicka dem till\n"
+"Om du vill avböja inbjudan kan du ignorera meddelandet. Om du har frågor\n"
+"kan du skicka dem till\n"
 "$owner_email."
 
 msgid "list:user:action:subscribe.txt"
@@ -2692,19 +2719,23 @@ msgstr ""
 "\n"
 "    $user_email\n"
 "\n"
-"Innan du kan börja använda GNU Mailman på denna webbplats måste du först bekräfta\n"
-"att detta är din e-postadress. Du kan göra detta genom att svara på detta meddelande.\n"
+"Innan du kan börja använda GNU Mailman på denna webbplats måste du först "
+"bekräfta\n"
+"att detta är din e-postadress. Du kan göra detta genom att svara på detta "
+"meddelande.\n"
 "\n"
-"Eller så ska du inkludera följande rad – och endast följande\n"
-"raden -- i ett meddelande till $request_email:\n"
+"Eller skicka följande rad, och endast denna rad, i ett meddelande till\n"
+"$request_email:\n"
 "\n"
 "    confirm $token\n"
 "\n"
 "Observera att det räcker att skicka ett ”svar” på detta meddelande från\n"
 "de flesta e-postprogram.\n"
 "\n"
-"Om du inte vill registrera denna e-postadress kan du helt enkelt ignorera detta\n"
-"meddelande. Om du tror att du har blivit registrerad på listan av någon som vill dig illa,\n"
+"Om du inte vill registrera denna e-postadress kan du helt enkelt ignorera "
+"detta\n"
+"meddelande. Om du tror att du har blivit registrerad på listan av någon som "
+"vill dig illa,\n"
 "eller har några andra frågor, kan du kontakta\n"
 "\n"
 "    $owner_email"
@@ -2722,16 +2753,18 @@ msgstr ""
 "Innan GNU Mailman kan avregistrera dig måste du först bekräfta din begäran.\n"
 "Du kan göra detta genom att helt enkelt svara på detta meddelande.\n"
 "\n"
-"Eller så ska du inkludera följande rad – och endast följande\n"
-"raden – i ett meddelande till $request_email:\n"
+"Eller skicka följande rad, och endast denna rad, i ett meddelande till\n"
+"$request_email:\n"
 "\n"
 "    confirm $token\n"
 "\n"
 "Observera att det räcker att skicka ett ”svar” på detta meddelande från\n"
 "de flesta e-postprogram.\n"
 "\n"
-"Om du inte vill avsluta prenumerationen för denna e-postadress, ignorera detta\n"
-"meddelande. Om du tror att du har blivit avsiktligt avregistrerad från listan,\n"
+"Om du inte vill avsluta prenumerationen för denna e-postadress, ignorera "
+"detta\n"
+"meddelande. Om du tror att någon har försökt avregistrera dig från listan "
+"mot din vilja,\n"
 "eller har andra frågor, kan du kontakta\n"
 "\n"
 "    $owner_email"
