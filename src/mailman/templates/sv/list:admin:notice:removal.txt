@@ -1,1 +1,1 @@
-$member har avprenumererats från $listname på grund av för många studsande meddelanden.
+Prenumerationen för $member på $listname har avslutats på grund av för många returmeddelanden.

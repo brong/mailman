@@ -1,4 +1,4 @@
-Prenumerationen för $member har inaktiverats på $listname på grund av att deras
-studsningspoäng överskrider sändlistans bounce_score_threshold.
+Prenumerationen för $member på $listname har inaktiverats eftersom returpoängen
+har överskridit sändlistans gränsvärde bounce_score_threshold.
 
-Den utlösande DSN bifogas, om tillgänglig.
+Det utlösande DSN-meddelandet bifogas om det finns tillgängligt.

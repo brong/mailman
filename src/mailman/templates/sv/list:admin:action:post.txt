@@ -1,5 +1,5 @@
-Som listadministratör begärs din behörighet för
-följande inlägg på sändlistan:
+Som listadministratör behöver du ta ställning till följande
+inlägg på sändlistan:
 
     Lista: $listname
     Från: $sender_email

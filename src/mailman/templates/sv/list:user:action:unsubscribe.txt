@@ -9,8 +9,8 @@ Vi har mottagit en begäran om avregistrering för e-postadressen
 Innan GNU Mailman kan avregistrera dig måste du först bekräfta din begäran.
 Du kan göra detta genom att helt enkelt svara på detta meddelande.
 
-Eller så ska du inkludera följande rad – och endast följande
-raden – i ett meddelande till $request_email:
+Eller skicka följande rad, och endast denna rad, i ett meddelande till
+$request_email:
 
     confirm $token
 
@@ -18,7 +18,7 @@ Observera att det räcker att skicka ett ”svar” på detta meddelande från
 de flesta e-postprogram.
 
 Om du inte vill avsluta prenumerationen för denna e-postadress, ignorera detta
-meddelande. Om du tror att du har blivit avsiktligt avregistrerad från listan,
+meddelande. Om du tror att någon har försökt avregistrera dig från listan mot din vilja,
 eller har andra frågor, kan du kontakta
 
     $owner_email

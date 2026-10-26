@@ -9,8 +9,8 @@ Vi har mottagit en registreringsbegäran för e-postadressen
 Innan du kan börja använda GNU Mailman på denna webbplats måste du först bekräfta
 att detta är din e-postadress. Du kan göra detta genom att svara på detta meddelande.
 
-Eller så ska du inkludera följande rad – och endast följande
-raden -- i ett meddelande till $request_email:
+Eller skicka följande rad, och endast denna rad, i ett meddelande till
+$request_email:
 
     confirm $token
 
