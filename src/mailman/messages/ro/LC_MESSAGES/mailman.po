@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-25 13:45-0700\n"
-"PO-Revision-Date: 2026-10-26 12:54+0000\n"
+"PO-Revision-Date: 2026-10-27 13:51+0000\n"
 "Last-Translator: Remus-Gabriel Chelu <remus-"
 "gabriel@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/gnu-mailman/"
@@ -820,13 +820,12 @@ msgid "Reopening the Mailman runners"
 msgstr "Se redeschid executanții Mailman"
 
 #: src/mailman/commands/cli_control.py:210
-#, fuzzy
 msgid "Stop and restart the Mailman runner subprocesses. Note: runners that have died and are not currently running will not be restarted by this command. To restart dead runners, use mailman stop followed by mailman start."
 msgstr ""
-"Oprește și repornește subprocesele Mailman runner. Notă: runner-urile care s-"
-"au oprit și nu rulează în prezent nu vor fi repornite de această comandă. "
-"Pentru a reporni runner-urile oprite, utilizați comanda «mailman stop», "
-"urmată de «mailman start»."
+"Oprește și repornește subprocesele executante Mailman. Notă: executanții "
+"care s-au oprit și nu rulează în prezent nu vor fi repornite de această "
+"comandă. Pentru a reporni executanții opriți, utilizați comanda «mailman stop"
+"», urmată de «mailman start»."
 
 #: src/mailman/commands/cli_control.py:223
 msgid "Restarting the Mailman runners"
@@ -1585,21 +1584,21 @@ msgstr ""
 
 #: src/mailman/commands/cli_unshunt.py:33
 msgid "Unshunt messages."
-msgstr "Elimină starea de deviere a mesajelor."
+msgstr "Elimină starea de carantină a mesajelor."
 
 #: src/mailman/commands/cli_unshunt.py:37
-#, fuzzy
 msgid ""
 "    Discard shunted messages instead of moving them back to their original\n"
 "    queue."
 msgstr ""
-"    Elimină mesajele deviate, în loc să le mute înapoi în coada inițială  ."
+"    Elimină mesajele carantinate, în loc să le mute înapoi în coada inițială."
 
 #: src/mailman/commands/cli_unshunt.py:61
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Cannot unshunt message ${filebase}, skipping: ${error}"
 msgstr ""
-"Nu se poate anula redirecționarea mesajului ${filebase}, se omite: ${error}"
+"Nu se poate anula starea de carantină a mesajului ${filebase}, se omite: $"
+"{error}"
 
 #: src/mailman/commands/cli_version.py:32
 msgid "Display Mailman's version."
@@ -2323,7 +2322,7 @@ msgstr "Capturează mesajele cu destinație implicită."
 
 #: src/mailman/rules/implicit_dest.py:92
 msgid "List is not explicitly addressed"
-msgstr "Lista nu este abordată(adresată) în mod explicit"
+msgstr "Lista nu este destinatarul explicit al mesajului"
 
 #: src/mailman/rules/loop.py:32
 msgid "Look for a posting loop."
