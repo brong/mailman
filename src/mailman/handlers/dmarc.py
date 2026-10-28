@@ -207,7 +207,7 @@ def _dkim2_rewrites_from(mlist, msg, msgdata):
 
     A list that changes a message, or originates it in DKIM2 terms (it
     arrived with no DKIM2-Signature, so the list's hop is i=1), signs with
-    its own domain, and From must be Authentic for that domain (spec-07
+    its own domain, and From must be Authentic for that domain (spec-08
     §11, §12.4).  A signed message the list passes on unchanged keeps its
     From: the author's signature still covers it.
 
