@@ -112,12 +112,12 @@ def _recipe_at(msg, version):
 
 
 def _copy_steps(steps):
-    """The {"c": [start, end]} copy steps of a recipe (spec-07 §5)."""
+    """The {"c": [start, end]} copy steps of a recipe (spec-08 §5)."""
     return [s for s in steps if isinstance(s, dict) and 'c' in s]
 
 
 def _data_steps(steps):
-    """The {"d": [...]} literal-data steps of a recipe (spec-07 §5)."""
+    """The {"d": [...]} literal-data steps of a recipe (spec-08 §5)."""
     return [s for s in steps if isinstance(s, dict) and 'd' in s]
 
 
@@ -273,14 +273,19 @@ class TestHeaderExclusion(unittest.TestCase):
             self.assertFalse(_should_exclude_header(name), name)
 
     def test_spec05_excluded_names(self):
-        # spec-07 §4: names added by the HDRMAINT survey
-        for name in ('Apparently-To', 'Auto-Submitted', 'DL-Expansion-History',
-                     'Original-Recipient', 'SIO-Label-History', 'VBR-Info',
+        # spec-08 §4: names added by the HDRMAINT survey
+        for name in ('Apparently-To', 'DL-Expansion-History',
+                     'Original-Recipient', 'SIO-Label-History',
                      'X400-Received', 'X400-Trace'):
             self.assertTrue(_should_exclude_header(name), name)
 
+    def test_spec08_hashes_auto_submitted_and_vbr_info(self):
+        # spec-08 §4 took these two off the list: they are hashed now.
+        for name in ('Auto-Submitted', 'VBR-Info'):
+            self.assertFalse(_should_exclude_header(name), name)
+
     def test_spec05_received_prefix(self):
-        # spec-07 §4: any Received-* field is a trace field
+        # spec-08 §4: any Received-* field is a trace field
         self.assertTrue(_should_exclude_header('Received-SPF'))
         self.assertTrue(_should_exclude_header('Received-Anything'))
 
@@ -486,7 +491,7 @@ class TestBodyRecipe(unittest.TestCase):
     def test_8bit_literal_is_a_u_step(self):
         # A restored line that is not valid UTF-8 -- Latin-1 here, not
         # representable as JSON text -- is emitted as a {"u": [...]} step
-        # holding the base64 of its raw octets (spec-07 §5), never as a "d"
+        # holding the base64 of its raw octets (spec-08 §5), never as a "d"
         # string of lone surrogates.
         latin1 = b'caf\xe9 au lait'
         recipe = compute_body_recipe(['New'], ['Old ascii', _octets(latin1)])
@@ -501,7 +506,7 @@ class TestBodyRecipe(unittest.TestCase):
         self.assertEqual(recipe, [{'u': ['Y2Fm6Q==']}])
 
     def test_utf8_literal_is_a_d_step(self):
-        # Valid UTF-8 above 0x7f is JSON text: spec-07 §5 has "u" only for
+        # Valid UTF-8 above 0x7f is JSON text: spec-08 §5 has "u" only for
         # what "d" cannot carry, so it goes in a "d" step.
         utf8 = 'caf\u00e9'.encode('utf-8')
         recipe = compute_body_recipe(['New'], [_octets(utf8)])
@@ -658,7 +663,7 @@ class TestHeaderRecipe(unittest.TestCase):
         # Two instances swapped.  Bottom-up the current message is
         # 1='two', 2='one'; the previous was 1='one', 2='two'.  'one' is
         # copied from instance 2, after which 'two' at instance 1 cannot
-        # be copied -- spec-07 §5.1 requires "c" starts to ascend past the
+        # be copied -- spec-08 §5.1 requires "c" starts to ascend past the
         # previous end -- so it is restored literally.
         recipe = compute_header_recipe(
             [('Comments', 'one'), ('Comments', 'two')],
@@ -713,7 +718,7 @@ class TestMIHeaderValue(unittest.TestCase):
 
 
 class TestRecipeUndo(unittest.TestCase):
-    """Recipe validation and application by undo / verify (spec-07 §5).
+    """Recipe validation and application by undo / verify (spec-08 §5).
 
     Pure-function tests: the instance under test is built by hand on a
     fixed message, with hashes that match it, so only the Recipe decides
@@ -805,7 +810,7 @@ class TestRecipeUndo(unittest.TestCase):
             'u non-string item': [{'u': [1]}],
             'd empty': [{'d': []}],
             'u empty': [{'u': []}],
-            # spec-07 has no "b" step: it is an unknown key now.
+            # spec-08 has no "b" step: it is an unknown key now.
             'old b step': [{'b': ['eA==']}],
         }
         for what, steps in cases.items():
@@ -863,33 +868,27 @@ class TestRecipeUndo(unittest.TestCase):
             with self.subTest(what):
                 self._assert_rejected(self._with_raw_recipe(text), what)
 
-    def test_mi_support_rejects_case_duplicate_keys(self):
-        # Shared case K2 and decision 2: keys equal ignoring case, in one
-        # object, are a duplicate at every level.
+    def test_mi_support_rejects_duplicate_keys(self):
+        # Shared case K2: a key twice in one object is invalid.
+        text = '{"b":[{"c":[1,1]}],"b":[{"c":[1,2]}]}'
+        self._assert_rejected(self._with_raw_recipe(text), 'exact duplicate')
+
+    def test_uppercase_keys_are_invalid(self):
+        # spec-08 §5, contract D10 (reverses the -07 contract's decision
+        # 2): a JSON key with a capital letter is invalid, at every level.
         cases = {
-            'header names': '{"h":{"Subject":[],"subject":[]}}',
-            'top level': '{"h":{"subject":[]},"H":{"comments":[]}}',
-            'step keys': '{"b":[{"c":[1,1],"C":[2,2]}]}',
-            'exact duplicate': '{"b":[{"c":[1,1]}],"b":[{"c":[1,2]}]}',
+            'header names': '{"h":{"Subject":[{"c":[1,1]}]}}',
+            'top level': '{"H":{"subject":[{"c":[1,1]}]}}',
+            'step keys': '{"b":[{"C":[1,2]}]}',
         }
         for what, text in cases.items():
             with self.subTest(what):
                 self._assert_rejected(self._with_raw_recipe(text), what)
-
-    def test_keys_match_case_insensitively(self):
-        # Shared case K1: an otherwise valid Recipe with upper-case keys
-        # undoes exactly as the lower-case form does.
-        upper = self._with_raw_recipe(
-            '{"H":{"Subject":[{"C":[1,1]}],"COMMENTS":[{"D":["x"]}]},'
-            '"B":[{"C":[1,2]},{"U":["Y2Fm6Q=="]}]}')
         lower = self._with_raw_recipe(
             '{"h":{"subject":[{"c":[1,1]}],"comments":[{"d":["x"]}]},'
             '"b":[{"c":[1,2]},{"u":["Y2Fm6Q=="]}]}')
-        self.assertEqual(verify_message_instance(upper)[0], 2)
-        self.assertEqual(undo_message_instance(upper), 2)
         self.assertEqual(undo_message_instance(lower), 2)
-        self.assertEqual(upper.as_bytes(), lower.as_bytes())
-        self.assertEqual(upper.get_all('Comments'), ['x'])
+        self.assertEqual(lower.get_all('Comments'), ['x'])
 
     def test_unparseable_r_is_rejected(self):
         msg = _msg_from_bytes(self.RAW)
@@ -928,7 +927,7 @@ class TestRecipeUndo(unittest.TestCase):
         self.assertEqual(msg.get_all('Comments'), ['two', 'one'])
 
     def test_null_body_recipe_leaves_the_body_alone(self):
-        # spec-07 §5.2: "b": null says the body cannot be recreated.
+        # spec-08 §5.2: "b": null says the body cannot be recreated.
         msg = self._with_recipe(header_recipe={'comments': []},
                                 body_recipe=None)
         # build_mi_header_value omits a None body recipe; put the null in
@@ -1056,7 +1055,7 @@ class TestRecipeUndo(unittest.TestCase):
 
 
 class TestParseMIFolding(unittest.TestCase):
-    """Folded Message-Instance values must parse (spec-07 §2.12, §2.14).
+    """Folded Message-Instance values must parse (spec-08 §2.12, §2.14).
 
     RFC 5322 FWS is CRLF followed by one *or more* WSP.  Unfolding only a
     single WSP used to leave one behind, which truncated the h= match at the
@@ -1108,7 +1107,7 @@ class TestParseMIFolding(unittest.TestCase):
 
 
 class TestParseMISyntax(unittest.TestCase):
-    """The whole Message-Instance value is a tag-list (spec-07 §8, §9.3).
+    """The whole Message-Instance value is a tag-list (spec-08 §8, §9.3).
 
     A fragment that is not a tag, a byte outside x-tag-char, a repeated
     tag or a malformed hash-set makes the field a syntax error; it is
@@ -1129,10 +1128,16 @@ class TestParseMISyntax(unittest.TestCase):
         for value in ('m=1; h={};'.format(self.H),
                       'm=1;; h={};;'.format(self.H),
                       ' m = 1 ; h = {} ; x_ext9=a b'.format(self.H),
-                      'M=1; H={}'.format(self.H),
+                      # spec-08 §8: tag-names are case-sensitive, so M= and
+                      # H= are unknown tags beside m= and h= (contract D10)
+                      'm=1; M=7; h={0}; H=x'.format(self.H),
                       'm=1; h=sha256 :{}'.format(self.H[7:]),
                       'm=1; h= sha256\r\n\t:{}'.format(self.H[7:]),
-                      'm=1; h=sha512:AAAA:AAAA, {}'.format(self.H)):
+                      'm=1; h=sha512:AAAA:AAAA, {}'.format(self.H),
+                      # spec-08 §9.3: "|" groups of "," lists, FWS around both
+                      'm=1; h=sha512:AAAA:AAAA | {}'.format(self.H),
+                      'm=1; h=foo:AAAA:AAAA,{0}|sha512:CCCC:CCCC'.format(
+                          self.H)):
             with self.subTest(value=value):
                 version, hashes, _ = self._ok(value)
                 self.assertEqual(version, 1)
@@ -1148,10 +1153,14 @@ class TestParseMISyntax(unittest.TestCase):
                     'Message-Instance m=1 syntax error')
 
     def test_repeated_tag(self):
-        for value in ('m=1; h={0}; h={0}', 'm=1; h={0}; H={0}',
-                      'm=1; M=1; h={0}'):
+        for value in ('m=1; h={0}; h={0}', 'm=1; m=1; h={0}'):
             with self.subTest(value=value):
                 self._bad(value.format(self.H))
+
+    def test_uppercase_tag_is_unknown(self):
+        # spec-08 §8, contract D10: "M=1" alone is no m= at all.
+        self._bad('M=1; h={0}'.format(self.H))
+        self._bad('m=1; H={0}'.format(self.H))
 
     def test_bad_hash_sets(self):
         for hset in ('sha 256:{}', 'sha\r\n 256:{}', 'sha256:{}:'):
@@ -1159,6 +1168,13 @@ class TestParseMISyntax(unittest.TestCase):
                 self._bad('m=1; h=' + hset.format(self.H[7:]))
         self._bad('m=1; h=sha256:' + 'A' * 43 + '=')
         self._bad('m=1; h={0},{0}'.format(self.H))
+        # spec-08 §9.3: a hash name once in the whole tag, and no empty
+        # member (contract D2)
+        self._bad('m=1; h={0}|{0}'.format(self.H))
+        for value in ('{0}|', '|{0}', '{0}||sha512:AAAA:AAAA',
+                      '{0},|sha512:AAAA:AAAA', 'foo:@@:!!|{0}'):
+            with self.subTest(value=value):
+                self._bad('m=1; h=' + value.format(self.H))
 
     def test_verify_mi_raw_reports_syntax_error(self):
         # A correctly hashed instance with a junk fragment does not verify.
@@ -1170,6 +1186,25 @@ class TestParseMISyntax(unittest.TestCase):
         bad = good.replace(b'm=1;', b'm=1; junk;', 1)
         self.assertEqual(verify_mi_raw(bad),
                          (0, 'Message-Instance m=1 syntax error'))
+
+    def test_verify_mi_raw_hash_groups(self):
+        # spec-08 §9.3, §14.7: "," lists must all pass, one "|" group must.
+        # Mailman checks sha256 only; any other hash-set is not a pass.
+        plain = b'From: a@example.com\r\nSubject: hi\r\n\r\nHello.\r\n'
+        hh = _b64(compute_header_hash_raw(plain))
+        bh = _b64(compute_body_hash_raw(plain))
+        good = 'sha256:{}:{}'.format(hh, bh)
+        wrong = 'sha256:{}:{}'.format(hh, 'B' * 43 + '=')
+        cases = {
+            'sha512 | good sha256': ('sha512:AAAA:AAAA|' + good, 1),
+            'bad sha256 | sha512': (wrong + '|sha512:AAAA:AAAA', 0),
+            'good sha256, sha512 (unchecked)': (good + ',sha512:AAAA:AAAA', 0),
+        }
+        for what, (h, want) in cases.items():
+            with self.subTest(what):
+                raw = ('Message-Instance: m=1; h={};\r\n'.format(h)
+                       .encode('ascii') + plain)
+                self.assertEqual(verify_mi_raw(raw)[0], want)
 
 
 class TestGetMaxMIVersion(unittest.TestCase):
@@ -1251,10 +1286,10 @@ class TestFoldMIValue(unittest.TestCase):
 
 class TestDraftVersion(unittest.TestCase):
 
-    def test_draft_version_is_07(self):
+    def test_draft_version_is_08(self):
         from mailman.handlers.message_instance import DKIM2_DRAFT, DKIM2_DATE
-        self.assertEqual(DKIM2_DRAFT, 'ietf-dkim-dkim2-spec-07')
-        self.assertEqual(DKIM2_DATE, '2026-10-18')
+        self.assertEqual(DKIM2_DRAFT, 'ietf-dkim-dkim2-spec-08')
+        self.assertEqual(DKIM2_DATE, '2026-10-28')
 
 
 # =====================================================================
@@ -1303,7 +1338,7 @@ class TestHeaderWireForm(unittest.TestCase):
     def test_collected_header_values_are_unfolded(self):
         # A long encoded-word Subject arrives folded; the parser keeps the
         # fold in the value.  Recipe "d" strings MUST NOT contain CR or LF
-        # (spec-07 §5.1): a literal with a fold inside it verified in two
+        # (spec-08 §5.1): a literal with a fold inside it verified in two
         # implementations and failed in three.
         raw = (
             b'To: ant@example.com\r\n'
@@ -1433,7 +1468,7 @@ This is a test.
         # Ruling 17: a post with no DKIM2-Signature enters the DKIM2
         # ecosystem at the list, whose MTA signs it as i=1.  It leaves with
         # one Message-Instance, m=1, over the message as sent, whose Recipe
-        # goes back to the post as received (spec-07 §12.1).  An m=1 over
+        # goes back to the post as received (spec-08 §12.1).  An m=1 over
         # the author's From would be checked against the list's i=1
         # (§14.8) and fail.
         msg = self._make_received_msg()
@@ -2147,7 +2182,7 @@ class TestNullBodyRecipe(unittest.TestCase):
         recipe = _recipe_at(msg, 1)
         self.assertIn('b', recipe)
         self.assertIsNone(recipe['b'])
-        # spec-07 §5.2: only "b" may be null; the header Recipe is real.
+        # spec-08 §5.2: only "b" may be null; the header Recipe is real.
         self.assertIn('h', recipe)
         self.assertIsNotNone(recipe['h'])
         v, err = verify_message_instance(msg)
@@ -2535,7 +2570,7 @@ class TestDKIM2Wrap(unittest.TestCase):
         _wrap_round_trip(self, raw, layout=False)
 
     def test_body_with_trailing_empty_lines(self):
-        # Trailing empty lines are not lines (spec-07 §6.1): the copy range
+        # Trailing empty lines are not lines (spec-08 §6.1): the copy range
         # stops before them although the wrap carries them.
         raw = self.HDRS + (b'Content-Type: text/plain\r\n\r\n'
                            b'Hello.\r\n\r\n\r\n')
@@ -2710,7 +2745,7 @@ class TestQueueCopiesWithoutReceivedOctets(unittest.TestCase):
 
 
 class TestDKIM2DistributionCopies(unittest.TestCase):
-    """What a DKIM2 list does to every copy it distributes (spec-07 §11,
+    """What a DKIM2 list does to every copy it distributes (spec-08 §11,
     §12.5): each copy carries the exploded hint for the signing milter,
     and a copy the list changed, or a post that arrived unsigned (the
     list's hop becomes i=1), leaves From the list's posting address so
