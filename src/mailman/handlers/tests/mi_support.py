@@ -36,7 +36,7 @@ from mailman.handlers.message_instance import (
 
 log = logging.getLogger('mailman.dkim2')
 
-# A "u" string (spec-07 §5 schema): base64 alphabet and padding, a whole
+# A "u" string (spec-08 §5 schema): base64 alphabet and padding, a whole
 # number of quanta, and zero pad bits ("QR==" is not canonical).
 _U_PATTERNS = (
     re.compile(r'[A-Za-z0-9+/]*={0,2}'),
@@ -56,7 +56,7 @@ def _get_raw_body(msg):
 
 
 def compute_body_hash(msg):
-    """Compute SHA-256 body hash per DKIM2 spec-07 §6.1.
+    """Compute SHA-256 body hash per DKIM2 spec-08 §6.1.
 
     Uses simple body canonicalization: strip trailing empty lines,
     ensure body ends with exactly one CRLF.
@@ -94,15 +94,14 @@ def _raw_values(msg, name):
 
 
 # ---------------------------------------------------------------------------
-# Recipe validation and application (spec-07 §5)
+# Recipe validation and application (spec-08 §5)
 # ---------------------------------------------------------------------------
 
 def _compile_steps(steps, where):
     """Check one step list and return it as ('c', start, end) / ('d', [str])
     tuples, every literal as its octets in the surrogateescape str form
-    the email parser uses for header values.  Step keys
-    match without regard to case (the parsed JSON has no two keys equal
-    ignoring case).  The upper bound of a "c" range is checked by
+    the email parser uses for header values.  Step keys are lowercase
+    (_parse_mi refuses any other).  The upper bound of a "c" range is checked by
     _apply_steps, which knows the item count."""
     if not isinstance(steps, list):
         raise MalformedRecipe('{}: steps are not an array'.format(where))
@@ -113,7 +112,6 @@ def _compile_steps(steps, where):
             raise MalformedRecipe(
                 '{}: step is not an object with one key'.format(where))
         (kind, arg), = step.items()
-        kind = kind.lower()
         if not isinstance(arg, list):
             raise MalformedRecipe(
                 '{}: "{}" is not an array'.format(where, kind))
@@ -174,13 +172,12 @@ def _compile_recipe(recipe):
     header_steps maps each lower-cased header name under "h" to its
     compiled steps; body_steps is the compiled "b" list, or None when the
     body was not changed (no "b") or cannot be recreated ("b": null,
-    spec-07 §5.2).  Keys match without regard to case.
+    spec-08 §5.2).  Keys are lowercase (_parse_mi refuses any other).
     """
     if recipe is None:
         return {}, None
     if not isinstance(recipe, dict):
         raise MalformedRecipe('Recipe is not an object')
-    recipe = {key.lower(): value for key, value in recipe.items()}
     if 'h' not in recipe and 'b' not in recipe:
         raise MalformedRecipe('Recipe has neither "h" nor "b"')
     header_steps = {}
@@ -190,7 +187,7 @@ def _compile_recipe(recipe):
         if not recipe['h']:
             raise MalformedRecipe('"h" has no properties')
         for hname, steps in recipe['h'].items():
-            header_steps[hname.lower()] = _compile_steps(steps, 'h ' + hname)
+            header_steps[hname] = _compile_steps(steps, 'h ' + hname)
     body_steps = None
     if recipe.get('b') is not None:
         body_steps = _compile_steps(recipe['b'], 'b')
@@ -271,7 +268,7 @@ def verify_message_instance(msg):
     if stored_b != computed_b:
         return 0, 'body hash mismatch ({} != {})'.format(
             stored_b, computed_b)
-    # An instance whose Recipe cannot be applied to this message (spec-07
+    # An instance whose Recipe cannot be applied to this message (spec-08
     # §5) does not verify either: nothing downstream could undo it.
     try:
         _plan_undo(msg, recipe)
@@ -286,7 +283,7 @@ def undo_message_instance(msg):
     Removes the highest MI header from the message, applies body and header
     recipes to reconstruct the previous version, and returns the version
     number that was undone.  Returns 0 if there are no MI headers, or if
-    the highest one carries a Recipe that cannot be applied (spec-07 §5,
+    the highest one carries a Recipe that cannot be applied (spec-08 §5,
     see MalformedRecipe) -- the message is then left untouched.
 
     After a successful undo, verify_message_instance(msg) should return
