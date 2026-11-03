@@ -36,7 +36,7 @@ from mailman.handlers.message_instance import (
 
 log = logging.getLogger('mailman.dkim2')
 
-# A "u" string (spec-08 §5 schema): base64 alphabet and padding, a whole
+# A "u" string (spec-09 §5 schema): base64 alphabet and padding, a whole
 # number of quanta, and zero pad bits ("QR==" is not canonical).
 _U_PATTERNS = (
     re.compile(r'[A-Za-z0-9+/]*={0,2}'),
@@ -56,7 +56,7 @@ def _get_raw_body(msg):
 
 
 def compute_body_hash(msg):
-    """Compute SHA-256 body hash per DKIM2 spec-08 §6.1.
+    """Compute SHA-256 body hash per DKIM2 spec-09 §6.1.
 
     Uses simple body canonicalization: strip trailing empty lines,
     ensure body ends with exactly one CRLF.
@@ -94,7 +94,7 @@ def _raw_values(msg, name):
 
 
 # ---------------------------------------------------------------------------
-# Recipe validation and application (spec-08 §5)
+# Recipe validation and application (spec-09 §5)
 # ---------------------------------------------------------------------------
 
 def _compile_steps(steps, where):
@@ -172,7 +172,7 @@ def _compile_recipe(recipe):
     header_steps maps each lower-cased header name under "h" to its
     compiled steps; body_steps is the compiled "b" list, or None when the
     body was not changed (no "b") or cannot be recreated ("b": null,
-    spec-08 §5.2).  Keys are lowercase (_parse_mi refuses any other).
+    spec-09 §5.2).  Keys are lowercase (_parse_mi refuses any other).
     """
     if recipe is None:
         return {}, None
@@ -268,7 +268,7 @@ def verify_message_instance(msg):
     if stored_b != computed_b:
         return 0, 'body hash mismatch ({} != {})'.format(
             stored_b, computed_b)
-    # An instance whose Recipe cannot be applied to this message (spec-08
+    # An instance whose Recipe cannot be applied to this message (spec-09
     # §5) does not verify either: nothing downstream could undo it.
     try:
         _plan_undo(msg, recipe)
@@ -283,7 +283,7 @@ def undo_message_instance(msg):
     Removes the highest MI header from the message, applies body and header
     recipes to reconstruct the previous version, and returns the version
     number that was undone.  Returns 0 if there are no MI headers, or if
-    the highest one carries a Recipe that cannot be applied (spec-08 §5,
+    the highest one carries a Recipe that cannot be applied (spec-09 §5,
     see MalformedRecipe) -- the message is then left untouched.
 
     After a successful undo, verify_message_instance(msg) should return
