@@ -43,6 +43,16 @@ class TestMailmanCommand(unittest.TestCase):
     def setUp(self):
         self._command = CliRunner()
 
+    def tearDown(self):
+        # Since 8.1.8, click caches each command's help option, with the
+        # option names of the first context it is used in.  Running a
+        # subcommand through `mailman` adds -h to those names, so reset the
+        # cache to keep later tests from seeing them.
+        commands = {}
+        add_components('commands', ICLISubCommand, commands)
+        for subcommand in commands.values():
+            subcommand.command._help_option = None
+
     def test_mailman_command_config(self):
         with as_file(files('mailman.testing') / 'testing.cfg') as config_path:
             with patch('mailman.bin.mailman.initialize') as init:

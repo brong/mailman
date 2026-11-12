@@ -1,9 +1,24 @@
+variables:
+  LC_ALL: "C.UTF-8"
+  HOME_ORIG: "/home/runner"
+  HOME: "/builds"
+  GIT_CEILING_DIRECTORIES: "$HOME"
+
 default:
+  image: ghcr.io/maxking/mailman-ci-runner:latest
   retry:
     max: 2
     when:
       - no_updates_running
       - server_timeout_running
+  before_script:
+    - cat /etc/os-release
+    - uname -a
+    - id
+    - env
+    # Create a symlink at /builds/.local pointing to /home/runner/.local
+    # (includes the Python user install directory)
+    - '[ "$HOME" != "$HOME_ORIG" ] && ln -s "$HOME_ORIG/.local" "$HOME/"'
 
 stages:
   - code
@@ -17,27 +32,20 @@ stages:
     - tags
     - web
 
-image: ghcr.io/maxking/mailman-ci-runner:latest
-
-variables:
-  LC_ALL: "C.UTF-8"
-  HOME: "/builds"
-  GIT_CEILING_DIRECTORIES: "/builds"
-
 code-qa:
   stage: code
   needs: []
   extends: .only-default
   script:
-    - tox -e qa
+    - python3 -m tox -e qa
 
 code-diffcov:
   stage: code
   needs: []
   script:
-    - git config --global --add safe.directory "/builds/${CI_PROJECT_NAMESPACE}/mailman"
+    - git config --global --add safe.directory "$HOME/$CI_PROJECT_NAMESPACE/mailman"
     - git config safe.directory
-    - tox -e py311-diffcov
+    - python3 -m tox -e py311-diffcov
   only:
     - merge_requests
 
@@ -46,7 +54,7 @@ docs:
   needs: []
   extends: .only-default
   script:
-    - tox -e docs
+    - python3 -m tox -e docs
 
 test-sqlite:
   stage: test
@@ -56,14 +64,14 @@ test-sqlite:
     matrix:
       - PYTHON_VER: ["310", "311", "312", "313"]
   script:
-    - tox -e "py$PYTHON_VER-nocov"
+    - python3 -m tox -e "py$PYTHON_VER-nocov"
 
 test-postgres:
   stage: test
   needs: []
   extends: .only-default
   variables:
-    MAILMAN_EXTRA_TESTING_CFG: "/home/runner/configs/postgres.cfg"
+    MAILMAN_EXTRA_TESTING_CFG: "$HOME_ORIG/configs/postgres.cfg"
     POSTGRES_DB: "mailman_test"
     POSTGRES_USER: "runner"
     POSTGRES_PASSWORD: "runner"
@@ -73,14 +81,14 @@ test-postgres:
     matrix:
       - PYTHON_VER: ["310", "311", "312", "313"]
   script:
-    - tox -e "py$PYTHON_VER-nocov-pg"
+    - python3 -m tox -e "py$PYTHON_VER-nocov-pg"
 
 test-mysql:
   stage: test
   needs: []
   extends: .only-default
   variables:
-    MAILMAN_EXTRA_TESTING_CFG: "/home/runner/configs/mysql.cfg"
+    MAILMAN_EXTRA_TESTING_CFG: "$HOME_ORIG/configs/mysql.cfg"
     MYSQL_DATABASE: "test_mailman"
     MYSQL_ROOT_PASSWORD: "runner"
     MYSQL_USER: "runner"
@@ -91,4 +99,4 @@ test-mysql:
     matrix:
       - PYTHON_VER: ["310", "311", "312", "313"]
   script:
-    - tox -e "py$PYTHON_VER-nocov-mysql"
+    - python3 -m tox -e "py$PYTHON_VER-nocov-mysql"
