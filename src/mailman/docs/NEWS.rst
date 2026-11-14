@@ -141,6 +141,8 @@ New Features
   a DKIM2 verifier can undo the list's changes.  This is enabled by the new
   ``message_instance`` setting in the ``mta`` section of mailman.cfg, which
   defaults to ``no``.
+* A new list attribute ``dkim2_message_instance`` lets a list opt out of
+  DKIM2 ``Message-Instance`` headers.
 
 Other
 -----
