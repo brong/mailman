@@ -133,6 +133,10 @@ New Features
   ``reset_db_session_on_sighup: yes``.  Enable this only in test configurations.
   The default remains log reopening only; no database records are deleted.
   (:mr:`1542`)
+* There is a new ``decorate_plain_text_in_place`` setting in the ``mailman``
+  section of mailman.cfg.  This defaults to ``yes`` to keep current behavior
+  but can be set to ``no`` to decorate text/plain messages by wrapping them in
+  multipart/mixed, as other content types are.
 
 Other
 -----

@@ -23,6 +23,8 @@ import logging
 
 from email.mime.text import MIMEText
 from email.utils import formataddr
+from lazr.config import as_boolean
+from mailman.config import config
 from mailman.core.i18n import _
 from mailman.interfaces.handler import IHandler
 from mailman.interfaces.mailinglist import IListArchiverSet
@@ -109,7 +111,8 @@ def process(mlist, msg, msgdata):
     # BAW: If the charsets don't match, should we add the header and footer by
     # MIME multipart chroming the message?
     wrap = True
-    if not msg.is_multipart() and msgtype == 'text/plain':
+    in_place = as_boolean(config.mailman.decorate_plain_text_in_place)
+    if not msg.is_multipart() and msgtype == 'text/plain' and in_place:
         # Save the RFC-3676 format parameters.
         format_param = msg.get_param('format')
         delsp = msg.get_param('delsp')

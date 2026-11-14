@@ -450,6 +450,84 @@ Footer:
                       self._msg.as_string())
 
 
+class TestDecoratePlainTextInPlace(unittest.TestCase):
+    """Test the decorate_plain_text_in_place setting."""
+
+    layer = ConfigLayer
+
+    def setUp(self):
+        self._mlist = create_list('ant@example.com')
+        self._mlist.preferred_language = 'en'
+        # A body in a charset and encoding that decorating in place changes.
+        self._msg = mfs("""\
+To: ant@example.com
+From: aperson@example.com
+Message-ID: <alpha>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: quoted-printable
+
+Caf=C3=A9 au lait.
+""")
+        temporary_dir = TemporaryDirectory()
+        self.addCleanup(temporary_dir.cleanup)
+        config.push('templates', """\
+        [paths.testing]
+        template_dir: {}
+        """.format(temporary_dir.name))
+        self.addCleanup(config.pop, 'templates')
+        site_dir = os.path.join(config.TEMPLATE_DIR, 'site', 'en')
+        os.makedirs(site_dir)
+        with open(os.path.join(site_dir, 'myfooter.txt'), 'w',
+                  encoding='utf-8') as fp:
+            print('The footer', file=fp)
+        getUtility(ITemplateManager).set(
+            'list:member:regular:footer', None, 'mailman:///myfooter.txt')
+
+    def test_in_place_by_default(self):
+        decorate.process(self._mlist, self._msg, {})
+        self.assertFalse(self._msg.is_multipart())
+        self.assertEqual(self._msg['content-transfer-encoding'], 'base64')
+        self.assertEqual(
+            self._msg.get_payload(decode=True).decode('utf-8'),
+            'Caf\xe9 au lait.\nThe footer\n')
+
+    def test_wrapped_when_not_in_place(self):
+        with configuration('mailman', decorate_plain_text_in_place='no'):
+            decorate.process(self._mlist, self._msg, {})
+        self.assertEqual(self._msg.get_content_type(), 'multipart/mixed')
+        body, footer = self._msg.get_payload()
+        # The post is untouched: same fields, same encoded octets.
+        self.assertEqual(body.items(), [
+            ('Content-Type', 'text/plain; charset="utf-8"; format="flowed"'),
+            ('Content-Transfer-Encoding', 'quoted-printable'),
+            ])
+        self.assertEqual(body.get_payload(), 'Caf=C3=A9 au lait.\n')
+        self.assertEqual(footer.get_payload(), 'The footer\n')
+        self.assertEqual(footer['content-disposition'], 'inline')
+
+    def test_multipart_mixed_unaffected(self):
+        msg = mfs("""\
+To: ant@example.com
+From: aperson@example.com
+Message-ID: <alpha>
+Content-Type: multipart/mixed; boundary="aaaaaa"
+
+--aaaaaa
+Content-Type: text/plain;
+
+This is a test message.
+--aaaaaa--
+""")
+        with configuration('mailman', decorate_plain_text_in_place='no'):
+            decorate.process(self._mlist, msg, {})
+        # The footer is appended as a part, as it always was.
+        parts = msg.get_payload()
+        self.assertEqual(len(parts), 2)
+        self.assertEqual(parts[0].get_payload(), 'This is a test message.')
+        self.assertEqual(parts[1].get_payload(), 'The footer\n')
+
+
 class TestBrokenPermalink(unittest.TestCase):
     layer = ConfigLayer
 
