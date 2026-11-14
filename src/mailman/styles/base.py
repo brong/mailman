@@ -93,6 +93,8 @@ class BasicOperation:
         mlist.digest_send_periodic = True
         mlist.digest_volume_frequency = DigestFrequency.monthly
         mlist.next_digest_number = 1
+        # DKIM2
+        mlist.dkim2_message_instance = True
         # DMARC
         mlist.dmarc_mitigate_action = DMARCMitigateAction.no_mitigation
         mlist.dmarc_mitigate_unconditionally = False

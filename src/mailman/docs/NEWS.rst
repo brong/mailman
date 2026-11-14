@@ -133,6 +133,16 @@ New Features
   ``reset_db_session_on_sighup: yes``.  Enable this only in test configurations.
   The default remains log reopening only; no database records are deleted.
   (:mr:`1542`)
+* There is a new ``decorate_plain_text_in_place`` setting in the ``mailman``
+  section of mailman.cfg.  This defaults to ``yes`` to keep current behavior
+  but can be set to ``no`` to decorate text/plain messages by wrapping them in
+  multipart/mixed, as other content types are.
+* Mailman can add DKIM2 ``Message-Instance`` headers to outgoing messages, so
+  a DKIM2 verifier can undo the list's changes.  This is enabled by the new
+  ``message_instance`` setting in the ``mta`` section of mailman.cfg, which
+  defaults to ``no``.
+* A new list attribute ``dkim2_message_instance`` lets a list opt out of
+  DKIM2 ``Message-Instance`` headers.
 
 Other
 -----
