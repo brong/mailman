@@ -42,6 +42,7 @@ class TestSystemConfiguration(unittest.TestCase):
                                         '^x-list-administrivia: ^x-spam-',
             cache_life='7d',
             check_max_size_on_filtered_message='no',
+            decorate_plain_text_in_place='yes',
             default_language='en',
             email_commands_max_lines='10',
             filter_report='no',
