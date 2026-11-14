@@ -323,6 +323,62 @@ Hello.
         msg['To'] = 'bee@example.com'
         self.assertIsNone(msg.header_log)
 
+    def test_body_unchanged_after_parsing(self):
+        self.assertFalse(self._msg().body_changed)
+
+    def test_set_payload_marks_the_body(self):
+        msg = self._msg()
+        msg.set_payload('Goodbye.\n')
+        self.assertTrue(msg.body_changed)
+
+    def test_same_payload_is_no_change(self):
+        # Content filtering sets back a payload list it did not change.
+        msg = mfs("""\
+From: anne@example.com
+Content-Type: multipart/mixed; boundary="aaa"
+
+--aaa
+
+x
+--aaa--
+""")
+        msg.start_header_log()
+        msg.set_payload(list(msg.get_payload()))
+        self.assertFalse(msg.body_changed)
+
+    def test_set_payload_with_charset_marks_the_body(self):
+        msg = self._msg()
+        msg.set_payload(msg.get_payload(), 'utf-8')
+        self.assertTrue(msg.body_changed)
+
+    def test_attach_marks_the_body(self):
+        msg = mfs("""\
+From: anne@example.com
+Content-Type: multipart/mixed; boundary="aaa"
+
+--aaa
+
+x
+--aaa--
+""")
+        msg.start_header_log()
+        msg.attach(Message())
+        self.assertTrue(msg.body_changed)
+
+    def test_subpart_change_marks_the_body(self):
+        msg = mfs("""\
+From: anne@example.com
+Content-Type: multipart/mixed; boundary="aaa"
+
+--aaa
+
+x
+--aaa--
+""")
+        msg.start_header_log()
+        msg.get_payload(0).set_payload('y\n')
+        self.assertTrue(msg.body_changed)
+
     def test_unpickle_without_log(self):
         # A message pickled before the log existed.
         msg = mfs(self.RAW)

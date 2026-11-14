@@ -21,13 +21,20 @@ import os
 import smtplib
 import unittest
 
+from aiosmtpd.smtp import Envelope
 from datetime import datetime
 from mailman.app.lifecycle import create_list
 from mailman.config import config
 from mailman.database.transaction import transaction
+from mailman.handlers.message_instance import arrival_record
 from mailman.interfaces.domain import IDomainManager
-from mailman.testing.helpers import get_lmtp_client, get_queue_messages
-from mailman.testing.layers import LMTPLayer
+from mailman.runners.lmtp import LMTPHandler
+from mailman.testing.helpers import (
+    configuration,
+    get_lmtp_client,
+    get_queue_messages,
+)
+from mailman.testing.layers import ConfigLayer, LMTPLayer
 from zope.component import getUtility
 
 
@@ -89,6 +96,19 @@ Message-ID: <[bogus@example.com]>
 """)
         items = get_queue_messages('in', expected_count=1)
         self.assertEqual('<bogus@example.com>', items[0].msg.get('message-id'))
+
+    def test_original_bytes_not_kept_by_default(self):
+        # Nothing of the received octets is kept with the message.
+        self._lmtp.sendmail('anne@example.com', ['test@example.com'], """\
+From: anne@example.com
+To: test@example.com
+Message-ID: <ant>
+Subject: not kept
+
+hello
+""")
+        items = get_queue_messages('in', expected_count=1)
+        self.assertFalse(hasattr(items[0].msg, 'original_bytes'))
 
     def test_message_id_hash_is_added(self):
         self._lmtp.sendmail('anne@example.com', ['test@example.com'], """\
@@ -369,3 +389,68 @@ Message-ID: <alpha>
         items = get_queue_messages('command', expected_count=1)
         self.assertEqual(items[0].msgdata['listid'],
                          'longer_than_15_bytes.example.com')
+
+
+class TestHandlerBase(unittest.TestCase):
+    """Deliver through the LMTP handler in-process."""
+
+    layer = ConfigLayer
+
+    def setUp(self):
+        with transaction():
+            create_list('test@example.com')
+
+    def _deliver(self, content):
+        # The handler in-process, so the test's configuration applies.
+        envelope = Envelope()
+        envelope.mail_from = 'anne@example.com'
+        envelope.rcpt_tos = ['test@example.com']
+        envelope.content = content
+        LMTPHandler()._handle_DATA(None, None, envelope)
+        return get_queue_messages('in', expected_count=1)[0].msg
+
+
+class TestOriginalBytes(TestHandlerBase):
+    """With Message-Instance enabled, the digests of the received octets
+    are kept, not the octets."""
+
+    # The octets as received, not a re-serialization: the trailing space on
+    # the Subject and the unterminated last line survive.
+    TEXT = (b'From: anne@example.com\r\n'
+            b'To: test@example.com\r\n'
+            b'Message-ID: <ant>\r\n'
+            b'Subject: kept as it came \r\n'
+            b'Content-Type: multipart/mixed; boundary="b"\r\n'
+            b'\r\n'
+            b'--b\r\n'
+            b'Content-Type: text/plain; charset="us-ascii" \r\n'
+            b'\r\n'
+            b'hello\r\n'
+            b'--b--')
+
+    @configuration('mta', message_instance='yes')
+    def test_received_octets_are_not_kept(self):
+        msg = self._deliver(self.TEXT)
+        self.assertFalse(hasattr(msg, 'original_bytes'))
+        self.assertEqual(msg.dkim2_arrival, arrival_record(self.TEXT))
+        self.assertEqual(msg.original_size, len(self.TEXT))
+
+
+class TestArrivalRecordOnDelivery(TestHandlerBase):
+    """The LMTP runner records the arrival digests and starts the header
+    log, before it repairs the Message-ID or stamps Message-ID-Hash."""
+
+    NO_ID = (b'From: anne@example.com\r\nTo: test@example.com\r\n'
+             b'Subject: no id\r\n\r\nhello\r\n')
+
+    @configuration('mta', message_instance='yes')
+    def test_record_and_log(self):
+        msg = self._deliver(self.NO_ID)
+        self.assertEqual(msg.dkim2_arrival, arrival_record(self.NO_ID))
+        self.assertEqual(msg.header_log['message-id'], [])
+        self.assertEqual(msg.header_log['message-id-hash'], [])
+
+    def test_nothing_when_off(self):
+        msg = self._deliver(self.NO_ID)
+        self.assertFalse(hasattr(msg, 'dkim2_arrival'))
+        self.assertIsNone(msg.header_log)
