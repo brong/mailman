@@ -58,6 +58,7 @@ All readable attributes for a list are available on a sub-resource.
     digests_enabled: True
     discard_these_nonmembers: []
     display_name: Ant
+    dkim2_message_instance: True
     dmarc_mitigate_action: no_mitigation
     dmarc_mitigate_unconditionally: False
     dmarc_moderation_notice:
@@ -168,6 +169,7 @@ When using ``PUT``, all writable attributes must be included.
     ...             digest_size_threshold=10.5,
     ...             digest_volume_frequency='yearly',
     ...             digests_enabled=False,
+    ...             dkim2_message_instance=False,
     ...             dmarc_mitigate_action='munge_from',
     ...             dmarc_mitigate_unconditionally=False,
     ...             dmarc_moderation_notice='Some moderation notice',
@@ -254,6 +256,7 @@ These values are changed permanently.
     digests_enabled: False
     discard_these_nonmembers: ['^name_*bperson*@example.com']
     display_name: Fnords
+    dkim2_message_instance: False
     dmarc_mitigate_action: munge_from
     dmarc_mitigate_unconditionally: False
     dmarc_moderation_notice: Some moderation notice
