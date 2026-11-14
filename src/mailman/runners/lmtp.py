@@ -41,10 +41,12 @@ from aiosmtpd.controller import Controller
 from aiosmtpd.lmtp import LMTP
 from contextlib import suppress
 from email.utils import parseaddr
+from lazr.config import as_boolean
 from mailman.config import config
 from mailman.core.runner import Runner
 from mailman.database.transaction import transactional
 from mailman.email.message import Message
+from mailman.handlers.message_instance import arrival_record, normalize_crlf
 from mailman.interfaces.domain import IDomainManager
 from mailman.interfaces.listmanager import IListManager
 from mailman.interfaces.runner import RunnerInterrupt
@@ -183,6 +185,12 @@ class LMTPHandler:
             # message, reject it right away; it's probably spam.
             msg = email.message_from_bytes(envelope.content, Message)
             msg.set_unixfrom(envelope.mail_from)
+            # For DKIM2 Message-Instance, record the digests of the post as
+            # received, and log every header change from here on.
+            if as_boolean(config.mta.message_instance):
+                msg.dkim2_arrival = arrival_record(
+                    normalize_crlf(envelope.content))
+                msg.start_header_log()
         except Exception:
             elog.exception('LMTP message parsing')
             config.db.abort()

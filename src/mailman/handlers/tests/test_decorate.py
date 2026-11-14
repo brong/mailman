@@ -22,6 +22,7 @@ import re
 import email
 import unittest
 
+from contextlib import ExitStack
 from importlib_resources import open_binary as resource_open
 from mailman.app.lifecycle import create_list
 from mailman.config import config
@@ -504,3 +505,90 @@ This is a test message.
         self.assertNotIn('http:', self._msg.as_string())
         self.assertIn('Exception in "broken" archiver', log_messages)
         self.assertIn('RuntimeError: Cannot get permalink', log_messages)
+
+
+class TestDecorateDKIM2Record(unittest.TestCase):
+    """On a DKIM2 Message-Instance list, decoration always leaves the post
+    intact inside the message, and records how, for the egress Recipe."""
+
+    layer = ConfigLayer
+
+    def setUp(self):
+        self._mlist = create_list('ant@example.com')
+        self._mlist.preferred_language = 'en'
+        resources = ExitStack()
+        self.addCleanup(resources.close)
+        temporary_dir = resources.enter_context(TemporaryDirectory())
+        resources.enter_context(
+            configuration('paths.testing', template_dir=temporary_dir))
+        resources.enter_context(configuration('mta', message_instance='yes'))
+        site_dir = os.path.join(config.TEMPLATE_DIR, 'site', 'en')
+        os.makedirs(site_dir)
+        for name, text in (('myheader.txt', 'The header'),
+                           ('myfooter.txt', 'The footer')):
+            with open(os.path.join(site_dir, name), 'w',
+                      encoding='utf-8') as fp:
+                print(text, file=fp)
+        manager = getUtility(ITemplateManager)
+        manager.set('list:member:regular:header', None,
+                    'mailman:///myheader.txt')
+        manager.set('list:member:regular:footer', None,
+                    'mailman:///myfooter.txt')
+
+    PLAIN = """\
+To: ant@example.com
+From: aperson@example.com
+Message-ID: <alpha>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Caf=C3=A9 au lait.
+"""
+
+    MIXED = """\
+To: ant@example.com
+From: aperson@example.com
+Message-ID: <alpha>
+Content-Type: multipart/mixed; boundary="aaaaaa"
+
+--aaaaaa
+Content-Type: text/plain;
+
+This is a test message.
+--aaaaaa--
+"""
+
+    def test_plain_text_wrapped_even_when_in_place_is_on(self):
+        msg = mfs(self.PLAIN)
+        msgdata = {}
+        decorate.process(self._mlist, msg, msgdata)
+        self.assertEqual(msg.get_content_type(), 'multipart/mixed')
+        self.assertEqual(msgdata['dkim2-decoration'], {
+            'shape': 'wrapped', 'header': True, 'footer': True})
+        # The generator picks the boundary (checking it against the text);
+        # egress reads it off the message once it is serialized.
+        self.assertIsNone(msg.get_boundary())
+        self.assertEqual(msg.get_payload(1).get_payload(),
+                         'Caf=C3=A9 au lait.\n')
+
+    def test_multipart_mixed(self):
+        msg = mfs(self.MIXED)
+        msgdata = {}
+        decorate.process(self._mlist, msg, msgdata)
+        self.assertEqual(msgdata['dkim2-decoration'], {
+            'shape': 'mixed', 'header': True, 'footer': True})
+
+    def test_list_opted_out_decorates_in_place(self):
+        self._mlist.dkim2_message_instance = False
+        msg = mfs(self.PLAIN)
+        msgdata = {}
+        decorate.process(self._mlist, msg, msgdata)
+        self.assertFalse(msg.is_multipart())
+        self.assertNotIn('dkim2-decoration', msgdata)
+
+    def test_site_off_records_nothing(self):
+        with configuration('mta', message_instance='no'):
+            msg = mfs(self.MIXED)
+            msgdata = {}
+            decorate.process(self._mlist, msg, msgdata)
+        self.assertNotIn('dkim2-decoration', msgdata)

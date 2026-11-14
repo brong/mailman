@@ -52,11 +52,17 @@ class Message(email.message.Message):
     # Mailman changes to the values it had before the first change ([] when
     # it was absent).  The six methods below are the only ones that edit the
     # header list directly; every other header change goes through them.
+    #
+    # Starting the log also clears every part's body mark, which set_payload
+    # and attach set when they change a payload.  A payload list edited in
+    # place is not seen.
 
     def start_header_log(self):
         """Start logging header changes; a running log is kept as it is."""
         if self.__dict__.get('_header_log') is None:
             self._header_log = {}
+            for part in self.walk():
+                part.__dict__.pop('_body_changed', None)
 
     def stop_header_log(self):
         """Stop logging header changes and discard the log."""
@@ -66,6 +72,22 @@ class Message(email.message.Message):
     def header_log(self):
         """The header log, or None when it has not been started."""
         return self.__dict__.get('_header_log')
+
+    @property
+    def body_changed(self):
+        """Has any part's payload changed since the header log started?"""
+        return any(part.__dict__.get('_body_changed', False)
+                   for part in self.walk())
+
+    def set_payload(self, payload, charset=None):
+        # Handlers set an unchanged payload list back; that is no change.
+        if charset is not None or payload != self.__dict__.get('_payload'):
+            self._body_changed = True
+        super().set_payload(payload, charset)
+
+    def attach(self, payload):
+        self._body_changed = True
+        super().attach(payload)
 
     def _log_header(self, name):
         log = self.__dict__.get('_header_log')
