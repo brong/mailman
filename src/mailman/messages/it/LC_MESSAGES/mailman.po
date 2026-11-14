@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-25 13:45-0700\n"
-"PO-Revision-Date: 2022-03-23 03:38+0000\n"
-"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/gnu-mailman/mailman/it/>\n"
+"PO-Revision-Date: 2026-11-14 01:23+0000\n"
+"Last-Translator: Zeno Tajoli <zenotajoli@users.noreply.hosted.weblate.org>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/gnu-mailman/"
+"mailman/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.12-dev\n"
+"X-Generator: Weblate 2026.12.dev0\n"
 
 #: src/mailman/app/bounces.py:76 src/mailman/app/moderator.py:83
 #: src/mailman/chains/hold.py:165 src/mailman/handlers/acknowledge.py:56
@@ -114,7 +115,7 @@ msgstr ""
 #: src/mailman/app/notifications.py:236
 #, python-brace-format
 msgid "${member} unsubscribed from ${mlist.display_name} mailing list due to bounces"
-msgstr "Sei stato disiscritto dalla lista ${mlist.display_name}"
+msgstr "${member} sei stato disiscritto dalla lista ${mlist.display_name}"
 
 #: src/mailman/app/notifications.py:269
 #, python-brace-format
@@ -332,6 +333,22 @@ msgid ""
 "    set which subtly changes some error handling behavior.\n"
 "    "
 msgstr ""
+"    Fa partire un sottoprocesso.\n"
+"\n"
+"    Il sottoprocesso nominato nella linea di comando sarà fatto partire\n"
+"    una volta o più volte. In maniera predefinita i sottoprocessi\n"
+"    sono fatti ripartire più volte.\n"
+"\n"
+"    L'argomento -r è richiesto a meno che non venga fornito -l o -h e il suo "
+"argomento deve essere uno tra\n"
+"    i nomi visualizzati dall'opzione -l.\n"
+"    \n"
+"    Di norma questo script è fatto partire da `mailman start`\n"
+"    Per il debug si può eseguirlo a mano o con l'opzione -o. Quando\n"
+"    eseguito in questo modo la variabile d'ambiente\n"
+"    $MAILMAN_UNDER_MASTER_CONTROL verrà impostata in modo da\n"
+"    modificare la gestione degli errori.\n"
+"    "
 
 #: src/mailman/bin/runner.py:104
 msgid "List the available runner names and exit."
@@ -925,7 +942,9 @@ msgstr "${mlist.list_id} è al volume ${mlist.volume}, numero ${mlist.next_diges
 #: src/mailman/commands/cli_digests.py:106
 #, python-brace-format
 msgid "${mlist.list_id} bumped to volume ${mlist.volume}, number ${mlist.next_digest_number}"
-msgstr "${mlist.list_id} aggiornato al volume volume ${mlist.volume}, numero ${mlist.next_digest_number}"
+msgstr ""
+"${mlist.list_id} aggiornato al volume ${mlist.volume}, numero $"
+"{mlist.next_digest_number}"
 
 #: src/mailman/commands/cli_digests.py:112 src/mailman/commands/cli_digests.py:122
 #, python-brace-format
