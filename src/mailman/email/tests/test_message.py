@@ -17,6 +17,8 @@
 
 """Test the message API."""
 
+import copy
+import pickle
 import sys
 import unittest
 
@@ -195,3 +197,140 @@ Message with \u201cNon-ascii\u201d.
                 fp.seek(0)
                 text = fp.read().decode('ascii', 'replace')
         self.assertEqual(msg.as_string(), text)
+
+
+class TestHeaderLog(unittest.TestCase):
+    """Test the log of original header field values."""
+
+    layer = ConfigLayer
+
+    RAW = """\
+From: anne@example.com
+To: ant@example.com
+Cc: a@example.com
+Cc: b@example.com
+Subject: hello
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+
+Hello.
+"""
+
+    def _msg(self):
+        msg = mfs(self.RAW)
+        msg.start_header_log()
+        return msg
+
+    def test_parser_does_not_log(self):
+        msg = mfs(self.RAW)
+        self.assertIsNone(msg.header_log)
+
+    def test_not_started_records_nothing(self):
+        msg = mfs(self.RAW)
+        msg['Reply-To'] = 'list@example.com'
+        self.assertIsNone(msg.header_log)
+
+    def test_setitem_logs_absent(self):
+        msg = self._msg()
+        msg['Reply-To'] = 'list@example.com'
+        self.assertEqual(msg.header_log, {'reply-to': []})
+
+    def test_setitem_logs_existing(self):
+        msg = self._msg()
+        msg['Cc'] = 'c@example.com'
+        self.assertEqual(
+            msg.header_log, {'cc': ['a@example.com', 'b@example.com']})
+
+    def test_delitem_logs_all_values(self):
+        msg = self._msg()
+        del msg['cc']
+        self.assertEqual(
+            msg.header_log, {'cc': ['a@example.com', 'b@example.com']})
+
+    def test_first_touch_only(self):
+        msg = self._msg()
+        msg.replace_header('Subject', 'x')
+        msg.replace_header('Subject', 'y')
+        del msg['subject']
+        self.assertEqual(msg.header_log, {'subject': ['hello']})
+
+    def test_add_header(self):
+        msg = self._msg()
+        msg.add_header('Content-Disposition', 'inline')
+        self.assertEqual(msg.header_log, {'content-disposition': []})
+
+    def test_set_raw(self):
+        msg = self._msg()
+        msg.set_raw('List-Id', '<ant.example.com>')
+        self.assertEqual(msg.header_log, {'list-id': []})
+
+    def test_set_param_logs_content_type(self):
+        msg = self._msg()
+        msg.set_param('format', 'flowed')
+        self.assertEqual(msg.header_log,
+                         {'content-type': ['text/plain; charset="us-ascii"']})
+
+    def test_set_boundary_logs_content_type(self):
+        msg = mfs("""\
+From: anne@example.com
+Content-Type: multipart/mixed; boundary="aaa"
+
+--aaa
+
+x
+--aaa--
+""")
+        msg.start_header_log()
+        msg.set_boundary('bbb')
+        self.assertEqual(msg.header_log,
+                         {'content-type': ['multipart/mixed; boundary="aaa"']})
+
+    def test_set_payload_charset_logs(self):
+        msg = mfs("""\
+From: anne@example.com
+Subject: hi
+
+Hello.
+""")
+        msg.start_header_log()
+        msg.set_payload('caf\xe9', 'utf-8')
+        # set_charset adds all three, through add_header.
+        self.assertEqual(msg.header_log, {
+            'mime-version': [], 'content-type': [],
+            'content-transfer-encoding': []})
+
+    def test_start_is_idempotent(self):
+        msg = self._msg()
+        msg['Subject'] = 'changed'
+        msg.start_header_log()
+        self.assertEqual(msg.header_log, {'subject': ['hello']})
+
+    def test_pickle_and_deepcopy_carry_log(self):
+        msg = self._msg()
+        del msg['subject']
+        for other in (pickle.loads(pickle.dumps(msg)), copy.deepcopy(msg)):
+            self.assertEqual(other.header_log, {'subject': ['hello']})
+            other['To'] = 'bee@example.com'
+            self.assertEqual(other.header_log, {
+                'subject': ['hello'], 'to': ['ant@example.com']})
+
+    def test_stop_header_log(self):
+        msg = self._msg()
+        del msg['subject']
+        msg.stop_header_log()
+        self.assertIsNone(msg.header_log)
+        msg['To'] = 'bee@example.com'
+        self.assertIsNone(msg.header_log)
+
+    def test_unpickle_without_log(self):
+        # A message pickled before the log existed.
+        msg = mfs(self.RAW)
+        state = pickle.dumps(msg)
+        self.assertIsNone(pickle.loads(state).header_log)
+
+    def testprepend_header(self):
+        msg = self._msg()
+        msg.prepend_header('Message-Instance', 'm=1; h=x; b=y;')
+        self.assertEqual(msg.header_log, {})
+        self.assertEqual(msg.keys()[0], 'Message-Instance')
