@@ -48,6 +48,62 @@ class Message(email.message.Message):
     def __setstate__(self, values):
         self.__dict__ = values
 
+    # Once started, the header log maps each header field name (lower case)
+    # Mailman changes to the values it had before the first change ([] when
+    # it was absent).  The six methods below are the only ones that edit the
+    # header list directly; every other header change goes through them.
+
+    def start_header_log(self):
+        """Start logging header changes; a running log is kept as it is."""
+        if self.__dict__.get('_header_log') is None:
+            self._header_log = {}
+
+    def stop_header_log(self):
+        """Stop logging header changes and discard the log."""
+        self.__dict__.pop('_header_log', None)
+
+    @property
+    def header_log(self):
+        """The header log, or None when it has not been started."""
+        return self.__dict__.get('_header_log')
+
+    def _log_header(self, name):
+        log = self.__dict__.get('_header_log')
+        if log is None:
+            return
+        name = name.lower()
+        if name not in log:
+            log[name] = [value for key, value in self.raw_items()
+                         if key.lower() == name]
+
+    def prepend_header(self, name, value):
+        """Add a header field at the top, without logging it."""
+        self._headers.insert(0, (name, value))
+
+    def __setitem__(self, name, val):
+        self._log_header(name)
+        super().__setitem__(name, val)
+
+    def __delitem__(self, name):
+        self._log_header(name)
+        super().__delitem__(name)
+
+    def add_header(self, _name, _value, **_params):
+        self._log_header(_name)
+        super().add_header(_name, _value, **_params)
+
+    def replace_header(self, _name, _value):
+        self._log_header(_name)
+        super().replace_header(_name, _value)
+
+    def set_boundary(self, boundary):
+        self._log_header('content-type')
+        super().set_boundary(boundary)
+
+    def set_raw(self, name, value):
+        self._log_header(name)
+        super().set_raw(name, value)
+
     def as_string(self):
         # Work around for https://bugs.python.org/issue27321 and
         # https://bugs.python.org/issue32330.
