@@ -30,6 +30,7 @@ class OwnerPipeline(BasePipeline):
     description = _('The built-in owner pipeline.')
 
     _default_handlers = (
+        'message-instance-ingress',
         'check_dmarc',
         'cleanse-dkim',
         'owner-recipients',
@@ -47,6 +48,7 @@ class PostingPipeline(BasePipeline):
 
     _default_handlers = (
         'validate-authenticity',
+        'message-instance-ingress',
         'mime-delete',
         'tagger',
         'member-recipients',

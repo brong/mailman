@@ -26,6 +26,7 @@ from email.utils import formataddr
 from lazr.config import as_boolean
 from mailman.config import config
 from mailman.core.i18n import _
+from mailman.handlers.message_instance import instances_enabled
 from mailman.interfaces.handler import IHandler
 from mailman.interfaces.mailinglist import IListArchiverSet
 from mailman.interfaces.template import ITemplateLoader
@@ -88,6 +89,9 @@ def process(mlist, msg, msgdata):
     # Escape hatch if both the footer and header are empty or None.
     if len(header) == 0 and len(footer) == 0:
         return
+    # On a DKIM2 list the post is never re-encoded, and
+    # msgdata['dkim2-decoration'] records where it is for the egress Recipe.
+    dkim2 = instances_enabled(mlist)
     # Be MIME smart here.  We only attach the header and footer by
     # concatenation when the message is a non-multipart of type text/plain.
     # Otherwise, if it is not a multipart, we make it a multipart, and then we
@@ -112,7 +116,8 @@ def process(mlist, msg, msgdata):
     # MIME multipart chroming the message?
     wrap = True
     in_place = as_boolean(config.mailman.decorate_plain_text_in_place)
-    if not msg.is_multipart() and msgtype == 'text/plain' and in_place:
+    if (not msg.is_multipart() and msgtype == 'text/plain' and in_place and
+            not dkim2):
         # Save the RFC-3676 format parameters.
         format_param = msg.get_param('format')
         delsp = msg.get_param('delsp')
@@ -167,6 +172,9 @@ def process(mlist, msg, msgdata):
             payload.insert(0, mimehdr)
         msg.set_payload(payload)
         wrap = False
+        if dkim2:
+            msgdata['dkim2-decoration'] = dict(
+                shape='mixed', header=len(header) > 0, footer=len(footer) > 0)
     # If we couldn't add the header or footer in a less intrusive way, we can
     # at least do it by MIME encapsulation.  We want to keep as much of the
     # outer chrome as possible.
@@ -200,6 +208,11 @@ def process(mlist, msg, msgdata):
     del msg['content-transfer-encoding']
     del msg['content-disposition']
     msg['Content-Type'] = 'multipart/mixed'
+    if dkim2:
+        # The generator picks the boundary when the message is first
+        # written out, checking it against the text; egress reads it then.
+        msgdata['dkim2-decoration'] = dict(
+            shape='wrapped', header=len(header) > 0, footer=len(footer) > 0)
 
 
 @public

@@ -195,6 +195,7 @@ class TestSystemConfiguration(unittest.TestCase):
             'logging.config',
             'logging.database',
             'logging.debug',
+            'logging.dkim2',
             'logging.error',
             'logging.fromusenet',
             'logging.gunicorn',

@@ -137,6 +137,10 @@ New Features
   section of mailman.cfg.  This defaults to ``yes`` to keep current behavior
   but can be set to ``no`` to decorate text/plain messages by wrapping them in
   multipart/mixed, as other content types are.
+* Mailman can add DKIM2 ``Message-Instance`` headers to outgoing messages, so
+  a DKIM2 verifier can undo the list's changes.  This is enabled by the new
+  ``message_instance`` setting in the ``mta`` section of mailman.cfg, which
+  defaults to ``no``.
 
 Other
 -----

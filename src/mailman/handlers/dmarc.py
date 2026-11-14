@@ -35,6 +35,12 @@ from email.utils import formataddr, make_msgid
 from lazr.config import as_boolean
 from mailman.config import config
 from mailman.core.i18n import _
+from mailman.handlers.decorate import decorate
+from mailman.handlers.message_instance import (
+    compute_header_hash,
+    instances_enabled,
+    SEND_MESSAGE_DROPS,
+)
 from mailman.interfaces.handler import IHandler
 from mailman.interfaces.mailinglist import DMARCMitigateAction, ReplyToMunging
 from mailman.utilities.string import wrap
@@ -197,7 +203,48 @@ def wrap_message(mlist, msg, msgdata):
     return
 
 
+def _dkim2_rewrites_from(mlist, msg, msgdata):
+    """Must a DKIM2 list make From its own address?
+
+    A list that changes a message, or originates it (it arrived unsigned),
+    signs with its own domain, so From must be in that domain.  A signed
+    message the list passes on unchanged keeps its From.
+    """
+    if not instances_enabled(mlist) or mlist.anonymous_list:
+        return False
+    if msg.get_all('dkim2-signature') is None:
+        return True
+    snapshot = msgdata.get('dkim2_snapshot')
+    if snapshot is None:
+        return True
+    if any(msg.get_all(name) for name in SEND_MESSAGE_DROPS):
+        return True
+    if compute_header_hash(msg) != snapshot['header_hash']:
+        return True
+    if not (msgdata.get('isdigest') or msgdata.get('nodecorate')) and any(
+            decorate(name, mlist) for name in (
+                'list:member:regular:header', 'list:member:regular:footer')):
+        return True
+    # The body: a handler changed it, or smtplib will escape a "From " line.
+    return msg.body_changed or len(snapshot['from_lines']) > 0
+
+
 def process(mlist, msg, msgdata):
+    # On a DKIM2 list, From must be in the list's domain when the list
+    # changes or originates the message.  The wrap mitigation sets From
+    # itself; anything else gets the munged From.
+    if _dkim2_rewrites_from(mlist, msg, msgdata):
+        wrapping = (
+            mlist.dmarc_mitigate_action is DMARCMitigateAction.wrap_message and
+            (msgdata.get('dmarc') or mlist.dmarc_mitigate_unconditionally) and
+            not (msgdata.get('to_owner') and
+                 not as_boolean(config.mailman.mitigate_owner_mail)))
+        if wrapping:
+            wrap_message(mlist, msg, msgdata)
+        else:
+            msgdata.setdefault('original_sender', msg.sender)
+            munge_from(mlist, msg, msgdata)
+        return
     # If the message is for the owner and global mitigation is disabled,
     # exit immediately.
     if (msgdata.get('to_owner') and
