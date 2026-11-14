@@ -19,6 +19,7 @@ You can also get all the values for a particular section, such as the
     ^x-ack: ^x-beenthere: ^x-list-administrivia: ^x-spam-
     cache_life: 7d
     check_max_size_on_filtered_message: no
+    decorate_plain_text_in_place: yes
     default_language: en
     dsn_lifetime: 1d
     email_commands_max_lines: 10
