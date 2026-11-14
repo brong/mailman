@@ -726,7 +726,7 @@ def instances_enabled(mlist=None):
     """Is Message-Instance support enabled, for the site and the list?"""
     if not as_boolean(config.mta.message_instance):
         return False
-    return mlist is None or getattr(mlist, 'dkim2_message_instance', True)
+    return mlist is None or mlist.dkim2_message_instance
 
 
 @public
