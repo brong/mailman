@@ -230,6 +230,10 @@ def _dkim2_rewrites_from(mlist, msg, msgdata):
 
 
 def process(mlist, msg, msgdata):
+    # The sending MTA rewrites From and signs: nothing to do here, for DMARC
+    # or for DKIM2.
+    if mlist.dmarc_mitigate_action is DMARCMitigateAction.defer_to_mta:
+        return
     # On a DKIM2 list, From must be in the list's domain when the list
     # changes or originates the message.  The wrap mitigation sets From
     # itself; anything else gets the munged From.

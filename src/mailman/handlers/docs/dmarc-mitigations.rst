@@ -57,6 +57,12 @@ The possible actions for ``dmarc_mitigate_action`` are:
    in ``dmarc_moderation_notice``.
 ``discard``
    Silently discard the message.
+``defer_to_mta``
+   Make no transformation to the message and do not look up the ``From:``
+   domain's DMARC policy: the MTA that sends the list's mail rewrites
+   ``From:`` itself and signs.  Unlike ``no_mitigation``, this also applies
+   on a list with DKIM2 ``Message-Instance`` headers, where ``From:`` is
+   otherwise made the list's posting address.
 
 Here's what happens when we munge the ``From:``.
 ::

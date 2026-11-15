@@ -2407,6 +2407,46 @@ Hello.
             out = self._distribute(self.RAW)
             self._assert_from_rewritten(out)
 
+    def test_defer_to_mta_keeps_from_on_a_modified_signed_post(self):
+        # The sending MTA takes From over and signs, so the list leaves the
+        # author's From and records only its own changes, in an m=2 that
+        # undoes cleanly to the author's m=1.
+        self._mlist.dmarc_mitigate_action = DMARCMitigateAction.defer_to_mta
+        out = self._distribute(self._signed())
+        self.assertTrue(str(out['Subject']).startswith('[Ant] '))
+        self.assertEqual(out['From'], 'Anne <anne@example.com>')
+        self.assertIsNone(out['Reply-To'])
+        self.assertEqual(get_max_instance_version(out), 2)
+        self.assertNotIn('from', _recipe_at(out, 2)['h'])
+        v, err = verify_message_instance(out)
+        self.assertEqual(v, 2, err)
+        self.assertEqual(undo_message_instance(out), 2)
+        self.assertEqual(str(out['Subject']), 'hello')
+        v, err = verify_message_instance(out)
+        self.assertEqual(v, 1, err)
+
+    def test_defer_to_mta_unsigned_post_gets_no_instance(self):
+        # Nobody signed the post and the list does not take From over, so
+        # an unsigned m=1 would only make DKIM2 verifiers report an error.
+        # If the MTA takes From over it starts the chain itself.
+        self._mlist.dmarc_mitigate_action = DMARCMitigateAction.defer_to_mta
+        out = self._distribute(self.RAW)
+        self.assertEqual(out['From'], 'Anne <anne@example.com>')
+        self.assertIsNone(out.get_all('message-instance'))
+        self.assertIsNone(out.get_all('x-dkim2-info'))
+        # The copy is still one of many.
+        self.assertEqual(out.get_all('X-DKIM2-Exploded'), ['yes'])
+
+    def test_defer_to_mta_drops_unsigned_instances_on_arrival(self):
+        # Unsigned instances an unsigned post arrives with are dropped, as
+        # on any DKIM2 list, and none is added in their place.
+        self._mlist.dmarc_mitigate_action = DMARCMitigateAction.defer_to_mta
+        mi1 = build_instance_value(1, compute_header_hash_raw(self.RAW),
+                                   compute_body_hash_raw(self.RAW))
+        out = self._distribute(
+            b'Message-Instance: ' + mi1.encode('ascii') + b'\r\n' + self.RAW)
+        self.assertIsNone(out.get_all('message-instance'))
+
     def test_unsigned_post_leaves_with_one_m1_over_the_list_from(self):
         # The list's MTA signs this as i=1 with the list's domain, so the
         # message m=1 hashes carries the list's From.  (There is no DKIM2
