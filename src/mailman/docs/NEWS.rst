@@ -147,7 +147,7 @@ New Features
   sending MTA, for a site whose MTA rewrites ``From:`` and signs.  Mailman
   applies no DMARC mitigation and does not look the policy up; on a list with
   ``Message-Instance`` headers ``From:`` is not made the list's posting
-  address, and an unsigned post gets no ``m=1``.
+  address.
 
 Other
 -----

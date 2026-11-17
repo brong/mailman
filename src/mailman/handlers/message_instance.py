@@ -30,7 +30,6 @@ from lazr.config import as_boolean
 from mailman.config import config
 from mailman.core.i18n import _
 from mailman.interfaces.handler import IHandler
-from mailman.interfaces.mailinglist import DMARCMitigateAction
 from public import public
 from zope.interface import implementer
 
@@ -1005,15 +1004,6 @@ class MessageInstanceEgress:
             msg[EXPLODED_HINT] = 'yes'
         if snapshot and get_max_instance_version(msg) > snapshot['version']:
             # Already stamped: a retry of a queued message.
-            return
-        if (snapshot and snapshot['version'] == 0 and
-                mlist.dmarc_mitigate_action is
-                DMARCMitigateAction.defer_to_mta):
-            # An unsigned post keeps its From on a list that defers to the
-            # MTA.  An m=1 nobody signs would only make DKIM2 verifiers
-            # report an error; if the MTA takes From over, it starts the
-            # chain itself.
-            log.debug('Unsigned post, list defers to the MTA: no m=1')
             return
         if not snapshot:
             # A message Mailman originated (e.g. through the virgin
