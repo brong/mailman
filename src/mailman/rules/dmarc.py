@@ -318,8 +318,11 @@ class DMARCMitigation:
 
     def check(self, mlist, msg, msgdata):
         """See `IRule`."""
-        if mlist.dmarc_mitigate_action is DMARCMitigateAction.no_mitigation:
-            # Don't bother to check if we're not going to do anything.
+        if mlist.dmarc_mitigate_action in (
+                DMARCMitigateAction.no_mitigation,
+                DMARCMitigateAction.defer_to_mta):
+            # Don't bother to check if we're not going to do anything.  The
+            # MTA a list defers to makes its own DMARC check.
             return False
         display_name, address = parseaddr(str(msg.get('from', '')))
         if maybe_mitigate(mlist, address):

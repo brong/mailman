@@ -50,6 +50,10 @@ class DMARCMitigateAction(Enum):
     reject = 3
     # Messages From: domains with DMARC policy will be discarded.
     discard = 4
+    # Leave From: to the sending MTA, which rewrites it and signs: no DMARC
+    # mitigation here, and on a DKIM2 list From: is not made the list's
+    # posting address.
+    defer_to_mta = 5
 
 
 @public

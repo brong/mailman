@@ -241,6 +241,23 @@ class TestDMARCRules(TestCase):
             dmarc.get_organizational_domain('ssub.sub.city.kobe.jp'),
             'city.kobe.jp')
 
+    def test_defer_to_mta_does_not_look_up(self):
+        # The sending MTA makes its own DMARC check, so the rule neither
+        # fires nor flags the message, and does no lookup.
+        mlist = create_list('ant@example.com')
+        mlist.dmarc_mitigate_action = DMARCMitigateAction.defer_to_mta
+        msg = mfs("""\
+From: anne@example.biz
+To: ant@example.com
+
+""")
+        msgdata = {}
+        rule = dmarc.DMARCMitigation()
+        with patch('mailman.rules.dmarc.maybe_mitigate',
+                   side_effect=AssertionError('DMARC looked up')):
+            self.assertFalse(rule.check(mlist, msg, msgdata))
+        self.assertNotIn('dmarc', msgdata)
+
     def test_straightforward_cname(self):
         # Test that we can recognize an answer with case mismatch in the
         # domain.

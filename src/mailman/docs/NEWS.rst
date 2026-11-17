@@ -143,6 +143,11 @@ New Features
   defaults to ``no``.
 * A new list attribute ``dkim2_message_instance`` lets a list opt out of
   DKIM2 ``Message-Instance`` headers.
+* A new ``dmarc_mitigate_action`` of ``defer_to_mta`` leaves ``From:`` to the
+  sending MTA, for a site whose MTA rewrites ``From:`` and signs.  Mailman
+  applies no DMARC mitigation and does not look the policy up; on a list with
+  ``Message-Instance`` headers ``From:`` is not made the list's posting
+  address.
 
 Other
 -----

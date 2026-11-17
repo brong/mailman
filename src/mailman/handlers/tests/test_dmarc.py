@@ -349,6 +349,20 @@ Content-Transfer-Encoding: 7bit
 --=====abc==--
 """)
 
+    def test_defer_to_mta_no_change(self):
+        # The sending MTA rewrites From, so a DMARC hit changes nothing here.
+        self._mlist.dmarc_mitigate_action = DMARCMitigateAction.defer_to_mta
+        msg = mfs(self._text)
+        dmarc.process(self._mlist, msg, dict(dmarc=True))
+        self.assertMultiLineEqual(msg.as_string(), self._text)
+
+    def test_defer_to_mta_unconditionally_no_change(self):
+        self._mlist.dmarc_mitigate_action = DMARCMitigateAction.defer_to_mta
+        self._mlist.dmarc_mitigate_unconditionally = True
+        msg = mfs(self._text)
+        dmarc.process(self._mlist, msg, dict(dmarc=True))
+        self.assertMultiLineEqual(msg.as_string(), self._text)
+
     def test_from_in_cc(self):
         self._mlist.dmarc_mitigate_action = DMARCMitigateAction.munge_from
         self._mlist.reply_goes_to_list = ReplyToMunging.point_to_list

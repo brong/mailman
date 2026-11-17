@@ -23,6 +23,7 @@ from mailman.app.lifecycle import create_list
 from mailman.database.transaction import transaction
 from mailman.interfaces.digests import DigestFrequency
 from mailman.interfaces.mailinglist import (
+    DMARCMitigateAction,
     IAcceptableAliasSet,
     SubscriptionPolicy,
 )
@@ -247,6 +248,18 @@ class TestConfiguration(unittest.TestCase):
         # And now we verify that it has the requested setting.
         self.assertEqual(self._mlist.subscription_policy,
                          SubscriptionPolicy.confirm_then_moderate)
+
+    def test_patch_dmarc_mitigate_action_defer_to_mta(self):
+        resource, response = call_api(
+            'http://localhost:9001/3.0/lists/ant.example.com/config', dict(
+                dmarc_mitigate_action='defer_to_mta'),
+            method='PATCH')
+        self.assertEqual(response.status_code, 204)
+        self.assertEqual(self._mlist.dmarc_mitigate_action,
+                         DMARCMitigateAction.defer_to_mta)
+        resource, response = call_api(
+            'http://localhost:9001/3.0/lists/ant.example.com/config')
+        self.assertEqual(resource['dmarc_mitigate_action'], 'defer_to_mta')
 
     def test_patch_attribute_double(self):
         with self.assertRaises(HTTPError) as cm:

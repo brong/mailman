@@ -79,8 +79,11 @@ get an ``m=1`` of their own.
 
 On a list with Message-Instance headers, From becomes the list's posting
 address whenever the list changes or originates a post, whatever the list's
-DMARC settings.  Whether the body will change is known without serializing
-it: a handler changed a payload, delivery will add a header or footer, or
+DMARC settings, unless its ``dmarc_mitigate_action`` is ``defer_to_mta``.
+That setting is for a site whose MTA rewrites From and signs: the list
+leaves From alone and records its own changes as usual, an unsigned post
+included, and the MTA records its From change above them and signs over
+the chain.  Whether the body will change is known without serializing it: a handler changed a payload, delivery will add a header or footer, or
 smtplib will escape a ``From`` line.  The header Recipe keeps the original
 From.
 
